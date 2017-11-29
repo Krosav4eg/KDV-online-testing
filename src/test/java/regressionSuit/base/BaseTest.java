@@ -17,7 +17,7 @@ public class BaseTest {
      */
     @BeforeTest
     public void setUp() {
-        driver = DriverFactory.setDriver("Chrome");
+        driver = DriverFactory.setDriver("Firefox");
     }
 
     /**

@@ -7,8 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 
-import static utils.Constants.CHROME_DRIVER_PATH;
-import static utils.Constants.DRIVER_NAME_CHROME;
+import static utils.Constants.DRIVER_NAME_FIREFOX;
 
 /**
  * @author Sergey Potapov
@@ -19,11 +18,16 @@ public class DriverFactory {
     private static final String FIREFOX = "Firefox";
     private static final String CHROME = "Chrome";
 
+    private static final String PATH_TO_DRIVER_CHROME = "driver\\chromedriver.exe";
+    private static final String PATH_TO_DRIVER_FIREFOX = "driver\\geckodriver.exe";
+
+
+
     /**
      * There is pre-initialization of the driver and his way that is it prior to calling object
      */
     static {
-        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
+        System.setProperty(DRIVER_NAME_FIREFOX, PATH_TO_DRIVER_FIREFOX);
     }
 
     /**
