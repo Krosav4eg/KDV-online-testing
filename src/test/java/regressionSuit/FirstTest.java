@@ -14,5 +14,4 @@ public class FirstTest extends BaseTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.authorization();
     }
-
 }

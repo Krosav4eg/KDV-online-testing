@@ -75,7 +75,6 @@ public abstract class BasePage {
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
-
 }
 
 

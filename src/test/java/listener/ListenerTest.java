@@ -38,5 +38,4 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
 
         BaseTest.capture(iTestResult.getName(), ERROR_SCREENSHOT_FOLDER);
     }
-
 }

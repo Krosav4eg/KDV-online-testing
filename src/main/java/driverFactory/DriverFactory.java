@@ -83,5 +83,4 @@ public class DriverFactory {
     public static WebDriver getDriver() {
         return driverThread.get();
     }
-
 }

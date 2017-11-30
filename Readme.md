@@ -13,7 +13,7 @@ Gecko driver (version 0.16.1 / 32 bit.) supports versions from Firefox from 53 a
 Https://github.com/mozilla/geckodriver/releases/tag/v0.16.1
 
 
-### Preconditions before installing the project``
+### Preconditions before installing the project
 OS Windows 7 and higher
 JDK 1.8 - http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 Maven (v 3.3 and higher ) https://maven.apache.org/download.cgi

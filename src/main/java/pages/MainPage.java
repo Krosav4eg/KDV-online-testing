@@ -30,5 +30,4 @@ public class MainPage extends BasePage {
         closePopupButton.click();
         enterButton.click();
     }
-
 }
