@@ -1,5 +1,7 @@
 package basePage;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +24,7 @@ public abstract class BasePage {
 
     protected WebDriver driver;
     private static final int WAITING_TIMEOUT = 15000;
+    protected static final Logger logger = LogManager.getLogger(basePage.BasePage.class);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

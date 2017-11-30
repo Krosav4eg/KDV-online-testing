@@ -1,18 +1,17 @@
 package regressionSuit;
 
-import regressionSuit.base.BaseTest;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import regressionSuit.base.BaseTest;
 
 /**
  * @author Sergey Potapov
  */
 
-public class AuthAsPhysicalPersonTest extends BaseTest {
+public class FirstTest extends BaseTest {
     @Test
     public void authorizationTest(){
         MainPage mainPage = new MainPage(driver);
         mainPage.authorization();
     }
-
 }

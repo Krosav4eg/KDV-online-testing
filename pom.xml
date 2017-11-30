@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fps.pm</groupId>
+    <groupId>magdv</groupId>
     <artifactId>autotests</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
@@ -51,9 +51,16 @@
     <build>
         <plugins>
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.19</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
+                <!--call testNg.xml file from pom.xml in Maven-->
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resourсes/regressionSuitAllTests.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <skipTests>false</skipTests>
+                </configuration>
             </plugin>
             <!--https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html-->
             <plugin>
