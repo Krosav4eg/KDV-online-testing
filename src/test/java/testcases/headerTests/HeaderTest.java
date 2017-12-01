@@ -30,8 +30,13 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyLowerPriceTest() throws InterruptedException {
-        mainPage.verifyingLowerPricesSection();
+    public void verifyLowerPriceTest() {
+        mainPage.verifyingOpeningLowerPricesSection();
+    }
+
+    @Test
+    public void verifyClosingLowerPriceTest() {
+        mainPage.verifyingClosingLowerPricesSection();
     }
 }
 

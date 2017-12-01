@@ -16,4 +16,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34322">
+        <classes>
+            <class name="testcases.headerTests.HeaderTest">
+                <methods>
+                    <include name="verifyClosingLowerPriceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

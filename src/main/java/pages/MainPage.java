@@ -78,10 +78,18 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getText(baseCityLink), getText(baseCityLink));
     }
 
-    public void verifyingLowerPricesSection() throws InterruptedException {
-        logger.info("Verifying Lower Prices Section");
+    public void verifyingOpeningLowerPricesSection() {
+        logger.info("Verifying Opening Lower Prices Section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
+    }
+
+    public void verifyingClosingLowerPricesSection() {
+        logger.info("Verifying Closing Lower Prices Section");
+        waitForPageLoad(driver);
+        elementIsClickable(lowerPriceSection, driver).click();
+        elementIsClickable(lowerPriceSectionOpen, driver).click();
+        AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
     }
 }
