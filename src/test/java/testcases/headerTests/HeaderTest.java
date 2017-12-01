@@ -28,5 +28,10 @@ public class HeaderTest extends BaseTest {
     public void verifyChangingCityTest() {
         mainPage.changeCity();
     }
+
+    @Test
+    public void verifyLowerPriceTest() throws InterruptedException {
+        mainPage.verifyingLowerPricesSection();
+    }
 }
 

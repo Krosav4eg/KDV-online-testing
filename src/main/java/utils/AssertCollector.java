@@ -25,4 +25,9 @@ public class AssertCollector {
         Assert.assertFalse(condition);
         logger.info("expected condition " + condition);
     }
+
+    public static void assertTrue(boolean condition) {
+        Assert.assertTrue(condition);
+        logger.info("expected condition " + condition);
+    }
 }
