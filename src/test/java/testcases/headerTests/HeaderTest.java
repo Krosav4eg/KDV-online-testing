@@ -20,8 +20,13 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void closingModalWindowTest() {
+    public void verifyClosingModalWindowTest() {
         mainPage.closingModalWindow();
+    }
+
+    @Test
+    public void verifyChangingCityTest() {
+        mainPage.changeCity();
     }
 }
 

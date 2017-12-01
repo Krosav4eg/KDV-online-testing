@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
 
     protected WebDriver driver;
-    private static final int WAITING_TIMEOUT = 15000;
+    private static final int WAITING_TIMEOUT = 20000;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
