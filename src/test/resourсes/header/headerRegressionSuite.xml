@@ -1,20 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="User Access To Pages And Functions Of The System" parallel="tests" thread-count="3">
+<suite name="Header Regression Tests" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="First Test">
+    <test name="C34282">
         <classes>
-            <class name="regressionSuit.FirstTest"/>
-        </classes>
-    </test>
-    <test name="Sec Test">
-        <classes>
-            <class name="regressionSuit.SecondTest"/>
+            <class name="testcases.headerTests.HeaderTest">
+                <methods>
+                    <include name="verifyLogoTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

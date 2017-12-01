@@ -4,6 +4,7 @@ package utils;
  * @author Sergey Potapov
  */
 public class Constants {
+
     //========================BASE URL==================================
     public static final String BASE_URL = "http://tomsk.demo.dev.magonline.ru";
 
@@ -19,8 +20,6 @@ public class Constants {
     public static final String ERROR_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/ErrorScreenShot/";
     public static final String SUCCESS_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/SuccessScreenShot/";
 
-
     //LOGGER FILES PATH
     public static final String LOG_FOLDER = System.getProperty("user.dir") + "/test-output/log/testlog.log";
-
 }

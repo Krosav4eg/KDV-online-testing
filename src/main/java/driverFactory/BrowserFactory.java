@@ -7,21 +7,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.concurrent.TimeUnit;
-
 import static utils.Constants.CHROME_DRIVER_PATH;
 import static utils.Constants.DRIVER_NAME_CHROME;
 
 /**
  * @author Sergey Potapov
  */
-
-public class DriverFactory {
+public class BrowserFactory {
 
     private static final String FIREFOX = "Firefox";
     private static final String CHROME = "Chrome";
-
-    protected static final Logger logger = LogManager.getLogger(DriverFactory.class);
+    protected static final Logger logger = LogManager.getLogger(BrowserFactory.class);
 
     /**
      * There is pre-initialization of the driver and his way that is it prior to calling object
@@ -64,15 +60,7 @@ public class DriverFactory {
                 }
             }
         }
-        class TimeOuts {
-            private static final int DEFAULT_TIMEOUT = 30000;
-            private static final int PAGE_LOAD_TIMEOUT = 180000;
-
-        }
-
         driverThread.get().manage().window().maximize();
-        driverThread.get().manage().timeouts().pageLoadTimeout(TimeOuts.PAGE_LOAD_TIMEOUT, TimeUnit.MILLISECONDS);
-        driverThread.get().manage().timeouts().implicitlyWait(TimeOuts.DEFAULT_TIMEOUT, TimeUnit.MILLISECONDS);
         return driverThread.get();
     }
 
@@ -83,4 +71,4 @@ public class DriverFactory {
     public static WebDriver getDriver() {
         return driverThread.get();
     }
-}
+  }
