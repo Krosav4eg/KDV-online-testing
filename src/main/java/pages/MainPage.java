@@ -34,6 +34,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__content']")
     private WebElement modalContentWindow;
 
+    @FindBy(xpath = ".//div[@id='geo_modal']//*[@class='modal__overlay']")
+    private WebElement background;
+
+    @FindBy(xpath = "//*[@class='quicklink__item quicklink__item_geo j_geo_control j_geo_control_modal']")
+    private WebElement cityLink;
+
     public void openMainPage() {
         logger.info("Open starting URL");
         driver.get(BASE_URL);
@@ -47,5 +53,14 @@ public class MainPage extends BasePage {
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
         AssertCollector.assertEquals(urlActual, urlExpected);
+    }
+
+    public void closingModalWindow() {
+        logger.info("Check closing modal window");
+        cityLink.click();
+        closePopupButton.click();
+        cityLink.click();
+        moveMouseToAndClick(driver, companyLogo);
+        AssertCollector.assertFalse(modalContentWindow.isDisplayed());
     }
 }

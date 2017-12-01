@@ -16,4 +16,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34287">
+        <classes>
+            <class name="testcases.headerTests.HeaderTest">
+                <methods>
+                    <include name="closingModalWindowTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

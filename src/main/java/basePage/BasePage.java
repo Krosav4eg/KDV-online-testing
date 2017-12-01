@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
@@ -28,6 +29,11 @@ public abstract class BasePage {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
                 "return document.readyState").equals("complete"));
+    }
+
+    protected void moveMouseToAndClick(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element, 1, 1).click().perform();
     }
 
     protected boolean isElementDisplayed(WebElement element) {
@@ -87,6 +93,14 @@ public abstract class BasePage {
 
     protected void refreshPage() {
         driver.navigate().refresh();
+    }
+
+    protected String getText(WebElement element) {
+        return element.getText();
+    }
+
+    protected String getValueOfAttributeByName(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
     }
 }
 
