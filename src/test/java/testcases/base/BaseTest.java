@@ -1,36 +1,39 @@
-package regressionSuit.base;
+package testcases.base;
 
-import driverFactory.DriverFactory;
+import driverFactory.BrowserFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import pages.MainPage;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.Constants.LOG_FOLDER;
-import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
+import static utils.Constants.*;
 
 /**
  * @author Sergey Potapov
  */
-
-public class BaseTest {
+public abstract class BaseTest {
     protected WebDriver driver;
+
+    //=======DECLARATION OF PAGE CLASSES=======
+    protected MainPage mainPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
     @BeforeTest
-    public void setUp() {
-        driver = DriverFactory.setDriver("Chrome");
+    public void runBrowser() {
+        driver = BrowserFactory.setDriver("Chrome");
+        initPageElements();
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -44,6 +47,7 @@ public class BaseTest {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+
         /**
          * Clean log directory before starting
          */
@@ -77,7 +81,7 @@ public class BaseTest {
      * @return dest - destination where to be situated screenshots
      */
     public static String capture(String screenShotName, String folder) {
-        TakesScreenshot takesScreenshot = ((TakesScreenshot) DriverFactory.getDriver());
+        TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
         File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
         String dest = folder + screenShotName + ".png";
         File destination = new File(dest);
@@ -93,9 +97,12 @@ public class BaseTest {
      * Method for closing browser and auto tests
      */
 
-    @AfterTest
-    public void tearDown() {
-        driver.close();
+    @AfterTest()
+    public void closeBrowser() {
         driver.quit();
+    }
+
+    private void initPageElements() {
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 }

@@ -1,30 +1,23 @@
 package basePage;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.util.concurrent.TimeUnit;
-
-import static utils.Constants.BASE_URL;
 
 
 /**
  * @author Sergey_Potapov
  */
-
 public abstract class BasePage {
 
     protected WebDriver driver;
     private static final int WAITING_TIMEOUT = 15000;
-    protected static final Logger logger = LogManager.getLogger(basePage.BasePage.class);
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -32,12 +25,24 @@ public abstract class BasePage {
     }
     //========================CUSTOM METHODS=============================================
 
-    protected void getUrl() {
-        driver.get(BASE_URL);
+    public static void waitForPageLoad(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
+                "return document.readyState").equals("complete"));
     }
 
-    protected void refreshPage() {
-        driver.navigate().refresh();
+    protected void moveMouseToAndClick(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element, 1, 1).click().perform();
+    }
+
+    protected boolean isElementDisplayed(WebElement element) {
+        try {
+            element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -74,6 +79,28 @@ public abstract class BasePage {
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static WebElement elementVisibility(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static void waitForElementNotPresent(WebElement element, WebDriver driver) {
+        new WebDriverWait(driver, WAITING_TIMEOUT)
+                .until(ExpectedConditions.stalenessOf(element));
+    }
+
+    protected void refreshPage() {
+        driver.navigate().refresh();
+    }
+
+    protected String getText(WebElement element) {
+        return element.getText();
+    }
+
+    protected String getValueOfAttributeByName(WebElement element, String attribute) {
+        return element.getAttribute(attribute);
     }
 }
 
