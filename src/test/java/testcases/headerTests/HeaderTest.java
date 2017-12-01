@@ -20,12 +20,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyClosingModalWindowTest() throws InterruptedException {
+    public void verifyClosingModalWindowTest() {
         mainPage.closingModalWindow();
     }
 
     @Test
-    public void verifyChangingCityTest() throws InterruptedException {
+    public void verifyChangingCityTest() {
         mainPage.changeCity();
     }
 }

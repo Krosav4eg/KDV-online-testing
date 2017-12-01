@@ -37,7 +37,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='header-top']//li[@class='first']")
     private WebElement baseCityLink;
 
-    @FindBy(xpath = ".//*[contains(text(),'Введите название населённого пункта')]/../..//div[@data-location]")
+    @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
 
     public void openMainPage() {
