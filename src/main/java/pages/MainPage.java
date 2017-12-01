@@ -34,22 +34,22 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__content']")
     private WebElement modalContentWindow;
 
-    @FindBy(xpath = ".//div[@id='geo_modal']//*[@class='modal__overlay']")
-    private WebElement background;
+    @FindBy(xpath = "//*[@class='header-top']//li[@class='first']")
+    private WebElement baseCityLink;
 
-    @FindBy(xpath = "//*[@class='quicklink__item quicklink__item_geo j_geo_control j_geo_control_modal']")
-    private WebElement cityLink;
+    @FindBy(xpath = ".//*[contains(text(),'Введите название населённого пункта')]/../..//div[@data-location]")
+    private WebElement otherCityLink;
 
     public void openMainPage() {
         logger.info("Open starting URL");
         driver.get(BASE_URL);
-        closePopupButton.click();
+        elementIsClickable(closePopupButton, driver).click();
     }
 
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
         logger.info("Check logo company");
-        companyLogo.click();
+        elementIsClickable(companyLogo, driver).click();
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
         AssertCollector.assertEquals(urlActual, urlExpected);
@@ -57,10 +57,18 @@ public class MainPage extends BasePage {
 
     public void closingModalWindow() {
         logger.info("Check closing modal window");
-        cityLink.click();
-        closePopupButton.click();
-        cityLink.click();
+        elementIsClickable(baseCityLink, driver).click();
+        elementIsClickable(closePopupButton, driver).click();
+        elementIsClickable(baseCityLink, driver).click();
         moveMouseToAndClick(driver, companyLogo);
         AssertCollector.assertFalse(modalContentWindow.isDisplayed());
+    }
+
+    public void changeCity() {
+        logger.info("Check changing city");
+        elementIsClickable(baseCityLink, driver).click();
+        elementIsClickable(otherCityLink, driver).click();
+        waitForPageLoad(driver);
+        AssertCollector.assertEquals(getText(baseCityLink), getText(baseCityLink));
     }
 }
