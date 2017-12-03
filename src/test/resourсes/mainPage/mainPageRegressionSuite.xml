@@ -1,37 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header Regression Tests" parallel="tests" thread-count="3">
+<suite name="Header Regression Tests" parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34282">
+    <test name="C34321">
         <classes>
             <class name="testcases.headerTests.HeaderTest">
                 <methods>
-                    <include name="verifyLogoTest"/>
+                    <include name="verifyLowerPriceTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34283">
+    <test name="C34322">
         <classes>
             <class name="testcases.headerTests.HeaderTest">
                 <methods>
-                    <include name="verifyChangingCityTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34287">
-        <classes>
-            <class name="testcases.headerTests.HeaderTest">
-                <methods>
-                    <include name="verifyClosingModalWindowTest"/>
+                    <include name="verifyClosingLowerPriceTest"/>
                 </methods>
             </class>
         </classes>

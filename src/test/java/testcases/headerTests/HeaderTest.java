@@ -28,5 +28,15 @@ public class HeaderTest extends BaseTest {
     public void verifyChangingCityTest() {
         mainPage.changeCity();
     }
+
+    @Test
+    public void verifyLowerPriceTest() {
+        mainPage.verifyingOpeningLowerPricesSection();
+    }
+
+    @Test
+    public void verifyClosingLowerPriceTest() {
+        mainPage.verifyingClosingLowerPricesSection();
+    }
 }
 

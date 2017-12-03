@@ -40,6 +40,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
 
+    @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
+    private WebElement lowerPriceSection;
+
+    @FindBy(xpath = "//div[@class='benefit benefit_price j_benefit benefit_active']")
+    private WebElement lowerPriceSectionOpen;
+
     public void openMainPage() {
         logger.info("Open starting URL");
         driver.get(BASE_URL);
@@ -70,5 +76,20 @@ public class MainPage extends BasePage {
         elementIsClickable(otherCityLink, driver).click();
         waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), getText(baseCityLink));
+    }
+
+    public void verifyingOpeningLowerPricesSection() {
+        logger.info("Verifying Opening Lower Prices Section");
+        waitForPageLoad(driver);
+        elementIsClickable(lowerPriceSection, driver).click();
+        AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
+    }
+
+    public void verifyingClosingLowerPricesSection() {
+        logger.info("Verifying Closing Lower Prices Section");
+        waitForPageLoad(driver);
+        elementIsClickable(lowerPriceSection, driver).click();
+        elementIsClickable(lowerPriceSectionOpen, driver).click();
+        AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
     }
 }
