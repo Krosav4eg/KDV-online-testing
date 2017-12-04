@@ -6,70 +6,172 @@
     <groupId>magdv</groupId>
     <artifactId>autotests</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <xmlFile></xmlFile>
+        <browserType>Chrome</browserType>
+        <urlToSystem></urlToSystem>
+        <report.header>Mag DV Report -</report.header>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>dd.MM.yyyy</maven.build.timestamp.format>
+
+        <reportng.version>1.1.4</reportng.version>
+        <velocity.version>1.5</velocity.version>
+        <google.inject.guice.version>4.1.0</google.inject.guice.version>
+        <extentreports.version>2.41.2</extentreports.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <apache.xmlbeans.version>2.6.0</apache.xmlbeans.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <selenium-java.version>3.0.1</selenium-java.version>
+        <log4j.version>1.2.17</log4j.version>
+        <mysql-connector-java.version>6.0.5</mysql-connector-java.version>
+        <testng.version>6.10</testng.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <monte-repack.version>1.0</monte-repack.version>
+        <xml-apis.version>1.4.01</xml-apis.version>
+        <xvfb-selenium.version>0.5</xvfb-selenium.version>
+        <org.assertj.version>3.6.2</org.assertj.version>
+        <com.relevantcodes.version>2.41.2</com.relevantcodes.version>
+        <org.apache.xmlbeans.version>2.6.0</org.apache.xmlbeans.version>
+        <xml-apis.version>1.4.01</xml-apis.version>
+        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <com.sun.jersey-bundle.version>1.10-b01</com.sun.jersey-bundle.version>
+    </properties>
+
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.4.0</version>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>${com.sun.jersey-bundle.version}</version>
         </dependency>
-        <!--https://mvnrepository.com/artifact/org.testng/testng-->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
         <dependency>
             <groupId>org.uncommons</groupId>
             <artifactId>reportng</artifactId>
-            <version>1.1.4</version>
+            <version>${reportng.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${org.assertj.version}</version>
         </dependency>
         <dependency>
             <groupId>velocity</groupId>
-            <artifactId>velocity-dep</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <artifactId>velocity</artifactId>
+            <version>${velocity.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>3.0</version>
+            <version>${google.inject.guice.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.relevantcodes</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${com.relevantcodes.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>${org.apache.xmlbeans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${javax.mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>RELEASE</version>
+            <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pojosontheweb</groupId>
+            <artifactId>monte-repack</artifactId>
+            <version>${monte-repack.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>${xml-apis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.mike10004</groupId>
+            <artifactId>xvfb-selenium</artifactId>
+            <version>${xvfb-selenium.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19</version>
-                <!--call testNg.xml file from pom.xml in Maven-->
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resourсes/regressionSuitAllTests.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                    <skipTests>false</skipTests>
+                    <filesets>
+                        <fileset>
+                            <directory>test-output</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
-            <!--https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>2.3.2</version>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <compilerVersion>1.8</compilerVersion>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/scenarios/${xmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <reportsDirectory>test-output/</reportsDirectory>
+                    <systemPropertyVariables>
+                        <browser>${browserType}</browser>
+                        <url>${urlToSystem}</url>
+                        <org.uncommons.reportng.escape-output>false</org.uncommons.reportng.escape-output>
+                        <org.uncommons.reportng.title>
+                            ${report.header}
+                            Date: ${timestamp}
+                            Browser: ${browserType}
+                        </org.uncommons.reportng.title>
+                    </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>disableXmlReport</name>
+                            <value>true</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>

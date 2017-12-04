@@ -1,33 +1,35 @@
 package utils;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import logger.MagDvLogger;
 import org.testng.Assert;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Sergey Potapov
  */
 public class AssertCollector {
 
-    protected static final Logger logger = LogManager.getLogger(basePage.BasePage.class);
+    private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-    public static void assertEquals(Object actual,String message, Object expected) {
+    public static void assertEquals(Object actual, String message, Object expected) {
         try {
             Assert.assertEquals(actual, expected);
-            logger.info(expected.toString() + message + actual.toString());
+            LOGGER.log(Level.INFO, expected.toString() +  message  + actual.toString());
         } catch (Throwable e) {
-            logger.info(expected.toString() + " is not equals " + actual.toString());
+            LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
             Assert.fail();
         }
     }
 
     public static void assertFalse(boolean condition) {
         Assert.assertFalse(condition);
-        logger.info("expected condition " + condition);
+        LOGGER.log(Level.INFO, " expected condition " + condition);
     }
 
     public static void assertTrue(boolean condition) {
         Assert.assertTrue(condition);
-        logger.info("expected condition " + condition);
+        LOGGER.log(Level.INFO, " expected condition " + condition);
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
+import utils.TestReporter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,12 +28,14 @@ public abstract class BasePage {
 
     public static void waitForPageLoad(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        TestReporter.step("Wait for page loading ");
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
                 "return document.readyState").equals("complete"));
     }
 
     protected void moveMouseToAndClick(WebDriver driver, WebElement element) {
         Actions action = new Actions(driver);
+        TestReporter.step("Wait for page loading " + element);
         action.moveToElement(element, 1, 1).click().perform();
     }
 
@@ -53,6 +56,7 @@ public abstract class BasePage {
 
     protected WebElement elementIsClickable(WebElement element, WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        TestReporter.step("Click on - " + element);
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 

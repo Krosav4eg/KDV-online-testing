@@ -4,13 +4,12 @@ Project contains autotests for verifying base application functional.
 
 
 ### Framework contain:
-MORE DETAIL DOCUMENTATION SEE: https://drive.google.com......
 ============================short description===================================
-Selenium WebDriver version 3.4 - http://www.seleniumhq.org/download/
+Selenium WebDriver version 3.0.1 - http://www.seleniumhq.org/download/
 TestNG version 6.8 - http://testng.org/doc/download.html
 The Chrome driver (version 2.28) supports Chrome versions 54-59 https://sites.google.com/a/chromium.org/chromedriver/home
-Gecko driver (version 0.16.1 / 32 bit.) supports versions from Firefox from 53 and higher
-Https://github.com/mozilla/geckodriver/releases/tag/v0.16.1
+Gecko driver (version 0.18.0 / 32 bit.) supports versions from Firefox from 53 and higher
+Https://github.com/mozilla/geckodriver/releases/tag/v0.18.0
 
 
 ### Preconditions before installing the project

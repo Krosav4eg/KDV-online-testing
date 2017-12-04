@@ -9,13 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import pages.MainPage;
+import utils.TestReporter;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import static utils.Constants.*;
+import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
+import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
 /**
  * @author Sergey Potapov
@@ -34,6 +34,7 @@ public abstract class BaseTest {
     public void runBrowser() {
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
+        TestReporter.step("Open main page");
         mainPage.openMainPage();
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
@@ -48,30 +49,6 @@ public abstract class BaseTest {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
-        /**
-         * Clean log directory before starting
-         */
-        if (new File(LOG_FOLDER).exists()) {
-
-            File[] files = new File(LOG_FOLDER).listFiles();
-
-            if (files != null) {
-                for (File file : files) {
-                    try {
-                        if (file.exists()) {
-                            FileWriter fwOb = new FileWriter(file, false);
-                            PrintWriter pwOb = new PrintWriter(fwOb, false);
-                            pwOb.flush();
-                            pwOb.close();
-                            fwOb.close();
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -101,6 +78,7 @@ public abstract class BaseTest {
     @AfterTest()
     public void closeBrowser() {
         driver.quit();
+        TestReporter.removeNumberStep();
     }
 
     private void initPageElements() {

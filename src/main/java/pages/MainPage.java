@@ -1,12 +1,14 @@
 package pages;
 
 import basePage.BasePage;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static utils.Constants.BASE_URL;
 
@@ -14,7 +16,7 @@ import static utils.Constants.BASE_URL;
  * @author Sergey Potapov
  */
 public class MainPage extends BasePage {
-    protected static final Logger logger = LogManager.getLogger(MainPage.class);
+    private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -70,16 +72,15 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='benefit benefit_payment j_benefit benefit_active']//section//a")
     private WebElement aboutPaymentUponReceivingLink;
 
-
     public void openMainPage() {
-        logger.info("Open starting url");
+        LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
         elementIsClickable(closePopupButton, driver).click();
     }
 
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
-        logger.info("Check logo company");
+        LOGGER.log(Level.INFO, "Check logo company");
         elementIsClickable(companyLogo, driver).click();
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
@@ -87,7 +88,7 @@ public class MainPage extends BasePage {
     }
 
     public void closingModalWindow() {
-        logger.info("Check closing modal window");
+        LOGGER.log(Level.INFO, "Check closing modal window");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(closePopupButton, driver).click();
         elementIsClickable(baseCityLink, driver).click();
@@ -96,7 +97,7 @@ public class MainPage extends BasePage {
     }
 
     public void changeCity() {
-        logger.info("Check changing city");
+        LOGGER.log(Level.INFO, "Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(otherCityLink, driver).click();
         waitForPageLoad(driver);
@@ -104,14 +105,14 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningLowerPricesSection() {
-        logger.info("Verifying opening lower prices section");
+        LOGGER.log(Level.INFO, "Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingLowerPricesSection() {
-        logger.info("Verifying closing lower prices section");
+        LOGGER.log(Level.INFO, "Verifying closing lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
@@ -119,9 +120,9 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAboutLinkLowerPriceSection() {
-        logger.info("Get current url");
+        LOGGER.log(Level.INFO, "Get current url");
         getCurrentUrl();
-        logger.info("Verifying opening lower prices section");
+        LOGGER.log(Level.INFO, "Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(aboutPricesLink, driver).click();
@@ -131,14 +132,14 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningFreeDeliveringSection() {
-        logger.info("Verifying opening free delivering section");
+        LOGGER.log(Level.INFO, "Verifying opening free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingFreeDeliveringSection() {
-        logger.info("Verifying closing free delivering section");
+        LOGGER.log(Level.INFO, "Verifying closing free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
@@ -146,12 +147,12 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAboutLinkFreeDeliveringSection() {
-        logger.info("Get current url");
+        LOGGER.log(Level.INFO, "Get current url");
         getCurrentUrl();
-        logger.info("Opening free delivering section");
+        LOGGER.log(Level.INFO, "Opening free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
-        logger.info("Click about link free delivering section");
+        LOGGER.log(Level.INFO, "Click about link free delivering section");
         elementIsClickable(aboutFreeDeliveryLink, driver).click();
         waitForPageLoad(driver);
         getCurrentUrl();
@@ -159,14 +160,14 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningPaymentUponReceivingSection() {
-        logger.info("Verifying opening payment upon receiving section");
+        LOGGER.log(Level.INFO,"Verifying opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingPaymentUponReceivingSection() {
-        logger.info("Verifying closing payment upon receiving section");
+        LOGGER.log(Level.INFO,"Verifying closing payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
@@ -174,12 +175,12 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAboutLinkPaymentUponReceivingSection() {
-        logger.info("Get current url");
+        LOGGER.log(Level.INFO,"Get current url");
         getCurrentUrl();
-        logger.info("Opening payment upon receiving section");
+        LOGGER.log(Level.INFO,"Opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
-        logger.info("Click about link free delivering section");
+        LOGGER.log(Level.INFO,"Click about link free delivering section");
         elementIsClickable(aboutPaymentUponReceivingLink, driver).click();
         waitForPageLoad(driver);
         getCurrentUrl();
