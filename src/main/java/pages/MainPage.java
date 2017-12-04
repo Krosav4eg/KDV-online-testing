@@ -123,4 +123,12 @@ public class MainPage extends BasePage {
         elementIsClickable(freeDeliveringSection, driver).click();
         AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
     }
+
+    public void verifyingClosingFreeDeliveringSection() {
+        logger.info("Verifying Closing Free Delivering Section");
+        waitForPageLoad(driver);
+        elementIsClickable(freeDeliveringSection, driver).click();
+        elementIsClickable(freeDeliveringSectionOpen, driver).click();
+        AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
+    }
 }

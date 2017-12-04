@@ -25,4 +25,8 @@ public class MainPageTest extends BaseTest {
     public void verifyOpeningFreeDeliveryTest() {
         mainPage.verifyingOpeningFreeDeliveringSection();
     }
+    @Test
+    public void verifyClosingFreeDeliveryTest() {
+        mainPage.verifyingClosingFreeDeliveringSection();
+    }
 }
