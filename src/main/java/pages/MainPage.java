@@ -40,7 +40,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
 
-    //========================lower price section
+    //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
 
@@ -50,15 +50,25 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "(//*[@href='/about'])[1]")
     private WebElement aboutPricesLink;
 
-    //========================free delivering section
+    //========================
     @FindBy(css = ".benefit.benefit_delivery.j_benefit")
     private WebElement freeDeliveringSection;
 
     @FindBy(css = ".benefit.benefit_delivery.j_benefit.benefit_active")
     private WebElement freeDeliveringSectionOpen;
 
-    @FindBy(xpath = "(//*[@href='/about'])[2]")
+    @FindBy(xpath = "(//*[@href='/delivery'])[2]")
     private WebElement aboutFreeDeliveryLink;
+
+    //========================
+    @FindBy(css = ".benefit.benefit_payment.j_benefit")
+    private WebElement paymentUponReceivingSection;
+
+    @FindBy(css = ".benefit.benefit_payment.j_benefit.benefit_active")
+    private WebElement paymentUponReceivingSectionOpen;
+
+    @FindBy(xpath = "//*[@class='benefit benefit_payment j_benefit benefit_active']//section//a")
+    private WebElement aboutPaymentUponReceivingLink;
 
 
     public void openMainPage() {
@@ -146,5 +156,12 @@ public class MainPage extends BasePage {
         waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
+    }
+
+    public void verifyingOpeningPaymentUponReceivingSection() {
+        logger.info("Verifying opening payment upon receiving section");
+        waitForPageLoad(driver);
+        elementIsClickable(paymentUponReceivingSection, driver).click();
+        AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
     }
 }

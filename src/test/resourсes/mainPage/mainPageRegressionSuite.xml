@@ -9,7 +9,7 @@
 
     <test name="C34321">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyLowerPriceTest"/>
                 </methods>
@@ -19,7 +19,7 @@
 
     <test name="C34322">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyClosingLowerPriceTest"/>
                 </methods>
@@ -29,7 +29,7 @@
 
     <test name="C34323">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyingAboutLinkLowerPrice"/>
                 </methods>
@@ -39,7 +39,7 @@
 
     <test name="C34324">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyOpeningFreeDeliveryTest"/>
                 </methods>
@@ -49,7 +49,7 @@
 
     <test name="C34325">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyClosingFreeDeliveryTest"/>
                 </methods>
@@ -59,9 +59,19 @@
 
     <test name="C34326">
         <classes>
-            <class name="testcases.MainPage.MainPageTest">
+            <class name="testcases.mainPage.MainPageTest">
                 <methods>
                     <include name="verifyingAboutLinkFreeDeliveryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34327">
+        <classes>
+            <class name="testcases.mainPage.MainPageTest">
+                <methods>
+                    <include name="verifyingOpeningPaymentUponReceivingTest"/>
                 </methods>
             </class>
         </classes>

@@ -1,4 +1,4 @@
-package testcases.MainPage;
+package testcases.mainPage;
 
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -35,5 +35,10 @@ public class MainPageTest extends BaseTest {
     @Test
     public void verifyingAboutLinkFreeDeliveryTest() {
         mainPage.verifyingAboutLinkFreeDeliveringSection();
+    }
+
+    @Test
+    public void verifyingOpeningPaymentUponReceivingTest() {
+        mainPage.verifyingOpeningPaymentUponReceivingSection();
     }
 }
