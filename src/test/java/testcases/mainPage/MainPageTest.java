@@ -46,4 +46,9 @@ public class MainPageTest extends BaseTest {
     public void verifyingClosingPaymentUponReceivingTest() {
         mainPage.verifyingClosingPaymentUponReceivingSection();
     }
+
+    @Test
+    public void verifyingAboutLinkPaymentUponReceivingTest() {
+        mainPage.verifyingAboutLinkPaymentUponReceivingSection();
+    }
 }

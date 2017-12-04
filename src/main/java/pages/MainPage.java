@@ -172,4 +172,17 @@ public class MainPage extends BasePage {
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
     }
+
+    public void verifyingAboutLinkPaymentUponReceivingSection() {
+        logger.info("Get current url");
+        getCurrentUrl();
+        logger.info("Opening payment upon receiving section");
+        waitForPageLoad(driver);
+        elementIsClickable(paymentUponReceivingSection, driver).click();
+        logger.info("Click about link free delivering section");
+        elementIsClickable(aboutPaymentUponReceivingLink, driver).click();
+        waitForPageLoad(driver);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
+    }
 }

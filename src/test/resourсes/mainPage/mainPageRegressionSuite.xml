@@ -87,4 +87,13 @@
         </classes>
     </test>
 
+    <test name="C34329">
+        <classes>
+            <class name="testcases.mainPage.MainPageTest">
+                <methods>
+                    <include name="verifyingAboutLinkPaymentUponReceivingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
