@@ -9,7 +9,7 @@
 
     <test name="C34282">
         <classes>
-            <class name="testcases.headerTests.HeaderTest">
+            <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyLogoTest"/>
                 </methods>
@@ -19,7 +19,7 @@
 
     <test name="C34283">
         <classes>
-            <class name="testcases.headerTests.HeaderTest">
+            <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyChangingCityTest"/>
                 </methods>
@@ -29,7 +29,7 @@
 
     <test name="C34287">
         <classes>
-            <class name="testcases.headerTests.HeaderTest">
+            <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyClosingModalWindowTest"/>
                 </methods>

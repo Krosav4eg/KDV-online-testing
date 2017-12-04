@@ -11,10 +11,10 @@ public class AssertCollector {
 
     protected static final Logger logger = LogManager.getLogger(basePage.BasePage.class);
 
-    public static void assertEquals(Object actual, Object expected) {
+    public static void assertEquals(Object actual,String message, Object expected) {
         try {
             Assert.assertEquals(actual, expected);
-            logger.info(expected.toString() + " value equals " + actual.toString());
+            logger.info(expected.toString() + message + actual.toString());
         } catch (Throwable e) {
             logger.info(expected.toString() + " is not equals " + actual.toString());
             Assert.fail();

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
 
     protected WebDriver driver;
-    private static final int WAITING_TIMEOUT = 20000;
+    private static final int WAITING_TIMEOUT = 30000;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -97,6 +97,11 @@ public abstract class BasePage {
 
     protected String getText(WebElement element) {
         return element.getText();
+    }
+
+    protected String getCurrentUrl() {
+        return driver.getCurrentUrl().toString();
+
     }
 
     protected String getValueOfAttributeByName(WebElement element, String attribute) {

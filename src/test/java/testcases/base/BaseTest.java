@@ -34,6 +34,7 @@ public abstract class BaseTest {
     public void runBrowser() {
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
+        mainPage.openMainPage();
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));

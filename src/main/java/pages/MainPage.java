@@ -46,6 +46,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@class='benefit benefit_price j_benefit benefit_active']")
     private WebElement lowerPriceSectionOpen;
 
+    @FindBy(xpath = "(//*[@href='/about'])[1]")
+    private WebElement aboutPricesLink;
+
     public void openMainPage() {
         logger.info("Open starting URL");
         driver.get(BASE_URL);
@@ -58,7 +61,7 @@ public class MainPage extends BasePage {
         elementIsClickable(companyLogo, driver).click();
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
-        AssertCollector.assertEquals(urlActual, urlExpected);
+        AssertCollector.assertEquals(urlActual, " URL IS EQUAL ", urlExpected);
     }
 
     public void closingModalWindow() {
@@ -75,7 +78,7 @@ public class MainPage extends BasePage {
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(otherCityLink, driver).click();
         waitForPageLoad(driver);
-        AssertCollector.assertEquals(getText(baseCityLink), getText(baseCityLink));
+        AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
     public void verifyingOpeningLowerPricesSection() {
@@ -91,5 +94,17 @@ public class MainPage extends BasePage {
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
         AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
+    }
+
+    public void verifyingAboutLinkLowerPriceSection() {
+        logger.info("Check logo company");
+        getCurrentUrl();
+        logger.info("Verifying Opening Lower Prices Section");
+        waitForPageLoad(driver);
+        elementIsClickable(lowerPriceSection, driver).click();
+        elementIsClickable(aboutPricesLink, driver).click();
+        waitForPageLoad(driver);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
     }
 }
