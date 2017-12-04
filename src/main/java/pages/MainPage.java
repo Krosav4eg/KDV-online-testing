@@ -57,9 +57,12 @@ public class MainPage extends BasePage {
     @FindBy(css = ".benefit.benefit_delivery.j_benefit.benefit_active")
     private WebElement freeDeliveringSectionOpen;
 
+    @FindBy(xpath = "(//*[@href='/about'])[2]")
+    private WebElement aboutFreeDeliveryLink;
+
 
     public void openMainPage() {
-        logger.info("Open starting URL");
+        logger.info("Open starting url");
         driver.get(BASE_URL);
         elementIsClickable(closePopupButton, driver).click();
     }
@@ -91,14 +94,14 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningLowerPricesSection() {
-        logger.info("Verifying Opening Lower Prices Section");
+        logger.info("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingLowerPricesSection() {
-        logger.info("Verifying Closing Lower Prices Section");
+        logger.info("Verifying closing lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
@@ -106,9 +109,9 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAboutLinkLowerPriceSection() {
-        logger.info("Check logo company");
+        logger.info("Get current url");
         getCurrentUrl();
-        logger.info("Verifying Opening Lower Prices Section");
+        logger.info("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(aboutPricesLink, driver).click();
@@ -118,17 +121,30 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningFreeDeliveringSection() {
-        logger.info("Verifying Opening Free Delivering Section");
+        logger.info("Verifying opening free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingFreeDeliveringSection() {
-        logger.info("Verifying Closing Free Delivering Section");
+        logger.info("Verifying closing free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
         AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
+    }
+
+    public void verifyingAboutLinkFreeDeliveringSection() {
+        logger.info("Get current url");
+        getCurrentUrl();
+        logger.info("Opening free delivering section");
+        waitForPageLoad(driver);
+        elementIsClickable(freeDeliveringSection, driver).click();
+        logger.info("Click about link free delivering section");
+        elementIsClickable(aboutFreeDeliveryLink, driver).click();
+        waitForPageLoad(driver);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
     }
 }

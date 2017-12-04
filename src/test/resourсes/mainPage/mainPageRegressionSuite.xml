@@ -56,4 +56,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34326">
+        <classes>
+            <class name="testcases.MainPage.MainPageTest">
+                <methods>
+                    <include name="verifyingAboutLinkFreeDeliveryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

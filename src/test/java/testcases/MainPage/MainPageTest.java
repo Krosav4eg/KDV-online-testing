@@ -21,12 +21,19 @@ public class MainPageTest extends BaseTest {
     public void verifyingAboutLinkLowerPrice() {
         mainPage.verifyingAboutLinkLowerPriceSection();
     }
+
     @Test
     public void verifyOpeningFreeDeliveryTest() {
         mainPage.verifyingOpeningFreeDeliveringSection();
     }
+
     @Test
     public void verifyClosingFreeDeliveryTest() {
         mainPage.verifyingClosingFreeDeliveringSection();
+    }
+
+    @Test
+    public void verifyingAboutLinkFreeDeliveryTest() {
+        mainPage.verifyingAboutLinkFreeDeliveringSection();
     }
 }
