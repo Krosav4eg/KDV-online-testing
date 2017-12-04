@@ -40,6 +40,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
 
+    //========================lower price section
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
 
@@ -48,6 +49,14 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "(//*[@href='/about'])[1]")
     private WebElement aboutPricesLink;
+
+    //========================free delivering section
+    @FindBy(css = ".benefit.benefit_delivery.j_benefit")
+    private WebElement freeDeliveringSection;
+
+    @FindBy(css = ".benefit.benefit_delivery.j_benefit.benefit_active")
+    private WebElement freeDeliveringSectionOpen;
+
 
     public void openMainPage() {
         logger.info("Open starting URL");
@@ -106,5 +115,12 @@ public class MainPage extends BasePage {
         waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
+    }
+
+    public void verifyingOpeningFreeDeliveringSection() {
+        logger.info("Verifying Opening Free Delivering Section");
+        waitForPageLoad(driver);
+        elementIsClickable(freeDeliveringSection, driver).click();
+        AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
     }
 }

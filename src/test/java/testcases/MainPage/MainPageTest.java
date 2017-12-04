@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 
 /**
- * Created by Avic on 4/12/17.
+ * @author Sergey Potapov
  */
 public class MainPageTest extends BaseTest {
     @Test
@@ -20,5 +20,9 @@ public class MainPageTest extends BaseTest {
     @Test
     public void verifyingAboutLinkLowerPrice() {
         mainPage.verifyingAboutLinkLowerPriceSection();
+    }
+    @Test
+    public void verifyOpeningFreeDeliveryTest() {
+        mainPage.verifyingOpeningFreeDeliveringSection();
     }
 }
