@@ -164,4 +164,12 @@ public class MainPage extends BasePage {
         elementIsClickable(paymentUponReceivingSection, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
     }
+
+    public void verifyingClosingPaymentUponReceivingSection() {
+        logger.info("Verifying closing payment upon receiving section");
+        waitForPageLoad(driver);
+        elementIsClickable(paymentUponReceivingSection, driver).click();
+        elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
+        AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
+    }
 }

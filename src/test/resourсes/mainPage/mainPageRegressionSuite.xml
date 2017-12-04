@@ -76,4 +76,15 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34328">
+        <classes>
+            <class name="testcases.mainPage.MainPageTest">
+                <methods>
+                    <include name="verifyingClosingPaymentUponReceivingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
