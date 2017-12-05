@@ -96,4 +96,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34330">
+        <classes>
+            <class name="testcases.mainPage.MainPageTest">
+                <methods>
+                    <include name="verifyingBorderColorTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

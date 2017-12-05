@@ -61,4 +61,10 @@ public class MainPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34329");
         mainPage.verifyingAboutLinkPaymentUponReceivingSection();
     }
+
+    @Test
+    public void verifyingBorderColorTest() {
+        TestReporter.testTitle("Test ID - C34330");
+        mainPage.verifyBorderColor();
+    }
 }

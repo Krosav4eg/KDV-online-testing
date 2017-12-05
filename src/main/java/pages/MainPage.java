@@ -49,8 +49,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@class='benefit benefit_price j_benefit benefit_active']")
     private WebElement lowerPriceSectionOpen;
 
-    @FindBy(xpath = "(//*[@href='/about'])[1]")
+    @FindBy(xpath = "(//*[@href='/about'])[2]")
     private WebElement aboutPricesLink;
+
+    @FindBy(xpath = "(//*[@class='benefit__header'])[1]")
+    private WebElement lowerPriceSectionHeader;
 
     //========================
     @FindBy(css = ".benefit.benefit_delivery.j_benefit")
@@ -62,6 +65,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "(//*[@href='/delivery'])[2]")
     private WebElement aboutFreeDeliveryLink;
 
+    @FindBy(xpath = "(//*[@class='benefit__header'])[2]")
+    private WebElement freeDeliveringSectionHeader;
+
     //========================
     @FindBy(css = ".benefit.benefit_payment.j_benefit")
     private WebElement paymentUponReceivingSection;
@@ -71,6 +77,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//*[@class='benefit benefit_payment j_benefit benefit_active']//section//a")
     private WebElement aboutPaymentUponReceivingLink;
+
+    @FindBy(xpath = "(//*[@class='benefit__header'])[3]")
+    private WebElement paymentUponReceivingHeader;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -92,7 +101,7 @@ public class MainPage extends BasePage {
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(closePopupButton, driver).click();
         elementIsClickable(baseCityLink, driver).click();
-        moveMouseToAndClick(driver, companyLogo);
+        moveMouseToAndClick(driver, companyLogo, 1, 1);
         AssertCollector.assertFalse(modalContentWindow.isDisplayed());
     }
 
@@ -185,5 +194,23 @@ public class MainPage extends BasePage {
         waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
+    }
+
+    public void verifyBorderColor() {
+        elementIsClickable(lowerPriceSection, driver).click();
+        String actualColorLowerPriceSection = "#ce0022";
+        String expectedColorLowerPriceSection = getBorderColor(lowerPriceSectionHeader);
+        AssertCollector.assertEqualsJ(actualColorLowerPriceSection, expectedColorLowerPriceSection,
+                " Verify elements color of lower price section ");
+        elementIsClickable(freeDeliveringSection, driver).click();
+        String actualColorFreeDeliveringSection = "#ce0022";
+        String expectedColorFreeDeliveringSection = getBorderColor(freeDeliveringSectionHeader);
+        AssertCollector.assertEqualsJ(actualColorFreeDeliveringSection, expectedColorFreeDeliveringSection,
+                " Verify elements color of free delivering section section ");
+        elementIsClickable(paymentUponReceivingSection, driver).click();
+        String actualColorPaymentUponReceivingSection = "#ce0022";
+        String expectedColorPaymentUponReceivingSection = getBorderColor(paymentUponReceivingHeader);
+        AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
+                " Verify elements color of free delivering section section ");
     }
 }
