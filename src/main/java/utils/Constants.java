@@ -20,6 +20,8 @@ public class Constants {
     public static final String ERROR_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/ErrorScreenShot/";
     public static final String SUCCESS_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/SuccessScreenShot/";
 
-    //LOGGER FILES PATH
-    public static final String LOG_FOLDER = System.getProperty("user.dir") + "/test-output/log/testlog.log";
+    //========================LOGGER FILES PATH=========================
+    public static final String LOGGING_HTML_FILE = "test-output/Logging.html";
+    public static final String LOGGING_TXT_FILE = "test-output/Logging.txt";
+
 }
