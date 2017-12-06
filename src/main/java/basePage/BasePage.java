@@ -29,6 +29,8 @@ public abstract class BasePage {
     //========================CUSTOM METHODS=============================================
 
     protected String getText(WebElement element) {
+        LOGGER.log(Level.INFO, " Get text of element ");
+        TestReporter.step(" Get text of element ");
         return element.getText();
     }
 

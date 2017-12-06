@@ -7,9 +7,9 @@ import utils.TestReporter;
 /**
  * @author Sergey Potapov
  */
-public class BannerTest extends BaseTest{
+public class BannerTest extends BaseTest {
     @Test
-    public void switchSlideForwardTest() throws InterruptedException {
+    public void switchSlideForwardTest() {
         TestReporter.testTitle("Test ID - C34331");
         mainPage.switchSlideForward();
     }
