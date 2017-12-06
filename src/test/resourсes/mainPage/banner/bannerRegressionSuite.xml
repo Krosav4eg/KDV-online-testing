@@ -16,4 +16,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34332">
+        <classes>
+            <class name="testcases.mainPage.banner.BannerTest">
+                <methods>
+                    <include name="switchSlidePreviousTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

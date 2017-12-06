@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
+import utils.TestReporter;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,10 +87,13 @@ public class MainPage extends BasePage {
     @FindBy(css = ".filmore_next.filmore_command")
     private WebElement slideForwardButton;
 
+    @FindBy(css = ".filmore_next.filmore_command")
+    private WebElement slidePreviouslyButton;
+
     @FindBy(css = ".pix_slideshow_target")
     private WebElement newSlideSelected;
 
-    @FindBy(xpath = ".//img[@src='http://demo.dev.magonline.ru/media/wysiwyg/Kdv-Banner-Chipsoni_872_400.png']")
+    @FindBy(xpath = ".//*[@id='1_enfinity_1']/div/div[3]/div[2]/a/img")
     private WebElement slideMenuSection;
 
 
@@ -169,11 +173,14 @@ public class MainPage extends BasePage {
 
     public void verifyingAboutLinkFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Get current url");
+        TestReporter.step("VGet current url");
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Opening free delivering section");
+        TestReporter.step("Opening free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         LOGGER.log(Level.INFO, "Click about link free delivering section");
+        TestReporter.step("Click about link free delivering section");
         elementIsClickable(aboutFreeDeliveryLink, driver).click();
         waitForPageLoad(driver);
         getCurrentUrl();
@@ -182,6 +189,7 @@ public class MainPage extends BasePage {
 
     public void verifyingOpeningPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying opening payment upon receiving section");
+        TestReporter.step("Verifying opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
@@ -197,11 +205,14 @@ public class MainPage extends BasePage {
 
     public void verifyingAboutLinkPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Get current url");
+        TestReporter.step("Get current url");
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Opening payment upon receiving section");
+        TestReporter.step("Opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         LOGGER.log(Level.INFO, "Click about link free delivering section");
+        TestReporter.step("Click about link free delivering section");
         elementIsClickable(aboutPaymentUponReceivingLink, driver).click();
         waitForPageLoad(driver);
         getCurrentUrl();
@@ -228,7 +239,15 @@ public class MainPage extends BasePage {
 
     public void switchSlideForward() {
         LOGGER.log(Level.INFO, "Click slide forward button");
+        TestReporter.step("Click slide forward button");
         hoverAndClick(driver, slideMenuSection, slideForwardButton);
+        AssertCollector.assertTrue(newSlideSelected.isDisplayed());
+    }
+
+    public void switchSlidePreviously() {
+        LOGGER.log(Level.INFO, "Click slide previously button");
+        TestReporter.step("Click slide previously button");
+        hoverAndClick(driver, slideMenuSection, slidePreviouslyButton);
         AssertCollector.assertTrue(newSlideSelected.isDisplayed());
     }
 }

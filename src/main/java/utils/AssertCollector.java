@@ -19,8 +19,10 @@ public class AssertCollector {
         try {
             Assert.assertEquals(actual, expected);
             LOGGER.log(Level.INFO, expected.toString() + message + actual.toString());
+            TestReporter.step(expected.toString() + message + actual.toString());
         } catch (Throwable e) {
             LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
+            TestReporter.fail(expected.toString() + message + actual.toString());
             Assert.fail();
         }
     }

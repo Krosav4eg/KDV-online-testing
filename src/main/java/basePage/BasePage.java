@@ -67,7 +67,7 @@ public abstract class BasePage {
     }
 
     public static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
-        LOGGER.log(Level.INFO, "Move to the main element position and click needed element");
+        LOGGER.log(Level.INFO, "Move to the main element position and click needed element " + mainElement);
         TestReporter.step(" Click on needed element " + subElement);
         Actions action = new Actions(driver);
         action.moveToElement(mainElement).perform();
