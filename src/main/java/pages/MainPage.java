@@ -96,6 +96,8 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='1_enfinity_1']/div/div[3]/div[2]/a/img")
     private WebElement slideMenuSection;
 
+    @FindBy(css = ".filmore_pag.filmore_pag_1")
+    private WebElement slideSecondPoint;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -249,5 +251,15 @@ public class MainPage extends BasePage {
         TestReporter.step("Click slide previously button");
         hoverAndClick(driver, slideMenuSection, slidePreviouslyButton);
         AssertCollector.assertTrue(newSlideSelected.isDisplayed());
+    }
+
+    public void switchBetweenSlides() throws InterruptedException {
+        LOGGER.log(Level.INFO, "Switch between slides");
+        TestReporter.step("Switch between slides");
+        elementIsClickable(slideSecondPoint, driver);
+        String actualColor = "#ff1b41";
+        String expectedColor = getBorderColor(slideSecondPoint);
+        AssertCollector.assertEqualsJ(actualColor, expectedColor,
+                " Verify elements color of free delivering section section ");
     }
 }

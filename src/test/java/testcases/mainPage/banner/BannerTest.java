@@ -18,4 +18,9 @@ public class BannerTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34332");
         mainPage.switchSlidePreviously();
     }
+    @Test
+    public void switchBetweenSlidesTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID - C34333");
+        mainPage.switchBetweenSlides();
+    }
 }
