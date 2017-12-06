@@ -26,13 +26,25 @@ public class AssertCollector {
     }
 
     public static void assertFalse(boolean condition) {
-        Assert.assertFalse(condition);
-        LOGGER.log(Level.INFO, " expected condition " + condition);
+        try {
+            Assert.assertFalse(condition);
+            TestReporter.success("expected condition is correct");
+            LOGGER.log(Level.INFO, " expected condition " + condition);
+        } catch (AssertionError e) {
+            TestReporter.fail("expected condition isn't correct");
+            LOGGER.log(Level.WARNING, " expected condition " + condition);
+        }
     }
 
     public static void assertTrue(boolean condition) {
-        Assert.assertTrue(condition);
-        LOGGER.log(Level.INFO, " expected condition " + condition);
+        try {
+            Assert.assertTrue(condition);
+            TestReporter.success(" expected condition is " + condition);
+            LOGGER.log(Level.INFO, " expected condition " + condition);
+        } catch (AssertionError e) {
+            TestReporter.fail("expected condition isn't correct");
+            LOGGER.log(Level.WARNING, " expected condition " + condition);
+        }
     }
 
     /**

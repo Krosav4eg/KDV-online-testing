@@ -1,13 +1,12 @@
 package basePage;
 
 import logger.MagDvLogger;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.*;
 import utils.TestReporter;
 
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +20,6 @@ import static utils.Constants.RGBA_TO_RGB_REGEX;
 public abstract class BasePage {
 
     protected WebDriver driver;
-    private static final int WAITING_TIMEOUT = 30000;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
@@ -30,48 +28,19 @@ public abstract class BasePage {
     }
     //========================CUSTOM METHODS=============================================
 
-    public static void waitForPageLoad(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
-        TestReporter.step("Wait for page loading ");
-        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
-                "return document.readyState").equals("complete"));
-    }
-
-    /**
-     * Method verifying that web element is clickable.
-     *
-     * @param element used to find the element
-     */
-    public WebElement elementIsClickable(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
-        TestReporter.step("Click on - " + element);
-        LOGGER.log(Level.INFO, " Click on - " + element);
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    /**
-     * Method was created for helps to search for elements with certain intervals within a given period of time.
-     * Web element searching every 50 MILLISECONDS for 30 seconds.
-     *
-     * @param element - used to find the element
-     */
-    protected static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
-        Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(50, TimeUnit.MILLISECONDS)
-                .ignoring(NoSuchElementException.class);
-        return newWait.until(ExpectedConditions.visibilityOf(element));
-    }
-
     protected String getText(WebElement element) {
-        return element.getText();}
+        return element.getText();
+    }
 
     protected String getCurrentUrl() {
-        return driver.getCurrentUrl().toString();}
+        LOGGER.log(Level.INFO, "Get current URL ");
+        TestReporter.step("Get current URL ");
+        return driver.getCurrentUrl().toString();
+    }
 
     public static String getBorderColor(WebElement webElement) {
         LOGGER.log(Level.INFO, "Get element color");
-        TestReporter.step("Get element color");
+        TestReporter.step("Get element color ");
         String rgb[] = webElement.getCssValue("border-color").replaceAll(RGBA_TO_RGB_REGEX, "")
                 .split(COMMA_REGEX);
         return String.format("#%s%s%s", toBrowserHexValue(Integer.parseInt(rgb[0])),
@@ -88,10 +57,19 @@ public abstract class BasePage {
     }
 
     public static void moveMouseToAndClick(WebDriver driver, WebElement element, int x, int y) {
+        TestReporter.step("Move to the element position ");
         LOGGER.log(Level.INFO, "Move to the element position");
         Actions action = new Actions(driver);
         TestReporter.step("Wait for page loading " + element);
         action.moveToElement(element, x, y).click().build().perform();
+    }
+
+    public static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
+        LOGGER.log(Level.INFO, "Move to the main element position and click needed element");
+        TestReporter.step(" Click on needed element " + subElement);
+        Actions action = new Actions(driver);
+        action.moveToElement(mainElement).perform();
+        action.click(subElement).perform();
     }
 }
 

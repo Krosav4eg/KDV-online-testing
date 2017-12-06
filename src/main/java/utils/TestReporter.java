@@ -114,17 +114,6 @@ public class TestReporter {
         Reporter.log(format(SKIP_TAG, skipMessage));
     }
 
-//    /**
-//     * Let you to add screenshot any time you want in any place in the Framework
-//     *
-//     * @param screenshotName - simple name of future added screenshot
-//     */
-//    public static void addScreenshotToReport(String screenshotName) {
-//        String screenshotPath = MediaHelper.captureScreenshot(screenshotName);
-//        log(screenshotPath);
-//        logScreenshot(screenshotPath);
-//    }
-
     /**
      * Appends border with message in report in format:
      * //================= YOUR_MESSAGE_HERE =================//

@@ -33,8 +33,6 @@ public class BrowserFactory {
      * There is pre-initialization of the driver and his way that is it prior to calling object
      */
     private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
-
-
     /**
      * There is setting driver by name
      *

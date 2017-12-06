@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static utils.Constants.BASE_URL;
+import static utils.WaitingUtility.elementIsClickable;
+import static utils.WaitingUtility.waitForPageLoad;
 
 /**
  * @author Sergey Potapov
@@ -23,7 +25,6 @@ public class MainPage extends BasePage {
     }
 
     //========================MAIN PAGE=============================================
-
     @FindBy(xpath = "//*[@title='Вход']")
     private WebElement enterButton;
 
@@ -80,6 +81,17 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "(//*[@class='benefit__header'])[3]")
     private WebElement paymentUponReceivingHeader;
+
+    //========================BANNER SECTION=========================================
+    @FindBy(css = ".filmore_next.filmore_command")
+    private WebElement slideForwardButton;
+
+    @FindBy(css = ".pix_slideshow_target")
+    private WebElement newSlideSelected;
+
+    @FindBy(xpath = ".//img[@src='http://demo.dev.magonline.ru/media/wysiwyg/Kdv-Banner-Chipsoni_872_400.png']")
+    private WebElement slideMenuSection;
+
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -169,14 +181,14 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingOpeningPaymentUponReceivingSection() {
-        LOGGER.log(Level.INFO,"Verifying opening payment upon receiving section");
+        LOGGER.log(Level.INFO, "Verifying opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingPaymentUponReceivingSection() {
-        LOGGER.log(Level.INFO,"Verifying closing payment upon receiving section");
+        LOGGER.log(Level.INFO, "Verifying closing payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
@@ -184,12 +196,12 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAboutLinkPaymentUponReceivingSection() {
-        LOGGER.log(Level.INFO,"Get current url");
+        LOGGER.log(Level.INFO, "Get current url");
         getCurrentUrl();
-        LOGGER.log(Level.INFO,"Opening payment upon receiving section");
+        LOGGER.log(Level.INFO, "Opening payment upon receiving section");
         waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
-        LOGGER.log(Level.INFO,"Click about link free delivering section");
+        LOGGER.log(Level.INFO, "Click about link free delivering section");
         elementIsClickable(aboutPaymentUponReceivingLink, driver).click();
         waitForPageLoad(driver);
         getCurrentUrl();
@@ -212,5 +224,11 @@ public class MainPage extends BasePage {
         String expectedColorPaymentUponReceivingSection = getBorderColor(paymentUponReceivingHeader);
         AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
                 " Verify elements color of free delivering section section ");
+    }
+
+    public void switchSlideForward() {
+        LOGGER.log(Level.INFO, "Click slide forward button");
+        hoverAndClick(driver, slideMenuSection, slideForwardButton);
+        AssertCollector.assertTrue(newSlideSelected.isDisplayed());
     }
 }
