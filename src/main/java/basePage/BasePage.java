@@ -72,8 +72,10 @@ public abstract class BasePage {
     public static String getBorderColor(WebElement webElement) {
         LOGGER.log(Level.INFO, "Get element color");
         TestReporter.step("Get element color");
-        String rgb[] = webElement.getCssValue("border-color").replaceAll(RGBA_TO_RGB_REGEX, "").split(COMMA_REGEX);
-        return String.format("#%s%s%s", toBrowserHexValue(Integer.parseInt(rgb[0])), toBrowserHexValue(Integer.parseInt(rgb[1])),
+        String rgb[] = webElement.getCssValue("border-color").replaceAll(RGBA_TO_RGB_REGEX, "")
+                .split(COMMA_REGEX);
+        return String.format("#%s%s%s", toBrowserHexValue(Integer.parseInt(rgb[0])),
+                toBrowserHexValue(Integer.parseInt(rgb[1])),
                 toBrowserHexValue(Integer.parseInt(rgb[2])));
     }
 
