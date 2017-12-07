@@ -104,8 +104,11 @@ public class MainPage extends BasePage {
     @FindBy(css = ".menu-categories__title")
     private List<WebElement> categoryGoodsList;
 
+    @FindBy(css = ".menu-categories__item:hover")
+    private WebElement parentItemOfProducts;
+
     @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
-    private WebElement firstGoodInList;
+    private WebElement firstGoodInLinkList;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -232,17 +235,17 @@ public class MainPage extends BasePage {
     public void verifyBorderColor() {
         elementIsClickable(lowerPriceSection, driver).click();
         String actualColorLowerPriceSection = "#ce0022";
-        String expectedColorLowerPriceSection = getBorderColor(lowerPriceSectionHeader);
+        String expectedColorLowerPriceSection = getElementColor(lowerPriceSectionHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorLowerPriceSection, expectedColorLowerPriceSection,
                 " Verify elements color of lower price section ");
         elementIsClickable(freeDeliveringSection, driver).click();
         String actualColorFreeDeliveringSection = "#ce0022";
-        String expectedColorFreeDeliveringSection = getBorderColor(freeDeliveringSectionHeader);
+        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorFreeDeliveringSection, expectedColorFreeDeliveringSection,
                 " Verify elements color of free delivering section section ");
         elementIsClickable(paymentUponReceivingSection, driver).click();
         String actualColorPaymentUponReceivingSection = "#ce0022";
-        String expectedColorPaymentUponReceivingSection = getBorderColor(paymentUponReceivingHeader);
+        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
                 " Verify elements color of free delivering section section ");
     }
@@ -266,7 +269,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Switch between slides");
         elementIsClickable(slideSecondPoint, driver);
         String actualColor = "#ff1b41";
-        String expectedColor = getBorderColor(slideSecondPoint);
+        String expectedColor = getElementColor(slideSecondPoint, "border-color");
         AssertCollector.assertEqualsJ(actualColor, expectedColor,
                 " Verify elements color of free delivering section section ");
     }
@@ -275,9 +278,19 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Select category");
         TestReporter.step("Select category");
         clickOnIndexFromElementList(categoryGoodsList, 20);
-        String textAttribute = getValueOfAttributeByName(firstGoodInList, "href");
+        String textAttribute = getValueOfAttributeByName(firstGoodInLinkList, "href");
         getCurrentUrl();
         AssertCollector.assertEqualsJ(getCurrentUrl(), textAttribute,
                 " Current url is equal link of product ");
+    }
+
+    public void moveToCategory() {
+        LOGGER.log(Level.INFO, "Move to category");
+        TestReporter.step("Move to category");
+        moveMouseTo(driver, firstGoodInLinkList);
+        String expectedColor = "#f6f6f6";
+        String actualColor = getElementColor(parentItemOfProducts, "background-color");
+        AssertCollector.assertEqualsJ(actualColor, expectedColor,
+                " Verify elements color of free delivering section section ");
     }
 }

@@ -9,8 +9,14 @@ import utils.TestReporter;
  */
 public class CategoryGoodsTest extends BaseTest {
     @Test
-    public void verifySelectingCategoryTest() throws InterruptedException {
+    public void verifySelectingCategoryTest() {
         TestReporter.testTitle("Test ID - C34335");
         mainPage.selectingCategory();
+    }
+
+    @Test
+    public void verifyMoveToCategoryTest() {
+        TestReporter.testTitle("Test ID - C34336");
+        mainPage.moveToCategory();
     }
 }

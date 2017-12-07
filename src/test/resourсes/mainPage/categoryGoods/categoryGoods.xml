@@ -16,4 +16,13 @@
             </class>
         </classes>
     </test>
+    <test name="C34336">
+        <classes>
+            <class name="testcases.mainPage.categorySection.CategoryGoodsTest">
+                <methods>
+                    <include name="verifyMoveToCategoryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

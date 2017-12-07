@@ -42,10 +42,10 @@ public abstract class BasePage {
         return driver.getCurrentUrl().toString();
     }
 
-    protected static String getBorderColor(WebElement webElement) {
+    protected static String getElementColor(WebElement webElement,String colorSection) {
         LOGGER.log(Level.INFO, "Get element color");
         TestReporter.step("Get element color ");
-        String rgb[] = webElement.getCssValue("border-color").replaceAll(RGBA_TO_RGB_REGEX, "")
+        String rgb[] = webElement.getCssValue(colorSection).replaceAll(RGBA_TO_RGB_REGEX, "")
                 .split(COMMA_REGEX);
         return String.format("#%s%s%s", toBrowserHexValue(Integer.parseInt(rgb[0])),
                 toBrowserHexValue(Integer.parseInt(rgb[1])),
@@ -89,6 +89,11 @@ public abstract class BasePage {
     }
     protected String getValueOfAttributeByName(WebElement element, String attribute) {
         return element.getAttribute(attribute);
+    }
+
+    protected void moveMouseTo(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element).build().perform();
     }
 }
 
