@@ -1,4 +1,4 @@
-package testcases.mainPage;
+package testcases.mainPage.blockWithBenefits;
 
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -7,7 +7,7 @@ import utils.TestReporter;
 /**
  * @author Sergey Potapov
  */
-public class MainPageTest extends BaseTest {
+public class BenefitsBlockTest extends BaseTest {
     @Test
     public void verifyLowerPriceTest() {
         TestReporter.testTitle("Test ID - C34321");
@@ -60,5 +60,11 @@ public class MainPageTest extends BaseTest {
     public void verifyingAboutLinkPaymentUponReceivingTest() {
         TestReporter.testTitle("Test ID - C34329");
         mainPage.verifyingAboutLinkPaymentUponReceivingSection();
+    }
+
+    @Test
+    public void verifyingBorderColorTest() {
+        TestReporter.testTitle("Test ID - C34330");
+        mainPage.verifyBorderColor();
     }
 }

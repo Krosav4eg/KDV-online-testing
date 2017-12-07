@@ -9,7 +9,7 @@
 
     <test name="C34321">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyLowerPriceTest"/>
                 </methods>
@@ -19,7 +19,7 @@
 
     <test name="C34322">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyClosingLowerPriceTest"/>
                 </methods>
@@ -29,7 +29,7 @@
 
     <test name="C34323">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyingAboutLinkLowerPrice"/>
                 </methods>
@@ -39,7 +39,7 @@
 
     <test name="C34324">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyOpeningFreeDeliveryTest"/>
                 </methods>
@@ -49,7 +49,7 @@
 
     <test name="C34325">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyClosingFreeDeliveryTest"/>
                 </methods>
@@ -59,7 +59,7 @@
 
     <test name="C34326">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyingAboutLinkFreeDeliveryTest"/>
                 </methods>
@@ -69,7 +69,7 @@
 
     <test name="C34327">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyingOpeningPaymentUponReceivingTest"/>
                 </methods>
@@ -79,7 +79,7 @@
 
     <test name="C34328">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyingClosingPaymentUponReceivingTest"/>
                 </methods>
@@ -89,9 +89,19 @@
 
     <test name="C34329">
         <classes>
-            <class name="testcases.mainPage.MainPageTest">
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
                 <methods>
                     <include name="verifyingAboutLinkPaymentUponReceivingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34330">
+        <classes>
+            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest">
+                <methods>
+                    <include name="verifyingBorderColorTest"/>
                 </methods>
             </class>
         </classes>

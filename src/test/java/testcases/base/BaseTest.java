@@ -74,7 +74,6 @@ public abstract class BaseTest {
     /**
      * Method for closing browser and auto tests
      */
-
     @AfterTest()
     public void closeBrowser() {
         driver.quit();

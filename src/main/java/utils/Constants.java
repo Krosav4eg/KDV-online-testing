@@ -24,4 +24,8 @@ public class Constants {
     public static final String LOGGING_HTML_FILE = "test-output/Logging.html";
     public static final String LOGGING_TXT_FILE = "test-output/Logging.txt";
 
+    //===============================REGEX==============================
+    public static final String RGBA_TO_RGB_REGEX = "(rgba)|(rgb)|(\\()|(\\s)|(\\))";
+    public static final String COMMA_REGEX = ",";
+
 }

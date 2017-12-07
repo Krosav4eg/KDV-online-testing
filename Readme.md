@@ -5,6 +5,7 @@ Project contains autotests for verifying base application functional.
 
 ### Framework contain:
 ============================short description===================================
+
 Selenium WebDriver version 3.0.1 - http://www.seleniumhq.org/download/
 TestNG version 6.8 - http://testng.org/doc/download.html
 The Chrome driver (version 2.28) supports Chrome versions 54-59 https://sites.google.com/a/chromium.org/chromedriver/home

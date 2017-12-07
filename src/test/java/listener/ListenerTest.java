@@ -29,12 +29,15 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         System.out.println(" TEST: " + iTestResult);
         LOGGER.log(Level.WARNING, ">>>>>> This test is failed:<<<<<< " + iTestResult.getName());
-        LOGGER.log(Level.WARNING, ">>>>>> This test is failed after:<<<<<< " + ((iTestResult.getEndMillis() - iTestResult.getStartMillis()) / 1000) + "Seconds");
+        LOGGER.log(Level.WARNING, ">>>>>> This test is failed after:<<<<<< " + ((iTestResult.getEndMillis()
+                - iTestResult.getStartMillis()) / 1000) + "Seconds");
         String messageErr = iTestResult.getThrowable().getMessage();
         try {
-            LOGGER.log(Level.WARNING, ">>>>>>> Reason: Unable to locate current element by using selector:<<<<<< " + messageErr.substring(0, messageErr.indexOf('\n')));
+            LOGGER.log(Level.WARNING, ">>>>>>> Reason: Unable to locate current element by using selector:<<<<<< "
+                    + messageErr.substring(0, messageErr.indexOf('\n')));
         } catch (StringIndexOutOfBoundsException ex) {
-            LOGGER.log(Level.WARNING, ">>>>>>> Reason: Unable to locate current element by using selector:<<<<<< " + messageErr.replace("Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator", ""));
+            LOGGER.log(Level.WARNING, ">>>>>>> Reason: Unable to locate current element by using selector:<<<<<< "
+                    + messageErr.replace("Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator", ""));
         }
         BaseTest.capture(iTestResult.getName(), ERROR_SCREENSHOT_FOLDER);
     }
