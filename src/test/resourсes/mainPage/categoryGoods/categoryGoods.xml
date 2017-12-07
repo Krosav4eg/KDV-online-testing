@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Header Regression Tests" parallel="tests" thread-count="3">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="C34335">
+        <classes>
+            <class name="testcases.mainPage.categorySection.CategoryGoodsTest">
+                <methods>
+                    <include name="verifySelectingCategoryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

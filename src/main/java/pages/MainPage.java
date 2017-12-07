@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -98,6 +99,13 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".filmore_pag.filmore_pag_1")
     private WebElement slideSecondPoint;
+
+    //========================CATEGORIES LIST SECTION=========================================
+    @FindBy(css = ".menu-categories__title")
+    private List<WebElement> categoryGoodsList;
+
+    @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
+    private WebElement firstGoodInList;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -261,5 +269,15 @@ public class MainPage extends BasePage {
         String expectedColor = getBorderColor(slideSecondPoint);
         AssertCollector.assertEqualsJ(actualColor, expectedColor,
                 " Verify elements color of free delivering section section ");
+    }
+
+    public void selectingCategory() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        clickOnIndexFromElementList(categoryGoodsList, 20);
+        String textAttribute = getValueOfAttributeByName(firstGoodInList, "href");
+        getCurrentUrl();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), textAttribute,
+                " Current url is equal link of product ");
     }
 }
