@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import utils.TestReporter;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +42,12 @@ public abstract class BasePage {
         LOGGER.log(Level.INFO, "Get current URL ");
         TestReporter.step("Get current URL ");
         return driver.getCurrentUrl().toString();
+    }
+
+    protected void getUrl(String url) {
+        LOGGER.log(Level.INFO, "Navigate to needed url ");
+        TestReporter.step("Navigate to needed url ");
+        driver.navigate().to(url);
     }
 
     protected static String getElementColor(WebElement webElement, String colorSection) {
@@ -95,6 +103,18 @@ public abstract class BasePage {
     protected void moveMouseTo(WebDriver driver, WebElement element) {
         Actions action = new Actions(driver);
         action.moveToElement(element).build().perform();
+    }
+
+    protected void scrollDown() {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "AWT Exception occurs, see message for details: %s", e.getMessage());
+        }
+        robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+        robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
     }
 
     protected static int getSumOfAllElementFromList(List<WebElement> element) {

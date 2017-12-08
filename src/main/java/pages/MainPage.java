@@ -114,6 +114,15 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
     private List<WebElement> hitSalesList;
 
+    @FindBy(css = ".product-item__summary-cart")
+    private List<WebElement> hitSalesBasketButtons;
+
+    @FindBy(css = ".cart-item__title.cart-item__text.cart-item__link")
+    private WebElement descriptionProductInBasket;
+
+    @FindBy(xpath = "(//div[@class='product-item__title'])[1]")
+    public WebElement firstItem;
+
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -303,7 +312,18 @@ public class MainPage extends BasePage {
         int expectedElementsInList = 15;
         int actualElementsInList = getSumOfAllElementFromList(hitSalesList);
         AssertCollector.assertEqualsJ(actualElementsInList, expectedElementsInList,
-                " Verify elements color of free delivering section section ");
+                " Verify total count of products in 'Hit Salary list' ");
+    }
+
+    public void verifyAddingIntoBasket() throws InterruptedException {
+        String expectedDescription = getText(firstItem);
+        scrollDown();
+        Thread.sleep(2000);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        getUrl(BASE_URL + "/checkout/cart/");
+        elementIsClickable(descriptionProductInBasket, driver);
+        String actualDescription = getText(descriptionProductInBasket);
+        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
     }
 }
 

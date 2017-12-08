@@ -13,4 +13,10 @@ public class HitOfSalesTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34339");
         mainPage.verifySumAllElements();
     }
+
+    @Test
+    public void verifyAddingProductIntoBasketTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID - C34340");
+        mainPage.verifyAddingIntoBasket();
+    }
 }
