@@ -110,6 +110,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
     private WebElement firstGoodInLinkList;
 
+    //========================HIT OF SALES SECTION=========================================
+    @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
+    private List<WebElement> hitSalesList;
+
+
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
@@ -264,7 +269,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(newSlideSelected.isDisplayed());
     }
 
-    public void switchBetweenSlides() throws InterruptedException {
+    public void switchBetweenSlides() {
         LOGGER.log(Level.INFO, "Switch between slides");
         TestReporter.step("Switch between slides");
         elementIsClickable(slideSecondPoint, driver);
@@ -293,4 +298,12 @@ public class MainPage extends BasePage {
         AssertCollector.assertEqualsJ(actualColor, expectedColor,
                 " Verify elements color of free delivering section section ");
     }
+
+    public void verifySumAllElements() {
+        int expectedElementsInList = 15;
+        int actualElementsInList = getSumOfAllElementFromList(hitSalesList);
+        AssertCollector.assertEqualsJ(actualElementsInList, expectedElementsInList,
+                " Verify elements color of free delivering section section ");
+    }
 }
+

@@ -42,7 +42,7 @@ public abstract class BasePage {
         return driver.getCurrentUrl().toString();
     }
 
-    protected static String getElementColor(WebElement webElement,String colorSection) {
+    protected static String getElementColor(WebElement webElement, String colorSection) {
         LOGGER.log(Level.INFO, "Get element color");
         TestReporter.step("Get element color ");
         String rgb[] = webElement.getCssValue(colorSection).replaceAll(RGBA_TO_RGB_REGEX, "")
@@ -84,9 +84,10 @@ public abstract class BasePage {
             }
         } catch (ElementNotVisibleException e) {
             e.getMessage();
-            LOGGER.log(Level.INFO, "ElementNotVisibleException " + e.getMessage());
+            LOGGER.log(Level.WARNING, "ElementNotVisibleException " + e.getMessage());
         }
     }
+
     protected String getValueOfAttributeByName(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
@@ -94,6 +95,20 @@ public abstract class BasePage {
     protected void moveMouseTo(WebDriver driver, WebElement element) {
         Actions action = new Actions(driver);
         action.moveToElement(element).build().perform();
+    }
+
+    protected static int getSumOfAllElementFromList(List<WebElement> element) {
+        int totalCount = 0;
+        try {
+            LOGGER.log(Level.INFO, "Counting total elements on page ");
+            TestReporter.step(" Counting total elements on page ");
+            List<WebElement> elementList = element;
+            totalCount = elementList.size();
+        } catch (ElementNotVisibleException e) {
+            e.getMessage();
+            LOGGER.log(Level.WARNING, "ElementNotVisibleException " + e.getMessage());
+        }
+        return totalCount;
     }
 }
 
