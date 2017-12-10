@@ -46,7 +46,7 @@ public class WaitingUtility {
      *
      * @param element - used to find the element
      */
-    protected static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
+    public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
         TestReporter.step("Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static utils.Constants.BASE_URL;
+import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -116,6 +117,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".product-item__summary-cart")
     private List<WebElement> hitSalesBasketButtons;
+
+    @FindBy(css = ".cart-control__active")
+    private WebElement productAddedButton;
 
     @FindBy(css = ".cart-item__title.cart-item__text.cart-item__link")
     private WebElement descriptionProductInBasket;
@@ -320,6 +324,7 @@ public class MainPage extends BasePage {
         scrollDown();
         Thread.sleep(2000);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        elementFluentWaitVisibility(productAddedButton,driver);
         getUrl(BASE_URL + "/checkout/cart/");
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);

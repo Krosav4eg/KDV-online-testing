@@ -7,15 +7,16 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <!--<test name="C34339">-->
-        <!--<classes>-->
-            <!--<class name="testcases.mainPage.hitOfSales.HitOfSalesTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyTotalSumHitSalesTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34339">
+        <classes>
+            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+                <methods>
+                    <include name="verifyTotalSumHitSalesTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C343340">
         <classes>
             <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
