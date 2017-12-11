@@ -26,4 +26,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C37063">
+        <classes>
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
+                <methods>
+                    <include name="verifyGooglePlayLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

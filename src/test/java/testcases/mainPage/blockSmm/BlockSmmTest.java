@@ -19,4 +19,10 @@ public class BlockSmmTest extends BaseTest {
         TestReporter.testTitle("Test ID - C37062");
         mainPage.verifyInstagramLink();
     }
+
+    @Test
+    public void verifyGooglePlayLinkTest() {
+        TestReporter.testTitle("Test ID - C37063");
+        mainPage.verifyGooglePlayLink();
+    }
 }

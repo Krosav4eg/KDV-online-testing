@@ -133,6 +133,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".social__link.social__link_instagram")
     private WebElement instaLink;
 
+    @FindBy(css = ".social__link.social__link_android")
+    private WebElement googlePlayLink;
+
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
@@ -357,8 +360,19 @@ public class MainPage extends BasePage {
     public void verifyInstagramLink() {
         String expUrl = "https://www.instagram.com/kdvonline/";
         scrollDown();
-        textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(instaLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+    }
+
+    public void verifyGooglePlayLink() {
+        String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
+        scrollDown();
+        scrollDown();
+        textPresent("Скачивайте приложение для Android");
+        elementFluentWaitVisibility(googlePlayLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
