@@ -28,4 +28,8 @@ public class Constants {
     public static final String RGBA_TO_RGB_REGEX = "(rgba)|(rgb)|(\\()|(\\s)|(\\))";
     public static final String COMMA_REGEX = ",";
 
+    //===============================UTIL CONSTANTS==============================
+    public static final int SECOND_TAB_BROWSER = 1;
+    public static final int TWO_TABS_BROWSER = 2;
+
 }

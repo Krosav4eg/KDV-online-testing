@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static utils.Constants.BASE_URL;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
-import static utils.WaitingUtility.elementIsClickable;
-import static utils.WaitingUtility.waitForPageLoad;
+import static org.testng.Assert.fail;
+import static utils.Constants.*;
+import static utils.WaitingUtility.*;
 
 /**
  * @author Sergey Potapov
@@ -125,8 +124,11 @@ public class MainPage extends BasePage {
     private WebElement descriptionProductInBasket;
 
     @FindBy(xpath = "(//div[@class='product-item__title'])[1]")
-    public WebElement firstItem;
+    private WebElement firstItem;
 
+    //========================HIT OF SALES SECTION=========================================
+    @FindBy(css = ".social__link.social__link_vk")
+    private WebElement vkLink;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -319,16 +321,34 @@ public class MainPage extends BasePage {
                 " Verify total count of products in 'Hit Salary list' ");
     }
 
-    public void verifyAddingIntoBasket() throws InterruptedException {
+    public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
         scrollDown();
-        Thread.sleep(2000);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        elementFluentWaitVisibility(productAddedButton,driver);
-        getUrl(BASE_URL + "/checkout/cart/");
+        if (productAddedButton.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+            TestReporter.step("Button hitSalesBasketButtons is displayed");
+            elementFluentWaitVisibility(productAddedButton, driver);
+            getUrl(BASE_URL + "/checkout/cart/");
+        } else {
+            LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+            TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+            fail();
+        }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
         AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+    }
+
+    public void verifyVkLink() {
+        String expUrl = "https://vk.com/kdvonline";
+        scrollDown();
+        textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
+        elementFluentWaitVisibility(vkLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 }
 
