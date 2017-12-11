@@ -8,10 +8,12 @@ import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static utils.Constants.BASE_URL;
+import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -98,6 +100,33 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".filmore_pag.filmore_pag_1")
     private WebElement slideSecondPoint;
+
+    //========================CATEGORIES LIST SECTION=========================================
+    @FindBy(css = ".menu-categories__title")
+    private List<WebElement> categoryGoodsList;
+
+    @FindBy(css = ".menu-categories__item:hover")
+    private WebElement parentItemOfProducts;
+
+    @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
+    private WebElement firstGoodInLinkList;
+
+    //========================HIT OF SALES SECTION=========================================
+    @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
+    private List<WebElement> hitSalesList;
+
+    @FindBy(css = ".product-item__summary-cart")
+    private List<WebElement> hitSalesBasketButtons;
+
+    @FindBy(css = ".cart-control__active")
+    private WebElement productAddedButton;
+
+    @FindBy(css = ".cart-item__title.cart-item__text.cart-item__link")
+    private WebElement descriptionProductInBasket;
+
+    @FindBy(xpath = "(//div[@class='product-item__title'])[1]")
+    public WebElement firstItem;
+
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -224,17 +253,17 @@ public class MainPage extends BasePage {
     public void verifyBorderColor() {
         elementIsClickable(lowerPriceSection, driver).click();
         String actualColorLowerPriceSection = "#ce0022";
-        String expectedColorLowerPriceSection = getBorderColor(lowerPriceSectionHeader);
+        String expectedColorLowerPriceSection = getElementColor(lowerPriceSectionHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorLowerPriceSection, expectedColorLowerPriceSection,
                 " Verify elements color of lower price section ");
         elementIsClickable(freeDeliveringSection, driver).click();
         String actualColorFreeDeliveringSection = "#ce0022";
-        String expectedColorFreeDeliveringSection = getBorderColor(freeDeliveringSectionHeader);
+        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorFreeDeliveringSection, expectedColorFreeDeliveringSection,
                 " Verify elements color of free delivering section section ");
         elementIsClickable(paymentUponReceivingSection, driver).click();
         String actualColorPaymentUponReceivingSection = "#ce0022";
-        String expectedColorPaymentUponReceivingSection = getBorderColor(paymentUponReceivingHeader);
+        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader, "border-color");
         AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
                 " Verify elements color of free delivering section section ");
     }
@@ -253,13 +282,53 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(newSlideSelected.isDisplayed());
     }
 
-    public void switchBetweenSlides() throws InterruptedException {
+    public void switchBetweenSlides() {
         LOGGER.log(Level.INFO, "Switch between slides");
         TestReporter.step("Switch between slides");
         elementIsClickable(slideSecondPoint, driver);
         String actualColor = "#ff1b41";
-        String expectedColor = getBorderColor(slideSecondPoint);
+        String expectedColor = getElementColor(slideSecondPoint, "border-color");
         AssertCollector.assertEqualsJ(actualColor, expectedColor,
                 " Verify elements color of free delivering section section ");
     }
+
+    public void selectingCategory() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        clickOnIndexFromElementList(categoryGoodsList, 20);
+        String textAttribute = getValueOfAttributeByName(firstGoodInLinkList, "href");
+        getCurrentUrl();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), textAttribute,
+                " Current url is equal link of product ");
+    }
+
+    public void moveToCategory() {
+        LOGGER.log(Level.INFO, "Move to category");
+        TestReporter.step("Move to category");
+        moveMouseTo(driver, firstGoodInLinkList);
+        String expectedColor = "#f6f6f6";
+        String actualColor = getElementColor(parentItemOfProducts, "background-color");
+        AssertCollector.assertEqualsJ(actualColor, expectedColor,
+                " Verify elements color of free delivering section section ");
+    }
+
+    public void verifySumAllElements() {
+        int expectedElementsInList = 15;
+        int actualElementsInList = getSumOfAllElementFromList(hitSalesList);
+        AssertCollector.assertEqualsJ(actualElementsInList, expectedElementsInList,
+                " Verify total count of products in 'Hit Salary list' ");
+    }
+
+    public void verifyAddingIntoBasket() throws InterruptedException {
+        String expectedDescription = getText(firstItem);
+        scrollDown();
+        Thread.sleep(2000);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        elementFluentWaitVisibility(productAddedButton,driver);
+        getUrl(BASE_URL + "/checkout/cart/");
+        elementIsClickable(descriptionProductInBasket, driver);
+        String actualDescription = getText(descriptionProductInBasket);
+        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+    }
 }
+
