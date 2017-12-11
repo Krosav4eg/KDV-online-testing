@@ -1,17 +1,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header Regression Tests" parallel="tests" thread-count="3">
+<suite name="Header Regression Tests" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="c37058">
+    <test name="C37058">
         <classes>
             <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
                     <include name="verifyVkLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C37062">
+        <classes>
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
+                <methods>
+                    <include name="verifyInstagramLinkTest"/>
                 </methods>
             </class>
         </classes>
