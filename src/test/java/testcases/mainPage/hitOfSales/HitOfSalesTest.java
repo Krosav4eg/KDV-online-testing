@@ -19,4 +19,10 @@ public class HitOfSalesTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34340");
         mainPage.verifyAddingIntoBasket();
     }
+
+    @Test
+    public void verifyOpeningProductCardPTest() {
+        TestReporter.testTitle("Test ID - C34343");
+        mainPage.openProductCard();
+    }
 }

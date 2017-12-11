@@ -91,6 +91,8 @@ public abstract class BasePage {
     }
 
     protected void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
+        LOGGER.log(Level.INFO, "Click on needed index of element " + elementIndex);
+        TestReporter.step("Click on needed index of element " + elementIndex);
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {

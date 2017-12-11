@@ -126,6 +126,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "(//div[@class='product-item__title'])[1]")
     private WebElement firstItem;
 
+    @FindBy(xpath = ".//*[@class='product-item__image-link']")
+    private WebElement productImageLink;
+
     //========================HIT OF SALES SECTION=========================================
     @FindBy(css = ".social__link.social__link_vk")
     private WebElement vkLink;
@@ -344,6 +347,17 @@ public class MainPage extends BasePage {
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
         AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+    }
+
+    public void openProductCard() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        scrollDown();
+        String textAttribute = getValueOfAttributeByName(productImageLink, "href");
+        clickOnIndexFromElementList(hitSalesList, 0);
+        getCurrentUrl();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), textAttribute,
+                " Current url is equal link of product ");
     }
 
     public void verifyVkLink() {
