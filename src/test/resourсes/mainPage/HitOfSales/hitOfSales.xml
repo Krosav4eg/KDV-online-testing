@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header Regression Tests" parallel="tests" thread-count="3">
+<suite name="Header Regression Tests" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -17,7 +17,7 @@
         </classes>
     </test>
 
-    <test name="C343340">
+    <test name="C34340">
         <classes>
             <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
                 <methods>
@@ -27,7 +27,17 @@
         </classes>
     </test>
 
-    <test name="C343343">
+    <test name="C34342">
+        <classes>
+            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+                <methods>
+                    <include name="verifyOpeningModalWindowProductCardTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34343">
         <classes>
             <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
                 <methods>

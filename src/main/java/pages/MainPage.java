@@ -129,7 +129,19 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@class='product-item__image-link']")
     private WebElement productImageLink;
 
-    //========================HIT OF SALES SECTION=========================================
+    @FindBy(css = ".product-item__inner")
+    private WebElement productInnerItem;
+
+    @FindBy(xpath = "(//*[@class='product-item__image-preview'])[1]")
+    private WebElement loupeButton;
+
+    @FindBy(css = ".modal__content")
+    private WebElement modalWindow;
+
+    @FindBy(css = ".product__title")
+    private WebElement descroptionProdictModalVindow;
+
+    //========================SMM SECTION=========================================
     @FindBy(css = ".social__link.social__link_vk")
     private WebElement vkLink;
 
@@ -333,6 +345,7 @@ public class MainPage extends BasePage {
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
         scrollDown();
+        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -347,6 +360,21 @@ public class MainPage extends BasePage {
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
         AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+    }
+
+    public void openingModalWindowProductCard() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        scrollDown();
+        moveMouseTo(driver, productInnerItem);
+        clickElementByJS(driver, loupeButton);
+        if (modalWindow.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Product modal window is displayed");
+            TestReporter.step("Product modal window is displayed");
+        } else {
+            LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
+            TestReporter.step("Product modal window isn't displayed");
+        }
     }
 
     public void openProductCard() {

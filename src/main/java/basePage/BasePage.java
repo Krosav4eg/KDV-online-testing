@@ -82,6 +82,11 @@ public abstract class BasePage {
         action.moveToElement(element, x, y).click().build().perform();
     }
 
+    protected void clickElementByJS(WebDriver driver, WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+    }
+
     protected static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
         LOGGER.log(Level.INFO, "Move to the main element position and click needed element " + mainElement);
         TestReporter.step(" Click on needed element " + subElement);

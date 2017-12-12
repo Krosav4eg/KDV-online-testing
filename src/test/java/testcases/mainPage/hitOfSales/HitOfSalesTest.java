@@ -21,6 +21,12 @@ public class HitOfSalesTest extends BaseTest {
     }
 
     @Test
+    public void verifyOpeningModalWindowProductCardTest() {
+        TestReporter.testTitle("Test ID - C34342");
+        mainPage.openingModalWindowProductCard();
+    }
+
+    @Test
     public void verifyOpeningProductCardPTest() {
         TestReporter.testTitle("Test ID - C34343");
         mainPage.openProductCard();
