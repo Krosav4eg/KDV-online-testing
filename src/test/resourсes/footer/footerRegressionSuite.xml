@@ -36,4 +36,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34360">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyPaymentLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

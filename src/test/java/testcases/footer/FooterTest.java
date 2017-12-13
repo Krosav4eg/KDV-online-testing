@@ -34,4 +34,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34359");
         mainPage.verifyFreeDeliveryLink();
     }
+
+    @Test
+    public void verifyPaymentLinkTest() {
+        TestReporter.testTitle("Test ID - C34360");
+        mainPage.verifyPaymentLink();
+    }
 }
