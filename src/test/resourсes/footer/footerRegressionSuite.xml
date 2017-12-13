@@ -1,47 +1,47 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Hit Of Sales Regression Tests" parallel="tests" thread-count="1">
+<suite name="Footer regression tests" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34339">
+    <test name="C34351">
         <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+            <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyTotalSumHitSalesTest"/>
+                    <include name="verifyAboutShopLinkTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34340">
+    <test name="C34358">
         <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+            <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyAddingProductIntoBasketTest"/>
+                    <include name="verifyCustomerPickupLinkTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34342">
+    <test name="C34359">
         <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+            <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyOpeningModalWindowProductCardTest"/>
+                    <include name="verifyFreeDeliveryLinkTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34343">
+    <test name="C34360">
         <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
+            <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyOpeningProductCardPTest"/>
+                    <include name="verifyPaymentLinkTest"/>
                 </methods>
             </class>
         </classes>

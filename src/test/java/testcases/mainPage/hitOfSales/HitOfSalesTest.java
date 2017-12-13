@@ -15,8 +15,20 @@ public class HitOfSalesTest extends BaseTest {
     }
 
     @Test
-    public void verifyAddingProductIntoBasketTest() throws InterruptedException {
+    public void verifyAddingProductIntoBasketTest() {
         TestReporter.testTitle("Test ID - C34340");
         mainPage.verifyAddingIntoBasket();
+    }
+
+    @Test
+    public void verifyOpeningModalWindowProductCardTest() {
+        TestReporter.testTitle("Test ID - C34342");
+        mainPage.openingModalWindowProductCard();
+    }
+
+    @Test
+    public void verifyOpeningProductCardPTest() {
+        TestReporter.testTitle("Test ID - C34343");
+        mainPage.openProductCard();
     }
 }

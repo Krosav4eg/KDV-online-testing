@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static utils.Constants.BASE_URL;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
-import static utils.WaitingUtility.elementIsClickable;
-import static utils.WaitingUtility.waitForPageLoad;
+import static org.testng.Assert.fail;
+import static utils.Constants.*;
+import static utils.WaitingUtility.*;
 
 /**
  * @author Sergey Potapov
@@ -125,8 +124,45 @@ public class MainPage extends BasePage {
     private WebElement descriptionProductInBasket;
 
     @FindBy(xpath = "(//div[@class='product-item__title'])[1]")
-    public WebElement firstItem;
+    private WebElement firstItem;
 
+    @FindBy(xpath = ".//*[@class='product-item__image-link']")
+    private WebElement productImageLink;
+
+    @FindBy(css = ".product-item__inner")
+    private WebElement productInnerItem;
+
+    @FindBy(xpath = "(//*[@class='product-item__image-preview'])[1]")
+    private WebElement loupeButton;
+
+    @FindBy(css = ".modal__content")
+    private WebElement modalWindow;
+
+    @FindBy(css = ".product__title")
+    private WebElement descroptionProdictModalVindow;
+
+    //========================SMM SECTION=========================================
+    @FindBy(css = ".social__link.social__link_vk")
+    private WebElement vkLink;
+
+    @FindBy(css = ".social__link.social__link_instagram")
+    private WebElement instaLink;
+
+    @FindBy(css = ".social__link.social__link_android")
+    private WebElement googlePlayLink;
+
+    //========================FOOTER SECTION=========================================
+    @FindBy(xpath = "//a[text()='О магазине']")
+    private WebElement aboutShopLink;
+
+    @FindBy(xpath = "//a[text()='Самовывоз']")
+    public WebElement customerPickupLink;
+
+    @FindBy(xpath = "//a[text()='Бесплатная доставка']")
+    public WebElement freeDeliveryLink;
+
+    @FindBy(xpath = "//a[text()='Оплата']")
+    public WebElement paymentLink;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -319,16 +355,114 @@ public class MainPage extends BasePage {
                 " Verify total count of products in 'Hit Salary list' ");
     }
 
-    public void verifyAddingIntoBasket() throws InterruptedException {
+    public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
         scrollDown();
-        Thread.sleep(2000);
+        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        elementFluentWaitVisibility(productAddedButton,driver);
-        getUrl(BASE_URL + "/checkout/cart/");
+        if (productAddedButton.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+            TestReporter.step("Button hitSalesBasketButtons is displayed");
+            elementFluentWaitVisibility(productAddedButton, driver);
+            getUrl(BASE_URL + "/checkout/cart/");
+        } else {
+            LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+            TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+            fail();
+        }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
         AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+    }
+
+    public void openingModalWindowProductCard() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        scrollDown();
+        moveMouseTo(driver, productInnerItem);
+        clickElementByJS(driver, loupeButton);
+        if (modalWindow.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Product modal window is displayed");
+            TestReporter.step("Product modal window is displayed");
+        } else {
+            LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
+            TestReporter.step("Product modal window isn't displayed");
+        }
+    }
+
+    public void openProductCard() {
+        LOGGER.log(Level.INFO, "Select category");
+        TestReporter.step("Select category");
+        scrollDown();
+        String textAttribute = getValueOfAttributeByName(productImageLink, "href");
+        clickOnIndexFromElementList(hitSalesList, 0);
+        getCurrentUrl();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), textAttribute,
+                " Current url is equal link of product ");
+    }
+
+    public void verifyVkLink() {
+        String expUrl = "https://vk.com/kdvonline";
+        scrollDown();
+        textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
+        elementFluentWaitVisibility(vkLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+    }
+
+    public void verifyInstagramLink() {
+        String expUrl = "https://www.instagram.com/kdvonline/";
+        scrollDown();
+        elementFluentWaitVisibility(instaLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+    }
+
+    public void verifyGooglePlayLink() {
+        String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
+        scrollDown();
+        scrollDown();
+        textPresent("Скачивайте приложение для Android");
+        elementFluentWaitVisibility(googlePlayLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+    }
+
+    public void verifyShopLink() {
+        String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
+        elementFluentWaitVisibility(aboutShopLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void verifyCustomerPickUpLink() {
+        String linkTextAttribute = getValueOfAttributeByName(customerPickupLink, "href");
+        elementFluentWaitVisibility(customerPickupLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void verifyFreeDeliveryLink() {
+        String linkTextAttribute = getValueOfAttributeByName(freeDeliveryLink, "href");
+        elementFluentWaitVisibility(freeDeliveryLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+    public void verifyPaymentLink() {
+        String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
+        elementFluentWaitVisibility(paymentLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
     }
 }
 

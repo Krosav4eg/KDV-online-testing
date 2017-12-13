@@ -48,6 +48,7 @@ public class WaitingUtility {
      */
     public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
         TestReporter.step("Click on - " + element);
+        LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)

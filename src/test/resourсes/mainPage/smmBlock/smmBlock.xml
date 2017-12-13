@@ -1,37 +1,37 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Banner regression tests" parallel="tests" thread-count="3">
+<suite name="Smm Block Regression Tests" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34331">
+    <test name="C37058">
         <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="switchSlideForwardTest"/>
+                    <include name="verifyVkLinkTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34332">
+    <test name="C37062">
         <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="switchSlidePreviousTest"/>
+                    <include name="verifyInstagramLinkTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34333">
+    <test name="C37063">
         <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="switchBetweenSlidesTest"/>
+                    <include name="verifyGooglePlayLinkTest"/>
                 </methods>
             </class>
         </classes>
