@@ -13,7 +13,9 @@ import utils.TestReporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
@@ -67,6 +69,7 @@ public abstract class BaseTest {
             FileUtils.copyFile(source, destination);
         } catch (IOException e) {
             e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
         }
         return dest;
     }
