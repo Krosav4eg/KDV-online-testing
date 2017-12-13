@@ -26,4 +26,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34359">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyFreeDeliveryLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
