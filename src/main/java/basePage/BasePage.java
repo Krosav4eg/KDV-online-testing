@@ -132,6 +132,14 @@ public abstract class BasePage {
         robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
     }
 
+    protected void scrollToNecessaryElement(WebElement element) {
+        LOGGER.log(Level.INFO, "Scroll to necessary element on page");
+        TestReporter.step("Scroll to necessary element on page");
+        int y = element.getLocation().getY();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0," + y + ")");
+    }
+
     protected static int getSumOfAllElementFromList(List<WebElement> element) {
         int totalCount = 0;
         try {
@@ -141,7 +149,7 @@ public abstract class BasePage {
             totalCount = elementList.size();
         } catch (ElementNotVisibleException e) {
             e.getMessage();
-            LOGGER.log(Level.WARNING, "ElementNotVisibleException " + e.getMessage());
+            LOGGER.log(Level.WARNING, "ElementNotVisibleException, see message for details: %s " + e.getMessage());
         }
         return totalCount;
     }
@@ -159,6 +167,7 @@ public abstract class BasePage {
                 return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
                 // no jQuery present
+                LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
                 return true;
             }
         };

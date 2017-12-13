@@ -151,6 +151,10 @@ public class MainPage extends BasePage {
     @FindBy(css = ".social__link.social__link_android")
     private WebElement googlePlayLink;
 
+    //========================FOOTER SECTION=========================================
+    @FindBy(xpath = "//a[text()='О магазине']")
+    private WebElement aboutShopLink;
+
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
@@ -419,6 +423,15 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+    }
+
+    public void verifyShopLink() {
+        scrollToNecessaryElement(aboutShopLink);
+        String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
+        elementFluentWaitVisibility(aboutShopLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
     }
 }
 
