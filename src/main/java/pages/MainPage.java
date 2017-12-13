@@ -155,6 +155,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//a[text()='О магазине']")
     private WebElement aboutShopLink;
 
+    @FindBy(xpath = "//a[text()='Самовывоз']")
+    public WebElement customerPickupLink;
+
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
@@ -426,9 +429,16 @@ public class MainPage extends BasePage {
     }
 
     public void verifyShopLink() {
-        scrollToNecessaryElement(aboutShopLink);
         String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
         elementFluentWaitVisibility(aboutShopLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void verifyCustomerPickUpLink() {
+        String linkTextAttribute = getValueOfAttributeByName(customerPickupLink, "href");
+        elementFluentWaitVisibility(customerPickupLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);

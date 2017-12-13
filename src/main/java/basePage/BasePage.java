@@ -132,7 +132,7 @@ public abstract class BasePage {
         robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
     }
 
-    protected void scrollToNecessaryElement(WebElement element) {
+    public void scrollToNecessaryElement(WebElement element) {
         LOGGER.log(Level.INFO, "Scroll to necessary element on page");
         TestReporter.step("Scroll to necessary element on page");
         int y = element.getLocation().getY();
