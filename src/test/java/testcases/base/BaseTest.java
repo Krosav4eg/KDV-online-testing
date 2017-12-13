@@ -23,7 +23,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 public abstract class BaseTest {
     protected WebDriver driver;
 
-    //=======DECLARATION OF PAGE CLASSES=======
+    //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
 
     /**
