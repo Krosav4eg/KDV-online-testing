@@ -173,6 +173,10 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//a[text()='Возврат и обмен']")
     private WebElement exchangeAndReturnLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Информация для юридических лиц']")
+    private WebElement infoLegalPersonLink;
+
+
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         driver.get(BASE_URL);
@@ -483,6 +487,14 @@ public class MainPage extends BasePage {
     public void openingExchangeAndReturnLink() {
         String linkTextAttribute = getValueOfAttributeByName(exchangeAndReturnLink, "href");
         elementFluentWaitVisibility(exchangeAndReturnLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingInfoForLegalPersonsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(infoLegalPersonLink, "href");
+        elementFluentWaitVisibility(infoLegalPersonLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
