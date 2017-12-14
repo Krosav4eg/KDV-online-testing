@@ -20,30 +20,36 @@ public class FooterTest extends BaseTest {
     @Test
     public void verifyOpeningAboutShopLinkTest() {
         TestReporter.testTitle("Test ID - C34351");
-        mainPage.verifyShopLink();
+        mainPage.openingShopLink();
     }
 
     @Test
     public void verifyOpeningCustomerPickupLinkTest() {
         TestReporter.testTitle("Test ID - C34358");
-        mainPage.verifyCustomerPickUpLink();
+        mainPage.openingCustomerPickUpLink();
     }
 
     @Test
     public void verifyOpeningFreeDeliveryLinkTest() {
         TestReporter.testTitle("Test ID - C34359");
-        mainPage.verifyFreeDeliveryLink();
+        mainPage.openingFreeDeliveryLink();
     }
 
     @Test
     public void verifyOpeningPaymentLinkTest() {
         TestReporter.testTitle("Test ID - C34360");
-        mainPage.verifyPaymentLink();
+        mainPage.openingPaymentLink();
     }
 
     @Test
     public void verifyOpeningHowToBuyLinkTest() {
         TestReporter.testTitle("Test ID - C34361");
-        mainPage.verifyHowToBuyLink();
+        mainPage.openingHowToBuyLink();
+    }
+
+    @Test
+    public void verifyOpeningExchangeAndReturnLinkTest() {
+        TestReporter.testTitle("Test ID - C34362");
+        mainPage.openingExchangeAndReturnLink();
     }
 }

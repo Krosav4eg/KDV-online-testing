@@ -18,20 +18,20 @@ public class BlockSmmTest extends BaseTest {
     }
 
     @Test
-    public void verifyVkLinkTest() throws InterruptedException {
+    public void verifyOpeningVkLinkTest() throws InterruptedException {
         TestReporter.testTitle("Test ID - C37058");
-        mainPage.verifyVkLink();
+        mainPage.openingVkLink();
     }
 
     @Test
-    public void verifyInstagramLinkTest() {
+    public void verifyOpeningInstagramLinkTest() {
         TestReporter.testTitle("Test ID - C37062");
-        mainPage.verifyInstagramLink();
+        mainPage.openingInstagramLink();
     }
 
     @Test
-    public void verifyGooglePlayLinkTest() {
+    public void verifyOpeningGooglePlayLinkTest() {
         TestReporter.testTitle("Test ID - C37063");
-        mainPage.verifyGooglePlayLink();
+        mainPage.openingGooglePlayLink();
     }
 }

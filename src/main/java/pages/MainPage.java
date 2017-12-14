@@ -94,7 +94,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".pix_slideshow_target")
     private WebElement newSlideSelected;
 
-    @FindBy(xpath = ".//*[@id='1_enfinity_1']/div/div[3]/div[2]/a/img")
+    @FindBy(xpath = ".//*[@id='1_enfinity_1']")
     private WebElement slideMenuSection;
 
     @FindBy(css = ".filmore_pag.filmore_pag_1")
@@ -162,13 +162,16 @@ public class MainPage extends BasePage {
     public WebElement customerPickupLink;
 
     @FindBy(xpath = ".//a[text()='Бесплатная доставка']")
-    public WebElement freeDeliveryLink;
+    private WebElement freeDeliveryLink;
 
     @FindBy(xpath = ".//a[text()='Оплата']")
-    public WebElement paymentLink;
+    private WebElement paymentLink;
 
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Как купить']")
-    public WebElement howToBuyLink;
+    private WebElement howToBuyLink;
+
+    @FindBy(xpath = ".//a[text()='Возврат и обмен']")
+    private WebElement exchangeAndReturnLink;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -393,6 +396,7 @@ public class MainPage extends BasePage {
         } else {
             LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
             TestReporter.step("Product modal window isn't displayed");
+            fail();
         }
     }
 
@@ -407,7 +411,7 @@ public class MainPage extends BasePage {
                 " Current url is equal link of product ");
     }
 
-    public void verifyVkLink() {
+    public void openingVkLink() {
         String expUrl = "https://vk.com/kdvonline";
         textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(vkLink, driver).click();
@@ -417,7 +421,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyInstagramLink() {
+    public void openingInstagramLink() {
         String expUrl = "https://www.instagram.com/kdvonline/";
         elementFluentWaitVisibility(instaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -426,7 +430,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyGooglePlayLink() {
+    public void openingGooglePlayLink() {
         String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
         textPresent("Скачивайте приложение для Android");
         elementFluentWaitVisibility(googlePlayLink, driver).click();
@@ -436,7 +440,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyShopLink() {
+    public void openingShopLink() {
         String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
         elementFluentWaitVisibility(aboutShopLink, driver).click();
         getCurrentUrl();
@@ -444,7 +448,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyCustomerPickUpLink() {
+    public void openingCustomerPickUpLink() {
         String linkTextAttribute = getValueOfAttributeByName(customerPickupLink, "href");
         elementFluentWaitVisibility(customerPickupLink, driver).click();
         getCurrentUrl();
@@ -452,7 +456,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyFreeDeliveryLink() {
+    public void openingFreeDeliveryLink() {
         String linkTextAttribute = getValueOfAttributeByName(freeDeliveryLink, "href");
         elementFluentWaitVisibility(freeDeliveryLink, driver).click();
         getCurrentUrl();
@@ -460,7 +464,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyPaymentLink() {
+    public void openingPaymentLink() {
         String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
         elementFluentWaitVisibility(paymentLink, driver).click();
         getCurrentUrl();
@@ -468,9 +472,17 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyHowToBuyLink() {
+    public void openingHowToBuyLink() {
         String linkTextAttribute = getValueOfAttributeByName(howToBuyLink, "href");
         elementFluentWaitVisibility(howToBuyLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingExchangeAndReturnLink() {
+        String linkTextAttribute = getValueOfAttributeByName(exchangeAndReturnLink, "href");
+        elementFluentWaitVisibility(exchangeAndReturnLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);

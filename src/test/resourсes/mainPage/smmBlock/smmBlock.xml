@@ -11,7 +11,7 @@
         <classes>
             <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="verifyVkLinkTest"/>
+                    <include name="verifyOpeningVkLinkTest"/>
                 </methods>
             </class>
         </classes>
@@ -21,7 +21,7 @@
         <classes>
             <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="verifyInstagramLinkTest"/>
+                    <include name="verifyOpeningInstagramLinkTest"/>
                 </methods>
             </class>
         </classes>
@@ -31,7 +31,7 @@
         <classes>
             <class name="testcases.mainPage.blockSmm.BlockSmmTest">
                 <methods>
-                    <include name="verifyGooglePlayLinkTest"/>
+                    <include name="verifyOpeningGooglePlayLinkTest"/>
                 </methods>
             </class>
         </classes>
