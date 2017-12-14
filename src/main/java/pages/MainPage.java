@@ -179,6 +179,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Договор купли-продажи']")
     private WebElement contractPurchaseSaleLink;
 
+    @FindBy(xpath = ".//a[text()='Договор поставки']")
+    private WebElement supplyContractLink;
+
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -507,6 +510,18 @@ public class MainPage extends BasePage {
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
         System.out.println(linkTextAttribute);
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        System.out.println(getCurrentUrl());
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingSupplyContractLink() {
+        String linkTextAttribute = "https://tomsk.kdvonline.ru/media/rules/Supply_contract.pdf";
+        System.out.println(linkTextAttribute);
+        elementFluentWaitVisibility(supplyContractLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
