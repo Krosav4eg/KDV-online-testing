@@ -159,7 +159,7 @@ public class MainPage extends BasePage {
     private WebElement aboutShopLink;
 
     @FindBy(xpath = ".//a[text()='Самовывоз']")
-    public WebElement customerPickupLink;
+    private WebElement customerPickupLink;
 
     @FindBy(xpath = ".//a[text()='Бесплатная доставка']")
     private WebElement freeDeliveryLink;
@@ -184,6 +184,15 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = ".//a[text()='Персональные данные']")
     private WebElement personalDataLink;
+
+    @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
+    private WebElement mailToLink;
+
+    @FindBy(xpath = ".//*[@href='tel:8 800 250 5555']")
+    private WebElement telLink;
+
+    @FindBy(xpath = ".//*[@id='footer']")
+    public WebElement footer;
 
 
     public void openMainPage() {
@@ -316,12 +325,14 @@ public class MainPage extends BasePage {
                 " Verify elements color of lower price section ");
         elementIsClickable(freeDeliveringSection, driver).click();
         String actualColorFreeDeliveringSection = "#ce0022";
-        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader, "border-color");
+        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader,
+                "border-color");
         AssertCollector.assertEqualsJ(actualColorFreeDeliveringSection, expectedColorFreeDeliveringSection,
                 " Verify elements color of free delivering section section ");
         elementIsClickable(paymentUponReceivingSection, driver).click();
         String actualColorPaymentUponReceivingSection = "#ce0022";
-        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader, "border-color");
+        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader,
+                "border-color");
         AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
                 " Verify elements color of free delivering section section ");
     }
@@ -394,7 +405,8 @@ public class MainPage extends BasePage {
         }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
-        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in" +
+                " basket page ", expectedDescription);
     }
 
     public void openingModalWindowProductCard() {
@@ -539,6 +551,19 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+    }
+
+    public void openingContactDataLink() {
+        textPresent("Свяжитесь с нами");
+        textPresent("Звонок по России бесплатный");
+        String expMailLink = getValueOfAttributeByName(mailToLink, "href");
+        String actMailLink = "mailto:info@kdvonline.ru";
+        String expTelLink = getValueOfAttributeByName(telLink, "href");
+        String actTelLink = "tel:8 800 250 5555";
+        AssertCollector.assertEquals(actMailLink, " is equal to ",
+                expMailLink);
+        AssertCollector.assertEquals(actTelLink, " is equal to ",
+                expTelLink);
     }
 }
 

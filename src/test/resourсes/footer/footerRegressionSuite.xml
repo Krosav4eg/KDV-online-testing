@@ -106,4 +106,13 @@
             </class>
         </classes>
     </test>
+    <test name="C34356">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyContactDataLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

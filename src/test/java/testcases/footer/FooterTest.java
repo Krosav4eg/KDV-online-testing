@@ -14,7 +14,7 @@ public class FooterTest extends BaseTest {
 
     @BeforeMethod
     public void beforeGeneralTests(Method method) {
-        mainPage.scrollToNecessaryElement(mainPage.customerPickupLink);
+        mainPage.scrollToNecessaryElement(mainPage.footer);
     }
 
     @Test
@@ -75,5 +75,11 @@ public class FooterTest extends BaseTest {
     public void verifyOpeningPersonalDataLinkTest() {
         TestReporter.testTitle("Test ID - C34366");
         mainPage.openingPersonalDataLink();
+    }
+
+    @Test
+    public void verifyContactDataLinkTest() {
+        TestReporter.testTitle("Test ID - C34356");
+        mainPage.openingContactDataLink();
     }
 }
