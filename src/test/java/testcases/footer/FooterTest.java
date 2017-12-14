@@ -59,4 +59,10 @@ public class FooterTest extends BaseTest {
         mainPage.openingInfoForLegalPersonsLink();
     }
 
+    @Test
+    public void verifyOpeningContractPurchaseSaleLinkTest() {
+        TestReporter.testTitle("Test ID - C34364");
+        mainPage.openingContractPurchaseSaleLink();
+    }
+
 }
