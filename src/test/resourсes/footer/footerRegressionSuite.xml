@@ -66,15 +66,4 @@
             </class>
         </classes>
     </test>
-
-    <test name="C34363">
-        <classes>
-            <class name="testcases.footer.FooterTest">
-                <methods>
-                    <include name="verifyOpeningInfoForLegalPersonsLinkTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
 </suite>
