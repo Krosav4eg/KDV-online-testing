@@ -126,4 +126,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34367">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningPoliticConfidentialLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

@@ -191,6 +191,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@href='tel:8 800 250 5555']")
     private WebElement telLink;
 
+    @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
+    private WebElement confidentialPoliticLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -548,6 +551,14 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(personalDataLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingPoliticConfidentialLink() {
+        String linkTextAttribute = getValueOfAttributeByName(confidentialPoliticLink, "href");
+        elementFluentWaitVisibility(confidentialPoliticLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
