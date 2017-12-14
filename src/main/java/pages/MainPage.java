@@ -565,5 +565,9 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actTelLink, " is equal to ",
                 expTelLink);
     }
+
+    public void verifyingCopyWriting() {
+        textPresent("© 2017 ООО «КДВ Групп»");
+    }
 }
 

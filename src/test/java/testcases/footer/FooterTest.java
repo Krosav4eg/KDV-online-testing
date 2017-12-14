@@ -78,6 +78,12 @@ public class FooterTest extends BaseTest {
     }
 
     @Test
+    public void verifyCopyWritingTest() {
+        TestReporter.testTitle("Test ID - C34355");
+        mainPage.verifyingCopyWriting();
+    }
+
+    @Test
     public void verifyContactDataLinkTest() {
         TestReporter.testTitle("Test ID - C34356");
         mainPage.openingContactDataLink();

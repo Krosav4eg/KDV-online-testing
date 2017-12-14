@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Footer regression tests" parallel="tests" thread-count="5">
+<suite name="Footer regression tests" parallel="tests" thread-count="6">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -106,6 +106,17 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34355">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyCopyWritingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34356">
         <classes>
             <class name="testcases.footer.FooterTest">
