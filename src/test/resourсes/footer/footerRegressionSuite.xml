@@ -11,7 +11,7 @@
         <classes>
             <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyAboutShopLinkTest"/>
+                    <include name="verifyOpeningAboutShopLinkTest"/>
                 </methods>
             </class>
         </classes>
@@ -21,7 +21,7 @@
         <classes>
             <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyCustomerPickupLinkTest"/>
+                    <include name="verifyOpeningCustomerPickupLinkTest"/>
                 </methods>
             </class>
         </classes>
@@ -31,7 +31,7 @@
         <classes>
             <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyFreeDeliveryLinkTest"/>
+                    <include name="verifyOpeningFreeDeliveryLinkTest"/>
                 </methods>
             </class>
         </classes>
@@ -41,7 +41,17 @@
         <classes>
             <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyPaymentLinkTest"/>
+                    <include name="verifyOpeningPaymentLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34361">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningHowToBuyLinkTest"/>
                 </methods>
             </class>
         </classes>

@@ -155,17 +155,20 @@ public class MainPage extends BasePage {
     public WebElement socialLinkSection;
 
     //========================FOOTER SECTION=========================================
-    @FindBy(xpath = "//a[text()='О магазине']")
+    @FindBy(xpath = ".//a[text()='О магазине']")
     private WebElement aboutShopLink;
 
-    @FindBy(xpath = "//a[text()='Самовывоз']")
+    @FindBy(xpath = ".//a[text()='Самовывоз']")
     public WebElement customerPickupLink;
 
-    @FindBy(xpath = "//a[text()='Бесплатная доставка']")
+    @FindBy(xpath = ".//a[text()='Бесплатная доставка']")
     public WebElement freeDeliveryLink;
 
-    @FindBy(xpath = "//a[text()='Оплата']")
+    @FindBy(xpath = ".//a[text()='Оплата']")
     public WebElement paymentLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Как купить']")
+    public WebElement howToBuyLink;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -460,6 +463,14 @@ public class MainPage extends BasePage {
     public void verifyPaymentLink() {
         String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
         elementFluentWaitVisibility(paymentLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void verifyHowToBuyLink() {
+        String linkTextAttribute = getValueOfAttributeByName(howToBuyLink, "href");
+        elementFluentWaitVisibility(howToBuyLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);

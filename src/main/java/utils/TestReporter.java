@@ -125,7 +125,7 @@ public class TestReporter {
     }
 
     /**
-     * Let to get a simple string in html format with comparison resi=ult of actual and expected
+     * Let to get a simple string in html format with comparison result of actual and expected
      *
      * @param actual   - actual comparison value
      * @param expected - expected comparison value
