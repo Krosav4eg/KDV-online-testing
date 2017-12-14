@@ -143,13 +143,16 @@ public class MainPage extends BasePage {
 
     //========================SMM SECTION=========================================
     @FindBy(css = ".social__link.social__link_vk")
-    private WebElement vkLink;
+    public WebElement vkLink;
 
     @FindBy(css = ".social__link.social__link_instagram")
     private WebElement instaLink;
 
     @FindBy(css = ".social__link.social__link_android")
     private WebElement googlePlayLink;
+
+    @FindBy(css = ".social")
+    public WebElement socialLinkSection;
 
     //========================FOOTER SECTION=========================================
     @FindBy(xpath = "//a[text()='О магазине']")
@@ -403,7 +406,6 @@ public class MainPage extends BasePage {
 
     public void verifyVkLink() {
         String expUrl = "https://vk.com/kdvonline";
-        scrollDown();
         textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(vkLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -414,7 +416,6 @@ public class MainPage extends BasePage {
 
     public void verifyInstagramLink() {
         String expUrl = "https://www.instagram.com/kdvonline/";
-        scrollDown();
         elementFluentWaitVisibility(instaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
@@ -424,8 +425,6 @@ public class MainPage extends BasePage {
 
     public void verifyGooglePlayLink() {
         String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
-        scrollDown();
-        scrollDown();
         textPresent("Скачивайте приложение для Android");
         elementFluentWaitVisibility(googlePlayLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -457,6 +456,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
     }
+
     public void verifyPaymentLink() {
         String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
         elementFluentWaitVisibility(paymentLink, driver).click();

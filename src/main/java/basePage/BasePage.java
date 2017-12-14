@@ -148,8 +148,8 @@ public abstract class BasePage {
             List<WebElement> elementList = element;
             totalCount = elementList.size();
         } catch (ElementNotVisibleException e) {
-            e.getMessage();
             LOGGER.log(Level.WARNING, "ElementNotVisibleException, see message for details: %s " + e.getMessage());
+            TestReporter.fail(" Couldn't shown total elements count on page ");
         }
         return totalCount;
     }
@@ -168,6 +168,7 @@ public abstract class BasePage {
             } catch (Exception e) {
                 // no jQuery present
                 LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
+                TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
                 return true;
             }
         };
