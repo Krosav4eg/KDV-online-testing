@@ -100,4 +100,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34368");
         mainPage.openingRegulationsLink();
     }
+
+    @Test
+    public void verifyOpeningContactsLinkTest() {
+        TestReporter.testTitle("Test ID - C34369");
+        mainPage.openingRegulationsLink();
+    }
 }

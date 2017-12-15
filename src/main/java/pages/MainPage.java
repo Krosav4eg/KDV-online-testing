@@ -197,6 +197,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Регламент']")
     private WebElement regulationsLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Контакты']")
+    private WebElement contactsLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -587,6 +590,14 @@ public class MainPage extends BasePage {
     public void openingRegulationsLink() {
         String linkTextAttribute = getValueOfAttributeByName(regulationsLink, "href");
         elementFluentWaitVisibility(regulationsLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingContactsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(contactsLink, "href");
+        elementFluentWaitVisibility(contactsLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);

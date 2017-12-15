@@ -146,4 +146,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34369">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningContactsLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
