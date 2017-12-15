@@ -104,6 +104,6 @@ public class FooterTest extends BaseTest {
     @Test
     public void verifyOpeningContactsLinkTest() {
         TestReporter.testTitle("Test ID - C34369");
-        mainPage.openingRegulationsLink();
+        mainPage.openingContactsLink();
     }
 }
