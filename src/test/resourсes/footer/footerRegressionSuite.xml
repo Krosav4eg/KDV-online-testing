@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Footer regression tests" parallel="tests" thread-count="5">
+<suite name="Footer regression tests" parallel="tests" thread-count="6">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -62,6 +62,76 @@
             <class name="testcases.footer.FooterTest">
                 <methods>
                     <include name="verifyOpeningExchangeAndReturnLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34363">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningInfoForLegalPersonsLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34364">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningContractPurchaseSaleLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34365">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningSupplyContractLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34366">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningPersonalDataLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34355">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyCopyWritingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34356">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyContactDataLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34367">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningPoliticConfidentialLinkTest"/>
                 </methods>
             </class>
         </classes>
