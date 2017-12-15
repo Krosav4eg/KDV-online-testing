@@ -94,7 +94,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".pix_slideshow_target")
     private WebElement newSlideSelected;
 
-    @FindBy(xpath = ".//*[@id='1_enfinity_1']/div/div[3]/div[2]/a/img")
+    @FindBy(xpath = ".//*[@id='1_enfinity_1']")
     private WebElement slideMenuSection;
 
     @FindBy(css = ".filmore_pag.filmore_pag_1")
@@ -159,16 +159,44 @@ public class MainPage extends BasePage {
     private WebElement aboutShopLink;
 
     @FindBy(xpath = ".//a[text()='Самовывоз']")
-    public WebElement customerPickupLink;
+    private WebElement customerPickupLink;
 
     @FindBy(xpath = ".//a[text()='Бесплатная доставка']")
-    public WebElement freeDeliveryLink;
+    private WebElement freeDeliveryLink;
 
     @FindBy(xpath = ".//a[text()='Оплата']")
-    public WebElement paymentLink;
+    private WebElement paymentLink;
 
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Как купить']")
-    public WebElement howToBuyLink;
+    private WebElement howToBuyLink;
+
+    @FindBy(xpath = ".//a[text()='Возврат и обмен']")
+    private WebElement exchangeAndReturnLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Информация для юридических лиц']")
+    private WebElement infoLegalPersonLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Договор купли-продажи']")
+    private WebElement contractPurchaseSaleLink;
+
+    @FindBy(xpath = ".//a[text()='Договор поставки']")
+    private WebElement supplyContractLink;
+
+    @FindBy(xpath = ".//a[text()='Персональные данные']")
+    private WebElement personalDataLink;
+
+    @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
+    private WebElement mailToLink;
+
+    @FindBy(xpath = ".//*[@href='tel:8 800 250 5555']")
+    private WebElement telLink;
+
+    @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
+    private WebElement confidentialPoliticLink;
+
+    @FindBy(xpath = ".//*[@id='footer']")
+    public WebElement footer;
+
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -300,12 +328,14 @@ public class MainPage extends BasePage {
                 " Verify elements color of lower price section ");
         elementIsClickable(freeDeliveringSection, driver).click();
         String actualColorFreeDeliveringSection = "#ce0022";
-        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader, "border-color");
+        String expectedColorFreeDeliveringSection = getElementColor(freeDeliveringSectionHeader,
+                "border-color");
         AssertCollector.assertEqualsJ(actualColorFreeDeliveringSection, expectedColorFreeDeliveringSection,
                 " Verify elements color of free delivering section section ");
         elementIsClickable(paymentUponReceivingSection, driver).click();
         String actualColorPaymentUponReceivingSection = "#ce0022";
-        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader, "border-color");
+        String expectedColorPaymentUponReceivingSection = getElementColor(paymentUponReceivingHeader,
+                "border-color");
         AssertCollector.assertEqualsJ(actualColorPaymentUponReceivingSection, expectedColorPaymentUponReceivingSection,
                 " Verify elements color of free delivering section section ");
     }
@@ -378,7 +408,8 @@ public class MainPage extends BasePage {
         }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
-        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in basket page ", expectedDescription);
+        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in" +
+                " basket page ", expectedDescription);
     }
 
     public void openingModalWindowProductCard() {
@@ -393,6 +424,7 @@ public class MainPage extends BasePage {
         } else {
             LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
             TestReporter.step("Product modal window isn't displayed");
+            fail();
         }
     }
 
@@ -407,7 +439,7 @@ public class MainPage extends BasePage {
                 " Current url is equal link of product ");
     }
 
-    public void verifyVkLink() {
+    public void openingVkLink() {
         String expUrl = "https://vk.com/kdvonline";
         textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(vkLink, driver).click();
@@ -417,7 +449,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyInstagramLink() {
+    public void openingInstagramLink() {
         String expUrl = "https://www.instagram.com/kdvonline/";
         elementFluentWaitVisibility(instaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -426,7 +458,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyGooglePlayLink() {
+    public void openingGooglePlayLink() {
         String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
         textPresent("Скачивайте приложение для Android");
         elementFluentWaitVisibility(googlePlayLink, driver).click();
@@ -436,7 +468,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
     }
 
-    public void verifyShopLink() {
+    public void openingShopLink() {
         String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
         elementFluentWaitVisibility(aboutShopLink, driver).click();
         getCurrentUrl();
@@ -444,7 +476,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyCustomerPickUpLink() {
+    public void openingCustomerPickUpLink() {
         String linkTextAttribute = getValueOfAttributeByName(customerPickupLink, "href");
         elementFluentWaitVisibility(customerPickupLink, driver).click();
         getCurrentUrl();
@@ -452,7 +484,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyFreeDeliveryLink() {
+    public void openingFreeDeliveryLink() {
         String linkTextAttribute = getValueOfAttributeByName(freeDeliveryLink, "href");
         elementFluentWaitVisibility(freeDeliveryLink, driver).click();
         getCurrentUrl();
@@ -460,7 +492,7 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyPaymentLink() {
+    public void openingPaymentLink() {
         String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
         elementFluentWaitVisibility(paymentLink, driver).click();
         getCurrentUrl();
@@ -468,12 +500,85 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyHowToBuyLink() {
+    public void openingHowToBuyLink() {
         String linkTextAttribute = getValueOfAttributeByName(howToBuyLink, "href");
         elementFluentWaitVisibility(howToBuyLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+    }
+
+    public void openingExchangeAndReturnLink() {
+        String linkTextAttribute = getValueOfAttributeByName(exchangeAndReturnLink, "href");
+        elementFluentWaitVisibility(exchangeAndReturnLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingInfoForLegalPersonsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(infoLegalPersonLink, "href");
+        elementFluentWaitVisibility(infoLegalPersonLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingContractPurchaseSaleLink() {
+        String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
+        System.out.println(linkTextAttribute);
+        elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        System.out.println(getCurrentUrl());
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingSupplyContractLink() {
+        String linkTextAttribute = "https://tomsk.kdvonline.ru/media/rules/Supply_contract.pdf";
+        elementFluentWaitVisibility(supplyContractLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingPersonalDataLink() {
+        String linkTextAttribute = getValueOfAttributeByName(personalDataLink, "href");
+        elementFluentWaitVisibility(personalDataLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingPoliticConfidentialLink() {
+        String linkTextAttribute = getValueOfAttributeByName(confidentialPoliticLink, "href");
+        elementFluentWaitVisibility(confidentialPoliticLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingContactDataLink() {
+        textPresent("Свяжитесь с нами");
+        textPresent("Звонок по России бесплатный");
+        String expMailLink = getValueOfAttributeByName(mailToLink, "href");
+        String actMailLink = "mailto:info@kdvonline.ru";
+        String expTelLink = getValueOfAttributeByName(telLink, "href");
+        String actTelLink = "tel:8 800 250 5555";
+        AssertCollector.assertEquals(actMailLink, " is equal to ",
+                expMailLink);
+        AssertCollector.assertEquals(actTelLink, " is equal to ",
+                expTelLink);
+    }
+
+    public void verifyingCopyWriting() {
+        textPresent("© 2017 ООО «КДВ Групп»");
     }
 }
 
