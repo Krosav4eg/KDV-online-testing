@@ -206,6 +206,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Instagram']")
     private WebElement footerInstaLink;
 
+    @FindBy(css=".footer-menu__social.footer-menu__social_android")
+    private WebElement footerGooglePlayLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -626,6 +629,16 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
+                linkTextAttribute);
+    }
+
+    public void openingGooglePlayInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerGooglePlayLink, "href");
+        elementFluentWaitVisibility(footerGooglePlayLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Google play ",
                 linkTextAttribute);
     }
 }
