@@ -194,6 +194,24 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
     private WebElement confidentialPoliticLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Регламент']")
+    private WebElement regulationsLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Контакты']")
+    private WebElement contactsLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='ВКонтакте']")
+    private WebElement footerVkLink;
+
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Instagram']")
+    private WebElement footerInstaLink;
+
+    @FindBy(css = ".footer-menu__social.footer-menu__social_android")
+    private WebElement footerGooglePlayLink;
+
+    @FindBy(css = ".button-scroll-top")
+    private WebElement upButton;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -579,6 +597,57 @@ public class MainPage extends BasePage {
 
     public void verifyingCopyWriting() {
         textPresent("© 2017 ООО «КДВ Групп»");
+    }
+
+    public void openingRegulationsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(regulationsLink, "href");
+        elementFluentWaitVisibility(regulationsLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingContactsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(contactsLink, "href");
+        elementFluentWaitVisibility(contactsLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingVkLinkInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerVkLink, "href");
+        elementFluentWaitVisibility(footerVkLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
+                linkTextAttribute);
+    }
+
+    public void openingInstaInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
+        elementFluentWaitVisibility(footerInstaLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
+                linkTextAttribute);
+    }
+
+    public void openingGooglePlayInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerGooglePlayLink, "href");
+        elementFluentWaitVisibility(footerGooglePlayLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Google play ",
+                linkTextAttribute);
+    }
+
+    public void clickingUpButtonInFooter() {
+        elementFluentWaitVisibility(upButton, driver).click();
+        waitInvisibilityOfElement(upButton,driver);
     }
 }
 

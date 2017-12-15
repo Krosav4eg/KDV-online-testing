@@ -94,4 +94,40 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34367");
         mainPage.openingPoliticConfidentialLink();
     }
+
+    @Test
+    public void verifyOpeningRegulationsLinkTest() {
+        TestReporter.testTitle("Test ID - C34368");
+        mainPage.openingRegulationsLink();
+    }
+
+    @Test
+    public void verifyOpeningContactsLinkTest() {
+        TestReporter.testTitle("Test ID - C34369");
+        mainPage.openingContactsLink();
+    }
+
+    @Test
+    public void verifyOpeningVkLinkInFooterTest() {
+        TestReporter.testTitle("Test ID - C34352");
+        mainPage.openingVkLinkInFooter();
+    }
+
+    @Test
+    public void verifyOpeningInstagramLinkInFooterTest() {
+        TestReporter.testTitle("Test ID - C34353");
+        mainPage.openingInstaInFooter();
+    }
+
+    @Test
+    public void verifyOpeningGooglePlayLinkInFooterTest() {
+        TestReporter.testTitle("Test ID - C34354");
+        mainPage.openingGooglePlayInFooter();
+    }
+
+    @Test
+    public void verifyClickingUpButtonTest() {
+        TestReporter.testTitle("Test ID - C34357");
+        mainPage.clickingUpButtonInFooter();
+    }
 }

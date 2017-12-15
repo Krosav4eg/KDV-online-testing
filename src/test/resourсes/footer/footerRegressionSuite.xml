@@ -136,4 +136,64 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34368">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningRegulationsLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34369">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningContactsLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34352">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningVkLinkInFooterTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34353">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningInstagramLinkInFooterTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34354">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningGooglePlayLinkInFooterTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34357">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyClickingUpButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
