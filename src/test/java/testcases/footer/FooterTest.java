@@ -112,4 +112,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34352");
         mainPage.openingVkLinkInFooter();
     }
+
+    @Test
+    public void verifyOpeningInstagramLinkInFooterTest() {
+        TestReporter.testTitle("Test ID - C34353");
+        mainPage.openingInstaInFooter();
+    }
 }

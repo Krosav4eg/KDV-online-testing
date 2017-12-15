@@ -203,6 +203,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']//a[text()='ВКонтакте']")
     private WebElement footerVkLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Instagram']")
+    private WebElement footerInstaLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -613,6 +616,16 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
+                linkTextAttribute);
+    }
+
+    public void openingInstaInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
+        elementFluentWaitVisibility(footerInstaLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
                 linkTextAttribute);
     }
 }
