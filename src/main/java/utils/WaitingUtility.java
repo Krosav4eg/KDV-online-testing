@@ -52,4 +52,11 @@ public class WaitingUtility {
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public static void waitInvisibilityOfElement(WebElement element, WebDriver driver) {
+        TestReporter.step("Element isn't displayed ");
+        LOGGER.log(Level.INFO, "Element isn't displayed ");
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 }

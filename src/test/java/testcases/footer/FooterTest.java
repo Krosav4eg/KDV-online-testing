@@ -124,4 +124,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34354");
         mainPage.openingGooglePlayInFooter();
     }
+
+    @Test
+    public void verifyClickingUpButtonTest() {
+        TestReporter.testTitle("Test ID - C34357");
+        mainPage.clickingUpButtonInFooter();
+    }
 }

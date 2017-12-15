@@ -186,4 +186,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34357">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyClickingUpButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
