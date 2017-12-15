@@ -200,6 +200,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']//a[text()='Контакты']")
     private WebElement contactsLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='ВКонтакте']")
+    private WebElement footerVkLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -600,6 +603,16 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(contactsLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
+    }
+
+    public void openingVkLinkInFooter() {
+        String linkTextAttribute = getValueOfAttributeByName(footerVkLink, "href");
+        elementFluentWaitVisibility(footerVkLink, driver).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
                 linkTextAttribute);
     }
 }

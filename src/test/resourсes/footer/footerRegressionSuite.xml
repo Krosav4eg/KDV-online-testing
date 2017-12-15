@@ -156,4 +156,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34352">
+        <classes>
+            <class name="testcases.footer.FooterTest">
+                <methods>
+                    <include name="verifyOpeningVkLinkInFooterTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
