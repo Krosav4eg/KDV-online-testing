@@ -94,4 +94,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34367");
         mainPage.openingPoliticConfidentialLink();
     }
+
+    @Test
+    public void verifyOpeningRegulationsLinkTest() {
+        TestReporter.testTitle("Test ID - C34368");
+        mainPage.openingRegulationsLink();
+    }
 }

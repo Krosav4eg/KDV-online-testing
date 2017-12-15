@@ -194,6 +194,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
     private WebElement confidentialPoliticLink;
 
+    @FindBy(xpath = ".//*[@id='footer']//a[text()='Регламент']")
+    private WebElement regulationsLink;
+
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
@@ -579,6 +582,14 @@ public class MainPage extends BasePage {
 
     public void verifyingCopyWriting() {
         textPresent("© 2017 ООО «КДВ Групп»");
+    }
+
+    public void openingRegulationsLink() {
+        String linkTextAttribute = getValueOfAttributeByName(regulationsLink, "href");
+        elementFluentWaitVisibility(regulationsLink, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+                linkTextAttribute);
     }
 }
 
