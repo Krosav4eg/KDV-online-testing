@@ -660,5 +660,13 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of registration ",
                 linkTextAttribute);
     }
+
+    public void openingEnterLink() {
+        String linkTextAttribute = getValueOfAttributeByName(enterButton, "href");
+        elementFluentWaitVisibility(enterButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
+                linkTextAttribute);
+    }
 }
 
