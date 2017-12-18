@@ -37,5 +37,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34289");
         mainPage.openingEnterLink();
     }
+
+    @Test
+    public void verifyingAnswerYourQuestionsTelNumber(){
+        TestReporter.testTitle("Test ID - C34290");
+        mainPage.verifyingAnswerYourQuestionsTelNumber();
+    }
 }
 
