@@ -36,4 +36,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34288">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningRegistrationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

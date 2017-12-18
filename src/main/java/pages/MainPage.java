@@ -30,6 +30,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Вход']")
     private WebElement enterButton;
 
+    @FindBy(xpath = "//*[@title='Регистрация']")
+    private WebElement registrationButton;
+
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
 
@@ -648,6 +651,14 @@ public class MainPage extends BasePage {
     public void clickingUpButtonInFooter() {
         elementFluentWaitVisibility(upButton, driver).click();
         waitInvisibilityOfElement(upButton,driver);
+    }
+
+    public void openingRegistrationLink() {
+        String linkTextAttribute = getValueOfAttributeByName(registrationButton, "href");
+        elementFluentWaitVisibility(registrationButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of registration ",
+                linkTextAttribute);
     }
 }
 
