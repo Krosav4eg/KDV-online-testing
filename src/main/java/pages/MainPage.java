@@ -660,5 +660,21 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of registration ",
                 linkTextAttribute);
     }
+
+    public void openingEnterLink() {
+        String linkTextAttribute = getValueOfAttributeByName(enterButton, "href");
+        elementFluentWaitVisibility(enterButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
+                linkTextAttribute);
+    }
+
+    public void verifyingAnswerYourQuestionsTelNumber() {
+        textPresent("Ответим на ваши вопросы");
+        String expTelLink = "tel:8 800 250 5555";
+        String actTelLink = getValueOfAttributeByName(telLink, "href");
+        AssertCollector.assertEquals(actTelLink, " Current telephone is equal to ",
+                expTelLink);
+    }
 }
 

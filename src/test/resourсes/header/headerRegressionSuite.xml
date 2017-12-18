@@ -46,4 +46,24 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34289">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningEnterTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34290">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyingAnswerYourQuestionsTelNumber"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
