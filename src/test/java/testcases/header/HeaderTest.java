@@ -25,5 +25,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34283");
         mainPage.changeCity();
     }
+
+    @Test
+    public void verifyOpeningRegistrationTest() {
+        TestReporter.testTitle("Test ID - C34288");
+        mainPage.openingRegistrationLink();
+    }
 }
 
