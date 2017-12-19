@@ -66,4 +66,15 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34292">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyMyBasketIsEmpty"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>

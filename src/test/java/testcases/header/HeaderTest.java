@@ -43,5 +43,12 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34290");
         mainPage.verifyingAnswerYourQuestionsTelNumber();
     }
+
+    @Test
+    public void verifyMyCartIsEmpty(){
+        TestReporter.testTitle("Test ID - C34292");
+        mainPage.verifyMyBasketIsEmpty();
+    }
+
 }
 

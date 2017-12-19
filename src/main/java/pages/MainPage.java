@@ -48,6 +48,10 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
 
+    //========================
+    @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
+    private WebElement myCart;
+
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
@@ -650,7 +654,7 @@ public class MainPage extends BasePage {
 
     public void clickingUpButtonInFooter() {
         elementFluentWaitVisibility(upButton, driver).click();
-        waitInvisibilityOfElement(upButton,driver);
+        waitInvisibilityOfElement(upButton, driver);
     }
 
     public void openingRegistrationLink() {
@@ -675,6 +679,15 @@ public class MainPage extends BasePage {
         String actTelLink = getValueOfAttributeByName(telLink, "href");
         AssertCollector.assertEquals(actTelLink, " Current telephone is equal to ",
                 expTelLink);
+    }
+
+    public void verifyMyBasketIsEmpty() {
+        LOGGER.log(Level.INFO, "Verifying clicking my basket");
+        TestReporter.step("Verifying clicking my basket");
+        waitForPageLoad(driver);
+        elementIsClickable(myCart, driver).click();
+        AssertCollector.assertTrue(myCart.isDisplayed());
+        textPresent("Корзина пока пуста");
     }
 }
 
