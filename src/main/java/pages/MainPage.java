@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 import utils.TestReporter;
@@ -47,6 +48,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private WebElement otherCityLink;
+
+    @FindBy(css = ".select2-selection.select2-selection--single")
+    private WebElement citySearchField;
 
     //========================
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
@@ -253,6 +257,21 @@ public class MainPage extends BasePage {
         elementIsClickable(otherCityLink, driver).click();
         waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
+    }
+
+    public void changeCityToCurrent() {
+        LOGGER.log(Level.INFO, "Check changing city");
+        TestReporter.step("Check changing city");
+        String currentCity = getText(baseCityLink);
+        elementIsClickable(baseCityLink, driver).click();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(citySearchField);
+        actions.click();
+        actions.sendKeys(currentCity);
+        actions.build().perform();
+//        elementIsClickable(otherCityLink, driver).click();
+//        waitForPageLoad(driver);
+//        AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
     public void verifyingOpeningLowerPricesSection() {

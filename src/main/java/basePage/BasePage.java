@@ -1,10 +1,7 @@
 package basePage;
 
 import logger.MagDvLogger;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -72,6 +69,11 @@ public abstract class BasePage {
             builder.append("0");
         }
         return builder.toString();
+    }
+
+    protected void fillInputField(WebElement element, String message) {
+        element.clear();
+        element.sendKeys(message);
     }
 
     protected static void moveMouseToAndClick(WebDriver driver, WebElement element, int x, int y) {

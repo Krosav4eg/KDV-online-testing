@@ -77,4 +77,14 @@
         </classes>
     </test>
 
+    <test name="C34316">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyChangingCityToCurrentTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
