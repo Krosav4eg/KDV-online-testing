@@ -52,6 +52,23 @@ public class MainPage extends BasePage {
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
     private WebElement myCart;
 
+    @FindBy(xpath = "//*[@title='Конфеты «Томские классические», 300 г']")
+    private WebElement productTitleToBasket;
+
+    @FindBy(xpath = ".//*[@id='product-price-2465']/span[1]")
+    private WebElement productPriceToBasket;
+
+    @FindBy(css = ".mini-cart-product__name.mini-cart-product__name_link")
+    private WebElement productTitleInBasket;
+
+    @FindBy(css = ".mini-cart-product__price")
+    private WebElement productPriceInBasket;
+
+    @FindBy(css = ".mini-cart__expander.hidden-sm.hidden-md")
+    private WebElement mainBasketToExpandButton;
+
+    @FindBy(css = ".mini-cart__inner.mini-cart_clickable.j_mini-cart_clickable")
+    private WebElement subBasketToExpandButton;
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
@@ -688,6 +705,31 @@ public class MainPage extends BasePage {
         elementIsClickable(myCart, driver).click();
         AssertCollector.assertTrue(myCart.isDisplayed());
         textPresent("Корзина пока пуста");
+    }
+
+    public void verifyMyBasketWithProduct() {
+        String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
+        String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
+        scrollDown();
+        waitForJSandJQueryToLoad();
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        if (productAddedButton.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+            TestReporter.step("Button hitSalesBasketButtons is displayed");
+            AssertCollector.assertTrue(productAddedButton.isDisplayed());
+        } else {
+            LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+            TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+            fail();
+        }
+        elementFluentWaitVisibility(upButton, driver).click();
+        hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+        String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
+        String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
+        AssertCollector.assertEquals(actTitle, " Title in main page equals title in" +
+                " basket page ", expTitle);
+        AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
+                " basket page ", expPrice);
     }
 }
 
