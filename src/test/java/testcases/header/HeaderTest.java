@@ -56,5 +56,10 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyMyBasketIsEmpty();
     }
 
+    @Test
+    public void verifyMyBasketWithProduct() {
+        TestReporter.testTitle("Test ID - 34293");
+        mainPage.verifyMyBasketWithProduct();
+    }
 }
 

@@ -77,6 +77,16 @@
         </classes>
     </test>
 
+    <test name="C34293">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyMyBasketWithProduct"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34316">
         <classes>
             <class name="testcases.header.HeaderTest">
