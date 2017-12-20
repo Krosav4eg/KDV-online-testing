@@ -92,5 +92,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34308");
         mainPage.openingCatalogAfterLeftMainPage();
     }
+
+    @Test
+    public void verifyStickingHeaderDuringScrollingTest() {
+        TestReporter.testTitle("Test ID = 34317");
+        mainPage.verifyStickingHeaderDuringScrolling();
+    }
 }
 

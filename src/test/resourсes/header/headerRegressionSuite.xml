@@ -74,6 +74,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34317">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyStickingHeaderDuringScrollingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 

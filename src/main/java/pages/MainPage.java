@@ -268,6 +268,21 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
+    //========================
+    @FindBy(css = ".header-bottom-left__logo_small.text-left")
+    private WebElement smallLogo;
+
+    @FindBy(xpath = ".//*[@id='search']")
+    private WebElement searchProductField;
+
+    @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
+    private WebElement categoryDropdown;
+
+    @FindBy(css = ".search-button__btn")
+    private WebElement searchButton;
+
+    @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
+    private WebElement fullBasketDropdown;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
@@ -848,6 +863,18 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(registrationButton, driver).click();
         elementFluentWaitVisibility(catalogExpand, driver).click();
         AssertCollector.assertTrue(categoryList.isDisplayed());
+    }
+
+    public void verifyStickingHeaderDuringScrolling() {
+        scrollToNecessaryElement(footer);
+        AssertCollector.assertTrue(smallLogo.isDisplayed());
+        AssertCollector.assertTrue(searchProductField.isDisplayed());
+        AssertCollector.assertTrue(categoryDropdown.isDisplayed());
+        AssertCollector.assertTrue(searchButton.isDisplayed());
+        textPresent("Корзина пока пуста");
+        clickOnIndexFromElementList(hitSalesBasketButtons, 14);
+        elementIsClickable(quantityOfProductsInBasket, driver).click();
+        AssertCollector.assertTrue(fullBasketDropdown.isDisplayed());
     }
 }
 
