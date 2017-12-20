@@ -47,7 +47,7 @@ public class MainPage extends BasePage {
     private WebElement baseCityLink;
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
-    private WebElement otherCityLink;
+    private List<WebElement> otherCityLink;
 
     @FindBy(css = ".select2-selection.select2-selection--single")
     private WebElement citySearchField;
@@ -293,7 +293,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city");
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
-        elementIsClickable(otherCityLink, driver).click();
+        clickOnIndexFromElementList(otherCityLink, 0);
         waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
@@ -313,22 +313,14 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
-    //TODO assertions for citySearchDropdown
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
-        String otherCity = "Кемерово";
+        String otherCity="Кемерово";
         elementIsClickable(baseCityLink, driver).click();
-        Actions actions = new Actions(driver);
-        actions.moveToElement(citySearchField);
-        actions.click();
-        actions.sendKeys(otherCity);
-        actions.build().perform();
-        Thread.sleep(4000);
-        actions.moveToElement(citySearchDropdown);
-        clickElementByJS(driver, citySearchDropdown);
-        waitForPageLoad(driver);
-        AssertCollector.assertEquals(otherCity, " City link is equal ", getText(baseCityLink));
+        clickOnIndexFromElementList(otherCityLink, 1);
+        Thread.sleep(3000);
+        AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
     }
 
     public void verifyingOpeningLowerPricesSection() {
