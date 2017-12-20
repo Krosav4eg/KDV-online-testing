@@ -39,19 +39,19 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyOpeningEnterTest(){
+    public void verifyOpeningEnterTest() {
         TestReporter.testTitle("Test ID - C34289");
         mainPage.openingEnterLink();
     }
 
     @Test
-    public void verifyingAnswerYourQuestionsTelNumber(){
+    public void verifyingAnswerYourQuestionsTelNumber() {
         TestReporter.testTitle("Test ID - C34290");
         mainPage.verifyingAnswerYourQuestionsTelNumber();
     }
 
     @Test
-    public void verifyMyCartIsEmpty(){
+    public void verifyMyCartIsEmpty() {
         TestReporter.testTitle("Test ID - C34292");
         mainPage.verifyMyBasketIsEmpty();
     }
@@ -60,6 +60,12 @@ public class HeaderTest extends BaseTest {
     public void verifyMyBasketWithProduct() {
         TestReporter.testTitle("Test ID - 34293");
         mainPage.verifyMyBasketWithProduct();
+    }
+
+    @Test
+    public void verifyProductsInBasket() {
+        TestReporter.testTitle("Test ID = 34299");
+        mainPage.checkingProductsInBasket();
     }
 }
 

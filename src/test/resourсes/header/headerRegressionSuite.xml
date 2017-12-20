@@ -97,4 +97,13 @@
         </classes>
     </test>
 
+    <test name="C34299">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyProductsInBasket"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
