@@ -76,6 +76,21 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".mini-cart__inner.mini-cart_clickable.j_mini-cart_clickable")
     private WebElement subBasketToExpandButton;
+
+    @FindBy(css = ".mini-cart-summary__qty")
+    private WebElement quantityOfProductsInBasket;
+
+    @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
+    private WebElement basketIsEmpty;
+
+    @FindBy(css = ".mini-cart-product__remove")
+    private WebElement removeProductsFromBasket;
+
+    @FindBy(css = ".mini-cart-dropdown__link.btn.btn-primary")
+    private WebElement submitAddingToBasket;
+
+    @FindBy(css = ".mini-cart-dropdown__link.mini-cart-dropdown__link_right.btn.btn-primary")
+    private WebElement createOrderInBasket;
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
@@ -774,6 +789,42 @@ public class MainPage extends BasePage {
                 " basket page ", expTitle);
         AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
                 " basket page ", expPrice);
+    }
+
+    public void checkingProductsInBasket() {
+        if (basketIsEmpty.isDisplayed()) {
+            scrollDown();
+            waitForJSandJQueryToLoad();
+            clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+            clickOnIndexFromElementList(hitSalesBasketButtons, 1);
+            if (productAddedButton.isDisplayed()) {
+                AssertCollector.assertTrue(productAddedButton.isDisplayed());
+                LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+                TestReporter.step("Button hitSalesBasketButtons is displayed");
+            } else {
+                LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+                TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+                fail();
+            }
+            elementFluentWaitVisibility(upButton, driver).click();
+            hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+            textPresent("2 тов.");
+            TestReporter.step("2 products are in the basket");
+        } else {
+            while (!basketIsEmpty.isDisplayed()) {
+                hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+                elementFluentWaitVisibility(removeProductsFromBasket, driver).click();
+            }
+        }
+    }
+
+    public void openingBasketPageFromHeader() {
+        verifyMyBasketWithProduct();
+        String linkTextAttribute = getValueOfAttributeByName(submitAddingToBasket, "href");
+        elementFluentWaitVisibility(submitAddingToBasket, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of adding to basket ",
+                linkTextAttribute);
     }
 }
 

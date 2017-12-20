@@ -68,5 +68,17 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - 34293");
         mainPage.verifyMyBasketWithProduct();
     }
+
+    @Test
+    public void verifyProductsInBasketTest() {
+        TestReporter.testTitle("Test ID = 34299");
+        mainPage.checkingProductsInBasket();
+    }
+
+    @Test
+    public void verifyOpeningBasketPageFromHeaderTest() {
+        TestReporter.testTitle("Test ID = 34296");
+        mainPage.openingBasketPageFromHeader();
+    }
 }
 
