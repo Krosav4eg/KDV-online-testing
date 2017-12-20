@@ -80,5 +80,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();
     }
+
+    @Test
+    public void verifyOpeningBasketAndOrderingTest() {
+        TestReporter.testTitle("Test ID = 34297");
+        mainPage.openingBasketAndOrdering();
+    }
 }
 

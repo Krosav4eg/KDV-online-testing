@@ -2,6 +2,7 @@ package pages;
 
 import basePage.BasePage;
 import logger.MagDvLogger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -155,6 +156,10 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
     private WebElement firstGoodInLinkList;
+
+    //========================
+    @FindBy(css = ".btn-catalog__label.with-closed-expander")
+    private WebElement catalogExpand;
 
     //========================HIT OF SALES SECTION=========================================
     @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
@@ -316,7 +321,7 @@ public class MainPage extends BasePage {
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
-        String otherCity="Кемерово";
+        String otherCity = "Кемерово";
         elementIsClickable(baseCityLink, driver).click();
         clickOnIndexFromElementList(otherCityLink, 1);
         Thread.sleep(3000);
@@ -817,6 +822,24 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of adding to basket ",
                 linkTextAttribute);
+    }
+
+    public void openingBasketAndOrdering() {
+        scrollDown();
+        waitForJSandJQueryToLoad();
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 1);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 2);
+        scrollToNecessaryElement(vkLink);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 3);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 4);
+        elementFluentWaitVisibility(upButton, driver).click();
+        hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+        String linkTextValue = getValueOfAttributeByName(createOrderInBasket, "href");
+        elementFluentWaitVisibility(createOrderInBasket, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
+                linkTextValue);
     }
 }
 

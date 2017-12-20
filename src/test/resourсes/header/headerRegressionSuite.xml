@@ -54,6 +54,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34297">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketAndOrderingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 
