@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import pages.AuthorizationPage;
 import pages.MainPage;
 import utils.TestReporter;
 
@@ -27,6 +28,7 @@ public abstract class BaseTest {
 
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
+    protected AuthorizationPage authorizationPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -85,5 +87,6 @@ public abstract class BaseTest {
 
     private void initPageElements() {
         mainPage = PageFactory.initElements(driver, MainPage.class);
+        authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
     }
 }

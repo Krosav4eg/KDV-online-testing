@@ -2,7 +2,6 @@ package pages;
 
 import basePage.BasePage;
 import logger.MagDvLogger;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,6 +48,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private List<WebElement> otherCityLink;
+
+    @FindBy(xpath = "(//*[@class='modal__box']//div[@data-location])[1]")
+    private WebElement firstCityLink;
 
     @FindBy(css = ".select2-selection.select2-selection--single")
     private WebElement citySearchField;
@@ -315,7 +317,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city");
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
-        clickOnIndexFromElementList(otherCityLink, 0);
+        elementIsClickable(firstCityLink, driver).click();
         waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }

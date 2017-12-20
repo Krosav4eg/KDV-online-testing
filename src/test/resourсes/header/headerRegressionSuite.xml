@@ -75,6 +75,16 @@
         </classes>
     </test>
 
+    <test name="C34309">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyAuthAsPhysicalPersonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34317">
         <classes>
             <class name="testcases.header.HeaderTest">
