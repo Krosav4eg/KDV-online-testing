@@ -24,5 +24,27 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34299">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyProductsInBasketTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34296">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketPageFromHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
+
+
 
