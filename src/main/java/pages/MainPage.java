@@ -158,9 +158,11 @@ public class MainPage extends BasePage {
     private WebElement firstGoodInLinkList;
 
     //========================
-    @FindBy(css = ".btn-catalog__label.with-closed-expander")
+    @FindBy(xpath = "(.//span[@class='btn-catalog__label with-closed-expander'])[1]")
     private WebElement catalogExpand;
 
+    @FindBy(css = ".header-bottom-left__catalog")
+    private WebElement categoryList;
     //========================HIT OF SALES SECTION=========================================
     @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
     private List<WebElement> hitSalesList;
@@ -840,6 +842,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
                 linkTextValue);
+    }
+
+    public void openingCatalogAfterLeftMainPage() {
+        elementFluentWaitVisibility(registrationButton, driver).click();
+        elementFluentWaitVisibility(catalogExpand, driver).click();
+        AssertCollector.assertTrue(categoryList.isDisplayed());
     }
 }
 

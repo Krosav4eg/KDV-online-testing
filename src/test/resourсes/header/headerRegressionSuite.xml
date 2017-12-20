@@ -64,6 +64,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34308">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningCatalogAfterLeftMainPageTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 
