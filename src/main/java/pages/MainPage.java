@@ -27,7 +27,7 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
-    //========================MAIN PAGE=============================================
+    //========================HEADER SECTION=============================================
     @FindBy(xpath = "//*[@title='Вход']")
     private WebElement enterButton;
 
@@ -57,6 +57,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".select2-results__options")
     private WebElement citySearchDropdown;
+
+    @FindBy(css = ".top-link-myaccount")
+    private WebElement myAccountLink;
 
     //========================
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
@@ -94,6 +97,7 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".mini-cart-dropdown__link.mini-cart-dropdown__link_right.btn.btn-primary")
     private WebElement createOrderInBasket;
+
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
@@ -877,6 +881,13 @@ public class MainPage extends BasePage {
         clickOnIndexFromElementList(hitSalesBasketButtons, 14);
         elementIsClickable(quantityOfProductsInBasket, driver).click();
         AssertCollector.assertTrue(fullBasketDropdown.isDisplayed());
+    }
+
+    public void verifyPhysicalAuthCredential() {
+        String linkTextValue = getValueOfAttributeByName(myAccountLink, "href");
+        elementFluentWaitVisibility(myAccountLink, driver).click();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
+                linkTextValue);
     }
 }
 

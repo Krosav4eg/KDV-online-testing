@@ -100,6 +100,13 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyPhysicalAuthCredentialTest() {
+        TestReporter.testTitle("Test ID = 34310");
+        authorizationPage.authAsPhysicalPerson();
+        mainPage.verifyPhysicalAuthCredential();
+    }
+
+    @Test
     public void verifyStickingHeaderDuringScrollingTest() {
         TestReporter.testTitle("Test ID = 34317");
         mainPage.verifyStickingHeaderDuringScrolling();
