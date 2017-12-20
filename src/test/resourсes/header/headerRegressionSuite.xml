@@ -1,109 +1,28 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header regression tests" parallel="tests" thread-count="3">
+<suite name="Header regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34282">
+    <test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyLogoTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34283">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
                     <include name="verifyChangingCityTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34287">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
                     <include name="verifyClosingModalWindowTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34288">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
                     <include name="verifyOpeningRegistrationTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34289">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
                     <include name="verifyOpeningEnterTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34290">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyingAnswerYourQuestionsTelNumber"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34292">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyMyBasketIsEmpty"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34293">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyMyBasketWithProduct"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34316">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
+                    <include name="verifyingAnswerYourQuestionsTelNumberTest"/>
+                    <include name="verifyMyCardIsEmptyTest"/>
+                    <include name="verifyMyBasketWithProductTest"/>
                     <include name="verifyChangingCityToCurrentTest"/>
                 </methods>
             </class>
         </classes>
     </test>
-
-    <test name="C34299">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyProductsInBasket"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 </suite>
+

@@ -8,6 +8,7 @@ import utils.TestReporter;
  * @author Sergey Potapov
  */
 public class HeaderTest extends BaseTest {
+
     @Test
     public void verifyLogoTest() {
         TestReporter.testTitle("Test ID - C34282");
@@ -45,19 +46,19 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyingAnswerYourQuestionsTelNumber() {
+    public void verifyingAnswerYourQuestionsTelNumberTest() {
         TestReporter.testTitle("Test ID - C34290");
         mainPage.verifyingAnswerYourQuestionsTelNumber();
     }
 
     @Test
-    public void verifyMyCartIsEmpty() {
+    public void verifyMyCardIsEmptyTest() {
         TestReporter.testTitle("Test ID - C34292");
-        mainPage.verifyMyBasketIsEmpty();
+        mainPage.verifyMyCardIsEmpty();
     }
 
     @Test
-    public void verifyMyBasketWithProduct() {
+    public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - 34293");
         mainPage.verifyMyBasketWithProduct();
     }
