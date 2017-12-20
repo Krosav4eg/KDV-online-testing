@@ -54,6 +54,12 @@ public abstract class BasePage {
         driver.navigate().to(url);
     }
 
+    protected void backPage() {
+        LOGGER.log(Level.INFO, "Navigate to back page ");
+        TestReporter.step("Navigate to back page ");
+        driver.navigate().back();
+    }
+
     protected void fillInputField(WebElement element, WebDriver driver, String message) {
         LOGGER.log(Level.INFO, "Feel input field ");
         TestReporter.step("Feel input field ");

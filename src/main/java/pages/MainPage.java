@@ -889,5 +889,10 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
                 linkTextValue);
     }
+
+    public void verifyExitButtonLink() {
+        AssertCollector.assertTrue(enterButton.isDisplayed());
+        AssertCollector.assertTrue(registrationButton.isDisplayed());
+    }
 }
 

@@ -107,6 +107,14 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyExitLinkAsPhysicalPersonTest() {
+        TestReporter.testTitle("Test ID = 34311");
+        authorizationPage.authAsPhysicalPerson();
+        customerAccountPage.pressExitFromAccountButton();
+        mainPage.verifyExitButtonLink();
+    }
+
+    @Test
     public void verifyStickingHeaderDuringScrollingTest() {
         TestReporter.testTitle("Test ID = 34317");
         mainPage.verifyStickingHeaderDuringScrolling();
