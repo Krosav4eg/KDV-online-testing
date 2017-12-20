@@ -52,6 +52,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".select2-selection.select2-selection--single")
     private WebElement citySearchField;
 
+    @FindBy(css = "li[role='treeitem']")
+    private WebElement citySearchDropdown;
+
     //========================
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
     private WebElement myCart;
@@ -246,6 +249,7 @@ public class MainPage extends BasePage {
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
+        TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         elementIsClickable(closePopupButton, driver).click();
     }
@@ -253,6 +257,7 @@ public class MainPage extends BasePage {
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
         LOGGER.log(Level.INFO, "Check logo company");
+        TestReporter.step("Check logo company");
         elementIsClickable(companyLogo, driver).click();
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
@@ -261,15 +266,17 @@ public class MainPage extends BasePage {
 
     public void closingModalWindow() {
         LOGGER.log(Level.INFO, "Check closing modal window");
-        elementIsClickable(baseCityLink, driver).click();
-        elementIsClickable(closePopupButton, driver).click();
-        elementIsClickable(baseCityLink, driver).click();
+        TestReporter.step("Check closing modal window");
+        elementFluentWaitVisibility(baseCityLink, driver).click();
+        elementFluentWaitVisibility(closePopupButton, driver).click();
+        elementFluentWaitVisibility(baseCityLink, driver).click();
         moveMouseToAndClick(driver, companyLogo, 1, 1);
         AssertCollector.assertFalse(modalContentWindow.isDisplayed());
     }
 
     public void changeCity() {
         LOGGER.log(Level.INFO, "Check changing city");
+        TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(otherCityLink, driver).click();
         waitForPageLoad(driver);
@@ -286,13 +293,14 @@ public class MainPage extends BasePage {
         actions.click();
         actions.sendKeys(currentCity);
         actions.build().perform();
-//        elementIsClickable(otherCityLink, driver).click();
-//        waitForPageLoad(driver);
-//        AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
+        elementIsClickable(citySearchDropdown, driver).click();
+        waitForPageLoad(driver);
+        AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
     public void verifyingOpeningLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
@@ -300,6 +308,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying closing lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
@@ -308,8 +317,10 @@ public class MainPage extends BasePage {
 
     public void verifyingAboutLinkLowerPriceSection() {
         LOGGER.log(Level.INFO, "Get current url");
+        TestReporter.step("Get current url");
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(aboutPricesLink, driver).click();
@@ -327,6 +338,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying closing free delivering section");
+        TestReporter.step("Verifying closing free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
@@ -479,14 +491,7 @@ public class MainPage extends BasePage {
         scrollDown();
         moveMouseTo(driver, productInnerItem);
         clickElementByJS(driver, loupeButton);
-        if (modalWindow.isDisplayed()) {
-            LOGGER.log(Level.INFO, "Product modal window is displayed");
-            TestReporter.step("Product modal window is displayed");
-        } else {
-            LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
-            TestReporter.step("Product modal window isn't displayed");
-            fail();
-        }
+        AssertCollector.assertTrue(modalWindow.isDisplayed());
     }
 
     public void openProductCard() {
@@ -707,6 +712,7 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
                 linkTextAttribute);
+        openMainPage();
     }
 
     public void verifyingAnswerYourQuestionsTelNumber() {
@@ -717,7 +723,7 @@ public class MainPage extends BasePage {
                 expTelLink);
     }
 
-    public void verifyMyBasketIsEmpty() {
+    public void verifyMyCardIsEmpty() {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
         waitForPageLoad(driver);
@@ -732,6 +738,7 @@ public class MainPage extends BasePage {
         scrollDown();
         waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
             TestReporter.step("Button hitSalesBasketButtons is displayed");

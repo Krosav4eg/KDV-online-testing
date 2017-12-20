@@ -71,11 +71,6 @@ public abstract class BasePage {
         return builder.toString();
     }
 
-    protected void fillInputField(WebElement element, String message) {
-        element.clear();
-        element.sendKeys(message);
-    }
-
     protected static void moveMouseToAndClick(WebDriver driver, WebElement element, int x, int y) {
         TestReporter.step("Move to the element position ");
         LOGGER.log(Level.INFO, "Move to the element position");
