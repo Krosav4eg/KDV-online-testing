@@ -52,7 +52,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".select2-selection.select2-selection--single")
     private WebElement citySearchField;
 
-    @FindBy(css = "li[role='treeitem']")
+    @FindBy(css = ".select2-results__options")
     private WebElement citySearchDropdown;
 
     //========================
@@ -284,8 +284,8 @@ public class MainPage extends BasePage {
     }
 
     public void changeCityToCurrent() {
-        LOGGER.log(Level.INFO, "Check changing city");
-        TestReporter.step("Check changing city");
+        LOGGER.log(Level.INFO, "Check changing city to current");
+        TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
@@ -296,6 +296,24 @@ public class MainPage extends BasePage {
         elementIsClickable(citySearchDropdown, driver).click();
         waitForPageLoad(driver);
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
+    }
+
+    //TODO assertions for citySearchDropdown
+    public void changeCityToOther() throws InterruptedException {
+        LOGGER.log(Level.INFO, "Check changing city to other");
+        TestReporter.step("Check changing city to other");
+        String otherCity = "Кемерово";
+        elementIsClickable(baseCityLink, driver).click();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(citySearchField);
+        actions.click();
+        actions.sendKeys(otherCity);
+        actions.build().perform();
+        Thread.sleep(4000);
+        actions.moveToElement(citySearchDropdown);
+        clickElementByJS(driver, citySearchDropdown);
+        waitForPageLoad(driver);
+        AssertCollector.assertEquals(otherCity, " City link is equal ", getText(baseCityLink));
     }
 
     public void verifyingOpeningLowerPricesSection() {

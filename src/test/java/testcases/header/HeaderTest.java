@@ -28,6 +28,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyChangingCityToOtherTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID - C34285");
+        mainPage.changeCityToOther();
+    }
+
+    @Test
     public void verifyChangingCityToCurrentTest() {
         TestReporter.testTitle("Test ID - C34316");
         mainPage.changeCityToCurrent();
