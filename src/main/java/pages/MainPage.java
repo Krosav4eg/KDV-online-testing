@@ -281,8 +281,17 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
     private WebElement categoryDropdown;
 
+    @FindBy(css = ".search-category__selected.j_search_category_selected")
+    private WebElement categoriesHeader;
+
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
+    private WebElement categoryFromList;
+
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//span[@class='search-button__label']/span")
+    private WebElement searchButtonLabel;
 
     @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
     private WebElement fullBasketDropdown;
@@ -887,7 +896,7 @@ public class MainPage extends BasePage {
                 linkTextValue);
     }
 
-    public void verifyToolTypeText() throws InterruptedException {
+    public void verifyToolTypeText() {
         moveMouseTo(driver, companyLogo);
         String companyLogoValue = getValueOfAttributeByName(companyLogo, "title");
         AssertCollector.assertEquals("КДВ", " tooltip text is equal of ",
@@ -904,6 +913,36 @@ public class MainPage extends BasePage {
         String enterButtonValue = getValueOfAttributeByName(enterButton, "title");
         AssertCollector.assertEquals(getText(enterButton), " tooltip text is equal of ",
                 enterButtonValue);
+    }
+
+    public void verifySearchButton() {
+        moveMouseTo(driver, searchButtonLabel);
+        String actualSearchButtonColor = "#ff1b41";
+        String expectedSearchButtonColor = getElementColor(searchButtonLabel, "color");
+        AssertCollector.assertEqualsJ(actualSearchButtonColor, expectedSearchButtonColor,
+                " Verify elements color of search button ");
+        String actualTitle = "Поиск";
+        String expectedTitle = searchButton.getAttribute("title");
+        AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
+    }
+
+    public void placeholderCheckingInSearchField() {
+        String actPlaceholder = "Введите название товара";
+        String expPlaceholder = searchProductField.getAttribute("placeholder");
+        AssertCollector.assertEquals(actPlaceholder, " Current placeholder is equal to placeholder of ", expPlaceholder);
+        moveMouseTo(driver, searchProductField);
+        elementIsClickable(searchProductField, driver).click();
+        fillInputField(searchProductField, driver, "вафли");
+        String textFromPlaceholder = searchProductField.getAttribute("value");
+        AssertCollector.assertEquals(textFromPlaceholder, " Current  text from placeholder is equal to ", textFromPlaceholder);
+    }
+
+    public void verificationOfCategoriesDropdownInSearchField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String expCategoryFromList = getText(categoryFromList);
+        elementIsClickable(categoryFromList, driver).click();
+        String actCategoryFromList = getText(categoriesHeader);
+        AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
     }
 }
 

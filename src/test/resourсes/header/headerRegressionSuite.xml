@@ -105,11 +105,51 @@
         </classes>
     </test>
 
+    <test name="C34374">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34375">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="placeholderCheckingInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34376">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verificationOfCategoriesDropdownInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyToolTypeTextTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34347">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>
                 </methods>
             </class>
         </classes>

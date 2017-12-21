@@ -113,9 +113,34 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyToolTypeTextTest() throws InterruptedException {
+    public void verifyToolTypeTextTest() {
         TestReporter.testTitle("Test ID = 34346");
         mainPage.verifyToolTypeText();
+    }
+
+    @Test
+    public void verifyToolTypeTextInPhysicalPersonAccountTest() {
+        TestReporter.testTitle("Test ID = 34347");
+        authorizationPage.authAsPhysicalPerson();
+        customerAccountPage.verifyToolTypeTextInPhysicalPersonAccount();
+    }
+
+    @Test
+    public void verifySearchButtonTest() {
+        TestReporter.testTitle("Test ID = 34374");
+        mainPage.verifySearchButton();
+    }
+
+    @Test
+    public void placeholderCheckingInSearchFieldTest() {
+        TestReporter.testTitle("Test ID = 34375");
+        mainPage.placeholderCheckingInSearchField();
+    }
+
+    @Test
+    public void verificationOfCategoriesDropdownInSearchFieldTest() {
+        TestReporter.testTitle("Test ID = 34376");
+        mainPage.verificationOfCategoriesDropdownInSearchField();
     }
 }
 

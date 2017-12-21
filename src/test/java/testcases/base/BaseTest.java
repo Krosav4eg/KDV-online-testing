@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import pages.AuthorizationPage;
+import pages.CustomerAccountPage;
 import pages.MainPage;
 import utils.TestReporter;
 
@@ -29,12 +30,14 @@ public abstract class BaseTest {
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
+    protected CustomerAccountPage customerAccountPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
     @BeforeTest
+
     public void runBrowser() {
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
@@ -88,5 +91,6 @@ public abstract class BaseTest {
     private void initPageElements() {
         mainPage = PageFactory.initElements(driver, MainPage.class);
         authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
+        customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
     }
 }
