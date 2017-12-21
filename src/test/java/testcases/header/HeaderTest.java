@@ -111,5 +111,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34317");
         mainPage.verifyStickingHeaderDuringScrolling();
     }
+
+    @Test
+    public void verifyToolTypeTextTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID = 34346");
+        mainPage.verifyToolTypeText();
+    }
 }
 

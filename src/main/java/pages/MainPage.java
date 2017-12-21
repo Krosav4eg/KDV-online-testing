@@ -37,13 +37,13 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
 
-    @FindBy(xpath = "//img[@alt='КДВ']")
+    @FindBy(xpath = "(//a[@title='КДВ'])[1]")
     private WebElement companyLogo;
 
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__content']")
     private WebElement modalContentWindow;
 
-    @FindBy(xpath = "//*[@class='header-top']//li[@class='first']")
+    @FindBy(css = ".quicklink__item.quicklink__item_geo.j_geo_control.j_geo_control_modal")
     private WebElement baseCityLink;
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
@@ -887,9 +887,23 @@ public class MainPage extends BasePage {
                 linkTextValue);
     }
 
-    public void verifyExitButtonLink() {
-        AssertCollector.assertTrue(enterButton.isDisplayed());
-        AssertCollector.assertTrue(registrationButton.isDisplayed());
+    public void verifyToolTypeText() throws InterruptedException {
+        moveMouseTo(driver, companyLogo);
+        String companyLogoValue = getValueOfAttributeByName(companyLogo, "title");
+        AssertCollector.assertEquals("КДВ", " tooltip text is equal of ",
+                companyLogoValue);
+        moveMouseTo(driver, baseCityLink);
+        String baseCityLinkValue = getValueOfAttributeByName(baseCityLink, "title");
+        AssertCollector.assertEquals(getText(baseCityLink), " tooltip text is equal of ",
+                baseCityLinkValue);
+        moveMouseTo(driver, registrationButton);
+        String registrationButtonValue = getValueOfAttributeByName(registrationButton, "title");
+        AssertCollector.assertEquals(getText(registrationButton), " tooltip text is equal of ",
+                registrationButtonValue);
+        moveMouseTo(driver, enterButton);
+        String enterButtonValue = getValueOfAttributeByName(enterButton, "title");
+        AssertCollector.assertEquals(getText(enterButton), " tooltip text is equal of ",
+                enterButtonValue);
     }
 }
 
