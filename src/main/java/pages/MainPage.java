@@ -944,5 +944,12 @@ public class MainPage extends BasePage {
         String actCategoryFromList = getText(categoriesHeader);
         AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
     }
+
+    public void verifyEmptyField() {
+        getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Url is equal url after refreshing ", getCurrentUrl());
+    }
 }
 
