@@ -104,6 +104,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34374">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 

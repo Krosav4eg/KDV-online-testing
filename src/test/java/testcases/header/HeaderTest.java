@@ -111,5 +111,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34317");
         mainPage.verifyStickingHeaderDuringScrolling();
     }
+
+    @Test
+    public void verifySearchButtonTest() {
+        TestReporter.testTitle("Test ID = 34374");
+        mainPage.verifySearchButton();
+    }
 }
 

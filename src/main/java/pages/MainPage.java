@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import utils.AssertCollector;
 import utils.TestReporter;
 
@@ -286,6 +287,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//span[@class='search-button__label']/span")
+    private WebElement searchButtonLabel;
 
     @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
     private WebElement fullBasketDropdown;
@@ -888,6 +892,17 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(myAccountLink, driver).click();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
                 linkTextValue);
+    }
+
+    public void verifySearchButton() {
+        moveMouseTo(driver, searchButtonLabel);
+        String actualSearchButtonColor = "#ff1b41";
+        String expectedSearchButtonColor = getElementColor(searchButtonLabel, "color");
+        AssertCollector.assertEqualsJ(actualSearchButtonColor, expectedSearchButtonColor,
+                " Verify elements color of search button ");
+        String actualTitle = "Поиск";
+        String expectedTitle = searchButton.getAttribute("title");
+        AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
     }
 }
 
