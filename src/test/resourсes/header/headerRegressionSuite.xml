@@ -144,6 +144,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="C34347">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 
