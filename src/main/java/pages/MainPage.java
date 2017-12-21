@@ -61,6 +61,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".top-link-myaccount")
     private WebElement myAccountLink;
 
+    @FindBy(xpath = "//div[2]//h1")
+    private WebElement resultsProductSearch;
+
     //========================
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
     private WebElement myCart;
@@ -955,6 +958,13 @@ public class MainPage extends BasePage {
     public void verifyLatinTextInProductInputField() {
         fillInputFieldAndPressEnterButton(searchProductField,"biscuit");
         textPresent("По вашему запросу ничего не найдено.");
+    }
+
+    public void verifyCyrillicTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
 }
 

@@ -145,6 +145,16 @@
         </classes>
     </test>
 
+    <test name="C34378">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyCyrillicTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

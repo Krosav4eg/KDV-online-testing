@@ -144,15 +144,21 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyEmptyFieldTest() {
-        TestReporter.testTitle("Test ID = 34389");
-        mainPage.verifyEmptyField();
-    }
-
-    @Test
     public void verifyLatinTextInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34377");
         mainPage.verifyLatinTextInProductInputField();
+    }
+
+    @Test
+    public void verifyCyrillicTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34378");
+        mainPage.verifyCyrillicTextInProductInputField();
+    }
+
+    @Test
+    public void verifyEmptyFieldTest() {
+        TestReporter.testTitle("Test ID = 34389");
+        mainPage.verifyEmptyField();
     }
 }
 
