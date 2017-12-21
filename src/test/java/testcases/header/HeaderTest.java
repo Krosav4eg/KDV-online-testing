@@ -113,9 +113,16 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyToolTypeTextTest() throws InterruptedException {
+    public void verifyToolTypeTextTest() {
         TestReporter.testTitle("Test ID = 34346");
         mainPage.verifyToolTypeText();
+    }
+
+    @Test
+    public void verifyToolTypeTextInPhysicalPersonAccountTest() {
+        TestReporter.testTitle("Test ID = 34347");
+        authorizationPage.authAsPhysicalPerson();
+        customerAccountPage.verifyToolTypeTextInPhysicalPersonAccount();
     }
 
     @Test

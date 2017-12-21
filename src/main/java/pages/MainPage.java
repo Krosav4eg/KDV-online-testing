@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import utils.AssertCollector;
 import utils.TestReporter;
 
@@ -891,7 +890,7 @@ public class MainPage extends BasePage {
                 linkTextValue);
     }
 
-    public void verifyToolTypeText() throws InterruptedException {
+    public void verifyToolTypeText() {
         moveMouseTo(driver, companyLogo);
         String companyLogoValue = getValueOfAttributeByName(companyLogo, "title");
         AssertCollector.assertEquals("КДВ", " tooltip text is equal of ",
