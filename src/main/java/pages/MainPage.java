@@ -275,7 +275,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".header-bottom-left__logo_small.text-left")
     private WebElement smallLogo;
 
-    @FindBy(xpath = ".//*[@id='search']")
+    @FindBy(xpath = "//div[@id='input-search-wrapper']/*[@id='search']")
     private WebElement searchProductField;
 
     @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
@@ -946,10 +946,15 @@ public class MainPage extends BasePage {
     }
 
     public void verifyEmptyField() {
-        getCurrentUrl();
+        String expUrl = getCurrentUrl();
         elementIsClickable(searchButton, driver).click();
-        getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Url is equal url after refreshing ", getCurrentUrl());
+        String actUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
+    }
+
+    public void verifyLatinTextInProductInputField() {
+        fillInputFieldAndPressEnterButton(searchProductField,"biscuit");
+        textPresent("По вашему запросу ничего не найдено.");
     }
 }
 

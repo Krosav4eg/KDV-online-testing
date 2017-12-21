@@ -67,6 +67,12 @@ public abstract class BasePage {
         elementFluentWaitVisibility(element, driver).sendKeys(message);
     }
 
+    protected void fillInputFieldAndPressEnterButton(WebElement element, String message) {
+        element.clear();
+        element.sendKeys(message);
+        element.sendKeys(Keys.ENTER);
+    }
+
     protected static String getElementColor(WebElement webElement, String colorSection) {
         LOGGER.log(Level.INFO, "Get element color");
         TestReporter.step("Get element color ");
