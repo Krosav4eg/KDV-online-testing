@@ -115,6 +115,16 @@
         </classes>
     </test>
 
+    <test name="C34375">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="placeholderCheckingInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

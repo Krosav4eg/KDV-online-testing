@@ -920,5 +920,16 @@ public class MainPage extends BasePage {
         String expectedTitle = searchButton.getAttribute("title");
         AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
     }
+
+    public void placeholderCheckingInSearchField() {
+        String actPlaceholder = "Введите название товара";
+        String expPlaceholder = searchProductField.getAttribute("placeholder");
+        AssertCollector.assertEquals(actPlaceholder, " Current placeholder is equal to placeholder of ", expPlaceholder);
+        moveMouseTo(driver, searchProductField);
+        elementIsClickable(searchProductField, driver).click();
+        fillInputField(searchProductField, driver, "вафли");
+        String textFromPlaceholder = searchProductField.getAttribute("value");
+        AssertCollector.assertEquals(textFromPlaceholder, " Current  text from placeholder is equal to ", textFromPlaceholder);
+    }
 }
 
