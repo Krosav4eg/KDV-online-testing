@@ -129,5 +129,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34375");
         mainPage.placeholderCheckingInSearchField();
     }
+
+    @Test
+    public void verificationOfCategoriesDropdownInSearchFieldTest() {
+        TestReporter.testTitle("Test ID = 34376");
+        mainPage.verificationOfCategoriesDropdownInSearchField();
+    }
 }
 

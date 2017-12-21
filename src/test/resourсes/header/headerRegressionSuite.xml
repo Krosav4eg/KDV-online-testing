@@ -125,6 +125,16 @@
         </classes>
     </test>
 
+    <test name="C34376">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verificationOfCategoriesDropdownInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

@@ -282,6 +282,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
     private WebElement categoryDropdown;
 
+    @FindBy(css = ".search-category__selected.j_search_category_selected")
+    private WebElement categoriesHeader;
+
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
+    private WebElement categoryFromList;
+
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
 
@@ -930,6 +936,14 @@ public class MainPage extends BasePage {
         fillInputField(searchProductField, driver, "вафли");
         String textFromPlaceholder = searchProductField.getAttribute("value");
         AssertCollector.assertEquals(textFromPlaceholder, " Current  text from placeholder is equal to ", textFromPlaceholder);
+    }
+
+    public void verificationOfCategoriesDropdownInSearchField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String expCategoryFromList = getText(categoryFromList);
+        elementIsClickable(categoryFromList, driver).click();
+        String actCategoryFromList = getText(categoriesHeader);
+        AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
     }
 }
 
