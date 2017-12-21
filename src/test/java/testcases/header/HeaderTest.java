@@ -113,6 +113,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyToolTypeTextTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID = 34346");
+        mainPage.verifyToolTypeText();
+    }
+
+    @Test
     public void verifySearchButtonTest() {
         TestReporter.testTitle("Test ID = 34374");
         mainPage.verifySearchButton();
