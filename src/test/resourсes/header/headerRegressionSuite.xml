@@ -95,16 +95,6 @@
         </classes>
     </test>
 
-    <test name="C34311">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyExitLinkAsPhysicalPersonTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <test name="C34317">
         <classes>
             <class name="testcases.header.HeaderTest">

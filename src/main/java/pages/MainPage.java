@@ -197,9 +197,6 @@ public class MainPage extends BasePage {
     @FindBy(css = ".modal__content")
     private WebElement modalWindow;
 
-    @FindBy(css = ".product__title")
-    private WebElement descroptionProdictModalVindow;
-
     //========================SMM SECTION=========================================
     @FindBy(css = ".social__link.social__link_vk")
     public WebElement vkLink;
