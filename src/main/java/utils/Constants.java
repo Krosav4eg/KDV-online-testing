@@ -32,4 +32,8 @@ public class Constants {
     public static final int SECOND_TAB_BROWSER = 1;
     public static final int TWO_TABS_BROWSER = 2;
 
+    //===============================UTIL CONSTANTS==============================
+    public static final String AUTORIZATION_PAGE_URL = "http://kemerovo.demo.dev.magonline.ru/customer/account/login/";
+    public static final String PHYSICAL_PERSON_EMAIL = "test_i.makarov@magdv.com";
+    public static final String PHYSICAL_PERSON_PASSWORD = "SWgeZWPs";
 }

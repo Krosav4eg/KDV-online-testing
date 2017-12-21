@@ -1,39 +1,120 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header regression tests" parallel="tests" thread-count="3">
+<suite name="Header regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34282">
+    <test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyLogoTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34283">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
                     <include name="verifyChangingCityTest"/>
+                    <include name="verifyClosingModalWindowTest"/>
+                    <include name="verifyOpeningRegistrationTest"/>
+                    <include name="verifyOpeningEnterTest"/>
+                    <include name="verifyingAnswerYourQuestionsTelNumberTest"/>
+                    <include name="verifyMyCardIsEmptyTest"/>
+                    <include name="verifyMyBasketWithProductTest"/>
+                    <include name="verifyChangingCityToCurrentTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="C34287">
+    <test name="C34299">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
-                    <include name="verifyClosingModalWindowTest"/>
+                    <include name="verifyProductsInBasketTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34296">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketPageFromHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34285">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyChangingCityToOtherTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34297">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketAndOrderingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34308">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningCatalogAfterLeftMainPageTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34309">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyAuthAsPhysicalPersonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34310">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyPhysicalAuthCredentialTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34317">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyStickingHeaderDuringScrollingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34346">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyToolTypeTextTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 </suite>
+
+
+

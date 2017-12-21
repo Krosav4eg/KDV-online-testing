@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 import utils.TestReporter;
@@ -26,24 +27,76 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
-    //========================MAIN PAGE=============================================
+    //========================HEADER SECTION=============================================
     @FindBy(xpath = "//*[@title='Вход']")
     private WebElement enterButton;
+
+    @FindBy(xpath = "//*[@title='Регистрация']")
+    private WebElement registrationButton;
 
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
 
-    @FindBy(xpath = "//img[@alt='КДВ']")
+    @FindBy(xpath = "(//a[@title='КДВ'])[1]")
     private WebElement companyLogo;
 
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__content']")
     private WebElement modalContentWindow;
 
-    @FindBy(xpath = "//*[@class='header-top']//li[@class='first']")
+    @FindBy(css = ".quicklink__item.quicklink__item_geo.j_geo_control.j_geo_control_modal")
     private WebElement baseCityLink;
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
-    private WebElement otherCityLink;
+    private List<WebElement> otherCityLink;
+
+    @FindBy(xpath = "(//*[@class='modal__box']//div[@data-location])[1]")
+    private WebElement firstCityLink;
+
+    @FindBy(css = ".select2-selection.select2-selection--single")
+    private WebElement citySearchField;
+
+    @FindBy(css = ".select2-results__options")
+    private WebElement citySearchDropdown;
+
+    @FindBy(css = ".top-link-myaccount")
+    private WebElement myAccountLink;
+
+    //========================
+    @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
+    private WebElement myCart;
+
+    @FindBy(xpath = "//*[@title='Конфеты «Томские классические», 300 г']")
+    private WebElement productTitleToBasket;
+
+    @FindBy(xpath = ".//*[@id='product-price-2465']/span[1]")
+    private WebElement productPriceToBasket;
+
+    @FindBy(css = ".mini-cart-product__name.mini-cart-product__name_link")
+    private WebElement productTitleInBasket;
+
+    @FindBy(css = ".mini-cart-product__price")
+    private WebElement productPriceInBasket;
+
+    @FindBy(css = ".mini-cart__expander.hidden-sm.hidden-md")
+    private WebElement mainBasketToExpandButton;
+
+    @FindBy(css = ".mini-cart__inner.mini-cart_clickable.j_mini-cart_clickable")
+    private WebElement subBasketToExpandButton;
+
+    @FindBy(css = ".mini-cart-summary__qty")
+    private WebElement quantityOfProductsInBasket;
+
+    @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
+    private WebElement basketIsEmpty;
+
+    @FindBy(css = ".mini-cart-product__remove")
+    private WebElement removeProductsFromBasket;
+
+    @FindBy(css = ".mini-cart-dropdown__link.btn.btn-primary")
+    private WebElement submitAddingToBasket;
+
+    @FindBy(css = ".mini-cart-dropdown__link.mini-cart-dropdown__link_right.btn.btn-primary")
+    private WebElement createOrderInBasket;
 
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
@@ -110,6 +163,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
     private WebElement firstGoodInLinkList;
 
+    //========================
+    @FindBy(xpath = "(.//span[@class='btn-catalog__label with-closed-expander'])[1]")
+    private WebElement catalogExpand;
+
+    @FindBy(css = ".header-bottom-left__catalog")
+    private WebElement categoryList;
     //========================HIT OF SALES SECTION=========================================
     @FindBy(xpath = ".//*[@class='product-item__image-wrapper']")
     private List<WebElement> hitSalesList;
@@ -137,9 +196,6 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".modal__content")
     private WebElement modalWindow;
-
-    @FindBy(css = ".product__title")
-    private WebElement descroptionProdictModalVindow;
 
     //========================SMM SECTION=========================================
     @FindBy(css = ".social__link.social__link_vk")
@@ -215,9 +271,25 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='footer']")
     public WebElement footer;
 
+    //========================
+    @FindBy(css = ".header-bottom-left__logo_small.text-left")
+    private WebElement smallLogo;
+
+    @FindBy(xpath = ".//*[@id='search']")
+    private WebElement searchProductField;
+
+    @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
+    private WebElement categoryDropdown;
+
+    @FindBy(css = ".search-button__btn")
+    private WebElement searchButton;
+
+    @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
+    private WebElement fullBasketDropdown;
 
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
+        TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         elementIsClickable(closePopupButton, driver).click();
     }
@@ -225,6 +297,7 @@ public class MainPage extends BasePage {
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
         LOGGER.log(Level.INFO, "Check logo company");
+        TestReporter.step("Check logo company");
         elementIsClickable(companyLogo, driver).click();
         waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
@@ -233,23 +306,51 @@ public class MainPage extends BasePage {
 
     public void closingModalWindow() {
         LOGGER.log(Level.INFO, "Check closing modal window");
-        elementIsClickable(baseCityLink, driver).click();
-        elementIsClickable(closePopupButton, driver).click();
-        elementIsClickable(baseCityLink, driver).click();
+        TestReporter.step("Check closing modal window");
+        elementFluentWaitVisibility(baseCityLink, driver).click();
+        elementFluentWaitVisibility(closePopupButton, driver).click();
+        elementFluentWaitVisibility(baseCityLink, driver).click();
         moveMouseToAndClick(driver, companyLogo, 1, 1);
         AssertCollector.assertFalse(modalContentWindow.isDisplayed());
     }
 
     public void changeCity() {
         LOGGER.log(Level.INFO, "Check changing city");
+        TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
-        elementIsClickable(otherCityLink, driver).click();
+        elementIsClickable(firstCityLink, driver).click();
         waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
+    public void changeCityToCurrent() {
+        LOGGER.log(Level.INFO, "Check changing city to current");
+        TestReporter.step("Check changing city to current");
+        String currentCity = getText(baseCityLink);
+        elementIsClickable(baseCityLink, driver).click();
+        Actions actions = new Actions(driver);
+        actions.moveToElement(citySearchField);
+        actions.click();
+        actions.sendKeys(currentCity);
+        actions.build().perform();
+        elementIsClickable(citySearchDropdown, driver).click();
+        waitForPageLoad(driver);
+        AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
+    }
+
+    public void changeCityToOther() throws InterruptedException {
+        LOGGER.log(Level.INFO, "Check changing city to other");
+        TestReporter.step("Check changing city to other");
+        String otherCity = "Кемерово";
+        elementIsClickable(baseCityLink, driver).click();
+        clickOnIndexFromElementList(otherCityLink, 1);
+        Thread.sleep(3000);
+        AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
+    }
+
     public void verifyingOpeningLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
@@ -257,6 +358,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying closing lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
@@ -265,8 +367,10 @@ public class MainPage extends BasePage {
 
     public void verifyingAboutLinkLowerPriceSection() {
         LOGGER.log(Level.INFO, "Get current url");
+        TestReporter.step("Get current url");
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(aboutPricesLink, driver).click();
@@ -284,6 +388,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying closing free delivering section");
+        TestReporter.step("Verifying closing free delivering section");
         waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
@@ -436,14 +541,7 @@ public class MainPage extends BasePage {
         scrollDown();
         moveMouseTo(driver, productInnerItem);
         clickElementByJS(driver, loupeButton);
-        if (modalWindow.isDisplayed()) {
-            LOGGER.log(Level.INFO, "Product modal window is displayed");
-            TestReporter.step("Product modal window is displayed");
-        } else {
-            LOGGER.log(Level.WARNING, "Product modal window isn't displayed");
-            TestReporter.step("Product modal window isn't displayed");
-            fail();
-        }
+        AssertCollector.assertTrue(modalWindow.isDisplayed());
     }
 
     public void openProductCard() {
@@ -647,7 +745,165 @@ public class MainPage extends BasePage {
 
     public void clickingUpButtonInFooter() {
         elementFluentWaitVisibility(upButton, driver).click();
-        waitInvisibilityOfElement(upButton,driver);
+        waitInvisibilityOfElement(upButton, driver);
+    }
+
+    public void openingRegistrationLink() {
+        String linkTextAttribute = getValueOfAttributeByName(registrationButton, "href");
+        elementFluentWaitVisibility(registrationButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of registration ",
+                linkTextAttribute);
+    }
+
+    public void openingEnterLink() {
+        String linkTextAttribute = getValueOfAttributeByName(enterButton, "href");
+        elementFluentWaitVisibility(enterButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
+                linkTextAttribute);
+        openMainPage();
+    }
+
+    public void verifyingAnswerYourQuestionsTelNumber() {
+        textPresent("Ответим на ваши вопросы");
+        String expTelLink = "tel:8 800 250 5555";
+        String actTelLink = getValueOfAttributeByName(telLink, "href");
+        AssertCollector.assertEquals(actTelLink, " Current telephone is equal to ",
+                expTelLink);
+    }
+
+    public void verifyMyCardIsEmpty() {
+        LOGGER.log(Level.INFO, "Verifying clicking my basket");
+        TestReporter.step("Verifying clicking my basket");
+        waitForPageLoad(driver);
+        elementIsClickable(myCart, driver).click();
+        AssertCollector.assertTrue(myCart.isDisplayed());
+        textPresent("Корзина пока пуста");
+    }
+
+    public void verifyMyBasketWithProduct() {
+        String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
+        String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
+        scrollDown();
+        waitForJSandJQueryToLoad();
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        elementIsClickable(productAddedButton, driver);
+        if (productAddedButton.isDisplayed()) {
+            LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+            TestReporter.step("Button hitSalesBasketButtons is displayed");
+            AssertCollector.assertTrue(productAddedButton.isDisplayed());
+        } else {
+            LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+            TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+            fail();
+        }
+        elementFluentWaitVisibility(upButton, driver).click();
+        hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+        String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
+        String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
+        AssertCollector.assertEquals(actTitle, " Title in main page equals title in" +
+                " basket page ", expTitle);
+        AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
+                " basket page ", expPrice);
+    }
+
+    public void checkingProductsInBasket() {
+        if (basketIsEmpty.isDisplayed()) {
+            scrollDown();
+            waitForJSandJQueryToLoad();
+            clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+            clickOnIndexFromElementList(hitSalesBasketButtons, 1);
+            if (productAddedButton.isDisplayed()) {
+                AssertCollector.assertTrue(productAddedButton.isDisplayed());
+                LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
+                TestReporter.step("Button hitSalesBasketButtons is displayed");
+            } else {
+                LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
+                TestReporter.step("Button hitSalesBasketButtons isn't displayed");
+                fail();
+            }
+            elementFluentWaitVisibility(upButton, driver).click();
+            hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+            textPresent("2 тов.");
+            TestReporter.step("2 products are in the basket");
+        } else {
+            while (!basketIsEmpty.isDisplayed()) {
+                hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+                elementFluentWaitVisibility(removeProductsFromBasket, driver).click();
+            }
+        }
+    }
+
+    public void openingBasketPageFromHeader() {
+        verifyMyBasketWithProduct();
+        String linkTextAttribute = getValueOfAttributeByName(submitAddingToBasket, "href");
+        elementFluentWaitVisibility(submitAddingToBasket, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of adding to basket ",
+                linkTextAttribute);
+    }
+
+    public void openingBasketAndOrdering() {
+        scrollDown();
+        waitForJSandJQueryToLoad();
+        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 1);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 2);
+        scrollToNecessaryElement(vkLink);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 3);
+        clickOnIndexFromElementList(hitSalesBasketButtons, 4);
+        elementFluentWaitVisibility(upButton, driver).click();
+        hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
+        String linkTextValue = getValueOfAttributeByName(createOrderInBasket, "href");
+        elementFluentWaitVisibility(createOrderInBasket, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
+                linkTextValue);
+    }
+
+    public void openingCatalogAfterLeftMainPage() {
+        elementFluentWaitVisibility(registrationButton, driver).click();
+        elementFluentWaitVisibility(catalogExpand, driver).click();
+        AssertCollector.assertTrue(categoryList.isDisplayed());
+    }
+
+    public void verifyStickingHeaderDuringScrolling() {
+        scrollToNecessaryElement(footer);
+        AssertCollector.assertTrue(smallLogo.isDisplayed());
+        AssertCollector.assertTrue(searchProductField.isDisplayed());
+        AssertCollector.assertTrue(categoryDropdown.isDisplayed());
+        AssertCollector.assertTrue(searchButton.isDisplayed());
+        textPresent("Корзина пока пуста");
+        clickOnIndexFromElementList(hitSalesBasketButtons, 14);
+        elementIsClickable(quantityOfProductsInBasket, driver).click();
+        AssertCollector.assertTrue(fullBasketDropdown.isDisplayed());
+    }
+
+    public void verifyPhysicalAuthCredential() {
+        String linkTextValue = getValueOfAttributeByName(myAccountLink, "href");
+        elementFluentWaitVisibility(myAccountLink, driver).click();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
+                linkTextValue);
+    }
+
+    public void verifyToolTypeText() throws InterruptedException {
+        moveMouseTo(driver, companyLogo);
+        String companyLogoValue = getValueOfAttributeByName(companyLogo, "title");
+        AssertCollector.assertEquals("КДВ", " tooltip text is equal of ",
+                companyLogoValue);
+        moveMouseTo(driver, baseCityLink);
+        String baseCityLinkValue = getValueOfAttributeByName(baseCityLink, "title");
+        AssertCollector.assertEquals(getText(baseCityLink), " tooltip text is equal of ",
+                baseCityLinkValue);
+        moveMouseTo(driver, registrationButton);
+        String registrationButtonValue = getValueOfAttributeByName(registrationButton, "title");
+        AssertCollector.assertEquals(getText(registrationButton), " tooltip text is equal of ",
+                registrationButtonValue);
+        moveMouseTo(driver, enterButton);
+        String enterButtonValue = getValueOfAttributeByName(enterButton, "title");
+        AssertCollector.assertEquals(getText(enterButton), " tooltip text is equal of ",
+                enterButtonValue);
     }
 }
 

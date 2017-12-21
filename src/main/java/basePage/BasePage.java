@@ -1,10 +1,7 @@
 package basePage;
 
 import logger.MagDvLogger;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -22,6 +19,7 @@ import java.util.logging.Logger;
 import static driverFactory.BrowserFactory.getDriver;
 import static utils.Constants.COMMA_REGEX;
 import static utils.Constants.RGBA_TO_RGB_REGEX;
+import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 
 /**
@@ -54,6 +52,19 @@ public abstract class BasePage {
         LOGGER.log(Level.INFO, "Navigate to needed url ");
         TestReporter.step("Navigate to needed url ");
         driver.navigate().to(url);
+    }
+
+    protected void backPage() {
+        LOGGER.log(Level.INFO, "Navigate to back page ");
+        TestReporter.step("Navigate to back page ");
+        driver.navigate().back();
+    }
+
+    protected void fillInputField(WebElement element, WebDriver driver, String message) {
+        LOGGER.log(Level.INFO, "Feel input field ");
+        TestReporter.step("Feel input field ");
+        elementFluentWaitVisibility(element, driver).clear();
+        elementFluentWaitVisibility(element, driver).sendKeys(message);
     }
 
     protected static String getElementColor(WebElement webElement, String colorSection) {
@@ -104,7 +115,7 @@ public abstract class BasePage {
                 waitForJSandJQueryToLoad();
                 elementList.get(elementIndex).click();
             }
-        } catch (ElementNotVisibleException | ClassCastException e) {
+        } catch (ElementNotVisibleException | ClassCastException | IndexOutOfBoundsException e) {
             e.getMessage();
             LOGGER.log(Level.WARNING, "ElementNotVisibleException " + e.getMessage());
             TestReporter.step(" ElementNotVisibleException ");
