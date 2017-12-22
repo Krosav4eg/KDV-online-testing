@@ -62,6 +62,9 @@ public class MainPage extends BasePage {
     private WebElement myAccountLink;
 
     @FindBy(xpath = "//div[2]//h1")
+    private WebElement resultsProductSearchTitle;
+
+    @FindBy(xpath = "//div/p[1]")
     private WebElement resultsProductSearch;
 
     //========================
@@ -964,28 +967,28 @@ public class MainPage extends BasePage {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList);
         fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifyUpperCaseTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList).toUpperCase();
         fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifyLowerCaseTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList).toLowerCase();
         fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifyUpperAndLowerCaseTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList);
         fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifySearchQueryWithoutCategory() {
@@ -1004,6 +1007,12 @@ public class MainPage extends BasePage {
         String expUrl = "http://tomsk.demo.dev.magonline.ru/vafli.html";
         AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
                 expUrl);
+    }
+
+    public void verifyISpecialSymbolsInProductInputField() {
+        String expSymbols ="~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
     }
 }
 

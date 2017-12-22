@@ -170,7 +170,12 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyUpperAndLowerCaseTextInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34381");
-        mainPage.verifyUpperAndLowerCaseTextInProductInputField();
+    }
+
+    @Test
+    public void verifySpecialSymbolsInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34382");
+        mainPage.verifyISpecialSymbolsInProductInputField();
     }
 
     @Test
