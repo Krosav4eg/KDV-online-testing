@@ -204,6 +204,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyOtherAlphabetsLettersInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34387");
+        mainPage.verifyOtherAlphabetsLettersInInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();

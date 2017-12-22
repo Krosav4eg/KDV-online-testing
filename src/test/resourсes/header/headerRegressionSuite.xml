@@ -235,6 +235,16 @@
         </classes>
     </test>
 
+    <test name="C34387">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOtherAlphabetsLettersInInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

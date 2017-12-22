@@ -1077,5 +1077,11 @@ public class MainPage extends BasePage {
             AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
         AssertCollector.assertTrue(filter.isDisplayed());
     }
+
+    public void verifyOtherAlphabetsLettersInInputField() {
+        String expSymbols = "öпеченье äовсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
 }
 
