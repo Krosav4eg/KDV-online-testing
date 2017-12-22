@@ -155,6 +155,26 @@
         </classes>
     </test>
 
+    <test name="C34379">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyUpperCaseTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34380">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLowerCaseTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

@@ -966,5 +966,19 @@ public class MainPage extends BasePage {
         fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
+
+    public void verifyUpperCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList).toUpperCase();
+        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifyLowerCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList).toLowerCase();
+        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+    }
 }
 
