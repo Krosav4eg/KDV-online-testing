@@ -1067,6 +1067,12 @@ public class MainPage extends BasePage {
                 expUrl);
     }
 
+    public void verifySpacesWithWordInProductInputField() {
+        String expSymbols = " овсяное печенье ";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
+    }
+
     public void verifySearchQueryWithInputTextWithoutCategory() {
         elementIsClickable(searchProductField, driver).click();
         fillInputField(searchProductField, driver, "вафли");
@@ -1076,6 +1082,24 @@ public class MainPage extends BasePage {
         if (!categoryLink.isDisplayed())
             AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
         AssertCollector.assertTrue(filter.isDisplayed());
+    }
+
+    public void verifyOtherAlphabetsLettersInInputField() {
+        String expSymbols = "öпеченье äовсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyOtherIncorrectSymbolsInInputField() {
+        String expSymbols = "▲печенье ♦♥овсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyQueryWithWordsOrAndInInputField() {
+        String expSymbols = "печенье и вафли";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
     }
 
     public void verifySearchQueryWithInputTextWithCategory() {

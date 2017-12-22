@@ -225,6 +225,56 @@
         </classes>
     </test>
 
+    <test name="C34386">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySpacesWithWordInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34387">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOtherAlphabetsLettersInInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34388">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOtherIncorrectSymbolsInInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34389">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyEmptyFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34402">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyQueryWithWordsOrAndInInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">
@@ -240,16 +290,6 @@
             <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34389">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyEmptyFieldTest"/>
                 </methods>
             </class>
         </classes>

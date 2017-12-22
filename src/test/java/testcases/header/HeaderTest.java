@@ -198,6 +198,30 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifySpacesWithWordInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34386");
+        mainPage.verifySpacesWithWordInProductInputField();
+    }
+
+    @Test
+    public void verifyOtherAlphabetsLettersInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34387");
+        mainPage.verifyOtherAlphabetsLettersInInputField();
+    }
+
+    @Test
+    public void verifyOtherIncorrectSymbolsInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34388");
+        mainPage.verifyOtherIncorrectSymbolsInInputField();
+    }
+
+    @Test
+    public void verifyQueryWithWordsOrAndInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34389");
+        mainPage.verifyQueryWithWordsOrAndInInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();
