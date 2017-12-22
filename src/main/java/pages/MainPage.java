@@ -1026,6 +1026,22 @@ public class MainPage extends BasePage {
         fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(255));
         String textFromInputField = searchProductField.getAttribute("value");
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(256));
+        String textFromInputField1 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField1));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(257));
+        String textFromInputField2 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField2));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(1000));
+        String textFromInputField3 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField3));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(1024));
+        String textFromInputField4 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField4));
     }
 }
 
