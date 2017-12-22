@@ -234,6 +234,16 @@
             </class>
         </classes>
     </test>
+
+    <test name="37066">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchQueryWithInputTextWithoutCategoryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 

@@ -160,6 +160,12 @@ public class MainPage extends BasePage {
     @FindBy(css = ".menu-categories__title")
     private List<WebElement> categoryGoodsList;
 
+    @FindBy(css = ".filter__group")
+    private WebElement filter;
+
+    @FindBy(css = ".menu-categories__link")
+    private WebElement categoryLink;
+
     @FindBy(css = ".menu-categories__item:hover")
     private WebElement parentItemOfProducts;
 
@@ -1004,6 +1010,17 @@ public class MainPage extends BasePage {
         String expUrl = "http://tomsk.demo.dev.magonline.ru/vafli.html";
         AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
                 expUrl);
+    }
+
+    public void verifySearchQueryWithInputTextWithoutCategory() {
+        elementIsClickable(searchProductField, driver).click();
+        fillInputField(searchProductField, driver, "вафли");
+        elementIsClickable(searchButton, driver).click();
+        String title = driver.getTitle();
+        AssertCollector.assertTrue(title.contains("вафли"));
+        if (!categoryLink.isDisplayed())
+            AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
+        AssertCollector.assertTrue(filter.isDisplayed());
     }
 }
 
