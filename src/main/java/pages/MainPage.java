@@ -1009,10 +1009,16 @@ public class MainPage extends BasePage {
                 expUrl);
     }
 
-    public void verifyISpecialSymbolsInProductInputField() {
+    public void verifySpecialSymbolsInProductInputField() {
         String expSymbols ="~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
         fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyNumbersInProductInputField() {
+        String expNumbers ="564654";
+        fillInputFieldAndPressEnterButton(searchProductField, expNumbers);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expNumbers));
     }
 }
 

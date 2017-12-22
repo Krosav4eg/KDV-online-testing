@@ -176,7 +176,13 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifySpecialSymbolsInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34382");
-        mainPage.verifyISpecialSymbolsInProductInputField();
+        mainPage.verifySpecialSymbolsInProductInputField();
+    }
+
+    @Test
+    public void verifyNumbersInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34383");
+        mainPage.verifyNumbersInProductInputField();
     }
 
     @Test
