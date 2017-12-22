@@ -185,6 +185,46 @@
         </classes>
     </test>
 
+    <test name="C34382">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySpecialSymbolsInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34383">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyNumbersInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34384">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLongStringsWithNumbersInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34385">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySpacesInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">
