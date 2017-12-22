@@ -225,6 +225,16 @@
         </classes>
     </test>
 
+    <test name="C34386">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySpacesWithWordInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

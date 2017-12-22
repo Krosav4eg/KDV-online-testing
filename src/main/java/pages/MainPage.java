@@ -1054,5 +1054,11 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
                 expUrl);
     }
+
+    public void verifySpacesWithWordInProductInputField() {
+        String expSymbols = " овсяное печенье ";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
+    }
 }
 
