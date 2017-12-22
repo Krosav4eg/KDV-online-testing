@@ -192,6 +192,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifySpacesInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34385");
+        mainPage.verifySpacesInProductInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();

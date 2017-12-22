@@ -3,6 +3,7 @@ package pages;
 import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -1042,6 +1043,16 @@ public class MainPage extends BasePage {
         fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(1024));
         String textFromInputField4 = searchProductField.getAttribute("value");
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField4));
+    }
+
+    public void verifySpacesInProductInputField() {
+        elementFluentWaitVisibility(searchProductField, driver).clear();
+        elementFluentWaitVisibility(searchProductField, driver).sendKeys((Keys.SPACE));
+        String actUrl = getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        String expUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+                expUrl);
     }
 }
 
