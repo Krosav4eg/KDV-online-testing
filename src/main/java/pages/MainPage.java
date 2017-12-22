@@ -956,28 +956,35 @@ public class MainPage extends BasePage {
     }
 
     public void verifyLatinTextInProductInputField() {
-        fillInputFieldAndPressEnterButton(searchProductField,"biscuit");
+        fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
         textPresent("По вашему запросу ничего не найдено.");
     }
 
     public void verifyCyrillicTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList);
-        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifyUpperCaseTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList).toUpperCase();
-        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
 
     public void verifyLowerCaseTextInProductInputField() {
         elementIsClickable(categoriesHeader, driver).click();
         String oneOfCategoryFromList = getText(categoryFromList).toLowerCase();
-        fillInputFieldAndPressEnterButton(searchProductField,oneOfCategoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifyUpperAndLowerCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
 }
