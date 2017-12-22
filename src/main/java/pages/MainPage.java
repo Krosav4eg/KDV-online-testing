@@ -2,6 +2,7 @@ package pages;
 
 import basePage.BasePage;
 import logger.MagDvLogger;
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -1010,15 +1011,21 @@ public class MainPage extends BasePage {
     }
 
     public void verifySpecialSymbolsInProductInputField() {
-        String expSymbols ="~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
+        String expSymbols = "~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
         fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
     }
 
     public void verifyNumbersInProductInputField() {
-        String expNumbers ="564654";
+        String expNumbers = "564654";
         fillInputFieldAndPressEnterButton(searchProductField, expNumbers);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(expNumbers));
+    }
+
+    public void verifyLongStringsWithNumbersInProductInputField() {
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(255));
+        String textFromInputField = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField));
     }
 }
 

@@ -205,6 +205,16 @@
         </classes>
     </test>
 
+    <test name="C34384">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLongStringsWithNumbersInProductInputField"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

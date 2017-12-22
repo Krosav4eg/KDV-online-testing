@@ -186,6 +186,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyLongStringsWithNumbersInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34384");
+        mainPage.verifyLongStringsWithNumbersInProductInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();
