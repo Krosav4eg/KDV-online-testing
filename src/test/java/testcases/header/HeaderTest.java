@@ -178,5 +178,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();
     }
+
+    @Test
+    public void verifySearchQueryWithoutCategoryTest() {
+        TestReporter.testTitle("Test ID = 37064");
+        mainPage.verifySearchQueryWithoutCategory();
+    }
 }
 

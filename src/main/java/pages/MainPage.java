@@ -987,5 +987,13 @@ public class MainPage extends BasePage {
         fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(oneOfCategoryFromList));
     }
+
+    public void verifySearchQueryWithoutCategory() {
+        String actUrl = getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        String expUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+                expUrl);
+    }
 }
 
