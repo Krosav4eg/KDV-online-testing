@@ -168,6 +168,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".filter__group")
     private WebElement filter;
 
+    @FindBy(css = ".filter__value")
+    private WebElement filterValue;
+
     @FindBy(css = ".menu-categories__link")
     private WebElement categoryLink;
 
@@ -300,6 +303,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
     private WebElement categoryFromList;
+
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[10]")
+    private WebElement anotherCategoryFromList;
 
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
@@ -1070,6 +1076,18 @@ public class MainPage extends BasePage {
         if (!categoryLink.isDisplayed())
             AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
         AssertCollector.assertTrue(filter.isDisplayed());
+    }
+
+    public void verifySearchQueryWithInputTextWithCategory() {
+        fillInputField(searchProductField, driver, "суфле");
+        elementIsClickable(categoriesHeader, driver).click();
+        String expResult = anotherCategoryFromList.getText();
+        elementIsClickable(anotherCategoryFromList, driver).click();
+        elementIsClickable(searchButton, driver).click();
+        String actResult = filterValue.getText();
+        String title = driver.getTitle();
+        AssertCollector.assertTrue(title.contains("суфле"));
+        AssertCollector.assertEquals(actResult, " Names of categories are equal ", expResult);
     }
 }
 
