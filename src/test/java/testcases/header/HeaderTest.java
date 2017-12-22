@@ -217,7 +217,7 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifyQueryWithWordsOrAndInInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34389");
+        TestReporter.testTitle("Test ID = 34402");
         mainPage.verifyQueryWithWordsOrAndInInputField();
     }
 
