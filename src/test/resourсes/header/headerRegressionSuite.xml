@@ -245,6 +245,16 @@
         </classes>
     </test>
 
+    <test name="C34388">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOtherIncorrectSymbolsInInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34346">
         <classes>
             <class name="testcases.header.HeaderTest">

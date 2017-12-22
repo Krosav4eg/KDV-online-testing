@@ -210,6 +210,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyOtherIncorrectSymbolsInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34388");
+        mainPage.verifyOtherIncorrectSymbolsInInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();

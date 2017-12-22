@@ -1083,5 +1083,11 @@ public class MainPage extends BasePage {
         fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
     }
+
+    public void verifyOtherIncorrectSymbolsInInputField() {
+        String expSymbols = "▲печенье ♦♥овсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
 }
 
