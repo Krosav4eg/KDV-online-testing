@@ -259,6 +259,16 @@
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
+                    <include name="verifyEmptyFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34402">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
                     <include name="verifyQueryWithWordsOrAndInInputFieldTest"/>
                 </methods>
             </class>
@@ -280,16 +290,6 @@
             <class name="testcases.header.HeaderTest">
                 <methods>
                     <include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34389">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyEmptyFieldTest"/>
                 </methods>
             </class>
         </classes>
