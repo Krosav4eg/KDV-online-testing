@@ -7,203 +7,203 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <!--<test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyLogoTest"/>-->
-                    <!--<include name="verifyChangingCityTest"/>-->
-                    <!--<include name="verifyClosingModalWindowTest"/>-->
-                    <!--<include name="verifyOpeningRegistrationTest"/>-->
-                    <!--<include name="verifyOpeningEnterTest"/>-->
-                    <!--<include name="verifyingAnswerYourQuestionsTelNumberTest"/>-->
-                    <!--<include name="verifyMyCardIsEmptyTest"/>-->
-                    <!--<include name="verifyMyBasketWithProductTest"/>-->
-                    <!--<include name="verifyChangingCityToCurrentTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLogoTest"/>
+                    <include name="verifyChangingCityTest"/>
+                    <include name="verifyClosingModalWindowTest"/>
+                    <include name="verifyOpeningRegistrationTest"/>
+                    <include name="verifyOpeningEnterTest"/>
+                    <include name="verifyingAnswerYourQuestionsTelNumberTest"/>
+                    <include name="verifyMyCardIsEmptyTest"/>
+                    <include name="verifyMyBasketWithProductTest"/>
+                    <include name="verifyChangingCityToCurrentTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34299">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyProductsInBasketTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34299">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyProductsInBasketTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34296">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyOpeningBasketPageFromHeaderTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34296">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketPageFromHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34285">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyChangingCityToOtherTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34285">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyChangingCityToOtherTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34297">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyOpeningBasketAndOrderingTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34297">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningBasketAndOrderingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34308">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyOpeningCatalogAfterLeftMainPageTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34308">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyOpeningCatalogAfterLeftMainPageTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34309">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyAuthAsPhysicalPersonTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34309">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyAuthAsPhysicalPersonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34310">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyPhysicalAuthCredentialTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34310">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyPhysicalAuthCredentialTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34317">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyStickingHeaderDuringScrollingTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34317">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyStickingHeaderDuringScrollingTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34374">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifySearchButtonTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34374">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34375">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="placeholderCheckingInSearchFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34375">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="placeholderCheckingInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34376">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verificationOfCategoriesDropdownInSearchFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34376">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verificationOfCategoriesDropdownInSearchFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34377">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyLatinTextInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34377">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLatinTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34378">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyCyrillicTextInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34378">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyCyrillicTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34379">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyUpperCaseTextInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34379">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyUpperCaseTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34380">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyLowerCaseTextInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34380">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyLowerCaseTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34381">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyUpperAndLowerCaseTextInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34381">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyUpperAndLowerCaseTextInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34382">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifySpecialSymbolsInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34382">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySpecialSymbolsInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34383">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyNumbersInProductInputFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34383">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyNumbersInProductInputFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
     <test name="C34384">
         <classes>
@@ -215,55 +215,55 @@
         </classes>
     </test>
 
-    <!--<test name="C34346">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyToolTypeTextTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34346">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyToolTypeTextTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34347">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34347">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyToolTypeTextInPhysicalPersonAccountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="C34389">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyEmptyFieldTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="C34389">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyEmptyFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="37064">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifySearchQueryWithoutCategoryTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="37064">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchQueryWithoutCategoryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-    <!--<test name="37065">-->
-        <!--<classes>-->
-            <!--<class name="testcases.header.HeaderTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifySearchQueryWithCategoryTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="37065">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifySearchQueryWithCategoryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
 
 
