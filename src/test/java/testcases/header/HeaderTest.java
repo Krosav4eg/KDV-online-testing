@@ -216,6 +216,12 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
+    public void verifyQueryWithWordsOrAndInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34389");
+        mainPage.verifyQueryWithWordsOrAndInInputField();
+    }
+
+    @Test
     public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();
