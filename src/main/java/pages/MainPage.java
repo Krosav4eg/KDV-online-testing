@@ -995,5 +995,15 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
                 expUrl);
     }
+
+    public void verifySearchQueryWithCategory() {
+        elementIsClickable(categoriesHeader, driver).click();
+        elementIsClickable(categoryFromList, driver).click();
+        elementIsClickable(searchButton, driver).click();
+        String actUrl = getCurrentUrl();
+        String expUrl = "http://tomsk.demo.dev.magonline.ru/vafli.html";
+        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
+                expUrl);
+    }
 }
 
