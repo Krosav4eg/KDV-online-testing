@@ -244,5 +244,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37066");
         mainPage.verifySearchQueryWithInputTextWithoutCategory();
     }
+
+    @Test
+    public void verifySearchQueryWithInputTextWithCategoryTest() {
+        TestReporter.testTitle("Test ID = 37067");
+        mainPage.verifySearchQueryWithInputTextWithCategory();
+    }
 }
 
