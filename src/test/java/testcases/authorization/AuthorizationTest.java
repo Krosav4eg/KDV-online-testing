@@ -14,4 +14,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34462");
         authorizationPage.typeIncorrectPasswordInAuth();
     }
+
+    @Test
+    public void verifyTypingCorrectLoginIncorrectPasswordInAuthTest() {
+        TestReporter.testTitle("Test ID = 34463");
+        authorizationPage.typeCorrectLoginIncorrectPasswordInAuth();
+    }
 }
