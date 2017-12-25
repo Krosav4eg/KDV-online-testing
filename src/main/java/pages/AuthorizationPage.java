@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
-import static utils.Constants.AUTORIZATION_PAGE_URL;
-import static utils.Constants.PHYSICAL_PERSON_EMAIL;
-import static utils.Constants.PHYSICAL_PERSON_PASSWORD;
+import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 /**
@@ -35,5 +33,13 @@ public class AuthorizationPage extends BasePage {
         fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
         elementFluentWaitVisibility(authorizationButton, driver).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("http://kemerovo.demo.dev.magonline.ru/customer/account/"));
+    }
+
+    public void typeIncorrectPasswordInAuth() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, INCORRECT_EMAIL);
+        fillInputField(passwordField, driver,INCORRECT_PASSWORD );
+        elementFluentWaitVisibility(authorizationButton, driver).click();
+        textPresent("Неверный адрес электронной почты (email) или пароль");
     }
 }
