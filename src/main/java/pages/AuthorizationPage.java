@@ -1,6 +1,7 @@
 package pages;
 
 import basePage.BasePage;
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,6 +41,7 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, INCORRECT_EMAIL);
         fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
         elementFluentWaitVisibility(authorizationButton, driver).click();
+        getValueOfInputField(passwordField, "value");
         textPresent("Неверный адрес электронной почты (email) или пароль");
     }
 
@@ -47,6 +49,7 @@ public class AuthorizationPage extends BasePage {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        getValueOfInputField(passwordField, "value");
         textPresent("Неверный адрес электронной почты (email) или пароль");
     }
 
@@ -69,5 +72,13 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, EMPTY_DATA);
         fillInputFieldAndPressEnterButton(passwordField, PHYSICAL_PERSON_PASSWORD);
         textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifyEmailFieldWithNumbersAndSymbols() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) + PHYSICAL_PERSON_EMAIL);
+        fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        textPresent("Неверный адрес электронной почты (email) или пароль.");
+        getValueOfInputField(passwordField, "value");
     }
 }

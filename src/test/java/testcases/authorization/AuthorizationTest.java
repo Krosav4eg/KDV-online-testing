@@ -38,4 +38,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34474");
         authorizationPage.typePasswordWithoutLoginInAuth();
     }
+
+    @Test
+    public void verifyEmailFieldWithNumbersAndSymbolsInInAuthTest() {
+        TestReporter.testTitle("Test ID = 34491");
+        authorizationPage.verifyEmailFieldWithNumbersAndSymbols();
+    }
 }
