@@ -56,9 +56,18 @@ public class AuthorizationPage extends BasePage {
         fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
         textPresent("Это поле обязательно для заполнения.");
     }
+
     public void typeLoginWithoutPasswordInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputFieldAndPressEnterButton(emailInputField, EMPTY_DATA);
+        fillInputFieldAndPressEnterButton(emailInputField, PHYSICAL_PERSON_EMAIL);
+        fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void typePasswordWithoutLoginInAuth() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, EMPTY_DATA);
+        fillInputFieldAndPressEnterButton(passwordField, PHYSICAL_PERSON_PASSWORD);
         textPresent("Это поле обязательно для заполнения.");
     }
 }

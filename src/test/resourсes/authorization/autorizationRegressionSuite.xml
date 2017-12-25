@@ -7,7 +7,7 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34462-C34463,C34467,C34472">
+    <test name="C34462-C34463,C34467,C34472,C34474">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">
                 <methods>
@@ -15,6 +15,7 @@
                     <include name="verifyTypingCorrectLoginIncorrectPasswordInAuthTest"/>
                     <include name="verifyTypingEmptyDataInAuthTest"/>
                     <include name="verifyTypingLoginWithoutPasswordInAuthTest"/>
+                    <include name="verifyTypingPasswordWithoutLoginInAuthTest"/>
                 </methods>
             </class>
         </classes>

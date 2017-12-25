@@ -32,4 +32,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34472");
         authorizationPage.typeLoginWithoutPasswordInAuth();
     }
+
+    @Test
+    public void verifyTypingPasswordWithoutLoginInAuthTest() {
+        TestReporter.testTitle("Test ID = 34474");
+        authorizationPage.typePasswordWithoutLoginInAuth();
+    }
 }
