@@ -76,7 +76,8 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailFieldWithNumbersAndSymbols() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) + PHYSICAL_PERSON_EMAIL);
+        fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) +
+                PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Неверный адрес электронной почты (email) или пароль.");
         getValueOfInputField(passwordField, "value");
@@ -87,5 +88,12 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, EMPTY_DATA + PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email)");
+    }
+
+    public void verifyTypingPasswordLessSixSymbols() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
+        fillInputFieldAndPressEnterButton(passwordField, RandomStringUtils.randomAlphanumeric(5));
+        textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 }

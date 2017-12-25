@@ -50,4 +50,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34492");
         authorizationPage.verifyEmailWithSpaces();
     }
+
+    @Test
+    public void verifyTypingPasswordLessSixSymbolsInAuthTest() {
+        TestReporter.testTitle("Test ID = 34493");
+        authorizationPage.verifyTypingPasswordLessSixSymbols();
+    }
 }
