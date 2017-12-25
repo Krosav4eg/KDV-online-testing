@@ -44,4 +44,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34491");
         authorizationPage.verifyEmailFieldWithNumbersAndSymbols();
     }
+
+    @Test
+    public void verifyEmailWithSpacesInAuthTest() {
+        TestReporter.testTitle("Test ID = 34492");
+        authorizationPage.verifyEmailWithSpaces();
+    }
 }

@@ -81,4 +81,11 @@ public class AuthorizationPage extends BasePage {
         textPresent("Неверный адрес электронной почты (email) или пароль.");
         getValueOfInputField(passwordField, "value");
     }
+
+    public void verifyEmailWithSpaces() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, EMPTY_DATA + PHYSICAL_PERSON_EMAIL);
+        fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email)");
+    }
 }
