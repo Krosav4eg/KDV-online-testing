@@ -20,4 +20,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34463");
         authorizationPage.typeCorrectLoginIncorrectPasswordInAuth();
     }
+
+    @Test
+    public void verifyTypingEmptyDataInAuthTest() {
+        TestReporter.testTitle("Test ID = 34464");
+        authorizationPage.typeEmptyDataInAuth();
+    }
 }

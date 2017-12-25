@@ -38,7 +38,7 @@ public class AuthorizationPage extends BasePage {
     public void typeIncorrectPasswordInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, INCORRECT_EMAIL);
-        fillInputField(passwordField, driver, INCORRECT_PASSWORD);
+        fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
         elementFluentWaitVisibility(authorizationButton, driver).click();
         textPresent("Неверный адрес электронной почты (email) или пароль");
     }
@@ -48,5 +48,12 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Неверный адрес электронной почты (email) или пароль");
+    }
+
+    public void typeEmptyDataInAuth() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, EMPTY_DATA);
+        fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
+        textPresent("Это поле обязательно для заполнения.");
     }
 }
