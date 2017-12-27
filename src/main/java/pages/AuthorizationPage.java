@@ -31,18 +31,14 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
 
-    @FindBy(xpath = "(.//*[@class='login__action'])[1]")
+    @FindBy(xpath = ".//div[text()='Регистрация']")
     private WebElement registrationButton;
-    @FindBy(xpath = "(.//*[@class='login__action'])[2]")
+
+    @FindBy(xpath = ".//div[text()='Продолжить как гость']")
     private WebElement continueAsGuestButton;
 
-    @FindBy(xpath = "(.//*[@class='login__action'])[3]")
+    @FindBy(xpath = ".//div[text()='Для организаций']")
     private WebElement buttonForOrganizations;
-
-    /*@FindBy(xpath = "(./*//*[@class='login__action-title'])[1]")
-    private WebElement registrationButtonTitle;*/
-    @FindBy(xpath = ".//*[@class='login__action-title login__action-title_red']")
-    private WebElement forOrganizationsTitle;
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
