@@ -34,6 +34,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyOfTextInRegistrationTabTest() {
+        TestReporter.testTitle("Test ID = 34449");
+        authorizationPage.verifyOfTextInRegistrationTab();
+    }
+
+    @Test
     public void verifyTypingIncorrectPasswordInAuthTest() {
         TestReporter.testTitle("Test ID = 34462");
         authorizationPage.typeIncorrectPasswordInAuth();

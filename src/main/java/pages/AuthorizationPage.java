@@ -154,4 +154,12 @@ public class AuthorizationPage extends BasePage {
         AssertCollector.assertEqualsJ(actualForOrganizationsButtonColor, expectedForOrganizationsButtonColor,
                 " Verify elements color of for organizations button ");
     }
+
+    public void verifyOfTextInRegistrationTab() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        AssertCollector.assertTrue(registrationButton.isDisplayed());
+        textPresent("Регистрация");
+        textPresent("Регистрация позволит вам экономить время при оформлении заказов, даст возможность" +
+                " отслеживать их состояние и повторять заказы из архива.");
+    }
 }
