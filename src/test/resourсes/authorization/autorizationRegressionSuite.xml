@@ -47,6 +47,16 @@
         </classes>
     </test>
 
+    <test name="C34447">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyCopyWriteTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34449">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">

@@ -159,6 +159,11 @@ public class AuthorizationPage extends BasePage {
                 " Verify elements color of for organizations button ");
     }
 
+    public void verifyCopyWrite() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        textPresent("© 2017 ООО «КДВ Групп»");
+    }
+
     public void verifyOfTextInRegistrationTab() {
         getUrl(AUTORIZATION_PAGE_URL);
         AssertCollector.assertTrue(registrationButton.isDisplayed());

@@ -34,6 +34,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyCopyWriteTest() {
+        TestReporter.testTitle("Test ID = 34447");
+        authorizationPage.verifyCopyWrite();
+    }
+
+    @Test
     public void verifyOfTextInRegistrationTabTest() {
         TestReporter.testTitle("Test ID = 34449");
         authorizationPage.verifyOfTextInRegistrationTab();
