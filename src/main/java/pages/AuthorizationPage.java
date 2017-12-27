@@ -135,4 +135,23 @@ public class AuthorizationPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link for organizations ",
                 linkTextAttribute);
     }
+
+    public void verifyChangingColorsForTabs() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        moveMouseTo(driver, registrationButton);
+        String actualRegistrationButtonColor = "#ce0022";
+        String expectedRegistrationButtonColor = getElementColor(registrationButton, "color");
+        AssertCollector.assertEqualsJ(actualRegistrationButtonColor, expectedRegistrationButtonColor,
+                " Verify elements color of registration button ");
+        moveMouseTo(driver, continueAsGuestButton);
+        String actualContinueButtonColor = "#ce0022";
+        String expectedContinueButtonColor = getElementColor(continueAsGuestButton, "color");
+        AssertCollector.assertEqualsJ(actualContinueButtonColor, expectedContinueButtonColor,
+                " Verify elements color of continue as guest button ");
+        moveMouseTo(driver, buttonForOrganizations);
+        String actualForOrganizationsButtonColor = "#ce0022";
+        String expectedForOrganizationsButtonColor = getElementColor(buttonForOrganizations, "color");
+        AssertCollector.assertEqualsJ(actualForOrganizationsButtonColor, expectedForOrganizationsButtonColor,
+                " Verify elements color of for organizations button ");
+    }
 }

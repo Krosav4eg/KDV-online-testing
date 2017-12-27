@@ -28,6 +28,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyChangingColorsForTabsTest() {
+        TestReporter.testTitle("Test ID = 34446");
+        authorizationPage.verifyChangingColorsForTabs();
+    }
+
+    @Test
     public void verifyTypingIncorrectPasswordInAuthTest() {
         TestReporter.testTitle("Test ID = 34462");
         authorizationPage.typeIncorrectPasswordInAuth();
