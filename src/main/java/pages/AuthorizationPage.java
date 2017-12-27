@@ -40,6 +40,10 @@ public class AuthorizationPage extends BasePage {
     @FindBy(xpath = ".//div[text()='Для организаций']")
     private WebElement buttonForOrganizations;
 
+    @FindBy(xpath = ".//*[@class='login__action-title login__action-title_red']")
+    private WebElement forOrganizationsTitle;
+
+
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
@@ -168,5 +172,17 @@ public class AuthorizationPage extends BasePage {
         AssertCollector.assertTrue(continueAsGuestButton.isDisplayed());
         textPresent("Продолжить как гость");
         textPresent("В нашем интернет-магазине вы можете выбрать товары и оформить заказ без регистрации.");
+    }
+
+    public void verifyTextInForOrganizationsTab() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        AssertCollector.assertTrue(buttonForOrganizations.isDisplayed());
+        textPresent("Для организаций");
+        String actColor = "#ff1b41";
+        String expColor = getElementColor(forOrganizationsTitle, "color");
+        AssertCollector.assertEqualsJ(actColor, expColor,
+                " Verify elements color of for organizations button ");
+        textPresent("Зарегистрируйте вашу организацию и получайте полный комплект документов для юр. лиц. " +
+                "Для организаций, уже работающих с KDV, цены и условия отгрузки сохраняются.");
     }
 }
