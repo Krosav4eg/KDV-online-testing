@@ -57,6 +57,16 @@
         </classes>
     </test>
 
+    <test name="C34450">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyOfTextInContinueAsGuestTabTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34462-C34463,C34467,C34472,C34474,C34491-C34493">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">

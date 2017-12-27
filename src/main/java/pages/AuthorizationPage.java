@@ -162,4 +162,11 @@ public class AuthorizationPage extends BasePage {
         textPresent("Регистрация позволит вам экономить время при оформлении заказов, даст возможность" +
                 " отслеживать их состояние и повторять заказы из архива.");
     }
+
+    public void verifyOfTextInContinueAsGuestTab() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        AssertCollector.assertTrue(continueAsGuestButton.isDisplayed());
+        textPresent("Продолжить как гость");
+        textPresent("В нашем интернет-магазине вы можете выбрать товары и оформить заказ без регистрации.");
+    }
 }
