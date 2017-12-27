@@ -113,12 +113,21 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
-    public void openingRegistrationLink() {
+    public void verifyOpeningRegistrationLink() {
         getUrl(AUTORIZATION_PAGE_URL);
         String linkTextAttribute = getValueOfAttributeByName(registrationButton, "href");
         elementFluentWaitVisibility(registrationButton, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link of registration ",
+                linkTextAttribute);
+    }
+
+    public void verifyOpeningContinueAsGuestLink() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        String linkTextAttribute = getValueOfAttributeByName(continueAsGuestButton, "href");
+        elementFluentWaitVisibility(continueAsGuestButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page link ",
                 linkTextAttribute);
     }
 }

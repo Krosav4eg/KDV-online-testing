@@ -10,9 +10,15 @@ import utils.TestReporter;
 public class AuthorizationTest extends BaseTest {
 
     @Test
-    public void openingRegistrationLinkTest() {
+    public void verifyOpeningRegistrationLinkTest() {
         TestReporter.testTitle("Test ID = 34443");
-        authorizationPage.openingRegistrationLink();
+        authorizationPage.verifyOpeningRegistrationLink();
+    }
+
+    @Test
+    public void verifyOpeningContinueAsGuestLinkTest() {
+        TestReporter.testTitle("Test ID = 34444");
+        authorizationPage.verifyOpeningContinueAsGuestLink();
     }
 
     @Test

@@ -11,7 +11,17 @@
         <classes>
             <class name="testcases.authorization.AuthorizationTest">
                 <methods>
-                    <include name="openingRegistrationLinkTest"/>
+                    <include name="verifyOpeningRegistrationLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34444">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyOpeningContinueAsGuestLinkTest"/>
                 </methods>
             </class>
         </classes>
