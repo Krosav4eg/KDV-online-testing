@@ -7,6 +7,16 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
+    <test name="C34442">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyOpeningMainPageTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C34443">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">

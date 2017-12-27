@@ -10,6 +10,12 @@ import utils.TestReporter;
 public class AuthorizationTest extends BaseTest {
 
     @Test
+    public void verifyOpeningMainPageTest() {
+        TestReporter.testTitle("Test ID = 34442");
+        authorizationPage.verifyOpeningMainPage();
+    }
+
+    @Test
     public void verifyOpeningRegistrationLinkTest() {
         TestReporter.testTitle("Test ID = 34443");
         authorizationPage.verifyOpeningRegistrationLink();

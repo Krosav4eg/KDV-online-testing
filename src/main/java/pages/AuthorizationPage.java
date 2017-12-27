@@ -43,6 +43,8 @@ public class AuthorizationPage extends BasePage {
     @FindBy(xpath = ".//*[@class='login__action-title login__action-title_red']")
     private WebElement forOrganizationsTitle;
 
+    @FindBy(css = ".blank-layout__logo")
+    private WebElement mainPageLogo;
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
@@ -111,6 +113,15 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, RandomStringUtils.randomAlphanumeric(5));
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
+    }
+
+    public void verifyOpeningMainPage() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        String link = getValueOfAttributeByName(mainPageLogo, "href");
+        elementFluentWaitVisibility(mainPageLogo, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page ",
+                link);
     }
 
     public void verifyOpeningRegistrationLink() {
