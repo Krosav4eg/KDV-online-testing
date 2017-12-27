@@ -130,4 +130,13 @@ public class AuthorizationPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page link ",
                 linkTextAttribute);
     }
+
+    public void verifyOpeningForOrganizationsLink() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        String linkTextAttribute = getValueOfAttributeByName(buttonForOrganizations, "href");
+        elementFluentWaitVisibility(buttonForOrganizations, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link for organizations ",
+                linkTextAttribute);
+    }
 }
