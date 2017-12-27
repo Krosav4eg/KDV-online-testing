@@ -1,11 +1,14 @@
 package pages;
 
 import basePage.BasePage;
+import com.sun.jersey.server.wadl.WadlBuilder;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
+
+import javax.ws.rs.FormParam;
 
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -27,6 +30,19 @@ public class AuthorizationPage extends BasePage {
 
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
+
+    @FindBy(xpath = "(.//*[@class='login__action'])[1]")
+    private WebElement registrationButton;
+    @FindBy(xpath = "(.//*[@class='login__action'])[2]")
+    private WebElement continueAsGuestButton;
+
+    @FindBy(xpath = "(.//*[@class='login__action'])[3]")
+    private WebElement buttonForOrganizations;
+
+    /*@FindBy(xpath = "(./*//*[@class='login__action-title'])[1]")
+    private WebElement registrationButtonTitle;*/
+    @FindBy(xpath = ".//*[@class='login__action-title login__action-title_red']")
+    private WebElement forOrganizationsTitle;
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
@@ -95,5 +111,14 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, RandomStringUtils.randomAlphanumeric(5));
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
+    }
+
+    public void openingRegistrationLink() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        String linkTextAttribute = getValueOfAttributeByName(registrationButton, "href");
+        elementFluentWaitVisibility(registrationButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link of registration ",
+                linkTextAttribute);
     }
 }

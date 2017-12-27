@@ -10,6 +10,12 @@ import utils.TestReporter;
 public class AuthorizationTest extends BaseTest {
 
     @Test
+    public void openingRegistrationLinkTest() {
+        TestReporter.testTitle("Test ID = 34443");
+        authorizationPage.openingRegistrationLink();
+    }
+
+    @Test
     public void verifyTypingIncorrectPasswordInAuthTest() {
         TestReporter.testTitle("Test ID = 34462");
         authorizationPage.typeIncorrectPasswordInAuth();
