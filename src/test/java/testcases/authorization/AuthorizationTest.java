@@ -134,4 +134,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34494");
         authorizationPage.verifyPasswordContainsOnlySpaces();
     }
+
+    @Test
+    public void verifyPasswordContainsSpacesAtStartAndEndTest() {
+        TestReporter.testTitle("Test ID = 34495");
+        authorizationPage.verifyPasswordContainsSpacesAtStartAndEnd();
+    }
 }
