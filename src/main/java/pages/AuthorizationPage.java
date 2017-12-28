@@ -100,6 +100,14 @@ public class AuthorizationPage extends BasePage {
                 "ivanivanov@domain.com.");
     }
 
+    public void verifyEmailFieldWithoutDomainName() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, "a.shaulo@andersenlabcom");
+        fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
+                "ivanivanov@domain.com.");
+    }
+
     public void verifyEmailFieldWithNumbersAndSymbols() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) +
