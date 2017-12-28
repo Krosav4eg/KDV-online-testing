@@ -25,6 +25,12 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#email")
     private WebElement emailInputField;
 
+    @FindBy(css = "#email_address")
+    private WebElement emailInputAtForgotPassword;
+
+    @FindBy(css = ".login__button.login__button_right.button")
+    private WebElement sendEmailForVerification;
+
     @FindBy(css = "#pass")
     private WebElement passwordField;
 
@@ -45,6 +51,12 @@ public class AuthorizationPage extends BasePage {
 
     @FindBy(css = ".blank-layout__logo")
     private WebElement mainPageLogo;
+
+    @FindBy(css = ".link.float-right")
+    private WebElement forgotPassword;
+
+    @FindBy(css = ".link")
+    private WebElement authForm;
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
@@ -148,14 +160,23 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyPasswordContainsSpacesAtStartAndEnd() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a.shaulo@andersenlab.com" );
+        fillInputField(emailInputField, driver, "a.shaulo@andersenlab.com");
         fillInputFieldAndPressEnterButton(passwordField, " As06051993 ");
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
+    public void verifyForgotPassword() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        String linkTextAttribute = getValueOfAttributeByName(forgotPassword, "href");
+        elementFluentWaitVisibility(forgotPassword, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url forgot password ",
+                linkTextAttribute);
+    }
+
     public void verifyEnterWithUnconfirmedEmail() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com" );
+        fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Неверный адрес электронной почты (email) или пароль.");
     }

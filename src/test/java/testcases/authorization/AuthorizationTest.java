@@ -142,6 +142,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyForgotPasswordTest() {
+        TestReporter.testTitle("Test ID = 34497");
+        authorizationPage.verifyForgotPassword();
+    }
+
+    @Test
     public void verifyEnterWithUnconfirmedEmailTest() {
         TestReporter.testTitle("Test ID = 37057");
         authorizationPage.verifyEnterWithUnconfirmedEmail();
