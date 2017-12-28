@@ -92,6 +92,14 @@ public class AuthorizationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
+    public void verifyEmailFieldWithoutAt() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, "a.shauloandersenlab.com");
+        fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
+                "ivanivanov@domain.com.");
+    }
+
     public void verifyEmailFieldWithNumbersAndSymbols() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) +

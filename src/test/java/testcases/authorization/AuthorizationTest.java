@@ -94,6 +94,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyEmailFieldWithoutAtTest() {
+        TestReporter.testTitle("Test ID = 34487");
+        authorizationPage.verifyEmailFieldWithoutAt();
+    }
+
+    @Test
     public void verifyEmailFieldWithNumbersAndSymbolsInInAuthTest() {
         TestReporter.testTitle("Test ID = 34491");
         authorizationPage.verifyEmailFieldWithNumbersAndSymbols();
