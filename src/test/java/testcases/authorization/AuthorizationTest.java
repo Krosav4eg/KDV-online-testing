@@ -160,6 +160,12 @@ public class AuthorizationTest extends BaseTest {
     }
 
     @Test
+    public void verifyEmailFieldWithoutDomainNameInForgotPasswordFieldTest() {
+        TestReporter.testTitle("Test ID = 36973");
+        authorizationPage.verifyEmailFieldWithoutDomainNameInForgotPasswordField();
+    }
+
+    @Test
     public void verifyEnterWithUnconfirmedEmailTest() {
         TestReporter.testTitle("Test ID = 37057");
         authorizationPage.verifyEnterWithUnconfirmedEmail();
