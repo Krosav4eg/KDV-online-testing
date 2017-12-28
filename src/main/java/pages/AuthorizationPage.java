@@ -174,6 +174,15 @@ public class AuthorizationPage extends BasePage {
                 linkTextAttribute);
     }
 
+    public void verifyReturnToAuthorizationForm() {
+        getUrl(BASE_URL + "/customer/account/forgotpassword/");
+        String linkTextAttribute = getValueOfAttributeByName(authForm, "href");
+        elementFluentWaitVisibility(authForm, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url of authorization form ",
+                linkTextAttribute);
+    }
+
     public void verifyEnterWithUnconfirmedEmail() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com");

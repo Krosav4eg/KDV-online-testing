@@ -157,6 +157,16 @@
         </classes>
     </test>
 
+    <test name="C36970">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyReturnToAuthorizationFormTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C37057">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">
