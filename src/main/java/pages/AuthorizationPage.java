@@ -139,6 +139,13 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
+    public void verifyPasswordContainsOnlySpaces() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, "a.shaulo@andersenlab.com");
+        fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
     public void verifyOpeningMainPage() {
         getUrl(AUTORIZATION_PAGE_URL);
         String link = getValueOfAttributeByName(mainPageLogo, "href");

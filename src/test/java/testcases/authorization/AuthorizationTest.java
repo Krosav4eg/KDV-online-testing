@@ -128,4 +128,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34493");
         authorizationPage.verifyTypingPasswordLessSixSymbols();
     }
+
+    @Test
+    public void verifyPasswordContainsOnlySpacesTest() {
+        TestReporter.testTitle("Test ID = 34494");
+        authorizationPage.verifyPasswordContainsOnlySpaces();
+    }
 }
