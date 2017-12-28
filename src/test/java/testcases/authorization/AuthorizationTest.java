@@ -140,4 +140,10 @@ public class AuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34495");
         authorizationPage.verifyPasswordContainsSpacesAtStartAndEnd();
     }
+
+    @Test
+    public void verifyEnterWithUnconfirmedEmailTest() {
+        TestReporter.testTitle("Test ID = 37057");
+        authorizationPage.verifyEnterWithUnconfirmedEmail();
+    }
 }

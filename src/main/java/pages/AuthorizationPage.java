@@ -153,6 +153,13 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
+    public void verifyEnterWithUnconfirmedEmail() {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com" );
+        fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
+        textPresent("Неверный адрес электронной почты (email) или пароль.");
+    }
+
     public void verifyOpeningMainPage() {
         getUrl(AUTORIZATION_PAGE_URL);
         String link = getValueOfAttributeByName(mainPageLogo, "href");
