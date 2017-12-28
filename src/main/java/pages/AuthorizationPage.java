@@ -183,6 +183,14 @@ public class AuthorizationPage extends BasePage {
                 linkTextAttribute);
     }
 
+    public void verifyEmailWithoutAtInForgotPassword() {
+        getUrl(BASE_URL + "/customer/account/forgotpassword/");
+        fillInputField(emailInputAtForgotPassword, driver, "a.shauloandersenlab.com");
+        elementFluentWaitVisibility(sendEmailForVerification, driver).click();
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
+                "ivanivanov@domain.com.");
+    }
+
     public void verifyEnterWithUnconfirmedEmail() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com");

@@ -167,6 +167,16 @@
         </classes>
     </test>
 
+    <test name="C36971">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyEmailWithoutAtInForgotPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name="C37057">
         <classes>
             <class name="testcases.authorization.AuthorizationTest">
