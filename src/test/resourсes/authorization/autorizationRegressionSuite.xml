@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Authorization regression tests">
+<suite name="Authorization regression tests" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -142,6 +142,56 @@
             <class name="testcases.authorization.AuthorizationTest">
                 <methods>
                     <include name="verifyPasswordContainsSpacesAtStartAndEndTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C34497">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyForgotPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C36970">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyReturnToAuthorizationFormTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C36971">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyEmailWithoutAtInForgotPasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C36973">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyEmailFieldWithoutDomainNameInForgotPasswordFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C36974">
+        <classes>
+            <class name="testcases.authorization.AuthorizationTest">
+                <methods>
+                    <include name="verifyValidEmailInForgotPasswordTest"/>
                 </methods>
             </class>
         </classes>
