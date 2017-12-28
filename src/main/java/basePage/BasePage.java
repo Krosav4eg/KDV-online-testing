@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static driverFactory.BrowserFactory.getDriver;
+import static org.testng.Assert.fail;
 import static utils.Constants.COMMA_REGEX;
 import static utils.Constants.RGBA_TO_RGB_REGEX;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -65,6 +66,12 @@ public abstract class BasePage {
         TestReporter.step("Feel input field ");
         elementFluentWaitVisibility(element, driver).clear();
         elementFluentWaitVisibility(element, driver).sendKeys(message);
+    }
+
+    protected void fillInputFieldAndPressEnterButton(WebElement element, String message) {
+        element.clear();
+        element.sendKeys(message);
+        element.sendKeys(Keys.ENTER);
     }
 
     protected static String getElementColor(WebElement webElement, String colorSection) {
@@ -124,6 +131,17 @@ public abstract class BasePage {
 
     protected String getValueOfAttributeByName(WebElement element, String attribute) {
         return element.getAttribute(attribute);
+    }
+
+    protected void getValueOfInputField(WebElement element, String attribute) {
+        if (getValueOfAttributeByName(element, attribute).isEmpty()) {
+            LOGGER.log(Level.INFO, "Field is empty ");
+            TestReporter.step(" Field is empty ");
+        } else {
+            LOGGER.log(Level.INFO, "Field isn't empty ");
+            TestReporter.step(" Field isn't empty ");
+            fail();
+        }
     }
 
     protected void moveMouseTo(WebDriver driver, WebElement element) {

@@ -142,5 +142,113 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34376");
         mainPage.verificationOfCategoriesDropdownInSearchField();
     }
+
+    @Test
+    public void verifyLatinTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34377");
+        mainPage.verifyLatinTextInProductInputField();
+    }
+
+    @Test
+    public void verifyCyrillicTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34378");
+        mainPage.verifyCyrillicTextInProductInputField();
+    }
+
+    @Test
+    public void verifyUpperCaseTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34379");
+        mainPage.verifyUpperCaseTextInProductInputField();
+    }
+
+    @Test
+    public void verifyLowerCaseTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34380");
+        mainPage.verifyLowerCaseTextInProductInputField();
+    }
+
+    @Test
+    public void verifyUpperAndLowerCaseTextInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34381");
+        mainPage.verifyUpperAndLowerCaseTextInProductInputField();
+    }
+
+    @Test
+    public void verifySpecialSymbolsInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34382");
+        mainPage.verifySpecialSymbolsInProductInputField();
+    }
+
+    @Test
+    public void verifyNumbersInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34383");
+        mainPage.verifyNumbersInProductInputField();
+    }
+
+    @Test
+    public void verifyLongStringsWithNumbersInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34384");
+        mainPage.verifyLongStringsWithNumbersInProductInputField();
+    }
+
+    @Test
+    public void verifySpacesInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34385");
+        mainPage.verifySpacesInProductInputField();
+    }
+
+    @Test
+    public void verifySpacesWithWordInProductInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34386");
+        mainPage.verifySpacesWithWordInProductInputField();
+    }
+
+    @Test
+    public void verifyOtherAlphabetsLettersInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34387");
+        mainPage.verifyOtherAlphabetsLettersInInputField();
+    }
+
+    @Test
+    public void verifyOtherIncorrectSymbolsInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34388");
+        mainPage.verifyOtherIncorrectSymbolsInInputField();
+    }
+
+    @Test
+    public void verifyQueryWithWordsOrAndInInputFieldTest() {
+        TestReporter.testTitle("Test ID = 34402");
+        mainPage.verifyQueryWithWordsOrAndInInputField();
+    }
+
+    @Test
+    public void verifyEmptyFieldTest() {
+        TestReporter.testTitle("Test ID = 34389");
+        mainPage.verifyEmptyField();
+    }
+
+    @Test
+    public void verifySearchQueryWithoutCategoryTest() {
+        TestReporter.testTitle("Test ID = 37064");
+        mainPage.verifySearchQueryWithoutCategory();
+    }
+
+    @Test
+    public void verifySearchQueryWithCategoryTest() {
+        TestReporter.testTitle("Test ID = 37065");
+        mainPage.verifySearchQueryWithCategory();
+    }
+
+    @Test
+    public void verifySearchQueryWithInputTextWithoutCategoryTest() {
+        TestReporter.testTitle("Test ID = 37066");
+        mainPage.verifySearchQueryWithInputTextWithoutCategory();
+    }
+
+    @Test
+    public void verifySearchQueryWithInputTextWithCategoryTest() {
+        TestReporter.testTitle("Test ID = 37067");
+        mainPage.verifySearchQueryWithInputTextWithCategory();
+    }
 }
 

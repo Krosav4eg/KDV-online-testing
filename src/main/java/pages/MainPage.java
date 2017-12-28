@@ -2,6 +2,8 @@ package pages;
 
 import basePage.BasePage;
 import logger.MagDvLogger;
+import org.apache.commons.lang.RandomStringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -60,6 +62,12 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".top-link-myaccount")
     private WebElement myAccountLink;
+
+    @FindBy(xpath = "//div[2]//h1")
+    private WebElement resultsProductSearchTitle;
+
+    @FindBy(xpath = "//div/p[1]")
+    private WebElement resultsProductSearch;
 
     //========================
     @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
@@ -156,6 +164,15 @@ public class MainPage extends BasePage {
     //========================CATEGORIES LIST SECTION=========================================
     @FindBy(css = ".menu-categories__title")
     private List<WebElement> categoryGoodsList;
+
+    @FindBy(css = ".filter__group")
+    private WebElement filter;
+
+    @FindBy(css = ".filter__value")
+    private WebElement filterValue;
+
+    @FindBy(css = ".menu-categories__link")
+    private WebElement categoryLink;
 
     @FindBy(css = ".menu-categories__item:hover")
     private WebElement parentItemOfProducts;
@@ -275,7 +292,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".header-bottom-left__logo_small.text-left")
     private WebElement smallLogo;
 
-    @FindBy(xpath = ".//*[@id='search']")
+    @FindBy(xpath = "//div[@id='input-search-wrapper']/*[@id='search']")
     private WebElement searchProductField;
 
     @FindBy(xpath = ".//*[@id='select-search-wrapper']/div")
@@ -286,6 +303,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
     private WebElement categoryFromList;
+
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[10]")
+    private WebElement anotherCategoryFromList;
 
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
@@ -943,6 +963,155 @@ public class MainPage extends BasePage {
         elementIsClickable(categoryFromList, driver).click();
         String actCategoryFromList = getText(categoriesHeader);
         AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
+    }
+
+    public void verifyEmptyField() {
+        String expUrl = getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        String actUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
+    }
+
+    public void verifyLatinTextInProductInputField() {
+        fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
+        textPresent("По вашему запросу ничего не найдено.");
+    }
+
+    public void verifyCyrillicTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifyUpperCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList).toUpperCase();
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifyLowerCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList).toLowerCase();
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifyUpperAndLowerCaseTextInProductInputField() {
+        elementIsClickable(categoriesHeader, driver).click();
+        String oneOfCategoryFromList = getText(categoryFromList);
+        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
+    }
+
+    public void verifySearchQueryWithoutCategory() {
+        String actUrl = getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        String expUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+                expUrl);
+    }
+
+    public void verifySearchQueryWithCategory() {
+        elementIsClickable(categoriesHeader, driver).click();
+        elementIsClickable(categoryFromList, driver).click();
+        elementIsClickable(searchButton, driver).click();
+        String actUrl = getCurrentUrl();
+        String expUrl = "http://tomsk.demo.dev.magonline.ru/vafli.html";
+        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
+                expUrl);
+    }
+
+    public void verifySpecialSymbolsInProductInputField() {
+        String expSymbols = "~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyNumbersInProductInputField() {
+        String expNumbers = "564654";
+        fillInputFieldAndPressEnterButton(searchProductField, expNumbers);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expNumbers));
+    }
+
+    public void verifyLongStringsWithNumbersInProductInputField() {
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(255));
+        String textFromInputField = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(256));
+        String textFromInputField1 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField1));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(257));
+        String textFromInputField2 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField2));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(1000));
+        String textFromInputField3 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField3));
+        backPage();
+        fillInputFieldAndPressEnterButton(searchProductField, RandomStringUtils.randomNumeric(1024));
+        String textFromInputField4 = searchProductField.getAttribute("value");
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField4));
+    }
+
+    public void verifySpacesInProductInputField() {
+        elementFluentWaitVisibility(searchProductField, driver).clear();
+        elementFluentWaitVisibility(searchProductField, driver).sendKeys((Keys.SPACE));
+        String actUrl = getCurrentUrl();
+        elementIsClickable(searchButton, driver).click();
+        String expUrl = getCurrentUrl();
+        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+                expUrl);
+    }
+
+    public void verifySpacesWithWordInProductInputField() {
+        String expSymbols = " овсяное печенье ";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
+    }
+
+    public void verifySearchQueryWithInputTextWithoutCategory() {
+        elementIsClickable(searchProductField, driver).click();
+        fillInputField(searchProductField, driver, "вафли");
+        elementIsClickable(searchButton, driver).click();
+        String title = driver.getTitle();
+        AssertCollector.assertTrue(title.contains("вафли"));
+        if (!categoryLink.isDisplayed())
+            AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
+        AssertCollector.assertTrue(filter.isDisplayed());
+    }
+
+    public void verifyOtherAlphabetsLettersInInputField() {
+        String expSymbols = "öпеченье äовсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyOtherIncorrectSymbolsInInputField() {
+        String expSymbols = "▲печенье ♦♥овсяное";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
+    }
+
+    public void verifyQueryWithWordsOrAndInInputField() {
+        String expSymbols = "печенье и вафли";
+        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
+        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
+    }
+
+    public void verifySearchQueryWithInputTextWithCategory() {
+        fillInputField(searchProductField, driver, "суфле");
+        elementIsClickable(categoriesHeader, driver).click();
+        String expResult = anotherCategoryFromList.getText();
+        elementIsClickable(anotherCategoryFromList, driver).click();
+        elementIsClickable(searchButton, driver).click();
+        String actResult = filterValue.getText();
+        String title = driver.getTitle();
+        AssertCollector.assertTrue(title.contains("суфле"));
+        AssertCollector.assertEquals(actResult, " Names of categories are equal ", expResult);
     }
 }
 
