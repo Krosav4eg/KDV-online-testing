@@ -28,5 +28,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37097");
         registrationPage.verifyFieldFirstNamePresence();
     }
+
+    @Test
+    public void verifyInputInFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37098");
+        registrationPage.verifyInputInFirstNameField();
+    }
 }
 

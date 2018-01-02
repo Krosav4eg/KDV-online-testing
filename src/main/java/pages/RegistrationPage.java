@@ -27,6 +27,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = ".//*[@id='firstname']")
     private WebElement firstName;
 
+    @FindBy(css = ".layout__content")
+    private WebElement layout;
+
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(individualButton.isEnabled());
@@ -53,5 +56,14 @@ public class RegistrationPage extends BasePage {
     public void verifyFieldFirstNamePresence() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(firstName.isDisplayed());
+    }
+
+    public void verifyInputInFirstNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(firstName, driver).click();
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(46));
+        elementFluentWaitVisibility(layout, driver).click();
+        String text = firstName.getAttribute("value");
+        AssertCollector.assertEquals(text, " Current text is equal to ", text);
     }
 }
