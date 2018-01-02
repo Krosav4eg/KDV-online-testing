@@ -11,6 +11,10 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37076");
         registrationPage.verifyLegalFormByDefault();
     }
-
+    @Test
+    public void verifyChoosingLegalFormTest() {
+        TestReporter.testTitle("Test ID = 37077");
+        registrationPage.verifyChoosingLegalForm();
+    }
 }
 

@@ -21,9 +21,20 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//a[@rel='general']")
     private WebElement individualButton;
 
+    @FindBy(xpath = "//a[@rel='legal']")
+    private WebElement organizationButton;
+
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(individualButton.isEnabled());
     }
 
+    public void verifyChoosingLegalForm() {
+        getUrl(REGISTRATION_PAGE_URL);
+        String linkTextAttribute = getValueOfAttributeByName(organizationButton, "href");
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        getCurrentUrl();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url with selected organization ",
+                linkTextAttribute);
+    }
 }

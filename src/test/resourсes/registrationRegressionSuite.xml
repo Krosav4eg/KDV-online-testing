@@ -17,4 +17,13 @@
         </classes>
     </test>
 
+    <test name="37077">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyChoosingLegalFormTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
