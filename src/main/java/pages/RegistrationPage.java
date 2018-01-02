@@ -37,4 +37,13 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url with selected organization ",
                 linkTextAttribute);
     }
+
+    public void verifyForOrganizationsTextPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        textPresent("Внимание! Все заявки на регистрацию контрагентов - индивидуальных предпринимателей и " +
+                "юридических лиц рассматриваются специалистами отдела продаж. Это может занять некоторое время. " +
+                "До тех пор, пока контрагент не зарегистрирован, оформление заказов невозможно. Как правило, " +
+                "рассмотрение заявки занимает не более одного рабочего дня.");
+    }
 }

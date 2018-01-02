@@ -26,4 +26,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37715">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyForOrganizationsTextPresenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
