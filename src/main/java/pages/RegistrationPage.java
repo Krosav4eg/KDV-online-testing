@@ -24,6 +24,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//a[@rel='legal']")
     private WebElement organizationButton;
 
+    @FindBy(xpath = ".//*[@id='firstname']")
+    private WebElement firstName;
+
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(individualButton.isEnabled());
@@ -45,5 +48,10 @@ public class RegistrationPage extends BasePage {
                 "юридических лиц рассматриваются специалистами отдела продаж. Это может занять некоторое время. " +
                 "До тех пор, пока контрагент не зарегистрирован, оформление заказов невозможно. Как правило, " +
                 "рассмотрение заявки занимает не более одного рабочего дня.");
+    }
+
+    public void verifyFieldFirstNamePresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(firstName.isDisplayed());
     }
 }
