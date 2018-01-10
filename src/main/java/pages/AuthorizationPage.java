@@ -34,7 +34,7 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
 
-    @FindBy(xpath = ".//div[text()='Для организаций']/../..")
+    @FindBy(xpath = ".//div[text()='Регистрация']/../..")
     private WebElement registrationButton;
 
     @FindBy(xpath = ".//div[text()='Продолжить как гость']/../..")
