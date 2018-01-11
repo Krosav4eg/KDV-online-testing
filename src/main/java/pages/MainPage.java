@@ -328,7 +328,6 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check logo company");
         TestReporter.step("Check logo company");
         elementIsClickable(companyLogo, driver).click();
-        waitForPageLoad(driver);
         String urlExpected = driver.getCurrentUrl();
         AssertCollector.assertEquals(urlActual, " URL IS EQUAL ", urlExpected);
     }
@@ -348,7 +347,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(firstCityLink, driver).click();
-        waitForPageLoad(driver);
+       //waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
@@ -363,10 +362,9 @@ public class MainPage extends BasePage {
         actions.sendKeys(currentCity);
         actions.build().perform();
         elementIsClickable(citySearchDropdown, driver).click();
-        waitForPageLoad(driver);
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
-
+    //TODO remove thread.sleep , think about it, how to fix it
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
@@ -380,7 +378,6 @@ public class MainPage extends BasePage {
     public void verifyingOpeningLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
         TestReporter.step("Verifying opening lower prices section");
-        waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         AssertCollector.assertTrue(lowerPriceSectionOpen.isDisplayed());
     }
@@ -388,7 +385,6 @@ public class MainPage extends BasePage {
     public void verifyingClosingLowerPricesSection() {
         LOGGER.log(Level.INFO, "Verifying closing lower prices section");
         TestReporter.step("Verifying opening lower prices section");
-        waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(lowerPriceSectionOpen, driver).click();
         AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
@@ -400,17 +396,14 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Verifying opening lower prices section");
         TestReporter.step("Verifying opening lower prices section");
-        waitForPageLoad(driver);
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(aboutPricesLink, driver).click();
-        waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
     }
 
     public void verifyingOpeningFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying opening free delivering section");
-        waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
     }
@@ -418,7 +411,6 @@ public class MainPage extends BasePage {
     public void verifyingClosingFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying closing free delivering section");
         TestReporter.step("Verifying closing free delivering section");
-        waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
         AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
@@ -430,12 +422,10 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Opening free delivering section");
         TestReporter.step("Opening free delivering section");
-        waitForPageLoad(driver);
         elementIsClickable(freeDeliveringSection, driver).click();
         LOGGER.log(Level.INFO, "Click about link free delivering section");
         TestReporter.step("Click about link free delivering section");
         elementIsClickable(aboutFreeDeliveryLink, driver).click();
-        waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
     }
@@ -443,14 +433,12 @@ public class MainPage extends BasePage {
     public void verifyingOpeningPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying opening payment upon receiving section");
         TestReporter.step("Verifying opening payment upon receiving section");
-        waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
     }
 
     public void verifyingClosingPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying closing payment upon receiving section");
-        waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
@@ -462,12 +450,10 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         LOGGER.log(Level.INFO, "Opening payment upon receiving section");
         TestReporter.step("Opening payment upon receiving section");
-        waitForPageLoad(driver);
         elementIsClickable(paymentUponReceivingSection, driver).click();
         LOGGER.log(Level.INFO, "Click about link free delivering section");
         TestReporter.step("Click about link free delivering section");
         elementIsClickable(aboutPaymentUponReceivingLink, driver).click();
-        waitForPageLoad(driver);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", getCurrentUrl());
     }
@@ -805,7 +791,7 @@ public class MainPage extends BasePage {
     public void verifyMyCardIsEmpty() {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
-        waitForPageLoad(driver);
+       //waitForPageLoad(driver);
         elementIsClickable(myCart, driver).click();
         AssertCollector.assertTrue(myCart.isDisplayed());
         textPresent("Корзина пока пуста");

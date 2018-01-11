@@ -5,6 +5,15 @@ package utils;
  */
 public class Constants {
 
+
+    //========================Data Based==================================
+    /**
+     * DB for connection to TestBD
+     */
+    protected  final String serverName = "";//"jdbc:postgresql://localhost:5432/TestLog";
+    protected  final String userName = "";//"postgres";
+    protected  final String passwordName ="";//"admin";
+
     //========================BASE URL==================================
     public static final String BASE_URL = "http://tomsk.demo.dev.magonline.ru";
 
@@ -21,8 +30,9 @@ public class Constants {
     public static final String SUCCESS_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/SuccessScreenShot/";
 
     //========================LOGGER FILES PATH=========================
-    public static final String LOGGING_HTML_FILE = "test-output/Logging.html";
-    public static final String LOGGING_TXT_FILE = "test-output/Logging.txt";
+
+    public static final String LOGGING_HTML_FILE =System.getProperty("user.dir") + "/test-output/Logging.html";
+    public static final String LOGGING_TXT_FILE = System.getProperty("user.dir") + "/test-output/Logging.txt";
 
     //===============================REGEX==============================
     public static final String RGBA_TO_RGB_REGEX = "(rgba)|(rgb)|(\\()|(\\s)|(\\))";
