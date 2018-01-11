@@ -155,4 +155,12 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(lastName.isDisplayed());
     }
+
+    public void verifyInputInLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(46));
+        elementFluentWaitVisibility(layout, driver).click();
+        String text = lastName.getAttribute("value");
+        AssertCollector.assertEquals(text, "  Current text is equal to  ", text);
+    }
 }

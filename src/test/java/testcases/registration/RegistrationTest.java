@@ -66,5 +66,10 @@ public class RegistrationTest extends BaseTest {
         registrationPage.verifyFieldLastNamePresence();
     }
 
+    @Test
+    public void verifyInputInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37114");
+        registrationPage.verifyInputInLastNameField();
+    }
 }
 
