@@ -82,8 +82,15 @@ public class RegistrationPage extends BasePage {
     //test not pass(validation problems)
     public void verifyInputForbiddenSymbolsInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(firstName, driver).click();
         fillInputField(firstName, driver, "!@#$%^&*()+_/|{}[]?><.,");
         AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty());
+    }
+
+    public void verifyInputSpecialSymbolsInFirstNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, "Анна-Мар'я");
+        elementFluentWaitVisibility(layout, driver).click();
+        String text = firstName.getAttribute("value");
+        AssertCollector.assertEquals(text, " Current text is equal to ", text);
     }
 }
