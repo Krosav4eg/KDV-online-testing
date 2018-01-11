@@ -4,7 +4,7 @@ import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import static utils.Constants.DRIVER_NAME_CHROME;
 /**
  * @author Sergey Potapov
  */
-public class BrowserFactory {
+public class BrowserFactory  extends DriverCapabilities{
 
     private static final String FIREFOX = "Firefox";
     private static final String CHROME = "Chrome";
@@ -40,19 +40,18 @@ public class BrowserFactory {
      * @param driverName-name needed browser driver
      */
     public static WebDriver setDriver(String driverName) {
-        if (driverName != null) {
-            switch (driverName) {
+        if (driverName != null)
+        {
+            switch (driverName)
+            {
                 case FIREFOX: {
                     LOGGER.log(Level.INFO, "set browser FIREFOX");
-                    DesiredCapabilities ffCapabilities = DesiredCapabilities.firefox();
-                    driverThread.set(new FirefoxDriver(ffCapabilities));
+                    driverThread.set(new FirefoxDriver(firefoxCapabilities()));
                     break;
                 }
                 case CHROME: {
                     LOGGER.log(Level.INFO, "set browser CHROME");
-                    DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
-                    ChromeDriver chromeDriver = new ChromeDriver(chromeCapabilities);
-                    driverThread.set(chromeDriver);
+                    driverThread.set(new ChromeDriver(chromeCapabilities()));
                     break;
                 }
                 default: {
@@ -61,8 +60,11 @@ public class BrowserFactory {
                 }
             }
         }
-        driverThread.get().manage().window().maximize();
-        return driverThread.get();
+        WebDriver driver= driverThread.get();
+        EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
+        EventHandler handler = new EventHandler() {};
+        driver = eventDriver.register(handler);
+        return driver;
     }
 
     /**

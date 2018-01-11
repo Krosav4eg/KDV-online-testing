@@ -1,47 +1,18 @@
 package dataBased;
 
-import javax.ws.rs.GET;
 import java.sql.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import utils.Constants;
 
-public class PostgreSQL extends Constants{
-	@GET
-	public String getServerName()
-	{
-		return serverName;
-	}
-	@GET
-	public String getUserName()
-	{
-		return userName;
-	}
-	@GET
-	public String getPasswordName()
-	{
-		return passwordName;
-	}
-
-	/**
-	 * Initial drivers to connect Postgre DB
-	 * @param serverName   set Server Name to DB
-	 * @param userName     set Login to DB
-	 * @param passwordName set password to DB
-	 * @return Connection parameter
-	 */
-	protected static Connection connectPostgre(String serverName, String userName, String passwordName) throws Exception {
-		Class.forName("org.postgresql.Driver");
-		return DriverManager.getConnection(serverName, userName, passwordName);
-	}
+public class SQLMethods extends SQLConnect{
 
 	/**
 	 * Read SQL statements
 	 * @param sqlRequest - sql request example "select * from life "
 	 * @return ResultSet -all data from sql request
 	 */
-	public ResultSet readSQL(String sqlRequest) throws Exception {
-		Connection connect = connectPostgre(getServerName(), getUserName(), getPasswordName());
+	public ResultSet readSQL(String sqlRequest,Connection connectDB) throws Exception {
+		Connection connect = connectDB;
 		Statement statement = connect.createStatement();
 		ResultSet rs = statement.executeQuery(sqlRequest);
 		return rs;
@@ -51,8 +22,8 @@ public class PostgreSQL extends Constants{
 	 * @param sql - sql request example "select * from life "
 	 * @return JSONObject with <5 JSONArray in each array exist column of sql
 	 */
-	protected JSONObject getJSONResult(String sql) throws Exception {
-		ResultSet rs = readSQL(sql);
+	protected JSONObject getJSONResult(String sql,Connection connectDB) throws Exception {
+		ResultSet rs =readSQL(sql,connectDB);
 		JSONArray dataFirstSQL= new JSONArray();
 		JSONArray dataSecondSQL= new JSONArray();
 		JSONArray dataThirdSQL= new JSONArray();

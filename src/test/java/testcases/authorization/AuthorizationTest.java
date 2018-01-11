@@ -1,13 +1,24 @@
 package testcases.authorization;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.TestReporter;
+
+import java.lang.reflect.Method;
+
 
 /**
  * @author Sergey Potapov
  */
 public class AuthorizationTest extends BaseTest {
+
+
+    //TODO it get test name ,need to improver, bad realization
+    @BeforeMethod
+    public void setUp(Method method) {
+        System.err.println(method.getName());
+    }
 
     @Test
     public void verifyOpeningMainPageTest() {

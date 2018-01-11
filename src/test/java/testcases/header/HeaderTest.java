@@ -161,7 +161,7 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyUpperCaseTextInProductInputField();
     }
 
-    @Test
+    @Test(parameters = "")
     public void verifyLowerCaseTextInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34380");
         mainPage.verifyLowerCaseTextInProductInputField();
