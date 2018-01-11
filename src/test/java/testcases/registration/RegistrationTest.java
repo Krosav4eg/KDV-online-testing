@@ -77,5 +77,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37115");
         registrationPage.verifyMaximumInputInLastNameField();
     }
+
+    @Test
+    public void verifyInputNumbersInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37117");
+        registrationPage.verifyInputNumbersInLastNameField();
+    }
 }
 

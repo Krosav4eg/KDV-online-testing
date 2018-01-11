@@ -171,4 +171,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertEquals(lastName.getAttribute("value").length(), " Number of symbols is equal ",
                 RandomStringUtils.randomAlphabetic(45).length());
     }
+
+    //test not pass(validation problems)
+    public void verifyInputNumbersInLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(lastName, driver, RandomStringUtils.randomNumeric(6));
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty());
+    }
 }
