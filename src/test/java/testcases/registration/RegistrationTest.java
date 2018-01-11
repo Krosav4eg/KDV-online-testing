@@ -89,5 +89,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37118");
         registrationPage.verifyInputForbiddenSymbolsInLastNameField();
     }
+
+    @Test
+    public void verifyInputSpecialSymbolsInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37119");
+        registrationPage.verifyInputSpecialSymbolsInLastNameField();
+    }
 }
 

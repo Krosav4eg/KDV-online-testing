@@ -186,4 +186,13 @@ public class RegistrationPage extends BasePage {
         fillInputField(lastName, driver, "!@#$%^&*()+_/|{}[]?><.,");
         AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty());
     }
+
+    public void verifyInputSpecialSymbolsInLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(lastName, driver).click();
+        fillInputField(lastName, driver, "Иванов-Петров'ъ");
+        elementFluentWaitVisibility(layout, driver).click();
+        String text = lastName.getAttribute("value");
+        AssertCollector.assertEquals(text, "  Current text is equal to ", text);
+    }
 }
