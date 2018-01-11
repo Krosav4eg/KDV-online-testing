@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.AuthorizationPage;
 import pages.CustomerAccountPage;
@@ -16,6 +17,7 @@ import utils.TestReporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
@@ -59,6 +61,15 @@ public abstract class BaseTest {
                 ex.printStackTrace();
             }
     }
+
+
+    //TODO it get test name ,need to improver, bad realization
+    @BeforeMethod
+    public void setUp(Method method)
+    {
+        System.err.println(method.getName());
+    }
+
 
     /**
      * Method for screenshot creation

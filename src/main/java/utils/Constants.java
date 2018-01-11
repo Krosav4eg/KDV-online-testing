@@ -31,6 +31,7 @@ public class Constants {
 
     //========================LOGGER FILES PATH=========================
 
+    public static final String LOGGING_FOLDER =System.getProperty("user.dir");
     public static final String LOGGING_HTML_FILE =System.getProperty("user.dir") + "/test-output/Logging.html";
     public static final String LOGGING_TXT_FILE = System.getProperty("user.dir") + "/test-output/Logging.txt";
 

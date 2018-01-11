@@ -1,10 +1,12 @@
 package logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static utils.Constants.LOGGING_FOLDER;
 import static utils.Constants.LOGGING_HTML_FILE;
 import static utils.Constants.LOGGING_TXT_FILE;
 
@@ -34,6 +36,13 @@ public class MagDvLogger {
      * Create an HTML formatter
      */
     private void setup() {
+
+        File folder = new File(LOGGING_FOLDER +
+                File.separator + "test-output");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         Formatter formatterHTML = new HtmlLoggerFormatter();
         SimpleFormatter formatterTxt = new SimpleFormatter();
