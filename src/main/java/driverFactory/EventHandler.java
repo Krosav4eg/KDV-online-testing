@@ -1,11 +1,15 @@
 package driverFactory;
 
+import basePage.BasePage;
+import basePage.BasePage.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-public abstract class EventHandler implements WebDriverEventListener {
+import static utils.WaitingUtility.waitForPageLoad;
+
+public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeNavigateRefresh(WebDriver webDriver)
 	{
@@ -31,12 +35,13 @@ public abstract class EventHandler implements WebDriverEventListener {
 	}
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
-
+		waitForPageLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
+		waitForPageLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
 
