@@ -2,13 +2,10 @@ package pages;
 
 import basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
-
-import java.util.Objects;
 
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -65,5 +62,13 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(layout, driver).click();
         String text = firstName.getAttribute("value");
         AssertCollector.assertEquals(text, " Current text is equal to ", text);
+    }
+
+    //test not pass(validation problems)
+    public void verifyMaximumInputInFirstNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(46));
+        AssertCollector.assertEquals(firstName.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(45).length());
     }
 }
