@@ -66,4 +66,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37104">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputNumbersInFirstNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
