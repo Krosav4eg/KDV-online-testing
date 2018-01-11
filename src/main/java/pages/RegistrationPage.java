@@ -163,4 +163,12 @@ public class RegistrationPage extends BasePage {
         String text = lastName.getAttribute("value");
         AssertCollector.assertEquals(text, "  Current text is equal to  ", text);
     }
+
+    //test not pass(validation problems)
+    public void verifyMaximumInputInLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(46));
+        AssertCollector.assertEquals(lastName.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(45).length());
+    }
 }
