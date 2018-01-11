@@ -24,8 +24,65 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = ".//*[@id='firstname']")
     private WebElement firstName;
 
+    @FindBy(xpath = ".//*[@id='lastname']")
+    private WebElement lastName;
+
+    @FindBy(xpath = ".//*[@id='adv_phone']")
+    private WebElement phone;
+
+    @FindBy(xpath = ".//*[@id='email_address']")
+    private WebElement email;
+
+    @FindBy(xpath = ".//*[@id='password']")
+    private WebElement password;
+
+    @FindBy(xpath = ".//*[@id='confirmation']")
+    private WebElement confirmPassword;
+
+    @FindBy(xpath = "//label[@for='is_subscribed']")
+    private WebElement subscription;
+
+    @FindBy(xpath = "//label[@data-show='general']")
+    private WebElement checkboxConfirm;
+
+    @FindBy(xpath = "//label[@data-show='legal']")
+    private WebElement checkboxConfirmLegal;
+
+    @FindBy(xpath = ".//button[@title='Отправить']")
+    private WebElement sendButton;
+
+    @FindBy(css = ".layout__footer")
+    private WebElement footer;
+
     @FindBy(css = ".layout__content")
     private WebElement layout;
+
+    @FindBy(css = ".error-msg>ul>li>span>a")
+    private WebElement forgotPassword;
+
+    @FindBy(xpath = ".//*[@id='adv_full_name']")
+    private WebElement organizationFullName;
+
+    @FindBy(xpath = ".//*[@id='adv_inn']")
+    private WebElement taxpayerId;
+
+    @FindBy(xpath = ".//*[@id='adv_kpp']")
+    private WebElement reasonCode;
+
+    @FindBy(xpath = ".//*[@id='legal_address']")
+    private WebElement legalAddress;
+
+    @FindBy(xpath = ".//*[@id='company']")
+    private WebElement company;
+
+    @FindBy(xpath = ".//*[@id='street']")
+    private WebElement address;
+
+    @FindBy(xpath = ".//*[@id='comments']")
+    private WebElement comments;
+
+    @FindBy(xpath = "//span[contains(text(), \"г\")]/*[text()='Томск']")
+    private WebElement cityForAddress;
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -92,5 +149,10 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(layout, driver).click();
         String text = firstName.getAttribute("value");
         AssertCollector.assertEquals(text, " Current text is equal to ", text);
+    }
+
+    public void verifyFieldLastNamePresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(lastName.isDisplayed());
     }
 }
