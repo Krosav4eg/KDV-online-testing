@@ -178,4 +178,12 @@ public class RegistrationPage extends BasePage {
         fillInputField(lastName, driver, RandomStringUtils.randomNumeric(6));
         AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty());
     }
+
+    //test not pass(validation problems)
+    public void verifyInputForbiddenSymbolsInLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(lastName, driver).click();
+        fillInputField(lastName, driver, "!@#$%^&*()+_/|{}[]?><.,");
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty());
+    }
 }
