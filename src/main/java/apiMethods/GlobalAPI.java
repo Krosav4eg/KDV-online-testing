@@ -71,6 +71,8 @@ public class GlobalAPI {
 		return response;
 	}
 
+
+	//TODO fix
 	/**
 	 *
 	 * @param apiParameterData- api parameter it must be in JSON format ("url,refresh,access tokens")
