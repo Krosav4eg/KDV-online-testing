@@ -76,4 +76,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37105">
+       <classes>
+           <class name="testcases.registration.RegistrationTest">
+               <methods>
+                   <include name="verifyInputForbiddenSymbolsInFirstNameFieldTest"/>
+               </methods>
+           </class>
+       </classes>
+    </test>
 </suite>
