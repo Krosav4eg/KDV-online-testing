@@ -1,14 +1,11 @@
 package pages;
 
 import basePage.BasePage;
-import com.sun.jersey.server.wadl.WadlBuilder;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
-
-import javax.ws.rs.FormParam;
 
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -37,13 +34,13 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
 
-    @FindBy(xpath = ".//div[text()='Регистрация']")
+    @FindBy(xpath = ".//div[text()='Регистрация']/../..")
     private WebElement registrationButton;
 
-    @FindBy(xpath = ".//div[text()='Продолжить как гость']")
+    @FindBy(xpath = ".//div[text()='Продолжить как гость']/../..")
     private WebElement continueAsGuestButton;
 
-    @FindBy(xpath = ".//div[text()='Для организаций']")
+    @FindBy(xpath = ".//div[text()='Для организаций']/../..")
     private WebElement buttonForOrganizations;
 
     @FindBy(xpath = ".//*[@class='login__action-title login__action-title_red']")
@@ -256,18 +253,18 @@ public class AuthorizationPage extends BasePage {
     public void verifyChangingColorsForTabs() {
         getUrl(AUTORIZATION_PAGE_URL);
         moveMouseTo(driver, registrationButton);
-        String actualRegistrationButtonColor = "#ce0022";
-        String expectedRegistrationButtonColor = getElementColor(registrationButton, "color");
+        String expectedRegistrationButtonColor = "#ce0022";
+        String actualRegistrationButtonColor = getElementColor(registrationButton, "color");
         AssertCollector.assertEqualsJ(actualRegistrationButtonColor, expectedRegistrationButtonColor,
                 " Verify elements color of registration button ");
         moveMouseTo(driver, continueAsGuestButton);
-        String actualContinueButtonColor = "#ce0022";
-        String expectedContinueButtonColor = getElementColor(continueAsGuestButton, "color");
+        String expectedContinueButtonColor = "#ce0022";
+        String actualContinueButtonColor = getElementColor(continueAsGuestButton, "color");
         AssertCollector.assertEqualsJ(actualContinueButtonColor, expectedContinueButtonColor,
                 " Verify elements color of continue as guest button ");
         moveMouseTo(driver, buttonForOrganizations);
-        String actualForOrganizationsButtonColor = "#ce0022";
-        String expectedForOrganizationsButtonColor = getElementColor(buttonForOrganizations, "color");
+        String expectedForOrganizationsButtonColor = "#ce0022";
+        String actualForOrganizationsButtonColor = getElementColor(buttonForOrganizations, "color");
         AssertCollector.assertEqualsJ(actualForOrganizationsButtonColor, expectedForOrganizationsButtonColor,
                 " Verify elements color of for organizations button ");
     }

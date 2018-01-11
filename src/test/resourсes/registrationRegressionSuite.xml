@@ -1,0 +1,59 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Registration regression tests" parallel="tests" thread-count="3">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="37076">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyLegalFormByDefaultTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37077">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyChoosingLegalFormTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37715">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyForOrganizationsTextPresenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37097">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyFieldFirstNamePresenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37098">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputInFirstNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

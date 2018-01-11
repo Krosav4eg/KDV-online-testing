@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import pages.AuthorizationPage;
 import pages.CustomerAccountPage;
 import pages.MainPage;
+import pages.RegistrationPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public abstract class BaseTest {
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
     protected CustomerAccountPage customerAccountPage;
+    protected RegistrationPage registrationPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -92,5 +94,6 @@ public abstract class BaseTest {
         mainPage = PageFactory.initElements(driver, MainPage.class);
         authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
+        registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
     }
 }
