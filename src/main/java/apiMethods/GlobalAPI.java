@@ -73,7 +73,8 @@ public class GlobalAPI {
 
 
 	/**
-	 *
+	 * PATCH method was created on standard java library it`s has bad method to get status or entity
+	 * it must be refactoring
 	 * @param apiParameterData- api parameter it must be in JSON format ("url,refresh,access tokens")
 	 * @param patchData- data for patch request
 	 * @return ClientResponse from api request
