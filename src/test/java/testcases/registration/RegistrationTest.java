@@ -173,5 +173,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37331");
         registrationPage.verifyEmailWithSpacesAfterAtSymbol();
     }
+
+    @Test
+    public void verifyFieldPasswordPresenceTest() {
+        TestReporter.testTitle("Test ID = 37338");
+        registrationPage.verifyFieldPasswordPresence();
+    }
 }
 

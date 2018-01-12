@@ -283,6 +283,7 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Часть адреса до символа \"@\" не должна содержать символ \" \".");
     }
+
     public void verifyEmailWithSpacesAfterAtSymbol() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(email, driver, "a.shaulo@anders enlab.com");
@@ -291,4 +292,8 @@ public class RegistrationPage extends BasePage {
         textPresent("Часть адреса после символа \"@\" не должна содержать символ \" \".");
     }
 
+    public void verifyFieldPasswordPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(password.isDisplayed());
+    }
 }
