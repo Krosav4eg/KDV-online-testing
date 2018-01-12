@@ -296,4 +296,12 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(password.isDisplayed());
     }
+
+    public void verifyPasswordLengthLessThanSixSymbols() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "12345");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
+    }
 }

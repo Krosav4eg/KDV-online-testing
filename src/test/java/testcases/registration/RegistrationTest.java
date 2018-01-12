@@ -179,5 +179,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37338");
         registrationPage.verifyFieldPasswordPresence();
     }
+
+    @Test
+    public void verifyPasswordLengthLessThanSixSymbolsTest() {
+        TestReporter.testTitle("Test ID = 37292");
+        registrationPage.verifyPasswordLengthLessThanSixSymbols();
+    }
 }
 
