@@ -70,12 +70,11 @@ public abstract class BaseTest {
         System.err.println(method.getName());
     }
 
-
     /**
      * Method for screenshot creation
      *
      * @param screenShotName-name of screenshot
-     * @param folder-             folder which contain screenshots
+     * @param folder-folder which contain screenshots
      * @return dest - destination where to be situated screenshots
      */
     public static String capture(String screenShotName, String folder) {
