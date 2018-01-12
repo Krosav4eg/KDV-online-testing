@@ -126,5 +126,10 @@ public class RegistrationTest extends BaseTest {
         registrationPage.verifyInputLettersInPhoneField();
     }
 
+    @Test
+    public void verifyInputSpacesInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37285");
+        registrationPage.verifyInputSpacesInPhoneField();
+    }
 }
 
