@@ -336,4 +336,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37295">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputNewPasswordWithoutConfirmationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

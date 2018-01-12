@@ -320,9 +320,17 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
+
     public void verifyFieldConfirmPasswordPresence() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(confirmPassword.isDisplayed());
     }
 
+    public void verifyInputNewPasswordWithoutConfirmation() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
 }
