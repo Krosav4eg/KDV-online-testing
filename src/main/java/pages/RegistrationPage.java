@@ -231,4 +231,18 @@ public class RegistrationPage extends BasePage {
         fillInputField(phone, driver, EMPTY_DATA);
         AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
     }
+
+    public void verifyInputLessThenTenNumbersInPhoneField()  {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(5));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "test@test.ru");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(footer);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+    }
 }
