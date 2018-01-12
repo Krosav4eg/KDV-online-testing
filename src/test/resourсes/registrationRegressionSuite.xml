@@ -196,4 +196,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37283">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputLettersInPhoneFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
