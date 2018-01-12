@@ -137,5 +137,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37286");
         registrationPage.verifyInputLessThenTenNumbersInPhoneField();
     }
+
+    @Test
+    public void verifyFieldEmailPresenceTest() {
+        TestReporter.testTitle("Test ID = 37298");
+        registrationPage.verifyFieldEmailPresence();
+    }
 }
 

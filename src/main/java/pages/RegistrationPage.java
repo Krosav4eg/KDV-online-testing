@@ -217,22 +217,22 @@ public class RegistrationPage extends BasePage {
     public void verifyInputForbiddenSymbolsInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(phone, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
     public void verifyInputLettersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(phone, driver, RandomStringUtils.randomAlphabetic(10));
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
     public void verifyInputSpacesInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(phone, driver, EMPTY_DATA);
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
-    public void verifyInputLessThenTenNumbersInPhoneField()  {
+    public void verifyInputLessThenTenNumbersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(phone, driver, RandomStringUtils.randomNumeric(5));
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
@@ -244,5 +244,10 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(checkboxConfirm, driver).click();
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+    }
+
+    public void verifyFieldEmailPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(email.isDisplayed(), "Email field is displayed");
     }
 }
