@@ -316,4 +316,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37294">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyPasswordWithSpacesAtStartAndEndTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
