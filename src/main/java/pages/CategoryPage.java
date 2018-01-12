@@ -5,14 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
-import utils.TestReporter;
-
-import java.util.logging.Level;
-
-import static utils.Constants.REGISTRATION_PAGE_URL;
-import static utils.WaitingUtility.CallJS;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
-import static utils.WaitingUtility.elementIsClickable;
 
 public class CategoryPage 	extends BasePage
 	{
@@ -100,7 +93,7 @@ public class CategoryPage 	extends BasePage
 				{
 					elementFluentWaitVisibility(gridBtn,driver).click();
 					AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"),"required grid  is active");
-					AssertCollector.assertTrue(gridBtn.getCssValue("color").contains("rgba(255, 27, 65, 1)"),"required grid color is present");
+					AssertCollector.assertTrue( gridBtn.getCssValue("color").contains("rgba(255, 27, 65, 1)"),"required grid color is present");
 				}
 		}
 
