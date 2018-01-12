@@ -161,5 +161,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37289");
         registrationPage.verifyEmailWithMoreThanOneDot();
     }
+
+    @Test
+    public void verifyEmailWithSpacesBeforeAtSymbolTest() {
+        TestReporter.testTitle("Test ID = 37291");
+        registrationPage.verifyEmailWithSpacesBeforeAtSymbol();
+    }
 }
 

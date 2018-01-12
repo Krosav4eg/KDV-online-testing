@@ -275,4 +275,12 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
     }
+
+    public void verifyEmailWithSpacesBeforeAtSymbol() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.s ha ulo@andersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Часть адреса до символа \"@\" не должна содержать символ \" \".");
+    }
 }
