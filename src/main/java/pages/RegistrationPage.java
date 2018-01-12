@@ -133,14 +133,14 @@ public class RegistrationPage extends BasePage {
     public void verifyInputNumbersInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomNumeric(6));
-        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     //test not pass(validation problems)
     public void verifyInputForbiddenSymbolsInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     public void verifyInputSpecialSymbolsInFirstNameField() {
@@ -176,7 +176,7 @@ public class RegistrationPage extends BasePage {
     public void verifyInputNumbersInLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(lastName, driver, RandomStringUtils.randomNumeric(6));
-        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     //test not pass(validation problems)
@@ -184,7 +184,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(lastName, driver).click();
         fillInputField(lastName, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     public void verifyInputSpecialSymbolsInLastNameField() {
@@ -203,7 +203,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"),"phone mask is correct");
+        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"), "phone mask is correct");
     }
 
     public void verifyMaximumInputInPhoneField() {
@@ -219,4 +219,9 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
     }
 
+    public void verifyInputLettersInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomAlphabetic(10));
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+    }
 }

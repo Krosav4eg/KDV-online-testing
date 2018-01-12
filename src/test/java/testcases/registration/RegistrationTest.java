@@ -119,5 +119,12 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37281");
         registrationPage.verifyInputForbiddenSymbolsInPhoneField();
     }
+
+    @Test
+    public void verifyInputLettersInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37283");
+        registrationPage.verifyInputLettersInPhoneField();
+    }
+
 }
 
