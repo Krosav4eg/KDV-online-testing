@@ -195,4 +195,9 @@ public class RegistrationPage extends BasePage {
         String text = lastName.getAttribute("value");
         AssertCollector.assertEquals(text, "  Current text is equal to ", text);
     }
+
+    public void verifyFieldPhonePresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(phone.isDisplayed());
+    }
 }
