@@ -203,7 +203,13 @@ public class RegistrationPage extends BasePage {
 
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(phone, driver).click();
-        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"));
+        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"),"phone mask is correct");
+    }
+
+    public void verifyMaximumInputInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(15));
+        AssertCollector.assertEquals(phone.getAttribute("value").length(), " The length of phone number equals ",
+                RandomStringUtils.randomNumeric(12).length());
     }
 }
