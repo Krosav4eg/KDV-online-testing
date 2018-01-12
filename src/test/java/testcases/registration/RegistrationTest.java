@@ -191,5 +191,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37293");
         registrationPage.verifyPasswordWithOnlySpaces();
     }
+
+    @Test
+    public void verifyPasswordWithSpacesAtStartAndEndTest() {
+        TestReporter.testTitle("Test ID = 37294");
+        registrationPage.verifyPasswordWithSpacesAtStartAndEnd();
+    }
 }
 
