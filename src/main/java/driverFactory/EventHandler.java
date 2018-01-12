@@ -1,7 +1,5 @@
 package driverFactory;
 
-import basePage.BasePage;
-import basePage.BasePage.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
