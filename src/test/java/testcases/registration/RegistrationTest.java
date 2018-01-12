@@ -185,5 +185,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37292");
         registrationPage.verifyPasswordLengthLessThanSixSymbols();
     }
+
+    @Test
+    public void verifyPasswordWithOnlySpacesTest() {
+        TestReporter.testTitle("Test ID = 37293");
+        registrationPage.verifyPasswordWithOnlySpaces();
+    }
 }
 
