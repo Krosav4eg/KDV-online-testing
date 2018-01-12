@@ -9,10 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.AuthorizationPage;
-import pages.CustomerAccountPage;
-import pages.MainPage;
-import pages.RegistrationPage;
+import pages.*;
 import utils.TestReporter;
 
 import java.io.File;
@@ -35,6 +32,7 @@ public abstract class BaseTest {
     protected AuthorizationPage authorizationPage;
     protected CustomerAccountPage customerAccountPage;
     protected RegistrationPage registrationPage;
+    protected CategoryPage categoryPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -105,5 +103,6 @@ public abstract class BaseTest {
         authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
+        categoryPage = PageFactory.initElements(driver, CategoryPage.class);
     }
 }
