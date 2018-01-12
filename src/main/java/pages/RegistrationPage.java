@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
+import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
@@ -222,6 +223,12 @@ public class RegistrationPage extends BasePage {
     public void verifyInputLettersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(phone, driver, RandomStringUtils.randomAlphabetic(10));
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+    }
+
+    public void verifyInputSpacesInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, EMPTY_DATA);
         AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
     }
 }
