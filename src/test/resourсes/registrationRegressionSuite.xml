@@ -176,4 +176,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37279">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputInPhoneFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
