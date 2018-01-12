@@ -1,11 +1,18 @@
 package logger;
 
+import org.junit.After;
+import org.junit.Rule;
+import org.junit.rules.TestName;
+import org.testng.annotations.AfterMethod;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+
+
 
 /**
  * @author Sergey Potapov
@@ -14,6 +21,8 @@ public class HtmlLoggerFormatter extends Formatter {
     private static final String CLOSE_TABLE_CELL_TAG = "</td>\n";
     private static final String CLOSE_TABLE_TAG = "\t<td>";
     private static final String CLOSE_TABLE_ROW = "</tr>\n";
+
+
 
     /**
      * This method is called for every log record
@@ -59,7 +68,8 @@ public class HtmlLoggerFormatter extends Formatter {
         Date resultDate = new Date(milliseconds);
         return dateFormat.format(resultDate);
     }
-
+    //TODO add header Test Name
+    //TODO add test name off all test to log
     /**
      * This method is called just after the handler using this formatter is created
      *
@@ -81,7 +91,8 @@ public class HtmlLoggerFormatter extends Formatter {
                 + "<tr align=\"left\">\n"
                 + "\t<th style=\"width:10%\">Loglevel</th>\n"
                 + "\t<th style=\"width:15%\">Time</th>\n"
-                + "\t<th style=\"width:75%\">Log Message</th>\n"
+                + "\t<th style=\"width:65%\">Log Message</th>\n"
+		        + "\t<th style=\"width:10%\">Test Name</th>\n"
                 + "</tr>\n";
     }
 
