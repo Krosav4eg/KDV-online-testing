@@ -149,5 +149,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37287");
         registrationPage.verifyEmailWithoutAtSymbol();
     }
+
+    @Test
+    public void verifyEmailWithoutDomainNameTest() {
+        TestReporter.testTitle("Test ID = 37288");
+        registrationPage.verifyEmailWithoutDomainName();
+    }
 }
 

@@ -259,4 +259,12 @@ public class RegistrationPage extends BasePage {
         textPresent("Адрес электронной почты должен содержать символ \"@\". В адресе \"a.shauloandersenlab.com\" " +
                 "отсутствует символ \"@\".");
     }
+
+    public void verifyEmailWithoutDomainName() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.shaulo@andersenlabcom");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+    }
 }
