@@ -256,4 +256,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37289">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyEmailWithMoreThanOneDotTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
