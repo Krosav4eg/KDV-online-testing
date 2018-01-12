@@ -250,4 +250,13 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(email.isDisplayed(), "Email field is displayed");
     }
+
+    public void verifyEmailWithoutAtSymbol() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.shauloandersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Адрес электронной почты должен содержать символ \"@\". В адресе \"a.shauloandersenlab.com\" " +
+                "отсутствует символ \"@\".");
+    }
 }

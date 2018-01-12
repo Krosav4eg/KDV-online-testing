@@ -236,4 +236,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37287">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyEmailWithoutAtSymbolTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
