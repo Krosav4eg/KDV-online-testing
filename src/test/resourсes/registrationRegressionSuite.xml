@@ -326,4 +326,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37337">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyFieldConfirmPasswordPresenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
