@@ -113,5 +113,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37279");
         registrationPage.verifyMaximumInputInPhoneField();
     }
+
+    @Test
+    public void verifyInputForbiddenSymbolsInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37281");
+        registrationPage.verifyInputForbiddenSymbolsInPhoneField();
+    }
 }
 

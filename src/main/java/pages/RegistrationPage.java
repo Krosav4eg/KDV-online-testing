@@ -212,4 +212,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertEquals(phone.getAttribute("value").length(), " The length of phone number equals ",
                 RandomStringUtils.randomNumeric(12).length());
     }
+
+    public void verifyInputForbiddenSymbolsInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, "!@#$%^&*()+_/|{}[]?><.,");
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty());
+    }
+
 }
