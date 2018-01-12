@@ -267,4 +267,12 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
     }
+
+    public void verifyEmailWithMoreThanOneDot() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a..shaulo@andersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+    }
 }

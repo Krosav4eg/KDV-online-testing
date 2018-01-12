@@ -155,5 +155,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37288");
         registrationPage.verifyEmailWithoutDomainName();
     }
+
+    @Test
+    public void verifyEmailWithMoreThanOneDotTest() {
+        TestReporter.testTitle("Test ID = 37289");
+        registrationPage.verifyEmailWithMoreThanOneDot();
+    }
 }
 
