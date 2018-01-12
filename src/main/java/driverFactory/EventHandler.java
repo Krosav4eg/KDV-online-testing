@@ -17,6 +17,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
+		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
 
@@ -60,6 +61,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void beforeFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
+		waitForPageLoad(arg2);
 		//System.out.println("beforeFindBy "+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 
@@ -90,6 +92,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void beforeScript(String arg0, WebDriver arg1)
 	{
+		waitForPageLoad(arg1);
 		//System.out.println("beforeScript "+arg0);
 	}
 
