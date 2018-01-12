@@ -46,6 +46,7 @@ public class Constants {
     //===============================UTIL CONSTANTS==============================
     public static final String AUTORIZATION_PAGE_URL = "http://kemerovo.demo.dev.magonline.ru/customer/account/login/";
     public static final String REGISTRATION_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/create/";
+    public static final String ABOUT_PAGE_URL = " http://tomsk.demo.dev.magonline.ru/about";
     public static final String PHYSICAL_PERSON_EMAIL = "test_i.makarov@magdv.com";
     public static final String PHYSICAL_PERSON_PASSWORD = "SWgeZWPs";
     public static final String INCORRECT_EMAIL = "a.shaulo123@andersenlab.com";
