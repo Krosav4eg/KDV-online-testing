@@ -95,5 +95,83 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37119");
         registrationPage.verifyInputSpecialSymbolsInLastNameField();
     }
+
+    @Test
+    public void verifyFieldPhonePresenceTest() {
+        TestReporter.testTitle("Test ID = 37278");
+        registrationPage.verifyFieldPhonePresence();
+    }
+
+    @Test
+    public void verifyMaskInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37282");
+        registrationPage.verifyMaskInPhoneField();
+    }
+
+    @Test
+    public void verifyMaximumInputInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37279");
+        registrationPage.verifyMaximumInputInPhoneField();
+    }
+
+    @Test
+    public void verifyInputForbiddenSymbolsInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37281");
+        registrationPage.verifyInputForbiddenSymbolsInPhoneField();
+    }
+
+    @Test
+    public void verifyInputLettersInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37283");
+        registrationPage.verifyInputLettersInPhoneField();
+    }
+
+    @Test
+    public void verifyInputSpacesInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37285");
+        registrationPage.verifyInputSpacesInPhoneField();
+    }
+
+    @Test
+    public void verifyInputLessThenTenNumbersInPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37286");
+        registrationPage.verifyInputLessThenTenNumbersInPhoneField();
+    }
+
+    @Test
+    public void verifyFieldEmailPresenceTest() {
+        TestReporter.testTitle("Test ID = 37298");
+        registrationPage.verifyFieldEmailPresence();
+    }
+
+    @Test
+    public void verifyEmailWithoutAtSymbolTest() {
+        TestReporter.testTitle("Test ID = 37287");
+        registrationPage.verifyEmailWithoutAtSymbol();
+    }
+
+    @Test
+    public void verifyEmailWithoutDomainNameTest() {
+        TestReporter.testTitle("Test ID = 37288");
+        registrationPage.verifyEmailWithoutDomainName();
+    }
+
+    @Test
+    public void verifyEmailWithMoreThanOneDotTest() {
+        TestReporter.testTitle("Test ID = 37289");
+        registrationPage.verifyEmailWithMoreThanOneDot();
+    }
+
+    @Test
+    public void verifyEmailWithSpacesBeforeAtSymbolTest() {
+        TestReporter.testTitle("Test ID = 37291");
+        registrationPage.verifyEmailWithSpacesBeforeAtSymbol();
+    }
+
+    @Test
+    public void verifyEmailWithSpacesAfterAtSymbolTest() {
+        TestReporter.testTitle("Test ID = 37331");
+        registrationPage.verifyEmailWithSpacesAfterAtSymbol();
+    }
 }
 

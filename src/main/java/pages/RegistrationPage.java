@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
+import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
@@ -133,14 +134,14 @@ public class RegistrationPage extends BasePage {
     public void verifyInputNumbersInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomNumeric(6));
-        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     //test not pass(validation problems)
     public void verifyInputForbiddenSymbolsInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     public void verifyInputSpecialSymbolsInFirstNameField() {
@@ -176,7 +177,7 @@ public class RegistrationPage extends BasePage {
     public void verifyInputNumbersInLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(lastName, driver, RandomStringUtils.randomNumeric(6));
-        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     //test not pass(validation problems)
@@ -184,7 +185,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(lastName, driver).click();
         fillInputField(lastName, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(),"required field is empty");
+        AssertCollector.assertTrue(lastName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
     public void verifyInputSpecialSymbolsInLastNameField() {
@@ -195,4 +196,99 @@ public class RegistrationPage extends BasePage {
         String text = lastName.getAttribute("value");
         AssertCollector.assertEquals(text, "  Current text is equal to ", text);
     }
+
+    public void verifyFieldPhonePresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(phone.isDisplayed());
+    }
+
+    public void verifyMaskInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"), "phone mask is correct");
+    }
+
+    public void verifyMaximumInputInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(15));
+        AssertCollector.assertEquals(phone.getAttribute("value").length(), " The length of phone number equals ",
+                RandomStringUtils.randomNumeric(12).length());
+    }
+
+    public void verifyInputForbiddenSymbolsInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, "!@#$%^&*()+_/|{}[]?><.,");
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+    }
+
+    public void verifyInputLettersInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomAlphabetic(10));
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+    }
+
+    public void verifyInputSpacesInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, EMPTY_DATA);
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+    }
+
+    public void verifyInputLessThenTenNumbersInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(5));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "test@test.ru");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(footer);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+    }
+
+    public void verifyFieldEmailPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(email.isDisplayed(), "Email field is displayed");
+    }
+
+    public void verifyEmailWithoutAtSymbol() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.shauloandersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Адрес электронной почты должен содержать символ \"@\". В адресе \"a.shauloandersenlab.com\" " +
+                "отсутствует символ \"@\".");
+    }
+
+    public void verifyEmailWithoutDomainName() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.shaulo@andersenlabcom");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+    }
+
+    public void verifyEmailWithMoreThanOneDot() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a..shaulo@andersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+    }
+
+    public void verifyEmailWithSpacesBeforeAtSymbol() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.s ha ulo@andersenlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Часть адреса до символа \"@\" не должна содержать символ \" \".");
+    }
+    public void verifyEmailWithSpacesAfterAtSymbol() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(email, driver, "a.shaulo@anders enlab.com");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Часть адреса после символа \"@\" не должна содержать символ \" \".");
+    }
+
 }
