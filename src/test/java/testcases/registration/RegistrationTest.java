@@ -11,6 +11,7 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37076");
         registrationPage.verifyLegalFormByDefault();
     }
+
     @Test
     public void verifyChoosingLegalFormTest() {
         TestReporter.testTitle("Test ID = 37077");
@@ -33,6 +34,66 @@ public class RegistrationTest extends BaseTest {
     public void verifyInputInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37098");
         registrationPage.verifyInputInFirstNameField();
+    }
+
+    @Test
+    public void verifyMaximumInputInFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37103");
+        registrationPage.verifyMaximumInputInFirstNameField();
+    }
+
+    @Test
+    public void verifyInputNumbersInFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37104");
+        registrationPage.verifyInputNumbersInFirstNameField();
+    }
+
+    @Test
+    public void verifyInputForbiddenSymbolsInFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37105");
+        registrationPage.verifyInputForbiddenSymbolsInFirstNameField();
+    }
+
+    @Test
+    public void verifyInputSpecialSymbolsInFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37106");
+        registrationPage.verifyInputSpecialSymbolsInFirstNameField();
+    }
+
+    @Test
+    public void verifyFieldLastNamePresenceTest() {
+        TestReporter.testTitle("Test ID = 37113");
+        registrationPage.verifyFieldLastNamePresence();
+    }
+
+    @Test
+    public void verifyInputInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37114");
+        registrationPage.verifyInputInLastNameField();
+    }
+
+    @Test
+    public void verifyMaximumInputInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37115");
+        registrationPage.verifyMaximumInputInLastNameField();
+    }
+
+    @Test
+    public void verifyInputNumbersInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37117");
+        registrationPage.verifyInputNumbersInLastNameField();
+    }
+
+    @Test
+    public void verifyInputForbiddenSymbolsInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37118");
+        registrationPage.verifyInputForbiddenSymbolsInLastNameField();
+    }
+
+    @Test
+    public void verifyInputSpecialSymbolsInLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37119");
+        registrationPage.verifyInputSpecialSymbolsInLastNameField();
     }
 }
 

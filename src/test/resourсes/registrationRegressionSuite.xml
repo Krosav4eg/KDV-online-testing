@@ -56,4 +56,104 @@
             </class>
         </classes>
     </test>
+
+    <test name="37103">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputInFirstNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37104">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputNumbersInFirstNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37105">
+       <classes>
+           <class name="testcases.registration.RegistrationTest">
+               <methods>
+                   <include name="verifyInputForbiddenSymbolsInFirstNameFieldTest"/>
+               </methods>
+           </class>
+       </classes>
+    </test>
+
+    <test name="37106">
+      <classes>
+          <class name="testcases.registration.RegistrationTest">
+              <methods>
+                  <include name="verifyInputSpecialSymbolsInFirstNameFieldTest"/>
+              </methods>
+          </class>
+      </classes>
+  </test>
+
+    <test name="37113">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyFieldLastNamePresenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37114">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputInLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37115">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputInLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37117">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputNumbersInLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37118">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputForbiddenSymbolsInLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37119">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputSpecialSymbolsInLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

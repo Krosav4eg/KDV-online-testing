@@ -49,6 +49,11 @@ public class AssertCollector {
         }
     }
 
+    public static void assertTrue(boolean condition,String message) {
+        Assert.assertTrue(condition,message);
+    }
+
+
     /**
      * This method uses library assertJ for once-only comparison. "Try-catch" is used for remaining old logging logic,
      * but there is RuntimeException in the end that test can fail in appropriate situation.

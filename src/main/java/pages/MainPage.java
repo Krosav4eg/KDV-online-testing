@@ -36,6 +36,18 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Регистрация']")
     private WebElement registrationButton;
 
+    @FindBy(css = ".geo.j_geo")
+    private WebElement selectCityModalWindow;
+
+    @FindBy(xpath = "//div[text()='Томск']")
+    private WebElement selectCityTomsk;
+
+    @FindBy(css = ".geo-confirm__content")
+    private WebElement geoConfirmModalWindow;
+
+    @FindBy(xpath = "//button[text()='Да']")
+    private WebElement acceptGeoConfirm;
+
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
 
@@ -320,7 +332,11 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
-        elementIsClickable(closePopupButton, driver).click();
+        if (selectCityModalWindow.isDisplayed()) {
+            elementIsClickable(selectCityTomsk, driver).click();
+        } else if (geoConfirmModalWindow.isDisplayed()) {
+            elementIsClickable(acceptGeoConfirm, driver).click();
+        }
     }
 
     public void checkCompanyLogo() {
