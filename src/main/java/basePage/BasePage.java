@@ -102,8 +102,6 @@ public abstract class BasePage {
 
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
-        System.out.println(
-                executor.executeScript("arguments[0].click();", element));
         executor.executeScript("arguments[0].click();", element);
     }
 
