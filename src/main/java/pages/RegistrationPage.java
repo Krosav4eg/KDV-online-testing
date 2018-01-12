@@ -200,4 +200,10 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(phone.isDisplayed());
     }
+
+    public void verifyMaskInPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(phone, driver).click();
+        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"));
+    }
 }
