@@ -78,5 +78,15 @@ public class categoryTest extends BaseTest {
 		TestReporter.testTitle("Test ID - C39220");
 		categoryPage.sortFilter("Price Asc");
 	}
+	@Test
+	public void verifyCategoryFromSearch() {
+		TestReporter.testTitle("Test ID - C39220");
+		categoryPage.selectFromSearch();
+	}
+	@Test
+	public void verifyCategoryFromDropMenu() {
+		TestReporter.testTitle("Test ID - C39220");
+		categoryPage.selectFromDropDown();
+	}
 	
 }

@@ -102,7 +102,18 @@ public abstract class BasePage {
 
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
+        System.out.println(
+                executor.executeScript("arguments[0].click();", element));
         executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * It just execute all browsers js script
+     * @param script example jQery("div:contains('test')").click()
+     * @param driver
+     */
+    public static void CallJS(String script, WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript(script);
     }
 
     protected static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
