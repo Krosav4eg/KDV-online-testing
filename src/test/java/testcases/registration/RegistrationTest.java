@@ -227,5 +227,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37353");
         registrationPage.verifyWorkOfCheckboxConfirm();
     }
+
+    @Test
+    public void verifyCheckboxConfirmPresenceTest() {
+        TestReporter.testTitle("Test ID = 37354");
+        registrationPage.verifyCheckboxConfirmPresence();
+    }
 }
 
