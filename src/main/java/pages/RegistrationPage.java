@@ -358,7 +358,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyCheckboxConfirmPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(),"Required check box is present");
+        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(), "Required check box is present");
         AssertCollector.assertFalse(checkboxConfirm.isSelected());
     }
 
@@ -367,5 +367,144 @@ public class RegistrationPage extends BasePage {
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingFirstNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(11));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingEmailField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingPasswordField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingConfirmPasswordField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingCheckbox() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifyDuplicateEmail() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Учётная запись с таким адресом электронной почты уже существует. Если вы уверены, " +
+                "что это ваш адрес, то нажмите сюда для получения пароля на email. С ним вы сможете получить доступ " +
+                "к вашей учётной записи.");
+    }
+
+    public void verifyForgotPasswordButton() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        String linkTextValue = getValueOfAttributeByName(forgotPassword, "href");
+        elementFluentWaitVisibility(forgotPassword, driver).click();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
+                linkTextValue);
+    }
+
+    public void verifySuccessfulRegistration() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "testuser@test.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на " +
+                "указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
     }
 }

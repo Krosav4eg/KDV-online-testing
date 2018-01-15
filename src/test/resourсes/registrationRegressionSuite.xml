@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Registration regression tests" parallel="tests" thread-count="3">
+<suite name="Registration regression tests" parallel="tests" thread-count="4">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -392,6 +392,116 @@
             <class name="testcases.registration.RegistrationTest">
                 <methods>
                     <include name="verifyPressSendButtonWithoutFillingFieldsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37341">
+       <classes>
+           <class name="testcases.registration.RegistrationTest">
+               <methods>
+                   <include name="verifySendingWithoutFillingFirstNameFieldTest"/>
+               </methods>
+           </class>
+       </classes>
+   </test>
+
+    <test name="37343">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37344">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingPhoneFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37345">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingEmailFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37346">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingPasswordFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37349">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingConfirmPasswordFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37351">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingCheckboxTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37351">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySendingWithoutFillingCheckboxTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37360">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyDuplicateEmailTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37365">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyForgotPasswordButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37366">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySuccessfulRegistrationTest"/>
                 </methods>
             </class>
         </classes>
