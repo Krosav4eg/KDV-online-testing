@@ -386,4 +386,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="37340">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyPressSendButtonWithoutFillingFieldsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

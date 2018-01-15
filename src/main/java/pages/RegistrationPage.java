@@ -361,4 +361,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(checkboxConfirm.isDisplayed(),"Required check box is present");
         AssertCollector.assertFalse(checkboxConfirm.isSelected());
     }
+
+    public void verifyPressSendButtonWithoutFillingFields() {
+        getUrl(REGISTRATION_PAGE_URL);
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
 }
