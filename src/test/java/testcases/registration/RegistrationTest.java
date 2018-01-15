@@ -389,5 +389,59 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37421");
         registrationPage.verifyMaximumInputInLegalAddress();
     }
+
+    @Test
+    public void verifyCompanyFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37423");
+        registrationPage.verifyCompanyFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInCompanyTest() {
+        TestReporter.testTitle("Test ID = 37424");
+        registrationPage.verifyMaximumInputInCompany();
+    }
+
+    @Test
+    public void verifyAddressFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37479");
+        registrationPage.verifyAddressFieldPresence();
+    }
+
+    @Test
+    public void verifyPromptsInAddressFieldAfterInputTest() {
+        TestReporter.testTitle("Test ID = 37564");
+        registrationPage.verifyPromptsInAddressFieldAfterInput();
+    }
+
+    @Test
+    public void verifyPromptChoosingInAddressFieldAfterInputTest() {
+        TestReporter.testTitle("Test ID = 37565");
+        registrationPage.verifyPromptChoosingInAddressFieldAfterInput();
+    }
+
+    @Test
+    public void verifyFullAddressInputInAddressFieldTest() {
+        TestReporter.testTitle("Test ID = 37567");
+        registrationPage.verifyFullAddressInputInAddressField();
+    }
+
+    @Test
+    public void verifyMaximumInputInAddressFieldTest() {
+        TestReporter.testTitle("Test ID = 37480");
+        registrationPage.verifyMaximumInputInAddressField();
+    }
+
+    @Test
+    public void verifyCommentsFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37485");
+        registrationPage.verifyCommentsFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInCommentsFieldTest() {
+        TestReporter.testTitle("Test ID = 37486");
+        registrationPage.verifyMaximumInputInCommentsField();
+    }
 }
 
