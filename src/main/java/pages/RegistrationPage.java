@@ -355,4 +355,10 @@ public class RegistrationPage extends BasePage {
         doubleClickOnElement(driver, checkboxConfirm);
         AssertCollector.assertFalse(checkboxConfirm.isSelected());
     }
+
+    public void verifyCheckboxConfirmPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(),"Required check box is present");
+        AssertCollector.assertFalse(checkboxConfirm.isSelected());
+    }
 }
