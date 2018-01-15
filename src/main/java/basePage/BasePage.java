@@ -134,7 +134,7 @@ public abstract class BasePage {
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {
-                waitForJSandJQueryToLoad();
+              //  waitForJSandJQueryToLoad();
                 elementList.get(elementIndex).click();
             }
         } catch (ElementNotVisibleException | ClassCastException | IndexOutOfBoundsException e) {
@@ -198,29 +198,6 @@ public abstract class BasePage {
         return totalCount;
     }
 
-    /**
-     * Method for waiting for Javascript and jQuery to finish loading.
-     * Execute Javascript to check if jQuery.active is 0
-     * and document.readyState is complete, which means the JS and jQuery load is complete.
-     */
-    protected boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = driver -> {
-            try {
-                return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
-            } catch (Exception e) {
-                // no jQuery present
-                LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
-                TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
-                return true;
-            }
-        };
-        // wait for Javascript to load
-        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
-                .toString().equals("complete");
-        return wait.until(jQueryLoad) && wait.until(jsLoad);
-    }
 
 
     protected void switchDriverToAnyTabOfBrowser(int tabIndex) {
