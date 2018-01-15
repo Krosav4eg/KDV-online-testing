@@ -2,10 +2,13 @@ package pages;
 
 import basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
+
+import java.util.Random;
 
 import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
@@ -22,26 +25,35 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//a[@rel='legal']")
     private WebElement organizationButton;
 
-    @FindBy(xpath = ".//*[@id='firstname']")
+    @FindBy(id = "firstname")
     private WebElement firstName;
 
-    @FindBy(xpath = ".//*[@id='lastname']")
+    @FindBy(id = "lastname")
     private WebElement lastName;
 
-    @FindBy(xpath = ".//*[@id='adv_phone']")
+    @FindBy(id = "adv_phone")
     private WebElement phone;
 
-    @FindBy(xpath = ".//*[@id='email_address']")
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(3)")
+    private WebElement contactData;
+
+    @FindBy(id = "email_address")
     private WebElement email;
 
-    @FindBy(xpath = ".//*[@id='password']")
+    @FindBy(id = "password")
     private WebElement password;
 
-    @FindBy(xpath = ".//*[@id='confirmation']")
+    @FindBy(id = "confirmation")
     private WebElement confirmPassword;
 
-    @FindBy(xpath = "//label[@for='is_subscribed']")
+    @FindBy(css = "[for='is_subscribed']")
     private WebElement subscription;
+
+    @FindBy(css = "[for='is_agree_legal']")
+    private WebElement agreeLegal;
+
+    @FindBy(css = ".j_login_section")
+    private WebElement loginInformation;
 
     @FindBy(xpath = "//label[@data-show='general']")
     private WebElement checkboxConfirm;
@@ -49,7 +61,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//label[@data-show='legal']")
     private WebElement checkboxConfirmLegal;
 
-    @FindBy(xpath = ".//button[@title='Отправить']")
+    @FindBy(css = "button[title='Отправить']")
     private WebElement sendButton;
 
     @FindBy(css = ".layout__footer")
@@ -61,29 +73,36 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = ".error-msg>ul>li>span>a")
     private WebElement forgotPassword;
 
-    @FindBy(xpath = ".//*[@id='adv_full_name']")
+    @FindBy(id = "adv_full_name")
     private WebElement organizationFullName;
 
-    @FindBy(xpath = ".//*[@id='adv_inn']")
+    @FindBy(id = "adv_inn")
     private WebElement taxpayerId;
 
-    @FindBy(xpath = ".//*[@id='adv_kpp']")
+    @FindBy(id = "adv_kpp")
     private WebElement reasonCode;
 
-    @FindBy(xpath = ".//*[@id='legal_address']")
+    @FindBy(id = "legal_address")
     private WebElement legalAddress;
 
-    @FindBy(xpath = ".//*[@id='company']")
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(1)")
+    private WebElement informationOrganization;
+    @FindBy(id = "company")
     private WebElement company;
 
-    @FindBy(xpath = ".//*[@id='street']")
+    @FindBy(id = "street")
     private WebElement address;
 
-    @FindBy(xpath = ".//*[@id='comments']")
+    @FindBy(id = "comments")
     private WebElement comments;
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(2)")
+    private WebElement addressDelivery;
 
     @FindBy(xpath = "//span[contains(text(), \"г\")]/*[text()='Томск']")
     private WebElement cityForAddress;
+
+    @FindBy(css = "a[data-customer-type='3'].j_customer_type_link")
+    private WebElement organizationCheckBox;
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -334,6 +353,89 @@ public class RegistrationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
+    public JSONObject infoAuthorization()
+    {
+        String pass=RandomStringUtils.randomAlphabetic(10);
+        JSONObject data= new JSONObject();
+        data.put("email",RandomStringUtils.randomAlphabetic(10)+"@test.com");
+        data.put("password",pass);
+        data.put("confirmPassword",pass);
+        return data;
+    }
+
+        public JSONObject mainInfoRegistration()
+    {
+        JSONObject data= new JSONObject();
+        data.put("organizationName","ТЕСТ");
+        data.put("taxId",RandomStringUtils.randomNumeric(10));
+        data.put("reasonCode",RandomStringUtils.randomNumeric(9));
+        data.put("legalAddress",RandomStringUtils.randomAlphabetic(20));
+        data.put("company","ТЕСТ");
+        data.put("address",RandomStringUtils.randomAlphabetic(20));
+        data.put("comments",RandomStringUtils.randomAlphabetic(20));
+        data.put("firstName",RandomStringUtils.randomAlphabetic(20));
+        data.put("lastName",RandomStringUtils.randomAlphabetic(20));
+        data.put("phone",RandomStringUtils.randomNumeric(10));
+        return data;
+    }
+    public String verifyAuthorizationInformation(JSONObject data)
+    {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationCheckBox,driver).click();
+        elementFluentWaitVisibility(email,driver).clear();
+        elementFluentWaitVisibility(email,driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(password,driver).clear();
+        elementFluentWaitVisibility(password,driver).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(confirmPassword,driver).clear();
+        elementFluentWaitVisibility(confirmPassword,driver).sendKeys(data.getString("confirmPassword"));
+        elementFluentWaitVisibility(subscription,driver).click();
+        elementFluentWaitVisibility(agreeLegal,driver).click();
+        elementFluentWaitVisibility(sendButton,driver).click();
+        return getText(loginInformation);
+    }
+
+    public String verifyAuthorizationFields(JSONObject data)
+    {
+        String organizationInformation=organizationInformation(data);
+        String addressDelivery=addressDelivery(data);
+        String contactData=contactData(data);
+        elementFluentWaitVisibility(sendButton,driver).click();
+        System.out.println(organizationInformation);
+        System.out.println(addressDelivery);
+        System.out.println(contactData);
+        return organizationInformation+addressDelivery+contactData;
+    }
+    public String organizationInformation(JSONObject data)
+    {
+        elementFluentWaitVisibility(organizationFullName,driver).clear();
+        elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
+        elementFluentWaitVisibility(taxpayerId,driver).clear();
+        elementFluentWaitVisibility(taxpayerId,driver).sendKeys(data.getString("taxId"));
+        elementFluentWaitVisibility(reasonCode,driver).clear();
+        elementFluentWaitVisibility(reasonCode,driver).sendKeys(data.getString("reasonCode"));
+        elementFluentWaitVisibility(legalAddress,driver).clear();
+        elementFluentWaitVisibility(legalAddress,driver).sendKeys(data.getString("legalAddress"));
+        return getText(informationOrganization);
+    }
+    public String addressDelivery(JSONObject data)
+    {
+        elementFluentWaitVisibility(company,driver).clear();
+        elementFluentWaitVisibility(company,driver).sendKeys(data.getString("company"));
+        elementFluentWaitVisibility(address,driver).clear();
+        elementFluentWaitVisibility(address,driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(comments,driver).clear();
+        elementFluentWaitVisibility(comments,driver).sendKeys(data.getString("comments"));
+        return getText(addressDelivery);
+    }
+    public String contactData(JSONObject data) {
+        elementFluentWaitVisibility(firstName, driver).clear();
+        elementFluentWaitVisibility(firstName, driver).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastName, driver).clear();
+        elementFluentWaitVisibility(lastName, driver).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(phone, driver).clear();
+        elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
+        return getText(contactData);
+    }
     public void verifyCoincidencePasswordAndConfirmation() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(password, driver, "1234567");
@@ -358,7 +460,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyCheckboxConfirmPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(),"Required check box is present");
+        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(), "Required check box is present");
         AssertCollector.assertFalse(checkboxConfirm.isSelected());
     }
 
@@ -367,5 +469,360 @@ public class RegistrationPage extends BasePage {
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingFirstNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingLastNameField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(11));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingPhoneField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingEmailField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingPasswordField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingConfirmPasswordField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifySendingWithoutFillingCheckbox() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifyDuplicateEmail() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Учётная запись с таким адресом электронной почты уже существует. Если вы уверены, " +
+                "что это ваш адрес, то нажмите сюда для получения пароля на email. С ним вы сможете получить доступ " +
+                "к вашей учётной записи.");
+    }
+
+    public void verifyForgotPasswordButton() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "a.shaulo@andersenlab.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        String linkTextValue = getValueOfAttributeByName(forgotPassword, "href");
+        elementFluentWaitVisibility(forgotPassword, driver).click();
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of ",
+                linkTextValue);
+    }
+
+    public void verifySuccessfulRegistration() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(email, driver, "testuser@test.com");
+        fillInputField(password, driver, "123456789");
+        fillInputField(confirmPassword, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirm, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на " +
+                "указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
+    }
+
+    public void verifyLegalEntitySelected() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(organizationButton.isSelected());
+    }
+
+    public void verifyOrganizationFullNameFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(organizationFullName.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInFullName() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(256));
+        AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void verifyFieldForTaxpayerId() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(taxpayerId.isDisplayed());
+    }
+
+    public void verifyValidInputInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "1234567891");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+    }
+
+    public void verifyInputLettersInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "абвы456781");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertFalse(taxpayerId.getAttribute("value").matches("[A-Za-zа-яёА-ЯЁ]"));
+    }
+
+    // TODO: change regex expression
+    public void verifyInputSymbolsInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "%*&^@12121");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+
+    }
+
+    public void verifyInputLessThenTenDigitsInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(taxpayerId, driver, "7878");
+        fillInputField(reasonCode, driver, RandomStringUtils.randomNumeric(9));
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(company, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(10));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "ashaulo@andersenlab.com");
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirmLegal, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"ИНН\" должно содержать 10 символов.");
+    }
+
+    public void verifyReasonCodeFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(reasonCode.isDisplayed());
+    }
+
+    public void verifyValidInputInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, RandomStringUtils.randomNumeric(9));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertTrue(reasonCode.getAttribute("value").matches("\\d+"));
+    }
+
+    public void verifyInputLettersInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, "абвы56781");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertFalse(reasonCode.getAttribute("value").matches("[A-Za-zа-яёА-ЯЁ]"));
+    }
+
+    // TODO: change regex expression
+    public void verifyInputSymbolsInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, "%*&^@212121");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+
+    }
+
+    public void verifyInputLessThenNineDigitsInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(taxpayerId, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(reasonCode, driver, "7878");
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(company, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(10));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "ashaulo@andersenlab.com");
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirmLegal, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"КПП\" должно содержать 9 символов.");
+    }
+
+    public void verifyLegalAddressFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(legalAddress.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInLegalAddress() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphanumeric(255).length());
+    }
+
+    public void verifyCompanyFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(company.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInCompany() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(company, driver, RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertEquals(company.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphanumeric(255).length());
+    }
+
+    public void verifyAddressFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(address.isDisplayed());
+    }
+
+    public void verifyPromptsInAddressFieldAfterInput() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(address, driver, "Т");
+        textPresent("Выберите адрес");
+    }
+
+    public void verifyPromptChoosingInAddressFieldAfterInput() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        scrollToNecessaryElement(company);
+        elementFluentWaitVisibility(address, driver).click();
+        fillInputField(address, driver, "Томск");
+        elementFluentWaitVisibility(cityForAddress, driver).click();
+        AssertCollector.assertTrue(address.getAttribute("value").contains("Томск"));
+        textPresent("Внимание! Вы не указали номер квартиры, офиса.");
+    }
+
+    //not pass
+    public void verifyFullAddressInputInAddressField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        scrollToNecessaryElement(company);
+        fillInputField(address, driver, "Томск, пр. Мира 20, кв. 7");
+    }
+
+    //not pass
+    public void verifyMaximumInputInAddressField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertEquals(address.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphanumeric(255).length());
+    }
+
+    public void verifyCommentsFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(comments.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInCommentsField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(comments, driver, RandomStringUtils.randomAlphanumeric(1001));
+        AssertCollector.assertEquals(comments.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphanumeric(1000).length());
     }
 }
