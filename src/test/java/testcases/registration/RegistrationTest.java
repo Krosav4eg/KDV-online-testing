@@ -173,5 +173,71 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37331");
         registrationPage.verifyEmailWithSpacesAfterAtSymbol();
     }
+
+    @Test
+    public void verifyFieldPasswordPresenceTest() {
+        TestReporter.testTitle("Test ID = 37338");
+        registrationPage.verifyFieldPasswordPresence();
+    }
+
+    @Test
+    public void verifyPasswordLengthLessThanSixSymbolsTest() {
+        TestReporter.testTitle("Test ID = 37292");
+        registrationPage.verifyPasswordLengthLessThanSixSymbols();
+    }
+
+    @Test
+    public void verifyPasswordWithOnlySpacesTest() {
+        TestReporter.testTitle("Test ID = 37293");
+        registrationPage.verifyPasswordWithOnlySpaces();
+    }
+
+    @Test
+    public void verifyPasswordWithSpacesAtStartAndEndTest() {
+        TestReporter.testTitle("Test ID = 37294");
+        registrationPage.verifyPasswordWithSpacesAtStartAndEnd();
+    }
+
+    @Test
+    public void verifyFieldConfirmPasswordPresenceTest() {
+        TestReporter.testTitle("Test ID = 37337");
+        registrationPage.verifyFieldConfirmPasswordPresence();
+    }
+
+    @Test
+    public void verifyInputNewPasswordWithoutConfirmationTest() {
+        TestReporter.testTitle("Test ID = 37295");
+        registrationPage.verifyInputNewPasswordWithoutConfirmation();
+    }
+
+    @Test
+    public void verifyCoincidencePasswordAndConfirmationTest() {
+        TestReporter.testTitle("Test ID = 37296");
+        registrationPage.verifyCoincidencePasswordAndConfirmation();
+    }
+
+    @Test
+    public void verifySubscriptionCheckboxPresenceTest() {
+        TestReporter.testTitle("Test ID = 37352");
+        registrationPage.verifySubscriptionCheckboxPresence();
+    }
+
+    @Test
+    public void verifyWorkOfCheckboxConfirmTest() {
+        TestReporter.testTitle("Test ID = 37353");
+        registrationPage.verifyWorkOfCheckboxConfirm();
+    }
+
+    @Test
+    public void verifyCheckboxConfirmPresenceTest() {
+        TestReporter.testTitle("Test ID = 37354");
+        registrationPage.verifyCheckboxConfirmPresence();
+    }
+
+    @Test
+    public void verifyPressSendButtonWithoutFillingFieldsTest() {
+        TestReporter.testTitle("Test ID = 37340");
+        registrationPage.verifyPressSendButtonWithoutFillingFields();
+    }
 }
 

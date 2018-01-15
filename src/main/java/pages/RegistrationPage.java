@@ -283,6 +283,7 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Часть адреса до символа \"@\" не должна содержать символ \" \".");
     }
+
     public void verifyEmailWithSpacesAfterAtSymbol() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(email, driver, "a.shaulo@anders enlab.com");
@@ -291,4 +292,80 @@ public class RegistrationPage extends BasePage {
         textPresent("Часть адреса после символа \"@\" не должна содержать символ \" \".");
     }
 
+    public void verifyFieldPasswordPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(password.isDisplayed());
+    }
+
+    public void verifyPasswordLengthLessThanSixSymbols() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "12345");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
+    }
+
+    public void verifyPasswordWithOnlySpaces() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, EMPTY_DATA);
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifyPasswordWithSpacesAtStartAndEnd() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "   123456   ");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
+    }
+
+    public void verifyFieldConfirmPasswordPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(confirmPassword.isDisplayed());
+    }
+
+    public void verifyInputNewPasswordWithoutConfirmation() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "123456789");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
+
+    public void verifyCoincidencePasswordAndConfirmation() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "1234567");
+        fillInputField(confirmPassword, driver, "2233445");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, убедитесь, что ваши пароли совпадают.");
+    }
+
+    public void verifySubscriptionCheckboxPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(subscription.isDisplayed());
+        AssertCollector.assertFalse(subscription.isSelected());
+    }
+
+    public void verifyWorkOfCheckboxConfirm() {
+        getUrl(REGISTRATION_PAGE_URL);
+        scrollToNecessaryElement(checkboxConfirm);
+        doubleClickOnElement(driver, checkboxConfirm);
+        AssertCollector.assertFalse(checkboxConfirm.isSelected());
+    }
+
+    public void verifyCheckboxConfirmPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(),"Required check box is present");
+        AssertCollector.assertFalse(checkboxConfirm.isSelected());
+    }
+
+    public void verifyPressSendButtonWithoutFillingFields() {
+        getUrl(REGISTRATION_PAGE_URL);
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Это поле обязательно для заполнения.");
+    }
 }
