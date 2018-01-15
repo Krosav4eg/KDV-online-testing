@@ -507,4 +507,149 @@ public class RegistrationPage extends BasePage {
         textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на " +
                 "указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
     }
+
+    public void verifyLegalEntitySelected() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(organizationButton.isSelected());
+    }
+
+    public void verifyOrganizationFullNameFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(organizationFullName.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInFullName() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(256));
+        AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void verifyFieldForTaxpayerId() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(taxpayerId.isDisplayed());
+    }
+
+    public void verifyValidInputInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "1234567891");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+    }
+
+    public void verifyInputLettersInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "абвы456781");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertFalse(taxpayerId.getAttribute("value").matches("[A-Za-zа-яёА-ЯЁ]"));
+    }
+
+    // TODO: change regex expression
+    public void verifyInputSymbolsInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(taxpayerId, driver, "%*&^@12121");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+
+    }
+
+    public void verifyInputLessThenTenDigitsInTaxpayerIdField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(taxpayerId, driver, "7878");
+        fillInputField(reasonCode, driver, RandomStringUtils.randomNumeric(9));
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(company, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(10));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "ashaulo@andersenlab.com");
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirmLegal, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"ИНН\" должно содержать 10 символов.");
+    }
+
+    public void verifyReasonCodeFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(reasonCode.isDisplayed());
+    }
+
+    public void verifyValidInputInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, RandomStringUtils.randomNumeric(9));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertTrue(reasonCode.getAttribute("value").matches("\\d+"));
+    }
+
+    public void verifyInputLettersInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, "абвы56781");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        AssertCollector.assertFalse(reasonCode.getAttribute("value").matches("[A-Za-zа-яёА-ЯЁ]"));
+    }
+
+    // TODO: change regex expression
+    public void verifyInputSymbolsInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(reasonCode, driver, "%*&^@212121");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+
+    }
+
+    public void verifyInputLessThenNineDigitsInReasonCodeField() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(taxpayerId, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(reasonCode, driver, "7878");
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(company, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(10));
+        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
+        fillInputField(email, driver, "ashaulo@andersenlab.com");
+        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
+        fillInputField(confirmPassword, driver, password.getAttribute("value"));
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(checkboxConfirmLegal, driver).click();
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Значение \"КПП\" должно содержать 9 символов.");
+    }
+
+    public void verifyLegalAddressFieldPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        AssertCollector.assertTrue(legalAddress.isDisplayed());
+    }
+
+    //not pass
+    public void verifyMaximumInputInLegalAddress() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationButton, driver).click();
+        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphanumeric(255).length());
+    }
 }
