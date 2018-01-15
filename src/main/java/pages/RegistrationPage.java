@@ -342,4 +342,10 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Пожалуйста, убедитесь, что ваши пароли совпадают.");
     }
+
+    public void verifySubscriptionCheckboxPresence() {
+        getUrl(REGISTRATION_PAGE_URL);
+        AssertCollector.assertTrue(subscription.isDisplayed());
+        AssertCollector.assertFalse(subscription.isSelected());
+    }
 }
