@@ -105,6 +105,15 @@ public abstract class BasePage {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * It just execute all browsers js script
+     * @param script example jQery("div:contains('test')").click()
+     * @param driver
+     */
+    public static void CallJS(String script, WebDriver driver) {
+        ((JavascriptExecutor) driver).executeScript(script);
+    }
+
     protected static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
         LOGGER.log(Level.INFO, "Move to the main element position and click needed element " + mainElement);
         TestReporter.step(" Click on needed element " + subElement);
