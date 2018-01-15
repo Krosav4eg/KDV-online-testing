@@ -348,4 +348,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(subscription.isDisplayed());
         AssertCollector.assertFalse(subscription.isSelected());
     }
+
+    public void verifyWorkOfCheckboxConfirm() {
+        getUrl(REGISTRATION_PAGE_URL);
+        scrollToNecessaryElement(checkboxConfirm);
+        doubleClickOnElement(driver, checkboxConfirm);
+        AssertCollector.assertFalse(checkboxConfirm.isSelected());
+    }
 }

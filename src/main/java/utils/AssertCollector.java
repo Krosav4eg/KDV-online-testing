@@ -49,8 +49,12 @@ public class AssertCollector {
         }
     }
 
-    public static void assertTrue(boolean condition,String message) {
-        Assert.assertTrue(condition,message);
+    public static void assertTrue(boolean condition, String message) {
+        Assert.assertTrue(condition, message);
+    }
+
+    public static void assertFalse(boolean condition, String message) {
+        Assert.assertTrue(condition, message);
     }
 
 
