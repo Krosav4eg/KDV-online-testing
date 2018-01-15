@@ -333,4 +333,13 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Это поле обязательно для заполнения.");
     }
+
+    public void verifyCoincidencePasswordAndConfirmation() {
+        getUrl(REGISTRATION_PAGE_URL);
+        fillInputField(password, driver, "1234567");
+        fillInputField(confirmPassword, driver, "2233445");
+        scrollToNecessaryElement(sendButton);
+        elementFluentWaitVisibility(sendButton, driver).click();
+        textPresent("Пожалуйста, убедитесь, что ваши пароли совпадают.");
+    }
 }
