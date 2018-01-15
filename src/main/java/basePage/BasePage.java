@@ -100,6 +100,11 @@ public abstract class BasePage {
         action.moveToElement(element, x, y).click().build().perform();
     }
 
+    protected static void doubleClickOnElement(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver).doubleClick(element);
+        action.build().perform();
+    }
+
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
@@ -107,6 +112,7 @@ public abstract class BasePage {
 
     /**
      * It just execute all browsers js script
+     *
      * @param script example jQery("div:contains('test')").click()
      * @param driver
      */
