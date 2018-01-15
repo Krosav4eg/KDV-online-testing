@@ -209,5 +209,11 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37295");
         registrationPage.verifyInputNewPasswordWithoutConfirmation();
     }
+
+    @Test
+    public void verifyCoincidencePasswordAndConfirmationTest() {
+        TestReporter.testTitle("Test ID = 37296");
+        registrationPage.verifyCoincidencePasswordAndConfirmation();
+    }
 }
 
