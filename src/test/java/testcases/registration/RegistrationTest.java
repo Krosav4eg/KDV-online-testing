@@ -1,7 +1,11 @@
 package testcases.registration;
 
+import org.json.JSONObject;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
+import utils.AssertCollector;
 import utils.TestReporter;
 
 public class RegistrationTest extends BaseTest {
@@ -208,6 +212,69 @@ public class RegistrationTest extends BaseTest {
     public void verifyInputNewPasswordWithoutConfirmationTest() {
         TestReporter.testTitle("Test ID = 37295");
         registrationPage.verifyInputNewPasswordWithoutConfirmation();
+    }
+
+    @Test
+    public void verifyInputEmailTest() {
+        TestReporter.testTitle("Test ID = 37522,37515,37522");
+        JSONObject data= registrationPage.infoAuthorization();
+        AssertCollector.assertTrue(!registrationPage.verifyAuthorizationInformation(data).contains("Это поле обязательно для заполнения."));
+    }
+    @Test
+    public void verifyInputWrongEmailTest() {
+        TestReporter.testTitle("Test ID = 37516");
+        JSONObject data= registrationPage.infoAuthorization();
+        data.put("email","test@test");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Пожалуйста, введите правильный адрес электронной почты"));
+    }
+    @Test
+    public void verifyInputEmptyPasswordTest() {
+        TestReporter.testTitle("Test ID = 37523");
+        JSONObject data= registrationPage.infoAuthorization();
+        data.put("password","");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Это поле обязательно для заполнения."));
+        data.put("password","test");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Пожалуйста, введите не менее 6 символов без"));
+    }
+    @Test
+    public void verifyInputSpacePasswordTest() {
+        TestReporter.testTitle("Test ID = 37526");
+        JSONObject data= registrationPage.infoAuthorization();
+        data.put("password"," test ");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Это поле обязательно для заполнения."));
+    }
+    @Test
+    public void verifyInputEmptyConfirmPasswordTest() {
+        TestReporter.testTitle("Test ID = 37526");
+        JSONObject data= registrationPage.infoAuthorization();
+        data.put("confirmPassword","");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Это поле обязательно для заполнения."));
+    }
+    @Test
+    public void verifyInputWrongConfirmPasswordTest() {
+        TestReporter.testTitle("Test ID = 37528");
+        JSONObject data= registrationPage.infoAuthorization();
+        data.put("confirmPassword","test");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationInformation(data).contains("Это поле обязательно для заполнения."));
+    }
+    @Test
+    public void verifyFields()
+    {
+        TestReporter.testTitle("Test ID = 37542");
+        JSONObject dataAuthorization= registrationPage.infoAuthorization();
+        AssertCollector.assertTrue(!registrationPage.verifyAuthorizationInformation(dataAuthorization).contains("Это поле обязательно для заполнения."));
+        JSONObject data= registrationPage.mainInfoRegistration();
+        AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+    }
+    @Test
+    public void verifyFieldsEmptyFirstName()
+    {
+        TestReporter.testTitle("Test ID = 37542");
+        JSONObject dataAuthorization= registrationPage.infoAuthorization();
+        AssertCollector.assertTrue(!registrationPage.verifyAuthorizationInformation(dataAuthorization).contains("Это поле обязательно для заполнения."));
+        JSONObject data= registrationPage.mainInfoRegistration();
+        data.put("firstName","");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 }
 
