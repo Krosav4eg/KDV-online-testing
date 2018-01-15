@@ -75,7 +75,7 @@ public class HeaderTest extends BaseTest {
         mainPage.checkingProductsInBasket();
     }
 
-    @Test
+    @Test(timeOut = 30000)
     public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();

@@ -1,4 +1,4 @@
-package pages;
+package pages.CategoryPage;
 
 import basePage.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -76,9 +76,6 @@ public class CategoryPage 	extends BasePage
 		@FindBy(css = "#select-search-wrapper div")
 		private WebElement selectCategorySearchBtn;
 
-		@FindBy(css = "div.search-category-dropdown__list div:contains('Конфеты')")
-		private WebElement selectCategoryInSearchLink;
-
 		@FindBy(css = "#search_mini_form button")
 		private WebElement searchBtn;
 
@@ -106,8 +103,6 @@ public class CategoryPage 	extends BasePage
 			elementFluentWaitVisibility(candyCategoryMainLink,driver).click();
 			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
 		}
-
-
 		public void breadCrumbs() {
 			selectCategorySideBar();
 			AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"),"required bread Crumbs  is present");
