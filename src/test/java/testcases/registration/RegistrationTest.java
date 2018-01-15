@@ -267,14 +267,245 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
     @Test
-    public void verifyFieldsEmptyFirstName()
-    {
+    public void verifyFieldsEmptyFirstName() {
         TestReporter.testTitle("Test ID = 37542");
-        JSONObject dataAuthorization= registrationPage.infoAuthorization();
+        JSONObject dataAuthorization = registrationPage.infoAuthorization();
         AssertCollector.assertTrue(!registrationPage.verifyAuthorizationInformation(dataAuthorization).contains("Это поле обязательно для заполнения."));
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("firstName","");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("firstName", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+    }
+    public void verifyCoincidencePasswordAndConfirmationTest() {
+        TestReporter.testTitle("Test ID = 37296");
+        registrationPage.verifyCoincidencePasswordAndConfirmation();
+    }
+
+    @Test
+    public void verifySubscriptionCheckboxPresenceTest() {
+        TestReporter.testTitle("Test ID = 37352");
+        registrationPage.verifySubscriptionCheckboxPresence();
+    }
+
+    @Test
+    public void verifyWorkOfCheckboxConfirmTest() {
+        TestReporter.testTitle("Test ID = 37353");
+        registrationPage.verifyWorkOfCheckboxConfirm();
+    }
+
+    @Test
+    public void verifyCheckboxConfirmPresenceTest() {
+        TestReporter.testTitle("Test ID = 37354");
+        registrationPage.verifyCheckboxConfirmPresence();
+    }
+
+    @Test
+    public void verifyPressSendButtonWithoutFillingFieldsTest() {
+        TestReporter.testTitle("Test ID = 37340");
+        registrationPage.verifyPressSendButtonWithoutFillingFields();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingFirstNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37341");
+        registrationPage.verifySendingWithoutFillingFirstNameField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingLastNameFieldTest() {
+        TestReporter.testTitle("Test ID = 37343");
+        registrationPage.verifySendingWithoutFillingLastNameField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingPhoneFieldTest() {
+        TestReporter.testTitle("Test ID = 37344");
+        registrationPage.verifySendingWithoutFillingPhoneField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingEmailFieldTest() {
+        TestReporter.testTitle("Test ID = 37345");
+        registrationPage.verifySendingWithoutFillingEmailField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingPasswordFieldTest() {
+        TestReporter.testTitle("Test ID = 37346");
+        registrationPage.verifySendingWithoutFillingPasswordField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingConfirmPasswordFieldTest() {
+        TestReporter.testTitle("Test ID = 37349");
+        registrationPage.verifySendingWithoutFillingConfirmPasswordField();
+    }
+
+    @Test
+    public void verifySendingWithoutFillingCheckboxTest() {
+        TestReporter.testTitle("Test ID = 37351");
+        registrationPage.verifySendingWithoutFillingCheckbox();
+    }
+
+    @Test
+    public void verifyDuplicateEmailTest() {
+        TestReporter.testTitle("Test ID = 37360");
+        registrationPage.verifyDuplicateEmail();
+    }
+
+    @Test
+    public void verifyForgotPasswordButtonTest() {
+        TestReporter.testTitle("Test ID = 37365");
+        registrationPage.verifyForgotPasswordButton();
+    }
+
+    @Test
+    public void verifySuccessfulRegistrationTest() {
+        TestReporter.testTitle("Test ID = 37366");
+        registrationPage.verifySuccessfulRegistration();
+    }
+
+    @Test
+    public void verifyLegalEntitySelectedTest() {
+        TestReporter.testTitle("Test ID = 37384");
+        registrationPage.verifyLegalEntitySelected();
+    }
+
+    @Test
+    public void verifyOrganizationFullNameFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37374");
+        registrationPage.verifyOrganizationFullNameFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInFullNameTest() {
+        TestReporter.testTitle("Test ID = 37375");
+        registrationPage.verifyMaximumInputInFullName();
+    }
+
+    @Test
+    public void verifyFieldForTaxpayerIdTest() {
+        TestReporter.testTitle("Test ID = 37385");
+        registrationPage.verifyFieldForTaxpayerId();
+    }
+
+    @Test
+    public void verifyValidInputInTaxpayerIdFieldTest() {
+        TestReporter.testTitle("Test ID = 37388");
+        registrationPage.verifyValidInputInTaxpayerIdField();
+    }
+
+    @Test
+    public void verifyInputLettersInTaxpayerIdFieldTest() {
+        TestReporter.testTitle("Test ID = 37389");
+        registrationPage.verifyInputLettersInTaxpayerIdField();
+    }
+
+    @Test
+    public void verifyInputSymbolsInTaxpayerIdFieldTest() {
+        TestReporter.testTitle("Test ID = 37390");
+        registrationPage.verifyInputSymbolsInTaxpayerIdField();
+    }
+
+    @Test
+    public void verifyInputLessThenTenDigitsInTaxpayerIdFieldTest() {
+        TestReporter.testTitle("Test ID = 37391");
+        registrationPage.verifyInputLessThenTenDigitsInTaxpayerIdField();
+    }
+
+    @Test
+    public void verifyReasonCodeFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37393");
+        registrationPage.verifyReasonCodeFieldPresence();
+    }
+
+    @Test
+    public void verifyValidInputInReasonCodeFieldTest() {
+        TestReporter.testTitle("Test ID = 37394");
+        registrationPage.verifyValidInputInReasonCodeField();
+    }
+
+    @Test
+    public void verifyInputLettersInReasonCodeFieldTest() {
+        TestReporter.testTitle("Test ID = 37395");
+        registrationPage.verifyInputLettersInReasonCodeField();
+    }
+
+    @Test
+    public void verifyInputSymbolsInReasonCodeFieldTest() {
+        TestReporter.testTitle("Test ID = 37396");
+        registrationPage.verifyInputSymbolsInReasonCodeField();
+    }
+
+    @Test
+    public void verifyInputLessThenNineDigitsInReasonCodeFieldTest() {
+        TestReporter.testTitle("Test ID = 37397");
+        registrationPage.verifyInputLessThenNineDigitsInReasonCodeField();
+    }
+
+    @Test
+    public void verifyLegalAddressFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37416");
+        registrationPage.verifyLegalAddressFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInLegalAddressTest() {
+        TestReporter.testTitle("Test ID = 37421");
+        registrationPage.verifyMaximumInputInLegalAddress();
+    }
+
+    @Test
+    public void verifyCompanyFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37423");
+        registrationPage.verifyCompanyFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInCompanyTest() {
+        TestReporter.testTitle("Test ID = 37424");
+        registrationPage.verifyMaximumInputInCompany();
+    }
+
+    @Test
+    public void verifyAddressFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37479");
+        registrationPage.verifyAddressFieldPresence();
+    }
+
+    @Test
+    public void verifyPromptsInAddressFieldAfterInputTest() {
+        TestReporter.testTitle("Test ID = 37564");
+        registrationPage.verifyPromptsInAddressFieldAfterInput();
+    }
+
+    @Test
+    public void verifyPromptChoosingInAddressFieldAfterInputTest() {
+        TestReporter.testTitle("Test ID = 37565");
+        registrationPage.verifyPromptChoosingInAddressFieldAfterInput();
+    }
+
+    @Test
+    public void verifyFullAddressInputInAddressFieldTest() {
+        TestReporter.testTitle("Test ID = 37567");
+        registrationPage.verifyFullAddressInputInAddressField();
+    }
+
+    @Test
+    public void verifyMaximumInputInAddressFieldTest() {
+        TestReporter.testTitle("Test ID = 37480");
+        registrationPage.verifyMaximumInputInAddressField();
+    }
+
+    @Test
+    public void verifyCommentsFieldPresenceTest() {
+        TestReporter.testTitle("Test ID = 37485");
+        registrationPage.verifyCommentsFieldPresence();
+    }
+
+    @Test
+    public void verifyMaximumInputInCommentsFieldTest() {
+        TestReporter.testTitle("Test ID = 37486");
+        registrationPage.verifyMaximumInputInCommentsField();
     }
 }
 

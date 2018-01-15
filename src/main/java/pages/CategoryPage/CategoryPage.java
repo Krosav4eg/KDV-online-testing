@@ -1,10 +1,12 @@
-package pages;
+package pages.CategoryPage;
 
 import basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
+
+import static utils.Constants.ABOUT_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 public class CategoryPage 	extends BasePage
@@ -13,7 +15,7 @@ public class CategoryPage 	extends BasePage
 		super(driver);
 	}
 
-		//========================Categor PAGE=============================================
+		//========================Category PAGE=============================================
 		@FindBy(css = "[alt='Конфеты']")
 		private WebElement candyLink;
 
@@ -52,37 +54,68 @@ public class CategoryPage 	extends BasePage
 
 		@FindBy(css = ".toolbar-select__list a:nth-child(3)")
 		private WebElement sortPriceLink;
+
 		@FindBy(css = ".toolbar-select__list a:nth-child(2)")
 		private WebElement sortDeafultLink;
+
 		@FindBy(css = "div.yt-products-container.clearfix > div > div:nth-child(1)")
 		private WebElement categoryElementTxt;
+
 		@FindBy(css = ".toolbar-select__value")
 		private WebElement dropDownMenu;
+
 		@FindBy(css = "div.yt-products-container.clearfix > div > div:nth-child(1) .product-total-price")
 		private WebElement priceTxt;
-		//
-		//
-		//
-		private void  selectCategory()
-		{
 
+		@FindBy(css = ".header-bottom-left__btn-catalog-wrapper")
+		private WebElement catalogMainList;
+
+		@FindBy(css = ".header-bottom-left__btn-catalog-wrapper [alt='Конфеты']")
+		private WebElement candyCategoryMainLink;
+
+		@FindBy(css = "#select-search-wrapper div")
+		private WebElement selectCategorySearchBtn;
+
+		@FindBy(css = "#search_mini_form button")
+		private WebElement searchBtn;
+
+		private void selectCategorySideBar()
+		{
 			driver.navigate().refresh();
 			clickElementByJS(driver, candyLink);
 		}
 
+		//TODO find the solution of this problem - it must be fixed
+		public void selectFromSearch()
+		{
+			driver.navigate().refresh();
+			elementFluentWaitVisibility(selectCategorySearchBtn,driver).click();
+			CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()",driver);
+			//clickElementByJS(driver,selectCategoryInSearchLink);
+			elementFluentWaitVisibility(searchBtn,driver).click();
+			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
+
+		}
+		public void selectFromDropDown()
+		{
+			driver.navigate().to(ABOUT_PAGE_URL);
+			elementFluentWaitVisibility(catalogMainList,driver).click();
+			elementFluentWaitVisibility(candyCategoryMainLink,driver).click();
+			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
+		}
 		public void breadCrumbs() {
-			selectCategory();
+			selectCategorySideBar();
 			AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"),"required bread Crumbs  is present");
 			}
 
-
 		public void header() {
-			selectCategory();
+			selectCategorySideBar();
 			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
 		}
-		//TODO del before commit document.querySelector("[alt='Конфеты']").click()
+
+
 		public void commodityGridList(String navigate) {
-			selectCategory();
+			selectCategorySideBar();
 			if(navigate.contains("List"))
 				{
 					elementFluentWaitVisibility(listBtn,driver).click();
@@ -99,7 +132,7 @@ public class CategoryPage 	extends BasePage
 
 		public void statusBlock()
 		{
-			selectCategory();
+			selectCategorySideBar();
 			AssertCollector.assertTrue(getText(statusTxt).contains("Статус"),"required status  is present");
 			AssertCollector.assertTrue(getText(statusTxt).contains("в наличии"),"required text  is present");
 			int number= Integer.parseInt(getText(statusTxt).replaceAll("[^0-9]", ""));
@@ -107,7 +140,7 @@ public class CategoryPage 	extends BasePage
 		}
 
 		public void CheckBox(String testCase) {
-			selectCategory();
+			selectCategorySideBar();
 			elementFluentWaitVisibility(existBtn, driver).click();
 			AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
 			AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
@@ -133,7 +166,7 @@ public class CategoryPage 	extends BasePage
 			}
 		}
 		public void sortFilter(String testCase) {
-			selectCategory();
+			selectCategorySideBar();
 			moveMouseTo(driver,dropDownMenu);
 			switch (testCase)
 			{
