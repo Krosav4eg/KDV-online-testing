@@ -10,6 +10,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
+import pages.CategoryPage.CardPage;
+import pages.CategoryPage.CategoryPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -33,6 +35,7 @@ public abstract class BaseTest {
     protected CustomerAccountPage customerAccountPage;
     protected RegistrationPage registrationPage;
     protected CategoryPage categoryPage;
+    protected CardPage cardPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests

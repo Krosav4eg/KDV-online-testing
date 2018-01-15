@@ -337,6 +337,7 @@ public class MainPage extends BasePage {
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
+        driver.navigate().refresh();
     }
 
     public void checkCompanyLogo() {
@@ -548,7 +549,6 @@ public class MainPage extends BasePage {
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -817,7 +817,6 @@ public class MainPage extends BasePage {
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
@@ -842,7 +841,6 @@ public class MainPage extends BasePage {
     public void checkingProductsInBasket() {
         if (basketIsEmpty.isDisplayed()) {
             scrollDown();
-            waitForJSandJQueryToLoad();
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
             clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
@@ -877,7 +875,6 @@ public class MainPage extends BasePage {
 
     public void openingBasketAndOrdering() {
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         clickOnIndexFromElementList(hitSalesBasketButtons, 1);
         clickOnIndexFromElementList(hitSalesBasketButtons, 2);
