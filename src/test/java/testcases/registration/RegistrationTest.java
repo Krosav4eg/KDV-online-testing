@@ -215,5 +215,12 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37296");
         registrationPage.verifyCoincidencePasswordAndConfirmation();
     }
+
+    @Test
+    public void verifySubscriptionCheckboxPresenceTest() {
+        TestReporter.testTitle("Test ID = 37352");
+        registrationPage.verifySubscriptionCheckboxPresence();
+    }
+
 }
 
