@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
 public abstract class EventHandler   implements WebDriverEventListener   {
@@ -35,12 +36,14 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
 		waitForPageLoad(arg1);
+		waitForJSandJQueryToLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
 		waitForPageLoad(arg1);
+		waitForJSandJQueryToLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
 

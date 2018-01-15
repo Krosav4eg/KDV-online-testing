@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Header regression tests">
+<suite name="Header regression tests" time-out="600000">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316">
+    <test name="C34282-C34283,C34287-C34290,C34292-C34293,C34316" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -25,7 +25,7 @@
         </classes>
     </test>
 
-    <test name="C34299">
+    <test name="C34299" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -35,7 +35,7 @@
         </classes>
     </test>
 
-    <test name="C34296">
+    <test name="C34296" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -45,7 +45,7 @@
         </classes>
     </test>
 
-    <test name="C34285">
+    <test name="C34285" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -55,7 +55,7 @@
         </classes>
     </test>
 
-    <test name="C34297">
+    <test name="C34297" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -65,7 +65,7 @@
         </classes>
     </test>
 
-    <test name="C34308">
+    <test name="C34308" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -75,7 +75,7 @@
         </classes>
     </test>
 
-    <test name="C34309">
+    <test name="C34309" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -85,7 +85,7 @@
         </classes>
     </test>
 
-    <test name="C34310">
+    <test name="C34310" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -95,7 +95,7 @@
         </classes>
     </test>
 
-    <test name="C34317">
+    <test name="C34317" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -105,7 +105,7 @@
         </classes>
     </test>
 
-    <test name="C34374">
+    <test name="C34374" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -115,7 +115,7 @@
         </classes>
     </test>
 
-    <test name="C34375">
+    <test name="C34375" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
@@ -125,7 +125,7 @@
         </classes>
     </test>
 
-    <test name="C34376">
+    <test name="C34376" time-out="240000">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
