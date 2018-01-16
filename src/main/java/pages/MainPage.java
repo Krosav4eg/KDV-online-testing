@@ -375,6 +375,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
+        moveMouseTo(driver,baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
