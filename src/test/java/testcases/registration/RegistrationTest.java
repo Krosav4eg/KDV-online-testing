@@ -1,8 +1,6 @@
 package testcases.registration;
 
 import org.json.JSONObject;
-import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.AssertCollector;
