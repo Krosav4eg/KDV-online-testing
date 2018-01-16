@@ -4,8 +4,6 @@ import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 import utils.TestReporter;
 
@@ -16,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static driverFactory.BrowserFactory.getDriver;
 import static org.testng.Assert.fail;
 import static utils.Constants.COMMA_REGEX;
 import static utils.Constants.RGBA_TO_RGB_REGEX;
@@ -137,7 +134,7 @@ public abstract class BasePage {
         action.click(subElement).perform();
     }
 
-    protected void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
+    protected static void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
         LOGGER.log(Level.INFO, "Click on needed index of element " + elementIndex);
         TestReporter.step("Click on needed index of element " + elementIndex);
         try {

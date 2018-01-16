@@ -23,7 +23,7 @@ public class AssertCollector {
         } catch (Throwable e) {
             LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
             TestReporter.fail(expected.toString() + message + actual.toString());
-            Assert.fail();
+           Assert.fail();
         }
     }
 
