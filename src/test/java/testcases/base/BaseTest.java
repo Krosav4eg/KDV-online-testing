@@ -48,6 +48,7 @@ public abstract class BaseTest {
         initPageElements();
         TestReporter.step("Open main page");
         mainPage.openMainPage();
+
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -65,12 +66,12 @@ public abstract class BaseTest {
 
 
     //TODO it get test name ,need to improver, bad realization
+
     @BeforeMethod
     public void setUp(Method method)
     {
         System.err.println(method.getName());
     }
-
     /**
      * Method for screenshot creation
      *
