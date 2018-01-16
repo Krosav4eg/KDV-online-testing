@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -333,12 +334,20 @@ public class MainPage extends BasePage {
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
-        if (selectCityModalWindow.isDisplayed()) {
-            elementIsClickable(selectCityTomsk, driver).click();
-        } else if (geoConfirmModalWindow.isDisplayed()) {
-            elementIsClickable(acceptGeoConfirm, driver).click();
+        try {
+            if (selectCityModalWindow.isDisplayed()) {
+                elementIsClickable(selectCityTomsk, driver).click();
+            } else if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+            driver.navigate().refresh();
+        } catch (NoSuchElementException e) {
+            e.getMessage();
         }
-        driver.navigate().refresh();
+    }
+
+    public List<WebElement> getCategoryGoodsList() {
+        return categoryGoodsList;
     }
 
     public void checkCompanyLogo() {
@@ -365,7 +374,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(firstCityLink, driver).click();
-       //waitForPageLoad(driver);
+        //waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
@@ -382,6 +391,7 @@ public class MainPage extends BasePage {
         elementIsClickable(citySearchDropdown, driver).click();
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
+
     //TODO remove thread.sleep , think about it, how to fix it
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
@@ -808,7 +818,7 @@ public class MainPage extends BasePage {
     public void verifyMyCardIsEmpty() {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
-       //waitForPageLoad(driver);
+        //waitForPageLoad(driver);
         elementIsClickable(myCart, driver).click();
         AssertCollector.assertTrue(myCart.isDisplayed());
         textPresent("Корзина пока пуста");

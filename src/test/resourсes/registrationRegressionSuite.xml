@@ -747,4 +747,44 @@
             </class>
         </classes>
     </test>
+
+    <test name="37571,37572">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputCorrectInnValueTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37568,40062">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40063,40066">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthInCompanyAndCommentsFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40065">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputAddressFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
