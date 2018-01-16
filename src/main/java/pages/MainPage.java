@@ -334,20 +334,14 @@ public class MainPage extends BasePage {
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
-        try {
-            if (selectCityModalWindow.isDisplayed()) {
-                elementIsClickable(selectCityTomsk, driver).click();
-            } else if (geoConfirmModalWindow.isDisplayed()) {
-                elementIsClickable(acceptGeoConfirm, driver).click();
-            }
-            driver.navigate().refresh();
-        } catch (NoSuchElementException e) {
-            e.getMessage();
+        moveMouseTo(driver,selectCityModalWindow);
+        sleepWait();
+        if (selectCityModalWindow.isDisplayed()) {
+            elementIsClickable(selectCityTomsk, driver).click();
+        } else if (geoConfirmModalWindow.isDisplayed()) {
+            elementIsClickable(acceptGeoConfirm, driver).click();
         }
-    }
-
-    public List<WebElement> getCategoryGoodsList() {
-        return categoryGoodsList;
+        driver.navigate().refresh();
     }
 
     public void checkCompanyLogo() {
@@ -382,6 +376,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
+        moveMouseTo(driver,baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
@@ -391,7 +386,6 @@ public class MainPage extends BasePage {
         elementIsClickable(citySearchDropdown, driver).click();
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
-
     //TODO remove thread.sleep , think about it, how to fix it
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
@@ -818,7 +812,7 @@ public class MainPage extends BasePage {
     public void verifyMyCardIsEmpty() {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
-        //waitForPageLoad(driver);
+       //waitForPageLoad(driver);
         elementIsClickable(myCart, driver).click();
         AssertCollector.assertTrue(myCart.isDisplayed());
         textPresent("Корзина пока пуста");

@@ -25,6 +25,15 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
  */
 public abstract class BasePage {
 
+   public abstract static   class MyDelegate {
+        public  String getTextDelegate(WebElement element)
+        {
+            LOGGER.log(Level.INFO, " Get text of element ");
+            TestReporter.step(" Get text of element ");
+            return element.getText();
+        }
+    }
+
     protected WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
@@ -34,7 +43,7 @@ public abstract class BasePage {
     }
     //========================CUSTOM METHODS=============================================
 
-    protected String getText(WebElement element) {
+    public String getText(WebElement element) {
         LOGGER.log(Level.INFO, " Get text of element ");
         TestReporter.step(" Get text of element ");
         return element.getText();
@@ -230,6 +239,15 @@ public abstract class BasePage {
         } else {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
+        }
+    }
+
+    protected void sleepWait()
+    {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

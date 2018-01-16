@@ -105,8 +105,8 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = "a[data-customer-type='3'].j_customer_type_link")
     private WebElement organizationCheckBox;
 
-    @FindBy(css = "div[data-index='0']")
-    public WebElement firstValueAddressDropDown;
+    @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
+    public  WebElement getAlertTet;
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -357,11 +357,10 @@ public class RegistrationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
-    //TODO it`s not finished, need to refactoring it
 
+	/********************/
     /**
      * Validation JSON for tests
-     *
      * @return JSONData
      * @see
      */
@@ -387,55 +386,53 @@ public class RegistrationPage extends BasePage {
 
     public String verifyAuthorizationFields(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationCheckBox, driver).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformation(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
+        elementFluentWaitVisibility(organizationCheckBox,driver).click();
+        String authorizationInformation=verifyAuthorizationInformation(data);
+        String organizationInformation=organizationInformation(data);
+        String addressDelivery=addressDelivery(data);
+        String contactData=contactData(data);
         scrollToNecessaryElement(footer);
-        elementIsClickable(subscription, driver).click();
-        elementIsClickable(agreeLegal, driver).click();
-        elementIsClickable(sendButton, driver).click();
-        System.out.println(organizationInformation);
-        System.out.println(addressDelivery);
-        System.out.println(contactData);
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
+        elementIsClickable(subscription,driver).click();
+        elementIsClickable(agreeLegal,driver).click();
+        elementIsClickable(sendButton,driver).click();
+        return organizationInformation+addressDelivery+contactData+authorizationInformation;
     }
-
     //registration
-    String verifyAuthorizationInformation(JSONObject data) {
-        elementFluentWaitVisibility(email, driver).clear();
-        elementFluentWaitVisibility(email, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(password, driver).clear();
-        elementFluentWaitVisibility(password, driver).sendKeys(data.getString("password"));
-        elementFluentWaitVisibility(confirmPassword, driver).clear();
-        elementFluentWaitVisibility(confirmPassword, driver).sendKeys(data.getString("confirmPassword"));
+     String verifyAuthorizationInformation(JSONObject data)
+    {
+        elementFluentWaitVisibility(email,driver).clear();
+        elementFluentWaitVisibility(email,driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(password,driver).clear();
+        elementFluentWaitVisibility(password,driver).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(confirmPassword,driver).clear();
+        elementFluentWaitVisibility(confirmPassword,driver).sendKeys(data.getString("confirmPassword"));
         return getText(loginInformation);
     }
-
-    String organizationInformation(JSONObject data) {
-        elementFluentWaitVisibility(organizationFullName, driver).clear();
-        elementFluentWaitVisibility(organizationFullName, driver).sendKeys(data.getString("organizationName"));
-        elementFluentWaitVisibility(taxpayerId, driver).clear();
-        elementFluentWaitVisibility(taxpayerId, driver).sendKeys(data.getString("taxId"));
-        elementFluentWaitVisibility(reasonCode, driver).clear();
-        elementFluentWaitVisibility(reasonCode, driver).sendKeys(data.getString("reasonCode"));
-        elementFluentWaitVisibility(legalAddress, driver).clear();
-        elementFluentWaitVisibility(legalAddress, driver).sendKeys(data.getString("legalAddress"));
+     String organizationInformation(JSONObject data)
+    {
+        elementFluentWaitVisibility(organizationFullName,driver).clear();
+        elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
+        elementFluentWaitVisibility(taxpayerId,driver).clear();
+        elementFluentWaitVisibility(taxpayerId,driver).sendKeys(data.getString("taxId"));
+        elementFluentWaitVisibility(reasonCode,driver).clear();
+        elementFluentWaitVisibility(reasonCode,driver).sendKeys(data.getString("reasonCode"));
+        elementFluentWaitVisibility(legalAddress,driver).clear();
+        elementFluentWaitVisibility(legalAddress,driver).sendKeys(data.getString("legalAddress"));
         return getText(informationOrganization);
     }
 
-    String addressDelivery(JSONObject data) {
-        elementFluentWaitVisibility(company, driver).clear();
-        elementFluentWaitVisibility(company, driver).sendKeys(data.getString("company"));
-        elementFluentWaitVisibility(address, driver).clear();
-        elementFluentWaitVisibility(address, driver).sendKeys(data.getString("address"));
-        elementFluentWaitVisibility(comments, driver).clear();
-        elementFluentWaitVisibility(comments, driver).sendKeys(data.getString("comments"));
+     String addressDelivery(JSONObject data)
+    {
+        elementFluentWaitVisibility(company,driver).clear();
+        elementFluentWaitVisibility(company,driver).sendKeys(data.getString("company"));
+        elementFluentWaitVisibility(address,driver).clear();
+        elementFluentWaitVisibility(address,driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(comments,driver).clear();
+        elementFluentWaitVisibility(comments,driver).sendKeys(data.getString("comments"));
         return getText(addressDelivery);
     }
 
-    String contactData(JSONObject data) {
+     String contactData(JSONObject data) {
         elementFluentWaitVisibility(firstName, driver).clear();
         elementFluentWaitVisibility(firstName, driver).sendKeys(data.getString("firstName"));
         elementFluentWaitVisibility(lastName, driver).clear();
@@ -444,7 +441,7 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
         return getText(contactData);
     }
-
+	/********************/
     public void verifyCoincidencePasswordAndConfirmation() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(password, driver, "1234567");

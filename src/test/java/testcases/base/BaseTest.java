@@ -26,7 +26,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public abstract class BaseTest {
+public abstract class BaseTest  {
     protected WebDriver driver;
 
     //=======DECLARATION OF PAGE CLASSES=========
