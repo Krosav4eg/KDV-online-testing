@@ -314,15 +314,24 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Значение \"ИНН\" уже используется другим пользователем. "));
     }
 
-
-
     @Test
+    public void verifyRegistrationForgotPassword() {
+        TestReporter.testTitle("Test ID = 37540");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("email", "a.shaulo@andersenlab.com");
+        registrationPage.verifyAuthorizationFields(data);
+        registrationPage.forgotPassword();
+
+    }
+
+        @Test
     public void verifyFields()
     {
         TestReporter.testTitle("Test ID = 37542");
         JSONObject data= registrationPage.mainInfoRegistration();
         AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
+
     @Test
     public void verifyFieldsEmptyFirstName() {
         TestReporter.testTitle("Test ID = 37542");
@@ -335,13 +344,16 @@ public class RegistrationTest extends BaseTest {
     public void verifyCoincidencePasswordAndConfirmationTest() {
         TestReporter.testTitle("Test ID = 37296");
         registrationPage.verifyCoincidencePasswordAndConfirmation();
+
     }
 
     @Test
-    public void verifySubscriptionCheckboxPresenceTest() {
-        TestReporter.testTitle("Test ID = 37352");
-        registrationPage.verifySubscriptionCheckboxPresence();
+    public void verifyRegistrationWithEmptyFields() {
+        TestReporter.testTitle("Test ID = 37532");
+        registrationPage.verifyRegistrationWithEmptyFields();
     }
+
+
 
     @Test
     public void verifyWorkOfCheckboxConfirmTest() {

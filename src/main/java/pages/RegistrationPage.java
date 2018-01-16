@@ -63,7 +63,17 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//label[@data-show='legal']")
     private WebElement checkboxConfirmLegal;
 
-    @FindBy(css = "button[title='Отправить']")
+	@FindBy(css = "h1")
+	private WebElement getHeaderTxt;
+
+
+	@FindBy(css = ".error-msg a")
+	private WebElement forgotPasswordLink;
+
+	@FindBy(css = ".login__title_forgotpassword")
+	private WebElement forgotPasswordTxt;
+
+	@FindBy(css = "button[title='Отправить']")
     private WebElement sendButton;
 
     @FindBy(css = ".layout__footer")
@@ -447,7 +457,23 @@ public class RegistrationPage extends BasePage {
         return getText(contactData);
     }
 	/********************/
-    public void verifyCoincidencePasswordAndConfirmation() {
+	public void verifyRegistrationWithEmptyFields() {
+		getUrl(REGISTRATION_PAGE_URL);
+		elementIsClickable(organizationCheckBox,driver).click();
+		scrollToNecessaryElement(footer);
+		elementIsClickable(subscription,driver).click();
+		elementIsClickable(agreeLegal,driver).click();
+		elementIsClickable(sendButton,driver).click();
+		AssertCollector.assertTrue(getText(getHeaderTxt).contains("Регистрация"));
+		AssertCollector.assertTrue(getText(loginInformation).contains("Это поле обязательно для заполнения."));
+	}
+
+	public void forgotPassword() {
+		elementIsClickable(forgotPasswordLink,driver).click();
+		AssertCollector.assertTrue(getText(forgotPasswordTxt).contains("Восстановление вашего пароля"));
+	}
+
+	public void verifyCoincidencePasswordAndConfirmation() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(password, driver, "1234567");
         fillInputField(confirmPassword, driver, "2233445");
@@ -461,6 +487,7 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(subscription.isDisplayed());
         AssertCollector.assertFalse(subscription.isSelected());
     }
+
 
     public void verifyWorkOfCheckboxConfirm() {
         getUrl(REGISTRATION_PAGE_URL);
