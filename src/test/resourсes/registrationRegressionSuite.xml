@@ -747,4 +747,11 @@
             </class>
         </classes>
     </test>
+
+
+    <test name="Registration.Legal.Entities">
+        <classes>
+            <class name="testcases.registration.RegistrationTest"/>
+        </classes>
+    </test>
 </suite>
