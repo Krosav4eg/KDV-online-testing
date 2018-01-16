@@ -108,6 +108,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = "a[data-customer-type='3'].j_customer_type_link")
     private WebElement organizationCheckBox;
 
+    @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
+    public  WebElement getAlertTet;
+
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(individualButton.isEnabled());
@@ -357,8 +360,8 @@ public class RegistrationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
-    //TODO it`s not finished, need to refactoring it
 
+	/********************/
     /**
      * Validation JSON for tests
      * @return JSONData
@@ -397,9 +400,6 @@ public class RegistrationPage extends BasePage {
         elementIsClickable(subscription,driver).click();
         elementIsClickable(agreeLegal,driver).click();
         elementIsClickable(sendButton,driver).click();
-        System.out.println(organizationInformation);
-        System.out.println(addressDelivery);
-        System.out.println(contactData);
         return organizationInformation+addressDelivery+contactData+authorizationInformation;
     }
     //registration
@@ -446,7 +446,7 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
         return getText(contactData);
     }
-
+	/********************/
     public void verifyCoincidencePasswordAndConfirmation() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(password, driver, "1234567");
