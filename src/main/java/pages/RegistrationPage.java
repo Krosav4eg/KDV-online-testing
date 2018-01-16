@@ -8,13 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
-import java.util.Random;
-
 import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
-import static utils.WaitingUtility.sleepTime;
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
@@ -76,7 +73,7 @@ public class RegistrationPage extends BasePage {
     private WebElement forgotPassword;
 
     @FindBy(id = "adv_full_name")
-    private WebElement organizationFullName;
+    public WebElement organizationFullName;
 
     @FindBy(id = "adv_inn")
     private WebElement taxpayerId;
@@ -85,16 +82,16 @@ public class RegistrationPage extends BasePage {
     private WebElement reasonCode;
 
     @FindBy(id = "legal_address")
-    private WebElement legalAddress;
+    public WebElement legalAddress;
 
     @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(1)")
     private WebElement informationOrganization;
 
     @FindBy(id = "company")
-    private WebElement company;
+    public WebElement company;
 
     @FindBy(id = "street")
-    private WebElement address;
+    public WebElement address;
 
     @FindBy(id = "comments")
     private WebElement comments;
@@ -367,29 +364,27 @@ public class RegistrationPage extends BasePage {
      * @return JSONData
      * @see
      */
-    public JSONObject mainInfoRegistration()
-    {
-        JSONObject data= new JSONObject();
-        String pass=RandomStringUtils.randomAlphabetic(10);
-        data.put("email",RandomStringUtils.randomAlphabetic(10)+"@test.com");
-        data.put("password",pass);
-        data.put("confirmPassword",pass);
-        data.put("organizationName","ТЕСТ");
-        data.put("taxId",RandomStringUtils.randomNumeric(10));
-        data.put("reasonCode",RandomStringUtils.randomNumeric(9));
-        data.put("legalAddress",RandomStringUtils.randomAlphabetic(20));
-        data.put("company","ТЕСТ");
-        data.put("address",RandomStringUtils.randomAlphabetic(20));
-        data.put("comments",RandomStringUtils.randomAlphabetic(20));
-        data.put("firstName",RandomStringUtils.randomAlphabetic(20));
-        data.put("lastName",RandomStringUtils.randomAlphabetic(20));
-        data.put("phone",RandomStringUtils.randomNumeric(10));
+    public JSONObject mainInfoRegistration() {
+        JSONObject data = new JSONObject();
+        String pass = RandomStringUtils.randomAlphabetic(10);
+        data.put("email", RandomStringUtils.randomAlphabetic(10) + "@test.com");
+        data.put("password", pass);
+        data.put("confirmPassword", pass);
+        data.put("organizationName", "ТЕСТ");
+        data.put("taxId", RandomStringUtils.randomNumeric(10));
+        data.put("reasonCode", RandomStringUtils.randomNumeric(9));
+        data.put("legalAddress", RandomStringUtils.randomAlphabetic(20));
+        data.put("company", "ТЕСТ");
+        data.put("address", RandomStringUtils.randomAlphabetic(20));
+        data.put("comments", RandomStringUtils.randomAlphabetic(20));
+        data.put("firstName", RandomStringUtils.randomAlphabetic(20));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(20));
+        data.put("phone", RandomStringUtils.randomNumeric(10));
         return data;
     }
 
 
-    public String verifyAuthorizationFields(JSONObject data)
-    {
+    public String verifyAuthorizationFields(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox,driver).click();
         String authorizationInformation=verifyAuthorizationInformation(data);
