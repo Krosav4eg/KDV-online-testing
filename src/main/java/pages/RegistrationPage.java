@@ -13,6 +13,8 @@ import java.util.Random;
 import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.elementIsClickable;
+import static utils.WaitingUtility.sleepTime;
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
@@ -87,6 +89,7 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(1)")
     private WebElement informationOrganization;
+
     @FindBy(id = "company")
     private WebElement company;
 
@@ -95,6 +98,7 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(id = "comments")
     private WebElement comments;
+
     @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(2)")
     private WebElement addressDelivery;
 
@@ -103,6 +107,9 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(css = "a[data-customer-type='3'].j_customer_type_link")
     private WebElement organizationCheckBox;
+
+    @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
+    public  WebElement getAlertTet;
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -353,19 +360,20 @@ public class RegistrationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
-    public JSONObject infoAuthorization()
+
+	/********************/
+    /**
+     * Validation JSON for tests
+     * @return JSONData
+     * @see
+     */
+    public JSONObject mainInfoRegistration()
     {
-        String pass=RandomStringUtils.randomAlphabetic(10);
         JSONObject data= new JSONObject();
+        String pass=RandomStringUtils.randomAlphabetic(10);
         data.put("email",RandomStringUtils.randomAlphabetic(10)+"@test.com");
         data.put("password",pass);
         data.put("confirmPassword",pass);
-        return data;
-    }
-
-        public JSONObject mainInfoRegistration()
-    {
-        JSONObject data= new JSONObject();
         data.put("organizationName","ТЕСТ");
         data.put("taxId",RandomStringUtils.randomNumeric(10));
         data.put("reasonCode",RandomStringUtils.randomNumeric(9));
@@ -378,34 +386,34 @@ public class RegistrationPage extends BasePage {
         data.put("phone",RandomStringUtils.randomNumeric(10));
         return data;
     }
-    public String verifyAuthorizationInformation(JSONObject data)
+
+
+    public String verifyAuthorizationFields(JSONObject data)
     {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox,driver).click();
+        String authorizationInformation=verifyAuthorizationInformation(data);
+        String organizationInformation=organizationInformation(data);
+        String addressDelivery=addressDelivery(data);
+        String contactData=contactData(data);
+        scrollToNecessaryElement(footer);
+        elementIsClickable(subscription,driver).click();
+        elementIsClickable(agreeLegal,driver).click();
+        elementIsClickable(sendButton,driver).click();
+        return organizationInformation+addressDelivery+contactData+authorizationInformation;
+    }
+    //registration
+     String verifyAuthorizationInformation(JSONObject data)
+    {
         elementFluentWaitVisibility(email,driver).clear();
         elementFluentWaitVisibility(email,driver).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(password,driver).clear();
         elementFluentWaitVisibility(password,driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(confirmPassword,driver).clear();
         elementFluentWaitVisibility(confirmPassword,driver).sendKeys(data.getString("confirmPassword"));
-        elementFluentWaitVisibility(subscription,driver).click();
-        elementFluentWaitVisibility(agreeLegal,driver).click();
-        elementFluentWaitVisibility(sendButton,driver).click();
         return getText(loginInformation);
     }
-
-    public String verifyAuthorizationFields(JSONObject data)
-    {
-        String organizationInformation=organizationInformation(data);
-        String addressDelivery=addressDelivery(data);
-        String contactData=contactData(data);
-        elementFluentWaitVisibility(sendButton,driver).click();
-        System.out.println(organizationInformation);
-        System.out.println(addressDelivery);
-        System.out.println(contactData);
-        return organizationInformation+addressDelivery+contactData;
-    }
-    public String organizationInformation(JSONObject data)
+     String organizationInformation(JSONObject data)
     {
         elementFluentWaitVisibility(organizationFullName,driver).clear();
         elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
@@ -417,7 +425,8 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(legalAddress,driver).sendKeys(data.getString("legalAddress"));
         return getText(informationOrganization);
     }
-    public String addressDelivery(JSONObject data)
+
+     String addressDelivery(JSONObject data)
     {
         elementFluentWaitVisibility(company,driver).clear();
         elementFluentWaitVisibility(company,driver).sendKeys(data.getString("company"));
@@ -427,7 +436,8 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(comments,driver).sendKeys(data.getString("comments"));
         return getText(addressDelivery);
     }
-    public String contactData(JSONObject data) {
+
+     String contactData(JSONObject data) {
         elementFluentWaitVisibility(firstName, driver).clear();
         elementFluentWaitVisibility(firstName, driver).sendKeys(data.getString("firstName"));
         elementFluentWaitVisibility(lastName, driver).clear();
@@ -436,6 +446,7 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
         return getText(contactData);
     }
+	/********************/
     public void verifyCoincidencePasswordAndConfirmation() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(password, driver, "1234567");

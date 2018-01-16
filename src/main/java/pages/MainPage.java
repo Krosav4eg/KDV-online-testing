@@ -332,6 +332,9 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
+        //TODO can`t find element, or add thread sleep or implement another
+        moveMouseTo(driver,selectCityModalWindow);
+        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
@@ -372,6 +375,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
+        moveMouseTo(driver,baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
@@ -966,6 +970,7 @@ public class MainPage extends BasePage {
 
     public void verifyEmptyField() {
         String expUrl = getCurrentUrl();
+        moveMouseTo(driver,searchButton);
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
         AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
