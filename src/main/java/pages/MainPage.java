@@ -970,6 +970,7 @@ public class MainPage extends BasePage {
 
     public void verifyEmptyField() {
         String expUrl = getCurrentUrl();
+        moveMouseTo(driver,searchButton);
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
         AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);

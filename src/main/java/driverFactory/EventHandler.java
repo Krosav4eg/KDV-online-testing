@@ -26,7 +26,6 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences)
 	{
 		waitForPageLoad(webDriver);
-		waitForJSandJQueryToLoad(webDriver);
 		//System.out.println("beforeChangeValueOf "+ webElement);
 	}
 
@@ -39,14 +38,12 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	{
 	//	threadSleep();
 		waitForPageLoad(arg1);
-		waitForJSandJQueryToLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
 		waitForPageLoad(arg1);
-		waitForJSandJQueryToLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
 
@@ -68,7 +65,6 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	public void beforeFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
 		waitForPageLoad(arg2);
-		waitForJSandJQueryToLoad(arg2);
 		//System.out.println("beforeFindBy "+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 
