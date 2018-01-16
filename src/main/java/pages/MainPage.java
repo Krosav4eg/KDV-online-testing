@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -367,7 +368,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(firstCityLink, driver).click();
-       //waitForPageLoad(driver);
+        //waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
@@ -970,6 +971,7 @@ public class MainPage extends BasePage {
 
     public void verifyEmptyField() {
         String expUrl = getCurrentUrl();
+        moveMouseTo(driver,searchButton);
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
         AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);

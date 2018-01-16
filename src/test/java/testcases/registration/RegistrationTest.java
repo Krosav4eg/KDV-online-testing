@@ -1,6 +1,7 @@
 package testcases.registration;
 
 import basePage.BasePage;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -224,26 +225,28 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyInputWrongEmailTest() {
         TestReporter.testTitle("Test ID = 37516");
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("email","test@test");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("email", "test@test");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Пожалуйста, введите правильный адрес электронной почты"));
     }
+
     @Test
     public void verifyInputWrongPasswordTest() {
         TestReporter.testTitle("Test ID = 37523");
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("password","test");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("password", "test");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Пожалуйста, введите не менее 6 символов без"));
-        data.put("password"," test ");
+        data.put("password", " test ");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
+
     @Test
     public void verifyInputEmptyConfirmPasswordTest() {
         TestReporter.testTitle("Test ID = 37526,37528");
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("confirmPassword","");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data.put("confirmPassword","test");
+        data.put("confirmPassword", "test");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
 
     }
@@ -262,6 +265,7 @@ public class RegistrationTest extends BaseTest {
         data.put("reasonCode","");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
+
     @Test
     public void verifyRegistrationComponentTest() {
         TestReporter.testTitle("Test ID = 37551,37552,37553");
@@ -275,6 +279,7 @@ public class RegistrationTest extends BaseTest {
         data.put("address", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
+
     @Test
     public void verifyRegistrationAddressTest() {
         TestReporter.testTitle("Test ID = 37554,37556,37557");
@@ -575,6 +580,64 @@ public class RegistrationTest extends BaseTest {
     public void verifyMaximumInputInCommentsFieldTest() {
         TestReporter.testTitle("Test ID = 37486");
         registrationPage.verifyMaximumInputInCommentsField();
+    }
+
+    @Test
+    public void verifyInputCorrectInnValueTest() {
+        TestReporter.testTitle("Test ID = 37571,37572");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+    }
+
+    //not pass due validation in both fields
+    @Test
+    public void verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest() {
+        TestReporter.testTitle("Test ID = 37568,40062");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("organizationName", RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.organizationFullName.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+        data = registrationPage.mainInfoRegistration();
+        data.put("legalAddress", RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.legalAddress.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    //not pass due validation in both fields
+    @Test
+    public void verifyMaximumInputLengthInCompanyAndCommentsFieldTest() {
+        TestReporter.testTitle("Test ID = 40063,40066");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("company", RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.company.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+        data = registrationPage.mainInfoRegistration();
+        data.put("comments", RandomStringUtils.randomAlphanumeric(1001));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.company.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(1000).length());
+    }
+
+    //not pass due validation
+    @Test
+    public void verifyMaximumInputAddressFieldTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID = 40065");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("address", RandomStringUtils.randomAlphanumeric(256));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.address.getAttribute("value").length(), " Number of symbols is equal ",
+                RandomStringUtils.randomAlphabetic(255).length());
+        data = registrationPage.mainInfoRegistration();
+        data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Внимание! Вы не указали " +
+                "номер квартиры, офиса."));
+        data = registrationPage.mainInfoRegistration();
+        data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5, кв 5");
+        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).contains("Внимание! Вы не указали " +
+                "номер квартиры, офиса."));
     }
 }
 
