@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
 public abstract class EventHandler   implements WebDriverEventListener   {
@@ -17,6 +18,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
+		threadSleep();
 		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
@@ -24,6 +26,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences)
 	{
+		waitForPageLoad(webDriver);
 		//System.out.println("beforeChangeValueOf "+ webElement);
 	}
 
@@ -34,13 +37,14 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	}
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
-		threadSleep();
+	//	threadSleep();
 		waitForPageLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
+		threadSleep();
 		waitForPageLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
@@ -52,6 +56,8 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void afterNavigateTo(String arg0, WebDriver arg1)
 	{
+
+		waitForPageLoad(arg1);
 		//System.out.println("afterNavigateTo "+" WebDriver "+arg1);
 	}
 
@@ -112,7 +118,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	private void threadSleep()
 	{
 		try {
-			Thread.sleep(500);
+			Thread.sleep(250);
 		}
 		catch (Exception e)
 		{

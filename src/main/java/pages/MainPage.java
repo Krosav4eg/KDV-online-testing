@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -332,11 +333,15 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
+        //TODO can`t find element, or add thread sleep or implement another
+        moveMouseTo(driver,selectCityModalWindow);
+        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
+        driver.navigate().refresh();
     }
 
     public void checkCompanyLogo() {
@@ -363,7 +368,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(firstCityLink, driver).click();
-       //waitForPageLoad(driver);
+        //waitForPageLoad(driver);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", getText(baseCityLink));
     }
 
@@ -371,6 +376,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
+        moveMouseTo(driver,baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
@@ -548,7 +554,6 @@ public class MainPage extends BasePage {
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -817,7 +822,6 @@ public class MainPage extends BasePage {
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
@@ -842,7 +846,6 @@ public class MainPage extends BasePage {
     public void checkingProductsInBasket() {
         if (basketIsEmpty.isDisplayed()) {
             scrollDown();
-            waitForJSandJQueryToLoad();
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
             clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
@@ -877,7 +880,6 @@ public class MainPage extends BasePage {
 
     public void openingBasketAndOrdering() {
         scrollDown();
-        waitForJSandJQueryToLoad();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         clickOnIndexFromElementList(hitSalesBasketButtons, 1);
         clickOnIndexFromElementList(hitSalesBasketButtons, 2);
@@ -969,6 +971,7 @@ public class MainPage extends BasePage {
 
     public void verifyEmptyField() {
         String expUrl = getCurrentUrl();
+        moveMouseTo(driver,searchButton);
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
         AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);

@@ -4,8 +4,6 @@ import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 import utils.TestReporter;
 
@@ -16,7 +14,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static driverFactory.BrowserFactory.getDriver;
 import static org.testng.Assert.fail;
 import static utils.Constants.COMMA_REGEX;
 import static utils.Constants.RGBA_TO_RGB_REGEX;
@@ -28,6 +25,15 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
  */
 public abstract class BasePage {
 
+   public abstract static   class MyDelegate {
+        public  String getTextDelegate(WebElement element)
+        {
+            LOGGER.log(Level.INFO, " Get text of element ");
+            TestReporter.step(" Get text of element ");
+            return element.getText();
+        }
+    }
+
     protected WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
@@ -37,7 +43,7 @@ public abstract class BasePage {
     }
     //========================CUSTOM METHODS=============================================
 
-    protected String getText(WebElement element) {
+    public String getText(WebElement element) {
         LOGGER.log(Level.INFO, " Get text of element ");
         TestReporter.step(" Get text of element ");
         return element.getText();
@@ -100,6 +106,11 @@ public abstract class BasePage {
         action.moveToElement(element, x, y).click().build().perform();
     }
 
+    protected static void doubleClickOnElement(WebDriver driver, WebElement element) {
+        Actions action = new Actions(driver).doubleClick(element);
+        action.build().perform();
+    }
+
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
@@ -107,6 +118,7 @@ public abstract class BasePage {
 
     /**
      * It just execute all browsers js script
+     *
      * @param script example jQery("div:contains('test')").click()
      * @param driver
      */
@@ -122,13 +134,13 @@ public abstract class BasePage {
         action.click(subElement).perform();
     }
 
-    protected void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
+    protected static void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
         LOGGER.log(Level.INFO, "Click on needed index of element " + elementIndex);
         TestReporter.step("Click on needed index of element " + elementIndex);
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {
-                waitForJSandJQueryToLoad();
+              //  waitForJSandJQueryToLoad();
                 elementList.get(elementIndex).click();
             }
         } catch (ElementNotVisibleException | ClassCastException | IndexOutOfBoundsException e) {
@@ -142,7 +154,7 @@ public abstract class BasePage {
         return element.getAttribute(attribute);
     }
 
-    protected void getValueOfInputField(WebElement element, String attribute) {
+    public void getValueOfInputField(WebElement element, String attribute) {
         if (getValueOfAttributeByName(element, attribute).isEmpty()) {
             LOGGER.log(Level.INFO, "Field is empty ");
             TestReporter.step(" Field is empty ");
@@ -192,29 +204,6 @@ public abstract class BasePage {
         return totalCount;
     }
 
-    /**
-     * Method for waiting for Javascript and jQuery to finish loading.
-     * Execute Javascript to check if jQuery.active is 0
-     * and document.readyState is complete, which means the JS and jQuery load is complete.
-     */
-    protected boolean waitForJSandJQueryToLoad() {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        // wait for jQuery to load
-        ExpectedCondition<Boolean> jQueryLoad = driver -> {
-            try {
-                return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
-            } catch (Exception e) {
-                // no jQuery present
-                LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
-                TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
-                return true;
-            }
-        };
-        // wait for Javascript to load
-        ExpectedCondition<Boolean> jsLoad = driver -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
-                .toString().equals("complete");
-        return wait.until(jQueryLoad) && wait.until(jsLoad);
-    }
 
 
     protected void switchDriverToAnyTabOfBrowser(int tabIndex) {
@@ -250,6 +239,15 @@ public abstract class BasePage {
         } else {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
+        }
+    }
+
+    protected void sleepWait()
+    {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

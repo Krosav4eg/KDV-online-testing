@@ -23,7 +23,7 @@ public class AssertCollector {
         } catch (Throwable e) {
             LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
             TestReporter.fail(expected.toString() + message + actual.toString());
-            Assert.fail();
+           Assert.fail();
         }
     }
 
@@ -49,8 +49,12 @@ public class AssertCollector {
         }
     }
 
-    public static void assertTrue(boolean condition,String message) {
-        Assert.assertTrue(condition,message);
+    public static void assertTrue(boolean condition, String message) {
+        Assert.assertTrue(condition, message);
+    }
+
+    public static void assertFalse(boolean condition, String message) {
+        Assert.assertTrue(condition, message);
     }
 
 

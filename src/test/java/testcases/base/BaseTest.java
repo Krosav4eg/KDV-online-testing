@@ -9,7 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.*;
+import pages.AuthorizationPage;
+import pages.CategoryPage.CardPage;
+import pages.CategoryPage.CategoryPage;
+import pages.CategoryPage.ModalWindow;
 import utils.TestReporter;
 
 import java.io.File;
@@ -33,6 +36,8 @@ public abstract class BaseTest {
     protected CustomerAccountPage customerAccountPage;
     protected RegistrationPage registrationPage;
     protected CategoryPage categoryPage;
+    protected CardPage cardPage;
+    protected ModalWindow moadalWindow;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -41,6 +46,7 @@ public abstract class BaseTest {
     @BeforeTest
 
     public void runBrowser() {
+
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
         TestReporter.step("Open main page");
@@ -62,9 +68,9 @@ public abstract class BaseTest {
 
 
     //TODO it get test name ,need to improver, bad realization
+
     @BeforeMethod
-    public void setUp(Method method)
-    {
+    public void setUp(Method method) {
         System.err.println(method.getName());
     }
 
@@ -72,7 +78,7 @@ public abstract class BaseTest {
      * Method for screenshot creation
      *
      * @param screenShotName-name of screenshot
-     * @param folder-folder which contain screenshots
+     * @param folder-folder       which contain screenshots
      * @return dest - destination where to be situated screenshots
      */
     public static String capture(String screenShotName, String folder) {
@@ -104,5 +110,7 @@ public abstract class BaseTest {
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
+        cardPage = PageFactory.initElements(driver, CardPage.class);
+        moadalWindow = PageFactory.initElements(driver, ModalWindow.class);
     }
 }

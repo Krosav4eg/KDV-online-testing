@@ -62,7 +62,7 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34292");
         mainPage.verifyMyCardIsEmpty();
     }
-
+    //TODO it`s failed can`t  find other element , some element isn`t visible
     @Test
     public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - 34293");
@@ -75,7 +75,7 @@ public class HeaderTest extends BaseTest {
         mainPage.checkingProductsInBasket();
     }
 
-    @Test
+    @Test(timeOut = 30000)
     public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();

@@ -19,4 +19,38 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34336");
         mainPage.moveToCategory();
     }
+    @Test
+    public void verifyCategoryCardFields()
+    {
+        TestReporter.testTitle("Test ID - 39091");
+        cardPage.verifyFieldsCard();
+    }
+    //TODO BUG
+    @Test
+    public void verifyAddProductFromCard()
+    {
+        TestReporter.testTitle("Test ID - 39091");
+        cardPage.addProductFromCard();
+    }
+    //TODO BUG
+    @Test
+    public void verifyAddProductNotValidCase()
+    {
+        TestReporter.testTitle("Test ID - 40246");
+        cardPage.addProductNotValidFromCard();
+    }
+    //TODO BUG
+    @Test
+    public void verifyModalWindow()
+    {
+        TestReporter.testTitle("Test ID - 39126");
+        moadalWindow.checkModalWindow();
+    }
+    //TODO BUG
+    @Test
+    public  void verifyAddProductNotValid()
+    {
+        TestReporter.testTitle("Test ID - 40268");
+        moadalWindow.AddProductNotValid();
+    }
 }
