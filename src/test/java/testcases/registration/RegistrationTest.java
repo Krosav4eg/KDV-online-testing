@@ -335,7 +335,7 @@ public class RegistrationTest extends BaseTest {
     public void verifyFields()
     {
         TestReporter.testTitle("Test ID = 37542");
-        JSONObject data = registrationPage.mainInfoRegistration();
+        JSONObject data= registrationPage.mainInfoRegistration();
         AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
