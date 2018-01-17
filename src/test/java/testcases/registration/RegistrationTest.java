@@ -11,9 +11,7 @@ import utils.TestReporter;
 
 public class RegistrationTest extends BaseTest {
 
-    BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
-    };
-
+    BasePage.MyDelegate del2 = new BasePage.MyDelegate(){};
     @Test
     public void verifyLegalFormByDefaultTest() {
         TestReporter.testTitle("Test ID = 37076");
@@ -221,10 +219,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyInputEmailTest() {
         TestReporter.testTitle("Test ID = 37522,37515,37529,37530,37542");
-        JSONObject data = registrationPage.mainInfoRegistration();
+        JSONObject data= registrationPage.mainInfoRegistration();
         AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
-
     @Test
     public void verifyInputWrongEmailTest() {
         TestReporter.testTitle("Test ID = 37516");
@@ -324,9 +321,19 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Значение \"ИНН\" уже используется другим пользователем. "));
     }
 
-
     @Test
-    public void verifyFields() {
+    public void verifyRegistrationForgotPassword() {
+        TestReporter.testTitle("Test ID = 37540");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("email", "a.shaulo@andersenlab.com");
+        registrationPage.verifyAuthorizationFields(data);
+        registrationPage.forgotPassword();
+
+    }
+
+        @Test
+    public void verifyFields()
+    {
         TestReporter.testTitle("Test ID = 37542");
         JSONObject data = registrationPage.mainInfoRegistration();
         AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
@@ -347,9 +354,9 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void verifySubscriptionCheckboxPresenceTest() {
-        TestReporter.testTitle("Test ID = 37352");
-        registrationPage.verifySubscriptionCheckboxPresence();
+    public void verifyRegistrationWithEmptyFields() {
+        TestReporter.testTitle("Test ID = 37532");
+        registrationPage.verifyRegistrationWithEmptyFields();
     }
 
     @Test
