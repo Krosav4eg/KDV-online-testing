@@ -48,7 +48,6 @@ public abstract class BaseTest  {
         initPageElements();
         TestReporter.step("Open main page");
         mainPage.openMainPage();
-
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -108,5 +107,6 @@ public abstract class BaseTest  {
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
+        cardPage = PageFactory.initElements(driver, CardPage.class);
     }
 }

@@ -54,6 +54,8 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void afterNavigateTo(String arg0, WebDriver arg1)
 	{
+
+		waitForPageLoad(arg1);
 		//System.out.println("afterNavigateTo "+" WebDriver "+arg1);
 	}
 
