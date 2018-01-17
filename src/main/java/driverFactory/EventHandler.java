@@ -18,6 +18,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
+		threadSleep();
 		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
@@ -43,6 +44,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
+		threadSleep();
 		waitForPageLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
@@ -116,7 +118,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	private void threadSleep()
 	{
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		}
 		catch (Exception e)
 		{
