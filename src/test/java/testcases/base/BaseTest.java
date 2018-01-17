@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeTest;
 import pages.*;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
+import pages.CategoryPage.ModalWindow;
 import utils.TestReporter;
 
 import java.io.File;
@@ -36,6 +37,7 @@ public abstract class BaseTest  {
     protected RegistrationPage registrationPage;
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
+    protected ModalWindow moadalWindow;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -44,6 +46,7 @@ public abstract class BaseTest  {
     @BeforeTest
 
     public void runBrowser() {
+
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
         TestReporter.step("Open main page");
@@ -108,5 +111,6 @@ public abstract class BaseTest  {
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
+        moadalWindow = PageFactory.initElements(driver, ModalWindow.class);
     }
 }

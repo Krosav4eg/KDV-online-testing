@@ -42,31 +42,34 @@ public class CardPage extends BasePage {
 	@FindBy(css = ".event-menu")
 	private WebElement mainTxt;
 
-	private void searchAndSelect()
+
+
+	public void searchAndSelect()
 	{
+		driver.navigate().refresh();
 		driver.navigate().to(BASE_URL+"/konfety.html");
 		elementFluentWaitVisibility(selectCategorySearchBtn,driver).click();
 		CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()",driver);
 		elementFluentWaitVisibility(searchField,driver).sendKeys("Томские классические");
 		elementFluentWaitVisibility(searchBtn,driver).click();
+		moveMouseTo(driver,aboutLink);
 	}
 
 	public void verifyFieldsCard()
 	{
 		searchAndSelect();
-		AssertCollector.assertTrue(getText(categoryContainer).contains("Конфеты «Томские классические», 300 г"));
-		AssertCollector.assertTrue(getText(categoryContainer).contains("95,20"));
-		AssertCollector.assertTrue(getText(categoryContainer).contains("\u20BD"));
-		AssertCollector.assertTrue(categoryAddBtn.isDisplayed());
+		AssertCollector.assertTrue(getText(categoryContainer).contains("Конфеты «Томские классические», 300 г"),"Text is present");
+		AssertCollector.assertTrue(getText(categoryContainer).contains("95,20"),"Text is present");
+		AssertCollector.assertTrue(getText(categoryContainer).contains("\u20BD"),"Text is present");
+		AssertCollector.assertTrue(categoryAddBtn.isDisplayed(),"element is visible");
 
 	}
 	public void addProductFromCard()
 	{
 		searchAndSelect();
-		elementFluentWaitVisibility(categoryAddBtn,driver).click();
+		clickElementByJS(driver,categoryAddBtn);
 		driver.navigate().refresh();
-		System.out.println(getValueOfAttributeByName(categoryInputTxt,"value"));
-		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("1"));
+		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("1"),"");
 		elementFluentWaitVisibility(categoryDecBtn,driver).click();
 		driver.navigate().refresh();
 		AssertCollector.assertTrue(categoryAddBtn.isDisplayed());
@@ -91,7 +94,7 @@ public class CardPage extends BasePage {
 	private void addTxtToInput(String txt)
 	{
 		elementFluentWaitVisibility(categoryInputTxt,driver).click();
-		elementFluentWaitVisibility(categoryContainer,driver).clear();
+		elementFluentWaitVisibility(categoryInputTxt,driver).clear();
 		elementFluentWaitVisibility(categoryAddBtn,driver).click();
 		elementFluentWaitVisibility(categoryInputTxt,driver).sendKeys(txt);
 		moveMouseToAndClick(driver,mainTxt,0,0);
