@@ -2,6 +2,7 @@ package pages;
 
 import basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +11,7 @@ import utils.AssertCollector;
 import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.elementIsClickable;
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
@@ -22,26 +24,35 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//a[@rel='legal']")
     private WebElement organizationButton;
 
-    @FindBy(xpath = ".//*[@id='firstname']")
-    private WebElement firstName;
+    @FindBy(id = "firstname")
+    public WebElement firstName;
 
-    @FindBy(xpath = ".//*[@id='lastname']")
-    private WebElement lastName;
+    @FindBy(id = "lastname")
+    public WebElement lastName;
 
-    @FindBy(xpath = ".//*[@id='adv_phone']")
-    private WebElement phone;
+    @FindBy(id = "adv_phone")
+    public WebElement phone;
 
-    @FindBy(xpath = ".//*[@id='email_address']")
-    private WebElement email;
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(3)")
+    private WebElement contactData;
 
-    @FindBy(xpath = ".//*[@id='password']")
-    private WebElement password;
+    @FindBy(id = "email_address")
+    public WebElement email;
 
-    @FindBy(xpath = ".//*[@id='confirmation']")
-    private WebElement confirmPassword;
+    @FindBy(id = "password")
+    public WebElement password;
 
-    @FindBy(xpath = "//label[@for='is_subscribed']")
+    @FindBy(id = "confirmation")
+    public WebElement confirmPassword;
+
+    @FindBy(css = "[for='is_subscribed']")
     private WebElement subscription;
+
+    @FindBy(css = "[for='is_agree_legal']")
+    private WebElement agreeLegal;
+
+    @FindBy(css = ".j_login_section")
+    private WebElement loginInformation;
 
     @FindBy(xpath = "//label[@data-show='general']")
     private WebElement checkboxConfirm;
@@ -49,7 +60,17 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//label[@data-show='legal']")
     private WebElement checkboxConfirmLegal;
 
-    @FindBy(xpath = ".//button[@title='Отправить']")
+    @FindBy(css = "h1")
+    private WebElement getHeaderTxt;
+
+
+    @FindBy(css = ".error-msg a")
+    private WebElement forgotPasswordLink;
+
+    @FindBy(css = ".login__title_forgotpassword")
+    private WebElement forgotPasswordTxt;
+
+    @FindBy(css = "button[title='Отправить']")
     private WebElement sendButton;
 
     @FindBy(css = ".layout__footer")
@@ -61,29 +82,41 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = ".error-msg>ul>li>span>a")
     private WebElement forgotPassword;
 
-    @FindBy(xpath = ".//*[@id='adv_full_name']")
-    private WebElement organizationFullName;
+    @FindBy(id = "adv_full_name")
+    public WebElement organizationFullName;
 
-    @FindBy(xpath = ".//*[@id='adv_inn']")
+    @FindBy(id = "adv_inn")
     private WebElement taxpayerId;
 
-    @FindBy(xpath = ".//*[@id='adv_kpp']")
+    @FindBy(id = "adv_kpp")
     private WebElement reasonCode;
 
-    @FindBy(xpath = ".//*[@id='legal_address']")
-    private WebElement legalAddress;
+    @FindBy(id = "legal_address")
+    public WebElement legalAddress;
 
-    @FindBy(xpath = ".//*[@id='company']")
-    private WebElement company;
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(1)")
+    private WebElement informationOrganization;
 
-    @FindBy(xpath = ".//*[@id='street']")
-    private WebElement address;
+    @FindBy(id = "company")
+    public WebElement company;
 
-    @FindBy(xpath = ".//*[@id='comments']")
-    private WebElement comments;
+    @FindBy(id = "street")
+    public WebElement address;
+
+    @FindBy(id = "comments")
+    public WebElement comments;
+
+    @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(2)")
+    private WebElement addressDelivery;
 
     @FindBy(xpath = "//span[contains(text(), \"г\")]/*[text()='Томск']")
     private WebElement cityForAddress;
+
+    @FindBy(css = "a[data-customer-type='3'].j_customer_type_link")
+    private WebElement organizationCheckBox;
+
+    @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
+    public WebElement getAlertTet;
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -204,6 +237,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(phone, driver).click();
         AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"), "phone mask is correct");
     }
 
@@ -332,6 +366,109 @@ public class RegistrationPage extends BasePage {
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton, driver).click();
         textPresent("Это поле обязательно для заполнения.");
+    }
+
+    /********************/
+    /**
+     * Validation JSON for tests
+     *
+     * @return JSONData
+     * @see
+     */
+    public JSONObject mainInfoRegistration() {
+        JSONObject data = new JSONObject();
+        String pass = RandomStringUtils.randomAlphabetic(10);
+        data.put("email", RandomStringUtils.randomAlphabetic(10) + "@test.com");
+        data.put("password", pass);
+        data.put("confirmPassword", pass);
+        data.put("organizationName", "ТЕСТ");
+        data.put("taxId", RandomStringUtils.randomNumeric(10));
+        data.put("reasonCode", RandomStringUtils.randomNumeric(9));
+        data.put("legalAddress", RandomStringUtils.randomAlphabetic(20));
+        data.put("company", "ТЕСТ");
+        data.put("address", RandomStringUtils.randomAlphabetic(20));
+        data.put("comments", RandomStringUtils.randomAlphabetic(20));
+        data.put("firstName", RandomStringUtils.randomAlphabetic(20));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(20));
+        data.put("phone", RandomStringUtils.randomNumeric(10));
+        return data;
+    }
+
+
+    public String verifyAuthorizationFields(JSONObject data) {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementFluentWaitVisibility(organizationCheckBox, driver).click();
+        String authorizationInformation = verifyAuthorizationInformation(data);
+        String organizationInformation = organizationInformation(data);
+        String addressDelivery = addressDelivery(data);
+        String contactData = contactData(data);
+        scrollToNecessaryElement(footer);
+        elementIsClickable(subscription, driver).click();
+        AssertCollector.assertTrue(subscription.isEnabled());
+        elementIsClickable(agreeLegal, driver).click();
+        AssertCollector.assertTrue(agreeLegal.isEnabled());
+        elementIsClickable(sendButton, driver).click();
+        return organizationInformation + addressDelivery + contactData + authorizationInformation;
+    }
+
+    //registration
+    String verifyAuthorizationInformation(JSONObject data) {
+        elementFluentWaitVisibility(email, driver).clear();
+        elementFluentWaitVisibility(email, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(password, driver).clear();
+        elementFluentWaitVisibility(password, driver).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(confirmPassword, driver).clear();
+        elementFluentWaitVisibility(confirmPassword, driver).sendKeys(data.getString("confirmPassword"));
+        return getText(loginInformation);
+    }
+
+    String organizationInformation(JSONObject data) {
+        elementFluentWaitVisibility(organizationFullName, driver).clear();
+        elementFluentWaitVisibility(organizationFullName, driver).sendKeys(data.getString("organizationName"));
+        elementFluentWaitVisibility(taxpayerId, driver).clear();
+        elementFluentWaitVisibility(taxpayerId, driver).sendKeys(data.getString("taxId"));
+        elementFluentWaitVisibility(reasonCode, driver).clear();
+        elementFluentWaitVisibility(reasonCode, driver).sendKeys(data.getString("reasonCode"));
+        elementFluentWaitVisibility(legalAddress, driver).clear();
+        elementFluentWaitVisibility(legalAddress, driver).sendKeys(data.getString("legalAddress"));
+        return getText(informationOrganization);
+    }
+
+    String addressDelivery(JSONObject data) {
+        elementFluentWaitVisibility(company, driver).clear();
+        elementFluentWaitVisibility(company, driver).sendKeys(data.getString("company"));
+        elementFluentWaitVisibility(address, driver).clear();
+        elementFluentWaitVisibility(address, driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(comments, driver).clear();
+        elementFluentWaitVisibility(comments, driver).sendKeys(data.getString("comments"));
+        return getText(addressDelivery);
+    }
+
+    String contactData(JSONObject data) {
+        elementFluentWaitVisibility(firstName, driver).clear();
+        elementFluentWaitVisibility(firstName, driver).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastName, driver).clear();
+        elementFluentWaitVisibility(lastName, driver).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(phone, driver).clear();
+        elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
+        return getText(contactData);
+    }
+
+    /********************/
+    public void verifyRegistrationWithEmptyFields() {
+        getUrl(REGISTRATION_PAGE_URL);
+        elementIsClickable(organizationCheckBox, driver).click();
+        scrollToNecessaryElement(footer);
+        elementIsClickable(subscription, driver).click();
+        elementIsClickable(agreeLegal, driver).click();
+        elementIsClickable(sendButton, driver).click();
+        AssertCollector.assertTrue(getText(getHeaderTxt).contains("Регистрация"));
+        AssertCollector.assertTrue(getText(loginInformation).contains("Это поле обязательно для заполнения."));
+    }
+
+    public void forgotPassword() {
+        elementIsClickable(forgotPasswordLink, driver).click();
+        AssertCollector.assertTrue(getText(forgotPasswordTxt).contains("Восстановление вашего пароля"));
     }
 
     public void verifyCoincidencePasswordAndConfirmation() {

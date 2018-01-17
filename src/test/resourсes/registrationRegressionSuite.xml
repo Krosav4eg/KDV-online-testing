@@ -754,4 +754,87 @@
             <class name="testcases.registration.RegistrationTest"/>
         </classes>
     </test>
+<<<<<<< HEAD
+=======
+
+    <test name="37571,37572">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputCorrectInnValueTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37568,40062">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40063,40066">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthInCompanyAndCommentsFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40065">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputAddressFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40067">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthFirstAndLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40068">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputLengthPhoneFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40069">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyEmailFieldValidationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40068">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyPhoneFieldValidationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+>>>>>>> 03c1e297c46e767e3f0d8fda76b43d9621992231
 </suite>

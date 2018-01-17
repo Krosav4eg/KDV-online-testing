@@ -10,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
+import pages.AuthorizationPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
@@ -70,15 +71,14 @@ public abstract class BaseTest  {
     //TODO it get test name ,need to improver, bad realization
 
     @BeforeMethod
-    public void setUp(Method method)
-    {
+    public void setUp(Method method) {
         System.err.println(method.getName());
     }
     /**
      * Method for screenshot creation
      *
      * @param screenShotName-name of screenshot
-     * @param folder-folder which contain screenshots
+     * @param folder-folder       which contain screenshots
      * @return dest - destination where to be situated screenshots
      */
     public static String capture(String screenShotName, String folder) {
