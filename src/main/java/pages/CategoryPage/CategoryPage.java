@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
 import static utils.Constants.ABOUT_PAGE_URL;
+import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 public class CategoryPage 	extends BasePage
@@ -81,12 +82,13 @@ public class CategoryPage 	extends BasePage
 
 		private void selectCategorySideBar()
 		{
+			driver.navigate().to(BASE_URL);
 			driver.navigate().refresh();
 			clickElementByJS(driver, candyLink);
 		}
 
 		//TODO find the solution of this problem - it must be fixed
-		public void selectFromSearch()
+		public void selectFromCategoryDropDown()
 		{
 			driver.navigate().refresh();
 			elementFluentWaitVisibility(selectCategorySearchBtn,driver).click();
@@ -94,116 +96,65 @@ public class CategoryPage 	extends BasePage
 			//clickElementByJS(driver,selectCategoryInSearchLink);
 			elementFluentWaitVisibility(searchBtn,driver).click();
 			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
-
-		}
-		public void selectFromDropDown()
-		{
 			driver.navigate().to(ABOUT_PAGE_URL);
 			elementFluentWaitVisibility(catalogMainList,driver).click();
 			elementFluentWaitVisibility(candyCategoryMainLink,driver).click();
 			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
 		}
-		public void breadCrumbs() {
-			selectCategorySideBar();
-			AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"),"required bread Crumbs  is present");
-			}
-
-		public void header() {
-			selectCategorySideBar();
-			AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"),"required header  is present");
-		}
-
-
-		public void commodityGridList(String navigate) {
-			selectCategorySideBar();
-			if(navigate.contains("List"))
-				{
-					elementFluentWaitVisibility(listBtn,driver).click();
-					AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"),"required list  is active");
-					AssertCollector.assertTrue(listBtn.getCssValue("color").contains("rgba(255, 27, 65, 1)"),"required list color is present");
-				}
-				else
-				{
-					elementFluentWaitVisibility(gridBtn,driver).click();
-					AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"),"required grid  is active");
-					AssertCollector.assertTrue( gridBtn.getCssValue("color").contains("rgba(255, 27, 65, 1)"),"required grid color is present");
-				}
-		}
-
-		public void statusBlock()
+		public void breadCrumbs()
 		{
 			selectCategorySideBar();
-			AssertCollector.assertTrue(getText(statusTxt).contains("Статус"),"required status  is present");
-			AssertCollector.assertTrue(getText(statusTxt).contains("в наличии"),"required text  is present");
-			int number= Integer.parseInt(getText(statusTxt).replaceAll("[^0-9]", ""));
-			AssertCollector.assertTrue(number>0,"required number  is present");
+			AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"),"required bread Crumbs  is present");
 		}
 
-		public void CheckBox(String testCase) {
+		public void commodityGridList() {
+			selectCategorySideBar();
+			elementFluentWaitVisibility(listBtn,driver).click();
+			AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"),"required list  is active");
+			elementFluentWaitVisibility(gridBtn,driver).click();
+			AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"),"required grid  is active");
+
+		}
+
+		public void CheckBox() {
 			selectCategorySideBar();
 			elementFluentWaitVisibility(existBtn, driver).click();
 			AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
 			AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
 			AssertCollector.assertTrue(getText(activeFilter).contains("в наличии"), "text 'В наличии' is present");
 			AssertCollector.assertTrue(deletePositionBtn.isDisplayed(), "checkbox delete is present");
-			switch (testCase) {
-				case "Is Present": {
-					AssertCollector.assertTrue(existBtn.isDisplayed(), "checkbox is present");
-					break;
-				}
-				case "Is Active": {
-					AssertCollector.assertTrue(getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
-					break;
-				}
-				case "DeleteBtn All": {
-					elementFluentWaitVisibility(deletePositionBtn, driver).click();
-					break;
-				}
-				case "Delete All": {
-					elementFluentWaitVisibility(deletePositionLink, driver).click();
-				}
-				AssertCollector.assertTrue(!getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
-			}
+			AssertCollector.assertTrue(existBtn.isDisplayed(), "checkbox is present");
+			AssertCollector.assertTrue(getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
+			elementFluentWaitVisibility(deletePositionBtn, driver).click();
+			elementFluentWaitVisibility(existBtn, driver).click();
+			elementFluentWaitVisibility(deletePositionLink, driver).click();
+			AssertCollector.assertTrue(!getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
 		}
-		public void sortFilter(String testCase) {
+
+		public void sortFilterDefault()
+		{
 			selectCategorySideBar();
 			moveMouseTo(driver,dropDownMenu);
-			switch (testCase)
-			{
-				case "Asc":
-				{
-
-					String firstElement=getText(categoryElementTxt);
-					elementFluentWaitVisibility(sortDeafultLink,driver).click();
-					AssertCollector.assertTrue(firstElement.contains(getText(categoryElementTxt)),"price filter is active");
-					break;
-				}
-				case "Deasc":
-				{
-					elementFluentWaitVisibility(sortDeafultLink,driver).click();
-					String firstElement=getText(categoryElementTxt);
-					elementFluentWaitVisibility(sortBtn,driver).click();
-					AssertCollector.assertTrue(!firstElement.contains(getText(categoryElementTxt)),"price filter is active");
-					break;
-				}
-				case "Price Deasc":
-				{
-					Double firstValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
-					elementFluentWaitVisibility(sortPriceLink,driver).click();
-					elementFluentWaitVisibility(sortBtn,driver).click();
-					System.out.println(getText(categoryElementTxt));
-					Double lastValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
-					AssertCollector.assertTrue(lastValue>firstValue,"Asc filter is active");
-					break;
-				}
-				case "Price Asc":
-				{
-					Double firstValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
-					elementFluentWaitVisibility(sortPriceLink,driver).click();
-					System.out.println(getText(categoryElementTxt));
-					Double lastValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
-					AssertCollector.assertTrue(lastValue<firstValue,"Asc filter is active");	break;
-				}
+			elementFluentWaitVisibility(sortDeafultLink,driver).click();
+			moveMouseTo(driver,dropDownMenu);
+			elementFluentWaitVisibility(sortDeafultLink,driver).click();
+			String firstElement=getText(categoryElementTxt);
+			elementFluentWaitVisibility(sortBtn,driver).click();
+			AssertCollector.assertTrue(!firstElement.contains(getText(categoryElementTxt)),"price filter is active");
 		}
+
+		public void sortFilterPrice() {
+			selectCategorySideBar();
+			moveMouseTo(driver,dropDownMenu);
+			Double firstValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
+			elementFluentWaitVisibility(sortPriceLink,driver).click();
+			elementFluentWaitVisibility(sortBtn,driver).click();
+			Double lastValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
+			AssertCollector.assertTrue(lastValue>firstValue,"Asc filter is active");
+			firstValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
+			moveMouseTo(driver,dropDownMenu);
+			elementFluentWaitVisibility(sortPriceLink,driver).click();
+			lastValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
+			AssertCollector.assertTrue(lastValue<firstValue,"Asc filter is active");
 		}
 	}
