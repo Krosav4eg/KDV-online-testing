@@ -25,4 +25,9 @@
             </class>
         </classes>
     </test>
+    <test name="Category PAges">
+        <classes>
+            <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
+        </classes>
+    </test>
 </suite>
