@@ -794,4 +794,44 @@
             </class>
         </classes>
     </test>
+
+    <test name="40067">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyMaximumInputLengthFirstAndLastNameFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40068">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyInputLengthPhoneFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40069">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyEmailFieldValidationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="40068">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifyPhoneFieldValidationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
