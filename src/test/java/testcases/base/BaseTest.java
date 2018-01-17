@@ -13,6 +13,9 @@ import pages.AuthorizationPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
+import pages.CustomerAccountPage;
+import pages.MainPage;
+import pages.RegistrationPage;
 import utils.TestReporter;
 
 import java.io.File;
