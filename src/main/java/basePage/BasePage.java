@@ -154,7 +154,7 @@ public abstract class BasePage {
         return element.getAttribute(attribute);
     }
 
-    protected void getValueOfInputField(WebElement element, String attribute) {
+    public void getValueOfInputField(WebElement element, String attribute) {
         if (getValueOfAttributeByName(element, attribute).isEmpty()) {
             LOGGER.log(Level.INFO, "Field is empty ");
             TestReporter.step(" Field is empty ");
