@@ -587,7 +587,8 @@ public class RegistrationTest extends BaseTest {
     public void verifyInputCorrectInnValueTest() {
         TestReporter.testTitle("Test ID = 37571,37572");
         JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
     }
 
     //not pass due validation in both fields
@@ -596,14 +597,16 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37568,40062");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("organizationName", RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.organizationFullName.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(255).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.organizationFullName.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
         data = registrationPage.mainInfoRegistration();
         data.put("legalAddress", RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.legalAddress.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(255).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.legalAddress.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
     }
 
     //not pass due validation in both fields
@@ -612,33 +615,36 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40063,40066");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("company", RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.company.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(255).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.company.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
         data = registrationPage.mainInfoRegistration();
         data.put("comments", RandomStringUtils.randomAlphanumeric(1001));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.comments.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(1000).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.comments.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(1000).length());
     }
 
     //not pass due validation
     @Test
-    public void verifyMaximumInputAddressFieldTest() throws InterruptedException {
+    public void verifyMaximumInputAddressFieldTest() {
         TestReporter.testTitle("Test ID = 40065");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("address", RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.address.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(255).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.address.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
         data = registrationPage.mainInfoRegistration();
         data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Внимание! Вы не указали " +
-                "номер квартиры, офиса."));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Внимание! Вы не указали номер квартиры, офиса."));
         data = registrationPage.mainInfoRegistration();
         data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5, кв 5");
-        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).contains("Внимание! Вы не указали " +
-                "номер квартиры, офиса."));
+        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).
+                contains("Внимание! Вы не указали номер квартиры, офиса."));
     }
 
     //not pass due validation in all fields
@@ -647,24 +653,28 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40067");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
         data = registrationPage.mainInfoRegistration();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value"), " Value of last name is equal ",
-                registrationPage.firstName.getAttribute("value"));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value"),
+                " Value of last name is equal ", registrationPage.firstName.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value"), " Value of last name is equal ",
-                registrationPage.lastName.getAttribute("value"));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value"),
+                " Value of last name is equal ", registrationPage.lastName.getAttribute("value"));
     }
 
     @Test
@@ -672,19 +682,33 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.email.getAttribute("value"), " Value of email field is equal ",
-                registrationPage.email.getAttribute("value"));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
+                " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
         data.put("password", RandomStringUtils.randomAlphanumeric(7));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.password.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(7).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.password.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
         data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", RandomStringUtils.randomAlphanumeric(7));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.confirmPassword.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphabetic(7).length());
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertEquals(registrationPage.confirmPassword.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
+    }
+
+    @Test
+    public void verifyPhoneFieldValidationTest() {
+        TestReporter.testTitle("Test ID = 40068");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("phone", RandomStringUtils.randomAlphanumeric(10));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения"));
+        AssertCollector.assertEquals(registrationPage.phone.getAttribute("value"),
+                " Value of email field is equal ", registrationPage.phone.getAttribute("value"));
     }
 }
 
