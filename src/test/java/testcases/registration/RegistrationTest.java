@@ -261,8 +261,8 @@ public class RegistrationTest extends BaseTest {
         data = registrationPage.mainInfoRegistration();
         data.put("taxId", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data= registrationPage.mainInfoRegistration();
-        data.put("reasonCode","");
+        data = registrationPage.mainInfoRegistration();
+        data.put("reasonCode", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
@@ -283,39 +283,41 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyRegistrationAddressTest() {
         TestReporter.testTitle("Test ID = 37554,37556,37557");
-        JSONObject  data= registrationPage.mainInfoRegistration();
-        data.put("firstName","");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("firstName", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data= registrationPage.mainInfoRegistration();
-        data.put("lastName","");
+        data = registrationPage.mainInfoRegistration();
+        data.put("lastName", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data= registrationPage.mainInfoRegistration();
-        data.put("phone","");
+        data = registrationPage.mainInfoRegistration();
+        data.put("phone", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
 
     }
+
     @Test
     public void verifyRegistrationAuthorizationTest() {
         TestReporter.testTitle("Test ID = 37558,37559,37560");
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("password","");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("password", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data= registrationPage.mainInfoRegistration();
-        data.put("confirmPassword","");
+        data = registrationPage.mainInfoRegistration();
+        data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data= registrationPage.mainInfoRegistration();
-        data.put("email","");
+        data = registrationPage.mainInfoRegistration();
+        data.put("email", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
+
     @Test
     public void verifyRegistrationExistData() {
         TestReporter.testTitle("Test ID = 37558,37562");
-        JSONObject data= registrationPage.mainInfoRegistration();
-        data.put("email","a.shaulo@andersenlab.com");
-       registrationPage.verifyAuthorizationFields(data);
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("email", "a.shaulo@andersenlab.com");
+        registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Учётная запись с таким адресом электронной почты уже существует. "));
-        data= registrationPage.mainInfoRegistration();
-        data.put("taxId","1234567891");
+        data = registrationPage.mainInfoRegistration();
+        data.put("taxId", "1234567891");
         AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Значение \"ИНН\" уже используется другим пользователем. "));
     }
 
@@ -349,7 +351,6 @@ public class RegistrationTest extends BaseTest {
     public void verifyCoincidencePasswordAndConfirmationTest() {
         TestReporter.testTitle("Test ID = 37296");
         registrationPage.verifyCoincidencePasswordAndConfirmation();
-
     }
 
     @Test
@@ -357,8 +358,6 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37532");
         registrationPage.verifyRegistrationWithEmptyFields();
     }
-
-
 
     @Test
     public void verifyWorkOfCheckboxConfirmTest() {
