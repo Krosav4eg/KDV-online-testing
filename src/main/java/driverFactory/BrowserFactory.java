@@ -40,6 +40,7 @@ public class BrowserFactory  extends DriverCapabilities{
      * @param driverName-name needed browser driver
      */
     public static WebDriver setDriver(String driverName) {
+        killProcess();
         if (driverName != null)
         {
             switch (driverName)
@@ -60,6 +61,7 @@ public class BrowserFactory  extends DriverCapabilities{
                 }
             }
         }
+
         WebDriver driver= driverThread.get();
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         EventHandler handler = new EventHandler() {};
@@ -67,6 +69,16 @@ public class BrowserFactory  extends DriverCapabilities{
         return driver;
     }
 
+    private static void killProcess()
+    {
+        try {
+            Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+        }
+        catch (Exception ex)
+        {
+            ex.getMessage();
+        }
+    }
     /**
      * Getting personal object for every browser driver
      */
