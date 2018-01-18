@@ -32,16 +32,16 @@ public class PersonalCabinetTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(46).length());
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
 
         data = personalCabinetPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(46).length());
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
 
         data = personalCabinetPage.mainAccountInfo();
-        data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(35));
+        data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value"),
                 " Value of first name is equal ", personalCabinetPage.firstNameInEditPage.
