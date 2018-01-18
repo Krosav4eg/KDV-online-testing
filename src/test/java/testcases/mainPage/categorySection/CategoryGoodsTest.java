@@ -44,13 +44,13 @@ public class CategoryGoodsTest extends BaseTest {
     public void verifyModalWindow()
     {
         TestReporter.testTitle("Test ID - 39126");
-        moadalWindow.checkModalWindow();
+        modalWindow.checkModalWindow();
     }
     //TODO BUG
     @Test
     public  void verifyAddProductNotValid()
     {
         TestReporter.testTitle("Test ID - 40268");
-        moadalWindow.AddProductNotValid();
+        modalWindow.AddProductNotValid();
     }
 }
