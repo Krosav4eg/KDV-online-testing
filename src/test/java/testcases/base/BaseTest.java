@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import pages.*;
 import pages.AuthorizationPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
@@ -30,7 +31,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public abstract class BaseTest {
+public abstract class BaseTest  {
     protected WebDriver driver;
 
     //=======DECLARATION OF PAGE CLASSES=========
