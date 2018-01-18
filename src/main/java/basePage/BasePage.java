@@ -25,16 +25,31 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
  */
 public abstract class BasePage {
 
-   public abstract static   class MyDelegate {
-        public  String getTextDelegate(WebElement element)
-        {
+    public abstract static class MyDelegate {
+        public String getTextDelegate(WebElement element) {
             LOGGER.log(Level.INFO, " Get text of element ");
             TestReporter.step(" Get text of element ");
             return element.getText();
         }
+
+        public void textPresentDelegate(String expectedText) {
+            if (driver.getPageSource().contains(expectedText)) {
+                LOGGER.log(Level.INFO, expectedText + " - Required text is present on page");
+                TestReporter.step(expectedText + " - Required text is present on page");
+            } else {
+                LOGGER.log(Level.INFO, expectedText + " - Required text is present on page");
+                TestReporter.step(expectedText + " - Required text is present on page");
+            }
+        }
+
+        public String getCurrentUrl() {
+            LOGGER.log(Level.INFO, "Get current URL ");
+            TestReporter.step("Get current URL ");
+            return driver.getCurrentUrl().toString();
+        }
     }
 
-    protected WebDriver driver;
+    protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
@@ -140,7 +155,6 @@ public abstract class BasePage {
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {
-              //  waitForJSandJQueryToLoad();
                 elementList.get(elementIndex).click();
             }
         } catch (ElementNotVisibleException | ClassCastException | IndexOutOfBoundsException e) {
@@ -205,7 +219,6 @@ public abstract class BasePage {
     }
 
 
-
     protected void switchDriverToAnyTabOfBrowser(int tabIndex) {
         LOGGER.log(Level.INFO, "Navigate to needed tab " + tabIndex);
         TestReporter.step(" Navigate to needed tab " + tabIndex);
@@ -242,8 +255,7 @@ public abstract class BasePage {
         }
     }
 
-    protected void sleepWait()
-    {
+    protected void sleepWait() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
