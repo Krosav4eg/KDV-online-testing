@@ -2,6 +2,7 @@ package pages;
 
 import basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,6 +55,24 @@ public class AuthorizationPage extends BasePage {
 
     @FindBy(css = ".link")
     private WebElement authForm;
+
+
+    public JSONObject mainAuthorizationInfo() {
+        JSONObject data = new JSONObject();
+        data.put("email", AUTORIZATION_EMAIL);
+        data.put("password", AUTORIZATION_PASSWORD);
+        return data;
+    }
+
+    public void verifyAuthFields(JSONObject data) {
+        getUrl(AUTORIZATION_PAGE_URL);
+        elementFluentWaitVisibility(emailInputField, driver).clear();
+        elementFluentWaitVisibility(emailInputField, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordField, driver).clear();
+        elementFluentWaitVisibility(passwordField, driver).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(authorizationButton, driver).click();
+        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL),"Verify current url");
+    }
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);

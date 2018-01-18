@@ -9,13 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.AuthorizationPage;
+import pages.*;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
-import pages.CustomerAccountPage;
-import pages.MainPage;
-import pages.RegistrationPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -41,7 +38,7 @@ public abstract class BaseTest {
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
-
+    protected PersonalCabinetPage personalCabinetPage;
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
@@ -115,5 +112,6 @@ public abstract class BaseTest {
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
         modalWindow = PageFactory.initElements(driver, ModalWindow.class);
+        personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
     }
 }
