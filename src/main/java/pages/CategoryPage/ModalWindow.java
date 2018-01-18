@@ -79,7 +79,7 @@ public class ModalWindow  extends BasePage {
 		clickElementByJS(driver,logoBtn);
 		AssertCollector.assertFalse(modalContainerWindow.isDisplayed());
 	}
-	public  void AddProductNotValid()
+	public  void addProductNotValidModalWindow()
 	{
 		openModal();
 		AssertCollector.assertEquals(addText("-5"),"","15");

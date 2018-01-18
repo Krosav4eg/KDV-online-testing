@@ -33,7 +33,7 @@ public class CategoryGoodsTest extends BaseTest {
     @Test
     public void verifyCheckBoxIsPresent() {
         TestReporter.testTitle("Test ID - C39083");
-        categoryPage.CheckBox();
+        categoryPage.checkBox();
     }
     @Test
     public void verifySortDefault() {
@@ -58,63 +58,64 @@ public class CategoryGoodsTest extends BaseTest {
         mainPage.moveToCategory();
     }
     @Test
-    public void verifyCategoryCardFields()
+    public void verifyCategoryFieldsMainPage()
     {
-        TestReporter.testTitle("Test ID - 39091");
-        cardPage.verifyFieldsCard();
+        TestReporter.testTitle("Test ID - C39091");
+        cardPage.verifyFieldsCardMainPage();
     }
     @Test
-    public void verifyAddProductFromCard()
+    public void verifyAddProductMainPage()
     {
-        TestReporter.testTitle("Test ID - 39141");
-        cardPage.addProductFromCard();
+        TestReporter.testTitle("Test ID - C39141");
+        cardPage.addProductFromCardMainPage();
     }
     @Test
-    public void verifyAddProductNotValidCase()
+    public void verifyAddProductNotValidMainPage()
     {
-        TestReporter.testTitle("Test ID - 40246");
-        cardPage.addProductNotValidFromCard();
+        TestReporter.testTitle("Test ID - C40246");
+        cardPage.addProductNotValidFromCardMainPage();
     }
     @Test
     public void verifyModalWindow()
     {
-        TestReporter.testTitle("Test ID - 39126");
+        TestReporter.testTitle("Test ID - C39126");
         moadalWindow.checkModalWindow();
     }
     @Test
-    public  void verifyAddProductNotValid()
+    public  void verifyAddProductNotValidModalWindow()
     {
-        TestReporter.testTitle("Test ID - 40268");
-        moadalWindow.AddProductNotValid();
+        TestReporter.testTitle("Test ID - C40268");
+        moadalWindow.addProductNotValidModalWindow();
     }
     @Test
     public  void verifyProductCard()
     {
-        TestReporter.testTitle("Test ID - 39286");
+        TestReporter.testTitle("Test ID - C39286");
         cardPage.validCardProductVerify();
     }
     @Test
     public  void verifyProductCardDescription()
     {
-        TestReporter.testTitle("Test ID - 39306");
+        TestReporter.testTitle("Test ID - C39306");
         cardPage.validCardProductVerifyDescription();
     }
     @Test
     public  void verifyProductCardComposition()
     {
-        TestReporter.testTitle("Test ID - 40270");
+        TestReporter.testTitle("Test ID - C40270");
         cardPage.validCardProductVerifyComposition();
     }
+    //BUGS
     @Test
     public  void verifyProductCardNotValid()
     {
-        TestReporter.testTitle("Test ID - 40269");
+        TestReporter.testTitle("Test ID - C40269");
         cardPage.verifyNotValidProductCard();
     }
     @Test
     public  void verifyProductCardAdvanceShop()
     {
-        TestReporter.testTitle("Test ID - 40271");
+        TestReporter.testTitle("Test ID - C40271");
         cardPage.validCardProductVerifyAdvantagesShop();
     }
 }

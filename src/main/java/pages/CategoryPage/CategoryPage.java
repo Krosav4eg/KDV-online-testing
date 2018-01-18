@@ -117,7 +117,7 @@ public class CategoryPage 	extends BasePage
 
 		}
 
-		public void CheckBox() {
+		public void checkBox() {
 			selectCategorySideBar();
 		//	driver.findElement(By.id("")).isDisplayed();
 			elementFluentWaitVisibility(existBtn, driver).click();

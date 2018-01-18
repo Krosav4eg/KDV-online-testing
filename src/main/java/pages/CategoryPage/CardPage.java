@@ -80,7 +80,7 @@ public class CardPage extends BasePage {
 		elementFluentWaitVisibility(searchBtn,driver).click();
 		moveMouseTo(driver,aboutLink);
 	}
-	public void verifyFieldsCard()
+	public void verifyFieldsCardMainPage()
 	{
 		searchAndSelect();
 		AssertCollector.assertTrue(getText(categoryContainer).contains("Конфеты «Томские классические», 300 г"));
@@ -89,7 +89,7 @@ public class CardPage extends BasePage {
 		AssertCollector.assertTrue(categoryAddBtn.isDisplayed(),"element is visible");
 
 	}
-	public void addProductFromCard()
+	public void addProductFromCardMainPage()
 	{
 		searchAndSelect();
 		clickElementByJS(driver,categoryAddBtn);
@@ -99,7 +99,7 @@ public class CardPage extends BasePage {
 		driver.navigate().refresh();
 		AssertCollector.assertTrue(categoryAddBtn.isDisplayed());
 	}
-	public void addProductNotValidFromCard()
+	public void addProductNotValidFromCardMainPage()
 	{
 		searchAndSelect();
 		moveMouseTo(driver,aboutLink);
@@ -186,9 +186,8 @@ public class CardPage extends BasePage {
 		searchAndSelect();
 		elementFluentWaitVisibility(productCardContainer,driver).click();
 		addTxtToInput("-5");
-		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("51"));
+		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("51"),"text not present");
 		addTxtToInput("99999");
-		System.out.println(getValueOfAttributeByName(categoryInputTxt,"value"));
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));
 		addTxtToInput("@!$^*&$#@*()");
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));
