@@ -1,6 +1,7 @@
 package pages.CategoryPage;
 
 import basePage.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -118,6 +119,7 @@ public class CategoryPage 	extends BasePage
 
 		public void CheckBox() {
 			selectCategorySideBar();
+			driver.findElement(By.id("")).isDisplayed();
 			elementFluentWaitVisibility(existBtn, driver).click();
 			AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
 			AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
