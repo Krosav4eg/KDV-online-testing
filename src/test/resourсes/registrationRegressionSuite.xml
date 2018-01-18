@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Registration regression tests" parallel="tests" thread-count="4">
+<suite name="Registration regression tests" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -754,8 +754,6 @@
             <class name="testcases.registration.RegistrationTest"/>
         </classes>
     </test>
-<<<<<<< HEAD
-=======
 
     <test name="37571,37572">
         <classes>
@@ -836,10 +834,6 @@
             </class>
         </classes>
     </test>
-<<<<<<< src/test/resourсes/registrationRegressionSuite.xml
->>>>>>> 03c1e297c46e767e3f0d8fda76b43d9621992231
-=======
-
     <test name="37681">
         <classes>
             <class name="testcases.registration.RegistrationTest">
@@ -849,5 +843,4 @@
             </class>
         </classes>
     </test>
->>>>>>> src/test/resourсes/registrationRegressionSuite.xml
 </suite>
