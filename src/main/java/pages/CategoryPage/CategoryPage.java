@@ -119,7 +119,7 @@ public class CategoryPage 	extends BasePage
 
 		public void CheckBox() {
 			selectCategorySideBar();
-			driver.findElement(By.id("")).isDisplayed();
+		//	driver.findElement(By.id("")).isDisplayed();
 			elementFluentWaitVisibility(existBtn, driver).click();
 			AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
 			AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
@@ -159,4 +159,5 @@ public class CategoryPage 	extends BasePage
 			lastValue= Double.valueOf(getText(priceTxt).replaceAll("[^0-9]",""));
 			AssertCollector.assertTrue(lastValue<firstValue,"Asc filter is active");
 		}
+
 	}

@@ -4,6 +4,8 @@ import basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -22,17 +24,9 @@ public class ModalWindow  extends BasePage {
 	@FindBy(css = ".product-item")
 	private WebElement categoryContainer;
 
-	@FindBy(css = ".cart-control__add")
-	private WebElement cartControlBtn;
-
 	@FindBy(css = ".cart-control__add-text")
 	private WebElement addCartModalBtn;
 
-	@FindBy(css = ".cart-control__btn_inc")
-	private WebElement cartControlIncBtn;
-
-	@FindBy(css = ".cart-control__btn_dec")
-	private WebElement cartControlDecBtn;
 
 	@FindBy(css = ".modal__content .cart-control__btn_inc")
 	private WebElement cartControlModalIncBtn;
@@ -53,13 +47,18 @@ public class ModalWindow  extends BasePage {
 	private WebElement logoBtn;
 
 
-	public void checkModalWindow()
+	private void openModal()
 	{
 		new CardPage(driver).searchAndSelect();
 		sleepWait();
 		moveMouseTo(driver,categoryContainer);
 		clickElementByJS(driver,openModalBtn);
 		sleepWait();
+	}
+
+	public void checkModalWindow()
+	{
+		openModal();
 		AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические», 300 г"),"");
 		AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
 		AssertCollector.assertTrue(getText(productContainer).contains("95,20"),"");
@@ -82,23 +81,28 @@ public class ModalWindow  extends BasePage {
 	}
 	public  void AddProductNotValid()
 	{
-		new CardPage(driver).searchAndSelect();
-		elementFluentWaitVisibility(categoryContainer,driver).click();
-		elementFluentWaitVisibility(cartControlBtn,driver).click();
-		AssertCollector.assertEquals(addText("-5"),"","51");
+		openModal();
+		AssertCollector.assertEquals(addText("-5"),"","15");
 		AssertCollector.assertEquals(addText("123123"),"","9999");
-		AssertCollector.assertEquals(addText("asdasdasd"),"","9999");
-		AssertCollector.assertEquals(addText("@!$^*&$#@*()"),"","9999");
+		AssertCollector.assertEquals(addText("asdasdasd"),"","1");
+		AssertCollector.assertEquals(addText("@!$^*&$#@*()"),"","1");
+		elementFluentWaitVisibility(categoryInputTxt,driver).clear();
 	}
 
-	private String addText(String text)
-	{
 
-		elementFluentWaitVisibility(categoryInputTxt,driver).click();
+	private String addText(String text) {
+		elementFluentWaitVisibility(categoryInputTxt,driver).clear();
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.visibilityOf(addCartModalBtn)).click();
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Element Card not valid");
+		}
+		clickElementByJS(driver,categoryInputTxt);
 		elementFluentWaitVisibility(categoryInputTxt,driver).sendKeys(text);
 		sleepWait();
-		driver.navigate().refresh();
-		System.out.println(getValueOfAttributeByName(categoryInputTxt,"value"));
 		return getValueOfAttributeByName(categoryInputTxt,"value");
 	}
 }

@@ -18,11 +18,7 @@
     </test>
     <test name="C34336">
         <classes>
-            <class name="testcases.mainPage.categorySection.CategoryGoodsTest">
-                <methods>
-                    <include name="verifyMoveToCategoryTest"/>
-                </methods>
-            </class>
+            <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
         </classes>
     </test>
 </suite>
