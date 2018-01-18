@@ -8,6 +8,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static utils.Constants.AUTORIZATION_PAGE_URL;
+
 
 public class RegistrationTest extends BaseTest {
 
@@ -711,6 +713,17 @@ public class RegistrationTest extends BaseTest {
                 contains("Это поле обязательно для заполнения"));
         AssertCollector.assertEquals(registrationPage.phone.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.phone.getAttribute("value"));
+    }
+
+    @Test
+    public void verifySuccessRegistrationTest() {
+        TestReporter.testTitle("Test ID = 37681");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Это поле обязательно для заполнения"));
+        del2.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
+                " выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
+        AssertCollector.assertEqualsJ(del2.getCurrentUrl(), AUTORIZATION_PAGE_URL, "Urls are equals");
     }
 }
 

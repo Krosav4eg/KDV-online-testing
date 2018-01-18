@@ -14,6 +14,9 @@ import pages.AuthorizationPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
+import pages.CustomerAccountPage;
+import pages.MainPage;
+import pages.RegistrationPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -38,7 +41,7 @@ public abstract class BaseTest  {
     protected RegistrationPage registrationPage;
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
-    protected ModalWindow moadalWindow;
+    protected ModalWindow modalWindow;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -52,6 +55,7 @@ public abstract class BaseTest  {
         initPageElements();
         TestReporter.step("Open main page");
         mainPage.openMainPage();
+
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -111,6 +115,6 @@ public abstract class BaseTest  {
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
-        moadalWindow = PageFactory.initElements(driver, ModalWindow.class);
+        modalWindow = PageFactory.initElements(driver, ModalWindow.class);
     }
 }

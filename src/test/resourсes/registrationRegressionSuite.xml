@@ -836,5 +836,18 @@
             </class>
         </classes>
     </test>
+<<<<<<< src/test/resourсes/registrationRegressionSuite.xml
 >>>>>>> 03c1e297c46e767e3f0d8fda76b43d9621992231
+=======
+
+    <test name="37681">
+        <classes>
+            <class name="testcases.registration.RegistrationTest">
+                <methods>
+                    <include name="verifySuccessRegistrationTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+>>>>>>> src/test/resourсes/registrationRegressionSuite.xml
 </suite>
