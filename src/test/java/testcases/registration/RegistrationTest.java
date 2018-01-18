@@ -351,13 +351,16 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-    @Test
     public void verifyCoincidencePasswordAndConfirmationTest() {
         TestReporter.testTitle("Test ID = 37296");
         registrationPage.verifyCoincidencePasswordAndConfirmation();
     }
 
     @Test
+    public void verifySubscriptionCheckboxPresenceTest() {
+        TestReporter.testTitle("Test ID = 37352");
+        registrationPage.verifySubscriptionCheckboxPresence();
+    }
     public void verifyRegistrationWithEmptyFields() {
         TestReporter.testTitle("Test ID = 37532");
         registrationPage.verifyRegistrationWithEmptyFields();
@@ -584,7 +587,6 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37486");
         registrationPage.verifyMaximumInputInCommentsField();
     }
-
     @Test
     public void verifyInputCorrectInnValueTest() {
         TestReporter.testTitle("Test ID = 37571,37572");

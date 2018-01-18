@@ -187,7 +187,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".menu-categories__link")
     private WebElement categoryLink;
 
-    @FindBy(css = ".menu-categories__item:hover")
+    @FindBy(css = ".menu-categories__item")
     private WebElement parentItemOfProducts;
 
     @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
@@ -537,11 +537,8 @@ public class MainPage extends BasePage {
     public void moveToCategory() {
         LOGGER.log(Level.INFO, "Move to category");
         TestReporter.step("Move to category");
-        moveMouseTo(driver, firstGoodInLinkList);
-        String expectedColor = "#f6f6f6";
-        String actualColor = getElementColor(parentItemOfProducts, "background-color");
-        AssertCollector.assertEqualsJ(actualColor, expectedColor,
-                " Verify elements color of free delivering section section ");
+        moveMouseTo(driver, parentItemOfProducts);
+        AssertCollector.assertTrue(getValueOfAttributeByName(parentItemOfProducts,"class").contains("menu-categories__item"));
     }
 
     public void verifySumAllElements() {

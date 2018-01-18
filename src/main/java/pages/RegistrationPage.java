@@ -368,7 +368,6 @@ public class RegistrationPage extends BasePage {
         textPresent("Это поле обязательно для заполнения.");
     }
 
-
     /********************/
     /**
      * Validation JSON for tests
@@ -486,7 +485,6 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(subscription.isDisplayed());
         AssertCollector.assertFalse(subscription.isSelected());
     }
-
 
     public void verifyWorkOfCheckboxConfirm() {
         getUrl(REGISTRATION_PAGE_URL);
