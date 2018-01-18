@@ -79,13 +79,13 @@ public class CategoryGoodsTest extends BaseTest {
     public void verifyModalWindow()
     {
         TestReporter.testTitle("Test ID - C39126");
-        moadalWindow.checkModalWindow();
+        modalWindow.checkModalWindow();
     }
     @Test
     public  void verifyAddProductNotValidModalWindow()
     {
         TestReporter.testTitle("Test ID - C40268");
-        moadalWindow.addProductNotValidModalWindow();
+        modalWindow.addProductNotValidModalWindow();
     }
     @Test
     public  void verifyProductCard()
