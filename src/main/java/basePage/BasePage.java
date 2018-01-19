@@ -77,6 +77,12 @@ public abstract class BasePage {
         TestReporter.step(" Get text of element ");
         return element.getText();
     }
+    protected Double parseStringToDouble(String text)
+    {
+        String parseText=text.replaceAll(",",".");
+        parseText=parseText.replaceAll("[^\\d.]","");
+        return Double.valueOf(parseText);
+    }
 
     protected String getCurrentUrl() {
         LOGGER.log(Level.INFO, "Get current URL ");
@@ -143,6 +149,14 @@ public abstract class BasePage {
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+        sleepWait();
+    }
+
+    /**
+     * scrol to Element
+     */
+    public static void moveToElementJS(WebDriver driver,WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
     }
 
     /**

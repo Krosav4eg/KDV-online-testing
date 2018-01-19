@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Registration regression tests" parallel="tests" thread-count="4">
+<suite name="Registration regression tests" parallel="tests" thread-count="3">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
@@ -834,7 +834,6 @@
             </class>
         </classes>
     </test>
-
     <test name="37681">
         <classes>
             <class name="testcases.registration.RegistrationTest">

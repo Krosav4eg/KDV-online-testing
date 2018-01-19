@@ -333,14 +333,15 @@ public class MainPage extends BasePage {
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
-        moveMouseTo(driver,selectCityModalWindow);
-        sleepWait();
+        moveToElementJS(driver,selectCityModalWindow);
+        //sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
         driver.navigate().refresh();
+        sleepWait();
     }
 
     public void checkCompanyLogo() {

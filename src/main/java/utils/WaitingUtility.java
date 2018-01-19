@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static basePage.BasePage.moveToElementJS;
 import static driverFactory.BrowserFactory.getDriver;
 
 /**
@@ -75,6 +76,7 @@ public class WaitingUtility {
      * @param element - used to find the element
      */
     public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
+        //moveToElementJS(driver,element);
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
