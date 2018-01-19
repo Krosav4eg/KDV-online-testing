@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
 import pages.AuthorizationPage;
+import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
@@ -42,6 +43,8 @@ public abstract class BaseTest  {
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
+    protected BasketPage basketPage;
+
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -116,5 +119,7 @@ public abstract class BaseTest  {
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
         modalWindow = PageFactory.initElements(driver, ModalWindow.class);
+        basketPage = PageFactory.initElements(driver, BasketPage.class);
+
     }
 }
