@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static basePage.BasePage.moveToElementJS;
 import static driverFactory.BrowserFactory.getDriver;
 
 /**
@@ -81,6 +82,7 @@ public class WaitingUtility {
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
+
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
 
