@@ -1,4 +1,4 @@
-package pages;
+package pages.personalCabinetPage;
 
 import basePage.BasePage;
 import org.json.JSONObject;
@@ -54,50 +54,14 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(), \"Адрес по умолчанию\")]")
     private WebElement addressByDefaultHeader;
 
-    @FindBy(xpath = "//p[contains(text(), 'Аркадий Евдокимов')]")
+    @FindBy(xpath = "//div[2]/div/p[1]")
     public WebElement nameInPersonalData;
 
-    @FindBy(xpath = "//p[contains(text(), \"test_a.evdokimov@magdv.com\")]")
-    private WebElement emailInPersonalData;
+    @FindBy(xpath = "//div/p[2]")
+    public WebElement emailInPersonalData;
 
-    @FindBy(xpath = "//p[contains(text(), \"+71111111111\")]")
-    private WebElement phoneInPersonalData;
-
-    @FindBy(xpath = "//h2//a[@class='account__edit link offset-l-1']")
-    private WebElement editPersonalDataButton;
-
-    @FindBy(xpath = "//div[contains(text(), \"Аркадий Евдокимов\")]")
-    private WebElement nameInAddressByDefault;
-
-    @FindBy(xpath = "//div[contains(text(), \"г Кемерово, ул Варшавская, д 87, кв 12 \")]")
-    private WebElement addressInAddressByDefault;
-
-    @FindBy(xpath = "//div[contains(text(), \"+71111111111 \")]")
-    private WebElement phoneInAddressByDefault;
-
-    @FindBy(xpath = "//h2//a[@class='address__action link offset-l-1']")
-    private WebElement editAddressButton;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_id hidden-xs hidden-xxs']")
-    private WebElement orderId;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_date hidden-xs hidden-xxs']")
-    private WebElement orderDate;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_status hidden-xs hidden-xxs']")
-    private WebElement orderStatus;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_cost hidden-xs hidden-xxs']")
-    private WebElement orderCost;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_view hidden-xs hidden-xxs']")
-    private WebElement orderView;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_link']")
-    private WebElement orderRepeat;
-
-    @FindBy(xpath = "//h2//a[contains(text(), \"Показать все\")]")
-    private WebElement showAll;
+    @FindBy(xpath = "//div/p[3]")
+    public WebElement phoneInPersonalData;
 
     @FindBy(xpath = "//h1[contains(text(), \"Учётная запись\")]")
     public WebElement personalDataHeaderInEditPage;
@@ -126,14 +90,20 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = "#email")
     public WebElement emailInEditPage;
 
-    @FindBy(xpath = ".//*[@id='form-validate']//span[contains(text(), \"Согласен\")]")
-    private WebElement checkboxAgreement;
-
     @FindBy(xpath = ".//*[@id='form-validate']/div[1]")
     private WebElement informationAccountEdit;
 
     @FindBy(css = ".checkbox__label")
     public WebElement changePasswordCheckbox;
+
+    @FindBy(xpath = "//h2[text()='Изменить пароль']")
+    public WebElement changePasswordHeader;
+
+    @FindBy(css = "#password")
+    public WebElement newPasswordField;
+
+    @FindBy(css = "#confirmation")
+    public WebElement confirmPasswordField;
 
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
@@ -157,7 +127,7 @@ public class PersonalCabinetPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage, driver).clear();
         elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
-        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL),"Verify current url");
+        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
         return getText(informationAccountEdit);
     }
 }
