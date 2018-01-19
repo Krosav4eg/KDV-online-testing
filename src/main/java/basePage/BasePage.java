@@ -132,6 +132,13 @@ public abstract class BasePage {
     }
 
     /**
+     * scrol to Element
+     */
+    public static void moveToElementJS(WebDriver driver,WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
+    }
+
+    /**
      * It just execute all browsers js script
      *
      * @param script example jQery("div:contains('test')").click()

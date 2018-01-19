@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import static basePage.BasePage.moveToElementJS;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -37,7 +38,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	}
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
-	//	threadSleep();
+		moveToElementJS(arg1,arg0);
 		waitForPageLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
