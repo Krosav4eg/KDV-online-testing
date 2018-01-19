@@ -38,7 +38,7 @@ public class PersonalCabinetTest extends BaseTest {
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(46).length());
 
         data = personalCabinetPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
@@ -61,7 +61,7 @@ public class PersonalCabinetTest extends BaseTest {
         del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
-        del.textPresentDelegate("Аркадий Евдокимов");
+        AssertCollector.assertTrue(personalCabinetPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
     @Test

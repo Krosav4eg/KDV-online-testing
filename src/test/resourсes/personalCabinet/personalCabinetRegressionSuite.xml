@@ -10,6 +10,9 @@
     <test name="Personal Cabinet Page">
         <classes>
             <class name="testcases.personalCabinet.PersonalCabinetTest">
+                <methods>
+                    <include name="verifyOpeningPersonalDataItemTest"/>
+                </methods>
             </class>
         </classes>
     </test>
