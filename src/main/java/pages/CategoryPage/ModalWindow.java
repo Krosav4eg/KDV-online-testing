@@ -91,15 +91,15 @@ public class ModalWindow  extends BasePage {
 
 
 	private String addText(String text) {
-		elementFluentWaitVisibility(categoryInputTxt,driver).clear();
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 5);
-			wait.until(ExpectedConditions.visibilityOf(addCartModalBtn)).click();
-		}
-		catch (Exception ex)
-		{
-			System.out.println("Element Card not valid");
-		}
+	try {
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.visibilityOf(addCartModalBtn)).click();
+	}
+	catch (Exception ex)
+	{
+		System.out.println("Element Card not valid");
+	}
+		//elementFluentWaitVisibility(addCartModalBtn,driver).click();
 		clickElementByJS(driver,categoryInputTxt);
 		elementFluentWaitVisibility(categoryInputTxt,driver).sendKeys(text);
 		sleepWait();

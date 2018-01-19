@@ -76,13 +76,13 @@ public class WaitingUtility {
      * @param element - used to find the element
      */
     public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
+        //moveToElementJS(driver,element);
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
-
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
 
