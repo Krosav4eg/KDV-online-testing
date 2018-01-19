@@ -47,6 +47,25 @@ public abstract class BasePage {
             TestReporter.step("Get current URL ");
             return driver.getCurrentUrl().toString();
         }
+
+        public void getUrl(String url) {
+            LOGGER.log(Level.INFO, "Navigate to needed url ");
+            TestReporter.step("Navigate to needed url ");
+            driver.navigate().to(url);
+        }
+
+        public void scrollToNecessaryElement(WebElement element) {
+            LOGGER.log(Level.INFO, "Scroll to necessary element ");
+            TestReporter.step("Scroll to necessary element ");
+            int y = element.getLocation().getY();
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0," + y + ")");
+        }
+
+        public void doubleClickOnElement(WebDriver driver, WebElement element) {
+            Actions action = new Actions(driver).doubleClick(element);
+            action.build().perform();
+        }
     }
 
     protected static WebDriver driver;
@@ -129,6 +148,13 @@ public abstract class BasePage {
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * scrol to Element
+     */
+    public static void moveToElementJS(WebDriver driver,WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
     }
 
     /**

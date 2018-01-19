@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import static basePage.BasePage.moveToElementJS;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -26,6 +27,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences)
 	{
+
 		waitForPageLoad(webDriver);
 		//System.out.println("beforeChangeValueOf "+ webElement);
 	}
@@ -37,14 +39,13 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	}
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
-	//	threadSleep();
+		moveToElementJS(arg1,arg0);
 		waitForPageLoad(arg1);
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
-		threadSleep();
 		waitForPageLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
@@ -68,6 +69,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void beforeFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
+
 		waitForPageLoad(arg2);
 		//System.out.println("beforeFindBy "+" WebElement "+arg1+" WebDriver "+arg2);
 	}
@@ -79,6 +81,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void afterScript(String arg0, WebDriver arg1)
 	{
+		threadSleep();
 		//System.out.println("afterScript " +arg1);
 	}
 
@@ -99,6 +102,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void beforeScript(String arg0, WebDriver arg1)
 	{
+
 		waitForPageLoad(arg1);
 		//System.out.println("beforeScript "+arg0);
 	}
@@ -118,7 +122,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	private void threadSleep()
 	{
 		try {
-			Thread.sleep(250);
+			Thread.sleep(50);
 		}
 		catch (Exception e)
 		{

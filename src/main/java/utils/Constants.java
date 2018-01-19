@@ -46,10 +46,13 @@ public class Constants {
     //===============================UTIL CONSTANTS==============================
     public static final String AUTORIZATION_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/login/";
     public static final String REGISTRATION_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/create/";
-    public static final String ACCEPT_PASSWORD_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/index/";
+    public static final String ACCOUNT_INFORMATION_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/edit/";
+    public static final String ACCOUNT_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/";
     public static final String ABOUT_PAGE_URL = " http://tomsk.demo.dev.magonline.ru/about";
     public static final String PHYSICAL_PERSON_EMAIL = "test_i.makarov@magdv.com";
     public static final String PHYSICAL_PERSON_PASSWORD = "SWgeZWPs";
+    public static final String AUTORIZATION_EMAIL = "test_a.evdokimov@magdv.com";
+    public static final String AUTORIZATION_PASSWORD = "JOviF7J2";
     public static final String INCORRECT_EMAIL = "a.shaulo123@andersenlab.com";
     public static final String INCORRECT_PASSWORD = "As06051993";
     public static final String EMPTY_DATA = " ";
