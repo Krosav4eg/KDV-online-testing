@@ -76,6 +76,7 @@ public abstract class BaseTest  {
 
     @BeforeMethod
     public void setUp(Method method) {
+        System.err.println("DRIVER:"+ driver);
         System.err.println(method.getName());
     }
     /**
