@@ -61,11 +61,6 @@ public abstract class BasePage {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0," + y + ")");
         }
-
-        public void doubleClickOnElement(WebDriver driver, WebElement element) {
-            Actions action = new Actions(driver).doubleClick(element);
-            action.build().perform();
-        }
     }
 
     protected static WebDriver driver;

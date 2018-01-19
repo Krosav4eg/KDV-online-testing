@@ -10,7 +10,7 @@ import utils.TestReporter;
 
 import static utils.Constants.*;
 
-public class PersonalCabinetTest extends BaseTest {
+public class AccountDataPageTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
@@ -61,7 +61,7 @@ public class PersonalCabinetTest extends BaseTest {
         del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(personalCabinetPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
+        AssertCollector.assertTrue(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PersonalCabinetTest extends BaseTest {
         del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(personalCabinetPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class PersonalCabinetTest extends BaseTest {
         del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
         AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
-        AssertCollector.assertTrue(personalCabinetPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
 
     @Test
