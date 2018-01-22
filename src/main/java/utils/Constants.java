@@ -47,6 +47,7 @@ public class Constants {
     public static final String AUTORIZATION_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/login/";
     public static final String REGISTRATION_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/create/";
     public static final String ACCOUNT_INFORMATION_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/edit/";
+    public static final String ACCOUNT_DELIVERY_ADDRESS_URL = "http://tomsk.demo.dev.magonline.ru/customer/address/";
     public static final String ACCOUNT_PAGE_URL = "http://tomsk.demo.dev.magonline.ru/customer/account/";
     public static final String ABOUT_PAGE_URL = " http://tomsk.demo.dev.magonline.ru/about";
     public static final String PHYSICAL_PERSON_EMAIL = "test_i.makarov@magdv.com";

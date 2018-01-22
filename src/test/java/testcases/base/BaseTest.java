@@ -10,7 +10,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.*;
 import pages.AuthorizationPage;
 import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
@@ -20,7 +19,10 @@ import pages.CustomerAccountPage;
 import pages.MainPage;
 import pages.OrderingPage.OrderingGuest;
 import pages.RegistrationPage;
-import testcases.OrderingPage.OrderingPage;
+import pages.personalCabinetPage.AccountDataPage;
+import pages.personalCabinetPage.ControlPanelPage;
+import pages.personalCabinetPage.DeliveryAddressPage;
+import pages.personalCabinetPage.MyBookingPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -35,7 +37,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public abstract class BaseTest  {
+public abstract class BaseTest {
     protected WebDriver driver;
 
     //=======DECLARATION OF PAGE CLASSES=========
@@ -46,7 +48,11 @@ public abstract class BaseTest  {
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
-    protected PersonalCabinetPage personalCabinetPage;
+    protected AccountDataPage accountDataPage;
+    protected ControlPanelPage controlPanelPage;
+    protected DeliveryAddressPage deliveryAddressPage;
+    protected MyBookingPage myBookingPage;
+    //    protected PersonalCabinetPage personalCabinetPage;
     protected BasketPage basketPage;
     protected OrderingGuest orderingGuest;
     /**
@@ -77,8 +83,7 @@ public abstract class BaseTest  {
 
 
     @AfterMethod
-    public void clearCookies()
-    {
+    public void clearCookies() {
         driver.manage().deleteAllCookies();
         mainPage.openMainPage();
 
@@ -87,9 +92,10 @@ public abstract class BaseTest  {
 
     @BeforeMethod
     public void setUp(Method method) {
-        System.err.println("DRIVER:"+ driver);
+        System.err.println("DRIVER:" + driver);
         System.err.println(method.getName());
     }
+
     /**
      * Method for screenshot creation
      *
@@ -128,8 +134,10 @@ public abstract class BaseTest  {
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
         modalWindow = PageFactory.initElements(driver, ModalWindow.class);
-        personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
         basketPage = PageFactory.initElements(driver, BasketPage.class);
-        orderingGuest=PageFactory.initElements(driver,OrderingGuest.class);
+        accountDataPage = PageFactory.initElements(driver, AccountDataPage.class);
+        controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
+        deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
+        myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
     }
 }

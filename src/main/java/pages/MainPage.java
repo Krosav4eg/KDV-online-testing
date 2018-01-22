@@ -4,7 +4,6 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -810,7 +809,6 @@ public class MainPage extends BasePage {
     public void verifyMyCardIsEmpty() {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
-       //waitForPageLoad(driver);
         elementIsClickable(myCart, driver).click();
         AssertCollector.assertTrue(myCart.isDisplayed());
         textPresent("Корзина пока пуста");
