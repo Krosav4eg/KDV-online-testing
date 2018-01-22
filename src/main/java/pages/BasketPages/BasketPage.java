@@ -1,18 +1,13 @@
 package pages.BasketPages;
 
 import basePage.BasePage;
-import com.sun.xml.internal.ws.policy.spi.AssertionCreationException;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
-import java.util.Set;
-
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
-import static utils.WaitingUtility.waitForPageLoad;
 
 
 public class BasketPage extends BasePage {
@@ -119,6 +114,7 @@ public class BasketPage extends BasePage {
 		elementFluentWaitVisibility(selectMiniCart, driver).click();
 		elementFluentWaitVisibility(selectBasket, driver).click();
 	}
+
 	public void verifyBasket() {
 		selectOneProduct();
 		AssertCollector.assertTrue(getText(cardContainer).contains("95,20"));

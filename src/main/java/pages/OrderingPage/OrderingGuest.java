@@ -49,9 +49,9 @@ public class OrderingGuest extends BasePage {
 		new BasketPage(driver).selectOneProduct();
 		new BasketPage(driver).increaseProductCount();
 		elementFluentWaitVisibility(orderBtn,driver).click();
-		identificationBlock(data);
-		authorizationBlock(data);
-		elementFluentWaitVisibility(agreementBtn,driver).click();
+//		identificationBlock(data);
+//		authorizationBlock(data);
+//		elementFluentWaitVisibility(agreementBtn,driver).click();
 	}
 
 	private void identificationBlock(JSONObject data)

@@ -5,11 +5,19 @@ import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.TestReporter;
 
-public class OrderingPage extends BaseTest{
-	@Test
-	public void switchSlideForwardTest() {
-		TestReporter.testTitle("Test ID - C41074");
-		JSONObject data= orderingGuest.data();
-		orderingGuest.createOrder(data);
-	}
+public class OrderingPage extends BaseTest {
+//	@Test
+//	public void switchSlideForwardTest() {
+//		TestReporter.testTitle("Test ID - C41074");
+//		JSONObject data= orderingGuest.data();
+//		orderingGuest.createOrder(data);
+//	}
+
+    @Test
+    public void verifyAuthorizationLInkTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID - C41074");
+        JSONObject data = orderingGuest.data();
+        orderingGuest.createOrder(data);
+        Thread.sleep(3000);
+    }
 }
