@@ -21,45 +21,45 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrl(ACCOUNT_INFORMATION_URL);
-        AssertCollector.assertTrue(personalCabinetPage.personalDataHeaderInEditPage.
+        AssertCollector.assertTrue(accountDataPage.personalDataHeaderInEditPage.
                 isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.personalDataInEditPage.
+        AssertCollector.assertTrue(accountDataPage.personalDataInEditPage.
                 isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.sharingInEditPage.
+        AssertCollector.assertTrue(accountDataPage.sharingInEditPage.
                 isDisplayed(), "Required header is displayed");
 
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value").length(),
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.firstNameInEditPage.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
 
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value").length(),
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.lastNameInEditPage.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
 
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value"),
-                " Value of first name is equal ", personalCabinetPage.firstNameInEditPage.
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.firstNameInEditPage.getAttribute("value"),
+                " Value of first name is equal ", accountDataPage.firstNameInEditPage.
                         getAttribute("value"));
 
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value"),
-                " Value of last name is equal ", personalCabinetPage.lastNameInEditPage.
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.lastNameInEditPage.getAttribute("value"),
+                " Value of last name is equal ", accountDataPage.lastNameInEditPage.
                         getAttribute("value"));
 
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");
-        personalCabinetPage.verifyEditAccountFields(data);
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        personalCabinetPage.saveButtonInEditPage.click();
+        accountDataPage.verifyEditAccountFields(data);
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
         AssertCollector.assertTrue(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
@@ -70,14 +70,14 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrl(ACCOUNT_INFORMATION_URL);
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("phone", "+77111111111");
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.phoneInEditPage.getAttribute("value"),
-                " Value of phone field is equal ", personalCabinetPage.phoneInEditPage.
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.phoneInEditPage.getAttribute("value"),
+                " Value of phone field is equal ", accountDataPage.phoneInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        personalCabinetPage.saveButtonInEditPage.click();
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
         AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
@@ -87,14 +87,14 @@ public class AccountDataPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40091,40096");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("email", AUTORIZATION_EMAIL);
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.emailInEditPage.getAttribute("value"),
-                " Value of current password field is equal ", personalCabinetPage.emailInEditPage.
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.emailInEditPage.getAttribute("value"),
+                " Value of current password field is equal ", accountDataPage.emailInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        personalCabinetPage.saveButtonInEditPage.click();
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
         AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
@@ -104,14 +104,14 @@ public class AccountDataPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40094,40098");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("passwordInEditPage", AUTORIZATION_PASSWORD);
-        personalCabinetPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(personalCabinetPage.passwordInEditPage.getAttribute("value"),
-                " Value of current password field is equal ", personalCabinetPage.passwordInEditPage.
+        accountDataPage.verifyEditAccountFields(data);
+        AssertCollector.assertEquals(accountDataPage.passwordInEditPage.getAttribute("value"),
+                " Value of current password field is equal ", accountDataPage.passwordInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        personalCabinetPage.saveButtonInEditPage.click();
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
     }
 
@@ -120,23 +120,23 @@ public class AccountDataPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 38455,38456,38419");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        data = personalCabinetPage.mainAccountInfo();
+        data = accountDataPage.mainAccountInfo();
         data.put("firstName", "");
         data.put("lastName", "");
         data.put("email", "");
         data.put("phone", "");
         data.put("currentPassword", "");
-        personalCabinetPage.verifyEditAccountFields(data);
-        personalCabinetPage.changePasswordCheckbox.click();
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        personalCabinetPage.saveButtonInEditPage.click();
+        accountDataPage.verifyEditAccountFields(data);
+        accountDataPage.changePasswordCheckbox.click();
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        accountDataPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
-        AssertCollector.assertTrue(personalCabinetPage.changePasswordHeader.isDisplayed(),
+        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        AssertCollector.assertTrue(accountDataPage.changePasswordHeader.isDisplayed(),
                 "Required header is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.newPasswordField.isDisplayed(),
+        AssertCollector.assertTrue(accountDataPage.newPasswordField.isDisplayed(),
                 "Required field is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.confirmPasswordField.isDisplayed(),
+        AssertCollector.assertTrue(accountDataPage.confirmPasswordField.isDisplayed(),
                 "Required field is displayed");
     }
 }
