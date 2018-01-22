@@ -111,7 +111,7 @@ public class BasketPage extends BasePage {
 
 	}
 
-	private void selectOneProduct()
+	public void selectOneProduct()
 	{
 		searchElement();
 		moveToElementJS(driver,productAddBtn);
@@ -162,7 +162,7 @@ public class BasketPage extends BasePage {
 		return parseStringToDouble(getText(element));
 	}
 
-	private void increaseProductCount() {
+	public void increaseProductCount() {
 		while (getPrice(summTxt) < 300) {
 			sleepWait();
 			elementFluentWaitVisibility(incBtn, driver).click();

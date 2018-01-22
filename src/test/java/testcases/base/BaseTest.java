@@ -17,6 +17,7 @@ import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.CustomerAccountPage;
 import pages.MainPage;
+import pages.OrderingPage.OrderingGuest;
 import pages.RegistrationPage;
 import pages.personalCabinetPage.AccountDataPage;
 import pages.personalCabinetPage.ControlPanelPage;
@@ -53,7 +54,7 @@ public abstract class BaseTest {
     protected MyBookingPage myBookingPage;
     //    protected PersonalCabinetPage personalCabinetPage;
     protected BasketPage basketPage;
-
+    protected OrderingGuest orderingGuest;
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
