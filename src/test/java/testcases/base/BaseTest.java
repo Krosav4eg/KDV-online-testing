@@ -139,5 +139,6 @@ public abstract class BaseTest {
         controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
+        orderingGuest = PageFactory.initElements(driver,OrderingGuest.class);
     }
 }
