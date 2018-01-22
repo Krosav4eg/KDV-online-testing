@@ -11,6 +11,5 @@ public class OrderingPage extends BaseTest{
 		TestReporter.testTitle("Test ID - C41074");
 		JSONObject data= orderingGuest.data();
 		orderingGuest.createOrder(data);
-
 	}
 }

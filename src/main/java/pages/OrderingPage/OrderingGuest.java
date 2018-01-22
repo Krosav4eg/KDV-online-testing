@@ -16,7 +16,6 @@ public class OrderingGuest extends BasePage {
 		super(driver);
 	}
 
-//
 	@FindBy(css = ".j_cart_checkout")
 	private WebElement orderBtn;
 
@@ -34,7 +33,7 @@ public class OrderingGuest extends BasePage {
 
 	@FindBy(id = "label[for='billing:is_agree']")
 	private WebElement agreementBtn;
-	//
+
 
 	public JSONObject data()
 	{
