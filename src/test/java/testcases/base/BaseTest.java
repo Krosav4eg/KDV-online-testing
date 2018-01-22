@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -19,8 +18,9 @@ import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.CustomerAccountPage;
 import pages.MainPage;
+import pages.OrderingPage.OrderingGuest;
 import pages.RegistrationPage;
-import testcases.mainPage.basket.BasketTests;
+import testcases.OrderingPage.OrderingPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -29,7 +29,6 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
-import static utils.Constants.BASE_URL;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
@@ -49,6 +48,7 @@ public abstract class BaseTest  {
     protected ModalWindow modalWindow;
     protected PersonalCabinetPage personalCabinetPage;
     protected BasketPage basketPage;
+    protected OrderingGuest orderingGuest;
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
@@ -129,6 +129,7 @@ public abstract class BaseTest  {
         cardPage = PageFactory.initElements(driver, CardPage.class);
         modalWindow = PageFactory.initElements(driver, ModalWindow.class);
         personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
-         basketPage = PageFactory.initElements(driver, BasketPage.class);
+        basketPage = PageFactory.initElements(driver, BasketPage.class);
+        orderingGuest=PageFactory.initElements(driver,OrderingGuest.class);
     }
 }

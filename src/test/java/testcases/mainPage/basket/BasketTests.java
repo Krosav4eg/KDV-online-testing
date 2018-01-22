@@ -1,6 +1,5 @@
 package testcases.mainPage.basket;
 
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.TestReporter;
