@@ -40,6 +40,7 @@ public class Constants {
     public static final String COMMA_REGEX = ",";
 
     //===============================UTIL CONSTANTS==============================
+    public static final int FIRST_TAB_BROWSER = 0;
     public static final int SECOND_TAB_BROWSER = 1;
     public static final int TWO_TABS_BROWSER = 2;
 
