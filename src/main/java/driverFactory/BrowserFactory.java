@@ -20,6 +20,7 @@ public class BrowserFactory  extends DriverCapabilities{
 
     private static final String FIREFOX = "Firefox";
     private static final String CHROME = "Chrome";
+    private static final String GRID = "GRID";
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     /**
@@ -57,6 +58,11 @@ public class BrowserFactory  extends DriverCapabilities{
                 }
                 case CHROME: {
                     LOGGER.log(Level.INFO, "set browser CHROME");
+                    driverThread.set(new ChromeDriver(chromeCapabilities()));
+                    break;
+                }
+                case GRID: {
+                    LOGGER.log(Level.INFO, "set browser GRID");
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
                     break;
                 }

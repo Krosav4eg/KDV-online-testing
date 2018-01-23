@@ -3,6 +3,7 @@ package pages;
 import basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,11 +14,13 @@ import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
 
+
+
+
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
-
     @FindBy(xpath = "//a[@rel='general']")
     private WebElement individualButton;
 

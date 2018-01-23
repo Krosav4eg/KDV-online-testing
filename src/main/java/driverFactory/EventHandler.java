@@ -114,7 +114,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 
 	public void onException(Throwable arg0, WebDriver arg1)
 	{
-		capture(testName,ERROR_SCREENSHOT_FOLDER);
+		//capture(testName,ERROR_SCREENSHOT_FOLDER);
 
 	}
 

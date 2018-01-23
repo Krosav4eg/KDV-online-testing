@@ -5,6 +5,7 @@ import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
+import pages.RegistrationPage;
 import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
@@ -20,7 +21,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyLegalFormByDefaultTest() {
         TestReporter.testTitle("Test ID = 37076");
-        registrationPage.verifyLegalFormByDefault();
+       registrationPage.verifyLegalFormByDefault();
     }
 
     @Test
