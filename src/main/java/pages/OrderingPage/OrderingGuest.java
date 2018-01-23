@@ -64,7 +64,7 @@ public class OrderingGuest extends BasePage {
         data.put("firstName", "ТЕСТ");
         data.put("lastName", "ТЕСТОВИЧ");
         data.put("email", RandomStringUtils.randomAlphabetic(15) + "@test.com");
-        data.put("phone", RandomStringUtils.randomNumeric(10));
+        data.put("phone", RandomStringUtils.randomNumeric(11));
         return data;
     }
 
