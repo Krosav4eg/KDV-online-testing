@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.common.base.Verify;
 import logger.MagDvLogger;
 import org.testng.Assert;
 
@@ -23,7 +24,7 @@ public class AssertCollector {
         } catch (Throwable e) {
             LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
             TestReporter.fail(expected.toString() + message + actual.toString());
-           Assert.fail();
+            Assert.fail();
         }
     }
 
@@ -76,5 +77,9 @@ public class AssertCollector {
             LOGGER.log(Level.WARNING, expected.toString() + message + actual.toString());
             Assert.fail(message);
         }
+    }
+
+    public static void verifyCondition(boolean condition) {
+        Verify.verify(condition);
     }
 }

@@ -20,16 +20,16 @@ public class OrderingGuest extends BasePage {
     private WebElement orderBtn;
 
     @FindBy(css = "[id='billing:firstname']")
-    private WebElement firstNameTxt;
+    public WebElement firstNameTxt;
 
     @FindBy(css = "[id='billing:lastname']")
-    private WebElement lastNameTxt;
+    public WebElement lastNameTxt;
 
     @FindBy(css = "[id='billing:email']")
     private WebElement emailTxt;
 
     @FindBy(css = "[id='billing:telephone']")
-    private WebElement phoneTxt;
+    public WebElement phoneTxt;
 
     @FindBy(css = "label[for=\"billing:is_agree\"]")
     public WebElement agreementBtn;
@@ -52,6 +52,12 @@ public class OrderingGuest extends BasePage {
     @FindBy(css = ".button.modal-auth__forgot-btn.j_modal_auth_login_btn")
     private WebElement authEnterButton;
 
+    @FindBy(css = "#review-btn")
+    public WebElement createOrderButton;
+
+    @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
+    private WebElement identificationInfo;
+
 
     public JSONObject data() {
         JSONObject data = new JSONObject();
@@ -67,17 +73,18 @@ public class OrderingGuest extends BasePage {
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
         identificationBlock(data);
-        authorizationBlock(data);
     }
 
-    private void identificationBlock(JSONObject data) {
+    public String identificationBlock(JSONObject data) {
+        elementFluentWaitVisibility(firstNameTxt, driver).clear();
         elementFluentWaitVisibility(firstNameTxt, driver).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameTxt, driver).clear();
         elementFluentWaitVisibility(lastNameTxt, driver).sendKeys(data.getString("lastName"));
-    }
-
-    private void authorizationBlock(JSONObject data) {
+        elementFluentWaitVisibility(emailTxt, driver).clear();
         elementFluentWaitVisibility(emailTxt, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(phoneTxt, driver).clear();
         elementFluentWaitVisibility(phoneTxt, driver).sendKeys(data.getString("phone"));
+        return getText(identificationInfo);
     }
 
     public JSONObject authModalFormData() {
