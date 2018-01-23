@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Site Tests">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+    <test name="OrderingPageTest">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest"/>
+        </classes>
+    </test>
+</suite>

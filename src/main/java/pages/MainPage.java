@@ -333,8 +333,8 @@ public class MainPage extends BasePage {
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
-        moveToElementJS(driver,selectCityModalWindow);
-        //sleepWait();
+        //moveToElementJS(driver, selectCityModalWindow);
+//        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
@@ -376,7 +376,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
         String currentCity = getText(baseCityLink);
-        moveMouseTo(driver,baseCityLink);
+        moveMouseTo(driver, baseCityLink);
         elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
@@ -386,6 +386,7 @@ public class MainPage extends BasePage {
         elementIsClickable(citySearchDropdown, driver).click();
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
+
     //TODO remove thread.sleep , think about it, how to fix it
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
@@ -538,7 +539,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Move to category");
         TestReporter.step("Move to category");
         moveMouseTo(driver, parentItemOfProducts);
-        AssertCollector.assertTrue(getValueOfAttributeByName(parentItemOfProducts,"class").contains("menu-categories__item"));
+        AssertCollector.assertTrue(getValueOfAttributeByName(parentItemOfProducts, "class").contains("menu-categories__item"));
     }
 
     public void verifySumAllElements() {
@@ -967,7 +968,7 @@ public class MainPage extends BasePage {
 
     public void verifyEmptyField() {
         String expUrl = getCurrentUrl();
-        moveMouseTo(driver,searchButton);
+        moveMouseTo(driver, searchButton);
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
         AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);

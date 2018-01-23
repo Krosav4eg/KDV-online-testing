@@ -82,7 +82,7 @@ public class WaitingUtility {
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
+                .withTimeout(40, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.visibilityOf(element));

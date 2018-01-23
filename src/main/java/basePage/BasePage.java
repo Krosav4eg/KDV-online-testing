@@ -153,7 +153,7 @@ public abstract class BasePage {
     }
 
     /**
-     * scrol to Element
+     * scroll to Element
      */
     public static void moveToElementJS(WebDriver driver,WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
@@ -285,7 +285,7 @@ public abstract class BasePage {
 
     protected void sleepWait() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
