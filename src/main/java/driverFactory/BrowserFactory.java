@@ -34,12 +34,17 @@ public class BrowserFactory  extends DriverCapabilities{
      */
     private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
+
+
+    public WebDriver driver;
+
+    public static String testName;
     /**
      * There is setting driver by name
      *
      * @param driverName-name needed browser driver
      */
-    public static WebDriver setDriver(String driverName) {
+    public  WebDriver setDriver(String driverName) {
         //killProcess();
         if (driverName != null)
         {

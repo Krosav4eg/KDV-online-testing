@@ -45,7 +45,7 @@ public abstract class BasePage {
         public String getCurrentUrl() {
             LOGGER.log(Level.INFO, "Get current URL ");
             TestReporter.step("Get current URL ");
-            return driver.getCurrentUrl().toString();
+            return driver.getCurrentUrl();
         }
 
         public void getUrl(String url) {
@@ -72,12 +72,12 @@ public abstract class BasePage {
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
+        BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
     //========================CUSTOM METHODS=============================================
 
-    public String getText(WebElement element) {
+    protected String getText(WebElement element) {
         LOGGER.log(Level.INFO, " Get text of element ");
         TestReporter.step(" Get text of element ");
         return element.getText();
@@ -86,7 +86,7 @@ public abstract class BasePage {
     protected String getCurrentUrl() {
         LOGGER.log(Level.INFO, "Get current URL ");
         TestReporter.step("Get current URL ");
-        return driver.getCurrentUrl().toString();
+        return driver.getCurrentUrl();
     }
 
     protected void getUrl(String url) {
@@ -159,11 +159,9 @@ public abstract class BasePage {
 
     /**
      * It just execute all browsers js script
-     *
      * @param script example jQery("div:contains('test')").click()
-     * @param driver
      */
-    public static void CallJS(String script, WebDriver driver) {
+    protected static void CallJS(String script, WebDriver driver) {
         ((JavascriptExecutor) driver).executeScript(script);
     }
 
@@ -194,7 +192,7 @@ public abstract class BasePage {
         return element.getAttribute(attribute);
     }
 
-    public void getValueOfInputField(WebElement element, String attribute) {
+    protected void getValueOfInputField(WebElement element, String attribute) {
         if (getValueOfAttributeByName(element, attribute).isEmpty()) {
             LOGGER.log(Level.INFO, "Field is empty ");
             TestReporter.step(" Field is empty ");

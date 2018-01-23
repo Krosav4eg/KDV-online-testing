@@ -4,11 +4,10 @@ import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static basePage.BasePage.moveToElementJS;
 import static driverFactory.BrowserFactory.getDriver;
 
 /**
@@ -22,9 +21,9 @@ public class WaitingUtility {
     }
 
     public static void waitForPageLoad(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+	    WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Wait for page loading ");
-        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
+        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
 
@@ -38,7 +37,9 @@ public class WaitingUtility {
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = drivers -> {
             try {
-                return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
+            	long result= (Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active");
+	            System.err.println("jQuery Activity: "+result);
+                return (result == 0);
             } catch (Exception e) {
                 // no jQuery present
                 LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
@@ -46,10 +47,10 @@ public class WaitingUtility {
                 return true;
             }
         };
-        // wait for Javascript to load
-        ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
-                .toString().equals("complete");
-        return wait.until(jQueryLoad) && wait.until(jsLoad);
+//        // wait for Javascript to load
+//        ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
+//                .toString().equals("complete");
+        return wait.until(jQueryLoad);/* && wait.until(jsLoad);*/
     }
 
 
@@ -80,7 +81,7 @@ public class WaitingUtility {
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(50, TimeUnit.MILLISECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
 
         return newWait.until(ExpectedConditions.visibilityOf(element));

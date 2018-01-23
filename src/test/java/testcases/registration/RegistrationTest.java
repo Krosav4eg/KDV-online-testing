@@ -1,6 +1,7 @@
 package testcases.registration;
 
 import basePage.BasePage;
+import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -719,7 +720,7 @@ public class RegistrationTest extends BaseTest {
     public void verifySuccessRegistrationTest() {
         TestReporter.testTitle("Test ID = 37681");
         JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+        Verify.verify(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения"));
         del2.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
                 " выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");

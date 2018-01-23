@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 
+import static driverFactory.BrowserFactory.testName;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
@@ -31,7 +33,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public abstract class BaseTest  {
+public  class BaseTest  {
     protected WebDriver driver;
 
     //=======DECLARATION OF PAGE CLASSES=========
@@ -43,19 +45,18 @@ public abstract class BaseTest  {
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
     protected PersonalCabinetPage personalCabinetPage;
+
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-    @BeforeTest
-
-    public void runBrowser() {
-
-        driver = BrowserFactory.setDriver("Chrome");
+    @BeforeMethod
+    public void runBrowser(Method method) {
+        testName=method.getName();
+        driver = new BrowserFactory().setDriver("Chrome");
         initPageElements();
         TestReporter.step("Open main page");
         mainPage.openMainPage();
-
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -74,11 +75,11 @@ public abstract class BaseTest  {
 
     //TODO it get test name ,need to improver, bad realization
 
-    @BeforeMethod
-    public void setUp(Method method) {
-        System.err.println("DRIVER:"+ driver);
-        System.err.println(method.getName());
-    }
+//    @BeforeMethod
+//    public void setUp(Method method) {
+//        System.err.println("DRIVER:"+ driver);
+//        System.err.println(method.getName());
+//    }
     /**
      * Method for screenshot creation
      *
@@ -103,7 +104,7 @@ public abstract class BaseTest  {
     /**
      * Method for closing browser and auto tests
      */
-    @AfterTest()
+    @AfterMethod()
     public void closeBrowser() {
         driver.quit();
         TestReporter.removeNumberStep();
