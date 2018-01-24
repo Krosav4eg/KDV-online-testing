@@ -58,6 +58,21 @@ public class OrderingGuest extends BasePage {
     @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
     private WebElement identificationInfo;
 
+    @FindBy(xpath = "//a[text()='Регламентом работы сайта']")
+    public WebElement regulationsWebsiteLink;
+
+    @FindBy(css = "#checkout-delivery-date")
+    public WebElement checkoutDeliveryDate;
+
+    @FindBy(xpath = ".//a[text()=\"Согласием на обработку персональных данных\"]")
+    public WebElement consentPersonalDataProcessingLink;
+
+    @FindBy(xpath = ".//a[contains(text(),'Договора купли-продажи.')]")
+    public WebElement salesPurchaseAgreementLink;
+
+    @FindBy(xpath = "//span[contains(text(),'Согласен получать выгодные предложения на покупку продуктов')]")
+    public WebElement agreeCheckBox;
+
 
     public JSONObject data() {
         JSONObject data = new JSONObject();
