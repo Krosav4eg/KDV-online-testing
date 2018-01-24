@@ -27,15 +27,15 @@
         </classes>
     </test>
 
-    <!--<test name="37822">-->
-        <!--<classes>-->
-            <!--<class name="testcases.personalCabinet.ControlPanelPageTest">-->
-                <!--<methods>-->
-                    <!--<include name="verifyOrdersBlockAbsenceTest"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="37822">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyOrdersBlockAbsenceTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
     <test name="37823">
          <classes>
