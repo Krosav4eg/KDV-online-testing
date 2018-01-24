@@ -81,5 +81,7 @@ public class AssertCollector {
 
     public static void verifyCondition(boolean condition) {
         Verify.verify(condition);
+        TestReporter.success(" expected condition is " + condition);
+        LOGGER.log(Level.INFO, " expected condition " + condition);
     }
 }

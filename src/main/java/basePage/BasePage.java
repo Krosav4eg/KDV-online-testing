@@ -98,7 +98,6 @@ public abstract class BasePage {
             driver.close();
             System.setProperty("close.current.window.handle", parentHandle);
         }
-
     }
 
     protected static WebDriver driver;
