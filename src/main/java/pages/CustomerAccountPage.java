@@ -34,7 +34,7 @@ public class CustomerAccountPage extends BasePage {
     private WebElement exitButton;
 
     @FindBy(css = ".top-link-myaccount")
-    private WebElement myAccountLink;
+    public WebElement myAccountLink;
 
 
     public void verifyToolTypeTextInPhysicalPersonAccount() {

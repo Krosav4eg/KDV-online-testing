@@ -52,9 +52,9 @@ public abstract class BaseTest {
     protected ControlPanelPage controlPanelPage;
     protected DeliveryAddressPage deliveryAddressPage;
     protected MyBookingPage myBookingPage;
-    //    protected PersonalCabinetPage personalCabinetPage;
     protected BasketPage basketPage;
     protected OrderingGuest orderingGuest;
+
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
@@ -85,8 +85,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
-
+//        mainPage.openMainPage();
     }
     //TODO it get test name ,need to improver, bad realization
 
@@ -139,5 +138,6 @@ public abstract class BaseTest {
         controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
+        orderingGuest = PageFactory.initElements(driver, OrderingGuest.class);
     }
 }

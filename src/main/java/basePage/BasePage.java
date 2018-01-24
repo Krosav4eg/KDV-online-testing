@@ -61,6 +61,43 @@ public abstract class BasePage {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0," + y + ")");
         }
+
+        //TODO more flexible method
+        public void scrollByCoordinate() {
+            LOGGER.log(Level.INFO, "Scroll to necessary element ");
+            TestReporter.step("Scroll to necessary element ");
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("window.scrollBy(0,600)", "");
+        }
+
+        public void switchDriverToAnyTabOfBrowser(int tabIndex) {
+            LOGGER.log(Level.INFO, "Navigate to needed tab " + tabIndex);
+            TestReporter.step(" Navigate to needed tab " + tabIndex);
+            String parentHandle = new ArrayList<>(driver.getWindowHandles()).get(0);
+            String anyTabName = new ArrayList<>(driver.getWindowHandles()).get(tabIndex);
+            driver.switchTo().window(anyTabName);
+            System.setProperty("current.window.handle", parentHandle);
+        }
+
+        public int getBrowserTabsCount() {
+            return driver.getWindowHandles().size();
+        }
+
+
+        public void verifyTabsCountAsExpected(int expectedCount) {
+            LOGGER.log(Level.INFO, " Verify count of tabs " + expectedCount);
+            TestReporter.step(" Verify count of tabs " + expectedCount);
+            int actualCount = getBrowserTabsCount();
+            AssertCollector.assertEqualsJ(actualCount, expectedCount, "Verifying browser tabs count");
+        }
+
+        public void closeDriverToAnyTabOfBrowser(int tabIndex) {
+            String parentHandle = new ArrayList<>(driver.getWindowHandles()).get(0);
+            String anyTabName = new ArrayList<>(driver.getWindowHandles()).get(tabIndex);
+            driver.switchTo().window(anyTabName);
+            driver.close();
+            System.setProperty("close.current.window.handle", parentHandle);
+        }
     }
 
     protected static WebDriver driver;
@@ -77,10 +114,10 @@ public abstract class BasePage {
         TestReporter.step(" Get text of element ");
         return element.getText();
     }
-    protected Double parseStringToDouble(String text)
-    {
-        String parseText=text.replaceAll(",",".");
-        parseText=parseText.replaceAll("[^\\d.]","");
+
+    protected Double parseStringToDouble(String text) {
+        String parseText = text.replaceAll(",", ".");
+        parseText = parseText.replaceAll("[^\\d.]", "");
         return Double.valueOf(parseText);
     }
 
@@ -153,10 +190,10 @@ public abstract class BasePage {
     }
 
     /**
-     * scrol to Element
+     * scroll to Element
      */
-    public static void moveToElementJS(WebDriver driver,WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
+    public static void moveToElementJS(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     /**
@@ -285,7 +322,7 @@ public abstract class BasePage {
 
     protected void sleepWait() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
