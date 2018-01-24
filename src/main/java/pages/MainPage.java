@@ -334,7 +334,7 @@ public class MainPage extends BasePage {
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
 //        moveToElementJS(driver, selectCityModalWindow);
-//        sleepWait();
+        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {

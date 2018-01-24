@@ -8,11 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasketPages.BasketPage;
 
+import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
-public class OrderingGuest extends BasePage {
+public class OrderingGuestPage extends BasePage {
 
-    public OrderingGuest(WebDriver driver) {
+    public OrderingGuestPage(WebDriver driver) {
         super(driver);
     }
 
@@ -52,7 +53,7 @@ public class OrderingGuest extends BasePage {
     @FindBy(css = ".button.modal-auth__forgot-btn.j_modal_auth_login_btn")
     private WebElement authEnterButton;
 
-    @FindBy(css = "#review-btn")
+    @FindBy(id = "review-btn")
     public WebElement createOrderButton;
 
     @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
@@ -83,10 +84,16 @@ public class OrderingGuest extends BasePage {
         return data;
     }
 
-    public void createOrder(JSONObject data) {
+    public void addProductToBasket()
+    {
+        getUrl(BASE_URL);
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
+    }
+
+    public void createOrder(JSONObject data) {
+        addProductToBasket();
         identificationBlock(data);
     }
 

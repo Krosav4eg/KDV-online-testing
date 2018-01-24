@@ -107,9 +107,10 @@ public class BasketPage extends BasePage {
 
     public void selectOneProduct() {
         searchElement();
-//        moveToElementJS(driver, productAddBtn);
-        scrollDown();
+        //moveToElementJS(driver, productAddBtn);
+        //scrollDown();
         elementFluentWaitVisibility(productAddBtn, driver).click();
+        sleepWait();
         elementFluentWaitVisibility(selectMiniCart, driver).click();
         elementFluentWaitVisibility(selectBasket, driver).click();
     }
