@@ -4,6 +4,7 @@ import basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -331,17 +332,21 @@ public class MainPage extends BasePage {
     public void openMainPage() {
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
-        driver.get(BASE_URL);
-        //TODO can`t find element, or add thread sleep or implement another
-        //moveToElementJS(driver, selectCityModalWindow);
-//        sleepWait();
-        if (selectCityModalWindow.isDisplayed()) {
-            elementIsClickable(selectCityTomsk, driver).click();
-        } else if (geoConfirmModalWindow.isDisplayed()) {
-            elementIsClickable(acceptGeoConfirm, driver).click();
+        try {
+            driver.get(BASE_URL);
+            //TODO can`t find element, or add thread sleep or implement another
+            moveToElementJS(driver, selectCityModalWindow);
+            sleepWait();
+            if (selectCityModalWindow.isDisplayed()) {
+                elementIsClickable(selectCityTomsk, driver).click();
+            } else if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+            driver.navigate().refresh();
+            sleepWait();
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
         }
-        driver.navigate().refresh();
-        sleepWait();
     }
 
     public void checkCompanyLogo() {

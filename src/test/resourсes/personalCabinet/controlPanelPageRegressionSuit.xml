@@ -1,0 +1,169 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Control panel regression tests" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="37820">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyControlPanelHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37821">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyGreetingsBlockTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--<test name="37822">-->
+        <!--<classes>-->
+            <!--<class name="testcases.personalCabinet.ControlPanelPageTest">-->
+                <!--<methods>-->
+                    <!--<include name="verifyOrdersBlockAbsenceTest"/>-->
+                <!--</methods>-->
+            <!--</class>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <test name="37823">
+         <classes>
+             <class name="testcases.personalCabinet.ControlPanelPageTest">
+                 <methods>
+                     <include name="verifyOrdersBlockWithQuantityLessThenFiveTest"/>
+                 </methods>
+             </class>
+         </classes>
+     </test>
+
+    <test name="37843">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyOrdersBlockWithQuantityMoreThenFiveTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="37845">
+       <classes>
+           <class name="testcases.personalCabinet.ControlPanelPageTest">
+               <methods>
+                   <include name="verifyLinkShowAllTest"/>
+               </methods>
+           </class>
+       </classes>
+   </test>
+
+    <test name="38062">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyPersonalDataHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38063">
+         <classes>
+             <class name="testcases.personalCabinet.ControlPanelPageTest">
+                 <methods>
+                     <include name="verifyUserFirstNameAndLastNameInPersonalDataTest"/>
+                 </methods>
+             </class>
+         </classes>
+     </test>
+
+    <test name="38064">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyUserEmailTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38065">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyUserPhoneTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38066">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyPersonalDataEditButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38196">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyAddressByDefaultHeaderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38197">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyUserFirstNameAndLastNameInAddressByDefaultTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38198">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyAddressByDefaultTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38199">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyUserPhoneInAddressByDefaultTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="38200">
+        <classes>
+            <class name="testcases.personalCabinet.ControlPanelPageTest">
+                <methods>
+                    <include name="verifyAddressEditButtonTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

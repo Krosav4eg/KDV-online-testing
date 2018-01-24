@@ -8,25 +8,27 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static utils.Constants.BASE_URL;
+
 public class OrderingPageTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
-//    @Test
-//    public void verifyAuthorizationLInkTest() {
-//        TestReporter.testTitle("Test ID - C41074");
-//        JSONObject data = orderingGuest.data();
-//        orderingGuest.createOrder(data);
-//        orderingGuest.modalAuthLink.click();
-//        AssertCollector.assertTrue(orderingGuest.modalAuthForm.isDisplayed(),
-//                "Modal authorization form is appear");
-//        orderingGuest.closeModalButton.click();
-//        orderingGuest.modalAuthLink.click();
-//        JSONObject data1 = orderingGuest.authModalFormData();
-//        orderingGuest.authorizationBlockModalWindow(data1);
-//        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
-//        AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
-//    }
+    @Test
+    public void verifyAuthorizationLInkTest() {
+        TestReporter.testTitle("Test ID - C41074");
+        JSONObject data = orderingGuest.data();
+        orderingGuest.createOrder(data);
+        orderingGuest.modalAuthLink.click();
+        AssertCollector.assertTrue(orderingGuest.modalAuthForm.isDisplayed(),
+                "Modal authorization form is appear");
+        orderingGuest.closeModalButton.click();
+        orderingGuest.modalAuthLink.click();
+        JSONObject data1 = orderingGuest.authModalFormData();
+        orderingGuest.authorizationBlockModalWindow(data1);
+        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
+        AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
+    }
 
     //problem with validation length and validation message in first name and last name fields
     @Test
