@@ -88,7 +88,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
+        //mainPage.openMainPage();
     }
     //TODO it get test name ,need to improver, bad realization
 

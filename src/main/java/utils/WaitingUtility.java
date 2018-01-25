@@ -88,6 +88,17 @@ public class WaitingUtility {
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
+        //moveToElementJS(driver,element);
+        TestReporter.step("Click on - " + element);
+        LOGGER.log(Level.INFO, " Click on - " + element);
+        Wait<WebDriver> newWait = new FluentWait<>(driver)
+                .withTimeout(40, TimeUnit.SECONDS)
+                .pollingEvery(50, TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class);
+        return newWait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
     public static void waitInvisibilityOfElement(WebElement element, WebDriver driver) {
         TestReporter.step("Element isn't displayed ");
         LOGGER.log(Level.INFO, "Element isn't displayed ");
