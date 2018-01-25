@@ -17,7 +17,8 @@ import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.CustomerAccountPage;
 import pages.MainPage;
-import pages.OrderingPage.OrderingGuest;
+import pages.OrderingPage.OrderingGuestPage;
+import pages.OrderingPage.OrderingPhysicalPage;
 import pages.RegistrationPage;
 import pages.personalCabinetPage.AccountDataPage;
 import pages.personalCabinetPage.ControlPanelPage;
@@ -53,7 +54,8 @@ public abstract class BaseTest {
     protected DeliveryAddressPage deliveryAddressPage;
     protected MyBookingPage myBookingPage;
     protected BasketPage basketPage;
-    protected OrderingGuest orderingGuest;
+    protected OrderingGuestPage orderingGuestPage;
+    protected OrderingPhysicalPage orderingPhysicalPage;
 
     /**
      * Clean directory with error and success screenshots before starting auto tests
@@ -85,7 +87,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-//        mainPage.openMainPage();
+        mainPage.openMainPage();
     }
     //TODO it get test name ,need to improver, bad realization
 
@@ -138,6 +140,7 @@ public abstract class BaseTest {
         controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
-        orderingGuest = PageFactory.initElements(driver, OrderingGuest.class);
+        orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
+        orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
     }
 }

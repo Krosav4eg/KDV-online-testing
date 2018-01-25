@@ -94,6 +94,14 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public static void textIsPresent(WebElement element, WebDriver driver,String text)
+    {
+        TestReporter.step("Element isn't displayed ");
+        LOGGER.log(Level.INFO, "Element isn't displayed ");
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        wait.until(ExpectedConditions. textToBePresentInElement(element,text));
+    }
     public static void  sleepTime()
     {
         try {
