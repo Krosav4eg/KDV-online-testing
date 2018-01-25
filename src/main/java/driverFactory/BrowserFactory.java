@@ -39,7 +39,7 @@ public class BrowserFactory  extends DriverCapabilities{
      *
      * @param driverName-name needed browser driver
      */
-    public static WebDriver setDriver(String driverName) {
+        public static   WebDriver setDriver(String driverName) {
         //killProcess();
         if (driverName != null)
         {

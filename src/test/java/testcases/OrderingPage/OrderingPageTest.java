@@ -96,7 +96,6 @@ public class OrderingPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41454");
         orderingPhysicalPage.orderingChangedAddress();
     }
-
     @Test
     public void  orderingChangeStoreAddress()
     {

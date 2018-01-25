@@ -4,11 +4,13 @@ import basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.OrderingPage.OrderingPhysicalPage;
 import utils.AssertCollector;
 
 import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
+import static utils.WaitingUtility.textIsPresent;
 
 
 public class BasketPage extends BasePage {
@@ -18,6 +20,9 @@ public class BasketPage extends BasePage {
 
     @FindBy(css = ".j_cart_control_add")
     private WebElement productAddBtn;
+
+    @FindBy(css = "[title='Кальмар подкопчённый (упаковка 1 кг)']")
+    private WebElement tittleProductTxt;
 
     @FindBy(css = ".product-item")
     private WebElement productContainer;
@@ -98,7 +103,8 @@ public class BasketPage extends BasePage {
     @FindBy(xpath = "//div[text()='Тула']")
     private WebElement selectCityTylaLink;
 
-
+    @FindBy(css = "h1.title")
+    private WebElement searchHeaderTxt;
     private void searchElement() {
         moveToElementJS(driver, productContainer);
         elementFluentWaitVisibility(searchField, driver).sendKeys("Кальмар подкопчённый");
@@ -110,8 +116,11 @@ public class BasketPage extends BasePage {
         searchElement();
         //moveToElementJS(driver, productAddBtn);
         //scrollDown();
+        textIsPresent(searchHeaderTxt,driver,"Результаты поиска для «Кальмар подкопчённый»");
+        moveToElementJS(driver,tittleProductTxt);
         elementFluentWaitVisibility(productAddBtn, driver).click();
-        sleepWait();
+        textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt,driver,"тов.");
+       //sleepWait();
         elementFluentWaitVisibility(selectMiniCart, driver).click();
         elementFluentWaitVisibility(selectBasket, driver).click();
     }

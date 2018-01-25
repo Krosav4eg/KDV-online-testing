@@ -11,13 +11,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.AssertCollector;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-
 import static utils.Constants.AUTORIZATION_PAGE_URL;
 import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
@@ -46,7 +39,7 @@ public class OrderingPhysicalPage extends BasePage {
 	private WebElement accountLink;
 
 	@FindBy(css = ".mini-cart-summary")
-	private WebElement basketSummaryTxt;
+	public WebElement basketSummaryTxt;
 
 
 	@FindBy(css = "div.j_mini_cart_summary")
@@ -100,6 +93,15 @@ public class OrderingPhysicalPage extends BasePage {
 
 	@FindBy(id = "loc-changed")
 	public  WebElement  modelWindows;
+
+	@FindBy(css = "button.j_confirm_confirm")
+	private WebElement confirmBtn;
+
+	@FindBy(css = "button.j_confirm_cancel")
+	private WebElement cancelBtn;
+
+	@FindBy(css = "#loc-changed .modal__close")
+	private WebElement closedBtn;
 
 	@FindBy(id="billing-address-select")
 	private WebElement addressesList;
@@ -165,7 +167,9 @@ public class OrderingPhysicalPage extends BasePage {
 		Verify.verify(getValueOfAttributeByName(guest.phoneTxt,"value").contains("71111111111"));
 		System.out.println(getValueOfAttributeByName(guest.checkoutDeliveryDate,"value"));
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+
 		validateMainData();
+
 	}
 
 
@@ -194,7 +198,10 @@ public class OrderingPhysicalPage extends BasePage {
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(4);
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		Verify.verify(getText(headerTxt).contains("Кемерово"));
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
+
 
 	}
 	public void orderingChangedStoreAddress()
@@ -204,8 +211,18 @@ public class OrderingPhysicalPage extends BasePage {
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(1);
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		textIsPresent(modelWindows,driver,"Выбранный вами адрес обслуживается другим");
+		Verify.verify(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
+				"Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
+		elementFluentWaitVisibility(cancelBtn,driver).click();
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		elementFluentWaitVisibility(closedBtn,driver).click();
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		elementFluentWaitVisibility(confirmBtn,driver).click();
+		elementFluentWaitVisibility(dropListAddresses,driver).click();
+		dropdown.selectByIndex(1);
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
-
 	}
 //	public boolean dateDay() {
 //		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
