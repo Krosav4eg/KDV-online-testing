@@ -8,6 +8,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static utils.Constants.BASE_URL;
+
 import static utils.Constants.*;
 
 public class OrderingPageTest extends BaseTest {
