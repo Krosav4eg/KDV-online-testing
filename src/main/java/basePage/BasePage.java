@@ -1,6 +1,5 @@
 package basePage;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -10,10 +9,7 @@ import utils.TestReporter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
