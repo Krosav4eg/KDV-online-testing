@@ -2,14 +2,14 @@ package pages.OrderingPage;
 
 import basePage.BasePage;
 import com.google.common.base.Verify;
-import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import utils.AssertCollector;
+
+import java.util.Calendar;
 
 import static utils.Constants.AUTORIZATION_PAGE_URL;
 import static utils.Constants.BASE_URL;
@@ -79,6 +79,8 @@ public class OrderingPhysicalPage extends BasePage {
 	@FindBy(id = "billing:floor")
 	private WebElement floorField;
 
+	@FindBy(id = "checkout-delivery-date")
+	private WebElement dateTxt;
 
 	@FindBy(id = "billing:porch")
 	private WebElement porchField;
@@ -149,7 +151,7 @@ public class OrderingPhysicalPage extends BasePage {
 		Assert.assertTrue(getText(orderConteiner).contains(order));
 	}
 
-	private void verifyOrderingBefoSend()
+	private void verifyOrderingBeforeSend()
 	{
 		Verify.verify(getText(orderBillingTxt).contains("г Томск, ул Нахимова, д 34, кв 53"));
 		Verify.verify(getValueOfAttributeByName(guest.firstNameTxt,"value").contains("Маргарита"));
@@ -157,10 +159,30 @@ public class OrderingPhysicalPage extends BasePage {
 		Verify.verify(getValueOfAttributeByName(guest.phoneTxt,"value").contains("71111111111"));
 
 	}
+
+	private static boolean dateDay(String time) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR, 4);
+		int hourNow = cal.get(Calendar.HOUR);
+		int dateNow= cal.get(Calendar.DATE);
+		boolean result;
+		if(hourNow>=8)
+		{
+			result =time.contains(Integer.toString(dateNow+1));
+		}
+		else
+		{
+			result=time.contains(Integer.toString(dateNow));
+		}
+		System.out.println(dateNow+7);
+		return result;
+	}
+
 	public void orderingDefaultAddress()
 	{
 		selectProduct();
-		verifyOrderingBefoSend();
+		verifyOrderingBeforeSend();
+		dateDay(getValueOfAttributeByName(dateTxt,"value"));
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
 
@@ -169,7 +191,7 @@ public class OrderingPhysicalPage extends BasePage {
 	public void orderingNewAddress()
 	{
 		selectProduct();
-		verifyOrderingBefoSend();
+		verifyOrderingBeforeSend();
 		elementFluentWaitVisibility(checkboxLabelBtn,driver).click();
 		sleepWait();
 		elementFluentWaitVisibility(addressesField,driver).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
@@ -181,7 +203,7 @@ public class OrderingPhysicalPage extends BasePage {
 	public void orderingChangedAddress()
 	{
 		selectProduct();
-		verifyOrderingBefoSend();
+		verifyOrderingBeforeSend();
 		elementFluentWaitVisibility(dropListAddresses,driver).click();
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(4);
@@ -192,7 +214,7 @@ public class OrderingPhysicalPage extends BasePage {
 	public void orderingChangedStoreAddress()
 	{
 		selectProduct();
-		verifyOrderingBefoSend();
+		verifyOrderingBeforeSend();
 		elementFluentWaitVisibility(dropListAddresses,driver).click();
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(1);
@@ -212,19 +234,7 @@ public class OrderingPhysicalPage extends BasePage {
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
 	}
-//	public boolean dateDay() {
-//		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//		DateFormat time = new SimpleDateFormat("dd-MM-yyyy");
-//		Date date = new Date();
-//		Calendar cal = Calendar.getInstance();
-//		cal.add(Calendar.HOUR, 2);
-//		Date dateNow = cal.getTime();
-//		Object test =date.compareTo(dateNow);
-//		System.out.println(dateNow);
-//		if(dateNow> )
-//
-//		return  dateFormat.format(date.getTime());
-//	}
+
 
 
 }
