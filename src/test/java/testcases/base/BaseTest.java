@@ -39,6 +39,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
  * @author Sergey Potapov
  */
 public abstract class BaseTest {
+
     protected WebDriver driver;
 
     //=======DECLARATION OF PAGE CLASSES=========
@@ -62,7 +63,7 @@ public abstract class BaseTest {
      * and set browser before starting auto tests
      */
     @BeforeTest
-    public void runBrowser() {
+    public void    runBrowser() {
 
         driver = BrowserFactory.setDriver("Chrome");
         initPageElements();
@@ -87,7 +88,7 @@ public abstract class BaseTest {
     @AfterMethod
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
+        //mainPage.openMainPage();
     }
     //TODO it get test name ,need to improver, bad realization
 

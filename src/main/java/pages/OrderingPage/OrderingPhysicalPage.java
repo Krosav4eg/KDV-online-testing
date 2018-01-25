@@ -11,15 +11,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.AssertCollector;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-
 import static utils.Constants.AUTORIZATION_PAGE_URL;
 import static utils.Constants.BASE_URL;
+import static utils.WaitingUtility.elementFluentWaitClick;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.textIsPresent;
 
@@ -46,7 +40,7 @@ public class OrderingPhysicalPage extends BasePage {
 	private WebElement accountLink;
 
 	@FindBy(css = ".mini-cart-summary")
-	private WebElement basketSummaryTxt;
+	public WebElement basketSummaryTxt;
 
 
 	@FindBy(css = "div.j_mini_cart_summary")
@@ -98,42 +92,48 @@ public class OrderingPhysicalPage extends BasePage {
 	@FindBy(css = ".select2-container")
 	public WebElement dropListAddresses;
 
+	@FindBy(css = "div.checkout-layout__inner h1")
+	public WebElement headerOrderTxt;
+
 	@FindBy(id = "loc-changed")
 	public  WebElement  modelWindows;
+
+	@FindBy(css = "button.j_confirm_confirm")
+	private WebElement confirmBtn;
+
+	@FindBy(css = "button.j_confirm_cancel")
+	private WebElement cancelBtn;
+
+	@FindBy(css = "#loc-changed .modal__close")
+	private WebElement closedBtn;
 
 	@FindBy(id="billing-address-select")
 	private WebElement addressesList;
 
-	public JSONObject getAuthorizationData(String email, String pass) {
-		JSONObject authorizationData=new JSONObject();
-		authorizationData.put("email",email);
-		authorizationData.put("pass",pass);
-		return authorizationData;
-	}
-	public void authorization(JSONObject data)
-	{
-		getUrl(AUTORIZATION_PAGE_URL);
-		fillInputField(emailInputField, driver, data.getString("email"));
-		fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
-	}
-	JSONObject data= getAuthorizationData("test_m.ponomareva@magdv.com","ztq0d9e6");
+	/**
+	 * Authorization and select product
+	 */
 	private void selectProduct()
 	{
 		getUrl(AUTORIZATION_PAGE_URL);
-		authorization(data);
+		getUrl(AUTORIZATION_PAGE_URL);
+		fillInputField(emailInputField, driver, "test_m.ponomareva@magdv.com");
+		fillInputFieldAndPressEnterButton(passwordField, "ztq0d9e6");
 		if(!getText(basketSummaryTxt).contains("тов."))
 		{
 			new OrderingGuestPage(driver).addProductToBasket();
 		}
 		else
 		{
-
 			elementFluentWaitVisibility(selectMiniCart, driver).click();
 			elementFluentWaitVisibility(selectBasket, driver).click();
 			elementFluentWaitVisibility(orderBtn, driver).click();
 		}
 	}
 
+	/**
+	 * Validate Data after ordering
+	 */
 	private void validateMainData()
 	{
 		textIsPresent(orderContainer,driver,"Ваш заказ принят");
@@ -148,37 +148,28 @@ public class OrderingPhysicalPage extends BasePage {
 		elementFluentWaitVisibility(accountLink,driver).click();
 		Assert.assertTrue(getText(orderConteiner).contains(order));
 	}
-	private void beforeOrderData()
-	{
 
-	}
-
-	/**
-	 * Assert default data in order
-	 */
-	public void orderingDefaultAddress()
+	private void verifyOrderingBefoSend()
 	{
-		selectProduct();
 		Verify.verify(getText(orderBillingTxt).contains("г Томск, ул Нахимова, д 34, кв 53"));
 		Verify.verify(getValueOfAttributeByName(guest.firstNameTxt,"value").contains("Маргарита"));
 		Verify.verify(getValueOfAttributeByName(guest.lastNameTxt,"value").contains("Пономарёва"));
 		Verify.verify(getValueOfAttributeByName(guest.phoneTxt,"value").contains("71111111111"));
-		System.out.println(getValueOfAttributeByName(guest.checkoutDeliveryDate,"value"));
+
+	}
+	public void orderingDefaultAddress()
+	{
+		selectProduct();
+		verifyOrderingBefoSend();
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
+
 	}
 
-
-
-	private void addAddresses(JSONObject data)
-	{
-
-		elementFluentWaitVisibility(floorField,driver).sendKeys(data.getString("floor"));
-		elementFluentWaitVisibility(porchField,driver).sendKeys(data.getString("porch"));
-	}
 	public void orderingNewAddress()
 	{
 		selectProduct();
+		verifyOrderingBefoSend();
 		elementFluentWaitVisibility(checkboxLabelBtn,driver).click();
 		sleepWait();
 		elementFluentWaitVisibility(addressesField,driver).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
@@ -190,22 +181,36 @@ public class OrderingPhysicalPage extends BasePage {
 	public void orderingChangedAddress()
 	{
 		selectProduct();
+		verifyOrderingBefoSend();
 		elementFluentWaitVisibility(dropListAddresses,driver).click();
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(4);
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
-
 	}
+
 	public void orderingChangedStoreAddress()
 	{
 		selectProduct();
+		verifyOrderingBefoSend();
 		elementFluentWaitVisibility(dropListAddresses,driver).click();
 		Select dropdown= new Select(addressesList);
 		dropdown.selectByIndex(1);
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		textIsPresent(modelWindows,driver,"Выбранный вами адрес обслуживается другим");
+		Verify.verify(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
+				"Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
+		elementFluentWaitVisibility(cancelBtn,driver).click();
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		elementFluentWaitVisibility(closedBtn,driver).click();
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
+		textIsPresent(confirmBtn,driver,"Да");
+		elementFluentWaitVisibility(confirmBtn,driver).click();
+		sleepWait();
+		elementFluentWaitClick(dropListAddresses,driver).click();
+		dropdown.selectByIndex(1);
+		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
-
 	}
 //	public boolean dateDay() {
 //		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
