@@ -1,11 +1,10 @@
 package testcases.registration;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import pages.RegistrationPage;
 import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
@@ -725,7 +724,7 @@ public class RegistrationTest extends BaseTest {
                 contains("Это поле обязательно для заполнения"));
         del2.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
                 " выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
-        AssertCollector.assertEqualsJ(del2.getCurrentUrl(), AUTORIZATION_PAGE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del2.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls are equals");
     }
 }
 

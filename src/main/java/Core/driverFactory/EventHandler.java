@@ -1,4 +1,4 @@
-package driverFactory;
+package Core.driverFactory;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -9,10 +9,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
-import static driverFactory.BrowserFactory.testName;
+
 public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeNavigateRefresh(WebDriver webDriver)

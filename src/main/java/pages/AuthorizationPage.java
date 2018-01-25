@@ -1,6 +1,6 @@
 package pages;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -238,7 +238,7 @@ public class AuthorizationPage extends BasePage {
         String link = getValueOfAttributeByName(mainPageLogo, "href");
         elementFluentWaitVisibility(mainPageLogo, driver).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page ",
                 link);
     }
 
@@ -256,7 +256,7 @@ public class AuthorizationPage extends BasePage {
         String linkTextAttribute = getValueOfAttributeByName(continueAsGuestButton, "href");
         elementFluentWaitVisibility(continueAsGuestButton, driver).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page link ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page link ",
                 linkTextAttribute);
     }
 

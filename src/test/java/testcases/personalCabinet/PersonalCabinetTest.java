@@ -1,6 +1,6 @@
 package testcases.personalCabinet;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -20,7 +20,7 @@ public class PersonalCabinetTest extends BaseTest {
         TestReporter.testTitle("Test ID = 38264,40087,38364,40095");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        del.getUrl(ACCOUNT_INFORMATION_URL);
+        del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
         AssertCollector.assertTrue(personalCabinetPage.personalDataHeaderInEditPage.
                 isDisplayed(), "Required header is displayed");
         AssertCollector.assertTrue(personalCabinetPage.personalDataInEditPage.
@@ -58,9 +58,9 @@ public class PersonalCabinetTest extends BaseTest {
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");
         personalCabinetPage.verifyEditAccountFields(data);
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
         AssertCollector.assertTrue(personalCabinetPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
@@ -69,7 +69,7 @@ public class PersonalCabinetTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40088");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        del.getUrl(ACCOUNT_INFORMATION_URL);
+        del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
         data = personalCabinetPage.mainAccountInfo();
         data.put("phone", RandomStringUtils.randomAlphanumeric(10));
         personalCabinetPage.verifyEditAccountFields(data);
@@ -102,9 +102,9 @@ public class PersonalCabinetTest extends BaseTest {
         AssertCollector.assertEquals(personalCabinetPage.passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", personalCabinetPage.passwordInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
-        AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
+        AssertCollector.assertEquals(del.getCurrentUrlDelegate(), "Current url is equals", ACCOUNT_PAGE_URL);
     }
 
     @Test
@@ -120,7 +120,7 @@ public class PersonalCabinetTest extends BaseTest {
         data.put("currentPassword", "");
         personalCabinetPage.verifyEditAccountFields(data);
         personalCabinetPage.changePasswordCheckbox.click();
-        del.scrollToNecessaryElement(personalCabinetPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(personalCabinetPage.saveButtonInEditPage);
         personalCabinetPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
     }

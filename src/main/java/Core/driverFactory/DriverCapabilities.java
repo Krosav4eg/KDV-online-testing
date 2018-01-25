@@ -1,7 +1,6 @@
-package driverFactory;
+package Core.driverFactory;
 
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -11,7 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Arrays;
 
- abstract class DriverCapabilities {
+ public class DriverCapabilities {
 
 	 /**
 	  * PROXY you can use only if you need to connect to some proxy server

@@ -1,10 +1,9 @@
 package pages;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -564,7 +563,7 @@ public class MainPage extends BasePage {
         }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
-        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in" +
+        AssertCollector.assertEquals(actualDescription, " Description in Singleton page equals description in" +
                 " basket page ", expectedDescription);
     }
 
@@ -834,9 +833,9 @@ public class MainPage extends BasePage {
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
         String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
         String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
-        AssertCollector.assertEquals(actTitle, " Title in main page equals title in" +
+        AssertCollector.assertEquals(actTitle, " Title in Singleton page equals title in" +
                 " basket page ", expTitle);
-        AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
+        AssertCollector.assertEquals(actPrice, " Price in Singleton page equals price in" +
                 " basket page ", expPrice);
     }
 

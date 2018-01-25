@@ -1,13 +1,12 @@
 package testcases.base;
 
-import driverFactory.BrowserFactory;
+import Core.driverFactory.BrowserFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
@@ -25,7 +24,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 
-import static driverFactory.BrowserFactory.testName;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
@@ -45,17 +43,16 @@ public  class BaseTest  {
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
     protected PersonalCabinetPage personalCabinetPage;
-
+    final BrowserFactory singleton = BrowserFactory.getInstance();
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-    @BeforeMethod
-    public void runBrowser(Method method) {
-        testName=method.getName();
-        driver = new BrowserFactory().setDriver("Chrome");
+    @BeforeTest
+    public void runBrowser() {
+        driver = singleton.setDriver("Chrome");
         initPageElements();
-        TestReporter.step("Open main page");
+        TestReporter.step("Open Singleton page");
         mainPage.openMainPage();
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
@@ -75,11 +72,11 @@ public  class BaseTest  {
 
     //TODO it get test name ,need to improver, bad realization
 
-//    @BeforeMethod
-//    public void setUp(Method method) {
-//        System.err.println("DRIVER:"+ driver);
-//        System.err.println(method.getName());
-//    }
+   @BeforeMethod
+   public void setUp(Method method) {
+       System.err.println("DRIVER:"+ driver);
+       System.err.println(method.getName());
+   }
     /**
      * Method for screenshot creation
      *

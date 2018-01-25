@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static driverFactory.BrowserFactory.getDriver;
+import static Core.driverFactory.BrowserFactory.getDriver;
 
 /**
  * @author Sergey Potapov
