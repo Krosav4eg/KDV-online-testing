@@ -82,9 +82,26 @@ public class OrderingPageTest extends BaseTest {
     public void  orderingDefaultAddress()
     {
         TestReporter.testTitle("Test ID - C41300");
-        JSONObject data= orderingPhysicalPage.
-                getAuthorizationData("test_m.ponomareva@magdv.com","ztq0d9e6");
-        orderingPhysicalPage.orderingDefaultAddress(data);
+        orderingPhysicalPage.orderingDefaultAddress();
+    }
+    @Test
+    public void  orderingNewAddress()
+    {
+        TestReporter.testTitle("Test ID - C41314");
+        orderingPhysicalPage.orderingNewAddress();
+    }
+    @Test
+    public void  orderingChangeAddress()
+    {
+        TestReporter.testTitle("Test ID - C41454");
+        orderingPhysicalPage.orderingChangedAddress();
+    }
+
+    @Test
+    public void  orderingChangeStoreAddress()
+    {
+        TestReporter.testTitle("Test ID - C41313");
+        orderingPhysicalPage.orderingChangedStoreAddress();
     }
 
 }

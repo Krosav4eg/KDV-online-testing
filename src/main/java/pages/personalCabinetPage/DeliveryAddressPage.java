@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static utils.Constants.BASE_URL;
+
 /**
  * @author Sergey Potapov
  */
@@ -32,7 +34,7 @@ public class DeliveryAddressPage extends BasePage {
     @FindBy(css = ".tag.tag_right.tag_default")
     public WebElement byDefaultMark;
 
-    @FindBy(css = "a[href='http://tomsk.demo.dev.magonline.ru/customer/address/edit/id/6925/']")
+    @FindBy(css = "a[href='"+BASE_URL+"/customer/address/edit/id/6925/']")
     public WebElement editDeliveryLink;
 
     @FindBy(id = "firstname")

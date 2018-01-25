@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
+import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
 
@@ -179,7 +180,7 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(confirmBtn, driver).click();
         AssertCollector.assertTrue(getText(basketContainer).contains("Ваша корзина пуста, вы можете перейти"));
         elementFluentWaitVisibility(mainPageLink, driver).click();
-        AssertCollector.assertTrue(getCurrentUrl().contains("http://tomsk.demo.dev.magonline.ru/"));
+        AssertCollector.assertTrue(getCurrentUrl().contains(BASE_URL));
     }
 
     public void verifyDeleteAllProduct() {
@@ -192,7 +193,7 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(confirmBtn, driver).click();
         AssertCollector.assertTrue(getText(basketContainer).contains("Ваша корзина пуста, вы можете перейти"));
         elementFluentWaitVisibility(mainPageLink, driver).click();
-        AssertCollector.assertTrue(getCurrentUrl().contains("http://tomsk.demo.dev.magonline.ru/"));
+        AssertCollector.assertTrue(getCurrentUrl().contains(BASE_URL));
     }
 
     public void verifyProductAbsent() {

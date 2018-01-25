@@ -189,7 +189,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".menu-categories__item")
     private WebElement parentItemOfProducts;
 
-    @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
+    @FindBy(xpath = "(//a[@href='"+BASE_URL+"/new-year-gifts.html'])[2]")
     private WebElement firstGoodInLinkList;
 
     //========================
@@ -1020,7 +1020,7 @@ public class MainPage extends BasePage {
         elementIsClickable(categoryFromList, driver).click();
         elementIsClickable(searchButton, driver).click();
         String actUrl = getCurrentUrl();
-        String expUrl = "http://tomsk.demo.dev.magonline.ru/vafli.html";
+        String expUrl = BASE_URL+"/vafli.html";
         AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
                 expUrl);
     }
