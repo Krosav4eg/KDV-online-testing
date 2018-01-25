@@ -1,105 +1,93 @@
 package testcases.personalCabinet;
 
 
+import basePage.BasePage;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
+import utils.AssertCollector;
 import utils.TestReporter;
 
-public class ControlPanelPageTest extends BaseTest{
+import static utils.Constants.*;
+
+public class ControlPanelPageTest extends BaseTest {
+    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
 
     @Test
-    public void verifyControlPanelHeaderTest() {
-        TestReporter.testTitle("Test ID = 37820");
-        controlPanelPage.verifyControlPanelHeader();
-    }
-
-    @Test
-    public void verifyGreetingsBlockTest() {
-        TestReporter.testTitle("Test ID = 37821");
-        controlPanelPage.verifyGreetingsBlock();
-    }
-
-    @Test
-    public void verifyOrdersBlockAbsenceTest() {
-        TestReporter.testTitle("Test ID = 37822");
-        controlPanelPage.verifyOrdersBlockAbsence();
+    public void verifyControlPanelTest() {
+        TestReporter.testTitle("Test ID = 37820,37821,37822");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", PHYSICAL_PERSON_EMAIL);
+        data.put("password", PHYSICAL_PERSON_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
+        AssertCollector.verifyCondition(controlPanelPage.controlPanelHeader.isDisplayed());
+        del.textPresentDelegate("Здравствуйте, Иннокентий Макаров!");
+        del.textPresentDelegate("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
     }
 
     @Test
     public void verifyOrdersBlockWithQuantityLessThenFiveTest() {
         TestReporter.testTitle("Test ID = 37823");
-        controlPanelPage.verifyOrdersBlockWithQuantityLessThenFive();
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", "test_i.kononov@magdv.com");
+        data.put("password", "M9fraZ");
+        authorizationPage.verifyAuthFields(data);
+        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
     }
 
     @Test
-    public void verifyOrdersBlockWithQuantityMoreThenFiveTest() {
-        TestReporter.testTitle("Test ID = 37843");
-        controlPanelPage.verifyOrdersBlockWithQuantityMoreThenFive();
+    public void verifyOrdersMoreThenFiveAndShowAllBtnTest() {
+        TestReporter.testTitle("Test ID = 37843,37845");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", TEST_EMAIL);
+        data.put("password", TEST_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
+        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
+        String expLink = del.getValueOfAttributeByName(controlPanelPage.showAll, "href");
+        (controlPanelPage.showAll).click();
+        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink));
     }
 
-    @Test
-    public void verifyLinkShowAllTest() {
-        TestReporter.testTitle("Test ID = 37845");
-        controlPanelPage.verifyLinkShowAll();
-    }
+    // TODO: 12.01.2018 C38045 take id from DB
 
     @Test
-    public void verifyPersonalDataHeaderTest() {
-        TestReporter.testTitle("Test ID = 38062");
-        controlPanelPage.verifyPersonalDataHeader();
-    }
+    public void verifyAccountAndAddressByDefaultTest() {
+        TestReporter.testTitle("Test ID = 38062-38066,38196-38200");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", AUTORIZATION_EMAIL);
+        data.put("password", AUTORIZATION_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
+        AssertCollector.verifyCondition(controlPanelPage.personalDataHeader.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
+                contains("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTORIZATION_EMAIL));
+        AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+71111111111"));
 
-    @Test
-    public void verifyUserFirstNameAndLastNameInPersonalDataTest() {
-        TestReporter.testTitle("Test ID = 38063");
-        controlPanelPage.verifyUserFirstNameAndLastNameInPersonalData();
-    }
-
-    @Test
-    public void verifyUserEmailTest() {
-        TestReporter.testTitle("Test ID = 38064");
-        controlPanelPage.verifyUserEmail();
-    }
-
-    @Test
-    public void verifyUserPhoneTest() {
-        TestReporter.testTitle("Test ID = 38065");
-        controlPanelPage.verifyUserPhone();
-    }
-
-    @Test
-    public void verifyPersonalDataEditButtonTest() {
-        TestReporter.testTitle("Test ID = 38066");
-        controlPanelPage.verifyPersonalDataEditButton();
-    }
-
-    @Test
-    public void verifyAddressByDefaultHeaderTest() {
-        TestReporter.testTitle("Test ID = 38196");
-        controlPanelPage.verifyAddressByDefaultHeader();
-    }
-
-    @Test
-    public void verifyUserFirstNameAndLastNameInAddressByDefaultTest() {
-        TestReporter.testTitle("Test ID = 38197");
-        controlPanelPage.verifyUserFirstNameAndLastNameInAddressByDefault();
-    }
-
-    @Test
-    public void verifyAddressByDefaultTest() {
-        TestReporter.testTitle("Test ID = 38198");
-        controlPanelPage.verifyAddressByDefault();
-    }
-
-    @Test
-    public void verifyUserPhoneInAddressByDefaultTest() {
-        TestReporter.testTitle("Test ID = 38199");
-        controlPanelPage.verifyUserPhoneInAddressByDefault();
-    }
-
-    @Test
-    public void verifyAddressEditButtonTest() {
-        TestReporter.testTitle("Test ID = 38200");
-        controlPanelPage.verifyAddressEditButton();
+        String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
+        (controlPanelPage.editPersonalDataButton).click();
+        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink));
+        driver.navigate().back();
+        AssertCollector.verifyCondition(controlPanelPage.addressByDefaultHeader.isDisplayed());
+        AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().
+                equals("г Кемерово, ул Варшавская, д 87, кв 12"));
+        AssertCollector.verifyCondition(controlPanelPage.phoneInAddressByDefault.getText().equals("+71111111111"));
+        del.scrollToNecessaryElement(controlPanelPage.editAddressButton);
+        String expLink1 = del.getValueOfAttributeByName(controlPanelPage.editAddressButton, "href");
+        (controlPanelPage.editAddressButton).click();
+        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink1));
     }
 }

@@ -94,6 +94,7 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
     public static void  sleepTime()
     {
         try {

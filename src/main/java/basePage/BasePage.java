@@ -98,6 +98,9 @@ public abstract class BasePage {
             driver.close();
             System.setProperty("close.current.window.handle", parentHandle);
         }
+        public String getValueOfAttributeByName(WebElement element, String attribute) {
+            return element.getAttribute(attribute);
+        }
     }
 
     protected static WebDriver driver;
@@ -322,7 +325,7 @@ public abstract class BasePage {
 
     protected void sleepWait() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

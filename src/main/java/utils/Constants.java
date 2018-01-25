@@ -57,5 +57,7 @@ public class Constants {
     public static final String AUTORIZATION_PASSWORD = "JOviF7J2";
     public static final String INCORRECT_EMAIL = "a.shaulo123@andersenlab.com";
     public static final String INCORRECT_PASSWORD = "As06051993";
+    public static final String TEST_EMAIL = "test_t.bolshakov@magdv.com";
+    public static final String TEST_PASSWORD = "sTU1iJ46";
     public static final String EMPTY_DATA = " ";
 }
