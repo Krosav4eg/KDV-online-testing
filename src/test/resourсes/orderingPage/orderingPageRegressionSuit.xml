@@ -1,15 +1,49 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Site Tests">
+<suite name="Registration regression tests" parallel="tests" thread-count="1">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="OrderingPageTest">
+    <test name="41070">
         <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest"/>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifySelfDeliveryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="41072">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyCourierDeliveryTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="41073">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyCompositionOrderTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="41074-41075">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyCreationOrderAsGuestTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
