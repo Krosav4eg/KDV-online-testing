@@ -69,7 +69,7 @@ public abstract class BasePage {
             LOGGER.log(Level.INFO, "Scroll to necessary element ");
             TestReporter.step("Scroll to necessary element ");
             JavascriptExecutor jse = (JavascriptExecutor) driver;
-            jse.executeScript("window.scrollBy(0,600)", "");
+            jse.executeScript("window.scrollBy(0,500)", "");
         }
 
         public void switchDriverToAnyTabOfBrowser(int tabIndex) {
@@ -109,6 +109,11 @@ public abstract class BasePage {
             TestReporter.step("Feel input field ");
             elementFluentWaitVisibility(element, driver).clear();
             elementFluentWaitVisibility(element, driver).sendKeys(message);
+        }
+        public void backPage() {
+            LOGGER.log(Level.INFO, "Navigate to back page ");
+            TestReporter.step("Navigate to back page ");
+            driver.navigate().back();
         }
     }
 

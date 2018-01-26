@@ -80,11 +80,47 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Самовывоз')]")
     public WebElement selfDeliveryRadioButton;
 
-    @FindBy(xpath = "//label[@for=\"billing:street_pickup\"]/following-sibling::input")
+    @FindBy(id = "billing:street_new")
     public WebElement deliveryAddressField;
+
+    @FindBy(css = "div[data-index='1']")
+    public WebElement addressSuggestionList;
 
     @FindBy(id = "id_comments")
     public WebElement deliveryCommentField;
+
+    @FindBy(xpath = "//span[contains(text(),'Курьерская доставка:')]")
+    public WebElement courierDeliveryRadioButton;
+
+    @FindBy(css = "#onepage-review>h2")
+    public WebElement compositionOrderHeader;
+
+    @FindBy(css = ".link.checkout-form__edit.float-right")
+    public WebElement editCompositionOrderHeader;
+
+    @FindBy(css = ".checkout-review__row.checkout-review__row_header")
+    public WebElement reviewOrder;
+
+    @FindBy(xpath = "(//tr[@class='checkout-review__row'])[2]")
+    public WebElement totalShipping;
+
+    @FindBy(css = ".checkout-review__row.checkout-review__row_last")
+    public WebElement compositionOrderLastRow;
+
+    @FindBy(xpath = ".//*[@id='checkout-review-table']/tbody/tr/td[4]/span")
+    public WebElement totalPriceCompositionOrder;
+
+    @FindBy(css = "label[for=\"p_method_beznal\"] span")
+    public WebElement payBankCardRadioButton;
+
+    @FindBy(id = "billing:floor")
+    public WebElement deliveryFloorField;
+
+    @FindBy(id = "billing:porch")
+    public WebElement deliveryPorchField;
+
+    @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
+    public WebElement addressErrorField;
 
 
     public JSONObject data() {
@@ -96,8 +132,7 @@ public class OrderingGuestPage extends BasePage {
         return data;
     }
 
-    public void addProductToBasket()
-    {
+    public void addProductToBasket() {
         getUrl(BASE_URL);
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
