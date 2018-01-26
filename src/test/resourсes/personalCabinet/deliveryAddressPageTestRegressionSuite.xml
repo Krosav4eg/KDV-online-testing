@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Delivery data regression tests" parallel="tests" thread-count="1">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="Delivery Address Page">
+        <classes>
+            <class name="testcases.personalCabinet.DeliveryAddressPageTest">
+            </class>
+        </classes>
+    </test>
+</suite>

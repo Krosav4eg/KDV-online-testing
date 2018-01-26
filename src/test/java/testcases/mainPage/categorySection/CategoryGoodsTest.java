@@ -29,7 +29,6 @@ public class CategoryGoodsTest extends BaseTest {
         categoryPage.commodityGridList();
 
     }
-    //TODO BUG
     @Test
     public void verifyCheckBoxIsPresent() {
         TestReporter.testTitle("Test ID - C39083");
@@ -45,7 +44,6 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C40223");
         categoryPage.sortFilterPrice();
     }
-    //TODO BUG
     @Test
     public void verifySelectingCategoryTest() {
         TestReporter.testTitle("Test ID - C34335");

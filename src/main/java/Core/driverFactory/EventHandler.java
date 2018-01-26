@@ -42,6 +42,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
 		waitForJSandJQueryToLoad(arg1);
+		threadSleep();
 		waitForPageLoad(arg1);
 		//moveToElementJS(arg1,arg0);
 		threadSleep();
@@ -63,6 +64,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	{
 
 		waitForPageLoad(arg1);
+		threadSleep();
 		//System.out.println("afterNavigateTo "+" WebDriver "+arg1);
 	}
 

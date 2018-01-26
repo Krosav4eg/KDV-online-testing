@@ -11,13 +11,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import pages.*;
-import pages.AuthorizationPage;
+import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
-import pages.CustomerAccountPage;
-import pages.MainPage;
-import pages.RegistrationPage;
+import pages.OrderingPage.OrderingGuestPage;
+import pages.OrderingPage.OrderingPhysicalPage;
+import pages.personalCabinetPage.AccountDataPage;
+import pages.personalCabinetPage.ControlPanelPage;
+import pages.personalCabinetPage.DeliveryAddressPage;
+import pages.personalCabinetPage.MyBookingPage;
 import utils.TestReporter;
 
 import java.io.File;
@@ -44,7 +47,29 @@ public  class BaseTest  {
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
     protected PersonalCabinetPage personalCabinetPage;
-    final BrowserFactory singleton = BrowserFactory.getInstance();
+    protected AccountDataPage accountDataPage;
+    protected ControlPanelPage controlPanelPage;
+    protected DeliveryAddressPage deliveryAddressPage;
+    protected MyBookingPage myBookingPage;
+    protected BasketPage basketPage;
+    protected OrderingGuestPage orderingGuestPage;
+    protected OrderingPhysicalPage orderingPhysicalPage;
+
+    BrowserFactory singleton = BrowserFactory.getInstance();
+
+    @BeforeMethod
+    public void verifyBrowser(Method method)
+    {
+        System.err.println("DRIVER:" + driver);
+        System.err.println(method.getName());
+        if (driver.equals(null))
+        {
+            driver = singleton.setDriver("Chrome");
+            initPageElements();
+            TestReporter.step("Open Main page");
+            screen();
+        }
+    }
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
@@ -53,8 +78,13 @@ public  class BaseTest  {
     public void runBrowser() {
         driver = singleton.setDriver("Chrome");
         initPageElements();
-        TestReporter.step("Open Singleton page");
+        TestReporter.step("Open Main page");
         mainPage.openMainPage();
+        screen();
+    }
+
+    private void screen()
+    {
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -70,14 +100,12 @@ public  class BaseTest  {
             }
     }
 
+    @AfterMethod
+    public void clearCookies() {
+        driver.manage().deleteAllCookies();
+        mainPage.openMainPage();
+    }
 
-    //TODO it get test name ,need to improver, bad realization
-
-   @BeforeMethod
-   public void setUp(Method method) {
-       System.err.println("DRIVER:"+ driver);
-       System.err.println(method.getName());
-   }
 
     /**
      * Method for screenshot creation
@@ -117,6 +145,12 @@ public  class BaseTest  {
         categoryPage = PageFactory.initElements(driver, CategoryPage.class);
         cardPage = PageFactory.initElements(driver, CardPage.class);
         modalWindow = PageFactory.initElements(driver, ModalWindow.class);
-        personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
+        basketPage = PageFactory.initElements(driver, BasketPage.class);
+        accountDataPage = PageFactory.initElements(driver, AccountDataPage.class);
+        controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
+        deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
+        myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
+        orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
+        orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
     }
 }

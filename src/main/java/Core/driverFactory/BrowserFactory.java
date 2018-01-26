@@ -45,7 +45,7 @@ public enum BrowserFactory  {
      *
      * @param driverName-name needed browser driver
      */
-    public  WebDriver setDriver(String driverName) {
+        public  synchronized WebDriver setDriver(String driverName) {
         //killProcess();
         if (driverName != null)
         {

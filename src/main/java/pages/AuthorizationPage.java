@@ -211,7 +211,7 @@ public class AuthorizationPage extends BasePage {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
         fillInputField(emailInputAtForgotPassword, driver, "a.shaulo@andersenlab.com");
         elementFluentWaitVisibility(sendEmailForVerification, driver).click();
-        String expLink = "http://tomsk.demo.dev.magonline.ru/customer/account/login/";
+        String expLink = BASE_URL+"/customer/account/login/";
         String actLink = getCurrentUrl();
         AssertCollector.assertEquals(actLink, " Current link is equal to ", expLink);
         textPresent("Если на сайте существует учётная запись с адресом a.shaulo@andersenlab.com " +

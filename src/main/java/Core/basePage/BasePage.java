@@ -1,5 +1,6 @@
 package Core.basePage;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -9,7 +10,10 @@ import utils.TestReporter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +28,8 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
  * @author Sergey_Potapov
  */
 public  class BasePage {
+
+
 
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
@@ -43,7 +49,45 @@ public  class BasePage {
         }
 
         public void scrollToNecessaryElementDelegate(WebElement element) {
-            scrollToNecessaryElement(element);
+            scrollToNecessaryElement(element);}
+        //TODO more flexible method
+        public void scrollByCoordinate() {
+            LOGGER.log(Level.INFO, "Scroll to necessary element ");
+            TestReporter.step("Scroll to necessary element ");
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("window.scrollBy(0,600)", "");
+        }
+
+        public void switchDriverToAnyTabOfBrowser(int tabIndex) {
+            LOGGER.log(Level.INFO, "Navigate to needed tab " + tabIndex);
+            TestReporter.step(" Navigate to needed tab " + tabIndex);
+            String parentHandle = new ArrayList<>(driver.getWindowHandles()).get(0);
+            String anyTabName = new ArrayList<>(driver.getWindowHandles()).get(tabIndex);
+            driver.switchTo().window(anyTabName);
+            System.setProperty("current.window.handle", parentHandle);
+        }
+
+        public int getBrowserTabsCount() {
+            return driver.getWindowHandles().size();
+        }
+
+
+        public void verifyTabsCountAsExpected(int expectedCount) {
+            LOGGER.log(Level.INFO, " Verify count of tabs " + expectedCount);
+            TestReporter.step(" Verify count of tabs " + expectedCount);
+            int actualCount = getBrowserTabsCount();
+            AssertCollector.assertEqualsJ(actualCount, expectedCount, "Verifying browser tabs count");
+        }
+
+        public void closeDriverToAnyTabOfBrowser(int tabIndex) {
+            String parentHandle = new ArrayList<>(driver.getWindowHandles()).get(0);
+            String anyTabName = new ArrayList<>(driver.getWindowHandles()).get(tabIndex);
+            driver.switchTo().window(anyTabName);
+            driver.close();
+            System.setProperty("close.current.window.handle", parentHandle);
+        }
+        public String getValueOfAttributeByName(WebElement element, String attribute) {
+            return element.getAttribute(attribute);
         }
     }
 
@@ -60,6 +104,12 @@ public  class BasePage {
         LOGGER.log(Level.INFO, " Get text of element ");
         TestReporter.step(" Get text of element ");
         return element.getText();
+    }
+
+    protected Double parseStringToDouble(String text) {
+        String parseText = text.replaceAll(",", ".");
+        parseText = parseText.replaceAll("[^\\d.]", "");
+        return Double.valueOf(parseText);
     }
 
     protected static String getCurrentUrl() {
@@ -127,13 +177,14 @@ public  class BasePage {
     protected void clickElementByJS(WebDriver driver, WebElement element) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+        sleepWait();
     }
 
     /**
-     * scrol to Element
+     * scroll to Element
      */
-    public static void moveToElementJS(WebDriver driver,WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();",element);
+    public static void moveToElementJS(WebDriver driver, WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     /**
@@ -260,7 +311,7 @@ public  class BasePage {
 
     protected void sleepWait() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

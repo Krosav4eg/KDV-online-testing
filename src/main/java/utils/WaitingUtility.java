@@ -1,7 +1,10 @@
 package utils;
 
 import logger.MagDvLogger;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.*;
 
 import java.util.Objects;
@@ -77,14 +80,26 @@ public class WaitingUtility {
      * @param element - used to find the element
      */
     public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
+        //moveToElementJS(driver,element);
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
+                .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
-
         return newWait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
+        //moveToElementJS(driver,element);
+        TestReporter.step("Click on - " + element);
+        LOGGER.log(Level.INFO, " Click on - " + element);
+        Wait<WebDriver> newWait = new FluentWait<>(driver)
+                .withTimeout(40, TimeUnit.SECONDS)
+                .pollingEvery(50, TimeUnit.MILLISECONDS)
+                .ignoring(NoSuchElementException.class);
+        return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitInvisibilityOfElement(WebElement element, WebDriver driver) {
@@ -92,6 +107,14 @@ public class WaitingUtility {
         LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public static void textIsPresent(WebElement element, WebDriver driver,String text)
+    {
+        TestReporter.step("Element isn't displayed ");
+        LOGGER.log(Level.INFO, "Element isn't displayed ");
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        wait.until(ExpectedConditions. textToBePresentInElement(element,text));
     }
     public static void  sleepTime()
     {
