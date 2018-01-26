@@ -35,13 +35,12 @@ public enum BrowserFactory  {
      */
     private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
-    public static String testName;
     /**
      * There is setting driver by name
      *
      * @param driverName-name needed browser driver
      */
-        public  synchronized WebDriver setDriver(String driverName) {
+    public  synchronized WebDriver setDriver(String driverName) {
         //killProcess();
         if (driverName != null)
         {

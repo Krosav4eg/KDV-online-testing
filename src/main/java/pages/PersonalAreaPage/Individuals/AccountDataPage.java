@@ -1,4 +1,4 @@
-package pages.personalCabinetPage;
+package pages.PersonalAreaPage.Individuals;
 
 import Core.basePage.BasePage;
 import org.json.JSONObject;

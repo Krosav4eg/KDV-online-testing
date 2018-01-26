@@ -17,10 +17,7 @@ import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.OrderingPage.OrderingGuestPage;
 import pages.OrderingPage.OrderingPhysicalPage;
-import pages.personalCabinetPage.AccountDataPage;
-import pages.personalCabinetPage.ControlPanelPage;
-import pages.personalCabinetPage.DeliveryAddressPage;
-import pages.personalCabinetPage.MyBookingPage;
+import pages.PersonalAreaPage.Individuals.*;
 import utils.TestReporter;
 
 import java.io.File;
