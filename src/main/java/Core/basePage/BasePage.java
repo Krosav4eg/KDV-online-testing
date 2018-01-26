@@ -44,6 +44,7 @@ public  class BasePage {
            return getCurrentUrl();
         }
 
+
         public void getUrlDelegate(String url) {
             getUrl(url);
         }
@@ -91,6 +92,10 @@ public  class BasePage {
         }
     }
 
+    public static  void navigateBack()
+    {
+        driver.navigate().back();
+    }
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 

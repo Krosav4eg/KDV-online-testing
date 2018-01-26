@@ -340,8 +340,8 @@ public class MainPage extends BasePage {
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        driver.navigate().refresh();
-        sleepWait();
+//        driver.navigate().refresh();
+//        sleepWait();
     }
 
     public void checkCompanyLogo() {

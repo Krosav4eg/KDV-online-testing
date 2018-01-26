@@ -8,6 +8,7 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static Core.basePage.BasePage.navigateBack;
 import static utils.Constants.*;
 
 public class ControlPanelPageTest extends BaseTest {
@@ -79,7 +80,7 @@ public class ControlPanelPageTest extends BaseTest {
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
         (controlPanelPage.editPersonalDataButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
-        driver.navigate().back();
+        navigateBack();
         AssertCollector.verifyCondition(controlPanelPage.addressByDefaultHeader.isDisplayed());
         AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().

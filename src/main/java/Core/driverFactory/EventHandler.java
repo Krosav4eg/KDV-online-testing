@@ -3,6 +3,7 @@ package Core.driverFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
 import java.io.IOException;
@@ -113,8 +114,13 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 		//System.out.println("beforeScript "+arg0);
 	}
 
+	BrowserFactory singleton = BrowserFactory.getInstance();
 	public void onException(Throwable arg0, WebDriver arg1)
 	{
+//		if (arg0 instanceof WebDriverException)
+//		{
+//			arg1 = singleton.setDriver("Chrome");
+//		}
 		//capture(testName,ERROR_SCREENSHOT_FOLDER);
 
 	}

@@ -35,10 +35,6 @@ public enum BrowserFactory  {
      */
     private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
 
-
-
-    public WebDriver driver;
-
     public static String testName;
     /**
      * There is setting driver by name

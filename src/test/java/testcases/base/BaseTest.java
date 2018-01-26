@@ -35,9 +35,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public  class BaseTest  {
-    protected WebDriver driver;
-
+public class BaseTest  {
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
@@ -56,7 +54,7 @@ public  class BaseTest  {
     protected OrderingPhysicalPage orderingPhysicalPage;
 
     BrowserFactory singleton = BrowserFactory.getInstance();
-
+    WebDriver driver;
     @BeforeMethod
     public void verifyBrowser(Method method)
     {
