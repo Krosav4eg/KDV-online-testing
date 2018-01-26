@@ -79,28 +79,44 @@ public class OrderingPageTest extends BaseTest {
         del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
     }
 
+    //maximum length 256 symbols validation problem in delivery comment field
+    @Test
+    public void verifySelfDeliveryTest() throws InterruptedException {
+        TestReporter.testTitle("Test ID - C41070");
+        JSONObject data = orderingGuestPage.data();
+        orderingGuestPage.createOrder(data);
+        orderingGuestPage.selfDeliveryRadioButton.click();
+        AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
+        AssertCollector.verifyCondition(orderingGuestPage.deliveryHeader.getText().contains("Доставка"));
+        Thread.sleep(3000);
+        del.scrollByCoordinate();
+        AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getText().
+                contains("г Томск, ул Сибирская, д 10"));
+        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(255));
+        AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
 
     @Test
-    public void  orderingDefaultAddress()
-    {
+    public void orderingDefaultAddress() {
         TestReporter.testTitle("Test ID - C41300");
         orderingPhysicalPage.orderingDefaultAddress();
     }
+
     @Test
-    public void  orderingNewAddress()
-    {
+    public void orderingNewAddress() {
         TestReporter.testTitle("Test ID - C41314");
         orderingPhysicalPage.orderingNewAddress();
     }
+
     @Test
-    public void  orderingChangeAddress()
-    {
+    public void orderingChangeAddress() {
         TestReporter.testTitle("Test ID - C41454");
         orderingPhysicalPage.orderingChangedAddress();
     }
+
     @Test
-    public void  orderingChangeStoreAddress()
-    {
+    public void orderingChangeStoreAddress() {
         TestReporter.testTitle("Test ID - C41313");
         orderingPhysicalPage.orderingChangedStoreAddress();
     }

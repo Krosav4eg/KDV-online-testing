@@ -1,6 +1,5 @@
 package basePage;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -10,10 +9,7 @@ import utils.TestReporter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,6 +102,13 @@ public abstract class BasePage {
         }
         public String getValueOfAttributeByName(WebElement element, String attribute) {
             return element.getAttribute(attribute);
+        }
+
+        public void fillInputField(WebElement element, WebDriver driver, String message) {
+            LOGGER.log(Level.INFO, "Feel input field ");
+            TestReporter.step("Feel input field ");
+            elementFluentWaitVisibility(element, driver).clear();
+            elementFluentWaitVisibility(element, driver).sendKeys(message);
         }
     }
 

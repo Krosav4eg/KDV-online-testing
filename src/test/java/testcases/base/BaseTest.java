@@ -124,6 +124,7 @@ public abstract class BaseTest {
      */
     @AfterTest()
     public void closeBrowser() {
+        driver.close();
         driver.quit();
         TestReporter.removeNumberStep();
     }

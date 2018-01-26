@@ -185,7 +185,6 @@ public class OrderingPhysicalPage extends BasePage {
 		dateDay(getValueOfAttributeByName(dateTxt,"value"));
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		validateMainData();
-
 	}
 
 	public void orderingNewAddress()

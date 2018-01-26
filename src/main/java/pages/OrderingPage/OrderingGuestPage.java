@@ -74,6 +74,18 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Согласен получать выгодные предложения на покупку продуктов')]")
     public WebElement agreeCheckBox;
 
+    @FindBy(css = ".title.checkout-form__title.offset-b-4.offset-t-4")
+    public WebElement deliveryHeader;
+
+    @FindBy(xpath = "//span[contains(text(),'Самовывоз')]")
+    public WebElement selfDeliveryRadioButton;
+
+    @FindBy(xpath = "//label[@for=\"billing:street_pickup\"]/following-sibling::input")
+    public WebElement deliveryAddressField;
+
+    @FindBy(id = "id_comments")
+    public WebElement deliveryCommentField;
+
 
     public JSONObject data() {
         JSONObject data = new JSONObject();

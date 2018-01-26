@@ -7,9 +7,13 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="OrderingPageTest">
+    <test name="41070">
         <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest"/>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifySelfDeliveryTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
