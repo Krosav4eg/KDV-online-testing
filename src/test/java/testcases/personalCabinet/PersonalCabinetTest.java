@@ -124,4 +124,5 @@ public class PersonalCabinetTest extends BaseTest {
         personalCabinetPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
     }
+
 }

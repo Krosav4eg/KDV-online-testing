@@ -17,7 +17,7 @@ import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.OrderingPage.OrderingGuestPage;
 import pages.OrderingPage.OrderingPhysicalPage;
-import pages.PersonalAreaPage.Individuals.*;
+import pages.PersonalAreaPage.*;
 import utils.TestReporter;
 
 import java.io.File;
@@ -147,5 +147,6 @@ public class BaseTest  {
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
         orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
+        personalCabinetPage = PageFactory.initElements(driver,PersonalCabinetPage.class);
     }
 }
