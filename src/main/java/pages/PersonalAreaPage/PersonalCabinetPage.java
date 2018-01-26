@@ -2,6 +2,7 @@ package pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
 import com.google.common.base.Verify;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,9 +37,14 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = ".profile")
     private WebElement profileContainer;
 
-    @FindBy(css = ".profile-nav__title")
-    private WebElement personalCabinet;
+    @FindBy(id = "password")
+    private WebElement newPasswordField;
 
+
+    @FindBy(id = "confirmation")
+    private WebElement newConfirmationField;
+
+    //
     @FindBy(xpath = "//span[contains(text(), \"Панель управления\")]")
     private WebElement controlPanel;
 
@@ -120,29 +126,29 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(), \"Рассылка\")]")
     public WebElement sharingInEditPage;
 
-    @FindBy(css = "#firstname")
+    @FindBy(id = "firstname")
     public WebElement firstNameInEditPage;
 
-    @FindBy(css = "#lastname")
+    @FindBy(id = "lastname")
     public WebElement lastNameInEditPage;
 
     @FindBy(css = ".button.button_mobile-wide")
     public WebElement saveButtonInEditPage;
 
-    @FindBy(css = "#adv_phone")
+    @FindBy(id = "adv_phone")
     public WebElement phoneInEditPage;
 
-    @FindBy(css = "#current_password")
+    @FindBy(id = "current_password")
     public WebElement passwordInEditPage;
 
-    @FindBy(css = "#email")
+    @FindBy(css = "[name='change_password']")
+    public WebElement changerPassBtn;
+
+    @FindBy(css = "[name='is_subscribed']")
+    public WebElement isSubscribedBtn;
+
+    @FindBy(id = "email")
     public WebElement emailInEditPage;
-
-    @FindBy(xpath = ".//*[@id='form-validate']//span[contains(text(), \"Согласен\")]")
-    private WebElement checkboxAgreement;
-
-    @FindBy(xpath = ".//*[@id='form-validate']/div[1]")
-    private WebElement informationAccountEdit;
 
     @FindBy(css = ".checkbox__label")
     public WebElement changePasswordCheckbox;
@@ -157,7 +163,7 @@ public class PersonalCabinetPage extends BasePage {
         return data;
     }
 
-    public String verifyEditAccountFields(JSONObject data) {
+    public void verifyEditAccountFields(JSONObject data) {
         getUrl(ACCOUNT_INFORMATION_URL);
         elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
         elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("firstName"));
@@ -170,16 +176,9 @@ public class PersonalCabinetPage extends BasePage {
         elementFluentWaitVisibility(passwordInEditPage, driver).clear();
         elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
         AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL),"Verify current url");
-        return getText(informationAccountEdit);
     }
 
     /*******Legal Room********/
-
-    public JSONObject verifyFields(JSONObject dataInput)
-    {
-        JSONObject data = new JSONObject();
-        return  data;
-    }
 
     public void verifyFieldsNotAuthorization()
     {
@@ -227,5 +226,59 @@ public class PersonalCabinetPage extends BasePage {
         Verify.verify(getText(profileContainer).contains("КПП: 701701001"));
         Verify.verify(getText(profileContainer).contains("Юридический адрес: 636820, Томская обл, Асиновский р-н, Батурино с, Промышленная ул, дом № 11"));
         Verify.verify(getText(profileContainer).contains("Способ оплаты: НаличныеОтсрочка"));
+    }
+    public void verifyFieldsData() {
+        getUrl(BASE_URL + "/customer/account/edit/");
+        Verify.verify(firstNameInEditPage.isDisplayed());
+        Verify.verify(lastNameInEditPage.isDisplayed());
+        Verify.verify(emailField.isDisplayed());
+        Verify.verify(passwordInEditPage.isDisplayed());
+        Verify.verify(phoneInEditPage.isDisplayed());
+        if(!isSubscribedBtn.isSelected())
+        {clickElementByJS(driver,isSubscribedBtn);}
+        if(!changerPassBtn.isSelected())
+        {clickElementByJS(driver,changerPassBtn);}
+        Verify.verify(isSubscribedBtn.isSelected());
+        Verify.verify(changerPassBtn.isSelected());
+        Verify.verify(newConfirmationField.isDisplayed());
+        AssertCollector.assertTrue(newPasswordField.isDisplayed());
+    }
+
+    public JSONObject dataPersonal()
+    {
+        JSONObject data= new JSONObject();
+        data.put("first","Тест");
+        data.put("last","Тестович");
+        data.put("email","test@test.com");
+        data.put("phone", RandomStringUtils.randomNumeric(10));
+        data.put("currentPass","bu5ttq");
+        data.put("newPass","");
+        data.put("confirmPass","");
+        return data;
+    }
+    public String fillFields(JSONObject data,boolean select)
+    {
+
+        getUrl(BASE_URL + "/customer/account/edit/");
+        elementFluentWaitVisibility(firstNameInEditPage,driver).clear();
+        elementFluentWaitVisibility(lastNameInEditPage,driver).clear();
+        elementFluentWaitVisibility(emailField,driver).clear();
+        elementFluentWaitVisibility(passwordInEditPage,driver).clear();
+        elementFluentWaitVisibility(phoneInEditPage,driver).clear();
+        elementFluentWaitVisibility(firstNameInEditPage,driver).sendKeys(data.getString("first"));
+        elementFluentWaitVisibility(lastNameInEditPage,driver).sendKeys(data.getString("last"));
+        elementFluentWaitVisibility(emailField,driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordInEditPage,driver).sendKeys(data.getString("currentPass"));
+        elementFluentWaitVisibility(phoneInEditPage,driver).sendKeys(data.getString("phone"));
+        if(select)
+        {if(!changerPassBtn.isSelected())
+        {clickElementByJS(driver,changerPassBtn);}
+
+            elementFluentWaitVisibility(newPasswordField,driver).sendKeys(data.getString("newPass"));
+            elementFluentWaitVisibility(newConfirmationField,driver).sendKeys(data.getString("confirmPass"));
+        }
+        moveToElementJS(driver,saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage,driver).click();
+        return getText(profileContainer);
     }
 }
