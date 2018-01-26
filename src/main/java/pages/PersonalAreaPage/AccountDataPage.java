@@ -1,6 +1,6 @@
-package pages.personalCabinetPage;
+package pages.PersonalAreaPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

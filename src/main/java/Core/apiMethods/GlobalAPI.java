@@ -1,4 +1,4 @@
-package apiMethods;
+package Core.apiMethods;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

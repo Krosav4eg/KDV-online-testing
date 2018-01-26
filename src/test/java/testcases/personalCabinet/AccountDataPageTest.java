@@ -1,6 +1,6 @@
 package testcases.personalCabinet;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -20,7 +20,7 @@ public class AccountDataPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 38264,40087,38364,40095");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        del.getUrl(ACCOUNT_INFORMATION_URL);
+        del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
         AssertCollector.assertTrue(accountDataPage.personalDataHeaderInEditPage.
                 isDisplayed(), "Required header is displayed");
         AssertCollector.assertTrue(accountDataPage.personalDataInEditPage.
@@ -58,9 +58,9 @@ public class AccountDataPageTest extends BaseTest {
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");
         accountDataPage.verifyEditAccountFields(data);
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
         AssertCollector.assertTrue(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
@@ -69,16 +69,16 @@ public class AccountDataPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40088,40097");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
-        del.getUrl(ACCOUNT_INFORMATION_URL);
+        del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
         data = accountDataPage.mainAccountInfo();
         data.put("phone", "+77111111111");
         accountDataPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(accountDataPage.phoneInEditPage.getAttribute("value"),
                 " Value of phone field is equal ", accountDataPage.phoneInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
         AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
 
@@ -93,9 +93,9 @@ public class AccountDataPageTest extends BaseTest {
         AssertCollector.assertEquals(accountDataPage.emailInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.emailInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
+        AssertCollector.assertEquals(del.getCurrentUrlDelegate(), "Current url is equals", ACCOUNT_PAGE_URL);
         AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
     }
 
@@ -110,9 +110,9 @@ public class AccountDataPageTest extends BaseTest {
         AssertCollector.assertEquals(accountDataPage.passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.passwordInEditPage.
                         getAttribute("value"));
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        AssertCollector.assertEquals(del.getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
+        AssertCollector.assertEquals(del.getCurrentUrlDelegate(), "Current url is equals", ACCOUNT_PAGE_URL);
     }
 
     @Test
@@ -128,10 +128,10 @@ public class AccountDataPageTest extends BaseTest {
         data.put("currentPassword", "");
         accountDataPage.verifyEditAccountFields(data);
         accountDataPage.changePasswordCheckbox.click();
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
-        del.scrollToNecessaryElement(accountDataPage.saveButtonInEditPage);
+        del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         AssertCollector.assertTrue(accountDataPage.changePasswordHeader.isDisplayed(),
                 "Required header is displayed");
         AssertCollector.assertTrue(accountDataPage.newPasswordField.isDisplayed(),

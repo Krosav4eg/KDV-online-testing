@@ -1,6 +1,6 @@
 package testcases.personalCabinet;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -20,8 +20,8 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("email", "test_m.ponomareva@magdv.com");
         data.put("password", "ztq0d9e6");
         authorizationPage.verifyAuthFields(data);
-        del.getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
+        del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
         AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressHeader.isDisplayed(),
                 "Required header is displayed");
     }
@@ -34,7 +34,7 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("password", "SWgeZWPs");
         authorizationPage.verifyAuthFields(data);
         deliveryAddressPage.deliveryAddressItemButton.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL +
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
                 "new/", "Urls are equals");
     }
 
@@ -56,7 +56,7 @@ public class DeliveryAddressPageTest extends BaseTest {
         AssertCollector.assertTrue(deliveryAddressPage.byDefaultMark.isDisplayed());
         AssertCollector.assertTrue(deliveryAddressPage.editDeliveryLink.isDisplayed());
         deliveryAddressPage.editDeliveryLink.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL +
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
                 "edit/id/4236/", "Urls are equals");
         AssertCollector.assertEqualsJ(deliveryAddressPage.firstNameInEditDeliveryPage.getAttribute("value"),
                 "Тимофей", "First names are correct");
@@ -81,9 +81,9 @@ public class DeliveryAddressPageTest extends BaseTest {
         authorizationPage.verifyAuthFields(data);
         deliveryAddressPage.deliveryAddressItemButton.click();
         deliveryAddressPage.editDeliveryLink.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL +
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
                 "edit/id/6925/", "Urls are equals");
-        del.scrollToNecessaryElement(mainPage.footer);
+        del.scrollToNecessaryElementDelegate(mainPage.footer);
         deliveryAddressPage.saveDeliveryAddressButton.click();
         AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressList.getText().contains("Томск, пр. Мира 20, оф.1"));
         AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressList.getText().contains("По умолчанию"));

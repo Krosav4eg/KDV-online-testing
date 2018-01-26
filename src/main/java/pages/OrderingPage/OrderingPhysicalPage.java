@@ -1,6 +1,6 @@
 package pages.OrderingPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import com.google.common.base.Verify;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
