@@ -1,4 +1,4 @@
-package dataBased;
+package Core.dataBased;
 
 import java.sql.*;
 import org.json.JSONArray;

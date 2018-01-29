@@ -1,6 +1,6 @@
 package testcases.base;
 
-import driverFactory.BrowserFactory;
+import Core.driverFactory.BrowserFactory;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -10,20 +10,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.AuthorizationPage;
+import pages.*;
 import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
-import pages.CustomerAccountPage;
-import pages.MainPage;
 import pages.OrderingPage.OrderingGuestPage;
 import pages.OrderingPage.OrderingPhysicalPage;
-import pages.RegistrationPage;
-import pages.personalCabinetPage.AccountDataPage;
-import pages.personalCabinetPage.ControlPanelPage;
-import pages.personalCabinetPage.DeliveryAddressPage;
-import pages.personalCabinetPage.MyBookingPage;
+import pages.PersonalAreaPage.*;
 import utils.TestReporter;
 
 import java.io.File;
@@ -38,10 +32,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public abstract class BaseTest {
-
-    protected WebDriver driver;
-
+public class BaseTest  {
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
@@ -50,6 +41,7 @@ public abstract class BaseTest {
     protected CategoryPage categoryPage;
     protected CardPage cardPage;
     protected ModalWindow modalWindow;
+    protected PersonalCabinetPage personalCabinetPage;
     protected AccountDataPage accountDataPage;
     protected ControlPanelPage controlPanelPage;
     protected DeliveryAddressPage deliveryAddressPage;
@@ -58,17 +50,36 @@ public abstract class BaseTest {
     protected OrderingGuestPage orderingGuestPage;
     protected OrderingPhysicalPage orderingPhysicalPage;
 
+    BrowserFactory singleton = BrowserFactory.getInstance();
+    WebDriver driver;
+    @BeforeMethod
+    public void verifyBrowser(Method method)
+    {
+        System.err.println("DRIVER:" + driver);
+        System.err.println(method.getName());
+        if (driver.equals(null))
+        {
+            driver = singleton.setDriver("Chrome");
+            initPageElements();
+            TestReporter.step("Open Main page");
+            screen();
+        }
+    }
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
     @BeforeTest
-    public void    runBrowser() {
-
-        driver = BrowserFactory.setDriver("Chrome");
+    public void runBrowser() {
+        driver = singleton.setDriver("Chrome");
         initPageElements();
-        TestReporter.step("Open main page");
+        TestReporter.step("Open Main page");
         mainPage.openMainPage();
+        screen();
+    }
+
+    private void screen()
+    {
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -84,19 +95,12 @@ public abstract class BaseTest {
             }
     }
 
-
     @AfterMethod
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        //mainPage.openMainPage();
+        mainPage.openMainPage();
     }
-    //TODO it get test name ,need to improver, bad realization
 
-    @BeforeMethod
-    public void setUp(Method method) {
-        System.err.println("DRIVER:" + driver);
-        System.err.println(method.getName());
-    }
 
     /**
      * Method for screenshot creation
@@ -144,5 +148,6 @@ public abstract class BaseTest {
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
         orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
+        personalCabinetPage = PageFactory.initElements(driver,PersonalCabinetPage.class);
     }
 }

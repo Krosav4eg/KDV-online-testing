@@ -1,11 +1,15 @@
-package driverFactory;
+package Core.driverFactory;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static basePage.BasePage.moveToElementJS;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -19,7 +23,6 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
-		threadSleep();
 		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
@@ -39,8 +42,11 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	}
 	public void beforeClickOn(WebElement arg0, WebDriver arg1)
 	{
+		waitForJSandJQueryToLoad(arg1);
 		threadSleep();
 		waitForPageLoad(arg1);
+		//moveToElementJS(arg1,arg0);
+		threadSleep();
 		//System.out.println("beforeClickOn "+arg0+" WebDriver "+arg1);
 	}
 
@@ -108,10 +114,32 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 		//System.out.println("beforeScript "+arg0);
 	}
 
+	BrowserFactory singleton = BrowserFactory.getInstance();
 	public void onException(Throwable arg0, WebDriver arg1)
 	{
-			screenBrowser();
+//		if (arg0 instanceof WebDriverException)
+//		{
+//			arg1 = singleton.setDriver("Chrome");
+//		}
+		//capture(testName,ERROR_SCREENSHOT_FOLDER);
+
 	}
+
+
+	public static String capture(String screenShotName, String folder) {
+		TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
+		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+		String dest = folder + screenShotName + ".png";
+		File destination = new File(dest);
+		try {
+			FileUtils.copyFile(source, destination);
+		} catch (IOException e) {
+			e.printStackTrace();
+			LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
+		}
+		return dest;
+	}
+
 
 	//TODO not completed
 	/***
@@ -127,7 +155,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 		}
 		catch (Exception e)
 		{
-
+			System.out.println();
 		}
 	}
 }

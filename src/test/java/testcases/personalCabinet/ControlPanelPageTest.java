@@ -1,13 +1,14 @@
 package testcases.personalCabinet;
 
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static Core.basePage.BasePage.navigateBack;
 import static utils.Constants.*;
 
 public class ControlPanelPageTest extends BaseTest {
@@ -58,7 +59,7 @@ public class ControlPanelPageTest extends BaseTest {
         AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
         String expLink = del.getValueOfAttributeByName(controlPanelPage.showAll, "href");
         (controlPanelPage.showAll).click();
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
     }
 
     // TODO: 12.01.2018 C38045 take id from DB
@@ -78,16 +79,16 @@ public class ControlPanelPageTest extends BaseTest {
 
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
         (controlPanelPage.editPersonalDataButton).click();
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink));
-        driver.navigate().back();
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
+        navigateBack();
         AssertCollector.verifyCondition(controlPanelPage.addressByDefaultHeader.isDisplayed());
         AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().
                 equals("г Кемерово, ул Варшавская, д 87, кв 12"));
         AssertCollector.verifyCondition(controlPanelPage.phoneInAddressByDefault.getText().equals("+71111111111"));
-        del.scrollToNecessaryElement(controlPanelPage.editAddressButton);
+        del.scrollToNecessaryElementDelegate(controlPanelPage.editAddressButton);
         String expLink1 = del.getValueOfAttributeByName(controlPanelPage.editAddressButton, "href");
         (controlPanelPage.editAddressButton).click();
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(expLink1));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink1));
     }
 }

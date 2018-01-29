@@ -1,6 +1,6 @@
 package pages;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
@@ -333,15 +333,15 @@ public class MainPage extends BasePage {
         TestReporter.step("Open starting url");
         driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
-//        moveToElementJS(driver, selectCityModalWindow);
         sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        driver.navigate().refresh();
-        sleepWait();
+        System.out.println( );
+//        driver.navigate().refresh();
+//        sleepWait();
     }
 
     public void checkCompanyLogo() {
@@ -565,7 +565,7 @@ public class MainPage extends BasePage {
         }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
-        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in" +
+        AssertCollector.assertEquals(actualDescription, " Description in Singleton page equals description in" +
                 " basket page ", expectedDescription);
     }
 
@@ -834,9 +834,9 @@ public class MainPage extends BasePage {
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
         String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
         String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
-        AssertCollector.assertEquals(actTitle, " Title in main page equals title in" +
+        AssertCollector.assertEquals(actTitle, " Title in Singleton page equals title in" +
                 " basket page ", expTitle);
-        AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
+        AssertCollector.assertEquals(actPrice, " Price in Singleton page equals price in" +
                 " basket page ", expPrice);
     }
 

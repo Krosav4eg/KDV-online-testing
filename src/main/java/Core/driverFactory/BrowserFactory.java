@@ -1,4 +1,4 @@
-package driverFactory;
+package Core.driverFactory;
 
 import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
@@ -9,25 +9,26 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static utils.Constants.CHROME_DRIVER_PATH;
-import static utils.Constants.DRIVER_NAME_CHROME;
+import static Core.driverFactory.DriverCapabilities.chromeCapabilities;
+import static Core.driverFactory.DriverCapabilities.firefoxCapabilities;
+import static utils.Constants.*;
 
 
 /**
  * @author Sergey Potapov
  */
-public class BrowserFactory  extends DriverCapabilities{
-
+public enum BrowserFactory  {
+    INSTANCE;
+    public static BrowserFactory getInstance()
+    {
+        return INSTANCE;
+    }
     private static final String FIREFOX = "Firefox";
     private static final String CHROME = "Chrome";
+    private static final String GRID = "GRID";
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-    /**
-     * There is pre-initialization of the driver and his way that is it prior to calling object
-     */
-    static {
-        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
-    }
+
 
     /**
      * There is pre-initialization of the driver and his way that is it prior to calling object
@@ -39,7 +40,7 @@ public class BrowserFactory  extends DriverCapabilities{
      *
      * @param driverName-name needed browser driver
      */
-        public static   WebDriver setDriver(String driverName) {
+    public  synchronized WebDriver setDriver(String driverName) {
         //killProcess();
         if (driverName != null)
         {
@@ -47,11 +48,18 @@ public class BrowserFactory  extends DriverCapabilities{
             {
                 case FIREFOX: {
                     LOGGER.log(Level.INFO, "set browser FIREFOX");
+                    System.setProperty(DRIVER_NAME_FIREFOX, FIREFOX_DRIVER_PATH);
                     driverThread.set(new FirefoxDriver(firefoxCapabilities()));
                     break;
                 }
                 case CHROME: {
                     LOGGER.log(Level.INFO, "set browser CHROME");
+                    System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
+                    driverThread.set(new ChromeDriver(chromeCapabilities()));
+                    break;
+                }
+                case GRID: {
+                    LOGGER.log(Level.INFO, "set browser GRID");
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
                     break;
                 }
@@ -69,16 +77,6 @@ public class BrowserFactory  extends DriverCapabilities{
         return driver;
     }
 
-    private static void killProcess()
-    {
-        try {
-            Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
-        }
-        catch (Exception ex)
-        {
-            ex.getMessage();
-        }
-    }
     /**
      * Getting personal object for every browser driver
      */

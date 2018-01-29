@@ -1,6 +1,6 @@
 package testcases.OrderingPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -27,7 +27,7 @@ public class OrderingPageTest extends BaseTest {
         orderingGuestPage.modalAuthLink.click();
         JSONObject data1 = orderingGuestPage.authModalFormData();
         orderingGuestPage.authorizationBlockModalWindow(data1);
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/onestepcheckout/"));
         AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
     }
 
@@ -84,18 +84,18 @@ public class OrderingPageTest extends BaseTest {
         orderingGuestPage.regulationsWebsiteLink.click();
         del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         del.verifyTabsCountAsExpected(TWO_TABS_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL + "/regulations"));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/regulations"));
         del.closeDriverToAnyTabOfBrowser(1);
         del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
         orderingGuestPage.consentPersonalDataProcessingLink.click();
         del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL +
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL +
                 "/media/rules/Consent_to_personal_data_processing.pdf"));
         del.closeDriverToAnyTabOfBrowser(1);
         del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
         orderingGuestPage.salesPurchaseAgreementLink.click();
         del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrl().equals(BASE_URL +
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL +
                 "/media/rules/Sales_and_Purchase_Agreement.pdf"));
         del.closeDriverToAnyTabOfBrowser(1);
         del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
