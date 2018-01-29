@@ -75,8 +75,8 @@ public enum BrowserFactory  {
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         EventHandler handler = new EventHandler() {
         };
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver = eventDriver.register(handler);
         return driver;
     }

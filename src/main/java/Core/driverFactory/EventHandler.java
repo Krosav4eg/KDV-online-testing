@@ -141,7 +141,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 		System.err.println("Exception :"+arg0);
 		if (arg0 instanceof VerifyException)
 		{
-			arg1.close();
+		//	arg1.close();
 		}
 		//capture(testName,ERROR_SCREENSHOT_FOLDER);
 
