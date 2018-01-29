@@ -362,10 +362,6 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37352");
         registrationPage.verifySubscriptionCheckboxPresence();
     }
-    public void verifyRegistrationWithEmptyFields() {
-        TestReporter.testTitle("Test ID = 37532");
-        registrationPage.verifyRegistrationWithEmptyFields();
-    }
 
     @Test
     public void verifyWorkOfCheckboxConfirmTest() {
@@ -516,90 +512,10 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37396");
         registrationPage.verifyInputSymbolsInReasonCodeField();
     }
-
-    @Test
-    public void verifyInputLessThenNineDigitsInReasonCodeFieldTest() {
-        TestReporter.testTitle("Test ID = 37397");
-        registrationPage.verifyInputLessThenNineDigitsInReasonCodeField();
-    }
-
-    @Test
-    public void verifyLegalAddressFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37416");
-        registrationPage.verifyLegalAddressFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInLegalAddressTest() {
-        TestReporter.testTitle("Test ID = 37421");
-        registrationPage.verifyMaximumInputInLegalAddress();
-    }
-
-    @Test
-    public void verifyCompanyFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37423");
-        registrationPage.verifyCompanyFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInCompanyTest() {
-        TestReporter.testTitle("Test ID = 37424");
-        registrationPage.verifyMaximumInputInCompany();
-    }
-
-    @Test
-    public void verifyAddressFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37479");
-        registrationPage.verifyAddressFieldPresence();
-    }
-
-    @Test
-    public void verifyPromptsInAddressFieldAfterInputTest() {
-        TestReporter.testTitle("Test ID = 37564");
-        registrationPage.verifyPromptsInAddressFieldAfterInput();
-    }
-
-    @Test
-    public void verifyPromptChoosingInAddressFieldAfterInputTest() {
-        TestReporter.testTitle("Test ID = 37565");
-        registrationPage.verifyPromptChoosingInAddressFieldAfterInput();
-    }
-
-    @Test
-    public void verifyFullAddressInputInAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37567");
-        registrationPage.verifyFullAddressInputInAddressField();
-    }
-
-    @Test
-    public void verifyMaximumInputInAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37480");
-        registrationPage.verifyMaximumInputInAddressField();
-    }
-
-    @Test
-    public void verifyCommentsFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37485");
-        registrationPage.verifyCommentsFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInCommentsFieldTest() {
-        TestReporter.testTitle("Test ID = 37486");
-        registrationPage.verifyMaximumInputInCommentsField();
-    }
-    @Test
-    public void verifyInputCorrectInnValueTest() {
-        TestReporter.testTitle("Test ID = 37571,37572");
-        JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
-    }
-
     //not pass due validation in both fields
     @Test
     public void verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37568,40062");
+        TestReporter.testTitle("Test ID = 37568,40062,37486");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("organizationName", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -617,7 +533,7 @@ public class RegistrationTest extends BaseTest {
     //not pass due validation in both fields
     @Test
     public void verifyMaximumInputLengthInCompanyAndCommentsFieldTest() {
-        TestReporter.testTitle("Test ID = 40063,40066");
+        TestReporter.testTitle("Test ID = 40063,40066,37480,37424");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("company", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -635,7 +551,7 @@ public class RegistrationTest extends BaseTest {
     //not pass due validation
     @Test
     public void verifyMaximumInputAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 40065");
+        TestReporter.testTitle("Test ID = 40065,37421");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("address", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -718,7 +634,7 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void verifySuccessRegistrationTest() {
-        TestReporter.testTitle("Test ID = 37681");
+        TestReporter.testTitle("Test ID = 37564,37565,37485,37397,37681,37571,37572,37416,37479,37423,37567");
         JSONObject data = registrationPage.mainInfoRegistration();
         Verify.verify(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения"));

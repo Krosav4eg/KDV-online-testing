@@ -5,6 +5,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
@@ -31,6 +32,9 @@ public class AuthorizationPage extends BasePage {
 
     @FindBy(css = "#pass")
     private WebElement passwordField;
+
+    @FindBy(id = "form-validate")
+    private WebElement loginContainer;
 
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
@@ -206,6 +210,19 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
     }
+    public JSONObject authorizationData(JSONObject data)
+    {
+        JSONObject authorizationData=new JSONObject();
+        authorizationData.put("email","a.shaulo@andersenlab");
+        authorizationData.put("pass","");
+        return authorizationData;
+    }
+
+//    public void verifyValidSmallPassword()
+//    {
+//        getUrl(BASE_URL + "/customer/account/forgotpassword/");
+//
+//    }
 
     public void verifyValidEmailInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
@@ -318,5 +335,21 @@ public class AuthorizationPage extends BasePage {
                 " Verify elements color of for organizations button ");
         textPresent("Зарегистрируйте вашу организацию и получайте полный комплект документов для юр. лиц. " +
                 "Для организаций, уже работающих с KDV, цены и условия отгрузки сохраняются.");
+    }
+
+    public JSONObject authorizationData()
+    {
+        JSONObject data=new JSONObject();
+        data.put("email","a.shaulo@andersenlab.com");
+        data.put("pass","As06051993");
+        return data;
+
+    }
+
+    public String  authForm(JSONObject data) {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, data.getString("email"));
+        fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
+       return getText(loginContainer);
     }
 }

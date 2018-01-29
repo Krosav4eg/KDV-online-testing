@@ -110,7 +110,6 @@ public class CardPage extends BasePage {
 		addTxtToInput("-5");
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("51"));
 		addTxtToInput("99999");
-		System.out.println(getValueOfAttributeByName(categoryInputTxt,"value"));
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));
 		addTxtToInput("@!$^*&$#@*()");
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));

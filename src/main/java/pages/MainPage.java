@@ -339,7 +339,6 @@ public class MainPage extends BasePage {
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        System.out.println( );
 //        driver.navigate().refresh();
 //        sleepWait();
     }
@@ -676,12 +675,10 @@ public class MainPage extends BasePage {
 
     public void openingContractPurchaseSaleLink() {
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
-        System.out.println(linkTextAttribute);
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
-        System.out.println(getCurrentUrl());
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
     }

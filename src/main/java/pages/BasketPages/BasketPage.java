@@ -212,7 +212,6 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(selectCityLink, driver).click();
         elementFluentWaitVisibility(selectCityTylaLink, driver).click();
         AssertCollector.assertTrue(getText(cardContainer).contains("Нет в наличии"));
-        System.out.println(getPrice(summTxt));
         AssertCollector.assertTrue(getPrice(summTxt) == 0);
 
     }
