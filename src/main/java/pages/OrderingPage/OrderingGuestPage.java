@@ -23,6 +23,24 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = "[id='billing:firstname']")
     public WebElement firstNameTxt;
 
+    @FindBy(id = "advice-required-entry-billing:firstname")
+    public WebElement firstNameFieldAdvice;
+
+    @FindBy(id = "advice-required-entry-billing:lastname")
+    public WebElement lastNameFieldAdvice;
+
+    @FindBy(xpath = "(//input[@name=\"billing[email]\"]/following-sibling::div)[1]")
+    public WebElement emailFieldAdvice;
+
+    @FindBy(id = "advice-required-entry-billing:telephone")
+    public WebElement phoneFieldAdvice;
+
+    @FindBy(css = ".notice__title")
+    public WebElement phoneNotice;
+
+    @FindBy(id = "advice-required-entry-billing:street_new")
+    public WebElement addressFieldAdvice;
+
     @FindBy(css = "[id='billing:lastname']")
     public WebElement lastNameTxt;
 
@@ -32,8 +50,8 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = "[id='billing:telephone']")
     public WebElement phoneTxt;
 
-    @FindBy(css = "label[for=\"billing:is_agree\"]")
-    public WebElement agreementBtn;
+    @FindBy(id = "advice-required-entry-billing:is_agree")
+    public WebElement agreementCheckBoxAdvice;
 
     @FindBy(css = ".link.j_modal_auth_link")
     public WebElement modalAuthLink;
@@ -51,7 +69,10 @@ public class OrderingGuestPage extends BasePage {
     private WebElement passwordAuth;
 
     @FindBy(css = ".button.modal-auth__forgot-btn.j_modal_auth_login_btn")
-    private WebElement authEnterButton;
+    public WebElement authEnterButton;
+
+    @FindBy(css = ".modal-auth__errors.j_modal_auth_errors.text")
+    public WebElement errorText;
 
     @FindBy(id = "review-btn")
     public WebElement createOrderButton;
@@ -71,7 +92,7 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = ".//a[contains(text(),'Договора купли-продажи.')]")
     public WebElement salesPurchaseAgreementLink;
 
-    @FindBy(xpath = "//span[contains(text(),'Согласен получать выгодные предложения на покупку продуктов')]")
+    @FindBy(xpath = "//input[@id='billing:is_agree']/following-sibling::span")
     public WebElement agreeCheckBox;
 
     @FindBy(css = ".title.checkout-form__title.offset-b-4.offset-t-4")
