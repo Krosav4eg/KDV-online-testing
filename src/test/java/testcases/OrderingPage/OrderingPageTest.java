@@ -143,10 +143,10 @@ public class OrderingPageTest extends BaseTest {
         AssertCollector.assertTrue(orderingGuestPage.compositionOrderHeader.isDisplayed());
         AssertCollector.assertTrue(orderingGuestPage.editCompositionOrderHeader.isDisplayed());
         elementFluentWaitVisibility(orderingGuestPage.editCompositionOrderHeader, driver).click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), BASE_URL + "/checkout/cart/",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/checkout/cart/",
                 "Urls are equals");
         del.backPage();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), BASE_URL + "/onestepcheckout/",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/onestepcheckout/",
                 "Urls are equals");
         elementFluentWaitVisibility(orderingGuestPage.reviewOrder, driver);
         System.out.println(orderingGuestPage.reviewOrder.getText());
