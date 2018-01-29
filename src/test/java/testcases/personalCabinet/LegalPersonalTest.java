@@ -1,5 +1,7 @@
 package testcases.personalCabinet;
 
+import com.google.common.base.Verify;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -53,7 +55,7 @@ public class LegalPersonalTest  extends BaseTest{
 		personalCabinetPage.verifyFieldsAuthorizationInfo();
 	}
 	@Test
-	public void verifyFieldsPersonalData()
+	public void verifyFieldsIsPresent()
 	{
 
 		TestReporter.testTitle("Test ID = 41552");
@@ -64,10 +66,9 @@ public class LegalPersonalTest  extends BaseTest{
 		personalCabinetPage.verifyFieldsData();
 	}
 	@Test
-	public void verifyFieldsPersonalDataEmpty()
+	public void verifyFieldsPersonalData()
 	{
-
-		TestReporter.testTitle("Test ID = 41552");
+		TestReporter.testTitle("Test ID = C41558");
 		JSONObject data = authorizationPage.mainAuthorizationInfo();
 		data.put("email","test_n.moiseeva@magdv.com");
 		data.put("password","bu5ttq");
@@ -77,10 +78,160 @@ public class LegalPersonalTest  extends BaseTest{
 		dataCab.put("last","");
 		dataCab.put("email","");
 		dataCab.put("phone","");
-		dataCab.put("currentPass","");
+		AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab,false).contains(
+				"Это поле обязательно для заполнения."));
+	}
+
+	@Test
+	public void verifyClearAllFields()
+	{
+		TestReporter.testTitle("Test ID = C41561");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		dataCab.put("first","");
+		dataCab.put("last","");
+		dataCab.put("email","");
+		dataCab.put("phone","");
 		dataCab.put("newPass","");
+		dataCab.put("confirmPass","");
 		AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab,true).contains(
 				"Это поле обязательно для заполнения."));
+	}
+
+	@Test
+	public void verifyRewriteAllFields()
+	{
+		TestReporter.testTitle("Test ID = C41588");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		String first=RandomStringUtils.randomAlphabetic(5);
+		String last=RandomStringUtils.randomAlphabetic(5);
+		String email="test_n.moiseeva@magdv.com";
+		String phone=RandomStringUtils.randomNumeric(10);
+		dataCab.put("first", first);
+		dataCab.put("last",last);
+		dataCab.put("email",email);
+		dataCab.put("phone",phone);
+		dataCab.put("newPass","");
+		dataCab.put("confirmPass","");
+		String allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains(first));
+		Verify.verify(allResult.contains(last));
+		Verify.verify(allResult.contains(email));
+		Verify.verify(allResult.contains(phone));
+	}
+	@Test
+	public void verifyRewritePassword()
+	{
+		TestReporter.testTitle("Test ID = C41588");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		dataCab.put("newPass","bu5ttq");
+		dataCab.put("confirmPass","bu5ttq");
+		AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab,true).
+				contains("Данные учётной записи сохранены."));
+	}
+
+	@Test
+	public void verifyWrongName()
+	{
+		TestReporter.testTitle("Test ID = C41598");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		String email="test_n.moiseeva@magdv.com";
+		dataCab.put("email",email);
+		dataCab.put("first", "!@#$%^&*()+_/|{}[]?>");
+		dataCab.put("last","!@#$%^&*()+_/|{}[]?>");
+		String allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф."));
+		Verify.verify(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф."));
+
+	}
+
+	@Test
+	public void verifyWrongEmail()
+	{
+		TestReporter.testTitle("Test ID = C41600");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		String email="a.shauloandersenlab.com";
+		dataCab.put("email",email);
+		String allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		email="a.shaulo@andersenlabcom";
+		dataCab.put("email",email);
+		allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		email="a..shaulo@andersenlab.com";
+		dataCab.put("email",email);
+		allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		email="a.shaulo@anders enlab.com";
+		dataCab.put("email",email);
+		allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+
+	}
+
+	@Test
+	public void verifyWrongPhone()
+	{
+		TestReporter.testTitle("Test ID = C41602");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		dataCab.put("phone","@!#$%&*()_+/*");
+		String allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Это поле обязательно для заполнения."));
+		String phone=RandomStringUtils.randomNumeric(10);
+		dataCab.put("phone",phone);
+		allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Данные учётной записи сохранены."));
+
+	}
+
+	@Test
+	public void verifyWrongPass()
+	{
+		TestReporter.testTitle("Test ID = C41603");
+		JSONObject data = authorizationPage.mainAuthorizationInfo();
+		data.put("email","test_n.moiseeva@magdv.com");
+		data.put("password","bu5ttq");
+		authorizationPage.verifyAuthFields(data);
+		JSONObject dataCab=personalCabinetPage.dataPersonal();
+		String pass = RandomStringUtils.randomAlphabetic(5);
+		dataCab.put("email","test_n.moiseeva@magdv.com");
+		dataCab.put("currentPass",pass);
+		String allResult=personalCabinetPage.fillFields(dataCab,false);
+		Verify.verify(allResult.contains("Неправильный текущий пароль"));
+		dataCab.put("newPass",RandomStringUtils.randomAlphabetic(6));
+		dataCab.put("confirmPass",RandomStringUtils.randomAlphabetic(7));
+		allResult=personalCabinetPage.fillFields(dataCab,true);
+		Verify.verify(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
 	}
 
 }

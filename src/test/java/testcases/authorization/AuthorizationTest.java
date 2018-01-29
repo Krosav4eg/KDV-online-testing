@@ -1,7 +1,11 @@
 package testcases.authorization;
 
+import com.google.common.base.Verify;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
+import sun.plugin2.message.JavaScriptBaseMessage;
 import testcases.base.BaseTest;
+import utils.AssertCollector;
 import utils.TestReporter;
 
 
@@ -178,5 +182,20 @@ public class AuthorizationTest extends BaseTest {
     public void verifyEnterWithUnconfirmedEmailTest() {
         TestReporter.testTitle("Test ID = 37057");
         authorizationPage.verifyEnterWithUnconfirmedEmail();
+    }
+    @Test
+    public void verifyNotValidEmail()
+    {
+        TestReporter.testTitle("Test ID = 34487,34488,34489");
+        JSONObject data= authorizationPage.authorizationData();
+        data.put("email","a.shauloandersenlab.com");
+        Verify.verify(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+        data.put("email","a.shaulo@andersenlabcom");
+        Verify.verify(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+        data.put("email","a..shaulo@andersenlab.com");
+        Verify.verify(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+        data.put("email","anastasiya.shaulo@gmail.com");
+        Verify.verify(authorizationPage.authForm(data).contains("Эта учётная запись не подтверждена"));
+
     }
 }

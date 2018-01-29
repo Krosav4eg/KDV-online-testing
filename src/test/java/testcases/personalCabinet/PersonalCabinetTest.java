@@ -1,6 +1,7 @@
 package testcases.personalCabinet;
 
 import Core.basePage.BasePage;
+import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -21,39 +22,34 @@ public class PersonalCabinetTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        AssertCollector.assertTrue(personalCabinetPage.personalDataHeaderInEditPage.
+        Verify.verify(personalCabinetPage.personalDataHeaderInEditPage.
                 isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.personalDataInEditPage.
+        Verify.verify(personalCabinetPage.personalDataInEditPage.
                 isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(personalCabinetPage.sharingInEditPage.
+        Verify.verify(personalCabinetPage.sharingInEditPage.
                 isDisplayed(), "Required header is displayed");
-
         data = personalCabinetPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(46).length());
-
         data = personalCabinetPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(46).length());
-
         data = personalCabinetPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.firstNameInEditPage.getAttribute("value"),
                 " Value of first name is equal ", personalCabinetPage.firstNameInEditPage.
                         getAttribute("value"));
-
         data = personalCabinetPage.mainAccountInfo();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.lastNameInEditPage.getAttribute("value"),
                 " Value of last name is equal ", personalCabinetPage.lastNameInEditPage.
                         getAttribute("value"));
-
         data = personalCabinetPage.mainAccountInfo();
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");

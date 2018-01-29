@@ -52,16 +52,18 @@ public class BaseTest  {
 
     BrowserFactory singleton = BrowserFactory.getInstance();
     WebDriver driver;
+
     @BeforeMethod
     public void verifyBrowser(Method method)
     {
-        System.err.println("DRIVER:" + driver);
         System.err.println(method.getName());
-        if (driver.equals(null))
+        if (driver==null)
         {
+            //driver.quit();
             driver = singleton.setDriver("Chrome");
             initPageElements();
             TestReporter.step("Open Main page");
+            mainPage.openMainPage();
             screen();
         }
     }
