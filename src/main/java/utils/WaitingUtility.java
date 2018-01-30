@@ -26,8 +26,8 @@ public class WaitingUtility {
     public static void waitForPageLoad(WebDriver driver) {
 	    WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Wait for page loading ");
-        boolean result=   ((JavascriptExecutor) Objects.requireNonNull(driver)).executeScript(
-                "return document.readyState").equals("complete");
+//        boolean result=   ((JavascriptExecutor) Objects.requireNonNull(driver)).executeScript(
+//                "return document.readyState").equals("complete");
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
@@ -60,7 +60,6 @@ public class WaitingUtility {
 
     /**
      * Method verifying that web element is clickable.
-     *
      * @param element used to find the element
      */
     public static WebElement elementIsClickable(WebElement element, WebDriver driver) {
@@ -86,7 +85,6 @@ public class WaitingUtility {
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
-                .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -115,15 +113,5 @@ public class WaitingUtility {
         LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions. textToBePresentInElement(element,text));
-    }
-    public static void  sleepTime()
-    {
-        try {
-            Thread.sleep(1000);
-        }
-        catch (Exception ex)
-        {
-             System.out.println(ex.getMessage());
-        }
     }
 }
