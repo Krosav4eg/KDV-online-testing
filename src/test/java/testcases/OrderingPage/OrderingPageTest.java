@@ -8,8 +8,6 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
-import static utils.Constants.BASE_URL;
-
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
@@ -19,7 +17,7 @@ public class OrderingPageTest extends BaseTest {
 
     @Test
     public void verifyAuthorizationLInkTest() {
-        TestReporter.testTitle("Test ID - C41074");
+        TestReporter.testTitle("Test ID - C41075");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         orderingGuestPage.modalAuthLink.click();
@@ -31,6 +29,29 @@ public class OrderingPageTest extends BaseTest {
         orderingGuestPage.authorizationBlockModalWindow(data1);
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/onestepcheckout/"));
         AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
+    }
+
+    @Test
+    public void verifyAuthModalWindowTest() {
+        TestReporter.testTitle("Test ID - C41076");
+        JSONObject data = orderingGuestPage.data();
+        orderingGuestPage.createOrder(data);
+        orderingGuestPage.modalAuthLink.click();
+        elementFluentWaitVisibility(orderingGuestPage.authEnterButton, driver).click();
+        elementFluentWaitVisibility(orderingGuestPage.errorText, driver);
+        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
+        JSONObject data2 = orderingGuestPage.authModalFormData();
+        data2.put("email", "");
+        data2.put("password", "YZde8m");
+        orderingGuestPage.authorizationBlockModalWindow(data2);
+        orderingGuestPage.closeModalButton.click();
+        orderingGuestPage.modalAuthLink.click();
+        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
+        data2 = orderingGuestPage.authModalFormData();
+        data2.put("email", "test_s.zuevmagdv.com");
+        data2.put("password", "YZde8m");
+        orderingGuestPage.authorizationBlockModalWindow(data2);
+        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
     }
 
     //problem with validation length and validation message in first name and last name fields
@@ -122,10 +143,10 @@ public class OrderingPageTest extends BaseTest {
         AssertCollector.assertTrue(orderingGuestPage.compositionOrderHeader.isDisplayed());
         AssertCollector.assertTrue(orderingGuestPage.editCompositionOrderHeader.isDisplayed());
         elementFluentWaitVisibility(orderingGuestPage.editCompositionOrderHeader, driver).click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), BASE_URL + "/checkout/cart/",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/checkout/cart/",
                 "Urls are equals");
         del.backPage();
-        AssertCollector.assertEqualsJ(del.getCurrentUrl(), BASE_URL + "/onestepcheckout/",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/onestepcheckout/",
                 "Urls are equals");
         elementFluentWaitVisibility(orderingGuestPage.reviewOrder, driver);
         System.out.println(orderingGuestPage.reviewOrder.getText());
@@ -158,6 +179,117 @@ public class OrderingPageTest extends BaseTest {
         del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
         elementFluentWaitVisibility(orderingGuestPage.selfDeliveryRadioButton, driver).click();
         AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
+    }
+
+    @Test
+    public void verifyEmptyFirstAndLastNameTest() {
+        TestReporter.testTitle("Test ID - C41078-40079");
+        JSONObject data = orderingGuestPage.data();
+        data.put("firstName", "");
+        data.put("lastName", "");
+        orderingGuestPage.createOrder(data);
+        del.scrollByCoordinate();
+        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
+        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
+        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
+        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.firstNameFieldAdvice, driver);
+        AssertCollector.verifyCondition(orderingGuestPage.firstNameFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.verifyCondition(orderingGuestPage.lastNameFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+    }
+
+    @Test
+    public void verifyEmptyEmailFieldTest() {
+        TestReporter.testTitle("Test ID - C41080");
+        JSONObject data = orderingGuestPage.data();
+        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("email", "");
+        orderingGuestPage.createOrder(data);
+        del.scrollByCoordinate();
+        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
+        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
+        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
+        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.verifyCondition(orderingGuestPage.emailFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        data = orderingGuestPage.data();
+        data.put("email", "a.shauloandersenlab.com");
+        orderingGuestPage.identificationBlock(data);
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+        data = orderingGuestPage.data();
+        data.put("email", "a.shaulo@andersenlabcom");
+        orderingGuestPage.identificationBlock(data);
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+        data = orderingGuestPage.data();
+        data.put("email", "a..shaulo@andersenlab.com");
+        orderingGuestPage.identificationBlock(data);
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+        data = orderingGuestPage.data();
+        data.put("email", "a.s ha ulo@andersenlab.com");
+        orderingGuestPage.identificationBlock(data);
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+        data = orderingGuestPage.data();
+        data.put("email", "a.shaulo@anders enlab.com");
+        orderingGuestPage.identificationBlock(data);
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+    }
+
+    @Test
+    public void verifyEmptyPhoneAndAddressFieldsTest() {
+        TestReporter.testTitle("Test ID - C41081-41082");
+        JSONObject data = orderingGuestPage.data();
+        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("email", "test@test.ru");
+        data.put("phone", "");
+        orderingGuestPage.createOrder(data);
+        del.scrollByCoordinate();
+        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
+        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
+        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
+        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "");
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.phoneFieldAdvice, driver);
+        AssertCollector.verifyCondition(orderingGuestPage.phoneFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.verifyCondition(orderingGuestPage.addressFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        data = orderingGuestPage.data();
+        data.put("phone", RandomStringUtils.randomNumeric(9));
+        orderingGuestPage.identificationBlock(data);
+        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
+        orderingGuestPage.agreementCheckBoxAdvice.click();
+        orderingGuestPage.createOrderButton.click();
+        elementFluentWaitVisibility(orderingGuestPage.phoneNotice, driver);
+        AssertCollector.assertEqualsJ(orderingGuestPage.phoneNotice.getText(),
+                "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
+                "Error messages are equals");
     }
 
     @Test

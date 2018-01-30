@@ -46,4 +46,44 @@
             </class>
         </classes>
     </test>
+
+    <test name="41076">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyAuthModalWindowTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C41078-40079">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyEmptyFirstAndLastNameTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C41080">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyEmptyEmailFieldTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="C41081-41082">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPageTest">
+                <methods>
+                    <include name="verifyEmptyPhoneAndAddressFieldsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
