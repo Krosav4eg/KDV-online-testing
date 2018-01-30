@@ -4,8 +4,11 @@ import logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +53,8 @@ public class BrowserFactory implements DriverCapabilities  {
      *
      * @param driverName-name needed browser driver
      */
-    public  synchronized WebDriver setDriver(String driverName) {
+    public  synchronized WebDriver setDriver(String driverName)  {
+        WebDriver driver=null;
         if (driverName != null)
         {
             switch (driverName)
@@ -59,17 +63,26 @@ public class BrowserFactory implements DriverCapabilities  {
                     LOGGER.log(Level.INFO, "set browser FIREFOX");
                     System.setProperty(DRIVER_NAME_FIREFOX, FIREFOX_DRIVER_PATH);
                     driverThread.set(new FirefoxDriver(firefoxCapabilities()));
+                    driver= driverThread.get();
                     break;
                 }
                 case CHROME: {
                     LOGGER.log(Level.INFO, "set browser CHROME");
                     System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
+                    driver= driverThread.get();
                     break;
                 }
                 case GRID: {
                     LOGGER.log(Level.INFO, "set browser GRID");
-                    driverThread.set(new ChromeDriver(chromeCapabilities()));
+                    try {
+                        String Node = "http://192.168.1.3:4444/wd/hub";
+                        driver = new RemoteWebDriver(new URL(Node),chromeCapabilities());
+                    }
+                   catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println("Exception ERROR: "+ e.getMessage());
+                    }
                     break;
                 }
                 default: {
@@ -78,7 +91,6 @@ public class BrowserFactory implements DriverCapabilities  {
                 }
             }
         }
-        WebDriver driver= driverThread.get();
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         EventHandler handler = new EventHandler() {};
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);

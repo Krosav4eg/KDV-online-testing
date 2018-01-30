@@ -28,7 +28,6 @@ import java.util.logging.Level;
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
-
 /**
  * @author Sergey Potapov
  */
