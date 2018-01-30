@@ -23,12 +23,12 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
 /**
  * @author Sergey_Potapov
  */
-public  class BasePage {
+public class BasePage {
 
 
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
-           return  getText(element);
+            return getText(element);
         }
 
         public void textPresentDelegate(String expectedText) {
@@ -36,7 +36,7 @@ public  class BasePage {
         }
 
         public String getCurrentUrlDelegate() {
-           return getCurrentUrl();
+            return getCurrentUrl();
         }
 
 
@@ -45,7 +45,9 @@ public  class BasePage {
         }
 
         public void scrollToNecessaryElementDelegate(WebElement element) {
-            scrollToNecessaryElement(element);}
+            scrollToNecessaryElement(element);
+        }
+
         //TODO more flexible method
         public void scrollByCoordinate() {
             LOGGER.log(Level.INFO, "Scroll to necessary element ");
@@ -82,6 +84,7 @@ public  class BasePage {
             driver.close();
             System.setProperty("close.current.window.handle", parentHandle);
         }
+
         public String getValueOfAttributeByName(WebElement element, String attribute) {
             return element.getAttribute(attribute);
         }
@@ -92,6 +95,7 @@ public  class BasePage {
             elementFluentWaitVisibility(element, driver).clear();
             elementFluentWaitVisibility(element, driver).sendKeys(message);
         }
+
         public void backPage() {
             LOGGER.log(Level.INFO, "Navigate to back page ");
             TestReporter.step("Navigate to back page ");
@@ -99,10 +103,10 @@ public  class BasePage {
         }
     }
 
-    public static  void navigateBack()
-    {
+    public static void navigateBack() {
         driver.navigate().back();
     }
+
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
@@ -201,6 +205,7 @@ public  class BasePage {
 
     /**
      * It just execute all browsers js script
+     *
      * @param script example jQery("div:contains('test')").click()
      */
     protected static void CallJS(String script, WebDriver driver) {
@@ -262,7 +267,7 @@ public  class BasePage {
         robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
     }
 
-    public static void  scrollToNecessaryElement(WebElement element) {
+    public static void scrollToNecessaryElement(WebElement element) {
         LOGGER.log(Level.INFO, "Scroll to necessary element on page");
         TestReporter.step("Scroll to necessary element on page");
         int y = element.getLocation().getY();

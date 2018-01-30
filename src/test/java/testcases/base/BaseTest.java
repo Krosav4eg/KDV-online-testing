@@ -51,7 +51,7 @@ public class BaseTest  {
     protected OrderingPhysicalPage orderingPhysicalPage;
 
     BrowserFactory singleton = BrowserFactory.getInstance();
-    protected WebDriver driver;
+     WebDriver driver;
     @BeforeMethod
     public void verifyBrowser(Method method)
     {

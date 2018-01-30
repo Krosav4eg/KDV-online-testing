@@ -9,7 +9,6 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.*;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 public class OrderingPageTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -37,15 +36,14 @@ public class OrderingPageTest extends BaseTest {
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         orderingGuestPage.modalAuthLink.click();
-        elementFluentWaitVisibility(orderingGuestPage.authEnterButton, driver).click();
-        elementFluentWaitVisibility(orderingGuestPage.errorText, driver);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.authEnterButton);
         AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         JSONObject data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
-        orderingGuestPage.closeModalButton.click();
-        orderingGuestPage.modalAuthLink.click();
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.closeModalButton);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.modalAuthLink);
         AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "test_s.zuevmagdv.com");
@@ -107,32 +105,28 @@ public class OrderingPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41070");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        orderingGuestPage.selfDeliveryRadioButton.click();
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.selfDeliveryRadioButton);
         AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
         AssertCollector.verifyCondition(orderingGuestPage.deliveryHeader.getText().contains("Доставка"));
         del.scrollByCoordinate();
         AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getText().
                 contains("г Томск, ул Сибирская, д 10"));
-        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(255));
-        AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
     }
 
     @Test
     public void verifyCourierDeliveryTest() {
-        TestReporter.testTitle("Test ID - C41072");
+        TestReporter.testTitle("Test ID - C41072,41070");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         AssertCollector.verifyCondition(orderingGuestPage.courierDeliveryRadioButton.isEnabled());
         AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getAttribute("value").
                 contains("г Томск, ул Сибирская, д 10"));
-        del.scrollByCoordinate();
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск");
-        elementFluentWaitVisibility(orderingGuestPage.addressSuggestionList, driver).click();
-        elementFluentWaitVisibility(orderingGuestPage.addressErrorField, driver);
-        AssertCollector.verifyCondition(orderingGuestPage.addressErrorField.isDisplayed());
-        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
-        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
+        data = orderingGuestPage.deliveryFormData();
+        data.put("address", "Томск, пр. Мира 20, оф.4");
+        data.put("comment", RandomStringUtils.randomAlphabetic(255));
+        orderingGuestPage.deliveryFormInfo(data);
+        AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
     }
 
     @Test
@@ -142,14 +136,13 @@ public class OrderingPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         AssertCollector.assertTrue(orderingGuestPage.compositionOrderHeader.isDisplayed());
         AssertCollector.assertTrue(orderingGuestPage.editCompositionOrderHeader.isDisplayed());
-        elementFluentWaitVisibility(orderingGuestPage.editCompositionOrderHeader, driver).click();
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.editCompositionOrderHeader);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/checkout/cart/",
                 "Urls are equals");
         del.backPage();
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/onestepcheckout/",
                 "Urls are equals");
-        elementFluentWaitVisibility(orderingGuestPage.reviewOrder, driver);
-        System.out.println(orderingGuestPage.reviewOrder.getText());
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.reviewOrder);
         AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Название товара"));
         AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Цена"));
         AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Кол-во"));
@@ -170,14 +163,12 @@ public class OrderingPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         data.put("firstName", RandomStringUtils.randomAlphabetic(45));
         data.put("lastName", RandomStringUtils.randomAlphabetic(45));
-        elementFluentWaitVisibility(orderingGuestPage.payBankCardRadioButton, driver).click();
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.payBankCardRadioButton);
         AssertCollector.verifyCondition(orderingGuestPage.payBankCardRadioButton.isEnabled());
         del.scrollByCoordinate();
-        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
-        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
-        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
-        elementFluentWaitVisibility(orderingGuestPage.selfDeliveryRadioButton, driver).click();
+        data = orderingGuestPage.deliveryFormData();
+        orderingGuestPage.deliveryFormInfo(data);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.selfDeliveryRadioButton);
         AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
     }
 
@@ -189,12 +180,9 @@ public class OrderingPageTest extends BaseTest {
         data.put("lastName", "");
         orderingGuestPage.createOrder(data);
         del.scrollByCoordinate();
-        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
-        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
-        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.firstNameFieldAdvice, driver);
+        data = orderingGuestPage.deliveryFormData();
+        orderingGuestPage.deliveryFormInfo(data);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.firstNameFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.verifyCondition(orderingGuestPage.lastNameFieldAdvice.getText().
@@ -210,51 +198,43 @@ public class OrderingPageTest extends BaseTest {
         data.put("email", "");
         orderingGuestPage.createOrder(data);
         del.scrollByCoordinate();
-        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
-        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
-        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        data = orderingGuestPage.deliveryFormData();
+        orderingGuestPage.deliveryFormInfo(data);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.emailFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         data = orderingGuestPage.data();
         data.put("email", "a.shauloandersenlab.com");
         orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@andersenlabcom");
         orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a..shaulo@andersenlab.com");
         orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.s ha ulo@andersenlab.com");
         orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@anders enlab.com");
         orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.emailFieldAdvice, driver);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
@@ -270,12 +250,10 @@ public class OrderingPageTest extends BaseTest {
         data.put("phone", "");
         orderingGuestPage.createOrder(data);
         del.scrollByCoordinate();
-        del.fillInputField(orderingGuestPage.deliveryCommentField, driver, RandomStringUtils.randomAlphabetic(10));
-        del.fillInputField(orderingGuestPage.deliveryFloorField, driver, "1");
-        del.fillInputField(orderingGuestPage.deliveryPorchField, driver, "3");
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "");
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.phoneFieldAdvice, driver);
+        data = orderingGuestPage.deliveryFormData();
+        data.put("address", "");
+        orderingGuestPage.deliveryFormInfo(data);
+        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.phoneFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.verifyCondition(orderingGuestPage.addressFieldAdvice.getText().
@@ -283,10 +261,10 @@ public class OrderingPageTest extends BaseTest {
         data = orderingGuestPage.data();
         data.put("phone", RandomStringUtils.randomNumeric(9));
         orderingGuestPage.identificationBlock(data);
-        del.fillInputField(orderingGuestPage.deliveryAddressField, driver, "Томск, пр. Мира 20, оф.4");
-        orderingGuestPage.agreementCheckBoxAdvice.click();
-        orderingGuestPage.createOrderButton.click();
-        elementFluentWaitVisibility(orderingGuestPage.phoneNotice, driver);
+        data = orderingGuestPage.deliveryFormData();
+        data.put("address", "Томск, пр. Мира 20, оф.4");
+        orderingGuestPage.deliveryFormInfo(data);
+        orderingGuestPage.clickCheckBoxAndOrderButton();
         AssertCollector.assertEqualsJ(orderingGuestPage.phoneNotice.getText(),
                 "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
                 "Error messages are equals");
