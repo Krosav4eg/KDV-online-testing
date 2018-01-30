@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,7 +73,10 @@ public enum BrowserFactory  {
 
         WebDriver driver= driverThread.get();
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
-        EventHandler handler = new EventHandler() {};
+        EventHandler handler = new EventHandler() {
+        };
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver = eventDriver.register(handler);
         return driver;
     }

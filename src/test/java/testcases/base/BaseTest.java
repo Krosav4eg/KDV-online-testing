@@ -55,13 +55,14 @@ public class BaseTest  {
     @BeforeMethod
     public void verifyBrowser(Method method)
     {
-        System.err.println("DRIVER:" + driver);
         System.err.println(method.getName());
-        if (driver.equals(null))
+        if (driver==null)
         {
+            //driver.quit();
             driver = singleton.setDriver("Chrome");
             initPageElements();
             TestReporter.step("Open Main page");
+            mainPage.openMainPage();
             screen();
         }
     }

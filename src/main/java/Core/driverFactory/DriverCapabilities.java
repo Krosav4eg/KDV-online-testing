@@ -1,5 +1,6 @@
 package Core.driverFactory;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 	 /**
 	  * PROXY you can use only if you need to connect to some proxy server
 	  */
-	 static DesiredCapabilities chromeCapabilities() {
+	 static Capabilities chromeCapabilities() {
 		 //Proxy proxy = new Proxy();
 		// proxy.setHttpProxy("myhttpproxy:3337");
 		 ChromeOptions options = new ChromeOptions();
@@ -27,20 +28,22 @@ import java.util.Arrays;
 		 capability.setBrowserName("chrome");
 		 capability.setPlatform(Platform.ANY);
 		 capability.setCapability(ChromeOptions.CAPABILITY, options);
+		// options.setCapability("chrome.switches", Arrays.asList("--incognito"));
 		 return capability;
 	 }
 
-	 static DesiredCapabilities firefoxCapabilities() {
+	 static Capabilities firefoxCapabilities() {
 		 DesiredCapabilities capability = DesiredCapabilities.chrome();
 		 FirefoxProfile profile = new FirefoxProfile();
 		 profile.setAcceptUntrustedCertificates(true);
 		 profile.setAssumeUntrustedCertificateIssuer(true);
-		 profile.setPreference("browser.download.folderList", 2);
-		 profile.setPreference("browser.helperApps.alwaysAsk.force", false);
 		 capability.setCapability(FirefoxDriver.PROFILE, profile);
 		 FirefoxOptions options= new FirefoxOptions();
 		 options.addArguments("start-maximized");
 		 capability.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+//		 options.setCapability("chrome.switches", Arrays.asList("--incognito"));
+//		 options.addPreference("browser.download.folderList", 2);
+//		 options.addPreference("browser.helperApps.alwaysAsk.force", false);
 		 return capability;
 	 }
  }

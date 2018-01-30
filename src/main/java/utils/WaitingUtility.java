@@ -26,6 +26,8 @@ public class WaitingUtility {
     public static void waitForPageLoad(WebDriver driver) {
 	    WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Wait for page loading ");
+        boolean result=   ((JavascriptExecutor) Objects.requireNonNull(driver)).executeScript(
+                "return document.readyState").equals("complete");
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
@@ -40,9 +42,7 @@ public class WaitingUtility {
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = drivers -> {
             try {
-            	long result= (Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active");
-	            System.err.println("jQuery Activity: "+result);
-                return (result == 0);
+                return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
                 // no jQuery present
                 LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
@@ -50,10 +50,10 @@ public class WaitingUtility {
                 return true;
             }
         };
-//        // wait for Javascript to load
-//        ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
-//                .toString().equals("complete");
-        return wait.until(jQueryLoad);/* && wait.until(jsLoad);*/
+        // wait for Javascript to load
+        ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
+                .toString().equals("complete");
+        return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
 
@@ -84,7 +84,7 @@ public class WaitingUtility {
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
+                .withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);

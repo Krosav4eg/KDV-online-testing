@@ -1,6 +1,7 @@
 package testcases.personalCabinet;
 
 import Core.basePage.BasePage;
+import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -21,37 +22,33 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        AssertCollector.assertTrue(accountDataPage.personalDataHeaderInEditPage.
-                isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(accountDataPage.personalDataInEditPage.
-                isDisplayed(), "Required header is displayed");
-        AssertCollector.assertTrue(accountDataPage.sharingInEditPage.
-                isDisplayed(), "Required header is displayed");
+        Verify.verify(accountDataPage.personalDataHeaderInEditPage.
+                isDisplayed());
+        Verify.verify(accountDataPage.personalDataInEditPage.
+                isDisplayed());
+        Verify.verify(accountDataPage.sharingInEditPage.
+                isDisplayed());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(accountDataPage.firstNameInEditPage.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-
+        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value").length()==
+                RandomStringUtils.randomAlphabetic(45).length());
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(accountDataPage.lastNameInEditPage.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value").length()== RandomStringUtils.randomAlphabetic(45).length());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
         accountDataPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(accountDataPage.firstNameInEditPage.getAttribute("value"),
-                " Value of first name is equal ", accountDataPage.firstNameInEditPage.
+        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value")==accountDataPage.firstNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         accountDataPage.verifyEditAccountFields(data);
-        AssertCollector.assertEquals(accountDataPage.lastNameInEditPage.getAttribute("value"),
-                " Value of last name is equal ", accountDataPage.lastNameInEditPage.
+        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value")==accountDataPage.lastNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
@@ -60,8 +57,8 @@ public class AccountDataPageTest extends BaseTest {
         accountDataPage.verifyEditAccountFields(data);
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
+        Verify.verify(del.getCurrentUrlDelegate().contains(ACCOUNT_PAGE_URL));
+        Verify.verify(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
     @Test

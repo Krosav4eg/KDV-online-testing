@@ -1,10 +1,5 @@
 package logger;
 
-import org.junit.After;
-import org.junit.Rule;
-import org.junit.rules.TestName;
-import org.testng.annotations.AfterMethod;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
