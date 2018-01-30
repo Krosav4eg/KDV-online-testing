@@ -13,7 +13,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 
-public class GlobalAPI {
+public class   GlobalAPI {
 
 	/**
 	 * @param apiParameterData- api parameter it must be in JSON format ("url,refresh,access tokens")
