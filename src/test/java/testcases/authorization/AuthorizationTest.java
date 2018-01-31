@@ -3,9 +3,7 @@ package testcases.authorization;
 import com.google.common.base.Verify;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import sun.plugin2.message.JavaScriptBaseMessage;
 import testcases.base.BaseTest;
-import utils.AssertCollector;
 import utils.TestReporter;
 
 

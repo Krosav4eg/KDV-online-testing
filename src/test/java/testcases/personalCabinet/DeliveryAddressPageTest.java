@@ -100,4 +100,35 @@ public class DeliveryAddressPageTest extends BaseTest {
         del.textPresentDelegate("Мои заказы");
         del.textPresentDelegate("У вас пока нет оформленных заказов.");
     }
+
+    @Test
+    public void verifyCardApprovedAndEdit()
+    {
+        TestReporter.testTitle("Test ID = 41697");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email","test_g.fadeev@magdv.com");
+        data.put("password","gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        deliveryAddressPage.verifyCardApprovedAddress();
+    }
+	@Test
+    public void verifyCardNotApproved()
+    {
+        TestReporter.testTitle("Test ID = 41627");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email","test_g.fadeev@magdv.com");
+        data.put("password","gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        deliveryAddressPage.verifyCardNotApprovedAddress();
+    }
+    @Test
+    public void verifyAddNewApproved()
+    {
+        TestReporter.testTitle("Test ID = 41627");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email","test_g.fadeev@magdv.com");
+        data.put("password","gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        deliveryAddressPage.addAddresses();
+    }
 }

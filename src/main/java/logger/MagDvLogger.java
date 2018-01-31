@@ -3,12 +3,8 @@ package logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static utils.Constants.LOGGING_FOLDER;
-import static utils.Constants.LOGGING_HTML_FILE;
-import static utils.Constants.LOGGING_TXT_FILE;
+import static utils.Constants.*;
 
 /**
  * @author Sergey Potapov

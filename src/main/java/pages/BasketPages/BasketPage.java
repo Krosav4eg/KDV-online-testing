@@ -9,9 +9,7 @@ import pages.OrderingPage.OrderingPhysicalPage;
 import utils.AssertCollector;
 
 import static utils.Constants.BASE_URL;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
-import static utils.WaitingUtility.elementIsClickable;
-import static utils.WaitingUtility.textIsPresent;
+import static utils.WaitingUtility.*;
 
 
 public class BasketPage extends BasePage {
