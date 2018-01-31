@@ -85,10 +85,6 @@ public class BasePage {
             System.setProperty("close.current.window.handle", parentHandle);
         }
 
-        public String getValueOfAttributeByName(WebElement element, String attribute) {
-            return element.getAttribute(attribute);
-        }
-
         public void fillInputField(WebElement element, WebDriver driver, String message) {
             LOGGER.log(Level.INFO, "Feel input field ");
             TestReporter.step("Feel input field ");
@@ -100,6 +96,10 @@ public class BasePage {
             LOGGER.log(Level.INFO, "Navigate to back page ");
             TestReporter.step("Navigate to back page ");
             driver.navigate().back();
+        }
+
+        public String getValueOfAttributeByName(WebElement element, String attribute) {
+            return element.getAttribute(attribute);
         }
     }
 

@@ -3,6 +3,7 @@ package pages.OrderingPage;
 import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -143,6 +144,15 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
     public WebElement addressErrorField;
 
+    @FindBy(css = ".message__item")
+    public WebElement messageOrderError;
+
+    @FindBy(css = "div.j_mini_cart_summary")
+    private WebElement selectMiniCart;
+
+    @FindBy(css = "[title='Просмотр корзины ']")
+    private WebElement selectBasket;
+
 
     public JSONObject data() {
         JSONObject data = new JSONObject();
@@ -158,6 +168,16 @@ public class OrderingGuestPage extends BasePage {
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
+        try {
+            if (messageOrderError.isDisplayed()) {
+                elementFluentWaitVisibility(selectMiniCart, driver).click();
+                elementFluentWaitVisibility(selectBasket, driver).click();
+            }
+        new BasketPage(driver).increaseLegalPersonProductCount();
+        elementFluentWaitVisibility(orderBtn, driver).click();
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
     }
 
     public void createOrder(JSONObject data) {
