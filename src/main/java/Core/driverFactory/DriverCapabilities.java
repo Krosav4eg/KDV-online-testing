@@ -19,8 +19,6 @@ import java.util.Arrays;
 	  * PROXY you can use only if you need to connect to some proxy server
 	  */
 	 static Capabilities chromeCapabilities() {
-		 //Proxy proxy = new Proxy();
-		 //proxy.setHttpProxy("localhost:8800");
 		 ChromeOptions options = new ChromeOptions();
 		 options.addArguments("start-maximized");
 		 DesiredCapabilities capability = DesiredCapabilities.chrome();
@@ -29,6 +27,8 @@ import java.util.Arrays;
 		 capability.setBrowserName("chrome");
 		 capability.setPlatform(Platform.ANY);
 		 capability.setCapability(ChromeOptions.CAPABILITY, options);
+//		 Proxy proxy = new Proxy();
+//		 proxy.setHttpProxy("185.37.190.41");
 		 //capability.setCapability("proxy", proxy);
 		 return capability;
 	 }
