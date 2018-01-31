@@ -86,4 +86,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="C41799">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingLegalPageTest">
+                <methods>
+                    <include name="verifyCreateOrderWithDefaultAddress"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

@@ -1,6 +1,7 @@
 package pages.BasketPages;
 
 import Core.basePage.BasePage;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,9 @@ public class BasketPage extends BasePage {
 
     @FindBy(css = ".j_cart_control_add")
     private WebElement productAddBtn;
+
+    @FindBy(css = ".cart-control__btn.cart-control__btn_inc")
+    private WebElement productPlusBtn;
 
     @FindBy(css = "[title='Кальмар подкопчённый (упаковка 1 кг)']")
     private WebElement tittleProductTxt;
@@ -105,6 +109,7 @@ public class BasketPage extends BasePage {
 
     @FindBy(css = "h1.title")
     private WebElement searchHeaderTxt;
+
     private void searchElement() {
         moveToElementJS(driver, productContainer);
         elementFluentWaitVisibility(searchField, driver).sendKeys("Кальмар подкопчённый");
@@ -114,15 +119,24 @@ public class BasketPage extends BasePage {
 
     public void selectOneProduct() {
         searchElement();
-        //moveToElementJS(driver, productAddBtn);
-        //scrollDown();
-        textIsPresent(searchHeaderTxt,driver,"Результаты поиска для «Кальмар подкопчённый»");
-        moveToElementJS(driver,tittleProductTxt);
-        elementFluentWaitVisibility(productAddBtn, driver).click();
-        textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt,driver,"тов.");
-       //sleepWait();
-        elementFluentWaitVisibility(selectMiniCart, driver).click();
-        elementFluentWaitVisibility(selectBasket, driver).click();
+        moveToElementJS(driver, productAddBtn);
+        scrollDown();
+        textIsPresent(searchHeaderTxt, driver, "Результаты поиска для «Кальмар подкопчённый»");
+        moveToElementJS(driver, tittleProductTxt);
+        try {
+            if (productAddBtn.isDisplayed()) {
+                elementFluentWaitVisibility(productAddBtn, driver).click();
+                textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, driver, "тов.");
+                //sleepWait();
+                elementFluentWaitVisibility(selectMiniCart, driver).click();
+                elementFluentWaitVisibility(selectBasket, driver).click();
+            } else if (productPlusBtn.isDisplayed()) {
+                elementFluentWaitVisibility(selectMiniCart, driver).click();
+                elementFluentWaitVisibility(selectBasket, driver).click();
+            }
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
+        }
     }
 
     public void verifyBasket() {
@@ -172,6 +186,17 @@ public class BasketPage extends BasePage {
         while (getPrice(summTxt) < 300) {
             sleepWait();
             elementFluentWaitVisibility(incBtn, driver).click();
+        }
+    }
+
+    public void increaseLegalPersonProductCount() {
+        try {
+            while (getPrice(summTxt) < 2000) {
+                sleepWait();
+                elementFluentWaitVisibility(incBtn, driver).click();
+            }
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
         }
     }
 

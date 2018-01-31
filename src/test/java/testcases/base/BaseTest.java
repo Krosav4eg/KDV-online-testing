@@ -16,6 +16,7 @@ import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
 import pages.OrderingPage.OrderingGuestPage;
+import pages.OrderingPage.OrderingLegalPage;
 import pages.OrderingPage.OrderingPhysicalPage;
 import pages.PersonalAreaPage.*;
 import utils.TestReporter;
@@ -32,7 +33,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public class BaseTest  {
+public class BaseTest {
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
@@ -49,15 +50,15 @@ public class BaseTest  {
     protected BasketPage basketPage;
     protected OrderingGuestPage orderingGuestPage;
     protected OrderingPhysicalPage orderingPhysicalPage;
+    protected OrderingLegalPage orderingLegalPage;
 
     BrowserFactory singleton = BrowserFactory.getInstance();
-     WebDriver driver;
+    WebDriver driver;
+
     @BeforeMethod
-    public void verifyBrowser(Method method)
-    {
+    public void verifyBrowser(Method method) {
         System.err.println(method.getName());
-        if (driver==null)
-        {
+        if (driver == null) {
             //driver.quit();
             driver = singleton.setDriver("Chrome");
             initPageElements();
@@ -66,6 +67,7 @@ public class BaseTest  {
             screen();
         }
     }
+
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
@@ -79,8 +81,7 @@ public class BaseTest  {
         screen();
     }
 
-    private void screen()
-    {
+    private void screen() {
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -148,7 +149,8 @@ public class BaseTest  {
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
-        orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
-        personalCabinetPage = PageFactory.initElements(driver,PersonalCabinetPage.class);
+        orderingPhysicalPage = PageFactory.initElements(driver, OrderingPhysicalPage.class);
+        personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
+        orderingLegalPage = PageFactory.initElements(driver, OrderingLegalPage.class);
     }
 }
