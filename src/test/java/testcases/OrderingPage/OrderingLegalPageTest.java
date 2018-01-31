@@ -44,7 +44,6 @@ public class OrderingLegalPageTest extends BaseTest {
 
         AssertCollector.assertTrue(orderingLegalPage.transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
-
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
 
         del.textPresentDelegate("Обработка, пожалуйста, подождите. Не нажимайте на обновление или кнопку" +
@@ -68,8 +67,8 @@ public class OrderingLegalPageTest extends BaseTest {
                 BASE_URL + "/customer/account", "Urls are equals");
         del.getUrlDelegate(BASE_URL + "/sales/order/history/");
 
-        AssertCollector.assertEqualsJ(orderNumberActual,orderingLegalPage.
-                        getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2,12)
+        AssertCollector.assertEqualsJ(orderNumberActual, orderingLegalPage.
+                        getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");
     }
 }
