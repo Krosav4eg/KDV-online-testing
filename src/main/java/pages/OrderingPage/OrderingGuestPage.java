@@ -165,6 +165,23 @@ public class OrderingGuestPage extends BasePage {
         identificationBlock(data);
     }
 
+    public void clickOrderButton() {
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
+    }
+
+    public void clickOnWebElement(WebElement element) {
+        elementFluentWaitVisibility(element, driver).click();
+        sleepWait();
+    }
+
+    public void clickCheckBoxAndOrderButton() {
+        sleepWait();
+        elementFluentWaitVisibility(agreementCheckBoxAdvice, driver).click();
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
+    }
+
     public String identificationBlock(JSONObject data) {
         elementFluentWaitVisibility(firstNameTxt, driver).clear();
         elementFluentWaitVisibility(firstNameTxt, driver).sendKeys(data.getString("firstName"));
@@ -185,9 +202,32 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void authorizationBlockModalWindow(JSONObject data) {
+        elementFluentWaitVisibility(emailAuth, driver).clear();
         elementFluentWaitVisibility(emailAuth, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordAuth, driver).clear();
         elementFluentWaitVisibility(passwordAuth, driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authEnterButton, driver).click();
+        sleepWait();
+    }
+
+    public JSONObject deliveryFormData() {
+        JSONObject data = new JSONObject();
+        data.put("address", "Томск, пр. Мира 20, оф.4");
+        data.put("floor", "1");
+        data.put("porch", "3");
+        data.put("comment", RandomStringUtils.randomAlphabetic(10));
+        return data;
+    }
+
+    public void deliveryFormInfo(JSONObject data) {
+        elementFluentWaitVisibility(deliveryAddressField, driver).clear();
+        elementFluentWaitVisibility(deliveryAddressField, driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(deliveryFloorField, driver).clear();
+        elementFluentWaitVisibility(deliveryFloorField, driver).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(deliveryPorchField, driver).clear();
+        elementFluentWaitVisibility(deliveryPorchField, driver).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(deliveryCommentField, driver).clear();
+        elementFluentWaitVisibility(deliveryCommentField, driver).sendKeys(data.getString("comment"));
         sleepWait();
     }
 }
