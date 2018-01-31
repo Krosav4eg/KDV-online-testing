@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.TestReporter;
 
+import static utils.Constants.PHYSICAL_PERSON_EMAIL;
 
 
 /**

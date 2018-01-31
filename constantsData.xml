@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<constant>
+    <section id="1">
+        <driver>Chrome</driver>
+        <mainUrl>http://tomsk.demo.dev.magonline.ru</mainUrl>
+    </section>
+    <testData id="2">
+        <physicalEmail>test_i.makarov@magdv.com</physicalEmail>
+        <physicalPass>SWgeZWPs</physicalPass>
+        <authorizationEmail>test_a.evdokimov@magdv.com</authorizationEmail>
+        <authorizationPass>JOviF7J2</authorizationPass>
+        <incorrectEmail>a.shaulo123@andersenlab.com</incorrectEmail>
+        <incorrectPass>As06051993</incorrectPass>
+        <testEmail>a.shaulo123@andersenlab.com</testEmail>
+        <testPass>As06051993</testPass>
+    </testData>
+</constant>

@@ -67,7 +67,7 @@ public class AccountDataPage extends BasePage {
         data.put("lastName", "Евдокимов");
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
-        data.put("currentPassword", AUTORIZATION_PASSWORD);
+        data.put("currentPassword", AUTHORIZATION_PASSWORD);
         return data;
     }
 

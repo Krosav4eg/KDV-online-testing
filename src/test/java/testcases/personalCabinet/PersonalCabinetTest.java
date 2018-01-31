@@ -80,7 +80,7 @@ public class PersonalCabinetTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = personalCabinetPage.mainAccountInfo();
-        data.put("passwordInEditPage", AUTORIZATION_EMAIL);
+        data.put("passwordInEditPage", AUTHORIZATION_EMAIL);
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.emailInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", personalCabinetPage.emailInEditPage.
@@ -93,7 +93,7 @@ public class PersonalCabinetTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = personalCabinetPage.mainAccountInfo();
-        data.put("passwordInEditPage", AUTORIZATION_PASSWORD);
+        data.put("passwordInEditPage", AUTHORIZATION_PASSWORD);
         personalCabinetPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(personalCabinetPage.passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", personalCabinetPage.passwordInEditPage.

@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
-import javax.swing.*;
-
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 
@@ -159,7 +157,7 @@ public class PersonalCabinetPage extends BasePage {
         data.put("lastName", "Евдокимов");
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
-        data.put("currentPassword", AUTORIZATION_PASSWORD);
+        data.put("currentPassword", AUTHORIZATION_PASSWORD);
         return data;
     }
 

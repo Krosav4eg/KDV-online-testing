@@ -27,6 +27,7 @@ import java.util.logging.Level;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
+import static utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
@@ -58,7 +59,7 @@ public class BaseTest  {
         if (driver==null)
         {
             //driver.quit();
-            driver = singleton.setDriver("Chrome");
+            driver = singleton.setDriver();
             initPageElements();
             TestReporter.step("Open Main page");
             mainPage.openMainPage();
@@ -71,7 +72,8 @@ public class BaseTest  {
      */
     @BeforeTest
     public void runBrowser() {
-        driver = singleton.setDriver("Chrome");
+
+        driver = singleton.setDriver();
         initPageElements();
         TestReporter.step("Open Main page");
         mainPage.openMainPage();

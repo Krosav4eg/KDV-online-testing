@@ -50,10 +50,10 @@ public class BrowserFactory implements DriverCapabilities  {
 
     /**
      * There is setting driver by name
-     *
-     * @param driverName-name needed browser driver
      */
-    public  synchronized WebDriver setDriver(String driverName)  {
+    public  synchronized WebDriver setDriver()  {
+
+        String driverName=BASE_DRIVER;
         WebDriver driver=null;
         if (driverName != null)
         {

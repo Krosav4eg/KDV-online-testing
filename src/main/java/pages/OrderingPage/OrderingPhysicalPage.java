@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import utils.AssertCollector;
+import utils.Constants;
 
 import java.util.Calendar;
 
 import static utils.Constants.AUTORIZATION_PAGE_URL;
-import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitClick;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.textIsPresent;
@@ -85,7 +85,7 @@ public class OrderingPhysicalPage extends BasePage {
 	@FindBy(id = "billing:porch")
 	private WebElement porchField;
 
-	@FindBy(css = "[href='"+BASE_URL+"/customer/address/']")
+	@FindBy(css = "[href='http://tomsk.demo.dev.magonline.ru/customer/address/']")
 	private WebElement addressesLink;
 
 	@FindBy(css = ".profile__addresses")

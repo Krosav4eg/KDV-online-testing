@@ -76,7 +76,7 @@ public class AccountDataPageTest extends BaseTest {
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = accountDataPage.mainAccountInfo();
-        data.put("email", AUTORIZATION_EMAIL);
+        data.put("email", AUTHORIZATION_EMAIL);
         accountDataPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(accountDataPage.emailInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.emailInEditPage.
@@ -93,7 +93,7 @@ public class AccountDataPageTest extends BaseTest {
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEquals(del.getCurrentUrlDelegate(), "Current url is equals", ACCOUNT_PAGE_URL);
-        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = accountDataPage.mainAccountInfo();
-        data.put("passwordInEditPage", AUTORIZATION_PASSWORD);
+        data.put("passwordInEditPage", AUTHORIZATION_PASSWORD);
         accountDataPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(accountDataPage.passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.passwordInEditPage.
