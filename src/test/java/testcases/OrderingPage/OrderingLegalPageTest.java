@@ -190,7 +190,7 @@ public class OrderingLegalPageTest extends BaseTest {
     }
 
     @Test
-    public void verifyCreateOrderWithoutRequiredFields() {
+    public void verifyCreateOrderWithoutLastNameField() {
         TestReporter.testTitle("Test ID = 41835");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_g.fadeev@magdv.com");
@@ -203,6 +203,36 @@ public class OrderingLegalPageTest extends BaseTest {
         orderingLegalPage.deliveryAddressBlock(data1);
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
         AssertCollector.assertTrue(orderingGuestPage.lastNameFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
+    }
+
+    @Test
+    public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
+        TestReporter.testTitle("Test ID = 42013");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", "test_g.fadeev@magdv.com");
+        data.put("password", "gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        orderingLegalPage.createOrderForLegalPerson();
+        JSONObject data1 = orderingLegalPage.data();
+        data1.put("firstName", "");
+        data1.put("lastName", "");
+        data1.put("phone", "");
+        orderingLegalPage.deliveryAddressBlock(data1);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
+        AssertCollector.assertTrue(orderingGuestPage.firstNameFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
+        AssertCollector.assertTrue(orderingGuestPage.lastNameFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
+        AssertCollector.assertTrue(orderingGuestPage.phoneFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
+        JSONObject data2 = orderingLegalPage.data();
+        data2.put("firstName", RandomStringUtils.randomAlphabetic(45));
+        data2.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data2.put("phone", "7111111");
+        orderingLegalPage.deliveryAddressBlock(data2);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
+        AssertCollector.assertTrue(orderingGuestPage.phoneNotice.isDisplayed(),
                 "Error Message is displayed");
     }
 }
