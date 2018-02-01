@@ -22,6 +22,9 @@ public class OrderingLegalPage extends BasePage {
     @FindBy(xpath = "//select/option[text()='Кемерово, 50 лет Октября, 16']")
     public WebElement secondAddressDropDownList;
 
+    @FindBy(xpath = "//select/option[text()='ул. Тевлянто, 9, Анадырь, Чукотский автономный округ']")
+    public WebElement thirdAddressDropDownList;
+
     @FindBy(xpath = "//span[@class=\"text\"]")
     public WebElement transportDescription;
 
