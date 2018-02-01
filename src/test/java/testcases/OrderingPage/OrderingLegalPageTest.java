@@ -190,23 +190,6 @@ public class OrderingLegalPageTest extends BaseTest {
     }
 
     @Test
-    public void verifyCreateOrderWithoutLastNameField() {
-        TestReporter.testTitle("Test ID = 41835");
-        JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_g.fadeev@magdv.com");
-        data.put("password", "gctbVY");
-        authorizationPage.verifyAuthFields(data);
-        orderingLegalPage.createOrderForLegalPerson();
-        JSONObject data1 = orderingLegalPage.data();
-        data1.put("firstName", RandomStringUtils.randomAlphabetic(45));
-        data1.put("lastName", "");
-        orderingLegalPage.deliveryAddressBlock(data1);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
-        AssertCollector.assertTrue(orderingGuestPage.lastNameFieldAdvice.isDisplayed(),
-                "Error Message is displayed");
-    }
-
-    @Test
     public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
