@@ -17,7 +17,10 @@ public class OrderingLegalPage extends BasePage {
     public WebElement deliveryAddress;
 
     @FindBy(xpath = "//span[@aria-expanded='true']")
-    public WebElement addressDropDownList;
+    public WebElement addressDropDownArea;
+
+    @FindBy(xpath = "//select/option[text()='Кемерово, 50 лет Октября, 16']")
+    public WebElement secondAddressDropDownList;
 
     @FindBy(xpath = "//span[@class=\"text\"]")
     public WebElement transportDescription;
@@ -28,7 +31,7 @@ public class OrderingLegalPage extends BasePage {
     @FindBy(css = ".button.button_mobile-wide.j_button_metrics_goals")
     public WebElement continueShoppingButton;
 
-    @FindBy(css = ".link")
+    @FindBy(xpath = "//div/p[@class='text']/a")
     public WebElement orderLink;
 
     @FindBy(css = ".profile-orders__col.profile-orders__col_id.hidden-xs.hidden-xxs")
