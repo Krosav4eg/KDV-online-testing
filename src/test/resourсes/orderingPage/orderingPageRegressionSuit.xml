@@ -1,99 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Registration regression tests" parallel="tests" thread-count="1">
+<suite name="Ordering Page regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="41070">
+    <test name="OrderingPageTest">
         <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifySelfDeliveryTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="41072">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyCourierDeliveryTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="41073">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyCompositionOrderTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="41074-41075">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyCreationOrderAsGuestTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="41076">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyAuthModalWindowTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C41078-40079">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyEmptyFirstAndLastNameTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C41080">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyEmptyEmailFieldTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C41081-41082">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest">
-                <methods>
-                    <include name="verifyEmptyPhoneAndAddressFieldsTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C41799">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingLegalPageTest">
-                <methods>
-                    <include name="verifyCreateOrderWithDefaultAddress"/>
-                </methods>
-            </class>
+            <class name="testcases.OrderingPage.OrderingPageTest"/>
         </classes>
     </test>
 </suite>

@@ -84,9 +84,6 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//a[text()='Регламентом работы сайта']")
     public WebElement regulationsWebsiteLink;
 
-    @FindBy(css = "#checkout-delivery-date")
-    public WebElement checkoutDeliveryDate;
-
     @FindBy(xpath = ".//a[text()=\"Согласием на обработку персональных данных\"]")
     public WebElement consentPersonalDataProcessingLink;
 
