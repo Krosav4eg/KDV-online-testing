@@ -1,6 +1,7 @@
 package testcases.OrderingPage;
 
 import Core.basePage.BasePage;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -15,7 +16,7 @@ public class OrderingLegalPageTest extends BaseTest {
     };
 
     @Test
-    public void verifyCreateOrderWithDefaultAddress() {
+    public void verifyCreateOrderWithDefaultAddressTest() {
         TestReporter.testTitle("Test ID = 41799");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_g.fadeev@magdv.com");
@@ -73,7 +74,7 @@ public class OrderingLegalPageTest extends BaseTest {
     }
 
     @Test
-    public void verifyCreateOrderWithChangingAddress() {
+    public void verifyCreateOrderWithChangingAddressTest() {
         TestReporter.testTitle("Test ID = 41801");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_g.fadeev@magdv.com");
@@ -131,7 +132,7 @@ public class OrderingLegalPageTest extends BaseTest {
     }
 
     @Test
-    public void verifyCreateOrderWithThirdAddress() {
+    public void verifyCreateOrderWithThirdAddressTest() {
         TestReporter.testTitle("Test ID = 41826");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_g.fadeev@magdv.com");
@@ -186,5 +187,22 @@ public class OrderingLegalPageTest extends BaseTest {
         AssertCollector.assertEqualsJ(orderNumberActual, orderingLegalPage.
                         getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");
+    }
+
+    @Test
+    public void verifyCreateOrderWithoutRequiredFields() {
+        TestReporter.testTitle("Test ID = 41835");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", "test_g.fadeev@magdv.com");
+        data.put("password", "gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        orderingLegalPage.createOrderForLegalPerson();
+        JSONObject data1 = orderingLegalPage.data();
+        data1.put("firstName", RandomStringUtils.randomAlphabetic(45));
+        data1.put("lastName", "");
+        orderingLegalPage.deliveryAddressBlock(data1);
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
+        AssertCollector.assertTrue(orderingGuestPage.lastNameFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
     }
 }
