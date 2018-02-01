@@ -8,10 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.*;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.driverFactory.BrowserFactory.getDriver;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 /**
  * @author Sergey Potapov
@@ -73,6 +75,25 @@ public class WaitingUtility {
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public static boolean elementNotVisible(WebElement element, WebDriver driver)
+    {
+        TestReporter.step("Element Not visible - " + element);
+        LOGGER.log(Level.INFO, " Element Not visible - " + element);
+        while (element.isDisplayed())
+        {
+
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+
+
+
     /**
      * Method was created for helps to search for elements with certain intervals within a given period of time.
      * Web element searching every 50 MILLISECONDS for 30 seconds.
@@ -83,10 +104,10 @@ public class WaitingUtility {
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(10, TimeUnit.SECONDS)
+                .withTimeout(20, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
-        return newWait.until(ExpectedConditions.visibilityOf(element));
+        return newWait.until(visibilityOf(element));
     }
 
     public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
@@ -104,7 +125,7 @@ public class WaitingUtility {
         TestReporter.step("Element isn't displayed ");
         LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(visibilityOf(element));
     }
 
     public static void textIsPresent(WebElement element, WebDriver driver,String text)

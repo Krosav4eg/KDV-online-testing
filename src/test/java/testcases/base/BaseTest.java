@@ -10,24 +10,24 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import pages.*;
+import pages.AuthorizationPage;
 import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
 import pages.CategoryPage.CategoryPage;
 import pages.CategoryPage.ModalWindow;
+import pages.CustomerAccountPage;
+import pages.MainPage;
 import pages.OrderingPage.OrderingGuestPage;
 import pages.OrderingPage.OrderingPhysicalPage;
 import pages.PersonalAreaPage.*;
+import pages.RegistrationPage;
 import utils.TestReporter;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
@@ -58,7 +58,6 @@ public class BaseTest  {
         System.err.println(method.getName());
         if (driver==null)
         {
-            //driver.quit();
             driver = singleton.setDriver();
             initPageElements();
             TestReporter.step("Open Main page");
@@ -99,6 +98,7 @@ public class BaseTest  {
 
     @AfterMethod
     public void clearCookies() {
+        System.out.println(driver);
         driver.manage().deleteAllCookies();
         mainPage.openMainPage();
     }
@@ -120,7 +120,7 @@ public class BaseTest  {
             FileUtils.copyFile(source, destination);
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
+           // LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
         }
         return dest;
     }

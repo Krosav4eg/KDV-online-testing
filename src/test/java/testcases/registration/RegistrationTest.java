@@ -361,34 +361,34 @@ public class RegistrationTest extends BaseTest {
     public void verifySubscriptionCheckboxPresenceTest() {
         TestReporter.testTitle("Test ID = 37352");
         registrationPage.verifySubscriptionCheckboxPresence();
-    }
-
-    @Test
-    public void verifyWorkOfCheckboxConfirmTest() {
+//    }
+//
+//    @Test
+//    public void verifyWorkOfCheckboxConfirmTest() {
         TestReporter.testTitle("Test ID = 37353");
         registrationPage.verifyWorkOfCheckboxConfirm();
-    }
-
-    @Test
-    public void verifyCheckboxConfirmPresenceTest() {
+//    }
+//
+//    @Test
+//    public void verifyCheckboxConfirmPresenceTest() {
         TestReporter.testTitle("Test ID = 37354");
         registrationPage.verifyCheckboxConfirmPresence();
-    }
-
-    @Test
-    public void verifyPressSendButtonWithoutFillingFieldsTest() {
+//    }
+//
+//    @Test
+//    public void verifyPressSendButtonWithoutFillingFieldsTest() {
         TestReporter.testTitle("Test ID = 37340");
         registrationPage.verifyPressSendButtonWithoutFillingFields();
-    }
-
-    @Test
-    public void verifySendingWithoutFillingFirstNameFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifySendingWithoutFillingFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37341");
         registrationPage.verifySendingWithoutFillingFirstNameField();
-    }
-
-    @Test
-    public void verifySendingWithoutFillingLastNameFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifySendingWithoutFillingLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37343");
         registrationPage.verifySendingWithoutFillingLastNameField();
     }
@@ -451,64 +451,64 @@ public class RegistrationTest extends BaseTest {
     public void verifyOrganizationFullNameFieldPresenceTest() {
         TestReporter.testTitle("Test ID = 37374");
         registrationPage.verifyOrganizationFullNameFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInFullNameTest() {
+//    }
+//
+//    @Test
+//    public void verifyMaximumInputInFullNameTest() {
         TestReporter.testTitle("Test ID = 37375");
         registrationPage.verifyMaximumInputInFullName();
-    }
-
-    @Test
-    public void verifyFieldForTaxpayerIdTest() {
+//    }
+//
+//    @Test
+//    public void verifyFieldForTaxpayerIdTest() {
         TestReporter.testTitle("Test ID = 37385");
         registrationPage.verifyFieldForTaxpayerId();
-    }
-
-    @Test
-    public void verifyValidInputInTaxpayerIdFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyValidInputInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37388");
         registrationPage.verifyValidInputInTaxpayerIdField();
-    }
-
-    @Test
-    public void verifyInputLettersInTaxpayerIdFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputLettersInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37389");
         registrationPage.verifyInputLettersInTaxpayerIdField();
-    }
-
-    @Test
-    public void verifyInputSymbolsInTaxpayerIdFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputSymbolsInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37390");
         registrationPage.verifyInputSymbolsInTaxpayerIdField();
-    }
-
-    @Test
-    public void verifyInputLessThenTenDigitsInTaxpayerIdFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputLessThenTenDigitsInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37391");
         registrationPage.verifyInputLessThenTenDigitsInTaxpayerIdField();
-    }
-
-    @Test
-    public void verifyReasonCodeFieldPresenceTest() {
+//    }
+//
+//    @Test
+//    public void verifyReasonCodeFieldPresenceTest() {
         TestReporter.testTitle("Test ID = 37393");
         registrationPage.verifyReasonCodeFieldPresence();
-    }
-
-    @Test
-    public void verifyValidInputInReasonCodeFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyValidInputInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37394");
         registrationPage.verifyValidInputInReasonCodeField();
-    }
-
-    @Test
-    public void verifyInputLettersInReasonCodeFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputLettersInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37395");
         registrationPage.verifyInputLettersInReasonCodeField();
-    }
-
-    @Test
-    public void verifyInputSymbolsInReasonCodeFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputSymbolsInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37396");
         registrationPage.verifyInputSymbolsInReasonCodeField();
     }

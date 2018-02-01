@@ -29,6 +29,7 @@ public class Constants {
     //========================BROWSER DRIVER PATH=======================
     public static final String FIREFOX_DRIVER_PATH = System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver.exe";
     public static final String CHROME_DRIVER_PATH = System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe";
+    public static final String CHROME_DRIVER_PATH_UNIX = readXML("section","unixPath");
 
     //========================SCREENSHOT PATH===========================
     public static final String ERROR_SCREENSHOT_FOLDER = System.getProperty("user.dir") + "/test-output/screenShots/ErrorScreenShot/";

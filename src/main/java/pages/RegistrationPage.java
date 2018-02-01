@@ -65,6 +65,8 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = "h1")
     private WebElement getHeaderTxt;
 
+    @FindBy(className = "text")
+    private WebElement allertTxt;
 
     @FindBy(css = ".error-msg a")
     private WebElement forgotPasswordLink;
@@ -413,6 +415,7 @@ public class RegistrationPage extends BasePage {
 
     //registration
     private String verifyAuthorizationInformation(JSONObject data) {
+        moveToElementJS(driver,phone);
         elementFluentWaitVisibility(email,driver).click();
         elementFluentWaitVisibility(email,driver).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(password,driver).click();
@@ -423,6 +426,7 @@ public class RegistrationPage extends BasePage {
     }
 
     private String organizationInformation(JSONObject data) {
+        moveMouseTo(driver,allertTxt);
         elementFluentWaitVisibility(organizationFullName,driver).click();
         elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
         elementFluentWaitVisibility(taxpayerId,driver).click();

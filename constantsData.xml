@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <constant>
     <section id="1">
+        <unixPath></unixPath>
         <driver>Chrome</driver>
         <mainUrl>http://tomsk.demo.dev.magonline.ru</mainUrl>
     </section>

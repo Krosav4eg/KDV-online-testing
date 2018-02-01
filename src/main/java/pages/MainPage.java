@@ -36,6 +36,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Регистрация']")
     private WebElement registrationButton;
 
+    @FindBy(id = "geo_modal")
+    private WebElement modelWindow;
+
     @FindBy(css = ".geo.j_geo")
     private WebElement selectCityModalWindow;
 
@@ -205,6 +208,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".product-item__summary-cart")
     private List<WebElement> hitSalesBasketButtons;
 
+    @FindBy(className = "social")
+    private WebElement socialContainer;
+
     @FindBy(css = ".cart-control__active")
     private WebElement productAddedButton;
 
@@ -329,9 +335,9 @@ public class MainPage extends BasePage {
     private WebElement fullBasketDropdown;
 
     public void openMainPage() {
+        driver.get(BASE_URL);
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
-        driver.get(BASE_URL);
         //TODO can`t find element, or add thread sleep or implement another
         sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
@@ -339,8 +345,9 @@ public class MainPage extends BasePage {
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-//        driver.navigate().refresh();
-//        sleepWait();
+        sleepWait();
+        driver.navigate().refresh();
+        sleepWait();
     }
 
     public void checkCompanyLogo() {
@@ -386,14 +393,13 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
-    //TODO remove thread.sleep , think about it, how to fix it
     public void changeCityToOther() throws InterruptedException {
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
         elementIsClickable(baseCityLink, driver).click();
+        sleepWait();
         clickOnIndexFromElementList(otherCityLink, 1);
-        Thread.sleep(3000);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
     }
 
@@ -589,6 +595,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingVkLink() {
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://vk.com/kdvonline";
         textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(vkLink, driver).click();
@@ -596,18 +603,25 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingInstagramLink() {
+
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://www.instagram.com/kdvonline/";
         elementFluentWaitVisibility(instaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingGooglePlayLink() {
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
         textPresent("Скачивайте приложение для Android");
         elementFluentWaitVisibility(googlePlayLink, driver).click();
@@ -615,6 +629,8 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingShopLink() {
@@ -793,7 +809,7 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
                 linkTextAttribute);
-        openMainPage();
+//        openMainPage();
     }
 
     public void verifyingAnswerYourQuestionsTelNumber() {
@@ -815,7 +831,8 @@ public class MainPage extends BasePage {
     public void verifyMyBasketWithProduct() {
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
-        scrollDown();
+        moveToElementJS(driver,socialContainer);
+       // scrollDown();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
@@ -873,7 +890,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingBasketAndOrdering() {
-        scrollDown();
+        moveToElementJS(driver,socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         clickOnIndexFromElementList(hitSalesBasketButtons, 1);
         clickOnIndexFromElementList(hitSalesBasketButtons, 2);
