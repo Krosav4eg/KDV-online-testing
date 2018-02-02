@@ -2,15 +2,12 @@ package pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
 import com.google.common.base.Verify;
-import com.google.common.base.VerifyException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static utils.Constants.ACCOUNT_DELIVERY_ADDRESS_URL;
-import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitClick;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 /**
  * @author Sergey Potapov
@@ -39,8 +36,11 @@ public class DeliveryAddressPage extends BasePage {
     @FindBy(css = ".tag.tag_right.tag_default")
     public WebElement byDefaultMark;
 
-    @FindBy(css = "a[href='http://tomsk.demo.dev.magonline.ru/customer/address/edit/id/6925/']")
+    @FindBy(css = ".account__edit.link.offset-l-1")
     public WebElement editDeliveryLink;
+
+    @FindBy(css = ".address__action.link")
+    public WebElement addressActionLink;
 
     @FindBy(id = "firstname")
     public WebElement firstNameInEditDeliveryPage;

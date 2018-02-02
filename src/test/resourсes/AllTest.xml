@@ -66,4 +66,5 @@
                 <class name="testcases.registration.RegistrationTest"/>
             </classes>
         </test>
+
 </suite>

@@ -8,6 +8,7 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.ACCOUNT_DELIVERY_ADDRESS_URL;
+import static utils.Constants.ACCOUNT_INFORMATION_URL;
 
 public class DeliveryAddressPageTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -33,7 +34,8 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("email", "test_i.makarov@magdv.com");
         data.put("password", "SWgeZWPs");
         authorizationPage.verifyAuthFields(data);
-        deliveryAddressPage.deliveryAddressItemButton.click();
+        orderingGuestPage.clickOnWebElement(deliveryAddressPage.deliveryAddressItemButton);
+//        deliveryAddressPage.deliveryAddressItemButton.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
                 "new/", "Urls are equals");
     }
@@ -45,7 +47,7 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("email", "test_t.bolshakov@magdv.com");
         data.put("password", "sTU1iJ46");
         authorizationPage.verifyAuthFields(data);
-        deliveryAddressPage.deliveryAddressItemButton.click();
+        orderingGuestPage.clickOnWebElement(deliveryAddressPage.deliveryAddressItemButton);
         AssertCollector.assertEqualsJ(deliveryAddressPage.nameDeliveryByDefault.getText(), "Тимофей Большаков",
                 "First name and last name are equals");
         AssertCollector.assertEqualsJ(deliveryAddressPage.deliveryAddressByDefault.getText(),
@@ -54,10 +56,9 @@ public class DeliveryAddressPageTest extends BaseTest {
         AssertCollector.assertEqualsJ(deliveryAddressPage.phoneDeliveryByDefault.getText(), "+71111111111",
                 "Phone numbers are equals");
         AssertCollector.assertTrue(deliveryAddressPage.byDefaultMark.isDisplayed());
-        AssertCollector.assertTrue(deliveryAddressPage.editDeliveryLink.isDisplayed());
-        deliveryAddressPage.editDeliveryLink.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
-                "edit/id/4236/", "Urls are equals");
+        orderingGuestPage.clickOnWebElement(deliveryAddressPage.addressActionLink);
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL + "edit/id/4236/",
+                "Urls are equals");
         AssertCollector.assertEqualsJ(deliveryAddressPage.firstNameInEditDeliveryPage.getAttribute("value"),
                 "Тимофей", "First names are correct");
         AssertCollector.assertEqualsJ(deliveryAddressPage.lastNameInEditDeliveryPage.getAttribute("value"),
@@ -79,14 +80,8 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("email", "test_s.zuev@magdv.com");
         data.put("password", "YZde8m");
         authorizationPage.verifyAuthFields(data);
-        deliveryAddressPage.deliveryAddressItemButton.click();
-        deliveryAddressPage.editDeliveryLink.click();
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
-                "edit/id/6925/", "Urls are equals");
-        del.scrollToNecessaryElementDelegate(mainPage.footer);
-        deliveryAddressPage.saveDeliveryAddressButton.click();
-        AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressList.getText().contains("Томск, пр. Мира 20, оф.1"));
-        AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressList.getText().contains("По умолчанию"));
+        orderingGuestPage.clickOnWebElement(deliveryAddressPage.editDeliveryLink);
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_INFORMATION_URL, "Urls are equals");
     }
 
     @Test
@@ -96,38 +91,38 @@ public class DeliveryAddressPageTest extends BaseTest {
         data.put("email", "test_v.kalashnikova@magdv.com");
         data.put("password", "Q2ThNhHs");
         authorizationPage.verifyAuthFields(data);
-        myBookingPage.myBookingsItemButton.click();
+//        myBookingPage.myBookingsItemButton.click();
+        orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
         del.textPresentDelegate("Мои заказы");
         del.textPresentDelegate("У вас пока нет оформленных заказов.");
     }
 
     @Test
-    public void verifyCardApprovedAndEdit()
-    {
+    public void verifyCardApprovedAndEdit() {
         TestReporter.testTitle("Test ID = 41697");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email","test_g.fadeev@magdv.com");
-        data.put("password","gctbVY");
+        data.put("email", "test_g.fadeev@magdv.com");
+        data.put("password", "gctbVY");
         authorizationPage.verifyAuthFields(data);
         deliveryAddressPage.verifyCardApprovedAddress();
     }
-	@Test
-    public void verifyCardNotApproved()
-    {
+
+    @Test
+    public void verifyCardNotApproved() {
         TestReporter.testTitle("Test ID = 41627");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email","test_g.fadeev@magdv.com");
-        data.put("password","gctbVY");
+        data.put("email", "test_g.fadeev@magdv.com");
+        data.put("password", "gctbVY");
         authorizationPage.verifyAuthFields(data);
         deliveryAddressPage.verifyCardNotApprovedAddress();
     }
+
     @Test
-    public void verifyAddNewApproved()
-    {
+    public void verifyAddNewApproved() {
         TestReporter.testTitle("Test ID = 41627");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email","test_g.fadeev@magdv.com");
-        data.put("password","gctbVY");
+        data.put("email", "test_g.fadeev@magdv.com");
+        data.put("password", "gctbVY");
         authorizationPage.verifyAuthFields(data);
         deliveryAddressPage.addAddresses();
     }

@@ -286,17 +286,18 @@ public class PersonalCabinetPage extends BasePage {
         return getText(profileContainer);
     }
 
-    public void verifyOrder()
-    {
-        getUrl(BASE_URL + "/sales/order/history/");
-        Verify.verify(getText(profileContainer).contains("Кол-во"));
-        Verify.verify(getText(profileContainer).contains("42RT212954"));
-        Verify.verify(getText(profileContainer).contains("30.01.2018"));
-        Verify.verify(getText(profileContainer).contains("Новый"));
-        Verify.verify(getText(profileContainer).contains("Подробнее"));
-        Verify.verify(getText(profileContainer).contains("Повторить"));
-        Verify.verify(getText(profileContainer).contains("5 068,00"));
-        elementFluentWaitVisibility(detailLink,driver).click();
-        Verify.verify(getText(detailTxt).contains("#42RT212954"));
-    }
+//    public void verifyOrder()
+//    {
+//        getUrl(BASE_URL + "/sales/order/history/");
+//        Verify.verify(getText(profileContainer).contains("Кол-во"));
+//        Verify.verify(getText(profileContainer).contains("42RT212954"));
+//        Verify.verify(getText(profileContainer).contains("30.01.2018"));
+//        Verify.verify(getText(profileContainer).contains("Новый"));
+//        Verify.verify(getText(profileContainer).contains("Подробнее"));
+//        Verify.verify(getText(profileContainer).contains("Повторить"));
+//        Verify.verify(getText(profileContainer).contains("5 068,00"));
+//        elementFluentWaitVisibility(detailLink,driver).click();
+//        Verify.verify(getText(detailTxt).contains("#42RT212954"));
+//    }
+
 }
