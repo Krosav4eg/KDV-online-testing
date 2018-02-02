@@ -29,6 +29,8 @@ import java.util.Arrays;
 		 capability.setBrowserName("chrome");
 		 capability.setPlatform(Platform.ANY);
 		 capability.setCapability(ChromeOptions.CAPABILITY, options);
+//		 Proxy proxy = new Proxy();
+//		 proxy.setHttpProxy("185.37.190.41");
 		 //capability.setCapability("proxy", proxy);
 		 return capability;
 	 }
