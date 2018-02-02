@@ -26,41 +26,43 @@ public class ControlPanelPageTest extends BaseTest {
         del.textPresentDelegate("Здравствуйте, Иннокентий Макаров!");
         del.textPresentDelegate("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
     }
+//TODO same assertion in C41799
+//    @Test
+//    public void verifyOrdersBlockWithQuantityLessThenFiveTest() {
+//        TestReporter.testTitle("Test ID = 37823");
+//        JSONObject data = authorizationPage.mainAuthorizationInfo();
+//        data.put("email", "test_i.kononov@magdv.com");
+//        data.put("password", "M9fraZ");
+//        authorizationPage.verifyAuthFields(data);
+//        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
+//    }
 
-    @Test
-    public void verifyOrdersBlockWithQuantityLessThenFiveTest() {
-        TestReporter.testTitle("Test ID = 37823");
-        JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_i.kononov@magdv.com");
-        data.put("password", "M9fraZ");
-        authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
-    }
 
-    @Test
-    public void verifyOrdersMoreThenFiveAndShowAllBtnTest() {
-        TestReporter.testTitle("Test ID = 37843,37845");
-        JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", TEST_EMAIL);
-        data.put("password", TEST_PASSWORD);
-        authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
-        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
-        String expLink = del.getValueOfAttributeByName(controlPanelPage.showAll, "href");
-        (controlPanelPage.showAll).click();
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
-    }
+    //TODO same assertion in C41799
+//    @Test
+//    public void verifyOrdersMoreThenFiveAndShowAllBtnTest() {
+//        TestReporter.testTitle("Test ID = 37843,37845");
+//        JSONObject data = authorizationPage.mainAuthorizationInfo();
+//        data.put("email", TEST_EMAIL);
+//        data.put("password", TEST_PASSWORD);
+//        authorizationPage.verifyAuthFields(data);
+//        AssertCollector.verifyCondition(controlPanelPage.ordersHeader.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderId.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderDate.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderStatus.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderCost.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderView.isDisplayed());
+//        AssertCollector.verifyCondition(controlPanelPage.orderRepeat.isDisplayed());
+//        String expLink = del.getValueOfAttributeByName(controlPanelPage.showAll, "href");
+//        (controlPanelPage.showAll).click();
+//        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
+//    }
 
     // TODO: 12.01.2018 C38045 take id from DB
 
@@ -75,7 +77,7 @@ public class ControlPanelPageTest extends BaseTest {
         AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
                 contains("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
-        AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+71111111111"));
+        AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+77111111111"));
 
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
         (controlPanelPage.editPersonalDataButton).click();

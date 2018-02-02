@@ -205,6 +205,7 @@ public class PersonalCabinetPage extends BasePage {
         Verify.verify(getText(profileContainer).contains("+71119348926"));
        // Verify.verify(getText(profileContainer).contains("Томск"));
         Verify.verify(getText(profileContainer).contains("+71111111111"));
+        scrollDown();
         elementFluentWaitVisibility(editBtn,driver).click();
         Verify.verify(getCurrentUrl().contains("/customer/account/edit/"));
         backPage();
@@ -286,17 +287,18 @@ public class PersonalCabinetPage extends BasePage {
         return getText(profileContainer);
     }
 
-    public void verifyOrder()
-    {
-        getUrl(BASE_URL + "/sales/order/history/");
-        Verify.verify(getText(profileContainer).contains("Кол-во"));
-        Verify.verify(getText(profileContainer).contains("42RT212954"));
-        Verify.verify(getText(profileContainer).contains("30.01.2018"));
-        Verify.verify(getText(profileContainer).contains("Новый"));
-        Verify.verify(getText(profileContainer).contains("Подробнее"));
-        Verify.verify(getText(profileContainer).contains("Повторить"));
-        Verify.verify(getText(profileContainer).contains("5 068,00"));
-        elementFluentWaitVisibility(detailLink,driver).click();
-        Verify.verify(getText(detailTxt).contains("#42RT212954"));
-    }
+//    public void verifyOrder()
+//    {
+//        getUrl(BASE_URL + "/sales/order/history/");
+//        Verify.verify(getText(profileContainer).contains("Кол-во"));
+//        Verify.verify(getText(profileContainer).contains("42RT212954"));
+//        Verify.verify(getText(profileContainer).contains("30.01.2018"));
+//        Verify.verify(getText(profileContainer).contains("Новый"));
+//        Verify.verify(getText(profileContainer).contains("Подробнее"));
+//        Verify.verify(getText(profileContainer).contains("Повторить"));
+//        Verify.verify(getText(profileContainer).contains("5 068,00"));
+//        elementFluentWaitVisibility(detailLink,driver).click();
+//        Verify.verify(getText(detailTxt).contains("#42RT212954"));
+//    }
+
 }
