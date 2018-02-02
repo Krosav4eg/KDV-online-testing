@@ -22,33 +22,33 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        Verify.verify(accountDataPage.personalDataHeaderInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.personalDataHeaderInEditPage.
                 isDisplayed());
-        Verify.verify(accountDataPage.personalDataInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.personalDataInEditPage.
                 isDisplayed());
-        Verify.verify(accountDataPage.sharingInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.sharingInEditPage.
                 isDisplayed());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value").length()==
+        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length()==
                 RandomStringUtils.randomAlphabetic(45).length());
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value").length()== RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value").length()== RandomStringUtils.randomAlphabetic(45).length());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value")==accountDataPage.firstNameInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value")==accountDataPage.firstNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value")==accountDataPage.lastNameInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value")==accountDataPage.lastNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
@@ -57,8 +57,8 @@ public class AccountDataPageTest extends BaseTest {
         accountDataPage.verifyEditAccountFields(data);
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        Verify.verify(del.getCurrentUrlDelegate().contains(ACCOUNT_PAGE_URL));
-        Verify.verify(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().contains(ACCOUNT_PAGE_URL));
+        AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class AccountDataPageTest extends BaseTest {
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = accountDataPage.mainAccountInfo();
-        data.put("email", AUTORIZATION_EMAIL);
+        data.put("email", AUTHORIZATION_EMAIL);
         accountDataPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(accountDataPage.emailInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.emailInEditPage.
@@ -93,7 +93,7 @@ public class AccountDataPageTest extends BaseTest {
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEquals(del.getCurrentUrlDelegate(), "Current url is equals", ACCOUNT_PAGE_URL);
-        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = accountDataPage.mainAccountInfo();
-        data.put("passwordInEditPage", AUTORIZATION_PASSWORD);
+        data.put("passwordInEditPage", AUTHORIZATION_PASSWORD);
         accountDataPage.verifyEditAccountFields(data);
         AssertCollector.assertEquals(accountDataPage.passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", accountDataPage.passwordInEditPage.

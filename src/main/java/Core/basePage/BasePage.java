@@ -201,6 +201,7 @@ public class BasePage {
      */
     public static void moveToElementJS(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        sleepWait();
     }
 
     /**
@@ -223,6 +224,7 @@ public class BasePage {
     protected static void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
         LOGGER.log(Level.INFO, "Click on needed index of element " + elementIndex);
         TestReporter.step("Click on needed index of element " + elementIndex);
+        sleepWait();
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {
@@ -263,8 +265,10 @@ public class BasePage {
             e.printStackTrace();
             LOGGER.log(Level.WARNING, "AWT Exception occurs, see message for details: %s", e.getMessage());
         }
+        sleepWait();
         robot.keyPress(KeyEvent.VK_PAGE_DOWN);
         robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+        sleepWait();
     }
 
     public static void scrollToNecessaryElement(WebElement element) {
@@ -326,9 +330,9 @@ public class BasePage {
         }
     }
 
-    protected void sleepWait() {
+    protected static void sleepWait() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

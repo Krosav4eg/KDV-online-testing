@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import utils.AssertCollector;
+import utils.Constants;
 
 import java.util.Calendar;
 
 import static utils.Constants.AUTORIZATION_PAGE_URL;
-import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitClick;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.textIsPresent;
@@ -85,7 +85,7 @@ public class OrderingPhysicalPage extends BasePage {
 	@FindBy(id = "billing:porch")
 	private WebElement porchField;
 
-	@FindBy(css = "[href='"+BASE_URL+"/customer/address/']")
+	@FindBy(css = "[href='http://tomsk.demo.dev.magonline.ru/customer/address/']")
 	private WebElement addressesLink;
 
 	@FindBy(css = ".profile__addresses")
@@ -140,23 +140,23 @@ public class OrderingPhysicalPage extends BasePage {
 	{
 		textIsPresent(orderContainer,driver,"Ваш заказ принят");
 		String order=getText(orderTxt);
-		Verify.verify(getText(orderContainer).contains("Ваш заказ принят"));
-		Verify.verify(getText(orderContainer).contains("Спасибо за покупку!"));
-		Verify.verify(getText(orderContainer).contains("Номер вашего заказа"));
-		Verify.verify(getText(orderContainer).contains("Вы получите письмо на ваш адрес электронной почты"));
-		Verify.verify(getText(orderContainer).contains("Продолжить покупать"));
+		AssertCollector.verifyCondition(getText(orderContainer).contains("Ваш заказ принят"));
+		AssertCollector.verifyCondition(getText(orderContainer).contains("Спасибо за покупку!"));
+		AssertCollector.verifyCondition(getText(orderContainer).contains("Номер вашего заказа"));
+		AssertCollector.verifyCondition(getText(orderContainer).contains("Вы получите письмо на ваш адрес электронной почты"));
+		AssertCollector.verifyCondition(getText(orderContainer).contains("Продолжить покупать"));
 		elementFluentWaitVisibility(byeBtn,driver).click();
-		Verify.verify(getText(headerTxt).contains("Пономарёва Маргарита"));
+		AssertCollector.verifyCondition(getText(headerTxt).contains("Пономарёва Маргарита"));
 		elementFluentWaitVisibility(accountLink,driver).click();
 		Assert.assertTrue(getText(orderConteiner).contains(order));
 	}
 
 	private void verifyOrderingBeforeSend()
 	{
-		Verify.verify(getText(orderBillingTxt).contains("г Томск, ул Нахимова, д 34, кв 53"));
-		Verify.verify(getValueOfAttributeByName(guest.firstNameTxt,"value").contains("Маргарита"));
-		Verify.verify(getValueOfAttributeByName(guest.lastNameTxt,"value").contains("Пономарёва"));
-		Verify.verify(getValueOfAttributeByName(guest.phoneTxt,"value").contains("71111111111"));
+		AssertCollector.verifyCondition(getText(orderBillingTxt).contains("г Томск, ул Нахимова, д 34, кв 53"));
+		AssertCollector.verifyCondition(getValueOfAttributeByName(guest.firstNameTxt,"value").contains("Маргарита"));
+		AssertCollector.verifyCondition(getValueOfAttributeByName(guest.lastNameTxt,"value").contains("Пономарёва"));
+		AssertCollector.verifyCondition(getValueOfAttributeByName(guest.phoneTxt,"value").contains("71111111111"));
 
 	}
 
@@ -219,7 +219,7 @@ public class OrderingPhysicalPage extends BasePage {
 		dropdown.selectByIndex(1);
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();
 		textIsPresent(modelWindows,driver,"Выбранный вами адрес обслуживается другим");
-		Verify.verify(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
+		AssertCollector.verifyCondition(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
 				"Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
 		elementFluentWaitVisibility(cancelBtn,driver).click();
 		elementFluentWaitVisibility(guest.createOrderButton,driver).click();

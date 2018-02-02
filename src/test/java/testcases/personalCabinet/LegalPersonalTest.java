@@ -121,10 +121,10 @@ public class LegalPersonalTest  extends BaseTest{
 		dataCab.put("newPass","");
 		dataCab.put("confirmPass","");
 		String allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains(first));
-		Verify.verify(allResult.contains(last));
-		Verify.verify(allResult.contains(email));
-		Verify.verify(allResult.contains(phone));
+		AssertCollector.verifyCondition(allResult.contains(first));
+		AssertCollector.verifyCondition(allResult.contains(last));
+		AssertCollector.verifyCondition(allResult.contains(email));
+		AssertCollector.verifyCondition(allResult.contains(phone));
 	}
 	@Test
 	public void verifyRewritePassword()
@@ -157,8 +157,8 @@ public class LegalPersonalTest  extends BaseTest{
 		dataCab.put("first", "!@#$%^&*()+_/|{}[]?>");
 		dataCab.put("last","!@#$%^&*()+_/|{}[]?>");
 		String allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф."));
-		Verify.verify(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф."));
+		AssertCollector.verifyCondition(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф."));
+		AssertCollector.verifyCondition(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф."));
 
 	}
 
@@ -175,22 +175,22 @@ public class LegalPersonalTest  extends BaseTest{
 		String email="a.shauloandersenlab.com";
 		dataCab.put("email",email);
 		String allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
 		dataCab.put("email","test_n.moiseeva@magdv.com");
 		email="a.shaulo@andersenlabcom";
 		dataCab.put("email",email);
 		allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
 		dataCab.put("email","test_n.moiseeva@magdv.com");
 		email="a..shaulo@andersenlab.com";
 		dataCab.put("email",email);
 		allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
 		dataCab.put("email","test_n.moiseeva@magdv.com");
 		email="a.shaulo@anders enlab.com";
 		dataCab.put("email",email);
 		allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
 
 	}
 
@@ -206,11 +206,11 @@ public class LegalPersonalTest  extends BaseTest{
 		dataCab.put("email","test_n.moiseeva@magdv.com");
 		dataCab.put("phone","@!#$%&*()_+/*");
 		String allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Это поле обязательно для заполнения."));
+		AssertCollector.verifyCondition(allResult.contains("Это поле обязательно для заполнения."));
 		String phone=RandomStringUtils.randomNumeric(10);
 		dataCab.put("phone",phone);
 		allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Данные учётной записи сохранены."));
+		AssertCollector.verifyCondition(allResult.contains("Данные учётной записи сохранены."));
 
 	}
 
@@ -227,11 +227,11 @@ public class LegalPersonalTest  extends BaseTest{
 		dataCab.put("email","test_n.moiseeva@magdv.com");
 		dataCab.put("currentPass",pass);
 		String allResult=personalCabinetPage.fillFields(dataCab,false);
-		Verify.verify(allResult.contains("Неправильный текущий пароль"));
+		AssertCollector.verifyCondition(allResult.contains("Неправильный текущий пароль"));
 		dataCab.put("newPass",RandomStringUtils.randomAlphabetic(6));
 		dataCab.put("confirmPass",RandomStringUtils.randomAlphabetic(7));
 		allResult=personalCabinetPage.fillFields(dataCab,true);
-		Verify.verify(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
 	}
 
 }

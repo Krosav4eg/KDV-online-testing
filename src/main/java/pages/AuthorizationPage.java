@@ -5,7 +5,6 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
@@ -63,8 +62,8 @@ public class AuthorizationPage extends BasePage {
 
     public JSONObject mainAuthorizationInfo() {
         JSONObject data = new JSONObject();
-        data.put("email", AUTORIZATION_EMAIL);
-        data.put("password", AUTORIZATION_PASSWORD);
+        data.put("email", AUTHORIZATION_EMAIL);
+        data.put("password", AUTHORIZATION_PASSWORD);
         return data;
     }
 

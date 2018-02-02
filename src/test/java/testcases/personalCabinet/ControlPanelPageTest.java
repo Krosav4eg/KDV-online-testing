@@ -68,13 +68,13 @@ public class ControlPanelPageTest extends BaseTest {
     public void verifyAccountAndAddressByDefaultTest() {
         TestReporter.testTitle("Test ID = 38062-38066,38196-38200");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", AUTORIZATION_EMAIL);
-        data.put("password", AUTORIZATION_PASSWORD);
+        data.put("email", AUTHORIZATION_EMAIL);
+        data.put("password", AUTHORIZATION_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         AssertCollector.verifyCondition(controlPanelPage.personalDataHeader.isDisplayed());
         AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
                 contains("Аркадий Евдокимов"));
-        AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTORIZATION_EMAIL));
+        AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
         AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+71111111111"));
 
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");

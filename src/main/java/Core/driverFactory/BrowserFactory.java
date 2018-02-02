@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import static Core.driverFactory.DriverCapabilities.chromeCapabilities;
 import static Core.driverFactory.DriverCapabilities.firefoxCapabilities;
+import static com.sun.deploy.config.OSType.isUnix;
 import static utils.Constants.*;
 
 
@@ -50,10 +51,10 @@ public class BrowserFactory implements DriverCapabilities  {
 
     /**
      * There is setting driver by name
-     *
-     * @param driverName-name needed browser driver
      */
-    public  synchronized WebDriver setDriver(String driverName)  {
+    public  synchronized WebDriver setDriver()  {
+
+        String driverName=BASE_DRIVER;
         WebDriver driver=null;
         if (driverName != null)
         {
@@ -68,7 +69,13 @@ public class BrowserFactory implements DriverCapabilities  {
                 }
                 case CHROME: {
                     LOGGER.log(Level.INFO, "set browser CHROME");
-                    System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
+                    if(isUnix ()){
+                        System.out.println("This is Unix or Linux OS");
+                        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH_UNIX);
+                    }
+                    else {
+                        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
+                    }
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
                     driver= driverThread.get();
                     break;
@@ -93,9 +100,9 @@ public class BrowserFactory implements DriverCapabilities  {
         }
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         EventHandler handler = new EventHandler() {};
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver = eventDriver.register(handler);
+        driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
         return driver;
     }
 
