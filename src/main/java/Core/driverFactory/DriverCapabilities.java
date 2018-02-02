@@ -46,6 +46,5 @@ import java.util.Arrays;
 		 capability.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
 		 return capability;
 	 }
-
  }
 
