@@ -120,5 +120,15 @@ public class PersonalCabinetTest extends BaseTest {
         personalCabinetPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
     }
+    @Test
+    public void verifyMyOrder()
+    {
+        TestReporter.testTitle("Test ID = 41792");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email","test_g.fadeev@magdv.com");
+        data.put("password","gctbVY");
+        authorizationPage.verifyAuthFields(data);
+        personalCabinetPage.verifyOrder();
+    }
 
 }

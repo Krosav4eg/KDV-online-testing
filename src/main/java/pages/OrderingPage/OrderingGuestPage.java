@@ -3,6 +3,7 @@ package pages.OrderingPage;
 import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,9 +84,6 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//a[text()='Регламентом работы сайта']")
     public WebElement regulationsWebsiteLink;
 
-    @FindBy(css = "#checkout-delivery-date")
-    public WebElement checkoutDeliveryDate;
-
     @FindBy(xpath = ".//a[text()=\"Согласием на обработку персональных данных\"]")
     public WebElement consentPersonalDataProcessingLink;
 
@@ -143,6 +141,15 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
     public WebElement addressErrorField;
 
+    @FindBy(css = ".message__item")
+    public WebElement messageOrderError;
+
+    @FindBy(css = "div.j_mini_cart_summary")
+    private WebElement selectMiniCart;
+
+    @FindBy(css = "[title='Просмотр корзины ']")
+    private WebElement selectBasket;
+
 
     public JSONObject data() {
         JSONObject data = new JSONObject();
@@ -158,11 +165,38 @@ public class OrderingGuestPage extends BasePage {
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
+        try {
+            if (messageOrderError.isDisplayed()) {
+                elementFluentWaitVisibility(selectMiniCart, driver).click();
+                elementFluentWaitVisibility(selectBasket, driver).click();
+            }
+        new BasketPage(driver).increaseLegalPersonProductCount();
+        elementFluentWaitVisibility(orderBtn, driver).click();
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
     }
 
     public void createOrder(JSONObject data) {
         addProductToBasket();
         identificationBlock(data);
+    }
+
+    public void clickOrderButton() {
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
+    }
+
+    public void clickOnWebElement(WebElement element) {
+        elementFluentWaitVisibility(element, driver).click();
+        sleepWait();
+    }
+
+    public void clickCheckBoxAndOrderButton() {
+        sleepWait();
+        elementFluentWaitVisibility(agreementCheckBoxAdvice, driver).click();
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
     }
 
     public String identificationBlock(JSONObject data) {
@@ -185,9 +219,32 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void authorizationBlockModalWindow(JSONObject data) {
+        elementFluentWaitVisibility(emailAuth, driver).clear();
         elementFluentWaitVisibility(emailAuth, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordAuth, driver).clear();
         elementFluentWaitVisibility(passwordAuth, driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authEnterButton, driver).click();
+        sleepWait();
+    }
+
+    public JSONObject deliveryFormData() {
+        JSONObject data = new JSONObject();
+        data.put("address", "Томск, пр. Мира 20, оф.4");
+        data.put("floor", "1");
+        data.put("porch", "3");
+        data.put("comment", RandomStringUtils.randomAlphabetic(10));
+        return data;
+    }
+
+    public void deliveryFormInfo(JSONObject data) {
+        elementFluentWaitVisibility(deliveryAddressField, driver).clear();
+        elementFluentWaitVisibility(deliveryAddressField, driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(deliveryFloorField, driver).clear();
+        elementFluentWaitVisibility(deliveryFloorField, driver).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(deliveryPorchField, driver).clear();
+        elementFluentWaitVisibility(deliveryPorchField, driver).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(deliveryCommentField, driver).clear();
+        elementFluentWaitVisibility(deliveryCommentField, driver).sendKeys(data.getString("comment"));
         sleepWait();
     }
 }

@@ -54,7 +54,7 @@ public class Constants {
     public static final String AUTORIZATION_PAGE_URL =BASE_URL+ "/customer/account/login/";
     public static final String REGISTRATION_PAGE_URL = BASE_URL+"/customer/account/create/";
     public static final String ACCOUNT_INFORMATION_URL =BASE_URL+ "/customer/account/edit/";
-    public static final String ACCOUNT_DELIVERY_ADDRESS_URL =BASE_URL+ "h/customer/address/";
+    public static final String ACCOUNT_DELIVERY_ADDRESS_URL =BASE_URL+ "/customer/address/";
     public static final String ACCOUNT_PAGE_URL =BASE_URL+ "/customer/account/";
     public static final String ABOUT_PAGE_URL = BASE_URL+"/about";
     public static final String PHYSICAL_PERSON_EMAIL =  readXML("testData","physicalEmail");//"test_i.makarov@magdv.com";

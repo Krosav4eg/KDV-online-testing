@@ -32,8 +32,14 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = ".notice-msg .text")
     private WebElement allertTxt;
 
-    @FindBy(css = ".profile")
+    @FindBy(className = "profile")
     private WebElement profileContainer;
+
+    @FindBy(css = "[title='Номер заказа']")
+    private WebElement detailTxt;
+
+    @FindBy(css = "div.layout div > div.profile-layout__content  tr:nth-child(1) > td.hidden-xs > a")
+    private WebElement detailLink;
 
     @FindBy(id = "password")
     private WebElement newPasswordField;
@@ -278,5 +284,19 @@ public class PersonalCabinetPage extends BasePage {
         moveToElementJS(driver,saveButtonInEditPage);
         elementFluentWaitVisibility(saveButtonInEditPage,driver).click();
         return getText(profileContainer);
+    }
+
+    public void verifyOrder()
+    {
+        getUrl(BASE_URL + "/sales/order/history/");
+        Verify.verify(getText(profileContainer).contains("Кол-во"));
+        Verify.verify(getText(profileContainer).contains("42RT212954"));
+        Verify.verify(getText(profileContainer).contains("30.01.2018"));
+        Verify.verify(getText(profileContainer).contains("Новый"));
+        Verify.verify(getText(profileContainer).contains("Подробнее"));
+        Verify.verify(getText(profileContainer).contains("Повторить"));
+        Verify.verify(getText(profileContainer).contains("5 068,00"));
+        elementFluentWaitVisibility(detailLink,driver).click();
+        Verify.verify(getText(detailTxt).contains("#42RT212954"));
     }
 }

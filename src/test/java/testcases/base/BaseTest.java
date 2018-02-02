@@ -18,6 +18,7 @@ import pages.CategoryPage.ModalWindow;
 import pages.CustomerAccountPage;
 import pages.MainPage;
 import pages.OrderingPage.OrderingGuestPage;
+import pages.OrderingPage.OrderingLegalPage;
 import pages.OrderingPage.OrderingPhysicalPage;
 import pages.PersonalAreaPage.*;
 import pages.RegistrationPage;
@@ -32,7 +33,7 @@ import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
-public class BaseTest  {
+public class BaseTest {
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
@@ -49,6 +50,7 @@ public class BaseTest  {
     protected BasketPage basketPage;
     protected OrderingGuestPage orderingGuestPage;
     protected OrderingPhysicalPage orderingPhysicalPage;
+    protected OrderingLegalPage orderingLegalPage;
 
     BrowserFactory singleton = BrowserFactory.getInstance();
     protected WebDriver driver;
@@ -79,8 +81,7 @@ public class BaseTest  {
         screen();
     }
 
-    private void screen()
-    {
+    private void screen() {
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(ERROR_SCREENSHOT_FOLDER));
@@ -149,7 +150,8 @@ public class BaseTest  {
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
-        orderingPhysicalPage = PageFactory.initElements(driver,OrderingPhysicalPage.class);
-        personalCabinetPage = PageFactory.initElements(driver,PersonalCabinetPage.class);
+        orderingPhysicalPage = PageFactory.initElements(driver, OrderingPhysicalPage.class);
+        personalCabinetPage = PageFactory.initElements(driver, PersonalCabinetPage.class);
+        orderingLegalPage = PageFactory.initElements(driver, OrderingLegalPage.class);
     }
 }
