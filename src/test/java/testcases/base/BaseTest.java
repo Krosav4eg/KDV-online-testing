@@ -52,24 +52,24 @@ public class BaseTest  {
 
     BrowserFactory singleton = BrowserFactory.getInstance();
     protected WebDriver driver;
-    @BeforeMethod
-    public void verifyBrowser(Method method)
-    {
-        System.err.println(method.getName());
-        if (driver==null)
-        {
-            driver = singleton.setDriver();
-            initPageElements();
-            TestReporter.step("Open Main page");
-            mainPage.openMainPage();
-            screen();
-        }
-    }
+//    @BeforeMethod
+//    public void verifyBrowser(Method method)
+//    {
+//        System.err.println(method.getName());
+//        if (driver==null)
+//        {
+//            driver = singleton.setDriver();
+//            initPageElements();
+//            TestReporter.step("Open Main page");
+//            mainPage.openMainPage();
+//            screen();
+//        }
+//    }
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-    @BeforeTest
+    @BeforeMethod//(dependsOnMethods = )
     public void runBrowser() {
 
         driver = singleton.setDriver();
@@ -95,13 +95,13 @@ public class BaseTest  {
                 ex.printStackTrace();
             }
     }
-
-    @AfterMethod
-    public void clearCookies() {
-        System.out.println(driver);
-        driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
-    }
+//
+//    @AfterMethod
+//    public void clearCookies() {
+//        System.out.println(driver);
+//        driver.manage().deleteAllCookies();
+//        mainPage.openMainPage();
+//    }
 
 
     /**

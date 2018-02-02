@@ -338,7 +338,6 @@ public class MainPage extends BasePage {
         driver.get(BASE_URL);
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
-        //TODO can`t find element, or add thread sleep or implement another
         sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();

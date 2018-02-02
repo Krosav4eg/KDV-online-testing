@@ -129,28 +129,28 @@ public class RegistrationTest extends BaseTest {
     public void verifyInputForbiddenSymbolsInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37281");
         registrationPage.verifyInputForbiddenSymbolsInPhoneField();
-    }
-
-    @Test
-    public void verifyInputLettersInPhoneFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputLettersInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37283");
         registrationPage.verifyInputLettersInPhoneField();
-    }
-
-    @Test
-    public void verifyInputSpacesInPhoneFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputSpacesInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37285");
         registrationPage.verifyInputSpacesInPhoneField();
-    }
-
-    @Test
-    public void verifyInputLessThenTenNumbersInPhoneFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputLessThenTenNumbersInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37286");
         registrationPage.verifyInputLessThenTenNumbersInPhoneField();
-    }
-
-    @Test
-    public void verifyFieldEmailPresenceTest() {
+//    }
+//
+//    @Test
+//    public void verifyFieldEmailPresenceTest() {
         TestReporter.testTitle("Test ID = 37298");
         registrationPage.verifyFieldEmailPresence();
     }
@@ -189,34 +189,34 @@ public class RegistrationTest extends BaseTest {
     public void verifyFieldPasswordPresenceTest() {
         TestReporter.testTitle("Test ID = 37338");
         registrationPage.verifyFieldPasswordPresence();
-    }
-
-    @Test
-    public void verifyPasswordLengthLessThanSixSymbolsTest() {
+//    }
+//
+//    @Test
+//    public void verifyPasswordLengthLessThanSixSymbolsTest() {
         TestReporter.testTitle("Test ID = 37292");
         registrationPage.verifyPasswordLengthLessThanSixSymbols();
-    }
-
-    @Test
-    public void verifyPasswordWithOnlySpacesTest() {
+//    }
+//
+//    @Test
+//    public void verifyPasswordWithOnlySpacesTest() {
         TestReporter.testTitle("Test ID = 37293");
         registrationPage.verifyPasswordWithOnlySpaces();
-    }
-
-    @Test
-    public void verifyPasswordWithSpacesAtStartAndEndTest() {
+//    }
+//
+//    @Test
+//    public void verifyPasswordWithSpacesAtStartAndEndTest() {
         TestReporter.testTitle("Test ID = 37294");
         registrationPage.verifyPasswordWithSpacesAtStartAndEnd();
-    }
-
-    @Test
-    public void verifyFieldConfirmPasswordPresenceTest() {
+//    }
+//
+//    @Test
+//    public void verifyFieldConfirmPasswordPresenceTest() {
         TestReporter.testTitle("Test ID = 37337");
         registrationPage.verifyFieldConfirmPasswordPresence();
-    }
-
-    @Test
-    public void verifyInputNewPasswordWithoutConfirmationTest() {
+//    }
+//
+//    @Test
+//    public void verifyInputNewPasswordWithoutConfirmationTest() {
         TestReporter.testTitle("Test ID = 37295");
         registrationPage.verifyInputNewPasswordWithoutConfirmation();
     }

@@ -9,6 +9,13 @@ import utils.TestReporter;
  */
 public class HeaderTest extends BaseTest {
 
+
+    @Test
+    public void openMainPage()
+    {
+
+        mainPage.openMainPage();
+    }
     @Test
     public void verifyLogoTest() {
         TestReporter.testTitle("Test ID - C34282");
