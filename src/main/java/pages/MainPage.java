@@ -42,6 +42,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".geo.j_geo")
     private WebElement selectCityModalWindow;
 
+    @FindBy(xpath = "//div[text()='Кемерово']")
+    private WebElement selectCityKemerovo;
+
     @FindBy(xpath = "//div[text()='Томск']")
     private WebElement selectCityTomsk;
 
@@ -338,13 +341,11 @@ public class MainPage extends BasePage {
         driver.get(BASE_URL);
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
-        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        sleepWait();
         driver.navigate().refresh();
         sleepWait();
     }
@@ -397,8 +398,8 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
         elementIsClickable(baseCityLink, driver).click();
-        sleepWait();
-        clickOnIndexFromElementList(otherCityLink, 1);
+        elementIsClickable(selectCityKemerovo,driver).click();
+        //clickOnIndexFromElementList(otherCityLink, 1);
         AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
     }
 
@@ -555,7 +556,7 @@ public class MainPage extends BasePage {
 
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
-        scrollDown();
+        moveToElementJS(driver,socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -855,7 +856,8 @@ public class MainPage extends BasePage {
 
     public void checkingProductsInBasket() {
         if (basketIsEmpty.isDisplayed()) {
-            scrollDown();
+            //scrollDown();
+            moveToElementJS(driver,socialContainer);
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
             clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
@@ -961,6 +963,7 @@ public class MainPage extends BasePage {
     }
 
     public void placeholderCheckingInSearchField() {
+        getUrl(BASE_URL);
         String actPlaceholder = "Введите название товара";
         String expPlaceholder = searchProductField.getAttribute("placeholder");
         AssertCollector.assertEquals(actPlaceholder, " Current placeholder is equal to placeholder of ", expPlaceholder);

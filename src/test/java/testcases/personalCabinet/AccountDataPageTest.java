@@ -22,33 +22,33 @@ public class AccountDataPageTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        Verify.verify(accountDataPage.personalDataHeaderInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.personalDataHeaderInEditPage.
                 isDisplayed());
-        Verify.verify(accountDataPage.personalDataInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.personalDataInEditPage.
                 isDisplayed());
-        Verify.verify(accountDataPage.sharingInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.sharingInEditPage.
                 isDisplayed());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value").length()==
+        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length()==
                 RandomStringUtils.randomAlphabetic(45).length());
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value").length()== RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value").length()== RandomStringUtils.randomAlphabetic(45).length());
 
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(36));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.firstNameInEditPage.getAttribute("value")==accountDataPage.firstNameInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value")==accountDataPage.firstNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         accountDataPage.verifyEditAccountFields(data);
-        Verify.verify(accountDataPage.lastNameInEditPage.getAttribute("value")==accountDataPage.lastNameInEditPage.
+        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value")==accountDataPage.lastNameInEditPage.
                         getAttribute("value"));
 
         data = accountDataPage.mainAccountInfo();
@@ -57,8 +57,8 @@ public class AccountDataPageTest extends BaseTest {
         accountDataPage.verifyEditAccountFields(data);
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
-        Verify.verify(del.getCurrentUrlDelegate().contains(ACCOUNT_PAGE_URL));
-        Verify.verify(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().contains(ACCOUNT_PAGE_URL));
+        AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
     }
 
     @Test
