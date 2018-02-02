@@ -44,11 +44,12 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C40223");
         categoryPage.sortFilterPrice();
     }
-    @Test
-    public void verifySelectingCategoryTest() {
-        TestReporter.testTitle("Test ID - C34335");
-        mainPage.selectingCategory();
-    }
+    //TODO test data is miss no functional
+//    @Test
+//    public void verifySelectingCategoryTest() {
+//        TestReporter.testTitle("Test ID - C34335");
+//        mainPage.selectingCategory();
+//    }
 
     @Test
     public void verifyMoveToCategoryTest() {

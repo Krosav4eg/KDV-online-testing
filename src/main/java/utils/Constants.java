@@ -63,7 +63,7 @@ public class Constants {
     public static final String AUTHORIZATION_PASSWORD =  readXML("testData","authorizationPass");//"JOviF7J2";
     public static final String INCORRECT_EMAIL = readXML("testData","incorrectEmail");// "a.shaulo123@andersenlab.com";
     public static final String INCORRECT_PASSWORD = readXML("testData","incorrectPass");// "As06051993";
-    public static final String TEST_EMAIL = readXML("testData","testPass");//"test_t.bolshakov@magdv.com";
+    public static final String TEST_EMAIL = readXML("testData","testEmail");//"test_t.bolshakov@magdv.com";
     public static final String TEST_PASSWORD = readXML("testData","testPass");//"sTU1iJ46";
     public static final String EMPTY_DATA = " ";
 }

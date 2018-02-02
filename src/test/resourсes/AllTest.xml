@@ -46,6 +46,21 @@
                 <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
             </classes>
         </test>
+    <test name="PersonalCabinet">
+        <classes>
+            <class name="testcases.personalCabinet.AccountDataPageTest"/>
+            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
+            <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
+            <class name="testcases.personalCabinet.LegalPersonalTest"/>
+            <class name="testcases.personalCabinet.PersonalCabinetTest"/>
+        </classes>
+    </test>
+    <test name="Orering">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
+            <class name="testcases.OrderingPage.OrderingPageTest"/>
+        </classes>
+    </test>
         <test name="RegistrationTest">
             <classes>
                 <class name="testcases.registration.RegistrationTest"/>

@@ -237,6 +237,7 @@ public class HeaderTest extends BaseTest {
         mainPage.verifySearchQueryWithoutCategory();
    }
 
+   //TODO
     @Test
     public void verifySearchQueryWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37065");
@@ -249,7 +250,8 @@ public class HeaderTest extends BaseTest {
         mainPage.verifySearchQueryWithInputTextWithoutCategory();
     }
 
-    @Test
+    //BAG IN TEST
+   // @Test
     public void verifySearchQueryWithInputTextWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37067");
         mainPage.verifySearchQueryWithInputTextWithCategory();

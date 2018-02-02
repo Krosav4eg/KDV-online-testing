@@ -898,7 +898,7 @@ public class MainPage extends BasePage {
         scrollToNecessaryElement(vkLink);
         clickOnIndexFromElementList(hitSalesBasketButtons, 3);
         clickOnIndexFromElementList(hitSalesBasketButtons, 4);
-        elementFluentWaitVisibility(upButton, driver).click();
+       // elementFluentWaitVisibility(upButton, driver).click();
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
         String linkTextValue = getValueOfAttributeByName(createOrderInBasket, "href");
         elementFluentWaitVisibility(createOrderInBasket, driver).click();
@@ -1121,7 +1121,7 @@ public class MainPage extends BasePage {
     }
 
     public void verifySearchQueryWithInputTextWithCategory() {
-        fillInputField(searchProductField, driver, "суфле");
+        fillInputField(searchProductField, driver, "суфл");
         elementIsClickable(categoriesHeader, driver).click();
         String expResult = anotherCategoryFromList.getText();
         elementIsClickable(anotherCategoryFromList, driver).click();
