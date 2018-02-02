@@ -223,36 +223,36 @@ public class HeaderTest extends BaseTest {
     public void verifyQueryWithWordsOrAndInInputFieldTest() {
         TestReporter.testTitle("Test ID = 34402");
         mainPage.verifyQueryWithWordsOrAndInInputField();
-    }
-
-    @Test
-    public void verifyEmptyFieldTest() {
+//    }
+//
+//    @Test
+//    public void verifyEmptyFieldTest() {
         TestReporter.testTitle("Test ID = 34389");
         mainPage.verifyEmptyField();
-    }
-
-    @Test
-    public void verifySearchQueryWithoutCategoryTest() {
+//    }
+//
+//    @Test
+//    public void verifySearchQueryWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37064");
         mainPage.verifySearchQueryWithoutCategory();
-   }
-
-   //TODO
-    @Test
-    public void verifySearchQueryWithCategoryTest() {
+//   }
+//
+//   //TODO
+//    @Test
+//    public void verifySearchQueryWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37065");
         mainPage.verifySearchQueryWithCategory();
-    }
-
-    @Test
-    public void verifySearchQueryWithInputTextWithoutCategoryTest() {
+//    }
+//
+//    @Test
+//    public void verifySearchQueryWithInputTextWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37066");
-        mainPage.verifySearchQueryWithInputTextWithoutCategory();
-    }
-
-    //BAG IN TEST
-   // @Test
-    public void verifySearchQueryWithInputTextWithCategoryTest() {
+//        mainPage.verifySearchQueryWithInputTextWithoutCategory();
+//    }
+//
+//    //BAG IN TEST
+//   // @Test
+//    public void verifySearchQueryWithInputTextWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37067");
         mainPage.verifySearchQueryWithInputTextWithCategory();
     }
