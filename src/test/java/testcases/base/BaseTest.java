@@ -6,9 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 import pages.AuthorizationPage;
 import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
@@ -25,7 +23,9 @@ import utils.TestReporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
+import static utils.Constants.BASE_URL;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
@@ -51,27 +51,28 @@ public class BaseTest {
     protected OrderingLegalPage orderingLegalPage;
 
     BrowserFactory singleton = BrowserFactory.getInstance();
-    protected WebDriver driver;
-//    @BeforeMethod
-//    public void verifyBrowser(Method method)
-//    {
-//        System.err.println(method.getName());
-//        if (driver==null)
-//        {
-//            driver = singleton.setDriver();
-//            initPageElements();
-//            TestReporter.step("Open Main page");
-//            mainPage.openMainPage();
-//            screen();
-//        }
-//    }
+    WebDriver driver;
+
+    @BeforeMethod
+    public void verifyBrowser(Method method) {
+        System.err.println(method.getName());
+        if (driver==null)
+        {
+            driver = singleton.setDriver();
+            initPageElements();
+            TestReporter.step("Open Main page");
+            mainPage.openMainPage();
+            screen();
+        }
+    }
+
+
     /**
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-    @BeforeMethod//(dependsOnMethods = )
+    @BeforeTest//(dependsOnMethods = {"testcases.authorization.AuthorizationTest.openMainPage"})
     public void runBrowser() {
-
         driver = singleton.setDriver();
         initPageElements();
         TestReporter.step("Open Main page");
@@ -97,11 +98,18 @@ public class BaseTest {
 
     @AfterMethod
     public void clearCookies() {
-        System.out.println(driver);
-//        driver.manage().deleteAllCookies();
-//        mainPage.openMainPage();
+       driver.manage().deleteAllCookies();
+       mainPage.openMainPage();
+    }
+
+    /**
+     * Method for closing browser and auto tests
+     */
+    @AfterTest()
+    public void closeBrowser() {
+        driver.close();
         driver.quit();
-//        driver.close();
+        TestReporter.removeNumberStep();
     }
 
 
@@ -124,15 +132,6 @@ public class BaseTest {
            // LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
         }
         return dest;
-    }
-
-    /**
-     * Method for closing browser and auto tests
-     */
-    @AfterTest()
-    public void closeBrowser() {
-        driver.quit();
-        TestReporter.removeNumberStep();
     }
 
     private void initPageElements() {

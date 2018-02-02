@@ -101,9 +101,8 @@ public class BrowserFactory implements DriverCapabilities  {
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
         EventHandler handler = new EventHandler() {};
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver = eventDriver.register(handler);
+        driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
         return driver;
     }
 

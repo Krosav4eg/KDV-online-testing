@@ -22,12 +22,12 @@ public class PersonalCabinetTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        Verify.verify(personalCabinetPage.personalDataHeaderInEditPage.
-                isDisplayed(), "Required header is displayed");
-        Verify.verify(personalCabinetPage.personalDataInEditPage.
-                isDisplayed(), "Required header is displayed");
-        Verify.verify(personalCabinetPage.sharingInEditPage.
-                isDisplayed(), "Required header is displayed");
+        AssertCollector.verifyCondition(personalCabinetPage.personalDataHeaderInEditPage.
+                isDisplayed());
+        AssertCollector.verifyCondition(personalCabinetPage.personalDataInEditPage.
+                isDisplayed());
+        AssertCollector.verifyCondition(personalCabinetPage.sharingInEditPage.
+                isDisplayed());
         data = personalCabinetPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         personalCabinetPage.verifyEditAccountFields(data);
