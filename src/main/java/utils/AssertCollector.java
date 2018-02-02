@@ -3,6 +3,7 @@ package utils;
 import com.google.common.base.Verify;
 import logger.MagDvLogger;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,7 +81,8 @@ public class AssertCollector {
     }
 
     public static void verifyCondition(boolean condition) {
-        Verify.verify(condition);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(condition);
         TestReporter.success(" expected condition is " + condition);
         LOGGER.log(Level.INFO, " expected condition " + condition);
     }

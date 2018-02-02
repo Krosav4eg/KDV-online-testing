@@ -6,69 +6,65 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
-    <test name="AuthorizationTest">
+        <test name="AuthorizationTest">
+            <classes>
+                <class name="testcases.authorization.AuthorizationTest"/>
+            </classes>
+        </test>
+        <test name="HeaderTest">
+            <classes>
+                <class name="testcases.header.HeaderTest"/>
+            </classes>
+        </test>
+        <test name="FooterTest">
+            <classes>
+                <class name="testcases.footer.FooterTest"/>
+            </classes>
+        </test>
+        <test name="BannerTest">
+            <classes>
+                <class name="testcases.mainPage.banner.BannerTest"/>
+            </classes>
+        </test>
+        <test name="BlockSmmTest">
+            <classes>
+                <class name="testcases.mainPage.blockSmm.BlockSmmTest"/>
+            </classes>
+        </test>
+        <test name="BenefitsBlockTest">
+            <classes>
+                <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>
+            </classes>
+        </test>
+        <test name="CategoryGoodsTest">
+            <classes>
+                <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
+            </classes>
+        </test>
+        <test name="HitOfSalesTest">
+            <classes>
+                <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
+            </classes>
+        </test>
+    <test name="PersonalCabinet">
         <classes>
-            <class name="testcases.authorization.AuthorizationTest"/>
+            <class name="testcases.personalCabinet.AccountDataPageTest"/>
+            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
+            <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
+            <class name="testcases.personalCabinet.LegalPersonalTest"/>
+            <class name="testcases.personalCabinet.PersonalCabinetTest"/>
         </classes>
     </test>
-    <test name="HeaderTest">
+    <test name="Orering">
         <classes>
-            <class name="testcases.header.HeaderTest"/>
-        </classes>
-    </test>
-    <test name="FooterTest">
-        <classes>
-            <class name="testcases.footer.FooterTest"/>
-        </classes>
-    </test>
-    <test name="BannerTest">
-        <classes>
-            <class name="testcases.mainPage.banner.BannerTest"/>
-        </classes>
-    </test>
-    <test name="BlockSmmTest">
-        <classes>
-            <class name="testcases.mainPage.blockSmm.BlockSmmTest"/>
-        </classes>
-    </test>
-    <test name="BenefitsBlockTest">
-        <classes>
-            <class name="testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>
-        </classes>
-    </test>
-    <test name="CategoryGoodsTest">
-        <classes>
-            <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
-        </classes>
-    </test>
-    <test name="HitOfSalesTest">
-        <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
-        </classes>
-    </test>
-    <test name="RegistrationTest">
-        <classes>
-            <class name="testcases.registration.RegistrationTest"/>
-        </classes>
-    </test>
-    <test name="OrderingTest">
-        <classes>
+            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
             <class name="testcases.OrderingPage.OrderingPageTest"/>
         </classes>
     </test>
-    <test name="OrderingLegalPage">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
-        </classes>
-    </test>
+        <test name="RegistrationTest">
+            <classes>
+                <class name="testcases.registration.RegistrationTest"/>
+            </classes>
+        </test>
 
-    <test name="personalCabinet">
-        <classes>
-            <class name="testcases.personalCabinet.LegalPersonalTest"/>
-            <class name="testcases.personalCabinet.PersonalCabinetTest"/>
-            <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
-            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
-            <class name="testcases.personalCabinet.AccountDataPageTest"/>
-        </classes>
-    </test>
 </suite>

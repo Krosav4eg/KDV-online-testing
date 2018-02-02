@@ -1,4 +1,4 @@
-<suite name="Header Regression Tests" parallel="tests" thread-count="1">
+<suite name="Header Regression Tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
