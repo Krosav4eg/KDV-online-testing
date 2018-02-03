@@ -6,9 +6,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.*;
+
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,7 +65,6 @@ public class WaitingUtility {
      * @param element used to find the element
      */
     public static WebElement elementIsClickable(WebElement element, WebDriver driver) {
-       // WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)

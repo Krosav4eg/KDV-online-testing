@@ -7,11 +7,11 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="personalCabinet">
+    <test name="37065">
         <classes>
-            <class name="testcases.personalCabinet.AccountDataPageTest">
+            <class name="testcases.header.HeaderTest">
                 <methods>
-                    <include name="verifyOpeningPersonalDataItemTest"/>
+                    <include name="verifyOpeningBasketAndOrderingTest"/>
                 </methods>
             </class>
         </classes>

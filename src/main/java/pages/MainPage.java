@@ -4,6 +4,7 @@ import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -325,7 +326,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
     private WebElement categoryFromList;
 
-    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[10]")
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[9]")
     private WebElement anotherCategoryFromList;
 
     @FindBy(css = ".search-button__btn")
@@ -393,14 +394,13 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
-    public void changeCityToOther() throws InterruptedException {
+    public void changeCityToOther() {
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
         elementIsClickable(baseCityLink, driver).click();
-        elementIsClickable(selectCityKemerovo,driver).click();
-        //clickOnIndexFromElementList(otherCityLink, 1);
-        AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
+        clickOnIndexFromElementList(otherCityLink, 8);
+        AssertCollector.assertEquals(baseCityLink.getAttribute("title"), " LINK IS EQUAL ", otherCity);
     }
 
     public void verifyingOpeningLowerPricesSection() {
@@ -556,7 +556,7 @@ public class MainPage extends BasePage {
 
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
-        moveToElementJS(driver,socialContainer);
+        moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -831,8 +831,8 @@ public class MainPage extends BasePage {
     public void verifyMyBasketWithProduct() {
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
-        moveToElementJS(driver,socialContainer);
-       // scrollDown();
+        moveToElementJS(driver, socialContainer);
+        // scrollDown();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
@@ -857,7 +857,7 @@ public class MainPage extends BasePage {
     public void checkingProductsInBasket() {
         if (basketIsEmpty.isDisplayed()) {
             //scrollDown();
-            moveToElementJS(driver,socialContainer);
+            moveToElementJS(driver, socialContainer);
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
             clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
@@ -890,18 +890,15 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
+
     public void openingBasketAndOrdering() {
-        moveToElementJS(driver,socialContainer);
+        moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 1);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 2);
         scrollToNecessaryElement(vkLink);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 3);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 4);
         elementFluentWaitVisibility(upButton, driver).click();
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
-        String linkTextValue = getValueOfAttributeByName(createOrderInBasket, "href");
-        elementFluentWaitVisibility(createOrderInBasket, driver).click();
+        String linkTextValue = getValueOfAttributeByName(submitAddingToBasket, "href");
+        elementFluentWaitVisibility(submitAddingToBasket, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
                 linkTextValue);
@@ -952,11 +949,6 @@ public class MainPage extends BasePage {
     }
 
     public void verifySearchButton() {
-        moveMouseTo(driver, searchButtonLabel);
-        String actualSearchButtonColor = "#ff1b41";
-        String expectedSearchButtonColor = getElementColor(searchButtonLabel, "color");
-        AssertCollector.assertEqualsJ(actualSearchButtonColor, expectedSearchButtonColor,
-                " Verify elements color of search button ");
         String actualTitle = "Поиск";
         String expectedTitle = searchButton.getAttribute("title");
         AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
@@ -982,13 +974,19 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
     }
 
-    public void verifyEmptyField() {
-        String expUrl = getCurrentUrl();
-        moveMouseTo(driver, searchButton);
-        elementIsClickable(searchButton, driver).click();
-        String actUrl = getCurrentUrl();
-        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
-    }
+//    public void verifyEmptyField() {
+//        String expUrl = getCurrentUrl();
+//        try {
+//            if (geoConfirmModalWindow.isDisplayed()) {
+//                elementIsClickable(acceptGeoConfirm, driver).click();
+//            }
+//        } catch (NoSuchElementException e) {
+//            e.getMessage();
+//        }
+//        elementFluentWaitVisibility(searchButton, driver).click();
+//        String actUrl = getCurrentUrl();
+//        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
+//    }
 
     public void verifyLatinTextInProductInputField() {
         fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
@@ -1023,23 +1021,32 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
-    public void verifySearchQueryWithoutCategory() {
-        String actUrl = getCurrentUrl();
-        elementIsClickable(searchButton, driver).click();
-        String expUrl = getCurrentUrl();
-        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
-                expUrl);
-    }
+    //TODO same assertion is present in verifySearchButtonTest
+//    public void verifySearchQueryWithoutCategory() {
+//        String actUrl = getCurrentUrl();
+//        elementIsClickable(searchButton, driver).click();
+//        String expUrl = getCurrentUrl();
+//        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+//                expUrl);
+//    }
 
-    public void verifySearchQueryWithCategory() {
-        elementIsClickable(categoriesHeader, driver).click();
-        elementIsClickable(categoryFromList, driver).click();
-        elementIsClickable(searchButton, driver).click();
-        String actUrl = getCurrentUrl();
-        String expUrl = BASE_URL+"/vafli.html";
-        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
-                expUrl);
-    }
+//TODO we have same assertion wit product вафли
+//    public void verifySearchQueryWithCategory() {
+//        elementIsClickable(categoriesHeader, driver).click();
+//        elementIsClickable(categoryFromList, driver).click();
+//        try {
+//            if (geoConfirmModalWindow.isDisplayed()) {
+//                elementIsClickable(acceptGeoConfirm, driver).click();
+//            }
+//        } catch (NoSuchElementException e) {
+//            e.getMessage();
+//        }
+//        elementIsClickable(searchButton, driver).click();
+//        String actUrl = getCurrentUrl();
+//        String expUrl = BASE_URL + "/pechen-e.html";
+//        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
+//                expUrl);
+//    }
 
     public void verifySpecialSymbolsInProductInputField() {
         String expSymbols = "~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
@@ -1076,6 +1083,13 @@ public class MainPage extends BasePage {
     }
 
     public void verifySpacesInProductInputField() {
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
         elementFluentWaitVisibility(searchProductField, driver).clear();
         elementFluentWaitVisibility(searchProductField, driver).sendKeys((Keys.SPACE));
         String actUrl = getCurrentUrl();
@@ -1092,6 +1106,13 @@ public class MainPage extends BasePage {
     }
 
     public void verifySearchQueryWithInputTextWithoutCategory() {
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
         elementIsClickable(searchProductField, driver).click();
         fillInputField(searchProductField, driver, "вафли");
         elementIsClickable(searchButton, driver).click();
@@ -1122,6 +1143,13 @@ public class MainPage extends BasePage {
 
     public void verifySearchQueryWithInputTextWithCategory() {
         fillInputField(searchProductField, driver, "суфле");
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
+        }
         elementIsClickable(categoriesHeader, driver).click();
         String expResult = anotherCategoryFromList.getText();
         elementIsClickable(anotherCategoryFromList, driver).click();
