@@ -890,7 +890,6 @@ public class MainPage extends BasePage {
                 linkTextAttribute);
     }
 
-
     public void openingBasketAndOrdering() {
         moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);

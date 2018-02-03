@@ -76,8 +76,7 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
     }
-
-    //TODO not fix in progress
+//TODO not fix in progress
     @Test//(timeOut = 30000)
     public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
@@ -246,11 +245,12 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifySearchQueryWithInputTextWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37066");
-        mainPage.verifySearchQueryWithInputTextWithoutCategory();
-    }
-
-    @Test
-    public void verifySearchQueryWithInputTextWithCategoryTest() {
+//        mainPage.verifySearchQueryWithInputTextWithoutCategory();
+//    }
+//
+//    //BAG IN TEST
+//   // @Test
+//    public void verifySearchQueryWithInputTextWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37067");
         mainPage.verifySearchQueryWithInputTextWithCategory();
     }
