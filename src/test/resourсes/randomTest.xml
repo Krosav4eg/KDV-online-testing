@@ -1,4 +1,4 @@
-git merge<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<git merge<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Site Tests">
     <listeners>

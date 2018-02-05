@@ -46,13 +46,21 @@
                 <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
             </classes>
         </test>
-    <test name="PersonalCabinet">
+    <test name="PersonalCabinet Legal">
         <classes>
-            <class name="testcases.personalCabinet.AccountDataPageTest"/>
-            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
-            <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
+            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
             <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
-            <class name="testcases.personalCabinet.PersonalCabinetTest"/>
+            <class name="testcases.personalCabinet.Legal.LegalDataTest"/>
+            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
+            <class name="testcases.personalCabinet.Legal.OrderDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet Physical">
+        <classes>
+            <class name="testcases.personalCabinet.Physical.AddressesDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AccountDataTest"/>
+            <class name="testcases.personalCabinet.Physical.CabinetTest"/>
+            <class name="testcases.personalCabinet.Physical.OrderingDataTest"/>
         </classes>
     </test>
     <test name="Orering">
