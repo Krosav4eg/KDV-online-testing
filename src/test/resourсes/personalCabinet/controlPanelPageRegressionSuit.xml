@@ -7,43 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="37820,37821,37822">
+    <test name="ControlPanelPageTest">
         <classes>
-            <class name="testcases.personalCabinet.ControlPanelPageTest">
-                <methods>
-                    <include name="verifyControlPanelTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="37823">
-         <classes>
-             <class name="testcases.personalCabinet.ControlPanelPageTest">
-                 <methods>
-                     <include name="verifyOrdersBlockWithQuantityLessThenFiveTest"/>
-                 </methods>
-             </class>
-         </classes>
-     </test>
-
-    <test name="37843,37845">
-        <classes>
-            <class name="testcases.personalCabinet.ControlPanelPageTest">
-                <methods>
-                    <include name="verifyOrdersMoreThenFiveAndShowAllBtnTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="38062-38066,38196-38200">
-        <classes>
-            <class name="testcases.personalCabinet.ControlPanelPageTest">
-                <methods>
-                    <include name="verifyAccountAndAddressByDefaultTest"/>
-                </methods>
-            </class>
+            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
         </classes>
     </test>
 </suite>
