@@ -51,7 +51,7 @@
             <class name="testcases.personalCabinet.AccountDataPageTest"/>
             <class name="testcases.personalCabinet.ControlPanelPageTest"/>
             <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
-            <class name="testcases.personalCabinet.LegalPersonalTest"/>
+            <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
             <class name="testcases.personalCabinet.PersonalCabinetTest"/>
         </classes>
     </test>

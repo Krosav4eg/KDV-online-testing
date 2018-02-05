@@ -14,5 +14,19 @@
         <incorrectPass>As06051993</incorrectPass>
         <testEmail>test_t.bolshakov@magdv.com</testEmail>
         <testPass>sTU1iJ46</testPass>
+        <fadeevEmail>test_g.fadeev@magdv.com</fadeevEmail>
+        <fadeevPass>gctbVY</fadeevPass>
+        <fadeevPhone>+71111111111</fadeevPhone>
+        <kalashnikovaEmail>test_v.kalashnikova@magdv.com</kalashnikovaEmail>
+        <kalashnikovaPass>Q2ThNhHs</kalashnikovaPass>
+        <kalashnikovaPhone>test_v.kalashnikova@magdv.com</kalashnikovaPhone>
+        <ponomarevaEmail>test_m.ponomareva@magdv.com</ponomarevaEmail>
+        <ponomarevaPass>ztq0d9e6</ponomarevaPass>
+        <makarovEmail>test_i.makarov@magdv.com</makarovEmail>
+        <makarovPass>SWgeZWPs</makarovPass>
+        <bolshakovEmail>test_t.bolshakov@magdv.com</bolshakovEmail>
+        <bolshakovPass>sTU1iJ46</bolshakovPass>
+        <zuevEmail>test_s.zuev@magdv.com</zuevEmail>
+        <zuevPass>YZde8m</zuevPass>
     </testData>
 </constant>

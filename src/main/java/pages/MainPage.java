@@ -713,6 +713,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingContractPurchaseSaleLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -720,9 +721,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingSupplyContractLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = "https://tomsk.kdvonline.ru/media/rules/Supply_contract.pdf";
         elementFluentWaitVisibility(supplyContractLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -730,9 +734,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPersonalDataLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(personalDataLink, "href");
         elementFluentWaitVisibility(personalDataLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -740,6 +747,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPoliticConfidentialLink() {
@@ -784,6 +793,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingVkLinkInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerVkLink, "href");
         elementFluentWaitVisibility(footerVkLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -791,9 +801,13 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingInstaInFooter() {
+
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
         elementFluentWaitVisibility(footerInstaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -801,9 +815,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingGooglePlayInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerGooglePlayLink, "href");
         elementFluentWaitVisibility(footerGooglePlayLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -811,6 +828,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Google play ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void clickingUpButtonInFooter() {

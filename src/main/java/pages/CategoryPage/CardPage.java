@@ -145,6 +145,7 @@ public class CardPage extends BasePage {
 		AssertCollector.assertTrue(cartControlIncBtn.isDisplayed(),"element is visible");
 		AssertCollector.assertTrue(cartControlDecBtn.isDisplayed(),"element is visible");
 		elementFluentWaitVisibility(cartControlDecBtn,driver).click();
+		sleepWait();
 		AssertCollector.assertTrue(categoryAddBtn.isDisplayed(),"element is visible");
 	}
 	public void validCardProductVerifyDescription()

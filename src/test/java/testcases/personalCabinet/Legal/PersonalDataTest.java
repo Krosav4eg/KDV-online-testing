@@ -1,4 +1,4 @@
-package testcases.personalCabinet;
+package testcases.personalCabinet.Legal;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
@@ -7,52 +7,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
-public class LegalPersonalTest  extends BaseTest{
+public class PersonalDataTest extends BaseTest {
 
-	@Test
-	public void verifyFieldsNotApprovedUser()
-	{
-
-		TestReporter.testTitle("Test ID = 41510");
-		JSONObject data = authorizationPage.mainAuthorizationInfo();
-		data.put("email","test_a.grigoriev@magdv.com");
-		data.put("password","vDBAwk");
-		authorizationPage.verifyAuthFields(data);
-		personalCabinetPage.verifyFieldsNotAuthorization();
-	}
-
-	@Test
-	public void verifyFieldsApprovedUser()
-	{
-		TestReporter.testTitle("Test ID = 41521");
-		JSONObject data = personalCabinetPage.mainAccountInfo();
-		data.put("email","test_g.fadeev@magdv.com");
-		data.put("password","gctbVY");
-		authorizationPage.verifyAuthFields(data);
-		personalCabinetPage.verifyFieldsAuthorization();
-	}
-
-	@Test
-	public void verifyFieldsNotApprovedUserInfo()
-	{
-		TestReporter.testTitle("Test ID = 41522");
-		JSONObject data = authorizationPage.mainAuthorizationInfo();
-		data.put("email","test_a.grigoriev@magdv.com");
-		data.put("password","vDBAwk");
-		authorizationPage.verifyAuthFields(data);
-		personalCabinetPage.verifyFieldsNotAuthorizationInfo();
-	}
-
-	@Test
-	public void verifyFieldsApprovedUserInfo()
-	{
-		TestReporter.testTitle("Test ID = 41524");
-		JSONObject data = authorizationPage.mainAuthorizationInfo();
-		data.put("email","test_g.fadeev@magdv.com");
-		data.put("password","gctbVY");
-		authorizationPage.verifyAuthFields(data);
-		personalCabinetPage.verifyFieldsAuthorizationInfo();
-	}
 	@Test
 	public void verifyFieldsIsPresent()
 	{
@@ -109,7 +65,7 @@ public class LegalPersonalTest  extends BaseTest{
 		data.put("password","bu5ttq");
 		authorizationPage.verifyAuthFields(data);
 		JSONObject dataCab=personalCabinetPage.dataPersonal();
-		String first=RandomStringUtils.randomAlphabetic(5);
+		String first= RandomStringUtils.randomAlphabetic(5);
 		String last=RandomStringUtils.randomAlphabetic(5);
 		String email="test_n.moiseeva@magdv.com";
 		String phone=RandomStringUtils.randomNumeric(10);
@@ -232,5 +188,4 @@ public class LegalPersonalTest  extends BaseTest{
 		allResult=personalCabinetPage.fillFields(dataCab,true);
 		AssertCollector.verifyCondition(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
 	}
-
 }
