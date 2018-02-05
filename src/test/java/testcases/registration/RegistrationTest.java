@@ -13,7 +13,7 @@ import static utils.Constants.AUTORIZATION_PAGE_URL;
 
 public class RegistrationTest extends BaseTest {
 
-    BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
+    private BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
     };
 
     @Test
@@ -52,12 +52,13 @@ public class RegistrationTest extends BaseTest {
         registrationPage.verifyMaximumInputInFirstNameField();
     }
 
+    //test not pass(validation problems)
     @Test
     public void verifyInputNumbersInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37104");
         registrationPage.verifyInputNumbersInFirstNameField();
     }
-
+    //BUG ON SITE
     @Test
     public void verifyInputForbiddenSymbolsInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37105");
@@ -81,19 +82,19 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37114");
         registrationPage.verifyInputInLastNameField();
     }
-
+    //test not pass(validation problems)
     @Test
     public void verifyMaximumInputInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37115");
         registrationPage.verifyMaximumInputInLastNameField();
     }
-
+    //  //test not pass(validation problems)
     @Test
     public void verifyInputNumbersInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37117");
         registrationPage.verifyInputNumbersInLastNameField();
     }
-
+//    //test not pass(validation problems)
     @Test
     public void verifyInputForbiddenSymbolsInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37118");
@@ -351,10 +352,10 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-    public void verifyCoincidencePasswordAndConfirmationTest() {
-        TestReporter.testTitle("Test ID = 37296");
-        registrationPage.verifyCoincidencePasswordAndConfirmation();
-    }
+//    public void verifyCoincidencePasswordAndConfirmationTest() {
+//        TestReporter.testTitle("Test ID = 37296");
+//        registrationPage.verifyCoincidencePasswordAndConfirmation();
+//    }
 
     @Test
     public void verifySubscriptionCheckboxPresenceTest() {

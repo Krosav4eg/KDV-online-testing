@@ -83,9 +83,9 @@ public class ModalWindow  extends BasePage {
 	{
 		openModal();
 		AssertCollector.assertEquals(addText("-5"),"","15");
+		AssertCollector.assertEquals(addText("asdasdasd"),"","15");
+		AssertCollector.assertEquals(addText("@!$^*&$#@*()"),"","15");
 		AssertCollector.assertEquals(addText("123123"),"","9999");
-		AssertCollector.assertEquals(addText("asdasdasd"),"","1");
-		AssertCollector.assertEquals(addText("@!$^*&$#@*()"),"","1");
 		elementFluentWaitVisibility(categoryInputTxt,driver).clear();
 	}
 

@@ -51,6 +51,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[text()='Кемерово']")
     private WebElement selectCityKemerovo;
 
+    @FindBy(className = "geo__title_default")
+    private WebElement geoWindowModal;
+
     @FindBy(xpath = "//div[text()='Томск']")
     private WebElement selectCityTomsk;
 
@@ -74,6 +77,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".quicklink__item.quicklink__item_geo.j_geo_control.j_geo_control_modal")
     private WebElement baseCityLink;
+
+    @FindBy(className = "quicklink__item_geo")
+    public WebElement cityLink;
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private List<WebElement> otherCityLink;
@@ -391,9 +397,14 @@ public class MainPage extends BasePage {
     public void changeCityToCurrent() {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
+        textIsPresent(baseCityLink,driver,"Кемерово");
+        elementIsClickable(cityLink,driver).click();
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
+//        elementIsClickable(cityLink,driver).click();
         String currentCity = getText(baseCityLink);
         moveMouseTo(driver, baseCityLink);
-        elementIsClickable(baseCityLink, driver).click();
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
+        //elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
         actions.click();
@@ -404,10 +415,12 @@ public class MainPage extends BasePage {
     }
 
     public void changeCityToOther() {
+        textIsPresent(baseCityLink,driver,"Астрахань");
+        elementIsClickable(cityLink,driver).click();
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
-        elementIsClickable(baseCityLink, driver).click();
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
         elementIsClickable(selectCityKemerovo,driver).click();
 	    textIsPresent(baseCityLink,driver,"Кемерово");
         AssertCollector.assertEquals(baseCityLink.getAttribute("title"), " LINK IS EQUAL ", otherCity);
@@ -700,6 +713,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingContractPurchaseSaleLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -707,9 +721,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingSupplyContractLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = "https://tomsk.kdvonline.ru/media/rules/Supply_contract.pdf";
         elementFluentWaitVisibility(supplyContractLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -717,9 +734,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPersonalDataLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(personalDataLink, "href");
         elementFluentWaitVisibility(personalDataLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -727,6 +747,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPoliticConfidentialLink() {
@@ -771,6 +793,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingVkLinkInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerVkLink, "href");
         elementFluentWaitVisibility(footerVkLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -778,9 +801,13 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingInstaInFooter() {
+
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
         elementFluentWaitVisibility(footerInstaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -788,9 +815,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingGooglePlayInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerGooglePlayLink, "href");
         elementFluentWaitVisibility(footerGooglePlayLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -798,6 +828,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Google play ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void clickingUpButtonInFooter() {
