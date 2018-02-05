@@ -10,17 +10,14 @@ import utils.TestReporter;
 public class HeaderTest extends BaseTest {
 
 
-
-
-
     @Test
     public void verifyLogoTest() {
         TestReporter.testTitle("Test ID - C34282");
         mainPage.checkCompanyLogo();
-//    }
-//
-//    @Test
-//    public void verifyClosingModalWindowTest() {
+    }
+
+    @Test
+    public void verifyClosingModalWindowTest() {
         TestReporter.testTitle("Test ID - C34287");
         mainPage.closingModalWindow();
     }
@@ -32,13 +29,13 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyChangingCityToOtherTest() throws InterruptedException {
+    public void verifyChangingCityToOtherTest() {
         TestReporter.testTitle("Test ID - C34285");
         mainPage.changeCityToOther();
-   }
+    }
 
-   @Test
-   public void verifyChangingCityToCurrentTest() {
+    @Test
+    public void verifyChangingCityToCurrentTest() {
         TestReporter.testTitle("Test ID - C34316");
         mainPage.changeCityToCurrent();
     }
@@ -66,6 +63,7 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34292");
         mainPage.verifyMyCardIsEmpty();
     }
+
     //TODO it`s failed can`t  find other element , some element isn`t visible
     @Test
     public void verifyMyBasketWithProductTest() {
@@ -83,10 +81,10 @@ public class HeaderTest extends BaseTest {
     public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();
-   }
+    }
 
-   @Test
-   public void verifyOpeningBasketAndOrderingTest() {
+    @Test//(invocationCount = 5)
+    public void verifyOpeningBasketAndOrderingTest() {
         TestReporter.testTitle("Test ID = 34297");
         mainPage.openingBasketAndOrdering();
     }
@@ -223,29 +221,29 @@ public class HeaderTest extends BaseTest {
     public void verifyQueryWithWordsOrAndInInputFieldTest() {
         TestReporter.testTitle("Test ID = 34402");
         mainPage.verifyQueryWithWordsOrAndInInputField();
-//    }
-//
+    }
+//TODO Delete this test due useless assertion
 //    @Test
 //    public void verifyEmptyFieldTest() {
-        TestReporter.testTitle("Test ID = 34389");
-        mainPage.verifyEmptyField();
+//        TestReporter.testTitle("Test ID = 34389");
+//        mainPage.verifyEmptyField();
 //    }
-//
+
+    //TODO same assertion is present in verifySearchButtonTest
 //    @Test
 //    public void verifySearchQueryWithoutCategoryTest() {
-        TestReporter.testTitle("Test ID = 37064");
-        mainPage.verifySearchQueryWithoutCategory();
-//   }
-//
-//   //TODO
+//        TestReporter.testTitle("Test ID = 37064");
+//        mainPage.verifySearchQueryWithoutCategory();
+//    }
+
 //    @Test
 //    public void verifySearchQueryWithCategoryTest() {
-        TestReporter.testTitle("Test ID = 37065");
-        mainPage.verifySearchQueryWithCategory();
+//        TestReporter.testTitle("Test ID = 37065");
+//        mainPage.verifySearchQueryWithCategory();
 //    }
-//
-//    @Test
-//    public void verifySearchQueryWithInputTextWithoutCategoryTest() {
+
+    @Test
+    public void verifySearchQueryWithInputTextWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37066");
 //        mainPage.verifySearchQueryWithInputTextWithoutCategory();
 //    }
