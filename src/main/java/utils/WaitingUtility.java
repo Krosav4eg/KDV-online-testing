@@ -28,8 +28,6 @@ public class WaitingUtility {
     public static void waitForPageLoad(WebDriver driver) {
 	    WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Wait for page loading ");
-//        boolean result=   ((JavascriptExecutor) Objects.requireNonNull(driver)).executeScript(
-//                "return document.readyState").equals("complete");
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
@@ -74,21 +72,7 @@ public class WaitingUtility {
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static boolean elementNotVisible(WebElement element, WebDriver driver)
-    {
-        TestReporter.step("Element Not visible - " + element);
-        LOGGER.log(Level.INFO, " Element Not visible - " + element);
-        while (element.isDisplayed())
-        {
 
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return true;
-    }
 
 
 

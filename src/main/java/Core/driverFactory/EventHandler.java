@@ -1,9 +1,15 @@
 package Core.driverFactory;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
+import java.io.File;
+import java.io.IOException;
+
+import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
+import static utils.WaitingUtility.waitForPageLoad;
 
 public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
@@ -15,7 +21,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
-		//waitForPageLoad(webDriver);
+		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
 
@@ -46,6 +52,7 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterClickOn(WebElement arg0, WebDriver arg1)
 	{
+		waitForJSandJQueryToLoad(arg1);
 		//waitForPageLoad(arg1);
 		//System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
 	}
@@ -119,16 +126,28 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	public void onException(Throwable arg0, WebDriver arg1)
 	{
 		System.err.println("Exception :"+arg0);
-
-		//capture(testName,ERROR_SCREENSHOT_FOLDER);
+		System.out.println("Exception TEST NAME: "+testName);
+		capture(testName,ERROR_SCREENSHOT_FOLDER);
 
 	}
 
+
+	public static String testName;
 	//TODO not completed
 	/***
 	 * Need to implement it refactoring
 	 */
-	private void screenBrowser() {
+	static void capture(String screenShotName, String folder) {
+		TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
+		File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+		String dest = folder + screenShotName + ".png";
+		File destination = new File(dest);
+		try {
+			FileUtils.copyFile(source, destination);
+		} catch (IOException e) {
+			e.printStackTrace();
+			//LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
+		}
 	}
 
 }

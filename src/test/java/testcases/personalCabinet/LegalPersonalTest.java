@@ -1,6 +1,5 @@
 package testcases.personalCabinet;
 
-import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;

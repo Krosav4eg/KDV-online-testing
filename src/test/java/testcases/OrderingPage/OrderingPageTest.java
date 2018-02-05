@@ -11,7 +11,7 @@ import utils.TestReporter;
 import static utils.Constants.*;
 
 public class OrderingPageTest extends BaseTest {
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
     @Test

@@ -1,7 +1,6 @@
 package testcases.registration;
 
 import Core.basePage.BasePage;
-import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ import static utils.Constants.AUTORIZATION_PAGE_URL;
 
 public class RegistrationTest extends BaseTest {
 
-    BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
+    private BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
     };
 
     @Test
@@ -352,10 +351,10 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-    public void verifyCoincidencePasswordAndConfirmationTest() {
-        TestReporter.testTitle("Test ID = 37296");
-        registrationPage.verifyCoincidencePasswordAndConfirmation();
-    }
+//    public void verifyCoincidencePasswordAndConfirmationTest() {
+//        TestReporter.testTitle("Test ID = 37296");
+//        registrationPage.verifyCoincidencePasswordAndConfirmation();
+//    }
 
     @Test
     public void verifySubscriptionCheckboxPresenceTest() {

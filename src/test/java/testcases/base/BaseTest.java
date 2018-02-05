@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import static Core.driverFactory.EventHandler.testName;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
@@ -52,12 +53,12 @@ public class BaseTest {
     protected OrderingPhysicalPage orderingPhysicalPage;
     protected OrderingLegalPage orderingLegalPage;
 
-    BrowserFactory singleton = BrowserFactory.getInstance();
-    WebDriver driver;
-
+    private BrowserFactory singleton = BrowserFactory.getInstance();
+    public WebDriver driver;
     @BeforeMethod
     public void verifyBrowser(Method method) {
-        System.err.println(method.getName());
+        testName=method.getName();
+        //System.err.println(method.getName());
         if (driver==null)
         {
             driver = singleton.setDriver();
@@ -118,11 +119,11 @@ public class BaseTest {
     /**
      * Method for screenshot creation
      *
-     * @param screenShotName-name of screenshot
-     * @param folder-folder       which contain screenshots
-     * @return dest - destination where to be situated screenshots
+     * @param screenShotName -name of screenshot
+     * @param folder -folder       which contain screenshots
+     //* @return dest - destination where to be situated screenshots
      */
-    public static String capture(String screenShotName, String folder) {
+    public static void capture(String screenShotName, String folder) {
         TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
         File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
         String dest = folder + screenShotName + ".png";
@@ -131,9 +132,8 @@ public class BaseTest {
             FileUtils.copyFile(source, destination);
         } catch (IOException e) {
             e.printStackTrace();
-           // LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
+            //LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
         }
-        return dest;
     }
 
     private void initPageElements() {

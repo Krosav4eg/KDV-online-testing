@@ -24,19 +24,26 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifyChangingCityTest() {
-        TestReporter.testTitle("Test ID - C34283");
+        TestReporter.testTitle("Test ID - C34287");//C34287 - в этом кейсе объеденены C34283, C34285, C34316
         mainPage.changeCity();
-    }
+//    }
+//
+//    @Test
+//    public void verifyChangingCityToOtherTest() {
+//
+//        TestReporter.testTitle("Test ID - C34285");
 
-    @Test
-    public void verifyChangingCityToOtherTest() {
-        TestReporter.testTitle("Test ID - C34285");
-        mainPage.changeCityToOther();
-    }
+//        driver.manage().deleteAllCookies();
+//        driver.navigate().refresh();
+       mainPage.changeCityToOther();
+//     }
+//
+//     @Test
+//     public void verifyChangingCityToCurrentTest() {
+//         TestReporter.testTitle("Test ID - C34316");
 
-    @Test
-    public void verifyChangingCityToCurrentTest() {
-        TestReporter.testTitle("Test ID - C34316");
+//        driver.manage().deleteAllCookies();
+//        driver.navigate().refresh();
         mainPage.changeCityToCurrent();
     }
 
@@ -48,12 +55,12 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifyOpeningEnterTest() {
-        TestReporter.testTitle("Test ID - C34289");
+        TestReporter.testTitle("Test ID - C34288");//C34288 - в этом кейсе объеденены C34289, C34290
         mainPage.openingEnterLink();
-    }
-
-    @Test
-    public void verifyingAnswerYourQuestionsTelNumberTest() {
+//    }
+//
+//    @Test
+//    public void verifyingAnswerYourQuestionsTelNumberTest() {
         TestReporter.testTitle("Test ID - C34290");
         mainPage.verifyingAnswerYourQuestionsTelNumber();
     }
@@ -67,24 +74,24 @@ public class HeaderTest extends BaseTest {
     //TODO it`s failed can`t  find other element , some element isn`t visible
     @Test
     public void verifyMyBasketWithProductTest() {
-        TestReporter.testTitle("Test ID - 34293");
+        TestReporter.testTitle("Test ID - C34292");//C34292 - в этом кейсе объеденены C34293, C34299, C34296, C34297
         mainPage.verifyMyBasketWithProduct();
-    }
-
-    @Test
-    public void verifyProductsInBasketTest() {
+//    }
+//
+//    @Test
+//    public void verifyProductsInBasketTest() {
         TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
-    }
-//TODO not fix in progress
-    @Test//(timeOut = 30000)
-    public void verifyOpeningBasketPageFromHeaderTest() {
+//    }
+////TODO not fix in progress
+//    @Test//(timeOut = 30000)
+//    public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();
-    }
-
-    @Test//(invocationCount = 5)
-    public void verifyOpeningBasketAndOrderingTest() {
+//    }
+//
+//    @Test//(invocationCount = 5)
+//    public void verifyOpeningBasketAndOrderingTest() {
         TestReporter.testTitle("Test ID = 34297");
         mainPage.openingBasketAndOrdering();
     }

@@ -12,7 +12,7 @@ import static utils.Constants.BASE_URL;
 
 
 public class OrderingLegalPageTest extends BaseTest {
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
     @Test

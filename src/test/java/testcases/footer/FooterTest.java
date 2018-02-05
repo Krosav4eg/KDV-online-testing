@@ -1,5 +1,6 @@
 package testcases.footer;
 
+import Core.basePage.BasePage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -14,7 +15,7 @@ public class FooterTest extends BaseTest {
 
     @BeforeMethod
     public void beforeGeneralTests(Method method) {
-        mainPage.scrollToNecessaryElement(mainPage.footer);
+        BasePage.scrollToNecessaryElement(mainPage.footer);
     }
 
     @Test
