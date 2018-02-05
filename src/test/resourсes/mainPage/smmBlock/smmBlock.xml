@@ -7,33 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C37058">
+    <test name="BlockSmmTest">
         <classes>
-            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
-                <methods>
-                    <include name="verifyOpeningVkLinkTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C37062">
-        <classes>
-            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
-                <methods>
-                    <include name="verifyOpeningInstagramLinkTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C37063">
-        <classes>
-            <class name="testcases.mainPage.blockSmm.BlockSmmTest">
-                <methods>
-                    <include name="verifyOpeningGooglePlayLinkTest"/>
-                </methods>
-            </class>
+            <class name="testcases.mainPage.blockSmm.BlockSmmTest"/>
         </classes>
     </test>
 </suite>
