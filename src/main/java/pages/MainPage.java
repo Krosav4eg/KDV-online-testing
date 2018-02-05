@@ -9,10 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 import utils.TestReporter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +59,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//button[text()='Да']")
     private WebElement acceptGeoConfirm;
+
+    @FindBy(css=".j_geo_confirm_confirm")
+    private WebElement acceptBtn;
 
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
@@ -347,9 +355,10 @@ public class MainPage extends BasePage {
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        driver.navigate().refresh();
         sleepWait();
+        driver.navigate().refresh();
     }
+
 
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
@@ -399,7 +408,8 @@ public class MainPage extends BasePage {
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
         elementIsClickable(baseCityLink, driver).click();
-        clickOnIndexFromElementList(otherCityLink, 8);
+        elementIsClickable(selectCityKemerovo,driver).click();
+	    textIsPresent(baseCityLink,driver,"Кемерово");
         AssertCollector.assertEquals(baseCityLink.getAttribute("title"), " LINK IS EQUAL ", otherCity);
     }
 

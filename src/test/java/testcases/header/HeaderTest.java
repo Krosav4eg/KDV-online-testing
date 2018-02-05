@@ -83,7 +83,7 @@ public class HeaderTest extends BaseTest {
         mainPage.openingBasketPageFromHeader();
     }
 
-    @Test
+    @Test//(invocationCount = 5)
     public void verifyOpeningBasketAndOrderingTest() {
         TestReporter.testTitle("Test ID = 34297");
         mainPage.openingBasketAndOrdering();
