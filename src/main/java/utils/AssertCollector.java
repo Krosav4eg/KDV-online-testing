@@ -1,6 +1,5 @@
 package utils;
 
-import com.google.common.base.Verify;
 import logger.MagDvLogger;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
