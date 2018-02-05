@@ -30,12 +30,11 @@ public class HeaderTest extends BaseTest {
 //
 //    @Test
 //    public void verifyChangingCityToOtherTest() {
-//
-//        TestReporter.testTitle("Test ID - C34285");
 
-//        driver.manage().deleteAllCookies();
-//        driver.navigate().refresh();
-       mainPage.changeCityToOther();
+//        TestReporter.testTitle("Test ID - C34285");
+//          driver.manage().deleteAllCookies();
+//          driver.navigate().refresh();
+          mainPage.changeCityToOther();
 //     }
 //
 //     @Test
@@ -48,14 +47,14 @@ public class HeaderTest extends BaseTest {
     }
 
     @Test
-    public void verifyOpeningRegistrationTest() {
+    public void verifyOpeningRegistrationTest() {//C34288 - в этом кейсе объеденены C34289, C34290
         TestReporter.testTitle("Test ID - C34288");
         mainPage.openingRegistrationLink();
-    }
-
-    @Test
-    public void verifyOpeningEnterTest() {
-        TestReporter.testTitle("Test ID - C34288");//C34288 - в этом кейсе объеденены C34289, C34290
+//    }
+//
+//    @Test
+//    public void verifyOpeningEnterTest() {
+        TestReporter.testTitle("Test ID - C34289");
         mainPage.openingEnterLink();
 //    }
 //
@@ -76,11 +75,11 @@ public class HeaderTest extends BaseTest {
     public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - C34292");//C34292 - в этом кейсе объеденены C34293, C34299, C34296, C34297
         mainPage.verifyMyBasketWithProduct();
-//    }
-//
-//    @Test
-//    public void verifyProductsInBasketTest() {
-        TestReporter.testTitle("Test ID = 34299");
+   }
+
+   @Test
+   public void verifyProductsInBasketTest() {
+     TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
 //    }
 ////TODO not fix in progress

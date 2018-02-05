@@ -202,7 +202,7 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertEquals(text, "  Current text is equal to  ", text);
     }
 
-    //test not pass(validation problems)
+
     public void verifyMaximumInputInLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(lastName,driver, RandomStringUtils.randomAlphabetic(46));
@@ -242,7 +242,7 @@ public class RegistrationPage extends BasePage {
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(phone,driver).click();
-        AssertCollector.assertTrue(phone.getAttribute("value").equals("+7__________"), "phone mask is correct");
+        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "phone mask is correct");
     }
 
     public void verifyMaximumInputInPhoneField() {

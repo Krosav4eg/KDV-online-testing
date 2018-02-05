@@ -8,7 +8,7 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
-import static utils.Constants.BASE_URL;
+import static utils.Constants.*;
 
 
 public class OrderingLegalPageTest extends BaseTest {
@@ -19,8 +19,8 @@ public class OrderingLegalPageTest extends BaseTest {
     public void verifyCreateOrderWithDefaultAddressTest() {
         TestReporter.testTitle("Test ID = 41799");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_g.fadeev@magdv.com");
-        data.put("password", "gctbVY");
+        data.put("email", FADEEV_EMAIL);
+        data.put("password", FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
@@ -41,7 +41,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "Панфилов", "Last name is correct");
 
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.phoneTxt, "value"),
-                "+71111111111", "Phones correct");
+                FADEEV_PHONE, "Phones correct");
 
         AssertCollector.assertTrue(orderingLegalPage.transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
@@ -77,8 +77,8 @@ public class OrderingLegalPageTest extends BaseTest {
     public void verifyCreateOrderWithChangingAddressTest() {
         TestReporter.testTitle("Test ID = 41801");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_g.fadeev@magdv.com");
-        data.put("password", "gctbVY");
+        data.put("email", FADEEV_EMAIL);
+        data.put("password",FADEEV_PASSWORD );
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
@@ -135,8 +135,8 @@ public class OrderingLegalPageTest extends BaseTest {
     public void verifyCreateOrderWithThirdAddressTest() {
         TestReporter.testTitle("Test ID = 41826");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_g.fadeev@magdv.com");
-        data.put("password", "gctbVY");
+        data.put("email", FADEEV_EMAIL);
+        data.put("password",FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
@@ -157,7 +157,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "Белоусов", "Last name is correct");
 
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.phoneTxt, "value"),
-                "+71111111111", "Phones correct");
+                FADEEV_PHONE, "Phones correct");
 
         AssertCollector.assertTrue(orderingLegalPage.transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
@@ -193,8 +193,8 @@ public class OrderingLegalPageTest extends BaseTest {
     public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
-        data.put("email", "test_g.fadeev@magdv.com");
-        data.put("password", "gctbVY");
+        data.put("email", FADEEV_EMAIL);
+        data.put("password",FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         JSONObject data1 = orderingLegalPage.data();

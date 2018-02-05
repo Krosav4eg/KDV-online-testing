@@ -63,6 +63,21 @@ public class Constants {
     public static final String AUTHORIZATION_PASSWORD =  readXML("testData","authorizationPass");//"JOviF7J2";
     public static final String INCORRECT_EMAIL = readXML("testData","incorrectEmail");// "a.shaulo123@andersenlab.com";
     public static final String INCORRECT_PASSWORD = readXML("testData","incorrectPass");// "As06051993";
+    public static final String FADEEV_EMAIL = readXML("testData","fadeevEmail");
+    public static final String FADEEV_PASSWORD = readXML("testData","fadeevPass");
+    public static final String FADEEV_PHONE = readXML("testData","fadeevPhone");
+    public static final String KALASHNIKOVA_EMAIL = readXML("testData","kalashnikovaEmail");
+    public static final String KALASHNIKOVA_PASSWORD = readXML("testData","kalashnikovaPass");
+    public static final String KALASHNIKOVA_PHONE = readXML("testData","kalashnikovaPhone");
+    public static final String PONOMATEVA_EMAIL = readXML("testData","ponomarevaEmail");
+    public static final String PONOMATEVA_PASSWORD = readXML("testData","ponomarevaPass");
+    public static final String MAKAROVA_EMAIL = readXML("testData","makarovEmail");
+    public static final String MAKAROVA_PASSWORD = readXML("testData","makarovPass");
+    public static final String BOLSHAKOV_EMAIL = readXML("testData","bolshakovEmail");
+    public static final String BOLSHAKOV_PASSWORD = readXML("testData","bolshakovPass");
+    public static final String ZUEV_EMAIL = readXML("testData","zuevEmail");
+    public static final String ZUEV_PASSWORD = readXML("testData","zuevPass");
+
     public static final String TEST_EMAIL = readXML("testData","testEmail");//"test_t.bolshakov@magdv.com";
     public static final String TEST_PASSWORD = readXML("testData","testPass");//"sTU1iJ46";
     public static final String EMPTY_DATA = " ";
