@@ -63,20 +63,14 @@ public class WaitingUtility {
      * @param element used to find the element
      */
     public static WebElement elementIsClickable(WebElement element, WebDriver driver) {
-        TestReporter.step("Click on - " + element);
-        LOGGER.log(Level.INFO, " Click on - " + element);
+
+       // LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
-
-
-
-
-
-
     /**
      * Method was created for helps to search for elements with certain intervals within a given period of time.
      * Web element searching every 50 MILLISECONDS for 30 seconds.
@@ -84,8 +78,7 @@ public class WaitingUtility {
      */
     public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
         //moveToElementJS(driver,element);
-        TestReporter.step("Click on - " + element);
-        LOGGER.log(Level.INFO, " Click on - " + element);
+        //TestReporter.step("Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
@@ -95,8 +88,8 @@ public class WaitingUtility {
 
     public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
         //moveToElementJS(driver,element);
-        TestReporter.step("Click on - " + element);
-        LOGGER.log(Level.INFO, " Click on - " + element);
+//        TestReporter.step("Click on - " + element);
+//        LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
@@ -105,16 +98,16 @@ public class WaitingUtility {
     }
 
     public static void waitInvisibilityOfElement(WebElement element, WebDriver driver) {
-        TestReporter.step("Element isn't displayed ");
-        LOGGER.log(Level.INFO, "Element isn't displayed ");
+//        TestReporter.step("Element isn't displayed ");
+//        LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(visibilityOf(element));
     }
 
     public static void textIsPresent(WebElement element, WebDriver driver,String text)
     {
-        TestReporter.step("Element isn't displayed ");
-        LOGGER.log(Level.INFO, "Element isn't displayed ");
+//        TestReporter.step("Element isn't displayed ");
+//        LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions. textToBePresentInElement(element,text));
     }

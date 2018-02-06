@@ -135,8 +135,6 @@ public class BasePage {
     }
 
     protected static void getUrl(String url) {
-        LOGGER.log(Level.INFO, "Navigate to needed url ");
-        TestReporter.step("Navigate to needed url ");
         driver.navigate().to(url);
     }
 

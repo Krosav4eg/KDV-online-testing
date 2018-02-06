@@ -51,7 +51,11 @@ public class HtmlLoggerFormatter extends Formatter {
 
         return buf.toString();
     }
-
+    private String formatDate(long milliseconds) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        Date resultDate = new Date(milliseconds);
+        return dateFormat.format(resultDate);
+    }
     /**
      * Calculate date-time of logging
      *
