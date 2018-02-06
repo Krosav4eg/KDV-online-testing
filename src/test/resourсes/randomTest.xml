@@ -7,13 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="37065">
+    <test name="Registration Individual Entrepreneur">
         <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyOpeningBasketAndOrderingTest"/>
-                </methods>
-            </class>
+            <class name="testcases.registration.individualEntrepreneur.ContactDataTest"/>
         </classes>
     </test>
 </suite>
