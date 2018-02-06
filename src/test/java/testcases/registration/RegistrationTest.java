@@ -274,7 +274,7 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void verifyRegistrationComponentTest() {
-        TestReporter.testTitle("Test ID = 37551,37552,37553");
+        TestReporter.testTitle("Test ID = 37551,37552,37553,40279,40280,40281");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("legalAddress", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
