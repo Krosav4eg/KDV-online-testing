@@ -7,11 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.*;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static driverFactory.BrowserFactory.getDriver;
+import static Core.driverFactory.BrowserFactory.getDriver;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 /**
  * @author Sergey Potapov
@@ -24,9 +26,9 @@ public class WaitingUtility {
     }
 
     public static void waitForPageLoad(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+	    WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Wait for page loading ");
-        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) driver1).executeScript(
+        wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
 
@@ -58,19 +60,22 @@ public class WaitingUtility {
 
     /**
      * Method verifying that web element is clickable.
-     *
      * @param element used to find the element
      */
     public static WebElement elementIsClickable(WebElement element, WebDriver driver) {
-       // WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(50, TimeUnit.MILLISECONDS)
+                .pollingEvery(1, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+
+
+
+
 
     /**
      * Method was created for helps to search for elements with certain intervals within a given period of time.
@@ -82,10 +87,10 @@ public class WaitingUtility {
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(40, TimeUnit.SECONDS)
+                .withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
-        return newWait.until(ExpectedConditions.visibilityOf(element));
+        return newWait.until(visibilityOf(element));
     }
 
     public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
@@ -93,8 +98,8 @@ public class WaitingUtility {
         TestReporter.step("Click on - " + element);
         LOGGER.log(Level.INFO, " Click on - " + element);
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(40, TimeUnit.SECONDS)
-                .pollingEvery(50, TimeUnit.MILLISECONDS)
+                .withTimeout(30, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -103,7 +108,7 @@ public class WaitingUtility {
         TestReporter.step("Element isn't displayed ");
         LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
-        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(visibilityOf(element));
     }
 
     public static void textIsPresent(WebElement element, WebDriver driver,String text)
@@ -112,15 +117,5 @@ public class WaitingUtility {
         LOGGER.log(Level.INFO, "Element isn't displayed ");
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions. textToBePresentInElement(element,text));
-    }
-    public static void  sleepTime()
-    {
-        try {
-            Thread.sleep(1000);
-        }
-        catch (Exception ex)
-        {
-             System.out.println(ex.getMessage());
-        }
     }
 }

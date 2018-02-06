@@ -1,39 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Banner regression tests" parallel="tests" thread-count="3">
+<suite name="Banner regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34331">
+    <test name="BannerTest">
         <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
-                <methods>
-                    <include name="switchSlideForwardTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34332">
-        <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
-                <methods>
-                    <include name="switchSlidePreviousTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34333">
-        <classes>
-            <class name="testcases.mainPage.banner.BannerTest">
-                <methods>
-                    <include name="switchBetweenSlidesTest"/>
-                </methods>
-            </class>
+            <class name="testcases.mainPage.banner.BannerTest"/>
         </classes>
     </test>
 </suite>

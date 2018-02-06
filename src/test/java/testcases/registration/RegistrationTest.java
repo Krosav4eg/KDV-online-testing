@@ -1,6 +1,6 @@
 package testcases.registration;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -13,13 +13,13 @@ import static utils.Constants.AUTORIZATION_PAGE_URL;
 
 public class RegistrationTest extends BaseTest {
 
-    BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
+    private BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
     };
 
     @Test
     public void verifyLegalFormByDefaultTest() {
         TestReporter.testTitle("Test ID = 37076");
-        registrationPage.verifyLegalFormByDefault();
+       registrationPage.verifyLegalFormByDefault();
     }
 
     @Test
@@ -52,12 +52,13 @@ public class RegistrationTest extends BaseTest {
         registrationPage.verifyMaximumInputInFirstNameField();
     }
 
+    //test not pass(validation problems)
     @Test
     public void verifyInputNumbersInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37104");
         registrationPage.verifyInputNumbersInFirstNameField();
     }
-
+    //BUG ON SITE
     @Test
     public void verifyInputForbiddenSymbolsInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37105");
@@ -81,19 +82,19 @@ public class RegistrationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37114");
         registrationPage.verifyInputInLastNameField();
     }
-
+    //test not pass(validation problems)
     @Test
     public void verifyMaximumInputInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37115");
         registrationPage.verifyMaximumInputInLastNameField();
     }
-
+    //  //test not pass(validation problems)
     @Test
     public void verifyInputNumbersInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37117");
         registrationPage.verifyInputNumbersInLastNameField();
     }
-
+//    //test not pass(validation problems)
     @Test
     public void verifyInputForbiddenSymbolsInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37118");
@@ -128,28 +129,28 @@ public class RegistrationTest extends BaseTest {
     public void verifyInputForbiddenSymbolsInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37281");
         registrationPage.verifyInputForbiddenSymbolsInPhoneField();
-    }
+      }
 
-    @Test
-    public void verifyInputLettersInPhoneFieldTest() {
+      @Test
+      public void verifyInputLettersInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37283");
         registrationPage.verifyInputLettersInPhoneField();
-    }
+      }
 
-    @Test
-    public void verifyInputSpacesInPhoneFieldTest() {
+      @Test
+      public void verifyInputSpacesInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37285");
         registrationPage.verifyInputSpacesInPhoneField();
-    }
+      }
 
-    @Test
-    public void verifyInputLessThenTenNumbersInPhoneFieldTest() {
+      @Test
+      public void verifyInputLessThenTenNumbersInPhoneFieldTest() {
         TestReporter.testTitle("Test ID = 37286");
         registrationPage.verifyInputLessThenTenNumbersInPhoneField();
-    }
+      }
 
-    @Test
-    public void verifyFieldEmailPresenceTest() {
+      @Test
+      public void verifyFieldEmailPresenceTest() {
         TestReporter.testTitle("Test ID = 37298");
         registrationPage.verifyFieldEmailPresence();
     }
@@ -188,34 +189,34 @@ public class RegistrationTest extends BaseTest {
     public void verifyFieldPasswordPresenceTest() {
         TestReporter.testTitle("Test ID = 37338");
         registrationPage.verifyFieldPasswordPresence();
-    }
+      }
 
-    @Test
-    public void verifyPasswordLengthLessThanSixSymbolsTest() {
+      @Test
+      public void verifyPasswordLengthLessThanSixSymbolsTest() {
         TestReporter.testTitle("Test ID = 37292");
         registrationPage.verifyPasswordLengthLessThanSixSymbols();
-    }
+      }
 
-    @Test
-    public void verifyPasswordWithOnlySpacesTest() {
+      @Test
+      public void verifyPasswordWithOnlySpacesTest() {
         TestReporter.testTitle("Test ID = 37293");
         registrationPage.verifyPasswordWithOnlySpaces();
-    }
+      }
 
-    @Test
-    public void verifyPasswordWithSpacesAtStartAndEndTest() {
+      @Test
+      public void verifyPasswordWithSpacesAtStartAndEndTest() {
         TestReporter.testTitle("Test ID = 37294");
         registrationPage.verifyPasswordWithSpacesAtStartAndEnd();
-    }
+      }
 
-    @Test
-    public void verifyFieldConfirmPasswordPresenceTest() {
+      @Test
+      public void verifyFieldConfirmPasswordPresenceTest() {
         TestReporter.testTitle("Test ID = 37337");
         registrationPage.verifyFieldConfirmPasswordPresence();
-    }
+      }
 
-    @Test
-    public void verifyInputNewPasswordWithoutConfirmationTest() {
+      @Test
+      public void verifyInputNewPasswordWithoutConfirmationTest() {
         TestReporter.testTitle("Test ID = 37295");
         registrationPage.verifyInputNewPasswordWithoutConfirmation();
     }
@@ -351,47 +352,43 @@ public class RegistrationTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-    public void verifyCoincidencePasswordAndConfirmationTest() {
-        TestReporter.testTitle("Test ID = 37296");
-        registrationPage.verifyCoincidencePasswordAndConfirmation();
-    }
+//    public void verifyCoincidencePasswordAndConfirmationTest() {
+//        TestReporter.testTitle("Test ID = 37296");
+//        registrationPage.verifyCoincidencePasswordAndConfirmation();
+//    }
 
     @Test
     public void verifySubscriptionCheckboxPresenceTest() {
         TestReporter.testTitle("Test ID = 37352");
         registrationPage.verifySubscriptionCheckboxPresence();
-    }
-    public void verifyRegistrationWithEmptyFields() {
-        TestReporter.testTitle("Test ID = 37532");
-        registrationPage.verifyRegistrationWithEmptyFields();
-    }
+      }
 
-    @Test
-    public void verifyWorkOfCheckboxConfirmTest() {
+      @Test
+      public void verifyWorkOfCheckboxConfirmTest() {
         TestReporter.testTitle("Test ID = 37353");
         registrationPage.verifyWorkOfCheckboxConfirm();
-    }
+      }
 
-    @Test
-    public void verifyCheckboxConfirmPresenceTest() {
+      @Test
+      public void verifyCheckboxConfirmPresenceTest() {
         TestReporter.testTitle("Test ID = 37354");
         registrationPage.verifyCheckboxConfirmPresence();
-    }
+      }
 
-    @Test
-    public void verifyPressSendButtonWithoutFillingFieldsTest() {
+      @Test
+      public void verifyPressSendButtonWithoutFillingFieldsTest() {
         TestReporter.testTitle("Test ID = 37340");
         registrationPage.verifyPressSendButtonWithoutFillingFields();
-    }
+      }
 
-    @Test
-    public void verifySendingWithoutFillingFirstNameFieldTest() {
+      @Test
+      public void verifySendingWithoutFillingFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37341");
         registrationPage.verifySendingWithoutFillingFirstNameField();
-    }
+      }
 
-    @Test
-    public void verifySendingWithoutFillingLastNameFieldTest() {
+      @Test
+      public void verifySendingWithoutFillingLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37343");
         registrationPage.verifySendingWithoutFillingLastNameField();
     }
@@ -454,151 +451,71 @@ public class RegistrationTest extends BaseTest {
     public void verifyOrganizationFullNameFieldPresenceTest() {
         TestReporter.testTitle("Test ID = 37374");
         registrationPage.verifyOrganizationFullNameFieldPresence();
-    }
+      }
 
-    @Test
-    public void verifyMaximumInputInFullNameTest() {
+      @Test
+      public void verifyMaximumInputInFullNameTest() {
         TestReporter.testTitle("Test ID = 37375");
         registrationPage.verifyMaximumInputInFullName();
-    }
+      }
 
-    @Test
-    public void verifyFieldForTaxpayerIdTest() {
+      @Test
+      public void verifyFieldForTaxpayerIdTest() {
         TestReporter.testTitle("Test ID = 37385");
         registrationPage.verifyFieldForTaxpayerId();
-    }
+      }
 
-    @Test
-    public void verifyValidInputInTaxpayerIdFieldTest() {
+      @Test
+      public void verifyValidInputInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37388");
         registrationPage.verifyValidInputInTaxpayerIdField();
-    }
+      }
 
-    @Test
-    public void verifyInputLettersInTaxpayerIdFieldTest() {
+      @Test
+      public void verifyInputLettersInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37389");
         registrationPage.verifyInputLettersInTaxpayerIdField();
-    }
+      }
 
-    @Test
-    public void verifyInputSymbolsInTaxpayerIdFieldTest() {
+      @Test
+      public void verifyInputSymbolsInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37390");
         registrationPage.verifyInputSymbolsInTaxpayerIdField();
-    }
+      }
 
-    @Test
-    public void verifyInputLessThenTenDigitsInTaxpayerIdFieldTest() {
+      @Test
+      public void verifyInputLessThenTenDigitsInTaxpayerIdFieldTest() {
         TestReporter.testTitle("Test ID = 37391");
         registrationPage.verifyInputLessThenTenDigitsInTaxpayerIdField();
-    }
+      }
 
-    @Test
-    public void verifyReasonCodeFieldPresenceTest() {
+      @Test
+      public void verifyReasonCodeFieldPresenceTest() {
         TestReporter.testTitle("Test ID = 37393");
         registrationPage.verifyReasonCodeFieldPresence();
-    }
+      }
 
-    @Test
-    public void verifyValidInputInReasonCodeFieldTest() {
+      @Test
+      public void verifyValidInputInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37394");
         registrationPage.verifyValidInputInReasonCodeField();
-    }
+      }
 
-    @Test
-    public void verifyInputLettersInReasonCodeFieldTest() {
+      @Test
+      public void verifyInputLettersInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37395");
         registrationPage.verifyInputLettersInReasonCodeField();
-    }
+      }
 
-    @Test
-    public void verifyInputSymbolsInReasonCodeFieldTest() {
+      @Test
+      public void verifyInputSymbolsInReasonCodeFieldTest() {
         TestReporter.testTitle("Test ID = 37396");
         registrationPage.verifyInputSymbolsInReasonCodeField();
     }
-
-    @Test
-    public void verifyInputLessThenNineDigitsInReasonCodeFieldTest() {
-        TestReporter.testTitle("Test ID = 37397");
-        registrationPage.verifyInputLessThenNineDigitsInReasonCodeField();
-    }
-
-    @Test
-    public void verifyLegalAddressFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37416");
-        registrationPage.verifyLegalAddressFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInLegalAddressTest() {
-        TestReporter.testTitle("Test ID = 37421");
-        registrationPage.verifyMaximumInputInLegalAddress();
-    }
-
-    @Test
-    public void verifyCompanyFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37423");
-        registrationPage.verifyCompanyFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInCompanyTest() {
-        TestReporter.testTitle("Test ID = 37424");
-        registrationPage.verifyMaximumInputInCompany();
-    }
-
-    @Test
-    public void verifyAddressFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37479");
-        registrationPage.verifyAddressFieldPresence();
-    }
-
-    @Test
-    public void verifyPromptsInAddressFieldAfterInputTest() {
-        TestReporter.testTitle("Test ID = 37564");
-        registrationPage.verifyPromptsInAddressFieldAfterInput();
-    }
-
-    @Test
-    public void verifyPromptChoosingInAddressFieldAfterInputTest() {
-        TestReporter.testTitle("Test ID = 37565");
-        registrationPage.verifyPromptChoosingInAddressFieldAfterInput();
-    }
-
-    @Test
-    public void verifyFullAddressInputInAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37567");
-        registrationPage.verifyFullAddressInputInAddressField();
-    }
-
-    @Test
-    public void verifyMaximumInputInAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37480");
-        registrationPage.verifyMaximumInputInAddressField();
-    }
-
-    @Test
-    public void verifyCommentsFieldPresenceTest() {
-        TestReporter.testTitle("Test ID = 37485");
-        registrationPage.verifyCommentsFieldPresence();
-    }
-
-    @Test
-    public void verifyMaximumInputInCommentsFieldTest() {
-        TestReporter.testTitle("Test ID = 37486");
-        registrationPage.verifyMaximumInputInCommentsField();
-    }
-    @Test
-    public void verifyInputCorrectInnValueTest() {
-        TestReporter.testTitle("Test ID = 37571,37572");
-        JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
-    }
-
     //not pass due validation in both fields
     @Test
     public void verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 37568,40062");
+        TestReporter.testTitle("Test ID = 37568,40062,37486");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("organizationName", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -616,7 +533,7 @@ public class RegistrationTest extends BaseTest {
     //not pass due validation in both fields
     @Test
     public void verifyMaximumInputLengthInCompanyAndCommentsFieldTest() {
-        TestReporter.testTitle("Test ID = 40063,40066");
+        TestReporter.testTitle("Test ID = 40063,40066,37480,37424");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("company", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -634,7 +551,7 @@ public class RegistrationTest extends BaseTest {
     //not pass due validation
     @Test
     public void verifyMaximumInputAddressFieldTest() {
-        TestReporter.testTitle("Test ID = 40065");
+        TestReporter.testTitle("Test ID = 40065,37421");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("address", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
@@ -717,13 +634,13 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void verifySuccessRegistrationTest() {
-        TestReporter.testTitle("Test ID = 37681");
+        TestReporter.testTitle("Test ID = 37564,37565,37485,37397,37681,37571,37572,37416,37479,37423,37567");
         JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+        AssertCollector.verifyCondition(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения"));
         del2.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
                 " выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
-        AssertCollector.assertEqualsJ(del2.getCurrentUrl(), AUTORIZATION_PAGE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del2.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls are equals");
     }
 }
 

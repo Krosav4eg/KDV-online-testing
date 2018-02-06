@@ -1,6 +1,6 @@
 package DBTests;
 
-import dataBased.SQLConnect;
+import Core.dataBased.SQLConnect;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

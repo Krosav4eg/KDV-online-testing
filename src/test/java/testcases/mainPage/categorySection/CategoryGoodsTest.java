@@ -14,14 +14,13 @@ public class CategoryGoodsTest extends BaseTest {
     @Test
     public void verifyBreadCrumbs() {
         TestReporter.testTitle("Test ID - C39078");
-        categoryPage.breadCrumbs();
-    }
+     categoryPage.breadCrumbs();
+   }
 
-    @Test
-    public void verifyHeader() {
+   @Test
+   public void verifyHeader() {
         TestReporter.testTitle("Test ID - C39075");
         categoryPage.selectFromCategoryDropDown();
-
     }
     @Test
     public void verifyCommodityGrid() {
@@ -41,14 +40,15 @@ public class CategoryGoodsTest extends BaseTest {
     }
     @Test
     public void verifySortPriceDesc() {
-        TestReporter.testTitle("Test ID - C40223");
+      TestReporter.testTitle("Test ID - C40223");
         categoryPage.sortFilterPrice();
     }
-    @Test
-    public void verifySelectingCategoryTest() {
-        TestReporter.testTitle("Test ID - C34335");
-        mainPage.selectingCategory();
-    }
+    //TODO test data is miss no functional
+//    @Test
+//    public void verifySelectingCategoryTest() {
+//        TestReporter.testTitle("Test ID - C34335");
+//        mainPage.selectingCategory();
+//    }
 
     @Test
     public void verifyMoveToCategoryTest() {

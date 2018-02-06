@@ -1,8 +1,9 @@
 package pages.OrderingPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,24 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = "[id='billing:firstname']")
     public WebElement firstNameTxt;
 
+    @FindBy(id = "advice-required-entry-billing:firstname")
+    public WebElement firstNameFieldAdvice;
+
+    @FindBy(id = "advice-required-entry-billing:lastname")
+    public WebElement lastNameFieldAdvice;
+
+    @FindBy(xpath = "(//input[@name=\"billing[email]\"]/following-sibling::div)[1]")
+    public WebElement emailFieldAdvice;
+
+    @FindBy(id = "advice-required-entry-billing:telephone")
+    public WebElement phoneFieldAdvice;
+
+    @FindBy(css = ".notice__title")
+    public WebElement phoneNotice;
+
+    @FindBy(id = "advice-required-entry-billing:street_new")
+    public WebElement addressFieldAdvice;
+
     @FindBy(css = "[id='billing:lastname']")
     public WebElement lastNameTxt;
 
@@ -32,8 +51,8 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = "[id='billing:telephone']")
     public WebElement phoneTxt;
 
-    @FindBy(css = "label[for=\"billing:is_agree\"]")
-    public WebElement agreementBtn;
+    @FindBy(id = "advice-required-entry-billing:is_agree")
+    public WebElement agreementCheckBoxAdvice;
 
     @FindBy(css = ".link.j_modal_auth_link")
     public WebElement modalAuthLink;
@@ -51,7 +70,10 @@ public class OrderingGuestPage extends BasePage {
     private WebElement passwordAuth;
 
     @FindBy(css = ".button.modal-auth__forgot-btn.j_modal_auth_login_btn")
-    private WebElement authEnterButton;
+    public WebElement authEnterButton;
+
+    @FindBy(css = ".modal-auth__errors.j_modal_auth_errors.text")
+    public WebElement errorText;
 
     @FindBy(id = "review-btn")
     public WebElement createOrderButton;
@@ -62,17 +84,71 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = "//a[text()='Регламентом работы сайта']")
     public WebElement regulationsWebsiteLink;
 
-    @FindBy(css = "#checkout-delivery-date")
-    public WebElement checkoutDeliveryDate;
-
     @FindBy(xpath = ".//a[text()=\"Согласием на обработку персональных данных\"]")
     public WebElement consentPersonalDataProcessingLink;
 
     @FindBy(xpath = ".//a[contains(text(),'Договора купли-продажи.')]")
     public WebElement salesPurchaseAgreementLink;
 
-    @FindBy(xpath = "//span[contains(text(),'Согласен получать выгодные предложения на покупку продуктов')]")
+    @FindBy(xpath = "//input[@id='billing:is_agree']/following-sibling::span")
     public WebElement agreeCheckBox;
+
+    @FindBy(css = ".title.checkout-form__title.offset-b-4.offset-t-4")
+    public WebElement deliveryHeader;
+
+    @FindBy(xpath = "//span[contains(text(),'Самовывоз')]")
+    public WebElement selfDeliveryRadioButton;
+
+    @FindBy(id = "billing:street_new")
+    public WebElement deliveryAddressField;
+
+    @FindBy(css = "div[data-index='1']")
+    public WebElement addressSuggestionList;
+
+    @FindBy(id = "id_comments")
+    public WebElement deliveryCommentField;
+
+    @FindBy(xpath = "//span[contains(text(),'Курьерская доставка:')]")
+    public WebElement courierDeliveryRadioButton;
+
+    @FindBy(css = "#onepage-review>h2")
+    public WebElement compositionOrderHeader;
+
+    @FindBy(css = ".link.checkout-form__edit.float-right")
+    public WebElement editCompositionOrderHeader;
+
+    @FindBy(css = ".checkout-review__row.checkout-review__row_header")
+    public WebElement reviewOrder;
+
+    @FindBy(xpath = "(//tr[@class='checkout-review__row'])[2]")
+    public WebElement totalShipping;
+
+    @FindBy(css = ".checkout-review__row.checkout-review__row_last")
+    public WebElement compositionOrderLastRow;
+
+    @FindBy(xpath = ".//*[@id='checkout-review-table']/tbody/tr/td[4]/span")
+    public WebElement totalPriceCompositionOrder;
+
+    @FindBy(css = "label[for=\"p_method_beznal\"] span")
+    public WebElement payBankCardRadioButton;
+
+    @FindBy(id = "billing:floor")
+    public WebElement deliveryFloorField;
+
+    @FindBy(id = "billing:porch")
+    public WebElement deliveryPorchField;
+
+    @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
+    public WebElement addressErrorField;
+
+    @FindBy(css = ".message__item")
+    public WebElement messageOrderError;
+
+    @FindBy(css = "div.j_mini_cart_summary")
+    private WebElement selectMiniCart;
+
+    @FindBy(css = "[title='Просмотр корзины ']")
+    private WebElement selectBasket;
 
 
     public JSONObject data() {
@@ -84,17 +160,43 @@ public class OrderingGuestPage extends BasePage {
         return data;
     }
 
-    public void addProductToBasket()
-    {
+    public void addProductToBasket() {
         getUrl(BASE_URL);
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
+        try {
+            if (messageOrderError.isDisplayed()) {
+                elementFluentWaitVisibility(selectMiniCart, driver).click();
+                elementFluentWaitVisibility(selectBasket, driver).click();
+            }
+        new BasketPage(driver).increaseLegalPersonProductCount();
+        elementFluentWaitVisibility(orderBtn, driver).click();
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
     }
 
     public void createOrder(JSONObject data) {
         addProductToBasket();
         identificationBlock(data);
+    }
+
+    public void clickOrderButton() {
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
+    }
+
+    public void clickOnWebElement(WebElement element) {
+        elementFluentWaitVisibility(element, driver).click();
+        sleepWait();
+    }
+
+    public void clickCheckBoxAndOrderButton() {
+        sleepWait();
+        elementFluentWaitVisibility(agreementCheckBoxAdvice, driver).click();
+        elementFluentWaitVisibility(createOrderButton, driver).click();
+        sleepWait();
     }
 
     public String identificationBlock(JSONObject data) {
@@ -117,9 +219,32 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void authorizationBlockModalWindow(JSONObject data) {
+        elementFluentWaitVisibility(emailAuth, driver).clear();
         elementFluentWaitVisibility(emailAuth, driver).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordAuth, driver).clear();
         elementFluentWaitVisibility(passwordAuth, driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authEnterButton, driver).click();
+        sleepWait();
+    }
+
+    public JSONObject deliveryFormData() {
+        JSONObject data = new JSONObject();
+        data.put("address", "Томск, пр. Мира 20, оф.4");
+        data.put("floor", "1");
+        data.put("porch", "3");
+        data.put("comment", RandomStringUtils.randomAlphabetic(10));
+        return data;
+    }
+
+    public void deliveryFormInfo(JSONObject data) {
+        elementFluentWaitVisibility(deliveryAddressField, driver).clear();
+        elementFluentWaitVisibility(deliveryAddressField, driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(deliveryFloorField, driver).clear();
+        elementFluentWaitVisibility(deliveryFloorField, driver).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(deliveryPorchField, driver).clear();
+        elementFluentWaitVisibility(deliveryPorchField, driver).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(deliveryCommentField, driver).clear();
+        elementFluentWaitVisibility(deliveryCommentField, driver).sendKeys(data.getString("comment"));
         sleepWait();
     }
 }

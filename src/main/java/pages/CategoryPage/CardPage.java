@@ -1,6 +1,6 @@
 package pages.CategoryPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -110,7 +110,6 @@ public class CardPage extends BasePage {
 		addTxtToInput("-5");
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("51"));
 		addTxtToInput("99999");
-		System.out.println(getValueOfAttributeByName(categoryInputTxt,"value"));
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));
 		addTxtToInput("@!$^*&$#@*()");
 		AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt,"value").contains("9999"));
@@ -146,6 +145,7 @@ public class CardPage extends BasePage {
 		AssertCollector.assertTrue(cartControlIncBtn.isDisplayed(),"element is visible");
 		AssertCollector.assertTrue(cartControlDecBtn.isDisplayed(),"element is visible");
 		elementFluentWaitVisibility(cartControlDecBtn,driver).click();
+		sleepWait();
 		AssertCollector.assertTrue(categoryAddBtn.isDisplayed(),"element is visible");
 	}
 	public void validCardProductVerifyDescription()

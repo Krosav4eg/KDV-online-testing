@@ -1,27 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Category goods regression tests" parallel="tests" thread-count="3">
+<suite name="Category goods regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34335">
-        <classes>
-            <class name="testcases.mainPage.categorySection.CategoryGoodsTest">
-                <methods>
-                    <include name="verifySelectingCategoryTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="C34336">
+    <test name="CategoryGoodsTest">
         <classes>
             <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
         </classes>
     </test>
-    <test name="Category PAges">
+
+    <test name="CategoryGoodsTest">
         <classes>
             <class name="testcases.mainPage.categorySection.CategoryGoodsTest"/>
         </classes>

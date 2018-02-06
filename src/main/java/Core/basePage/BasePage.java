@@ -1,6 +1,5 @@
-package basePage;
+package Core.basePage;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -10,10 +9,7 @@ import utils.TestReporter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,45 +23,29 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
 /**
  * @author Sergey_Potapov
  */
-public abstract class BasePage {
-
+public class BasePage {
 
 
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
-            LOGGER.log(Level.INFO, " Get text of element ");
-            TestReporter.step(" Get text of element ");
-            return element.getText();
+            return getText(element);
         }
 
         public void textPresentDelegate(String expectedText) {
-            if (driver.getPageSource().contains(expectedText)) {
-                LOGGER.log(Level.INFO, expectedText + " - Required text is present on page");
-                TestReporter.step(expectedText + " - Required text is present on page");
-            } else {
-                LOGGER.log(Level.INFO, expectedText + " - Required text is present on page");
-                TestReporter.step(expectedText + " - Required text is present on page");
-            }
+            textPresent(expectedText);
         }
 
-        public String getCurrentUrl() {
-            LOGGER.log(Level.INFO, "Get current URL ");
-            TestReporter.step("Get current URL ");
-            return driver.getCurrentUrl().toString();
+        public String getCurrentUrlDelegate() {
+            return getCurrentUrl();
         }
 
-        public void getUrl(String url) {
-            LOGGER.log(Level.INFO, "Navigate to needed url ");
-            TestReporter.step("Navigate to needed url ");
-            driver.navigate().to(url);
+
+        public void getUrlDelegate(String url) {
+            getUrl(url);
         }
 
-        public void scrollToNecessaryElement(WebElement element) {
-            LOGGER.log(Level.INFO, "Scroll to necessary element ");
-            TestReporter.step("Scroll to necessary element ");
-            int y = element.getLocation().getY();
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("window.scrollTo(0," + y + ")");
+        public void scrollToNecessaryElementDelegate(WebElement element) {
+            scrollToNecessaryElement(element);
         }
 
         //TODO more flexible method
@@ -73,7 +53,7 @@ public abstract class BasePage {
             LOGGER.log(Level.INFO, "Scroll to necessary element ");
             TestReporter.step("Scroll to necessary element ");
             JavascriptExecutor jse = (JavascriptExecutor) driver;
-            jse.executeScript("window.scrollBy(0,600)", "");
+            jse.executeScript("window.scrollBy(0,500)", "");
         }
 
         public void switchDriverToAnyTabOfBrowser(int tabIndex) {
@@ -104,21 +84,39 @@ public abstract class BasePage {
             driver.close();
             System.setProperty("close.current.window.handle", parentHandle);
         }
+
+        public void fillInputField(WebElement element, WebDriver driver, String message) {
+            LOGGER.log(Level.INFO, "Feel input field ");
+            TestReporter.step("Feel input field ");
+            elementFluentWaitVisibility(element, driver).clear();
+            elementFluentWaitVisibility(element, driver).sendKeys(message);
+        }
+
+        public void backPage() {
+            LOGGER.log(Level.INFO, "Navigate to back page ");
+            TestReporter.step("Navigate to back page ");
+            driver.navigate().back();
+        }
+
         public String getValueOfAttributeByName(WebElement element, String attribute) {
             return element.getAttribute(attribute);
         }
+    }
+
+    public static void navigateBack() {
+        driver.navigate().back();
     }
 
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
+        BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
     //========================CUSTOM METHODS=============================================
 
-    public String getText(WebElement element) {
+    protected static String getText(WebElement element) {
         LOGGER.log(Level.INFO, " Get text of element ");
         TestReporter.step(" Get text of element ");
         return element.getText();
@@ -130,13 +128,13 @@ public abstract class BasePage {
         return Double.valueOf(parseText);
     }
 
-    protected String getCurrentUrl() {
+    protected static String getCurrentUrl() {
         LOGGER.log(Level.INFO, "Get current URL ");
         TestReporter.step("Get current URL ");
-        return driver.getCurrentUrl().toString();
+        return driver.getCurrentUrl();
     }
 
-    protected void getUrl(String url) {
+    protected static void getUrl(String url) {
         LOGGER.log(Level.INFO, "Navigate to needed url ");
         TestReporter.step("Navigate to needed url ");
         driver.navigate().to(url);
@@ -203,20 +201,20 @@ public abstract class BasePage {
      */
     public static void moveToElementJS(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        sleepWait();
     }
 
     /**
      * It just execute all browsers js script
      *
      * @param script example jQery("div:contains('test')").click()
-     * @param driver
      */
-    public static void CallJS(String script, WebDriver driver) {
+    protected static void CallJS(String script, WebDriver driver) {
         ((JavascriptExecutor) driver).executeScript(script);
     }
 
     protected static void hoverAndClick(WebDriver driver, WebElement mainElement, WebElement subElement) {
-        LOGGER.log(Level.INFO, "Move to the main element position and click needed element " + mainElement);
+        LOGGER.log(Level.INFO, "Move to the Singleton element position and click needed element " + mainElement);
         TestReporter.step(" Click on needed element " + subElement);
         Actions action = new Actions(driver);
         action.moveToElement(mainElement).perform();
@@ -226,6 +224,7 @@ public abstract class BasePage {
     protected static void clickOnIndexFromElementList(List<WebElement> element, int elementIndex) {
         LOGGER.log(Level.INFO, "Click on needed index of element " + elementIndex);
         TestReporter.step("Click on needed index of element " + elementIndex);
+        sleepWait();
         try {
             List<WebElement> elementList = element;
             for (int i = 0; i <= elementList.size(); i++) {
@@ -242,7 +241,7 @@ public abstract class BasePage {
         return element.getAttribute(attribute);
     }
 
-    public void getValueOfInputField(WebElement element, String attribute) {
+    protected void getValueOfInputField(WebElement element, String attribute) {
         if (getValueOfAttributeByName(element, attribute).isEmpty()) {
             LOGGER.log(Level.INFO, "Field is empty ");
             TestReporter.step(" Field is empty ");
@@ -266,11 +265,13 @@ public abstract class BasePage {
             e.printStackTrace();
             LOGGER.log(Level.WARNING, "AWT Exception occurs, see message for details: %s", e.getMessage());
         }
+        sleepWait();
         robot.keyPress(KeyEvent.VK_PAGE_DOWN);
         robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+        sleepWait();
     }
 
-    public void scrollToNecessaryElement(WebElement element) {
+    public static void scrollToNecessaryElement(WebElement element) {
         LOGGER.log(Level.INFO, "Scroll to necessary element on page");
         TestReporter.step("Scroll to necessary element on page");
         int y = element.getLocation().getY();
@@ -319,7 +320,7 @@ public abstract class BasePage {
      *
      * @param expectedText- text which must be present on the page
      */
-    protected void textPresent(String expectedText) {
+    protected static void textPresent(String expectedText) {
         if (driver.getPageSource().contains(expectedText)) {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
@@ -329,9 +330,9 @@ public abstract class BasePage {
         }
     }
 
-    protected void sleepWait() {
+    protected static void sleepWait() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

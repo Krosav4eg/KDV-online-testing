@@ -1,4 +1,4 @@
-package dataBased;
+package Core.dataBased;
 
 import java.sql.*;
 import org.json.JSONArray;
@@ -65,7 +65,6 @@ public class SQLMethods extends SQLConnect{
 		dataSQL.put("third_data",dataThirdSQL);
 		dataSQL.put("fourth_data",dataFourthSQL);
 		dataSQL.put("five_data",dataFiveSQL);
-		System.out.println(dataSQL);
 		return  dataSQL;
 	}
 
