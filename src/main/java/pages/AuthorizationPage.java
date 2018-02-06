@@ -1,6 +1,6 @@
 package pages;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -32,6 +32,9 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#pass")
     private WebElement passwordField;
 
+    @FindBy(id = "form-validate")
+    private WebElement loginContainer;
+
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
 
@@ -59,8 +62,8 @@ public class AuthorizationPage extends BasePage {
 
     public JSONObject mainAuthorizationInfo() {
         JSONObject data = new JSONObject();
-        data.put("email", AUTORIZATION_EMAIL);
-        data.put("password", AUTORIZATION_PASSWORD);
+        data.put("email", AUTHORIZATION_EMAIL);
+        data.put("password", AUTHORIZATION_PASSWORD);
         return data;
     }
 
@@ -206,6 +209,19 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
     }
+    public JSONObject authorizationData(JSONObject data)
+    {
+        JSONObject authorizationData=new JSONObject();
+        authorizationData.put("email","a.shaulo@andersenlab");
+        authorizationData.put("pass","");
+        return authorizationData;
+    }
+
+//    public void verifyValidSmallPassword()
+//    {
+//        getUrl(BASE_URL + "/customer/account/forgotpassword/");
+//
+//    }
 
     public void verifyValidEmailInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
@@ -238,7 +254,7 @@ public class AuthorizationPage extends BasePage {
         String link = getValueOfAttributeByName(mainPageLogo, "href");
         elementFluentWaitVisibility(mainPageLogo, driver).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page ",
                 link);
     }
 
@@ -256,7 +272,7 @@ public class AuthorizationPage extends BasePage {
         String linkTextAttribute = getValueOfAttributeByName(continueAsGuestButton, "href");
         elementFluentWaitVisibility(continueAsGuestButton, driver).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to main page link ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page link ",
                 linkTextAttribute);
     }
 
@@ -318,5 +334,21 @@ public class AuthorizationPage extends BasePage {
                 " Verify elements color of for organizations button ");
         textPresent("Зарегистрируйте вашу организацию и получайте полный комплект документов для юр. лиц. " +
                 "Для организаций, уже работающих с KDV, цены и условия отгрузки сохраняются.");
+    }
+
+    public JSONObject authorizationData()
+    {
+        JSONObject data=new JSONObject();
+        data.put("email","a.shaulo@andersenlab.com");
+        data.put("pass","As06051993");
+        return data;
+
+    }
+
+    public String  authForm(JSONObject data) {
+        getUrl(AUTORIZATION_PAGE_URL);
+        fillInputField(emailInputField, driver, data.getString("email"));
+        fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
+       return getText(loginContainer);
     }
 }

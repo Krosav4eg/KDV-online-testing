@@ -1,6 +1,6 @@
-package pages.personalCabinetPage;
+package pages.PersonalAreaPage;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,7 +67,7 @@ public class AccountDataPage extends BasePage {
         data.put("lastName", "Евдокимов");
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
-        data.put("currentPassword", AUTORIZATION_PASSWORD);
+        data.put("currentPassword", AUTHORIZATION_PASSWORD);
         return data;
     }
 

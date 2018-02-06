@@ -1,47 +1,13 @@
-<suite name="Header Regression Tests" parallel="tests" thread-count="1">
+<suite name="Header Regression Tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34339">
+    <test name="HitOfSalesTest">
         <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
-                <methods>
-                    <include name="verifyTotalSumHitSalesTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34340">
-        <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
-                <methods>
-                    <include name="verifyAddingProductIntoBasketTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34342">
-        <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
-                <methods>
-                    <include name="verifyOpeningModalWindowProductCardTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="C34343">
-        <classes>
-            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest">
-                <methods>
-                    <include name="verifyOpeningProductCardPTest"/>
-                </methods>
-            </class>
+            <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
         </classes>
     </test>
 </suite>

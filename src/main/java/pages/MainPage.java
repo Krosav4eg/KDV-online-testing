@@ -1,17 +1,23 @@
 package pages;
 
-import basePage.BasePage;
+import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 import utils.TestReporter;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,8 +42,17 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Регистрация']")
     private WebElement registrationButton;
 
+    @FindBy(id = "geo_modal")
+    private WebElement modelWindow;
+
     @FindBy(css = ".geo.j_geo")
     private WebElement selectCityModalWindow;
+
+    @FindBy(xpath = "//div[text()='Кемерово']")
+    private WebElement selectCityKemerovo;
+
+    @FindBy(className = "geo__title_default")
+    private WebElement geoWindowModal;
 
     @FindBy(xpath = "//div[text()='Томск']")
     private WebElement selectCityTomsk;
@@ -47,6 +62,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//button[text()='Да']")
     private WebElement acceptGeoConfirm;
+
+    @FindBy(css=".j_geo_confirm_confirm")
+    private WebElement acceptBtn;
 
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
@@ -59,6 +77,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".quicklink__item.quicklink__item_geo.j_geo_control.j_geo_control_modal")
     private WebElement baseCityLink;
+
+    @FindBy(className = "quicklink__item_geo")
+    public WebElement cityLink;
 
     @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
     private List<WebElement> otherCityLink;
@@ -189,7 +210,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".menu-categories__item")
     private WebElement parentItemOfProducts;
 
-    @FindBy(xpath = "(//a[@href='"+BASE_URL+"/new-year-gifts.html'])[2]")
+    @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
     private WebElement firstGoodInLinkList;
 
     //========================
@@ -204,6 +225,9 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".product-item__summary-cart")
     private List<WebElement> hitSalesBasketButtons;
+
+    @FindBy(className = "social")
+    private WebElement socialContainer;
 
     @FindBy(css = ".cart-control__active")
     private WebElement productAddedButton;
@@ -316,7 +340,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@id='inputs-search-table']//div[4]")
     private WebElement categoryFromList;
 
-    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[10]")
+    @FindBy(xpath = ".//*[@id='inputs-search-table']//div[9]")
     private WebElement anotherCategoryFromList;
 
     @FindBy(css = ".search-button__btn")
@@ -329,20 +353,18 @@ public class MainPage extends BasePage {
     private WebElement fullBasketDropdown;
 
     public void openMainPage() {
+        driver.get(BASE_URL);
         LOGGER.log(Level.INFO, "Open starting url");
         TestReporter.step("Open starting url");
-        driver.get(BASE_URL);
-        //TODO can`t find element, or add thread sleep or implement another
-//        moveToElementJS(driver, selectCityModalWindow);
-        sleepWait();
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
             elementIsClickable(acceptGeoConfirm, driver).click();
         }
-        driver.navigate().refresh();
         sleepWait();
+        driver.navigate().refresh();
     }
+
 
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
@@ -375,9 +397,14 @@ public class MainPage extends BasePage {
     public void changeCityToCurrent() {
         LOGGER.log(Level.INFO, "Check changing city to current");
         TestReporter.step("Check changing city to current");
+        textIsPresent(baseCityLink,driver,"Кемерово");
+        elementIsClickable(cityLink,driver).click();
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
+//        elementIsClickable(cityLink,driver).click();
         String currentCity = getText(baseCityLink);
         moveMouseTo(driver, baseCityLink);
-        elementIsClickable(baseCityLink, driver).click();
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
+        //elementIsClickable(baseCityLink, driver).click();
         Actions actions = new Actions(driver);
         actions.moveToElement(citySearchField);
         actions.click();
@@ -387,15 +414,16 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(currentCity, " City link is equal ", getText(baseCityLink));
     }
 
-    //TODO remove thread.sleep , think about it, how to fix it
-    public void changeCityToOther() throws InterruptedException {
+    public void changeCityToOther() {
+        textIsPresent(baseCityLink,driver,"Астрахань");
+        elementIsClickable(cityLink,driver).click();
         LOGGER.log(Level.INFO, "Check changing city to other");
         TestReporter.step("Check changing city to other");
         String otherCity = "Кемерово";
-        elementIsClickable(baseCityLink, driver).click();
-        clickOnIndexFromElementList(otherCityLink, 1);
-        Thread.sleep(3000);
-        AssertCollector.assertEquals(getText(baseCityLink), " LINK IS EQUAL ", otherCity);
+        textIsPresent(geoWindowModal,driver,"Или выберите из списка");
+        elementIsClickable(selectCityKemerovo,driver).click();
+	    textIsPresent(baseCityLink,driver,"Кемерово");
+        AssertCollector.assertEquals(baseCityLink.getAttribute("title"), " LINK IS EQUAL ", otherCity);
     }
 
     public void verifyingOpeningLowerPricesSection() {
@@ -551,7 +579,7 @@ public class MainPage extends BasePage {
 
     public void verifyAddingIntoBasket() {
         String expectedDescription = getText(firstItem);
-        scrollDown();
+        moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         if (productAddedButton.isDisplayed()) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -565,7 +593,7 @@ public class MainPage extends BasePage {
         }
         elementIsClickable(descriptionProductInBasket, driver);
         String actualDescription = getText(descriptionProductInBasket);
-        AssertCollector.assertEquals(actualDescription, " Description in main page equals description in" +
+        AssertCollector.assertEquals(actualDescription, " Description in Singleton page equals description in" +
                 " basket page ", expectedDescription);
     }
 
@@ -590,6 +618,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingVkLink() {
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://vk.com/kdvonline";
         textPresent("Мы стали еще ближе, присоединяйтесь к нам в соцсетях");
         elementFluentWaitVisibility(vkLink, driver).click();
@@ -597,18 +626,25 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingInstagramLink() {
+
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://www.instagram.com/kdvonline/";
         elementFluentWaitVisibility(instaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingGooglePlayLink() {
+        String originalHandle = driver.getWindowHandle();
         String expUrl = "https://play.google.com/store/apps/details?id=com.magonline.app";
         textPresent("Скачивайте приложение для Android");
         elementFluentWaitVisibility(googlePlayLink, driver).click();
@@ -616,6 +652,8 @@ public class MainPage extends BasePage {
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " URL IS EQUAL ", expUrl);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingShopLink() {
@@ -675,18 +713,20 @@ public class MainPage extends BasePage {
     }
 
     public void openingContractPurchaseSaleLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
-        System.out.println(linkTextAttribute);
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
         getCurrentUrl();
-        System.out.println(getCurrentUrl());
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingSupplyContractLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = "https://tomsk.kdvonline.ru/media/rules/Supply_contract.pdf";
         elementFluentWaitVisibility(supplyContractLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -694,9 +734,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPersonalDataLink() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(personalDataLink, "href");
         elementFluentWaitVisibility(personalDataLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -704,6 +747,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingPoliticConfidentialLink() {
@@ -748,6 +793,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingVkLinkInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerVkLink, "href");
         elementFluentWaitVisibility(footerVkLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -755,9 +801,13 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of VK ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingInstaInFooter() {
+
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
         elementFluentWaitVisibility(footerInstaLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -765,9 +815,12 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Instagram ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void openingGooglePlayInFooter() {
+        String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerGooglePlayLink, "href");
         elementFluentWaitVisibility(footerGooglePlayLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -775,6 +828,8 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of Google play ",
                 linkTextAttribute);
+        driver.close();
+        driver.switchTo().window(originalHandle);
     }
 
     public void clickingUpButtonInFooter() {
@@ -796,7 +851,7 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of enter ",
                 linkTextAttribute);
-        openMainPage();
+//        openMainPage();
     }
 
     public void verifyingAnswerYourQuestionsTelNumber() {
@@ -818,7 +873,8 @@ public class MainPage extends BasePage {
     public void verifyMyBasketWithProduct() {
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
-        scrollDown();
+        moveToElementJS(driver, socialContainer);
+        // scrollDown();
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
         if (productAddedButton.isDisplayed()) {
@@ -834,15 +890,16 @@ public class MainPage extends BasePage {
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
         String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
         String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
-        AssertCollector.assertEquals(actTitle, " Title in main page equals title in" +
+        AssertCollector.assertEquals(actTitle, " Title in Singleton page equals title in" +
                 " basket page ", expTitle);
-        AssertCollector.assertEquals(actPrice, " Price in main page equals price in" +
+        AssertCollector.assertEquals(actPrice, " Price in Singleton page equals price in" +
                 " basket page ", expPrice);
     }
 
     public void checkingProductsInBasket() {
         if (basketIsEmpty.isDisplayed()) {
-            scrollDown();
+            //scrollDown();
+            moveToElementJS(driver, socialContainer);
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
             clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
@@ -876,17 +933,13 @@ public class MainPage extends BasePage {
     }
 
     public void openingBasketAndOrdering() {
-        scrollDown();
+        moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 1);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 2);
         scrollToNecessaryElement(vkLink);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 3);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 4);
         elementFluentWaitVisibility(upButton, driver).click();
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
-        String linkTextValue = getValueOfAttributeByName(createOrderInBasket, "href");
-        elementFluentWaitVisibility(createOrderInBasket, driver).click();
+        String linkTextValue = getValueOfAttributeByName(submitAddingToBasket, "href");
+        elementFluentWaitVisibility(submitAddingToBasket, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
                 linkTextValue);
@@ -937,17 +990,13 @@ public class MainPage extends BasePage {
     }
 
     public void verifySearchButton() {
-        moveMouseTo(driver, searchButtonLabel);
-        String actualSearchButtonColor = "#ff1b41";
-        String expectedSearchButtonColor = getElementColor(searchButtonLabel, "color");
-        AssertCollector.assertEqualsJ(actualSearchButtonColor, expectedSearchButtonColor,
-                " Verify elements color of search button ");
         String actualTitle = "Поиск";
         String expectedTitle = searchButton.getAttribute("title");
         AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
     }
 
     public void placeholderCheckingInSearchField() {
+        getUrl(BASE_URL);
         String actPlaceholder = "Введите название товара";
         String expPlaceholder = searchProductField.getAttribute("placeholder");
         AssertCollector.assertEquals(actPlaceholder, " Current placeholder is equal to placeholder of ", expPlaceholder);
@@ -966,13 +1015,19 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actCategoryFromList, " Current name of category is equal to ", expCategoryFromList);
     }
 
-    public void verifyEmptyField() {
-        String expUrl = getCurrentUrl();
-        moveMouseTo(driver, searchButton);
-        elementIsClickable(searchButton, driver).click();
-        String actUrl = getCurrentUrl();
-        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
-    }
+//    public void verifyEmptyField() {
+//        String expUrl = getCurrentUrl();
+//        try {
+//            if (geoConfirmModalWindow.isDisplayed()) {
+//                elementIsClickable(acceptGeoConfirm, driver).click();
+//            }
+//        } catch (NoSuchElementException e) {
+//            e.getMessage();
+//        }
+//        elementFluentWaitVisibility(searchButton, driver).click();
+//        String actUrl = getCurrentUrl();
+//        AssertCollector.assertEquals(actUrl, " Url is equal url after refreshing ", expUrl);
+//    }
 
     public void verifyLatinTextInProductInputField() {
         fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
@@ -1007,23 +1062,32 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
     }
 
-    public void verifySearchQueryWithoutCategory() {
-        String actUrl = getCurrentUrl();
-        elementIsClickable(searchButton, driver).click();
-        String expUrl = getCurrentUrl();
-        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
-                expUrl);
-    }
+    //TODO same assertion is present in verifySearchButtonTest
+//    public void verifySearchQueryWithoutCategory() {
+//        String actUrl = getCurrentUrl();
+//        elementIsClickable(searchButton, driver).click();
+//        String expUrl = getCurrentUrl();
+//        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
+//                expUrl);
+//    }
 
-    public void verifySearchQueryWithCategory() {
-        elementIsClickable(categoriesHeader, driver).click();
-        elementIsClickable(categoryFromList, driver).click();
-        elementIsClickable(searchButton, driver).click();
-        String actUrl = getCurrentUrl();
-        String expUrl = BASE_URL+"/vafli.html";
-        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
-                expUrl);
-    }
+//TODO we have same assertion wit product вафли
+//    public void verifySearchQueryWithCategory() {
+//        elementIsClickable(categoriesHeader, driver).click();
+//        elementIsClickable(categoryFromList, driver).click();
+//        try {
+//            if (geoConfirmModalWindow.isDisplayed()) {
+//                elementIsClickable(acceptGeoConfirm, driver).click();
+//            }
+//        } catch (NoSuchElementException e) {
+//            e.getMessage();
+//        }
+//        elementIsClickable(searchButton, driver).click();
+//        String actUrl = getCurrentUrl();
+//        String expUrl = BASE_URL + "/pechen-e.html";
+//        AssertCollector.assertEquals(actUrl, " Current url is equal to category url ",
+//                expUrl);
+//    }
 
     public void verifySpecialSymbolsInProductInputField() {
         String expSymbols = "~`!@#$%^dfddgdfg&*()_+?:'dfvdfg{}[];";
@@ -1060,6 +1124,13 @@ public class MainPage extends BasePage {
     }
 
     public void verifySpacesInProductInputField() {
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
         elementFluentWaitVisibility(searchProductField, driver).clear();
         elementFluentWaitVisibility(searchProductField, driver).sendKeys((Keys.SPACE));
         String actUrl = getCurrentUrl();
@@ -1076,6 +1147,13 @@ public class MainPage extends BasePage {
     }
 
     public void verifySearchQueryWithInputTextWithoutCategory() {
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException e) {
+            e.getMessage();
+        }
         elementIsClickable(searchProductField, driver).click();
         fillInputField(searchProductField, driver, "вафли");
         elementIsClickable(searchButton, driver).click();
@@ -1106,6 +1184,13 @@ public class MainPage extends BasePage {
 
     public void verifySearchQueryWithInputTextWithCategory() {
         fillInputField(searchProductField, driver, "суфле");
+        try {
+            if (geoConfirmModalWindow.isDisplayed()) {
+                elementIsClickable(acceptGeoConfirm, driver).click();
+            }
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
+        }
         elementIsClickable(categoriesHeader, driver).click();
         String expResult = anotherCategoryFromList.getText();
         elementIsClickable(anotherCategoryFromList, driver).click();
