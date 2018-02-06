@@ -74,10 +74,24 @@
             <class name="testcases.registration.RegistrationTest"/>
         </classes>
     </test>
-    <test name="RegistrationTest Individual Entrepreneur">
+    <test name="RegistrationTest Individual Entrepreneur InformationAuthorizationTest">
         <classes>
             <class name="testcases.registration.individualEntrepreneur.InformationAuthorizationTest"/>
+        </classes>
+    </test>
+    <test name="RegistrationTest Individual Entrepreneur MandatoryFieldsTest">
+        <classes>
             <class name="testcases.registration.individualEntrepreneur.MandatoryFieldsTest"/>
+        </classes>
+    </test>
+    <test name="RegistrationTest Individual Entrepreneur ContactDataTest">
+        <classes>
+            <class name="testcases.registration.individualEntrepreneur.ContactDataTest"/>
+        </classes>
+    </test>
+    <test name="RegistrationTest Individual Entrepreneur OrganizationInfoTest">
+        <classes>
+            <class name="testcases.registration.individualEntrepreneur.OrganizationInfoTest"/>
         </classes>
     </test>
 </suite>
