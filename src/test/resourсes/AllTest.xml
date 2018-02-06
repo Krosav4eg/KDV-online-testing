@@ -69,10 +69,16 @@
             <class name="testcases.OrderingPage.OrderingPageTest"/>
         </classes>
     </test>
-        <test name="RegistrationTest">
-            <classes>
-                <class name="testcases.registration.RegistrationTest"/>
-            </classes>
-        </test>
+    <test name="RegistrationTest">
+        <classes>
+            <class name="testcases.registration.RegistrationTest"/>
+        </classes>
+    </test>
+    <test name="RegistrationTest Individual Entrepreneur">
+        <classes>
+            <class name="testcases.registration.individualEntrepreneur.InformationAuthorizationTest"/>
+            <class name="testcases.registration.individualEntrepreneur.MandatoryFieldsTest"/>
+        </classes>
+    </test>
 
 </suite>

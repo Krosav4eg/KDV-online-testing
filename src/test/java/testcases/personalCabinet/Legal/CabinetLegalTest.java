@@ -7,6 +7,9 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static utils.Constants.FADEEV_EMAIL;
+import static utils.Constants.FADEEV_PASSWORD;
+
 public class CabinetLegalTest extends BaseTest{
 
 	@Test
@@ -26,8 +29,8 @@ public class CabinetLegalTest extends BaseTest{
 	{
 		TestReporter.testTitle("Test ID = 41521");
 		JSONObject data = personalCabinetPage.mainAccountInfo();
-		data.put("email","test_g.fadeev@magdv.com");
-		data.put("password","gctbVY");
+		data.put("email",FADEEV_EMAIL);
+		data.put("password",FADEEV_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
 		personalCabinetPage.verifyFieldsAuthorization();
 	}
