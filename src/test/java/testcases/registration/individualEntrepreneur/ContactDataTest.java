@@ -28,4 +28,19 @@ public class ContactDataTest extends BaseTest {
         del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф.");
         del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.");
     }
+
+    @Test
+    public void verifyIncorrectPhoneValuesTest() {
+        TestReporter.testTitle("Test ID = 37633,37636");
+        registrationPage.verifyIndividualEntrepreneurRadioButton();
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("phone", "@!#$%&*()_+/*");
+        registrationPage.verifyAuthorizationFields(data);
+        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+
+        data = registrationPage.mainInfoRegistration();
+        data.put("phone", RandomStringUtils.randomNumeric(9));
+        registrationPage.verifyAuthorizationFields(data);
+        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+    }
 }
