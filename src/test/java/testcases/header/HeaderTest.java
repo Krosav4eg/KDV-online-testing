@@ -34,7 +34,7 @@ public class HeaderTest extends BaseTest {
 //        TestReporter.testTitle("Test ID - C34285");
 //          driver.manage().deleteAllCookies();
 //          driver.navigate().refresh();
-          mainPage.changeCityToOther();
+        mainPage.changeCityToOther();
 //     }
 //
 //     @Test
@@ -75,11 +75,11 @@ public class HeaderTest extends BaseTest {
     public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - C34292");//C34292 - в этом кейсе объеденены C34293, C34299, C34296, C34297
         mainPage.verifyMyBasketWithProduct();
-   }
+    }
 
-   @Test
-   public void verifyProductsInBasketTest() {
-     TestReporter.testTitle("Test ID = 34299");
+    @Test
+    public void verifyProductsInBasketTest() {
+        TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
 //    }
 ////TODO not fix in progress
