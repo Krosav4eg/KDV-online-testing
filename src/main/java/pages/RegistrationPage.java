@@ -431,40 +431,6 @@ public class RegistrationPage extends BasePage {
         return organizationInformation + addressDelivery + contactData + authorizationInformation;
     }
 
-    public String selectExistEmail()
-    {
-       elementFluentWaitVisibility(forgotPasswordLink,driver).click();
-      return getCurrentUrl();
-    }
-
-    public String verifyUnselectCheckoBoxIndividual(JSONObject data) {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationCheckBox,driver).click();
-        elementFluentWaitVisibility(getIndividualButton,driver).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformationIndividual(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
-        scrollToNecessaryElement(footer);
-        elementIsClickable(sendButton,driver).click();
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
-    }
-    public String verifyAuthorizationFieldsIndividual(JSONObject data) {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationCheckBox,driver).click();
-        elementFluentWaitVisibility(getIndividualButton,driver).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformationIndividual(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
-        scrollToNecessaryElement(footer);
-        elementIsClickable(subscription,driver).click();
-        AssertCollector.assertTrue(subscription.isEnabled());
-        elementIsClickable(agreeLegal,driver).click();
-        AssertCollector.assertTrue(agreeLegal.isEnabled());
-        elementIsClickable(sendButton,driver).click();
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
-    }
 
     public String selectExistEmail()
     {
@@ -537,16 +503,6 @@ public class RegistrationPage extends BasePage {
         return getText(informationOrganization);
     }
 
-    private String organizationInformationIndividual(JSONObject data) {
-        moveMouseTo(driver,allertTxt);
-        elementFluentWaitVisibility(organizationFullName,driver).click();
-        elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
-        elementFluentWaitVisibility(taxpayerId,driver).click();
-        elementFluentWaitVisibility(taxpayerId,driver).sendKeys(data.getString("taxId"));
-        elementFluentWaitVisibility(legalAddress,driver).click();
-        elementFluentWaitVisibility(legalAddress,driver).sendKeys(data.getString("legalAddress"));
-        return getText(informationOrganization);
-    }
 
     String addressDelivery(JSONObject data) {
         elementFluentWaitVisibility(company, driver).click();
