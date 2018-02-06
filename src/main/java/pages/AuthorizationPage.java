@@ -38,6 +38,15 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
 
+    @FindBy(xpath = "//a[@title=\"Вход\"]")
+    private WebElement loginButton;
+
+    @FindBy(css = ".top-link-checkout")
+    private WebElement registBtn;
+
+    @FindBy(xpath = "//a[@title=\"Выйти\"]")
+    private WebElement exitButton;
+
     @FindBy(xpath = ".//div[text()='Регистрация']/../..")
     private WebElement registrationButton;
 
@@ -74,7 +83,7 @@ public class AuthorizationPage extends BasePage {
         elementFluentWaitVisibility(passwordField, driver).clear();
         elementFluentWaitVisibility(passwordField, driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authorizationButton, driver).click();
-        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL),"Verify current url");
+        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
     }
 
     public void authAsPhysicalPerson() {
@@ -83,6 +92,9 @@ public class AuthorizationPage extends BasePage {
         fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
         elementFluentWaitVisibility(authorizationButton, driver).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("http://kemerovo.demo.dev.magonline.ru/customer/account/"));
+        elementFluentWaitVisibility(exitButton, driver).click();
+        AssertCollector.assertTrue(registBtn.isDisplayed(), "Registration button is appear");
+        AssertCollector.assertTrue(loginButton.isDisplayed(), "Login button is appear");
     }
 
     public void typeIncorrectPasswordInAuth() {
@@ -209,11 +221,11 @@ public class AuthorizationPage extends BasePage {
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
     }
-    public JSONObject authorizationData(JSONObject data)
-    {
-        JSONObject authorizationData=new JSONObject();
-        authorizationData.put("email","a.shaulo@andersenlab");
-        authorizationData.put("pass","");
+
+    public JSONObject authorizationData(JSONObject data) {
+        JSONObject authorizationData = new JSONObject();
+        authorizationData.put("email", "a.shaulo@andersenlab");
+        authorizationData.put("pass", "");
         return authorizationData;
     }
 
@@ -227,7 +239,7 @@ public class AuthorizationPage extends BasePage {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
         fillInputField(emailInputAtForgotPassword, driver, "a.shaulo@andersenlab.com");
         elementFluentWaitVisibility(sendEmailForVerification, driver).click();
-        String expLink = BASE_URL+"/customer/account/login/";
+        String expLink = BASE_URL + "/customer/account/login/";
         String actLink = getCurrentUrl();
         AssertCollector.assertEquals(actLink, " Current link is equal to ", expLink);
         textPresent("Если на сайте существует учётная запись с адресом a.shaulo@andersenlab.com " +
@@ -336,19 +348,18 @@ public class AuthorizationPage extends BasePage {
                 "Для организаций, уже работающих с KDV, цены и условия отгрузки сохраняются.");
     }
 
-    public JSONObject authorizationData()
-    {
-        JSONObject data=new JSONObject();
-        data.put("email","a.shaulo@andersenlab.com");
-        data.put("pass","As06051993");
+    public JSONObject authorizationData() {
+        JSONObject data = new JSONObject();
+        data.put("email", "a.shaulo@andersenlab.com");
+        data.put("pass", "As06051993");
         return data;
 
     }
 
-    public String  authForm(JSONObject data) {
+    public String authForm(JSONObject data) {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, driver, data.getString("email"));
         fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
-       return getText(loginContainer);
+        return getText(loginContainer);
     }
 }
