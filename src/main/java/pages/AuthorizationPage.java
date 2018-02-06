@@ -33,7 +33,7 @@ public class AuthorizationPage extends BasePage {
     private WebElement passwordField;
 
     @FindBy(id = "form-validate")
-    private WebElement loginContainer;
+    public WebElement loginContainer;
 
     @FindBy(css = "#send2")
     private WebElement authorizationButton;
