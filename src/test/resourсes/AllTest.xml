@@ -74,10 +74,10 @@
             <class name="testcases.registration.RegistrationTest"/>
         </classes>
     </test>
-    <test name="Registration Individual Entrepreneur">
+    <test name="RegistrationTest Individual Entrepreneur">
         <classes>
-            <class name="testcases.registration.individualEntrepreneur.OrganizationInfoTest"/>
-            <class name="testcases.registration.individualEntrepreneur.ContactDataTest"/>
+            <class name="testcases.registration.individualEntrepreneur.InformationAuthorizationTest"/>
+            <class name="testcases.registration.individualEntrepreneur.MandatoryFieldsTest"/>
         </classes>
     </test>
 </suite>
