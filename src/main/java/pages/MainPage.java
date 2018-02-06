@@ -9,15 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 import utils.TestReporter;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -993,6 +988,8 @@ public class MainPage extends BasePage {
         String actualTitle = "Поиск";
         String expectedTitle = searchButton.getAttribute("title");
         AssertCollector.assertEquals(actualTitle, " Current title is equal to title of ", expectedTitle);
+        String enterButtonValue = getValueOfAttributeByName(searchProductField, "placeholder");
+        AssertCollector.assertEqualsJ(enterButtonValue, "Введите название товара","Placeholder values are equals");
     }
 
     public void placeholderCheckingInSearchField() {
