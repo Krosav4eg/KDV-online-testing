@@ -89,7 +89,7 @@ public class MainPage extends BasePage {
     private WebElement citySearchDropdown;
 
     @FindBy(css = ".top-link-myaccount")
-    private WebElement myAccountLink;
+    public WebElement myAccountLink;
 
     @FindBy(xpath = "//div[2]//h1")
     private WebElement resultsProductSearchTitle;

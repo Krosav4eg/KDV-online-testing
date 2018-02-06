@@ -39,13 +39,13 @@ public class AuthorizationPage extends BasePage {
     private WebElement authorizationButton;
 
     @FindBy(xpath = "//a[@title=\"Вход\"]")
-    private WebElement loginButton;
+    public WebElement loginButton;
 
     @FindBy(css = ".top-link-checkout")
-    private WebElement registBtn;
+    public WebElement registBtn;
 
     @FindBy(xpath = "//a[@title=\"Выйти\"]")
-    private WebElement exitButton;
+    public WebElement exitButton;
 
     @FindBy(xpath = ".//div[text()='Регистрация']/../..")
     private WebElement registrationButton;
