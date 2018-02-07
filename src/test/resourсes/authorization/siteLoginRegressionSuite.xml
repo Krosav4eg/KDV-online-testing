@@ -1,15 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Control panel regression tests">
+<suite name="Authorization regression tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="ControlPanelPageTest">
+    <test name="Authorization test">
         <classes>
-            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
+            <class name="testcases.authorization.SiteLoginTest">
+            </class>
         </classes>
     </test>
 </suite>
+
+
+

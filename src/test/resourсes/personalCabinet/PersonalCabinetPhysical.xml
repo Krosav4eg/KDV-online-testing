@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Account data regression tests">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="PersonalCabinet Legal">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
+            <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
+            <class name="testcases.personalCabinet.Legal.LegalDataTest"/>
+            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
+            <class name="testcases.personalCabinet.Legal.OrderDataTest"/>
+        </classes>
+    </test>
+</suite>

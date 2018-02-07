@@ -36,17 +36,13 @@ public class OrderingLegalPageTest extends BaseTest {
         String currentName = del.getValueOfAttributeByName(orderingGuestPage.firstNameTxt, "value");
         AssertCollector.assertEqualsJ(currentName, "Илья",
                 "First name is correct");
-
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.lastNameTxt, "value"),
                 "Панфилов", "Last name is correct");
-
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.phoneTxt, "value"),
                 FADEEV_PHONE, "Phones correct");
-
         AssertCollector.assertTrue(orderingLegalPage.transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
-
         del.textPresentDelegate("Обработка, пожалуйста, подождите. Не нажимайте на обновление или кнопку" +
                 " назад иначе этот заказ не будет оформлен.");
         del.textPresentDelegate("Ваш заказ принят.");
@@ -55,19 +51,14 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
-
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
                 BASE_URL + "/", "Urls are equals");
-
         orderingGuestPage.clickOnWebElement(customerAccountPage.myAccountLink);
-
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
                 BASE_URL + "/customer/account", "Urls are equals");
         del.getUrlDelegate(BASE_URL + "/sales/order/history/");
-
         AssertCollector.assertEqualsJ(orderNumberActual, orderingLegalPage.
                         getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");

@@ -1,14 +1,21 @@
 package testcases.header;
 
+import Core.basePage.BasePage;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
+import utils.AssertCollector;
 import utils.TestReporter;
+
+import static utils.Constants.BASE_URL;
 
 /**
  * @author Sergey Potapov
  */
 public class HeaderTest extends BaseTest {
 
+    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
 
     @Test
     public void verifyLogoTest() {
@@ -34,7 +41,7 @@ public class HeaderTest extends BaseTest {
 //        TestReporter.testTitle("Test ID - C34285");
 //          driver.manage().deleteAllCookies();
 //          driver.navigate().refresh();
-          mainPage.changeCityToOther();
+        mainPage.changeCityToOther();
 //     }
 //
 //     @Test
@@ -75,11 +82,11 @@ public class HeaderTest extends BaseTest {
     public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - C34292");//C34292 - в этом кейсе объеденены C34293, C34299, C34296, C34297
         mainPage.verifyMyBasketWithProduct();
-   }
+    }
 
-   @Test
-   public void verifyProductsInBasketTest() {
-     TestReporter.testTitle("Test ID = 34299");
+    @Test
+    public void verifyProductsInBasketTest() {
+        TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
 //    }
 ////TODO not fix in progress
@@ -103,15 +110,28 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifyAuthAsPhysicalPersonTest() {
-        TestReporter.testTitle("Test ID = 34309");
+        TestReporter.testTitle("Test ID = 34309-34310");
         authorizationPage.authAsPhysicalPerson();
+        mainPage.verifyPhysicalAuthCredential();
     }
 
     @Test
-    public void verifyPhysicalAuthCredentialTest() {
-        TestReporter.testTitle("Test ID = 34310");
-        authorizationPage.authAsPhysicalPerson();
-        mainPage.verifyPhysicalAuthCredential();
+    public void verifyPersonalCabinetLinkTest() {
+        TestReporter.testTitle("Test ID = 34312");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", "test_n.moiseeva@magdv.com");
+        data.put("password", "bu5ttq");
+        authorizationPage.verifyAuthFields(data);
+        del.getUrlDelegate(BASE_URL);
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/", "Urls are equals");
+        AssertCollector.assertEqualsJ(mainPage.myAccountLink.getText(),
+                "ООО Аванс", "Organization name is correct");
+        orderingGuestPage.clickOnWebElement(mainPage.myAccountLink);
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/customer/account",
+                "Urls are equals");
+        orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
+        AssertCollector.assertTrue(authorizationPage.registBtn.isDisplayed(), "Registration button is appear");
+        AssertCollector.assertTrue(authorizationPage.loginButton.isDisplayed(), "Login button is appear");
     }
 
     @Test
@@ -135,19 +155,9 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifySearchButtonTest() {
-        TestReporter.testTitle("Test ID = 34374");
+        TestReporter.testTitle("Test ID = 34374-34376");
         mainPage.verifySearchButton();
-    }
-
-    @Test
-    public void placeholderCheckingInSearchFieldTest() {
-        TestReporter.testTitle("Test ID = 34375");
         mainPage.placeholderCheckingInSearchField();
-    }
-
-    @Test
-    public void verificationOfCategoriesDropdownInSearchFieldTest() {
-        TestReporter.testTitle("Test ID = 34376");
         mainPage.verificationOfCategoriesDropdownInSearchField();
     }
 

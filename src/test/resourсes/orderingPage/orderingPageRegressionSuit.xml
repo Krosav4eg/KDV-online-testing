@@ -9,7 +9,19 @@
 
     <test name="OrderingPageTest">
         <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest"/>
+            <class name="testcases.OrderingPage.OrderingGuestPageTest"/>
+        </classes>
+    </test>
+
+    <test name="OrderingPageTest">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
+        </classes>
+    </test>
+
+    <test name="OrderingPageTest">
+        <classes>
+            <class name="testcases.OrderingPage.OrderingPhysicalPageTest"/>
         </classes>
     </test>
 </suite>
