@@ -38,13 +38,11 @@ public class MagDvLogger {
         if (!folder.exists()) {
             folder.mkdir();
         }
-
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         Formatter formatterHTML = new HtmlLoggerFormatter();
         SimpleFormatter formatterTxt = new SimpleFormatter();
         FileHandler fileTxt;
         FileHandler fileHTML;
-
         Logger rootLogger = Logger.getLogger("");
         Handler[] handlers = rootLogger.getHandlers();
         if (handlers.length != 0) {
@@ -57,13 +55,13 @@ public class MagDvLogger {
         try {
             fileTxt = new FileHandler(LOGGING_TXT_FILE, true);
             fileHTML = new FileHandler(LOGGING_HTML_FILE, true);
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Unable to create log files!");
         }
         fileTxt.setFormatter(formatterTxt);
         logger.addHandler(fileTxt);
-
         fileHTML.setFormatter(formatterHTML);
         logger.addHandler(fileHTML);
     }

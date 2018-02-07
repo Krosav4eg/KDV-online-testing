@@ -46,18 +46,58 @@
                 <class name="testcases.mainPage.hitOfSales.HitOfSalesTest"/>
             </classes>
         </test>
-    <test name="PersonalCabinet">
+    <test name="PersonalCabinet Physical OrderingDataTest">
         <classes>
-            <class name="testcases.personalCabinet.AccountDataPageTest"/>
-            <class name="testcases.personalCabinet.ControlPanelPageTest"/>
-            <class name="testcases.personalCabinet.DeliveryAddressPageTest"/>
-            <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
-            <class name="testcases.personalCabinet.PersonalCabinetTest"/>
+            <class name="testcases.personalCabinet.Physical.OrderingDataTest"/>
         </classes>
     </test>
-    <test name="Orering">
+    <test name="PersonalCabinet Physical CabinetTest">
+    <classes>
+            <class name="testcases.personalCabinet.Physical.CabinetTest"/>
+    </classes>
+    </test>
+    <test name="PersonalCabinet Physical AccountDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Physical.AccountDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet Physical AddressesDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Physical.AddressesDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet OrderDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.OrderDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet LegalDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.LegalDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet AddressesDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet CabinetLegalTest">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
+        </classes>
+    </test>
+    <test name="PersonalCabinet PersonalDataTest">
+        <classes>
+            <class name="testcases.personalCabinet.Legal.PersonalDataTest"/>
+        </classes>
+    </test>
+    <test name="Ordering OrderingLegalPageTest">
         <classes>
             <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
+        </classes>
+    </test>
+    <test name="Ordering OrderingPageTest">
+        <classes>
             <class name="testcases.OrderingPage.OrderingPageTest"/>
         </classes>
     </test>

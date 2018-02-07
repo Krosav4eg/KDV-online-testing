@@ -5,17 +5,13 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import utils.TestReporter;
-
-import javax.xml.crypto.Data;
+import static Core.driverFactory.BrowserFactory.testName;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.seleniumhq.jetty9.http.DateGenerator.formatDate;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.WaitingUtility.textIsPresent;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 
@@ -32,6 +28,8 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterNavigateRefresh(WebDriver webDriver)
 	{
+		LOGGER.log(Level.INFO,"Refresh Current Page\t");
+		TestReporter.step("Refresh Current Page\t");
 		waitForPageLoad(webDriver);
 		//System.out.println("afterNavigateRefresh " +webDriver);
 	}
@@ -46,7 +44,12 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void afterChangeValueOf(WebElement webElement, WebDriver webDriver, CharSequence[] charSequences)
 	{
-		//System.out.println("afterChangeValueOf "+webElement);
+		if(charSequences!=null)
+		{
+			LOGGER.log(Level.INFO, "Change value in element\t" + webElement + "\t add value:" + charSequences[0]);
+			TestReporter.step("Change value in element\t" + webElement + "\t add value:" + charSequences[0]);
+			//System.out.println("afterChangeValueOf "+webElement);
+		}
 	}
 
 	@Override
@@ -96,14 +99,14 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
-		LOGGER.log(Level.INFO,testName+"\tFind element\t"+arg0);
-		TestReporter.step(testName+"\tFind element\t"+arg0);
 		//waitForPageLoad(arg2);
 		//System.out.println("beforeFindBy "+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 	@Override
 	public void afterFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
+		LOGGER.log(Level.INFO,"Find element\t"+arg0);
+		TestReporter.step("Find element\t"+arg0);
 		//System.out.println("afterFindBy "+arg0+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 	@Override
@@ -151,7 +154,6 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	}
 
 
-	public static String testName;
 	//TODO not completed
 	/***
 	 * Need to implement it refactoring

@@ -105,6 +105,7 @@ public class BrowserFactory implements DriverCapabilities  {
         return driver;
     }
 
+    public static String testName;
     /**
      * Getting personal object for every browser driver
      */
