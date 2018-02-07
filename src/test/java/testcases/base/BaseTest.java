@@ -1,11 +1,13 @@
 package testcases.base;
 
 import Core.driverFactory.BrowserFactory;
+import logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -27,14 +29,19 @@ import utils.TestReporter;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static Core.driverFactory.EventHandler.testName;
+import static Core.driverFactory.BrowserFactory.testName;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 /**
  * @author Sergey Potapov
  */
 public class BaseTest {
+
+    private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
     protected AuthorizationPage authorizationPage;
@@ -58,7 +65,6 @@ public class BaseTest {
     @BeforeMethod
     public void verifyBrowser(Method method) {
         testName=method.getName();
-        //System.err.println(method.getName());
         if (driver==null)
         {
             driver = singleton.setDriver();
@@ -74,13 +80,35 @@ public class BaseTest {
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-    @BeforeTest//(dependsOnMethods = {"testcases.authorization.AuthorizationTest.openMainPage"})
-    public void runBrowser() {
-        driver = singleton.setDriver();
-        initPageElements();
-        TestReporter.step("Open Main page");
-        mainPage.openMainPage();
-        screen();
+//    @BeforeTest
+//    public void runBrowser() {
+//        driver = singleton.setDriver();
+//        initPageElements();
+//        TestReporter.step("Open Main page");
+//        mainPage.openMainPage();
+//        screen();
+//    }
+
+    private void logStatus(ITestResult result,String date)
+    {
+	    switch (result.getStatus())
+	    {
+		    case ITestResult.FAILURE:
+		    {
+			    LOGGER.log(Level.WARNING, "TEST STATUS: FAILURE\t"+date);
+			    break;
+		    }
+		    case ITestResult.SKIP:
+		    {
+			    LOGGER.log(Level.WARNING, "TEST STATUS: SKIP\t"+date);
+			    break;
+		    }
+		    case ITestResult.SUCCESS:
+		    {
+			    LOGGER.log(Level.FINE, "TEST STATUS: PASSED\t"+date);
+			    break;
+		    }
+	    }
     }
 
     private void screen() {
@@ -91,7 +119,7 @@ public class BaseTest {
                 ex.printStackTrace();
             }
 
-        if (new File(ERROR_SCREENSHOT_FOLDER).exists())
+        if (new File(SUCCESS_SCREENSHOT_FOLDER).exists())
             try {
                 FileUtils.cleanDirectory(new File(SUCCESS_SCREENSHOT_FOLDER));
             } catch (IOException ex) {
@@ -100,9 +128,17 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void clearCookies() {
+    public void clearCookies(ITestResult result) {
+        System.err.println(result.getStatus());
+        System.err.println(result.getName());
+        long millis=result.getEndMillis()-result.getStartMillis();
+        String date=String.format("TEST TIME: %02d min, %02d sec",
+                TimeUnit.MILLISECONDS.toMinutes(millis),
+                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+        );
        driver.manage().deleteAllCookies();
        mainPage.openMainPage();
+       logStatus(result,date);
     }
 
     /**
@@ -110,7 +146,6 @@ public class BaseTest {
      */
     @AfterTest()
     public void closeBrowser() {
-        driver.close();
         driver.quit();
         TestReporter.removeNumberStep();
     }

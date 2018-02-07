@@ -6,7 +6,7 @@ import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
-
+import static Core.driverFactory.BrowserFactory.testName;
 
 
 /**
@@ -14,9 +14,8 @@ import java.util.logging.LogRecord;
  */
 public class HtmlLoggerFormatter extends Formatter {
     private static final String CLOSE_TABLE_CELL_TAG = "</td>\n";
-    private static final String CLOSE_TABLE_TAG = "\t<td>";
+    private static String OPEN_TABLE_TAG = "\t<td>";
     private static final String CLOSE_TABLE_ROW = "</tr>\n";
-
 
 
     /**
@@ -29,29 +28,33 @@ public class HtmlLoggerFormatter extends Formatter {
     public String format(LogRecord rec) {
         StringBuilder buf = new StringBuilder(1000);
         buf.append(CLOSE_TABLE_ROW);
-
         if (rec.getLevel().intValue() >= Level.WARNING.intValue()) {
-            buf.append("\t<td style=\"color:red\">");
-            buf.append("<b>");
-            buf.append(rec.getLevel());
-            buf.append("</b>");
-        } else {
-            buf.append(CLOSE_TABLE_TAG);
-            buf.append(rec.getLevel());
+            OPEN_TABLE_TAG="\t<td style=\"color:red\">";
+        }
+        if(rec.getLevel().intValue() == Level.FINE.intValue()) {
+            OPEN_TABLE_TAG="\t<td style=\"color:green\">";
         }
 
+        buf.append(OPEN_TABLE_TAG);
+        buf.append(rec.getLevel());
         buf.append(CLOSE_TABLE_CELL_TAG);
-        buf.append(CLOSE_TABLE_TAG);
+        buf.append(OPEN_TABLE_TAG);
         buf.append(calcDate(rec.getMillis()));
         buf.append(CLOSE_TABLE_CELL_TAG);
-        buf.append(CLOSE_TABLE_TAG);
+        buf.append(OPEN_TABLE_TAG);
+        buf.append(testName);
+        buf.append(CLOSE_TABLE_CELL_TAG);
+        buf.append(OPEN_TABLE_TAG);
         buf.append(formatMessage(rec));
         buf.append(CLOSE_TABLE_CELL_TAG);
-        buf.append(CLOSE_TABLE_ROW);
-
+        OPEN_TABLE_TAG="\t<td>";
         return buf.toString();
     }
-
+    private String formatDate(long milliseconds) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        Date resultDate = new Date(milliseconds);
+        return dateFormat.format(resultDate);
+    }
     /**
      * Calculate date-time of logging
      *
@@ -59,12 +62,10 @@ public class HtmlLoggerFormatter extends Formatter {
      * @return - string with formatted date
      */
     private String calcDate(long milliseconds) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd,yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
         Date resultDate = new Date(milliseconds);
         return dateFormat.format(resultDate);
     }
-    //TODO add header Test Name
-    //TODO add test name off all test to log
     /**
      * This method is called just after the handler using this formatter is created
      *
@@ -74,31 +75,38 @@ public class HtmlLoggerFormatter extends Formatter {
     @Override
     public String getHead(Handler h) {
         return "<!DOCTYPE html>\n<head>\n<style>\n"
-                + "table { width: 100% }\n"
-                + "th { font:bold 10pt Tahoma; }\n"
-                + "td { font:normal 10pt Tahoma; }\n"
-                + "h1 {font:normal 11pt Tahoma;}\n"
+                + "table { width: 100%;}\n"
+                + "th { font:bold 10pt Tahoma;}\n"
+                + "td { font:normal 11pt Tahoma; }\n"
+                + "h1 {font:normal 13pt Tahoma;}\n"
                 + "</style>\n"
                 + "</head>\n"
                 + "<body>\n"
                 + "<h1>" + (new Date()) + "</h1>\n"
-                + "<table border=\"0\" cellpadding=\"5\" cellspacing=\"3\">\n"
+                + "<table border=\"0\" cellpadding=\"5\" cellspacing=\"4\">\n"
                 + "<tr align=\"left\">\n"
-                + "\t<th style=\"width:10%\">Loglevel</th>\n"
+                + "\t<th style=\"width:5%\">Loglevel</th>\n"
                 + "\t<th style=\"width:15%\">Time</th>\n"
-                + "\t<th style=\"width:65%\">Log Message</th>\n"
-		        + "\t<th style=\"width:10%\">Test Name</th>\n"
+                + "\t<th style=\"width:20%\">Test Name</th>\n"
+                + "\t<th style=\"width:60%\">Log Message</th>\n"
                 + "</tr>\n";
     }
 
-    /**
-     * This method is called just after the handler using this formatter is closed
-     *
-     * @param h - handler
-     * @return - html table
-     */
+    public static String getFooter() {
+        return CLOSE_TABLE_CELL_TAG;
+    }
+
+
+
+   /**
+    * This method is called just after the handler using this formatter is closed
+    *
+    * @param h - handler
+    * @return - html table
+    */
     @Override
     public String getTail(Handler h) {
         return "</table>\n</body>\n</html>";
     }
+
 }

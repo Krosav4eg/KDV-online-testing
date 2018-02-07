@@ -60,14 +60,14 @@ public class BrowserFactory implements DriverCapabilities  {
             switch (driverName)
             {
                 case FIREFOX: {
-                    LOGGER.log(Level.INFO, "set browser FIREFOX");
+                    //LOGGER.log(Level.INFO, "set browser FIREFOX");
                     System.setProperty(DRIVER_NAME_FIREFOX, FIREFOX_DRIVER_PATH);
                     driverThread.set(new FirefoxDriver(firefoxCapabilities()));
                     driver= driverThread.get();
                     break;
                 }
                 case CHROME: {
-                    LOGGER.log(Level.INFO, "set browser CHROME");
+                    //LOGGER.log(Level.INFO, "set browser CHROME");
                     if(isUnix ()){
                         System.out.println("This is Unix or Linux OS");
                         System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH_UNIX);
@@ -80,7 +80,7 @@ public class BrowserFactory implements DriverCapabilities  {
                     break;
                 }
                 case GRID: {
-                    LOGGER.log(Level.INFO, "set browser GRID");
+                   // LOGGER.log(Level.INFO, "set browser GRID");
                     try {
                         String Node = "http://192.168.1.3:4444/wd/hub";
                         driver = new RemoteWebDriver(new URL(Node),chromeCapabilities());
@@ -105,6 +105,7 @@ public class BrowserFactory implements DriverCapabilities  {
         return driver;
     }
 
+    public static String testName;
     /**
      * Getting personal object for every browser driver
      */

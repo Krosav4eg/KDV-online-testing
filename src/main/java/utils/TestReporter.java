@@ -51,8 +51,10 @@ public class TestReporter {
      * @param step - message that corresponds to a step in executed scenario
      */
     public static void step(String step) {
-        Reporter.log(format(P_TAG, getTimeStamp() + format(STEP_TAG, numberStep.get().getAndIncrement() + ": ") + format(STEP_MESSAGE_TAG, step)), false);
+        Reporter.log(format(P_TAG, getTimeStamp() + format(STEP_TAG, numberStep.get().getAndIncrement() + ":") + format(STEP_MESSAGE_TAG, step)), false);
     }
+
+
 
     /**
      * This method mark your message as a part of step log,

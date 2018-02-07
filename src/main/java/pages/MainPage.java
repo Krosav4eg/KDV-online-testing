@@ -349,8 +349,8 @@ public class MainPage extends BasePage {
 
     public void openMainPage() {
         driver.get(BASE_URL);
-        LOGGER.log(Level.INFO, "Open starting url");
-        TestReporter.step("Open starting url");
+//        LOGGER.log(Level.INFO, "Open starting url");
+//        TestReporter.step("Open starting url");
         if (selectCityModalWindow.isDisplayed()) {
             elementIsClickable(selectCityTomsk, driver).click();
         } else if (geoConfirmModalWindow.isDisplayed()) {
@@ -363,16 +363,16 @@ public class MainPage extends BasePage {
 
     public void checkCompanyLogo() {
         String urlActual = driver.getCurrentUrl();
-        LOGGER.log(Level.INFO, "Check logo company");
-        TestReporter.step("Check logo company");
+//        LOGGER.log(Level.INFO, "Check logo company");
+//        TestReporter.step("Check logo company");
         elementIsClickable(companyLogo, driver).click();
         String urlExpected = driver.getCurrentUrl();
         AssertCollector.assertEquals(urlActual, " URL IS EQUAL ", urlExpected);
     }
 
     public void closingModalWindow() {
-        LOGGER.log(Level.INFO, "Check closing modal window");
-        TestReporter.step("Check closing modal window");
+//        LOGGER.log(Level.INFO, "Check closing modal window");
+//        TestReporter.step("Check closing modal window");
         elementFluentWaitVisibility(baseCityLink, driver).click();
         elementFluentWaitVisibility(closePopupButton, driver).click();
         elementFluentWaitVisibility(baseCityLink, driver).click();
@@ -381,8 +381,8 @@ public class MainPage extends BasePage {
     }
 
     public void changeCity() {
-        LOGGER.log(Level.INFO, "Check changing city");
-        TestReporter.step("Check changing city");
+//        LOGGER.log(Level.INFO, "Check changing city");
+//        TestReporter.step("Check changing city");
         elementIsClickable(baseCityLink, driver).click();
         elementIsClickable(firstCityLink, driver).click();
         //waitForPageLoad(driver);
