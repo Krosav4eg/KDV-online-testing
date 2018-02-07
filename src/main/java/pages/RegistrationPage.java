@@ -492,6 +492,16 @@ public class RegistrationPage extends BasePage {
         return getText(informationOrganization);
     }
 
+    private String organizationInformationIndividual(JSONObject data) {
+        moveMouseTo(driver,allertTxt);
+        elementFluentWaitVisibility(organizationFullName,driver).click();
+        elementFluentWaitVisibility(organizationFullName,driver).sendKeys(data.getString("organizationName"));
+        elementFluentWaitVisibility(taxpayerId,driver).click();
+        elementFluentWaitVisibility(taxpayerId,driver).sendKeys(data.getString("taxId"));
+        elementFluentWaitVisibility(legalAddress,driver).click();
+        elementFluentWaitVisibility(legalAddress,driver).sendKeys(data.getString("legalAddress"));
+        return getText(informationOrganization);
+    }
 
     String addressDelivery(JSONObject data) {
         elementFluentWaitVisibility(company, driver).click();
