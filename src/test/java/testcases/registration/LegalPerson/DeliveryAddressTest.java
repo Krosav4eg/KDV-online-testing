@@ -1,7 +1,24 @@
 package testcases.registration.LegalPerson;
 
-/**
- * Created by Avic on 7/2/18.
- */
-public class DeliveryAddressTest {
+import org.json.JSONObject;
+import org.testng.annotations.Test;
+import testcases.base.BaseTest;
+import utils.AssertCollector;
+import utils.TestReporter;
+
+public class DeliveryAddressTest extends BaseTest {
+
+    @Test
+    public void verifyRegistrationComponentTest() {
+        TestReporter.testTitle("Test ID = 37551,37552,37553,40279,40280,40281");
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("legalAddress", "");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        data = registrationPage.mainInfoRegistration();
+        data.put("company", "");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        data = registrationPage.mainInfoRegistration();
+        data.put("address", "");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+    }
 }

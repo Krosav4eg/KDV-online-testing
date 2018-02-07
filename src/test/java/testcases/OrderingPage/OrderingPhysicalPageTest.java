@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import testcases.base.BaseTest;
 import utils.TestReporter;
 
-public class OrderingPageTest extends BaseTest {
+public class OrderingPhysicalPageTest extends BaseTest {
 
      @Test
     public void orderingDefaultAddress() {

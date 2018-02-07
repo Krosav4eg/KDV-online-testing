@@ -8,7 +8,7 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 
-public class AuthorizationInfo extends BaseTest {
+public class AuthorizationInfoTest extends BaseTest {
 
     private BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
     };
@@ -136,19 +136,7 @@ public class AuthorizationInfo extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-    @Test
-    public void verifyRegistrationComponentTest() {
-        TestReporter.testTitle("Test ID = 37551,37552,37553,40279,40280,40281");
-        JSONObject data = registrationPage.mainInfoRegistration();
-        data.put("legalAddress", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data = registrationPage.mainInfoRegistration();
-        data.put("company", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-        data = registrationPage.mainInfoRegistration();
-        data.put("address", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
-    }
+
 
     @Test
     public void verifyRegistrationAddressTest() {
@@ -231,5 +219,11 @@ public class AuthorizationInfo extends BaseTest {
     public void verifyWorkOfCheckboxConfirmTest() {
         TestReporter.testTitle("Test ID = 37353");
         registrationPage.verifyWorkOfCheckboxConfirm();
+    }
+
+    @Test
+    public void verifyCheckboxConfirmPresenceTest() {
+        TestReporter.testTitle("Test ID = 37354");
+        registrationPage.verifyCheckboxConfirmPresence();
     }
 }

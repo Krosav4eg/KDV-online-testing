@@ -11,6 +11,21 @@
             <class name="testcases.authorization.AuthorizationTest"/>
         </classes>
     </test>
+
+    <test name="Authorization test">
+        <classes>
+            <class name="testcases.authorization.SiteLoginTest">
+            </class>
+        </classes>
+    </test>
+
+    <test name="Authorization test">
+        <classes>
+            <class name="testcases.authorization.PasswordRecoveryTest">
+            </class>
+        </classes>
+    </test>
+
     <test name="HeaderTest">
         <classes>
             <class name="testcases.header.HeaderTest"/>
@@ -66,12 +81,12 @@
     <test name="Ordering">
         <classes>
             <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
-            <class name="testcases.OrderingPage.OrderingPageTest"/>
+            <class name="testcases.OrderingPage.OrderingPhysicalPageTest"/>
         </classes>
     </test>
     <test name="RegistrationTest">
         <classes>
-            <class name="testcases.registration.RegistrationTest"/>
+            <class name="testcases.registration.LegalPerson.RegistrationTest"/>
         </classes>
     </test>
     <test name="RegistrationTest Individual Entrepreneur InformationAuthorizationTest">
@@ -92,6 +107,23 @@
     <test name="RegistrationTest Individual Entrepreneur OrganizationInfoTest">
         <classes>
             <class name="testcases.registration.individualEntrepreneur.OrganizationInfoTest"/>
+        </classes>
+    </test>
+
+    <test name="Registration physical person">
+        <classes>
+            <class name="testcases.registration.PhysicalPerson.AuthorizationInfoTest"/>
+            <class name="testcases.registration.PhysicalPerson.ContactDataTest"/>
+            <class name="testcases.registration.PhysicalPerson.FillRequiredFieldsTest"/>
+        </classes>
+    </test>
+
+    <test name="Registration legal person">
+        <classes>
+            <class name="testcases.registration.LegalPerson.ContactDataTest"/>
+            <class name="testcases.registration.LegalPerson.DeliveryAddressTest"/>
+            <class name="testcases.registration.LegalPerson.OrganizationInfoTest"/>
+            <class name="testcases.registration.LegalPerson.RegistrationTest"/>
         </classes>
     </test>
 </suite>
