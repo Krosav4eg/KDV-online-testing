@@ -8,10 +8,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import pages.AuthorizationPage;
 import pages.BasketPages.BasketPage;
 import pages.CategoryPage.CardPage;
@@ -80,15 +77,6 @@ public class BaseTest {
      * Clean directory with error and success screenshots before starting auto tests
      * and set browser before starting auto tests
      */
-//    @BeforeTest
-//    public void runBrowser() {
-//        driver = singleton.setDriver();
-//        initPageElements();
-//        TestReporter.step("Open Main page");
-//        mainPage.openMainPage();
-//        screen();
-//    }
-
     private void logStatus(ITestResult result,String date)
     {
 	    switch (result.getStatus())
@@ -150,6 +138,12 @@ public class BaseTest {
         TestReporter.removeNumberStep();
     }
 
+    @AfterClass
+    public void closeAfterClass()
+    {
+    	driver.quit();
+    	driver=null;
+    }
 
     /**
      * Method for screenshot creation

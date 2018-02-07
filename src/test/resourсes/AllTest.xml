@@ -91,19 +91,11 @@
             <class name="testcases.personalCabinet.Legal.PersonalDataTest"/>
         </classes>
     </test>
-    <test name="Ordering OrderingLegalPageTest">
-        <classes>
-            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
-        </classes>
-    </test>
     <test name="Ordering OrderingPageTest">
         <classes>
-            <class name="testcases.OrderingPage.OrderingPageTest"/>
-        </classes>
-    </test>
-        <test name="RegistrationTest">
-            <classes>
-                <class name="testcases.registration.RegistrationTest"/>
+            <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
+            <class name="testcases.OrderingPage.OrderingGuestPageTest"/>
+            <class name="testcases.OrderingPage.OrderingPhysicalPageTest"/>
             </classes>
         </test>
 </suite>
