@@ -99,14 +99,15 @@ public abstract class EventHandler   implements WebDriverEventListener   {
 	@Override
 	public void beforeFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
+		LOGGER.log(Level.INFO,"Find element\t"+arg0);
+		TestReporter.step("Find element\t"+arg0);
 		//waitForPageLoad(arg2);
 		//System.out.println("beforeFindBy "+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 	@Override
 	public void afterFindBy(By arg0, WebElement arg1, WebDriver arg2)
 	{
-		LOGGER.log(Level.INFO,"Find element\t"+arg0);
-		TestReporter.step("Find element\t"+arg0);
+
 		//System.out.println("afterFindBy "+arg0+" WebElement "+arg1+" WebDriver "+arg2);
 	}
 	@Override

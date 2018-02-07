@@ -32,6 +32,9 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = ".notice-msg .text")
     private WebElement allertTxt;
 
+    @FindBy(css = ".offset-l-1")
+    private WebElement linkTxt;
+
     @FindBy(className = "profile")
     private WebElement profileContainer;
 
@@ -204,6 +207,7 @@ public class PersonalCabinetPage extends BasePage {
         AssertCollector.verifyCondition(getText(profileContainer).contains("test_g.fadeev@magdv.com"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71119348926"));
        // Verify.verify(getText(profileContainer).contains("Томск"));
+        moveToElementJS(driver,linkTxt);
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71111111111"));
         elementFluentWaitVisibility(editBtn,driver).click();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/edit/"));
