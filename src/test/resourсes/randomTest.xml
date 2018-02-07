@@ -1,4 +1,4 @@
-git merge<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Site Tests">
     <listeners>
@@ -7,11 +7,11 @@ git merge<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="37065">
+    <test name="C34312">
         <classes>
-            <class name="testcases.footer.FooterTest">
+            <class name="testcases.header.HeaderTest">
                 <methods>
-                    <include name="verifyContactDataLinkTest"/>
+                    <include name="verifyPersonalCabinetLinkTest"/>
                 </methods>
             </class>
         </classes>

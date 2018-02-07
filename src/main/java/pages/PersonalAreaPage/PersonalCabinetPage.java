@@ -11,11 +11,15 @@ import utils.AssertCollector;
 
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.textIsPresent;
 
 public class PersonalCabinetPage extends BasePage {
     public PersonalCabinetPage(WebDriver driver) {
         super(driver);
     }
+
+    @FindBy(css = ".profile__section .offset-l-1")
+    public WebElement linkElement;
 
     @FindBy(id = "email")
     private WebElement emailField;
@@ -44,6 +48,8 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(id = "password")
     private WebElement newPasswordField;
 
+    @FindBy(css = "h1.title")
+    private WebElement titleField;
 
     @FindBy(id = "confirmation")
     private WebElement newConfirmationField;
@@ -200,11 +206,13 @@ public class PersonalCabinetPage extends BasePage {
     }
     public void verifyFieldsAuthorization()
     {
+        textIsPresent(titleField,driver,"Панель управления");
         AssertCollector.verifyCondition(getText(profileContainer).contains("Здравствуйте, Геннадий Фадеев!"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("test_g.fadeev@magdv.com"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71119348926"));
-       // Verify.verify(getText(profileContainer).contains("Томск"));
+        // Verify.verify(getText(profileContainer).contains("Томск"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71111111111"));
+        moveToElementJS(driver,linkElement);
         elementFluentWaitVisibility(editBtn,driver).click();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/edit/"));
         backPage();
