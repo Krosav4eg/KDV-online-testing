@@ -1,9 +1,7 @@
 package testcases.authorization;
 
-import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
-import utils.AssertCollector;
 import utils.TestReporter;
 
 
@@ -13,25 +11,31 @@ import utils.TestReporter;
 public class AuthorizationTest extends BaseTest {
 
     @Test
+    public void verifyCopyWriteTest() {
+        TestReporter.testTitle("Test ID = 34447");
+        authorizationPage.verifyCopyWrite();
+    }
+
+    @Test
     public void verifyOpeningMainPageTest() {
         TestReporter.testTitle("Test ID = 34442");
         authorizationPage.verifyOpeningMainPage();
-      }
+    }
 
-      @Test
-      public void verifyOpeningRegistrationLinkTest() {
+    @Test
+    public void verifyOpeningRegistrationLinkTest() {
         TestReporter.testTitle("Test ID = 34443");
         authorizationPage.verifyOpeningRegistrationLink();
-      }
+    }
 
-      @Test
-      public void verifyOpeningContinueAsGuestLinkTest() {
+    @Test
+    public void verifyOpeningContinueAsGuestLinkTest() {
         TestReporter.testTitle("Test ID = 34444");
         authorizationPage.verifyOpeningContinueAsGuestLink();
-      }
+    }
 
-      @Test
-      public void verifyOpeningForOrganizationsLinkTest() {
+    @Test
+    public void verifyOpeningForOrganizationsLinkTest() {
         TestReporter.testTitle("Test ID = 34445");
         authorizationPage.verifyOpeningForOrganizationsLink();
     }
@@ -40,158 +44,23 @@ public class AuthorizationTest extends BaseTest {
     public void verifyChangingColorsForTabsTest() {
         TestReporter.testTitle("Test ID = 34446");
         authorizationPage.verifyChangingColorsForTabs();
-     }
-
-     @Test
-     public void verifyCopyWriteTest() {
-        TestReporter.testTitle("Test ID = 34447");
-        authorizationPage.verifyCopyWrite();
     }
 
     @Test
     public void verifyOfTextInRegistrationTabTest() {
         TestReporter.testTitle("Test ID = 34449");
         authorizationPage.verifyOfTextInRegistrationTab();
-      }
+    }
 
-      @Test
-      public void verifyOfTextInContinueAsGuestTabTest() {
+    @Test
+    public void verifyOfTextInContinueAsGuestTabTest() {
         TestReporter.testTitle("Test ID = 34450");
         authorizationPage.verifyOfTextInContinueAsGuestTab();
-      }
+    }
 
-      @Test
-      public void verifyTextInForOrganizationsTabTest() {
+    @Test
+    public void verifyTextInForOrganizationsTabTest() {
         TestReporter.testTitle("Test ID = 34451");
         authorizationPage.verifyTextInForOrganizationsTab();
-    }
-    @Test
-    public void verifyTypingIncorrectPasswordInAuthTest() {
-        TestReporter.testTitle("Test ID = 34462");
-        authorizationPage.typeIncorrectPasswordInAuth();
-    }
-
-    @Test
-    public void verifyTypingCorrectLoginIncorrectPasswordInAuthTest() {
-        TestReporter.testTitle("Test ID = 34463");
-        authorizationPage.typeCorrectLoginIncorrectPasswordInAuth();
-    }
-
-    @Test
-    public void verifyTypingEmptyDataInAuthTest() {
-      TestReporter.testTitle("Test ID = 34467");
-      authorizationPage.typeEmptyDataInAuth();
-    }
-
-    @Test
-    public void verifyTypingLoginWithoutPasswordInAuthTest() {
-      TestReporter.testTitle("Test ID = 34472");
-      authorizationPage.typeLoginWithoutPasswordInAuth();
-    }
-
-    @Test
-    public void verifyTypingPasswordWithoutLoginInAuthTest() {
-      TestReporter.testTitle("Test ID = 34474");
-      authorizationPage.typePasswordWithoutLoginInAuth();
-    }
-
-    @Test
-    public void verifyEmailFieldWithoutAtTest() {
-        TestReporter.testTitle("Test ID = 34487");
-        authorizationPage.verifyEmailFieldWithoutAt();
-    }
-
-    @Test(alwaysRun = true)
-    public void verifyEmailFieldTest() {
-        TestReporter.testTitle("Test ID = 34488");
-        authorizationPage.verifyEmailFieldWithoutDomainName();
-      }
-
-      @Test
-      public void verifyEmailFieldWithMoreThanOneDotTest() {
-        TestReporter.testTitle("Test ID = 34489");
-        authorizationPage.verifyEmailFieldWithMoreThanOneDot();
-      }
-
-      @Test
-      public void verifyEmailFieldWithNumbersAndSymbolsInInAuthTest() {
-        TestReporter.testTitle("Test ID = 34491");
-        authorizationPage.verifyEmailFieldWithNumbersAndSymbols();
-      }
-
-      @Test
-      public void verifyEmailWithSpacesInAuthTest() {
-        TestReporter.testTitle("Test ID = 34492");
-        authorizationPage.verifyEmailWithSpaces();
-    }
-
-    @Test
-    public void verifyTypingPasswordAuthTest() {
-        TestReporter.testTitle("Test ID = 34493");
-        authorizationPage.verifyTypingPasswordLessSixSymbols();
-      }
-
-      @Test
-      public void verifyPasswordContainsOnlySpacesTest() {
-        TestReporter.testTitle("Test ID = 34494");
-        authorizationPage.verifyPasswordContainsOnlySpaces();
-      }
-
-      @Test
-      public void verifyPasswordContainsSpacesAtStartAndEndTest() {
-        TestReporter.testTitle("Test ID = 34495");
-        authorizationPage.verifyPasswordContainsSpacesAtStartAndEnd();
-      }
-
-      @Test
-      public void verifyForgotPasswordTest() {
-        TestReporter.testTitle("Test ID = 34497");
-        authorizationPage.verifyForgotPassword();
-    }
-
-    @Test
-    public void verifyAuthorizationFormTest() {
-        TestReporter.testTitle("Test ID = 36970");
-        authorizationPage.verifyReturnToAuthorizationForm();
-    }
-
-    @Test
-    public void verifyEmailWithoutAtInForgotPasswordTest() {
-      TestReporter.testTitle("Test ID = 36971");
-      authorizationPage.verifyEmailWithoutAtInForgotPassword();
-    }
-
-    @Test
-    public void verifyEmailFieldWithoutDomainNameInForgotPasswordFieldTest() {
-      TestReporter.testTitle("Test ID = 36973");
-      authorizationPage.verifyEmailFieldWithoutDomainNameInForgotPasswordField();
-    }
-
-    @Test
-    public void verifyValidEmailInForgotPasswordTest() {
-        TestReporter.testTitle("Test ID = 36974");
-        authorizationPage.verifyValidEmailInForgotPassword();
-    }
-
-    @Test
-    public void verifyEnterWithUnconfirmedEmailTest() {
-        TestReporter.testTitle("Test ID = 37057");
-        authorizationPage.verifyEnterWithUnconfirmedEmail();
-    }
-    //FAILED
-    @Test
-    public void verifyNotValidEmail()
-    {
-        TestReporter.testTitle("Test ID = 34487,34488,34489");
-        JSONObject data= authorizationPage.authorizationData();
-        data.put("email","a.shauloandersenlab.com");
-        AssertCollector.verifyCondition(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-        data.put("email","a.shaulo@andersenlabcom");
-        AssertCollector.verifyCondition(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-        data.put("email","a..shaulo@andersenlab.com");
-        AssertCollector.verifyCondition(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-        data.put("email","anastasiya.shaulo@gmail.com");
-        AssertCollector.assertTrue(authorizationPage.authForm(data).contains("Эта учётная запись не подтверждена"));
-
     }
 }

@@ -20,7 +20,6 @@ public class OrderingDataTest extends BaseTest {
 		data.put("email", KALASHNIKOVA_EMAIL);
 		data.put("password", KALASHNIKOVA_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
-//        myBookingPage.myBookingsItemButton.click();
 		orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
 		del.textPresentDelegate("Мои заказы");
 		del.textPresentDelegate("У вас пока нет оформленных заказов.");

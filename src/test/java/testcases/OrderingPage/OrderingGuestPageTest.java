@@ -1,5 +1,6 @@
 package testcases.OrderingPage;
 
+
 import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
@@ -9,8 +10,10 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.*;
+import static utils.Constants.BASE_URL;
 
-public class OrderingPageTest extends BaseTest {
+public class OrderingGuestPageTest extends BaseTest {
+
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
@@ -269,29 +272,4 @@ public class OrderingPageTest extends BaseTest {
                 "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
                 "Error messages are equals");
     }
-
-    @Test
-    public void orderingDefaultAddress() {
-        TestReporter.testTitle("Test ID - C41300");
-        orderingPhysicalPage.orderingDefaultAddress();
-    }
-
-    @Test
-    public void orderingNewAddress() {
-        TestReporter.testTitle("Test ID - C41314");
-        orderingPhysicalPage.orderingNewAddress();
-    }
-
-    @Test
-    public void orderingChangeAddress() {
-        TestReporter.testTitle("Test ID - C41454");
-        orderingPhysicalPage.orderingChangedAddress();
-    }
-
-    @Test
-    public void orderingChangeStoreAddress() {
-        TestReporter.testTitle("Test ID - C41313");
-        orderingPhysicalPage.orderingChangedStoreAddress();
-    }
-
 }

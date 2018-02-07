@@ -1,6 +1,7 @@
 package testcases.registration.individualEntrepreneur;
 
 import Core.basePage.BasePage;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
@@ -94,5 +95,29 @@ public class InformationAuthorizationTest extends BaseTest {
 		verifyData.put("pass","testsea");
 		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
 				contains("Это поле обязательно для заполнения."));
+	}
+
+
+	@Test
+	public void verifyEmailFieldValidationTest() {
+		TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
+		JSONObject data = registrationPage.mainInfoRegistration();
+		data.put("email", "test@test.com");
+		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+				contains("Это поле обязательно для заполнения."));
+		AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
+				" Value of email field is equal ", registrationPage.email.getAttribute("value"));
+		data = registrationPage.mainInfoRegistration();
+		data.put("password", RandomStringUtils.randomAlphanumeric(7));
+		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+				contains("Это поле обязательно для заполнения."));
+		AssertCollector.assertEquals(registrationPage.password.getAttribute("value").length(),
+				" Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
+		data = registrationPage.mainInfoRegistration();
+		data.put("confirmPassword", RandomStringUtils.randomAlphanumeric(7));
+		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+				contains("Это поле обязательно для заполнения."));
+		AssertCollector.assertEquals(registrationPage.confirmPassword.getAttribute("value").length(),
+				" Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
 	}
 }

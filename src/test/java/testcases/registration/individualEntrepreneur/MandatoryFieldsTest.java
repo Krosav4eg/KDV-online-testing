@@ -8,6 +8,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static utils.Constants.AUTORIZATION_PAGE_URL;
+
 public class MandatoryFieldsTest extends BaseTest {
 
 	private BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -66,15 +68,6 @@ public class MandatoryFieldsTest extends BaseTest {
 		TestReporter.testTitle("Test ID = C37687");
 		JSONObject verifyData=registrationPage.mainInfoRegistration();
 		verifyData.put("address","");
-		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-				contains("Это поле обязательно для заполнения."));
-	}
-
-	@Test
-	public void verifyMandatoryEmptyFirstNameTest() {
-		TestReporter.testTitle("Test ID = C37688,40272,40275");
-		JSONObject verifyData=registrationPage.mainInfoRegistration();
-		verifyData.put("firstName","");
 		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
 				contains("Это поле обязательно для заполнения."));
 	}
@@ -165,5 +158,16 @@ public class MandatoryFieldsTest extends BaseTest {
 		verifyData.put("email","a.shaulo@andersenlab.com");
 		registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
 		AssertCollector.assertTrue(registrationPage.selectExistEmail().contains("account/forgotpassword/"));
+	}
+
+	@Test
+	public void verifySuccessRegistrationTest() {
+		TestReporter.testTitle("Test ID = 37564,37565,37485,37397,37681,37571,37572,37416,37479,37423,37567");
+		JSONObject data = registrationPage.mainInfoRegistration();
+		AssertCollector.verifyCondition(registrationPage.verifyAuthorizationFields(data).
+				contains("Это поле обязательно для заполнения"));
+		del.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
+				" выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
+		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls are equals");
 	}
 }

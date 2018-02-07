@@ -1,7 +1,6 @@
 package pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
-import com.google.common.base.Verify;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
