@@ -7,9 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="PersonalCabinet Physical AddingAddressesTest">
+    <test name="ContactDataTest">
         <classes>
-            <class name="testcases.personalCabinet.Physical.AddingAddressTest"/>
+            <class name="testcases.registration.LegalPerson.ContactDataTest"/>
         </classes>
     </test>
 </suite>
