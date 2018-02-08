@@ -110,26 +110,26 @@
             <class name="testcases.OrderingPage.OrderingPhysicalPageTest"/>
         </classes>
         </test>
-    <test name="IndividualEntrepreneur ContactDataTest">
-    <classes>
-        <class name="testcases.registration.IndividualEntrepreneur.ContactDataTest"/>
-    </classes>
-    </test>
-    <test name="IndividualEntrepreneur InformationAuthorizationTest">
-        <classes>
-            <class name="testcases.registration.IndividualEntrepreneur.InformationAuthorizationTest"/>
-        </classes>
-    </test>
-    <test name="IndividualEntrepreneur MandatoryFieldsTest">
-        <classes>
-            <class name="testcases.registration.IndividualEntrepreneur.MandatoryFieldsTest"/>
-        </classes>
-    </test>
-    <test name="IndividualEntrepreneur OrganizationInfoTest">
-        <classes>
-            <class name="testcases.registration.IndividualEntrepreneur.OrganizationInfoTest"/>
-        </classes>
-    </test>
+    <!--<test name="IndividualEntrepreneur ContactDataTest">-->
+    <!--<classes>-->
+        <!--<class name="testcases.registration.IndividualEntrepreneur.ContactDataTest"/>-->
+    <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="IndividualEntrepreneur InformationAuthorizationTest">-->
+        <!--<classes>-->
+            <!--<class name="testcases.registration.IndividualEntrepreneur.InformationAuthorizationTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="IndividualEntrepreneur MandatoryFieldsTest">-->
+        <!--<classes>-->
+            <!--<class name="testcases.registration.IndividualEntrepreneur.MandatoryFieldsTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="IndividualEntrepreneur OrganizationInfoTest">-->
+        <!--<classes>-->
+            <!--<class name="testcases.registration.IndividualEntrepreneur.OrganizationInfoTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <test name="LegalPerson OrganizationInfoTest">
         <classes>
