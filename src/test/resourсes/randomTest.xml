@@ -7,13 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C34312">
+    <test name="PersonalCabinet Physical AddingAddressesTest">
         <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyPersonalCabinetLinkTest"/>
-                </methods>
-            </class>
+            <class name="testcases.personalCabinet.Physical.AddingAddressTest"/>
         </classes>
     </test>
 </suite>

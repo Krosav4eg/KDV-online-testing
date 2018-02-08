@@ -94,6 +94,9 @@ public class DeliveryAddressPage extends BasePage {
 	@FindBy(css = "[href='/about']")
 	public WebElement getAboutLink;
 
+	@FindBy(css = ".header-top")
+	public WebElement headerDelivery;
+
 	public void verifyCardNotApprovedAddress()
     {
 		getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);

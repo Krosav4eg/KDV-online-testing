@@ -13,6 +13,7 @@
             <class name="testcases.personalCabinet.Physical.AddressesDataTest"/>
             <class name="testcases.personalCabinet.Physical.CabinetTest"/>
             <class name="testcases.personalCabinet.Physical.OrderingDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AddingAddressTest"/>
         </classes>
     </test>
 </suite>
