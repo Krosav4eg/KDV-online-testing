@@ -7,13 +7,13 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="PersonalCabinet Legal">
+    <test name="PersonalCabinet Physical">
         <classes>
-            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
-            <class name="testcases.personalCabinet.Legal.CabinetLegalTest"/>
-            <class name="testcases.personalCabinet.Legal.LegalDataTest"/>
-            <class name="testcases.personalCabinet.Legal.AddressesDataTest"/>
-            <class name="testcases.personalCabinet.Legal.OrderDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AccountDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AddressesDataTest"/>
+            <class name="testcases.personalCabinet.Physical.CabinetTest"/>
+            <class name="testcases.personalCabinet.Physical.OrderingDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AddingAddressTest"/>
         </classes>
     </test>
 </suite>

@@ -66,6 +66,11 @@
             <class name="testcases.personalCabinet.Physical.AddressesDataTest"/>
         </classes>
     </test>
+    <test name="PersonalCabinet Physical AddingAddressesTest">
+        <classes>
+            <class name="testcases.personalCabinet.Physical.AddingAddressTest"/>
+        </classes>
+    </test>
     <test name="PersonalCabinet OrderDataTest">
         <classes>
             <class name="testcases.personalCabinet.Legal.OrderDataTest"/>

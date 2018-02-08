@@ -37,8 +37,23 @@ public class AccountDataPage extends BasePage {
     @FindBy(css = ".button.button_mobile-wide")
     public WebElement saveButtonInEditPage;
 
+    @FindBy(css = ".address__action.link.offset-l-2")
+    public WebElement deleteNewAddress;
+
     @FindBy(css = "#adv_phone")
     public WebElement phoneInEditPage;
+
+    @FindBy(css = "input[name=\"telephone\"]")
+    public WebElement newPhoneField;
+
+    @FindBy(css = "input[name=\"street[]\"]")
+    public WebElement newAddressField;
+
+    @FindBy(id = "floor")
+    public WebElement newFloorField;
+
+    @FindBy(id = "porch")
+    public WebElement newPorchField;
 
     @FindBy(css = "#current_password")
     public WebElement passwordInEditPage;
@@ -61,6 +76,12 @@ public class AccountDataPage extends BasePage {
     @FindBy(css = "#confirmation")
     public WebElement confirmPasswordField;
 
+    @FindBy(xpath = "//span[text()='Адрес удалён.']")
+    public WebElement deletionAddress;
+
+    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
+
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
         data.put("firstName", "Аркадий");
@@ -68,6 +89,17 @@ public class AccountDataPage extends BasePage {
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
         data.put("currentPassword", AUTHORIZATION_PASSWORD);
+        return data;
+    }
+
+    public JSONObject addingNewAddressInfo() {
+        JSONObject data = new JSONObject();
+        data.put("firstName", "Вера");
+        data.put("lastName", "Калашникова");
+        data.put("phone", "+71111111111");
+        data.put("address", "Томск, пр. Мира 20, оф.1");
+        data.put("floor", "1");
+        data.put("porch", "6");
         return data;
     }
 
@@ -85,5 +117,29 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
         AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
         return getText(informationAccountEdit);
+    }
+
+    public String verifyAddingNewAccountFields(JSONObject data) {
+        getUrl(BASE_URL + "/customer/address/new/");
+        elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
+        elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameInEditPage, driver).clear();
+        elementFluentWaitVisibility(lastNameInEditPage, driver).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(newPhoneField, driver).clear();
+        elementFluentWaitVisibility(newPhoneField, driver).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(newAddressField, driver).clear();
+        elementFluentWaitVisibility(newAddressField, driver).sendKeys(data.getString("address"));
+        del.scrollByCoordinate();
+        elementFluentWaitVisibility(newFloorField, driver).clear();
+        elementFluentWaitVisibility(newFloorField, driver).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(newPorchField, driver).clear();
+        elementFluentWaitVisibility(newPorchField, driver).sendKeys(data.getString("porch"));
+        return getText(informationAccountEdit);
+    }
+
+    public void verifyAddressDropDownAddress() {
+        elementFluentWaitVisibility(newAddressField, driver).clear();
+        fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
+
     }
 }
