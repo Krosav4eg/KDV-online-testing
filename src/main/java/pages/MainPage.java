@@ -262,8 +262,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//a[text()='О магазине']")
     private WebElement aboutShopLink;
 
-    @FindBy(xpath = ".//a[text()='Самовывоз']")
+        @FindBy(xpath = ".//a[text()='Самовывоз']")
     private WebElement customerPickupLink;
+
+    @FindBy(css = ".footer-menu")
+    private WebElement footerMenu;
 
     @FindBy(xpath = ".//a[text()='Бесплатная доставка']")
     private WebElement freeDeliveryLink;
@@ -457,7 +460,7 @@ public class MainPage extends BasePage {
     public void verifyingClosingFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying closing free delivering section");
         TestReporter.step("Verifying closing free delivering section");
-        elementIsClickable(freeDeliveringSection, driver).click();
+        //elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
         AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
     }
@@ -485,7 +488,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying closing payment upon receiving section");
-        elementIsClickable(paymentUponReceivingSection, driver).click();
+      //  elementIsClickable(paymentUponReceivingSection, driver).click();
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
     }
@@ -661,6 +664,7 @@ public class MainPage extends BasePage {
 
     public void openingCustomerPickUpLink() {
         String linkTextAttribute = getValueOfAttributeByName(customerPickupLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(customerPickupLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -669,6 +673,7 @@ public class MainPage extends BasePage {
 
     public void openingFreeDeliveryLink() {
         String linkTextAttribute = getValueOfAttributeByName(freeDeliveryLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(freeDeliveryLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -677,6 +682,7 @@ public class MainPage extends BasePage {
 
     public void openingPaymentLink() {
         String linkTextAttribute = getValueOfAttributeByName(paymentLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(paymentLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -685,6 +691,7 @@ public class MainPage extends BasePage {
 
     public void openingHowToBuyLink() {
         String linkTextAttribute = getValueOfAttributeByName(howToBuyLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(howToBuyLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -693,6 +700,7 @@ public class MainPage extends BasePage {
 
     public void openingExchangeAndReturnLink() {
         String linkTextAttribute = getValueOfAttributeByName(exchangeAndReturnLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(exchangeAndReturnLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -701,6 +709,7 @@ public class MainPage extends BasePage {
 
     public void openingInfoForLegalPersonsLink() {
         String linkTextAttribute = getValueOfAttributeByName(infoLegalPersonLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(infoLegalPersonLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -710,6 +719,7 @@ public class MainPage extends BasePage {
     public void openingContractPurchaseSaleLink() {
         String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(contractPurchaseSaleLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(contractPurchaseSaleLink, driver).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
@@ -773,6 +783,7 @@ public class MainPage extends BasePage {
 
     public void openingRegulationsLink() {
         String linkTextAttribute = getValueOfAttributeByName(regulationsLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(regulationsLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
@@ -781,6 +792,7 @@ public class MainPage extends BasePage {
 
     public void openingContactsLink() {
         String linkTextAttribute = getValueOfAttributeByName(contactsLink, "href");
+        moveToElementJS(driver,footerMenu);
         elementFluentWaitVisibility(contactsLink, driver).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",

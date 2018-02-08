@@ -12,15 +12,15 @@ public class BannerTest extends BaseTest {
     public void switchSlideForwardTest() {
         TestReporter.testTitle("Test ID - C34331");
         mainPage.switchSlideForward();
-     }
-     @Test
-     public void switchSlidePreviousTest() {
-       TestReporter.testTitle("Test ID - C34332");
+//     }
+//     @Test
+//     public void switchSlidePreviousTest() {
+//       TestReporter.testTitle("Test ID - C34332");
        mainPage.switchSlidePreviously();
-     }
-     @Test
-     public void switchBetweenSlidesTest() throws InterruptedException {
-        TestReporter.testTitle("Test ID - C34333");
+//     }
+//     @Test
+//     public void switchBetweenSlidesTest() throws InterruptedException {
+//        TestReporter.testTitle("Test ID - C34333");
         mainPage.switchBetweenSlides();
     }
 }
