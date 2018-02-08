@@ -1,4 +1,4 @@
-package testcases.registration.individualEntrepreneur;
+package testcases.registration.IndividualEntrepreneur;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package testcases.registration.individualEntrepreneur;
+package testcases.registration.IndividualEntrepreneur;
 
 import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
