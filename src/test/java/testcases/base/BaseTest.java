@@ -1,6 +1,7 @@
 package testcases.base;
 
 import Core.driverFactory.BrowserFactory;
+import logger.LevelCustom;
 import logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -30,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static logger.MagDvLogger.*;
 import static Core.driverFactory.BrowserFactory.testName;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
@@ -88,7 +90,7 @@ public class BaseTest {
 		    }
 		    case ITestResult.SKIP:
 		    {
-			    LOGGER.log(Level.WARNING, "TEST STATUS: SKIP\t"+date);
+			    LOGGER.log(LevelCustom.SKIP, "TEST STATUS: SKIP\t"+date);
 			    break;
 		    }
 		    case ITestResult.SUCCESS:
@@ -134,6 +136,7 @@ public class BaseTest {
      */
     @AfterTest()
     public void closeBrowser() {
+        doneFooter=false;
         driver.quit();
         TestReporter.removeNumberStep();
     }
