@@ -460,7 +460,7 @@ public class MainPage extends BasePage {
     public void verifyingClosingFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying closing free delivering section");
         TestReporter.step("Verifying closing free delivering section");
-        elementIsClickable(freeDeliveringSection, driver).click();
+        //elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
         AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
     }
@@ -488,7 +488,7 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying closing payment upon receiving section");
-        elementIsClickable(paymentUponReceivingSection, driver).click();
+      //  elementIsClickable(paymentUponReceivingSection, driver).click();
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
         AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
     }

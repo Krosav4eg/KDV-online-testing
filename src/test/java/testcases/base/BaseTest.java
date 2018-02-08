@@ -118,8 +118,6 @@ public class BaseTest {
 
     @AfterMethod
     public void clearCookies(ITestResult result) {
-        System.err.println(result.getStatus());
-        System.err.println(result.getName());
         long millis=result.getEndMillis()-result.getStartMillis();
         long tim=((millis % 60000)/1000)*1000;
         long timeS=millis -tim;
