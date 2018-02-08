@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import static Core.driverFactory.BrowserFactory.testName;
 
-
 /**
  * @author Sergey Potapov
  */
@@ -34,7 +33,6 @@ public class HtmlLoggerFormatter extends Formatter {
         if(rec.getLevel().intValue() == Level.FINE.intValue()) {
             OPEN_TABLE_TAG="\t<td style=\"color:green\">";
         }
-
         buf.append(OPEN_TABLE_TAG);
         buf.append(rec.getLevel());
         buf.append(CLOSE_TABLE_CELL_TAG);
@@ -49,11 +47,6 @@ public class HtmlLoggerFormatter extends Formatter {
         buf.append(CLOSE_TABLE_CELL_TAG);
         OPEN_TABLE_TAG="\t<td>";
         return buf.toString();
-    }
-    private String formatDate(long milliseconds) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-        Date resultDate = new Date(milliseconds);
-        return dateFormat.format(resultDate);
     }
     /**
      * Calculate date-time of logging

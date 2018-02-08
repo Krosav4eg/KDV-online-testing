@@ -3,6 +3,7 @@ package pages.PersonalAreaPage;
 import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,12 +24,6 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(id = "email")
     private WebElement emailField;
 
-    @FindBy(id = "pass")
-    private WebElement passwordField;
-
-    @FindBy(id = "send2")
-    private WebElement authorizationButton;
-
     @FindBy(css = "a.account__edit")
     private WebElement editBtn;
 
@@ -41,12 +36,6 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(className = "profile")
     private WebElement profileContainer;
 
-    @FindBy(css = "[title='Номер заказа']")
-    private WebElement detailTxt;
-
-    @FindBy(css = "div.layout div > div.profile-layout__content  tr:nth-child(1) > td.hidden-xs > a")
-    private WebElement detailLink;
-
     @FindBy(id = "password")
     private WebElement newPasswordField;
 
@@ -55,115 +44,127 @@ public class PersonalCabinetPage extends BasePage {
 
     @FindBy(id = "confirmation")
     private WebElement newConfirmationField;
+//
+//	@FindBy(id = "pass")
+//	private WebElement passwordField;
+//
+//	@FindBy(id = "send2")
+//	private WebElement authorizationButton;
+//
+//	@FindBy(css = "[title='Номер заказа']")
+//	private WebElement detailTxt;
+//
+//	@FindBy(css = "div.layout div > div.profile-layout__content  tr:nth-child(1) > td.hidden-xs > a")
+//	private WebElement detailLink;
+//
+//	@FindBy(xpath = "//span[contains(text(), \"Панель управления\")]")
+//    private WebElement controlPanel;
+//
+//    @FindBy(xpath = "//span[contains(text(), \"Данные учётной записи\")]")
+//    private WebElement personalData;
+//
+//    @FindBy(xpath = "//span[contains(text(), \"Адреса доставки\")]")
+//    private WebElement deliveryAddresses;
+//
+//    @FindBy(xpath = "//span[contains(text(), \"Мои заказы\")]")
+//    private WebElement orders;
+//
+//    @FindBy(xpath = ".//*[@class=\"profile-nav__item profile-nav__item_active\"]")
+//    private WebElement activeByDefault;
+//
+//    @FindBy(xpath = ".//*[@class='title']")
+//    private WebElement controlPanelHeader;
+//
+//    @FindBy(xpath = "//h2[contains(text(), \"Заказы\")]")
+//    private WebElement ordersHeader;
+//
+//    @FindBy(xpath = "//h2[contains(text(), \"Учётная запись\")]")
+//    private WebElement personalDataHeader;
+//
+//    @FindBy(xpath = "//h2[contains(text(), \"Адрес по умолчанию\")]")
+//    private WebElement addressByDefaultHeader;
+//
+//    @FindBy(xpath = "//p[contains(text(), 'Аркадий Евдокимов')]")
+//    public WebElement nameInPersonalData;
+//
+//    @FindBy(xpath = "//p[contains(text(), \"test_a.evdokimov@magdv.com\")]")
+//    private WebElement emailInPersonalData;
+//
+//    @FindBy(xpath = "//p[contains(text(), \"+71111111111\")]")
+//    private WebElement phoneInPersonalData;
+//
+//    @FindBy(xpath = "//h2//a[@class='account__edit link offset-l-1']")
+//    private WebElement editPersonalDataButton;
+//
+//    @FindBy(xpath = "//div[contains(text(), \"Аркадий Евдокимов\")]")
+//    private WebElement nameInAddressByDefault;
+//
+//    @FindBy(xpath = "//div[contains(text(), \"г Кемерово, ул Варшавская, д 87, кв 12 \")]")
+//    private WebElement addressInAddressByDefault;
+//
+//    @FindBy(xpath = "//div[contains(text(), \"+71111111111 \")]")
+//    private WebElement phoneInAddressByDefault;
+//
+//    @FindBy(xpath = "//h2//a[@class='address__action link offset-l-1']")
+//    private WebElement editAddressButton;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_id hidden-xs hidden-xxs']")
+//    private WebElement orderId;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_date hidden-xs hidden-xxs']")
+//    private WebElement orderDate;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_status hidden-xs hidden-xxs']")
+//    private WebElement orderStatus;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_cost hidden-xs hidden-xxs']")
+//    private WebElement orderCost;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_view hidden-xs hidden-xxs']")
+//    private WebElement orderView;
+//
+//    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_link']")
+//    private WebElement orderRepeat;
+//
+//    @FindBy(xpath = "//h2//a[contains(text(), \"Показать все\")]")
+//    private WebElement showAll;
+//
+//    @FindBy(xpath = "//h1[contains(text(), \"Учётная запись\")]")
+//    public WebElement personalDataHeaderInEditPage;
+//
+//    @FindBy(xpath = "//h2[contains(text(), \"Личные данные\")]")
+//    public WebElement personalDataInEditPage;
+//
+//    @FindBy(xpath = "//h2[contains(text(), \"Рассылка\")]")
+//    public WebElement sharingInEditPage;
 
-    //
-    @FindBy(xpath = "//span[contains(text(), \"Панель управления\")]")
-    private WebElement controlPanel;
-
-    @FindBy(xpath = "//span[contains(text(), \"Данные учётной записи\")]")
-    private WebElement personalData;
-
-    @FindBy(xpath = "//span[contains(text(), \"Адреса доставки\")]")
-    private WebElement deliveryAddresses;
-
-    @FindBy(xpath = "//span[contains(text(), \"Мои заказы\")]")
-    private WebElement orders;
-
-    @FindBy(xpath = ".//*[@class=\"profile-nav__item profile-nav__item_active\"]")
-    private WebElement activeByDefault;
-
-    @FindBy(xpath = ".//*[@class='title']")
-    private WebElement controlPanelHeader;
-
-    @FindBy(xpath = "//h2[contains(text(), \"Заказы\")]")
-    private WebElement ordersHeader;
-
-    @FindBy(xpath = "//h2[contains(text(), \"Учётная запись\")]")
-    private WebElement personalDataHeader;
-
-    @FindBy(xpath = "//h2[contains(text(), \"Адрес по умолчанию\")]")
-    private WebElement addressByDefaultHeader;
-
-    @FindBy(xpath = "//p[contains(text(), 'Аркадий Евдокимов')]")
-    public WebElement nameInPersonalData;
-
-    @FindBy(xpath = "//p[contains(text(), \"test_a.evdokimov@magdv.com\")]")
-    private WebElement emailInPersonalData;
-
-    @FindBy(xpath = "//p[contains(text(), \"+71111111111\")]")
-    private WebElement phoneInPersonalData;
-
-    @FindBy(xpath = "//h2//a[@class='account__edit link offset-l-1']")
-    private WebElement editPersonalDataButton;
-
-    @FindBy(xpath = "//div[contains(text(), \"Аркадий Евдокимов\")]")
-    private WebElement nameInAddressByDefault;
-
-    @FindBy(xpath = "//div[contains(text(), \"г Кемерово, ул Варшавская, д 87, кв 12 \")]")
-    private WebElement addressInAddressByDefault;
-
-    @FindBy(xpath = "//div[contains(text(), \"+71111111111 \")]")
-    private WebElement phoneInAddressByDefault;
-
-    @FindBy(xpath = "//h2//a[@class='address__action link offset-l-1']")
-    private WebElement editAddressButton;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_id hidden-xs hidden-xxs']")
-    private WebElement orderId;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_date hidden-xs hidden-xxs']")
-    private WebElement orderDate;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_status hidden-xs hidden-xxs']")
-    private WebElement orderStatus;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_cost hidden-xs hidden-xxs']")
-    private WebElement orderCost;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_view hidden-xs hidden-xxs']")
-    private WebElement orderView;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_link']")
-    private WebElement orderRepeat;
-
-    @FindBy(xpath = "//h2//a[contains(text(), \"Показать все\")]")
-    private WebElement showAll;
-
-    @FindBy(xpath = "//h1[contains(text(), \"Учётная запись\")]")
-    public WebElement personalDataHeaderInEditPage;
-
-    @FindBy(xpath = "//h2[contains(text(), \"Личные данные\")]")
-    public WebElement personalDataInEditPage;
-
-    @FindBy(xpath = "//h2[contains(text(), \"Рассылка\")]")
-    public WebElement sharingInEditPage;
+//	@FindBy(css = ".checkbox__label")
+//	public WebElement changePasswordCheckbox;
 
     @FindBy(id = "firstname")
-    public WebElement firstNameInEditPage;
+    private WebElement firstNameInEditPage;
 
     @FindBy(id = "lastname")
-    public WebElement lastNameInEditPage;
+    private WebElement lastNameInEditPage;
 
     @FindBy(css = ".button.button_mobile-wide")
-    public WebElement saveButtonInEditPage;
+    private WebElement saveButtonInEditPage;
 
     @FindBy(id = "adv_phone")
-    public WebElement phoneInEditPage;
+    private WebElement phoneInEditPage;
 
     @FindBy(id = "current_password")
-    public WebElement passwordInEditPage;
+    private WebElement passwordInEditPage;
 
     @FindBy(css = "[name='change_password']")
-    public WebElement changerPassBtn;
+    private WebElement changerPassBtn;
 
     @FindBy(css = "[name='is_subscribed']")
-    public WebElement isSubscribedBtn;
+    private WebElement isSubscribedBtn;
 
     @FindBy(id = "email")
-    public WebElement emailInEditPage;
+    private WebElement emailInEditPage;
 
-    @FindBy(css = ".checkbox__label")
-    public WebElement changePasswordCheckbox;
 
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();

@@ -14,9 +14,11 @@ public class PasswordRecoveryTest extends BaseTest {
     }
 
     @Test
-    public void verifyAuthorizationFormTest() {
-        TestReporter.testTitle("Test ID = 36970");
+    public void verifyAuthorizationFormTest() //C34497 - добавлены C36970, C36974
+    {
+        TestReporter.testTitle("Test ID = C34497");
         authorizationPage.verifyReturnToAuthorizationForm();
+        authorizationPage.verifyValidEmailInForgotPassword();
     }
 
     @Test
@@ -31,9 +33,8 @@ public class PasswordRecoveryTest extends BaseTest {
         authorizationPage.verifyEmailFieldWithoutDomainNameInForgotPasswordField();
     }
 
-    @Test
-    public void verifyValidEmailInForgotPasswordTest() {
-        TestReporter.testTitle("Test ID = 36974");
-        authorizationPage.verifyValidEmailInForgotPassword();
-    }
+//    @Test
+//    public void verifyValidEmailInForgotPasswordTest() {
+//
+//    }
 }
