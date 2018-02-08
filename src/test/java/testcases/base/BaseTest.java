@@ -27,14 +27,11 @@ import utils.TestReporter;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static logger.MagDvLogger.*;
 import static Core.driverFactory.BrowserFactory.testName;
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
+import static utils.Constants.*;
 /**
  * @author Sergey Potapov
  */
@@ -61,18 +58,6 @@ public class BaseTest {
 
     private BrowserFactory singleton = BrowserFactory.getInstance();
     public WebDriver driver;
-    @BeforeMethod
-    public void verifyBrowser(Method method) {
-        testName=method.getName();
-        if (driver==null)
-        {
-            driver = singleton.setDriver();
-            initPageElements();
-            TestReporter.step("Open Main page");
-            mainPage.openMainPage();
-            screen();
-        }
-    }
 
 
     /**
@@ -117,18 +102,31 @@ public class BaseTest {
             }
     }
 
+    @BeforeMethod
+    public void verifyBrowser(Method method) {
+        testName=method.getName();
+        if (driver==null)
+        {
+            driver = singleton.setDriver();
+            initPageElements();
+            TestReporter.step("Open Main page");
+            mainPage.openMainPage();
+            screen();
+        }
+    }
+
+
     @AfterMethod
     public void clearCookies(ITestResult result) {
         System.err.println(result.getStatus());
         System.err.println(result.getName());
         long millis=result.getEndMillis()-result.getStartMillis();
-        String date=String.format("TEST TIME: %02d min, %02d sec",
-                TimeUnit.MILLISECONDS.toMinutes(millis),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
-        );
-       driver.manage().deleteAllCookies();
-       mainPage.openMainPage();
-       logStatus(result,date);
+        long tim=((millis % 60000)/1000)*1000;
+        long timeS=millis -tim;
+        String date = String.format("TEST TIME: %d:%d:%d", millis / 60000, (millis % 60000) / 1000,timeS);
+        driver.manage().deleteAllCookies();
+        mainPage.openMainPage();
+        logStatus(result,date);
     }
 
     /**
@@ -136,8 +134,8 @@ public class BaseTest {
      */
     @AfterTest()
     public void closeBrowser() {
-        doneFooter=false;
-        driver.quit();
+        if(driver!=null)
+        {        driver.quit();}
         TestReporter.removeNumberStep();
     }
 
