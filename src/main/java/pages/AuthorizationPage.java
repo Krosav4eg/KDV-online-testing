@@ -20,22 +20,22 @@ public class AuthorizationPage extends BasePage {
     }
 
     //========================AUTHORIZATION PAGE=============================================
-    @FindBy(css = "#email")
+    @FindBy(id = "email")
     private WebElement emailInputField;
 
-    @FindBy(css = "#email_address")
+    @FindBy(id = "email_address")
     private WebElement emailInputAtForgotPassword;
 
     @FindBy(css = ".login__button.login__button_right.button")
     private WebElement sendEmailForVerification;
 
-    @FindBy(css = "#pass")
+    @FindBy(id = "pass")
     private WebElement passwordField;
 
     @FindBy(id = "form-validate")
     public WebElement loginContainer;
 
-    @FindBy(css = "#send2")
+    @FindBy(id = "send2")
     private WebElement authorizationButton;
 
     @FindBy(xpath = "//a[@title=\"Вход\"]")

@@ -133,7 +133,9 @@ public class BaseTest {
     @AfterTest()
     public void closeBrowser() {
         if(driver!=null)
-        {        driver.quit();}
+        {
+            driver.quit();
+        }
         TestReporter.removeNumberStep();
     }
 

@@ -55,7 +55,7 @@ public class HtmlLoggerFormatter extends Formatter {
      * @return - string with formatted date
      */
     private String calcDate(long milliseconds) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date resultDate = new Date(milliseconds);
         return dateFormat.format(resultDate);
     }
@@ -79,9 +79,9 @@ public class HtmlLoggerFormatter extends Formatter {
                 + "<table border=\"0\" cellpadding=\"5\" cellspacing=\"4\">\n"
                 + "<tr align=\"left\">\n"
                 + "\t<th style=\"width:5%\">Loglevel</th>\n"
-                + "\t<th style=\"width:15%\">Time</th>\n"
+                + "\t<th style=\"width:20%\">Time</th>\n"
                 + "\t<th style=\"width:20%\">Test Name</th>\n"
-                + "\t<th style=\"width:60%\">Log Message</th>\n"
+                + "\t<th style=\"width:55%\">Log Message</th>\n"
                 + "</tr>\n";
     }
 

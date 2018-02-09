@@ -18,7 +18,7 @@ public class HitOfSalesTest extends BaseTest {
 //
 //    @Test
 //    public void verifyAddingProductIntoBasketTest() {
-        TestReporter.testTitle("Test ID - C34340");
+//        TestReporter.testTitle("Test ID - C34340");
         mainPage.verifyAddingIntoBasket();
 //    }
 //
