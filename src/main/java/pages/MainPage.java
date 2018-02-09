@@ -3,7 +3,6 @@ package pages;
 import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1046,34 +1045,6 @@ public class MainPage extends BasePage {
         verifyLongStringsWithNumbersInProductInputField();
     }
 
-    public void verifyCyrillicTextInProductInputField() {
-        elementIsClickable(categoriesHeader, driver).click();
-        String oneOfCategoryFromList = getText(categoryFromList);
-        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
-    }
-
-    public void verifyUpperCaseTextInProductInputField() {
-        elementIsClickable(categoriesHeader, driver).click();
-        String oneOfCategoryFromList = getText(categoryFromList).toUpperCase();
-        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
-    }
-
-    public void verifyLowerCaseTextInProductInputField() {
-        elementIsClickable(categoriesHeader, driver).click();
-        String oneOfCategoryFromList = getText(categoryFromList).toLowerCase();
-        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
-    }
-
-    public void verifyUpperAndLowerCaseTextInProductInputField() {
-        elementIsClickable(categoriesHeader, driver).click();
-        String oneOfCategoryFromList = getText(categoryFromList);
-        fillInputFieldAndPressEnterButton(searchProductField, oneOfCategoryFromList);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(oneOfCategoryFromList));
-    }
-
     //TODO same assertion is present in verifySearchButtonTest
 //    public void verifySearchQueryWithoutCategory() {
 //        String actUrl = getCurrentUrl();
@@ -1135,29 +1106,6 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(resultsProductSearch.getText().contains(textFromInputField4));
     }
 
-    public void verifySpacesInProductInputField() {
-        try {
-            if (geoConfirmModalWindow.isDisplayed()) {
-                elementIsClickable(acceptGeoConfirm, driver).click();
-            }
-        } catch (NoSuchElementException e) {
-            e.getMessage();
-        }
-        elementFluentWaitVisibility(searchProductField, driver).clear();
-        elementFluentWaitVisibility(searchProductField, driver).sendKeys((Keys.SPACE));
-        String actUrl = getCurrentUrl();
-        elementIsClickable(searchButton, driver).click();
-        String expUrl = getCurrentUrl();
-        AssertCollector.assertEquals(actUrl, " Current url is equal to previous ",
-                expUrl);
-    }
-
-    public void verifySpacesWithWordInProductInputField() {
-        String expSymbols = " овсяное печенье ";
-        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
-    }
-
     public void verifySearchQueryWithInputTextWithoutCategory() {
         try {
             if (geoConfirmModalWindow.isDisplayed()) {
@@ -1174,24 +1122,6 @@ public class MainPage extends BasePage {
         if (!categoryLink.isDisplayed())
             AssertCollector.assertFalse(categoryGoodsList.contains(categoryLink));
         AssertCollector.assertTrue(filter.isDisplayed());
-    }
-
-    public void verifyOtherAlphabetsLettersInInputField() {
-        String expSymbols = "öпеченье äовсяное";
-        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
-    }
-
-    public void verifyOtherIncorrectSymbolsInInputField() {
-        String expSymbols = "▲печенье ♦♥овсяное";
-        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
-        AssertCollector.assertTrue(resultsProductSearch.getText().contains(expSymbols));
-    }
-
-    public void verifyQueryWithWordsOrAndInInputField() {
-        String expSymbols = "печенье и вафли";
-        fillInputFieldAndPressEnterButton(searchProductField, expSymbols);
-        AssertCollector.assertTrue(resultsProductSearchTitle.getText().contains(expSymbols));
     }
 
     public void verifySearchQueryWithInputTextWithCategory() {

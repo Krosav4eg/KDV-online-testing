@@ -167,60 +167,7 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyLatinTextInProductInputField();
     }
 
-    @Test
-    public void verifyCyrillicTextInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34378");
-        mainPage.verifyCyrillicTextInProductInputField();
-    }
-
-    @Test
-    public void verifyUpperCaseTextInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34379");
-        mainPage.verifyUpperCaseTextInProductInputField();
-    }
-
-    @Test(parameters = "")
-    public void verifyLowerCaseTextInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34380");
-        mainPage.verifyLowerCaseTextInProductInputField();
-    }
-
-    @Test
-    public void verifyUpperAndLowerCaseTextInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34381");
-        mainPage.verifyUpperAndLowerCaseTextInProductInputField();
-    }
-
-    @Test
-    public void verifySpacesInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34385");
-        mainPage.verifySpacesInProductInputField();
-    }
-
-    @Test
-    public void verifySpacesWithWordInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34386");
-        mainPage.verifySpacesWithWordInProductInputField();
-    }
-
-    @Test
-    public void verifyOtherAlphabetsLettersInInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34387");
-        mainPage.verifyOtherAlphabetsLettersInInputField();
-    }
-
-    @Test
-    public void verifyOtherIncorrectSymbolsInInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34388");
-        mainPage.verifyOtherIncorrectSymbolsInInputField();
-    }
-
-    @Test
-    public void verifyQueryWithWordsOrAndInInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34402");
-        mainPage.verifyQueryWithWordsOrAndInInputField();
-    }
-//TODO Delete this test due useless assertion
+    //TODO Delete this test due useless assertion
 //    @Test
 //    public void verifyEmptyFieldTest() {
 //        TestReporter.testTitle("Test ID = 34389");
