@@ -33,23 +33,7 @@ public class HeaderTest extends BaseTest {
     public void verifyChangingCityTest() {
         TestReporter.testTitle("Test ID - C34287");//C34287 - в этом кейсе объеденены C34283, C34285, C34316
         mainPage.changeCity();
-//    }
-//
-//    @Test
-//    public void verifyChangingCityToOtherTest() {
-
-//        TestReporter.testTitle("Test ID - C34285");
-//          driver.manage().deleteAllCookies();
-//          driver.navigate().refresh();
         mainPage.changeCityToOther();
-//     }
-//
-//     @Test
-//     public void verifyChangingCityToCurrentTest() {
-//         TestReporter.testTitle("Test ID - C34316");
-
-//        driver.manage().deleteAllCookies();
-//        driver.navigate().refresh();
         mainPage.changeCityToCurrent();
     }
 
@@ -57,16 +41,8 @@ public class HeaderTest extends BaseTest {
     public void verifyOpeningRegistrationTest() {//C34288 - в этом кейсе объеденены C34289, C34290
         TestReporter.testTitle("Test ID - C34288");
         mainPage.openingRegistrationLink();
-//    }
-//
-//    @Test
-//    public void verifyOpeningEnterTest() {
         TestReporter.testTitle("Test ID - C34289");
         mainPage.openingEnterLink();
-//    }
-//
-//    @Test
-//    public void verifyingAnswerYourQuestionsTelNumberTest() {
         TestReporter.testTitle("Test ID - C34290");
         mainPage.verifyingAnswerYourQuestionsTelNumber();
     }
@@ -88,16 +64,11 @@ public class HeaderTest extends BaseTest {
     public void verifyProductsInBasketTest() {
         TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
-//    }
-////TODO not fix in progress
+//TODO not fix in progress
 //    @Test//(timeOut = 30000)
 //    public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();
-//    }
-//
-//    @Test//(invocationCount = 5)
-//    public void verifyOpeningBasketAndOrderingTest() {
         TestReporter.testTitle("Test ID = 34297");
         mainPage.openingBasketAndOrdering();
     }
@@ -167,35 +138,9 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyLatinTextInProductInputField();
     }
 
-    //TODO Delete this test due useless assertion
-//    @Test
-//    public void verifyEmptyFieldTest() {
-//        TestReporter.testTitle("Test ID = 34389");
-//        mainPage.verifyEmptyField();
-//    }
-
-    //TODO same assertion is present in verifySearchButtonTest
-//    @Test
-//    public void verifySearchQueryWithoutCategoryTest() {
-//        TestReporter.testTitle("Test ID = 37064");
-//        mainPage.verifySearchQueryWithoutCategory();
-//    }
-
-//    @Test
-//    public void verifySearchQueryWithCategoryTest() {
-//        TestReporter.testTitle("Test ID = 37065");
-//        mainPage.verifySearchQueryWithCategory();
-//    }
-
     @Test
     public void verifySearchQueryWithInputTextWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37066");
-//        mainPage.verifySearchQueryWithInputTextWithoutCategory();
-//    }
-//
-//    //BAG IN TEST
-//   // @Test
-//    public void verifySearchQueryWithInputTextWithCategoryTest() {
         TestReporter.testTitle("Test ID = 37067");
         mainPage.verifySearchQueryWithInputTextWithCategory();
     }

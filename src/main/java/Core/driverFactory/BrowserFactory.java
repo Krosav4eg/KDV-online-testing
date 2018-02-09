@@ -21,7 +21,7 @@ import static utils.Constants.*;
 /**
  * @author Sergey Potapov
  */
-public class BrowserFactory implements DriverCapabilities  {
+public class BrowserFactory implements DriverCapabilities {
     private static volatile BrowserFactory instance;
 
     public static BrowserFactory getInstance() {
@@ -51,43 +51,39 @@ public class BrowserFactory implements DriverCapabilities  {
     /**
      * There is setting driver by name
      */
-    public  synchronized WebDriver setDriver()  {
+    public synchronized WebDriver setDriver() {
 
-        String driverName=BASE_DRIVER;
-        WebDriver driver=null;
-        if (driverName != null)
-        {
-            switch (driverName)
-            {
+        String driverName = BASE_DRIVER;
+        WebDriver driver = null;
+        if (driverName != null) {
+            switch (driverName) {
                 case FIREFOX: {
                     //LOGGER.log(Level.INFO, "set browser FIREFOX");
                     System.setProperty(DRIVER_NAME_FIREFOX, FIREFOX_DRIVER_PATH);
                     driverThread.set(new FirefoxDriver(firefoxCapabilities()));
-                    driver= driverThread.get();
+                    driver = driverThread.get();
                     break;
                 }
                 case CHROME: {
                     //LOGGER.log(Level.INFO, "set browser CHROME");
-                    if(isUnix ()){
+                    if (isUnix()) {
                         System.out.println("This is Unix or Linux OS");
                         System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH_UNIX);
-                    }
-                    else {
+                    } else {
                         System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
                     }
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
-                    driver= driverThread.get();
+                    driver = driverThread.get();
                     break;
                 }
                 case GRID: {
-                   // LOGGER.log(Level.INFO, "set browser GRID");
+                    // LOGGER.log(Level.INFO, "set browser GRID");
                     try {
                         String Node = "http://192.168.1.3:4444/wd/hub";
-                        driver = new RemoteWebDriver(new URL(Node),chromeCapabilities());
-                    }
-                   catch (Exception e) {
+                        driver = new RemoteWebDriver(new URL(Node), chromeCapabilities());
+                    } catch (Exception e) {
                         e.printStackTrace();
-                        System.out.println("Exception ERROR: "+ e.getMessage());
+                        System.out.println("Exception ERROR: " + e.getMessage());
                     }
                     break;
                 }
@@ -98,14 +94,16 @@ public class BrowserFactory implements DriverCapabilities  {
             }
         }
         EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
-        EventHandler handler = new EventHandler() {};
+        EventHandler handler = new EventHandler() {
+        };
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver = eventDriver.register(handler);
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         return driver;
     }
 
     public static String testName;
+
     /**
      * Getting personal object for every browser driver
      */

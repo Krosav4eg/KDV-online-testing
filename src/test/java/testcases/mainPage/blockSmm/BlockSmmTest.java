@@ -21,17 +21,7 @@ public class BlockSmmTest extends BaseTest {
     public void verifyOpeningVkLinkTest() {//C37058 - объеденен с C37062 и C37063
         TestReporter.testTitle("Test ID - C37058");
         mainPage.openingVkLink();
-//    }
-//
-//    @Test
-//    public void verifyOpeningInstagramLinkTest() {
-//        TestReporter.testTitle("Test ID - C37062");
         mainPage.openingInstagramLink();
-//    }
-//
-//    @Test
-//    public void verifyOpeningGooglePlayLinkTest() {
-//        TestReporter.testTitle("Test ID - C37063");
         mainPage.openingGooglePlayLink();
     }
 }

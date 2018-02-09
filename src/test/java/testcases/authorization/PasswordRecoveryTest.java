@@ -32,9 +32,4 @@ public class PasswordRecoveryTest extends BaseTest {
         TestReporter.testTitle("Test ID = 36973");
         authorizationPage.verifyEmailFieldWithoutDomainNameInForgotPasswordField();
     }
-
-//    @Test
-//    public void verifyValidEmailInForgotPasswordTest() {
-//
-//    }
 }

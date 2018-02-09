@@ -31,6 +31,7 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37104");
         registrationPage.verifyInputNumbersInFirstNameField();
     }
+
     //BUG ON SITE
     @Test
     public void verifyInputForbiddenSymbolsInFirstNameFieldTest() {
@@ -55,19 +56,22 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37114");
         registrationPage.verifyInputInLastNameField();
     }
+
     //test not pass(validation problems)
     @Test
     public void verifyMaximumInputInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37115");
         registrationPage.verifyMaximumInputInLastNameField();
     }
-    //  //test not pass(validation problems)
+
+    //test not pass(validation problems)
     @Test
     public void verifyInputNumbersInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37117");
         registrationPage.verifyInputNumbersInLastNameField();
     }
-    //    //test not pass(validation problems)
+
+    //test not pass(validation problems)
     @Test
     public void verifyInputForbiddenSymbolsInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37118");
