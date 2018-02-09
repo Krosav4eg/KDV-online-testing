@@ -1041,6 +1041,9 @@ public class MainPage extends BasePage {
     public void verifyLatinTextInProductInputField() {
         fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
         textPresent("По вашему запросу ничего не найдено.");
+        verifySpecialSymbolsInProductInputField();
+        verifyNumbersInProductInputField();
+        verifyLongStringsWithNumbersInProductInputField();
     }
 
     public void verifyCyrillicTextInProductInputField() {

@@ -163,7 +163,7 @@ public class HeaderTest extends BaseTest {
 
     @Test
     public void verifyLatinTextInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34377");
+        TestReporter.testTitle("Test ID = 34377,34382-34384");
         mainPage.verifyLatinTextInProductInputField();
     }
 
@@ -189,24 +189,6 @@ public class HeaderTest extends BaseTest {
     public void verifyUpperAndLowerCaseTextInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34381");
         mainPage.verifyUpperAndLowerCaseTextInProductInputField();
-    }
-
-    @Test
-    public void verifySpecialSymbolsInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34382");
-        mainPage.verifySpecialSymbolsInProductInputField();
-    }
-
-    @Test
-    public void verifyNumbersInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34383");
-        mainPage.verifyNumbersInProductInputField();
-    }
-
-    @Test
-    public void verifyLongStringsWithNumbersInProductInputFieldTest() {
-        TestReporter.testTitle("Test ID = 34384");
-        mainPage.verifyLongStringsWithNumbersInProductInputField();
     }
 
     @Test
