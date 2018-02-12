@@ -137,6 +137,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
     private WebElement lowerPriceSection;
 
+    @FindBy(css = "[alt='КДВ']")
+    private WebElement kdvImg;
+
     @FindBy(xpath = "//div[@class='benefit benefit_price j_benefit benefit_active']")
     private WebElement lowerPriceSectionOpen;
 
@@ -420,14 +423,16 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingClosingLowerPricesSection() {
-        LOGGER.log(Level.INFO, "Verifying closing lower prices section");
-        TestReporter.step("Verifying opening lower prices section");
+        getUrl(BASE_URL);
+//        LOGGER.log(Level.INFO, "Verifying closing lower prices section");
+//        TestReporter.step("Verifying opening lower prices section");
         elementIsClickable(lowerPriceSection, driver).click();
-        elementIsClickable(lowerPriceSectionOpen, driver).click();
+        elementIsClickable(kdvImg, driver).click();
         AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
     }
 
     public void verifyingAboutLinkLowerPriceSection() {
+        getUrl(BASE_URL);
         LOGGER.log(Level.INFO, "Get current url");
         TestReporter.step("Get current url");
         getCurrentUrl();
@@ -573,6 +578,7 @@ public class MainPage extends BasePage {
     }
 
     public void openingModalWindowProductCard() {
+        getUrl(BASE_URL);
         LOGGER.log(Level.INFO, "Select category");
         TestReporter.step("Select category");
         scrollDown();
@@ -582,6 +588,8 @@ public class MainPage extends BasePage {
     }
 
     public void openProductCard() {
+
+        getUrl(BASE_URL);
         LOGGER.log(Level.INFO, "Select category");
         TestReporter.step("Select category");
         scrollDown();

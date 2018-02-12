@@ -8,6 +8,8 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.BASE_URL;
+import static utils.Constants.PHYSICAL_PERSON_EMAIL;
+import static utils.Constants.PHYSICAL_PERSON_PASSWORD;
 
 /**
  * @author Sergey Potapov
@@ -28,8 +30,8 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34287");
         mainPage.closingModalWindow();
     }
-
-    @Test
+//TODO fix it too long
+   // @Test(timeOut = 60000)
     public void verifyChangingCityTest() {
         TestReporter.testTitle("Test ID - C34287");//C34287 - в этом кейсе объеденены C34283, C34285, C34316
         mainPage.changeCity();
@@ -60,7 +62,7 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyMyBasketWithProduct();
     }
 
-    @Test
+    @Test()
     public void verifyProductsInBasketTest() {
         TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
@@ -82,7 +84,10 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyAuthAsPhysicalPersonTest() {
         TestReporter.testTitle("Test ID = 34309-34310");
-        authorizationPage.authAsPhysicalPerson();
+        JSONObject data= new JSONObject();
+        data.put("email",PHYSICAL_PERSON_EMAIL);
+        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
         mainPage.verifyPhysicalAuthCredential();
     }
 
@@ -120,7 +125,10 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyToolTypeTextInPhysicalPersonAccountTest() {
         TestReporter.testTitle("Test ID = 34347");
-        authorizationPage.authAsPhysicalPerson();
+        JSONObject data= new JSONObject();
+        data.put("email",PHYSICAL_PERSON_EMAIL);
+        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
         customerAccountPage.verifyToolTypeTextInPhysicalPersonAccount();
     }
 

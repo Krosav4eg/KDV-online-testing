@@ -85,4 +85,5 @@ public class AssertCollector {
         TestReporter.success(" expected condition is " + condition);
         LOGGER.log(Level.INFO, " expected condition " + condition);
     }
+
 }

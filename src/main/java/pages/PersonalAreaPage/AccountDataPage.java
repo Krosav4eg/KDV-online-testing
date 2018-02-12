@@ -40,7 +40,7 @@ public class AccountDataPage extends BasePage {
     @FindBy(css = ".address__action.link.offset-l-2")
     public WebElement deleteNewAddress;
 
-    @FindBy(css = "#adv_phone")
+    @FindBy(id = "adv_phone")
     public WebElement phoneInEditPage;
 
     @FindBy(css = "input[name=\"telephone\"]")
