@@ -3,7 +3,7 @@
     <section id="1">
         <unixPath></unixPath>
         <driver>Chrome</driver>
-        <mainUrl>http://tomsk.demo.dev.magonline.ru</mainUrl>
+        <mainUrl>http://tomsk.kdv.demo.dev.magonline.ru/</mainUrl>
     </section>
     <testData id="2">
         <physicalEmail>test_i.makarov@magdv.com</physicalEmail>
