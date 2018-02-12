@@ -8,6 +8,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static pages.PersonalAreaPage.PersonalCabinetPage.phoneInEditPage;
+
 public class ContactDataTest extends BaseTest {
 
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -41,16 +43,16 @@ public class ContactDataTest extends BaseTest {
         data.put("lastName", RandomStringUtils.randomAlphabetic(10));
         data.put("phone", RandomStringUtils.randomNumeric(11));
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(registrationPage.phone.getAttribute("value").length() ==
+        AssertCollector.verifyCondition(phoneInEditPage.getAttribute("value").length() ==
                 RandomStringUtils.randomAlphabetic(11).length());
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "  ");
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(registrationPage.phone.getText().isEmpty());
+        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(registrationPage.phone.getText().isEmpty());
+        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
         data = new JSONObject();
         data.put("email", RandomStringUtils.randomAlphabetic(10) + "@test.com");
         data.put("password", pass);

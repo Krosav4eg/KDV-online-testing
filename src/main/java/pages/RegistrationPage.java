@@ -8,11 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
+import static pages.PersonalAreaPage.PersonalCabinetPage.phoneInEditPage;
 import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
-
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
@@ -37,8 +37,6 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "lastname")
     public WebElement lastName;
 
-    @FindBy(id = "adv_phone")
-    public WebElement phone;
 
     @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(3)")
     private WebElement contactData;
@@ -247,43 +245,43 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldPhonePresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(phone.isDisplayed());
+        AssertCollector.assertTrue(phoneInEditPage.isDisplayed());
     }
 
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(phone, driver).click();
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "phone mask is correct");
+        elementFluentWaitVisibility(phoneInEditPage, driver).click();
+        AssertCollector.assertTrue(phoneInEditPage.getAttribute("value").isEmpty(), "phone mask is correct");
     }
 
     public void verifyMaximumInputInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(15));
-        AssertCollector.assertEquals(phone.getAttribute("value").length(), " The length of phone number equals ",
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(15));
+        AssertCollector.assertEquals(phoneInEditPage.getAttribute("value").length(), " The length of phone number equals ",
                 RandomStringUtils.randomNumeric(12).length());
     }
 
     public void verifyInputForbiddenSymbolsInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(phone, driver, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+        fillInputField(phoneInEditPage, driver, "!@#$%^&*()+_/|{}[]?><.,");
+        AssertCollector.assertTrue(phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
     public void verifyInputLettersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(phone, driver, RandomStringUtils.randomAlphabetic(10));
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomAlphabetic(10));
+        AssertCollector.assertTrue(phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
     public void verifyInputSpacesInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(phone, driver, EMPTY_DATA);
-        AssertCollector.assertTrue(phone.getAttribute("value").isEmpty(), "Phone field is displayed");
+        fillInputField(phoneInEditPage, driver, EMPTY_DATA);
+        AssertCollector.assertTrue(phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
     }
 
     public void verifyInputLessThenTenNumbersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(5));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(5));
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
         fillInputField(email, driver, "test@test.ru");
@@ -474,7 +472,7 @@ public class RegistrationPage extends BasePage {
 
     //registration
     private String verifyAuthorizationInformation(JSONObject data) {
-        moveToElementJS(driver, phone);
+        moveToElementJS(driver, phoneInEditPage);
         elementFluentWaitVisibility(email, driver).click();
         elementFluentWaitVisibility(email, driver).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(password, driver).click();
@@ -523,8 +521,8 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(firstName, driver).sendKeys(data.getString("firstName"));
         elementFluentWaitVisibility(lastName, driver).click();
         elementFluentWaitVisibility(lastName, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(phone, driver).click();
-        elementFluentWaitVisibility(phone, driver).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(phoneInEditPage, driver).click();
+        elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
         return getText(contactData);
     }
 
@@ -574,7 +572,7 @@ public class RegistrationPage extends BasePage {
     public void verifySendingWithoutFillingFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
@@ -587,7 +585,7 @@ public class RegistrationPage extends BasePage {
     public void verifySendingWithoutFillingLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(11));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(11));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
@@ -614,7 +612,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
         scrollToNecessaryElement(sendButton);
@@ -627,7 +625,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
         scrollToNecessaryElement(sendButton);
@@ -640,7 +638,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
         scrollToNecessaryElement(sendButton);
@@ -653,7 +651,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(12));
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
@@ -666,7 +664,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, "123456789");
         fillInputField(confirmPassword, driver, "123456789");
@@ -682,7 +680,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "a.shaulo@andersenlab.com");
         fillInputField(password, driver, "123456789");
         fillInputField(confirmPassword, driver, "123456789");
@@ -699,7 +697,7 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(12));
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(12));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(12));
         fillInputField(email, driver, "testuser@test.com");
         fillInputField(password, driver, "123456789");
         fillInputField(confirmPassword, driver, "123456789");
@@ -776,7 +774,7 @@ public class RegistrationPage extends BasePage {
         fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
         fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
         fillInputField(email, driver, "ashaulo@andersenlab.com");
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
+        fillInputField(phoneInEditPage, driver, RandomStringUtils.randomNumeric(10));
         fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
         fillInputField(confirmPassword, driver, password.getAttribute("value"));
         scrollToNecessaryElement(sendButton);

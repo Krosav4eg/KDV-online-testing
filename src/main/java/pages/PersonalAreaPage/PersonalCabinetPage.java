@@ -53,8 +53,8 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = ".button.button_mobile-wide")
     private WebElement saveButtonInEditPage;
 
-    @FindBy(id = "adv_phone")
-    private WebElement phoneInEditPage;
+    @FindBy(id = "phone")
+    public static WebElement phoneInEditPage;
 
     @FindBy(id = "current_password")
     private WebElement passwordInEditPage;

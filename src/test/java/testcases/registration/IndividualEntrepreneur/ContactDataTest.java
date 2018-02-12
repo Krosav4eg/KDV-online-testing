@@ -8,6 +8,8 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static pages.PersonalAreaPage.PersonalCabinetPage.phoneInEditPage;
+
 public class ContactDataTest extends BaseTest {
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
@@ -82,7 +84,7 @@ public class ContactDataTest extends BaseTest {
         data.put("phone", RandomStringUtils.randomAlphanumeric(10));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения"));
-        AssertCollector.assertEquals(registrationPage.phone.getAttribute("value"),
-                " Value of email field is equal ", registrationPage.phone.getAttribute("value"));
+        AssertCollector.assertEquals(phoneInEditPage.getAttribute("value"),
+                " Value of email field is equal ", phoneInEditPage.getAttribute("value"));
     }
 }

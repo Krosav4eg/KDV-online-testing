@@ -102,7 +102,7 @@ public class WaitingUtility {
     }
 
     public static boolean elementIsDisplayed(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, 3);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
 }

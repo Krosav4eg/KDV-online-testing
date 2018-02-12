@@ -168,6 +168,6 @@ public class MandatoryFieldsTest extends BaseTest {
 				contains("Это поле обязательно для заполнения"));
 		del.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
 				" выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
-		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls are equals");
+		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls Not equals");
 	}
 }
