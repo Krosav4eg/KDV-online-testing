@@ -10,7 +10,7 @@ import utils.AssertCollector;
 
 import java.util.Calendar;
 
-import static utils.Constants.AUTORIZATION_PAGE_URL;
+import static utils.Constants.*;
 import static utils.WaitingUtility.*;
 
 public class OrderingPhysicalPage extends BasePage {
@@ -105,7 +105,7 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = "#loc-changed .modal__close")
     private WebElement closedBtn;
 
-    @FindBy(id = "billing-address-select")
+    @FindBy(id = "billing-address-select")///checkout-delivery-time
     private WebElement addressesList;
 
     /**
@@ -113,9 +113,8 @@ public class OrderingPhysicalPage extends BasePage {
      */
     private void selectProduct() {
         getUrl(AUTORIZATION_PAGE_URL);
-        getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "test_m.ponomareva@magdv.com");
-        fillInputFieldAndPressEnterButton(passwordField, "ztq0d9e6");
+        fillInputField(emailInputField, driver, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
+        fillInputFieldAndPressEnterButton(passwordField,PONOMAREVA_PASSWORD); //"ztq0d9e6");
         if (!getText(basketSummaryTxt).contains("тов.")) {
             new OrderingGuestPage(driver).addProductToBasket();
         } else {
@@ -210,10 +209,10 @@ public class OrderingPhysicalPage extends BasePage {
         elementFluentWaitVisibility(guest.createOrderButton, driver).click();
         textIsPresent(confirmBtn, driver, "Да");
         elementFluentWaitVisibility(confirmBtn, driver).click();
-        sleepWait();
-        elementFluentWaitClick(dropListAddresses, driver).click();
-        dropdown.selectByIndex(1);
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
-        validateMainData();
+//        //TODO
+//        elementFluentWaitClick(dropListAddresses, driver).click();
+//        dropdown.selectByIndex(1);
+//        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
+//        validateMainData();
     }
 }

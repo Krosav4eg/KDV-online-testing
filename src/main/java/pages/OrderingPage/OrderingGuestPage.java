@@ -166,13 +166,15 @@ public class OrderingGuestPage extends BasePage {
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
         try {
+            elementIsPresent(messageOrderError,driver);
             if (elementIsDisplayed(messageOrderError,driver)) {
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();
             }
         new BasketPage(driver).increaseLegalPersonProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
-        } catch (NoSuchElementException e) {
+        }
+        catch (Exception e) {
             e.getMessage();
         }
     }

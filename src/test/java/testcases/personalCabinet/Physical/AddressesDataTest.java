@@ -20,8 +20,8 @@ public class AddressesDataTest extends BaseTest {
 	public void verifyOpeningAddressItemPersonalTest() {
 		TestReporter.testTitle("Test ID = 38710");
 		JSONObject data = authorizationPage.mainAuthorizationInfo();
-		data.put("email", PONOMATEVA_EMAIL);
-		data.put("password", PONOMATEVA_PASSWORD);//"ztq0d9e6"
+		data.put("email", PONOMAREVA_EMAIL);
+		data.put("password", PONOMAREVA_PASSWORD);//"ztq0d9e6"
 		authorizationPage.verifyAuthFields(data);
 		del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");

@@ -18,7 +18,7 @@ public class OrderingPhysicalPageTest extends BaseTest {
         orderingPhysicalPage.orderingNewAddress();
     }
 
-    @Test
+    @Test//(invocationCount = 3)
     public void orderingChangeAddress() {
         TestReporter.testTitle("Test ID - C41454");
         orderingPhysicalPage.orderingChangedAddress();
