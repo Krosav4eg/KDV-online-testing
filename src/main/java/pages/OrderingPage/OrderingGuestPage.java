@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.BasketPages.BasketPage;
 
 import static utils.Constants.BASE_URL;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.*;
 
 public class OrderingGuestPage extends BasePage {
 
@@ -166,7 +166,7 @@ public class OrderingGuestPage extends BasePage {
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
         try {
-            if (messageOrderError.isDisplayed()) {
+            if (elementIsDisplayed(messageOrderError,driver)) {
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();
             }
