@@ -125,7 +125,6 @@ public class BasketPage extends BasePage {
             if (productAddBtn.isDisplayed()) {
                 elementFluentWaitVisibility(productAddBtn, driver).click();
                 textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, driver, "тов.");
-                //sleepWait();
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();
             } else if (productPlusBtn.isDisplayed()) {
@@ -162,7 +161,6 @@ public class BasketPage extends BasePage {
         elementIsClickable(selectMiniCart, driver).click();
         moveToElementJS(driver, selectBasket);
         elementIsClickable(selectBasket, driver).click();
-
     }
 
     public void verifyAddProductToBasket() {
@@ -236,6 +234,5 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(selectCityTylaLink, driver).click();
         AssertCollector.assertTrue(getText(cardContainer).contains("Нет в наличии"));
         AssertCollector.assertTrue(getPrice(summTxt) == 0);
-
     }
 }

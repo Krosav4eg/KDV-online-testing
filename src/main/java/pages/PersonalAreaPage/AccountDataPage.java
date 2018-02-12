@@ -140,6 +140,5 @@ public class AccountDataPage extends BasePage {
     public void verifyAddressDropDownAddress() {
         elementFluentWaitVisibility(newAddressField, driver).clear();
         fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
-
     }
 }

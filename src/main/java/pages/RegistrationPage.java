@@ -545,15 +545,6 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(getText(forgotPasswordTxt).contains("Восстановление вашего пароля"));
     }
 
-    public void verifyCoincidencePasswordAndConfirmation() {
-        getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(password, driver, "1234567");
-        fillInputField(confirmPassword, driver, "2233445");
-        scrollToNecessaryElement(sendButton);
-        elementFluentWaitVisibility(sendButton, driver).click();
-        textPresent("Пожалуйста, убедитесь, что ваши пароли совпадают.");
-    }
-
     public void verifySubscriptionCheckboxPresence() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(subscription.isDisplayed());
@@ -825,114 +816,6 @@ public class RegistrationPage extends BasePage {
         fillInputField(reasonCode, driver, "%*&^@212121");
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton, driver).click();
-
-    }
-
-    public void verifyInputLessThenNineDigitsInReasonCodeField() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(organizationFullName, driver, RandomStringUtils.randomAlphabetic(10));
-        fillInputField(taxpayerId, driver, RandomStringUtils.randomNumeric(10));
-        fillInputField(reasonCode, driver, "7878");
-        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphabetic(10));
-        fillInputField(company, driver, RandomStringUtils.randomAlphabetic(10));
-        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(10));
-        fillInputField(firstName, driver, RandomStringUtils.randomAlphabetic(10));
-        fillInputField(lastName, driver, RandomStringUtils.randomAlphabetic(10));
-        fillInputField(email, driver, "ashaulo@andersenlab.com");
-        fillInputField(phone, driver, RandomStringUtils.randomNumeric(10));
-        fillInputField(password, driver, RandomStringUtils.randomAlphanumeric(8));
-        fillInputField(confirmPassword, driver, password.getAttribute("value"));
-        scrollToNecessaryElement(sendButton);
-        elementFluentWaitVisibility(checkboxConfirmLegal, driver).click();
-        elementFluentWaitVisibility(sendButton, driver).click();
-        textPresent("Значение \"КПП\" должно содержать 9 символов.");
-    }
-
-    public void verifyLegalAddressFieldPresence() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(legalAddress.isDisplayed());
-    }
-
-    //not pass
-    public void verifyMaximumInputInLegalAddress() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(legalAddress, driver, RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphanumeric(255).length());
-    }
-
-    public void verifyCompanyFieldPresence() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(company.isDisplayed());
-    }
-
-    //not pass
-    public void verifyMaximumInputInCompany() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(company, driver, RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertEquals(company.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphanumeric(255).length());
-    }
-
-    public void verifyAddressFieldPresence() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(address.isDisplayed());
-    }
-
-    public void verifyPromptsInAddressFieldAfterInput() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(address, driver, "Т");
-        textPresent("Выберите адрес");
-    }
-
-    public void verifyPromptChoosingInAddressFieldAfterInput() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        scrollToNecessaryElement(company);
-        elementFluentWaitVisibility(address, driver).click();
-        fillInputField(address, driver, "Томск");
-        elementFluentWaitVisibility(cityForAddress, driver).click();
-        AssertCollector.assertTrue(address.getAttribute("value").contains("Томск"));
-        textPresent("Внимание! Вы не указали номер квартиры, офиса.");
-    }
-
-    //not pass
-    public void verifyFullAddressInputInAddressField() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        scrollToNecessaryElement(company);
-        fillInputField(address, driver, "Томск, пр. Мира 20, кв. 7");
-    }
-
-    //not pass
-    public void verifyMaximumInputInAddressField() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(address, driver, RandomStringUtils.randomAlphanumeric(256));
-        AssertCollector.assertEquals(address.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphanumeric(255).length());
-    }
-
-    public void verifyCommentsFieldPresence() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(comments.isDisplayed());
-    }
-
-    //not pass
-    public void verifyMaximumInputInCommentsField() {
-        getUrl(REGISTRATION_PAGE_URL);
-        elementFluentWaitVisibility(organizationButton, driver).click();
-        fillInputField(comments, driver, RandomStringUtils.randomAlphanumeric(1001));
-        AssertCollector.assertEquals(comments.getAttribute("value").length(), " Number of symbols is equal ",
-                RandomStringUtils.randomAlphanumeric(1000).length());
     }
 
     public void verifyIndividualEntrepreneurRadioButton() {

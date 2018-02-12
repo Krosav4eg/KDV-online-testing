@@ -37,7 +37,6 @@ public class AddressesDataTest extends BaseTest {
 		data.put("password", MAKAROVA_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
 		orderingGuestPage.clickOnWebElement(deliveryAddressPage.deliveryAddressItemButton);
-//        deliveryAddressPage.deliveryAddressItemButton.click();
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
 				"new/", "Urls are equals");
 	}
