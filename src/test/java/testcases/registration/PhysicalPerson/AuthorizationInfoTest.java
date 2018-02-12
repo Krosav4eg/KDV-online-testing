@@ -204,11 +204,6 @@ public class AuthorizationInfoTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 
-//    public void verifyCoincidencePasswordAndConfirmationTest() {
-//        TestReporter.testTitle("Test ID = 37296");
-//        registrationPage.verifyCoincidencePasswordAndConfirmation();
-//    }
-
     @Test
     public void verifySubscriptionCheckboxPresenceTest() {
         TestReporter.testTitle("Test ID = 37352");

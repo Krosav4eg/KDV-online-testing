@@ -69,7 +69,6 @@ public class SiteLoginTest extends BaseTest {
         AssertCollector.verifyCondition(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
         data.put("email", "anastasiya.shaulo@gmail.com");
         AssertCollector.assertTrue(authorizationPage.authForm(data).contains("Эта учётная запись не подтверждена"));
-
     }
 
     @Test

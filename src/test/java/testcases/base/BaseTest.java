@@ -115,7 +115,6 @@ public class BaseTest {
         }
     }
 
-
     @AfterMethod
     public void clearCookies(ITestResult result) {
         long millis=result.getEndMillis()-result.getStartMillis();
@@ -162,7 +161,6 @@ public class BaseTest {
             FileUtils.copyFile(source, destination);
         } catch (IOException e) {
             e.printStackTrace();
-            //LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
         }
     }
 

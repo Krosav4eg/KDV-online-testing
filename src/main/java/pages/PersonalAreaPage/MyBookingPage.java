@@ -15,5 +15,4 @@ public class MyBookingPage extends BasePage {
 
     @FindBy(xpath = ".//span[text()='Мои заказы']")
     public WebElement myBookingsItemButton;
-
 }

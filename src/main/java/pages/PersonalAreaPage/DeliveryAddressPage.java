@@ -69,80 +69,77 @@ public class DeliveryAddressPage extends BasePage {
     @FindBy(xpath = "(//div[@class='profile__addresses']/div[@class='address'])[1]")
     public WebElement deliveryAddressList;
 
-	@FindBy(css = ".profile__addresses")
-	public WebElement deliveryAddressContainer;
+    @FindBy(css = ".profile__addresses")
+    public WebElement deliveryAddressContainer;
 
-	@FindBy(css = "div.layout  div:nth-child(1) > div.address__info_actions > a")
-	public WebElement editAddressLink;
+    @FindBy(css = "div.layout  div:nth-child(1) > div.address__info_actions > a")
+    public WebElement editAddressLink;
 
-	@FindBy(id = "company")
-	public WebElement company;
+    @FindBy(id = "company")
+    public WebElement company;
 
-	@FindBy(linkText = "Добавить")
-	public WebElement addBtn;
+    @FindBy(linkText = "Добавить")
+    public WebElement addBtn;
 
 
-	@FindBy(className = "success-msg")
-	public WebElement messageSuccesTxt;
+    @FindBy(className = "success-msg")
+    public WebElement messageSuccesTxt;
 
-	@FindBy(css = ".suggestions-wrapper")
-	public WebElement addressesContainerDropDown;
+    @FindBy(css = ".suggestions-wrapper")
+    public WebElement addressesContainerDropDown;
 
-	@FindBy(css = "[title='Сохранить адрес']")
-	public WebElement getSaveDeliveryAddressBtn;
+    @FindBy(css = "[title='Сохранить адрес']")
+    public WebElement getSaveDeliveryAddressBtn;
 
-	@FindBy(css = "[href='/about']")
-	public WebElement getAboutLink;
+    @FindBy(css = "[href='/about']")
+    public WebElement getAboutLink;
 
-	@FindBy(css = ".header-top")
-	public WebElement headerDelivery;
+    @FindBy(css = ".header-top")
+    public WebElement headerDelivery;
 
-	public void verifyCardNotApprovedAddress()
-    {
-		getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
-	    Verify.verify(getText(deliveryAddressContainer).contains("Илья Панфилов"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Томск, Нечевский переулок, 34"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Герцог мини-маркет"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
-	    elementFluentWaitClick(editAddressLink,driver).click();
-	    Verify.verify(getValueOfAttributeByName(company,"readonly").contains("true"));
-	    Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage,"readonly").contains("true"));
-	    Verify.verify(getValueOfAttributeByName(company,"value").contains("Герцог мини-маркет"));
-	    Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage,"value").contains("Томск, Нечевский переулок, 34"));
-    }
-    public void verifyCardApprovedAddress()
-    {
-	    getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
-	    Verify.verify(getText(deliveryAddressContainer).contains("Илья Панфилов"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Томск, Нечевский переулок, 34"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Герцог мини-маркет"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
-	    Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
-	    elementFluentWaitClick(editAddressLink,driver).click();
-	    Verify.verify(getValueOfAttributeByName(company,"readonly").contains("true"));
-	    Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage,"readonly").contains("true"));
-	    Verify.verify(getValueOfAttributeByName(company,"value").contains("Герцог мини-маркет"));
-	    Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage,"value").contains("Томск, Нечевский переулок, 34"));
+    public void verifyCardNotApprovedAddress() {
+        getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
+        Verify.verify(getText(deliveryAddressContainer).contains("Илья Панфилов"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Томск, Нечевский переулок, 34"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Герцог мини-маркет"));
+        Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
+        Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
+        elementFluentWaitClick(editAddressLink, driver).click();
+        Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
+        Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").contains("Томск, Нечевский переулок, 34"));
     }
 
-    public void addAddresses()
-    {
-	    getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
-	    elementFluentWaitClick(addBtn,driver).click();
-	    Verify.verify(getCurrentUrl().contains("/customer/address/new/"));
-	    Verify.verify(getValueOfAttributeByName(firstNameInEditDeliveryPage,"value").contains("Геннадий"));
-	    Verify.verify(getValueOfAttributeByName(lastNameInEditDeliveryPage,"value").contains("Фадеев"));
-	    Verify.verify(getValueOfAttributeByName(phoneInEditDeliveryPage,"value").contains("71119348926"));
-	    elementFluentWaitClick(company,driver).sendKeys("ТЕСТОВАЯ");
-	    elementFluentWaitClick(addressInEditDeliveryPage,driver).sendKeys("ул.Тестеров Тест 1");
-	    moveMouseTo(driver,getAboutLink);
-	    elementFluentWaitClick(addressInEditDeliveryPage,driver).click();
-	    Verify.verify(getText(addressesContainerDropDown).contains("Выберите адрес"));
-	    elementFluentWaitClick(getSaveDeliveryAddressBtn,driver).submit();
-	    Verify.verify(getText(messageSuccesTxt).contains("Адрес сохранён."));
+    public void verifyCardApprovedAddress() {
+        getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
+        Verify.verify(getText(deliveryAddressContainer).contains("Илья Панфилов"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Томск, Нечевский переулок, 34"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Герцог мини-маркет"));
+        Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
+        Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
+        Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
+        elementFluentWaitClick(editAddressLink, driver).click();
+        Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
+        Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").contains("Томск, Нечевский переулок, 34"));
     }
 
+    public void addAddresses() {
+        getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
+        elementFluentWaitClick(addBtn, driver).click();
+        Verify.verify(getCurrentUrl().contains("/customer/address/new/"));
+        Verify.verify(getValueOfAttributeByName(firstNameInEditDeliveryPage, "value").contains("Геннадий"));
+        Verify.verify(getValueOfAttributeByName(lastNameInEditDeliveryPage, "value").contains("Фадеев"));
+        Verify.verify(getValueOfAttributeByName(phoneInEditDeliveryPage, "value").contains("71119348926"));
+        elementFluentWaitClick(company, driver).sendKeys("ТЕСТОВАЯ");
+        elementFluentWaitClick(addressInEditDeliveryPage, driver).sendKeys("ул.Тестеров Тест 1");
+        moveMouseTo(driver, getAboutLink);
+        elementFluentWaitClick(addressInEditDeliveryPage, driver).click();
+        Verify.verify(getText(addressesContainerDropDown).contains("Выберите адрес"));
+        elementFluentWaitClick(getSaveDeliveryAddressBtn, driver).submit();
+        Verify.verify(getText(messageSuccesTxt).contains("Адрес сохранён."));
+    }
 }

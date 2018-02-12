@@ -222,19 +222,6 @@ public class AuthorizationPage extends BasePage {
                 "ivanivanov@domain.com.");
     }
 
-    public JSONObject authorizationData(JSONObject data) {
-        JSONObject authorizationData = new JSONObject();
-        authorizationData.put("email", "a.shaulo@andersenlab");
-        authorizationData.put("pass", "");
-        return authorizationData;
-    }
-
-//    public void verifyValidSmallPassword()
-//    {
-//        getUrl(BASE_URL + "/customer/account/forgotpassword/");
-//
-//    }
-
     public void verifyValidEmailInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
         fillInputField(emailInputAtForgotPassword, driver, "a.shaulo@andersenlab.com");
@@ -297,25 +284,6 @@ public class AuthorizationPage extends BasePage {
                 linkTextAttribute);
     }
 
-    public void verifyChangingColorsForTabs() {
-        getUrl(AUTORIZATION_PAGE_URL);
-        moveMouseTo(driver, registrationButton);
-        String expectedRegistrationButtonColor = "#ce0022";
-        String actualRegistrationButtonColor = getElementColor(registrationButton, "color");
-        AssertCollector.assertEqualsJ(actualRegistrationButtonColor, expectedRegistrationButtonColor,
-                " Verify elements color of registration button ");
-        moveMouseTo(driver, continueAsGuestButton);
-        String expectedContinueButtonColor = "#ce0022";
-        String actualContinueButtonColor = getElementColor(continueAsGuestButton, "color");
-        AssertCollector.assertEqualsJ(actualContinueButtonColor, expectedContinueButtonColor,
-                " Verify elements color of continue as guest button ");
-        moveMouseTo(driver, buttonForOrganizations);
-        String expectedForOrganizationsButtonColor = "#ce0022";
-        String actualForOrganizationsButtonColor = getElementColor(buttonForOrganizations, "color");
-        AssertCollector.assertEqualsJ(actualForOrganizationsButtonColor, expectedForOrganizationsButtonColor,
-                " Verify elements color of for organizations button ");
-    }
-
     public void verifyCopyWrite() {
         getUrl(AUTORIZATION_PAGE_URL);
         textPresent("© 2017 ООО «КДВ Групп»");
@@ -353,7 +321,6 @@ public class AuthorizationPage extends BasePage {
         data.put("email", "a.shaulo@andersenlab.com");
         data.put("pass", "As06051993");
         return data;
-
     }
 
     public String authForm(JSONObject data) {
