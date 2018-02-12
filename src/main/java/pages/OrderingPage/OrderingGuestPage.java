@@ -166,6 +166,7 @@ public class OrderingGuestPage extends BasePage {
         new BasketPage(driver).increaseProductCount();
         elementFluentWaitVisibility(orderBtn, driver).click();
         try {
+            elementIsPresent(messageOrderError,driver);
             if (elementIsDisplayed(messageOrderError,driver)) {
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();

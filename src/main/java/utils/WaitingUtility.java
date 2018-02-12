@@ -105,4 +105,14 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
+    public static boolean elementIsPresent(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        try {
+             return  wait.until(ExpectedConditions.visibilityOf(element)).isSelected();
+        }
+        catch (NoSuchElementException ex)
+        {
+            return false;
+        }
+    }
 }

@@ -69,8 +69,8 @@ public class Constants {
     public static final String KALASHNIKOVA_EMAIL = readXML("testData","kalashnikovaEmail");
     public static final String KALASHNIKOVA_PASSWORD = readXML("testData","kalashnikovaPass");
     public static final String KALASHNIKOVA_PHONE = readXML("testData","kalashnikovaPhone");
-    public static final String PONOMATEVA_EMAIL = readXML("testData","ponomarevaEmail");
-    public static final String PONOMATEVA_PASSWORD = readXML("testData","ponomarevaPass");
+    public static final String PONOMAREVA_EMAIL = readXML("testData","ponomarevaEmail");
+    public static final String PONOMAREVA_PASSWORD = readXML("testData","ponomarevaPass");
     public static final String MAKAROVA_EMAIL = readXML("testData","makarovEmail");
     public static final String MAKAROVA_PASSWORD = readXML("testData","makarovPass");
     public static final String BOLSHAKOV_EMAIL = readXML("testData","bolshakovEmail");

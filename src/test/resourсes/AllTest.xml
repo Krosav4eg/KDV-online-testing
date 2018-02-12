@@ -7,7 +7,7 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
     <test name="AuthorizationTest">
-        <classes>
+        <classes >
             <class name="testcases.authorization.AuthorizationTest"/>
         </classes>
     </test>
