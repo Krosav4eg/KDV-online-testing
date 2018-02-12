@@ -8,6 +8,8 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.BASE_URL;
+import static utils.Constants.PHYSICAL_PERSON_EMAIL;
+import static utils.Constants.PHYSICAL_PERSON_PASSWORD;
 
 /**
  * @author Sergey Potapov
@@ -60,11 +62,12 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyMyBasketWithProduct();
     }
 
-    @Test
+    @Test()
     public void verifyProductsInBasketTest() {
         TestReporter.testTitle("Test ID = 34299");
         mainPage.checkingProductsInBasket();
-//TODO not fix in progress
+//    }
+////TODO not fix in progress
 //    @Test//(timeOut = 30000)
 //    public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
@@ -82,7 +85,10 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyAuthAsPhysicalPersonTest() {
         TestReporter.testTitle("Test ID = 34309-34310");
-        authorizationPage.authAsPhysicalPerson();
+        JSONObject data= new JSONObject();
+        data.put("email",PHYSICAL_PERSON_EMAIL);
+        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
         mainPage.verifyPhysicalAuthCredential();
     }
 
@@ -120,7 +126,10 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyToolTypeTextInPhysicalPersonAccountTest() {
         TestReporter.testTitle("Test ID = 34347");
-        authorizationPage.authAsPhysicalPerson();
+        JSONObject data= new JSONObject();
+        data.put("email",PHYSICAL_PERSON_EMAIL);
+        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
         customerAccountPage.verifyToolTypeTextInPhysicalPersonAccount();
     }
 
