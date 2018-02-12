@@ -3,7 +3,6 @@ package pages;
 import Core.basePage.BasePage;
 import logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -589,7 +588,6 @@ public class MainPage extends BasePage {
     }
 
     public void openProductCard() {
-
         getUrl(BASE_URL);
         LOGGER.log(Level.INFO, "Select category");
         TestReporter.step("Select category");
@@ -863,6 +861,7 @@ public class MainPage extends BasePage {
     }
 
     public void verifyMyBasketWithProduct() {
+        getUrl(BASE_URL);
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
         String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
         moveToElementJS(driver, socialContainer);
@@ -887,11 +886,11 @@ public class MainPage extends BasePage {
                 " basket page ", expPrice);
     }
 
-    public void checkingProductsInBasket() {
+    public void checkingProductsInBasket() throws NoSuchElementException {
         if (basketIsEmpty.isDisplayed()) {
-            moveToElementJS(driver, socialContainer);
+            scrollToNecessaryElement(socialContainer);
+            moveToCategory();
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-            clickOnIndexFromElementList(hitSalesBasketButtons, 1);
             if (productAddedButton.isDisplayed()) {
                 AssertCollector.assertTrue(productAddedButton.isDisplayed());
                 LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
@@ -920,19 +919,6 @@ public class MainPage extends BasePage {
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of adding to basket ",
                 linkTextAttribute);
-    }
-
-    public void openingBasketAndOrdering() {
-        moveToElementJS(driver, socialContainer);
-        clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        scrollToNecessaryElement(vkLink);
-        elementFluentWaitVisibility(upButton, driver).click();
-        hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
-        String linkTextValue = getValueOfAttributeByName(submitAddingToBasket, "href");
-        elementFluentWaitVisibility(submitAddingToBasket, driver).click();
-        getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of creating order in basket ",
-                linkTextValue);
     }
 
     public void openingCatalogAfterLeftMainPage() {

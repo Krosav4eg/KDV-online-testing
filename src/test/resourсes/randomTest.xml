@@ -7,12 +7,21 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-
     <test name="1">
         <classes>
             <class name="testcases.header.HeaderTest">
                 <methods>
-                    <include name="verifyAuthAsPhysicalPersonTest"/>
+                    <include name="verifyPersonalCabinetLinkTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="2">
+        <classes>
+            <class name="testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyProductsInBasketTest"/>
                 </methods>
             </class>
         </classes>

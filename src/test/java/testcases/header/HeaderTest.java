@@ -30,8 +30,9 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34287");
         mainPage.closingModalWindow();
     }
-//TODO fix it too long
-   // @Test(timeOut = 60000)
+
+    //TODO fix it too long
+    // @Test(timeOut = 60000)
     public void verifyChangingCityTest() {
         TestReporter.testTitle("Test ID - C34287");//C34287 - в этом кейсе объеденены C34283, C34285, C34316
         mainPage.changeCity();
@@ -71,8 +72,6 @@ public class HeaderTest extends BaseTest {
 //    public void verifyOpeningBasketPageFromHeaderTest() {
         TestReporter.testTitle("Test ID = 34296");
         mainPage.openingBasketPageFromHeader();
-        TestReporter.testTitle("Test ID = 34297");
-        mainPage.openingBasketAndOrdering();
     }
 
     @Test
@@ -84,9 +83,9 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyAuthAsPhysicalPersonTest() {
         TestReporter.testTitle("Test ID = 34309-34310");
-        JSONObject data= new JSONObject();
-        data.put("email",PHYSICAL_PERSON_EMAIL);
-        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        JSONObject data = new JSONObject();
+        data.put("email", PHYSICAL_PERSON_EMAIL);
+        data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         mainPage.verifyPhysicalAuthCredential();
     }
@@ -99,11 +98,11 @@ public class HeaderTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(BASE_URL);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/", "Urls are equals");
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL, "Urls are equals");
         AssertCollector.assertEqualsJ(mainPage.myAccountLink.getText(),
                 "ООО Аванс", "Organization name is correct");
         orderingGuestPage.clickOnWebElement(mainPage.myAccountLink);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/customer/account",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "customer/account",
                 "Urls are equals");
         orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
         AssertCollector.assertTrue(authorizationPage.registBtn.isDisplayed(), "Registration button is appear");
@@ -125,9 +124,9 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyToolTypeTextInPhysicalPersonAccountTest() {
         TestReporter.testTitle("Test ID = 34347");
-        JSONObject data= new JSONObject();
-        data.put("email",PHYSICAL_PERSON_EMAIL);
-        data.put("password",PHYSICAL_PERSON_PASSWORD);
+        JSONObject data = new JSONObject();
+        data.put("email", PHYSICAL_PERSON_EMAIL);
+        data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         customerAccountPage.verifyToolTypeTextInPhysicalPersonAccount();
     }
