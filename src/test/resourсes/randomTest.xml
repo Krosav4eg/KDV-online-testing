@@ -9,19 +9,9 @@
 
     <test name="1">
         <classes>
-            <class name="testcases.header.HeaderTest">
+            <class name="testcases.personalCabinet.Physical.AccountDataTest">
                 <methods>
-                    <include name="verifyPersonalCabinetLinkTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="2">
-        <classes>
-            <class name="testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifyProductsInBasketTest"/>
+                    <include name="verifyOpeningPersonalDataItemTest"/>
                 </methods>
             </class>
         </classes>
