@@ -100,4 +100,9 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
+
+    public static boolean elementIsDisplayed(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+    }
 }
