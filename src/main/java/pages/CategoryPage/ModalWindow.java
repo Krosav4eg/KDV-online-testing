@@ -27,7 +27,6 @@ public class ModalWindow extends BasePage {
     @FindBy(css = ".cart-control__add-text")
     private WebElement addCartModalBtn;
 
-
     @FindBy(css = ".modal__content .cart-control__btn_inc")
     private WebElement cartControlModalIncBtn;
 

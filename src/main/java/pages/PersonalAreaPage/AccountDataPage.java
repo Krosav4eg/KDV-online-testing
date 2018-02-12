@@ -40,7 +40,7 @@ public class AccountDataPage extends BasePage {
     @FindBy(css = ".address__action.link.offset-l-2")
     public WebElement deleteNewAddress;
 
-    @FindBy(id = "adv_phone")
+    @FindBy(id = "phone")
     public WebElement phoneInEditPage;
 
     @FindBy(css = "input[name=\"telephone\"]")
@@ -115,7 +115,7 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage, driver).clear();
         elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
-        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
+        AssertCollector.assertEqualsJ(getCurrentUrl(),ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
 
