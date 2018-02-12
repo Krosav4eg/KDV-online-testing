@@ -182,7 +182,8 @@ public class CardPage extends BasePage {
         searchAndSelect();
         elementFluentWaitVisibility(productCardContainer, driver).click();
         addTxtToInput("-5");
-        AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("51"), "text not present");
+        AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("51"),
+                "text not present");
         addTxtToInput("99999");
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
         addTxtToInput("@!$^*&$#@*()");

@@ -7,9 +7,13 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="ContactDataTest">
+    <test name="1">
         <classes>
-            <class name="testcases.registration.LegalPerson.ContactDataTest"/>
+            <class name="testcases.personalCabinet.Physical.AccountDataTest">
+                <methods>
+                    <include name="verifyOpeningPersonalDataItemTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

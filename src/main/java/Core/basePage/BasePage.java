@@ -25,7 +25,6 @@ import static utils.WaitingUtility.elementFluentWaitVisibility;
  */
 public class BasePage {
 
-
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
             return getText(element);
