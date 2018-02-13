@@ -81,7 +81,7 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "billing:porch")
     private WebElement porchField;
 
-    @FindBy(css = "[href='http://tomsk.demo.dev.magonline.ru/customer/address/']")
+    @FindBy(css = "[href='http://tomsk.kdv.demo.dev.magonline.ru/customer/address/']")
     private WebElement addressesLink;
 
     @FindBy(css = ".profile__addresses")
