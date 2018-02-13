@@ -13,13 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.driverFactory.BrowserFactory.getDriver;
+import static Core.readDocs.ReadXMLFile.readXML;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 /**
  * @author Sergey Potapov
  */
 public class WaitingUtility {
-    private static final int WAITING_TIMEOUT = 30000;
+    private static final int WAITING_TIMEOUT = Integer.parseInt(readXML("section","waitTime"));
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     private WaitingUtility() {
@@ -97,7 +98,7 @@ public class WaitingUtility {
     }
 
     public static void textIsPresent(WebElement element, WebDriver driver, String text) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 

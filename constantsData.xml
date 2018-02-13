@@ -3,6 +3,7 @@
     <section id="1">
         <unixPath></unixPath>
         <driver>Chrome</driver>
+        <waitTime>30</waitTime>
         <mainUrl>http://tomsk.kdv.demo.dev.magonline.ru</mainUrl>
     </section>
     <testData id="2">
