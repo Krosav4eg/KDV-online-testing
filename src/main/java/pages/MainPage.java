@@ -97,7 +97,7 @@ public class MainPage extends BasePage {
     private WebElement resultsProductSearch;
 
     //========================
-    @FindBy(css = ".mini-cart-label__text.mini-cart-label__text-collapsed")
+    @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
     private WebElement myCart;
 
     @FindBy(xpath = "//*[@title='Конфеты «Томские классические», 300 г']")
@@ -112,7 +112,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".mini-cart-product__price")
     private WebElement productPriceInBasket;
 
-    @FindBy(css = ".mini-cart__expander.hidden-sm.hidden-md")
+    @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
     private WebElement mainBasketToExpandButton;
 
     @FindBy(css = ".mini-cart__inner.mini-cart_clickable.j_mini-cart_clickable")
@@ -426,8 +426,8 @@ public class MainPage extends BasePage {
 
     public void verifyingClosingLowerPricesSection() {
         getUrl(BASE_URL);
-//        LOGGER.log(Level.INFO, "Verifying closing lower prices section");
-//        TestReporter.step("Verifying opening lower prices section");
+        LOGGER.log(Level.INFO, "Verifying closing lower prices section");
+        TestReporter.step("Verifying opening lower prices section");
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(kdvImg, driver).click();
         AssertCollector.assertTrue(elementIsVisible(lowerPriceSection,driver));

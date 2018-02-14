@@ -99,15 +99,15 @@ public class HeaderTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(BASE_URL);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/", "Urls are equals");
         AssertCollector.assertEqualsJ(mainPage.myAccountLink.getText(),
                 "ООО Аванс", "Organization name is correct");
         orderingGuestPage.clickOnWebElement(mainPage.myAccountLink);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "customer/account",
+        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/customer/account",
                 "Urls are equals");
         orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn,driver), "Registration button is appear");
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton,driver), "Login button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn, driver), "Registration button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton, driver), "Login button is appear");
     }
 
     @Test
