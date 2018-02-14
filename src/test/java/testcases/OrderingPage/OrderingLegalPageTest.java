@@ -10,6 +10,7 @@ import utils.TestReporter;
 
 import static Core.basePage.BasePage.sleepWait;
 import static utils.Constants.*;
+import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 
 public class OrderingLegalPageTest extends BaseTest {
@@ -71,7 +72,7 @@ public class OrderingLegalPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 41801");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", FADEEV_EMAIL);
-        data.put("password",FADEEV_PASSWORD );
+        data.put("password", FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
@@ -129,7 +130,7 @@ public class OrderingLegalPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 41826");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", FADEEV_EMAIL);
-        data.put("password",FADEEV_PASSWORD);
+        data.put("password", FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
@@ -188,7 +189,7 @@ public class OrderingLegalPageTest extends BaseTest {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", FADEEV_EMAIL);
-        data.put("password",FADEEV_PASSWORD);
+        data.put("password", FADEEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
         orderingLegalPage.createOrderForLegalPerson();
         JSONObject data1 = orderingLegalPage.data();

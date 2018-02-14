@@ -89,7 +89,6 @@ public class BasketPage extends BasePage {
     @FindBy(css = "#remove-all-from-cart-confirm .modal__close")
     private WebElement closeAllBtn;
 
-
     @FindBy(xpath = "//a[text()='Очистить все']")
     private WebElement removeAll;
 

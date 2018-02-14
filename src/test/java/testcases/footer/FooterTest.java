@@ -18,7 +18,6 @@ public class FooterTest extends BaseTest {
         BasePage.scrollToNecessaryElement(mainPage.footer);
     }
 
-
     @Test
     public void verifyCopyWritingTest() {
         TestReporter.testTitle("Test ID - C34355");
