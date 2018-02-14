@@ -10,6 +10,7 @@ import utils.AssertCollector;
 
 import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.elementIsDisplayed;
 
 public class CardPage extends BasePage {
     public CardPage(WebDriver driver) {
@@ -86,7 +87,7 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(categoryContainer).contains("Конфеты «Томские классические», 300 г"));
         AssertCollector.assertTrue(getText(categoryContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(categoryContainer).contains("\u20BD"));
-        AssertCollector.assertTrue(categoryAddBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn,driver), "element is visible");
     }
 
     public void addProductFromCardMainPage() {
@@ -96,7 +97,7 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"));
         elementFluentWaitVisibility(categoryDecBtn, driver).click();
         driver.navigate().refresh();
-        AssertCollector.assertTrue(categoryAddBtn.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn,driver));
     }
 
     public void addProductNotValidFromCardMainPage() {
@@ -136,14 +137,14 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"));
-        AssertCollector.assertTrue(categoryAddBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn,driver), "element is visible");
         elementFluentWaitVisibility(categoryAddBtn, driver).click();
         sleepWait();
-        AssertCollector.assertTrue(cartControlIncBtn.isDisplayed(), "element is visible");
-        AssertCollector.assertTrue(cartControlDecBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlIncBtn,driver), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlDecBtn,driver), "element is visible");
         elementFluentWaitVisibility(cartControlDecBtn, driver).click();
         sleepWait();
-        AssertCollector.assertTrue(categoryAddBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn,driver), "element is visible");
     }
 
     public void validCardProductVerifyDescription() {
@@ -174,7 +175,7 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("22 г"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("59 г"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("495 ккал"));
-        AssertCollector.assertTrue(showAll.isDisplayed(), "element is present");
+        AssertCollector.assertTrue(elementIsDisplayed(showAll,driver), "element is present");
         elementFluentWaitVisibility(showAll, driver).click();
     }
 

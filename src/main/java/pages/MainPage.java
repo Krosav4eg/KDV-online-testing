@@ -51,7 +51,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[text()='Томск']")
     private WebElement selectCityTomsk;
 
-    @FindBy(css = ".geo-confirm__content")
+    @FindBy(css = ".geo-confirm__city")
     private WebElement geoConfirmModalWindow;
 
     @FindBy(xpath = "//button[text()='Да']")
@@ -354,12 +354,14 @@ public class MainPage extends BasePage {
 
     public void openMainPage() {
         driver.get(BASE_URL);
-        if (selectCityModalWindow.isDisplayed()) {
+        if ( elementIsPresent(selectCityModalWindow,driver)) {
             elementIsClickable(selectCityTomsk, driver).click();
-        } else if (geoConfirmModalWindow.isDisplayed()) {
-            elementIsClickable(acceptGeoConfirm, driver).click();
+            elementIsVisible(selectCityModalWindow,driver);
         }
-        sleepWait();
+        else if (elementIsPresent(geoConfirmModalWindow,driver)) {
+            elementIsClickable(acceptGeoConfirm, driver).click();
+            elementIsVisible(geoConfirmModalWindow,driver);
+        }
         driver.navigate().refresh();
     }
 
@@ -376,7 +378,7 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(closePopupButton, driver).click();
         elementFluentWaitVisibility(baseCityLink, driver).click();
         moveMouseToAndClick(driver, companyLogo, 1, 1);
-        AssertCollector.assertFalse(modalContentWindow.isDisplayed());
+        AssertCollector.assertFalse(elementIsVisible(modalContentWindow,driver));
     }
 
     public void changeCity() {
@@ -428,7 +430,7 @@ public class MainPage extends BasePage {
 //        TestReporter.step("Verifying opening lower prices section");
         elementIsClickable(lowerPriceSection, driver).click();
         elementIsClickable(kdvImg, driver).click();
-        AssertCollector.assertTrue(lowerPriceSection.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(lowerPriceSection,driver));
     }
 
     public void verifyingAboutLinkLowerPriceSection() {
@@ -447,7 +449,7 @@ public class MainPage extends BasePage {
     public void verifyingOpeningFreeDeliveringSection() {
         LOGGER.log(Level.INFO, "Verifying opening free delivering section");
         elementIsClickable(freeDeliveringSection, driver).click();
-        AssertCollector.assertTrue(freeDeliveringSectionOpen.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(freeDeliveringSectionOpen,driver));
     }
 
     public void verifyingClosingFreeDeliveringSection() {
@@ -455,7 +457,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Verifying closing free delivering section");
         //elementIsClickable(freeDeliveringSection, driver).click();
         elementIsClickable(freeDeliveringSectionOpen, driver).click();
-        AssertCollector.assertTrue(freeDeliveringSection.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(freeDeliveringSection,driver));
     }
 
     public void verifyingAboutLinkFreeDeliveringSection() {
@@ -476,13 +478,13 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Verifying opening payment upon receiving section");
         TestReporter.step("Verifying opening payment upon receiving section");
         elementIsClickable(paymentUponReceivingSection, driver).click();
-        AssertCollector.assertTrue(paymentUponReceivingSectionOpen.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(paymentUponReceivingSectionOpen,driver));
     }
 
     public void verifyingClosingPaymentUponReceivingSection() {
         LOGGER.log(Level.INFO, "Verifying closing payment upon receiving section");
         elementIsClickable(paymentUponReceivingSectionOpen, driver).click();
-        AssertCollector.assertTrue(paymentUponReceivingSection.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(paymentUponReceivingSection,driver));
     }
 
     public void verifyingAboutLinkPaymentUponReceivingSection() {
@@ -523,14 +525,14 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Click slide forward button");
         TestReporter.step("Click slide forward button");
         hoverAndClick(driver, slideMenuSection, slideForwardButton);
-        AssertCollector.assertTrue(newSlideSelected.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(newSlideSelected,driver));
     }
 
     public void switchSlidePreviously() {
         LOGGER.log(Level.INFO, "Click slide previously button");
         TestReporter.step("Click slide previously button");
         hoverAndClick(driver, slideMenuSection, slidePreviouslyButton);
-        AssertCollector.assertTrue(newSlideSelected.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(newSlideSelected,driver));
     }
 
     public void switchBetweenSlides() {
@@ -561,7 +563,7 @@ public class MainPage extends BasePage {
         String expectedDescription = getText(firstItem);
         moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-        if (productAddedButton.isDisplayed()) {
+        if (elementIsVisible(productAddedButton,driver)) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
             TestReporter.step("Button hitSalesBasketButtons is displayed");
             elementFluentWaitVisibility(productAddedButton, driver);
@@ -584,7 +586,7 @@ public class MainPage extends BasePage {
         scrollDown();
         moveMouseTo(driver, productInnerItem);
         clickElementByJS(driver, loupeButton);
-        AssertCollector.assertTrue(modalWindow.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(modalWindow,driver));
     }
 
     public void openProductCard() {
@@ -856,7 +858,7 @@ public class MainPage extends BasePage {
         LOGGER.log(Level.INFO, "Verifying clicking my basket");
         TestReporter.step("Verifying clicking my basket");
         elementIsClickable(myCart, driver).click();
-        AssertCollector.assertTrue(myCart.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(myCart,driver));
         textPresent("Корзина пока пуста");
     }
 
@@ -867,10 +869,10 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton, driver);
-        if (productAddedButton.isDisplayed()) {
+        if (elementIsVisible(productAddedButton,driver)) {
             LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
             TestReporter.step("Button hitSalesBasketButtons is displayed");
-            AssertCollector.assertTrue(productAddedButton.isDisplayed());
+            AssertCollector.assertTrue(elementIsVisible(productAddedButton,driver));
         } else {
             LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
             TestReporter.step("Button hitSalesBasketButtons isn't displayed");
@@ -887,12 +889,12 @@ public class MainPage extends BasePage {
     }
 
     public void checkingProductsInBasket() throws NoSuchElementException {
-        if (basketIsEmpty.isDisplayed()) {
+        if (elementIsVisible(basketIsEmpty,driver)) {
             scrollToNecessaryElement(socialContainer);
             moveToCategory();
             clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-            if (productAddedButton.isDisplayed()) {
-                AssertCollector.assertTrue(productAddedButton.isDisplayed());
+            if (elementIsVisible(productAddedButton,driver)) {
+                AssertCollector.assertTrue(elementIsVisible(productAddedButton,driver));
                 LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
                 TestReporter.step("Button hitSalesBasketButtons is displayed");
             } else {
@@ -924,19 +926,19 @@ public class MainPage extends BasePage {
     public void openingCatalogAfterLeftMainPage() {
         elementFluentWaitVisibility(registrationButton, driver).click();
         elementFluentWaitVisibility(catalogExpand, driver).click();
-        AssertCollector.assertTrue(categoryList.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(categoryList,driver));
     }
 
     public void verifyStickingHeaderDuringScrolling() {
         scrollToNecessaryElement(footer);
-        AssertCollector.assertTrue(smallLogo.isDisplayed());
-        AssertCollector.assertTrue(searchProductField.isDisplayed());
-        AssertCollector.assertTrue(categoryDropdown.isDisplayed());
-        AssertCollector.assertTrue(searchButton.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(smallLogo,driver));
+        AssertCollector.assertTrue(elementIsVisible(searchProductField,driver));
+        AssertCollector.assertTrue(elementIsVisible(categoryDropdown,driver));
+        AssertCollector.assertTrue(elementIsVisible(searchButton,driver));
         textPresent("Корзина пока пуста");
         clickOnIndexFromElementList(hitSalesBasketButtons, 14);
         elementIsClickable(quantityOfProductsInBasket, driver).click();
-        AssertCollector.assertTrue(fullBasketDropdown.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(fullBasketDropdown,driver));
     }
 
     public void verifyPhysicalAuthCredential() {
@@ -1038,7 +1040,7 @@ public class MainPage extends BasePage {
     public void verifySearchQueryWithInputTextWithCategory() {
         fillInputField(searchProductField, driver, "суфле");
         try {
-            if (geoConfirmModalWindow.isDisplayed()) {
+            if (elementIsVisible(geoConfirmModalWindow,driver)) {
                 elementIsClickable(acceptGeoConfirm, driver).click();
             }
         } catch (NoSuchElementException ex) {

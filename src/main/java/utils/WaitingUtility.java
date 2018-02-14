@@ -109,11 +109,33 @@ public class WaitingUtility {
     public static boolean elementIsPresent(WebElement element, WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
-             return  wait.until(ExpectedConditions.visibilityOf(element)).isSelected();
+             return  wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
         }
-        catch (NoSuchElementException ex)
+        catch (Exception ex)
         {
             return false;
         }
+    }
+    public static boolean elementIsVisible(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        try {
+            return  wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+    }
+    public static boolean elementIsSelected(WebElement element, WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        try {
+            return  wait.until(ExpectedConditions.visibilityOf(element)).isSelected();
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
     }
 }

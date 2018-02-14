@@ -10,6 +10,7 @@ import utils.TestReporter;
 import static utils.Constants.*;
 import static utils.Constants.ACCOUNT_INFORMATION_URL;
 import static utils.Constants.ZUEV_PASSWORD;
+import static utils.WaitingUtility.elementIsVisible;
 
 public class AddressesDataTest extends BaseTest {
 
@@ -25,7 +26,7 @@ public class AddressesDataTest extends BaseTest {
 		authorizationPage.verifyAuthFields(data);
 		del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
-		AssertCollector.assertTrue(deliveryAddressPage.deliveryAddressHeader.isDisplayed(),
+		AssertCollector.assertTrue(elementIsVisible( deliveryAddressPage.deliveryAddressHeader,driver),
 				"Required header is displayed");
 	}
 
@@ -56,7 +57,7 @@ public class AddressesDataTest extends BaseTest {
 				"Addresses are equals");
 		AssertCollector.assertEqualsJ(deliveryAddressPage.phoneDeliveryByDefault.getText(), "+71111111111",
 				"Phone numbers are equals");
-		AssertCollector.assertTrue(deliveryAddressPage.byDefaultMark.isDisplayed());
+			AssertCollector.assertTrue(elementIsVisible(deliveryAddressPage.byDefaultMark,driver));
 		orderingGuestPage.clickOnWebElement(deliveryAddressPage.addressActionLink);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL + "edit/id/4236/",
 				"Urls are equals");

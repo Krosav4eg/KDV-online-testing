@@ -13,6 +13,7 @@ import static utils.Constants.EMPTY_DATA;
 import static utils.Constants.REGISTRATION_PAGE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
 import static utils.WaitingUtility.elementIsClickable;
+import static utils.WaitingUtility.elementIsDisplayed;
 
 public class RegistrationPage extends BasePage {
     public RegistrationPage(WebDriver driver) {
@@ -156,7 +157,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldFirstNamePresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(firstName.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(firstName,driver));
     }
 
     public void verifyInputInFirstNameField() {
@@ -200,7 +201,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldLastNamePresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(lastName.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(lastName,driver));
     }
 
     public void verifyInputInLastNameField() {
@@ -245,7 +246,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldPhonePresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(phoneInEditPage.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(phoneInEditPage,driver));
     }
 
     public void verifyMaskInPhoneField() {
@@ -295,7 +296,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldEmailPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(email.isDisplayed(), "Email field is displayed");
+        AssertCollector.assertTrue(elementIsDisplayed(email,driver), "Email field is displayed");
     }
 
     public void verifyEmailWithoutAtSymbol() {
@@ -341,7 +342,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldPasswordPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(password.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(password,driver));
     }
 
     public void verifyPasswordLengthLessThanSixSymbols() {
@@ -370,7 +371,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyFieldConfirmPasswordPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(confirmPassword.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(confirmPassword,driver));
     }
 
     public void verifyInputNewPasswordWithoutConfirmation() {
@@ -545,7 +546,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifySubscriptionCheckboxPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(subscription.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(subscription,driver));
         AssertCollector.assertFalse(subscription.isSelected());
     }
 
@@ -558,7 +559,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyCheckboxConfirmPresence() {
         getUrl(REGISTRATION_PAGE_URL);
-        AssertCollector.assertTrue(checkboxConfirm.isDisplayed(), "Required check box is present");
+        AssertCollector.assertTrue(elementIsDisplayed(checkboxConfirm,driver), "Required check box is present");
         AssertCollector.assertFalse(checkboxConfirm.isSelected());
     }
 
@@ -717,7 +718,7 @@ public class RegistrationPage extends BasePage {
     public void verifyOrganizationFullNameFieldPresence() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(organizationFullName.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(organizationFullName,driver));
     }
 
     //not pass
@@ -732,7 +733,7 @@ public class RegistrationPage extends BasePage {
     public void verifyFieldForTaxpayerId() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(taxpayerId.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(taxpayerId,driver));
     }
 
     public void verifyValidInputInTaxpayerIdField() {
@@ -786,7 +787,7 @@ public class RegistrationPage extends BasePage {
     public void verifyReasonCodeFieldPresence() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton, driver).click();
-        AssertCollector.assertTrue(reasonCode.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(reasonCode,driver));
     }
 
     public void verifyValidInputInReasonCodeField() {

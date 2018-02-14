@@ -10,6 +10,7 @@ import utils.TestReporter;
 import static utils.Constants.BASE_URL;
 import static utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static utils.Constants.PHYSICAL_PERSON_PASSWORD;
+import static utils.WaitingUtility.elementIsVisible;
 
 /**
  * @author Sergey Potapov
@@ -105,8 +106,8 @@ public class HeaderTest extends BaseTest {
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "customer/account",
                 "Urls are equals");
         orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
-        AssertCollector.assertTrue(authorizationPage.registBtn.isDisplayed(), "Registration button is appear");
-        AssertCollector.assertTrue(authorizationPage.loginButton.isDisplayed(), "Login button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn,driver), "Registration button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton,driver), "Login button is appear");
     }
 
     @Test

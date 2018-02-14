@@ -9,6 +9,7 @@ import utils.AssertCollector;
 import utils.TestReporter;
 
 import static utils.Constants.*;
+import static utils.WaitingUtility.elementIsVisible;
 
 public class AccountDataTest extends BaseTest {
 
@@ -23,12 +24,9 @@ public class AccountDataTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        AssertCollector.verifyCondition(accountDataPage.personalDataHeaderInEditPage.
-                isDisplayed());
-        AssertCollector.verifyCondition(accountDataPage.personalDataInEditPage.
-                isDisplayed());
-        AssertCollector.verifyCondition(accountDataPage.sharingInEditPage.
-                isDisplayed());
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataHeaderInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.sharingInEditPage,driver));
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(45));
         accountDataPage.verifyEditAccountFields(data);
@@ -116,11 +114,11 @@ public class AccountDataTest extends BaseTest {
         accountDataPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
-        AssertCollector.assertTrue(accountDataPage.changePasswordHeader.isDisplayed(),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.changePasswordHeader,driver),
                 "Required header is displayed");
-        AssertCollector.assertTrue(accountDataPage.newPasswordField.isDisplayed(),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.newPasswordField,driver),
                 "Required field is displayed");
-        AssertCollector.assertTrue(accountDataPage.confirmPasswordField.isDisplayed(),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.confirmPasswordField,driver),
                 "Required field is displayed");
     }
 }

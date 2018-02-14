@@ -121,12 +121,12 @@ public class BasketPage extends BasePage {
         textIsPresent(searchHeaderTxt, driver, "Результаты поиска для «Кальмар подкопчённый»");
         moveToElementJS(driver, tittleProductTxt);
         try {
-            if (productAddBtn.isDisplayed()) {
+            if (elementIsVisible(productAddBtn,driver)) {
                 elementFluentWaitVisibility(productAddBtn, driver).click();
                 textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, driver, "тов.");
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();
-            } else if (productPlusBtn.isDisplayed()) {
+            } else if (elementIsVisible(productPlusBtn,driver)) {
                 elementFluentWaitVisibility(selectMiniCart, driver).click();
                 elementFluentWaitVisibility(selectBasket, driver).click();
             }
@@ -147,7 +147,7 @@ public class BasketPage extends BasePage {
         AssertCollector.assertTrue(getText(cardContainer).contains("Итого к оплате:"));
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Итого к оплате:"));
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Минимальная сумма заказа 300,00"));
-        AssertCollector.assertTrue(imageCard.isDisplayed());
+        AssertCollector.assertTrue(elementIsDisplayed(imageCard,driver));
         elementFluentWaitVisibility(imageCard, driver).click();
         driver.navigate().back();
     }
