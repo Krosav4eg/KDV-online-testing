@@ -37,7 +37,7 @@ public class OrderingLegalPage extends BasePage {
     @FindBy(css = ".button.button_mobile-wide.j_button_metrics_goals")
     public WebElement continueShoppingButton;
 
-    @FindBy(xpath = "//div/p[@class='text']/a")
+    @FindBy(css = ".text a.link")
     public WebElement orderLink;
 
     @FindBy(css = ".profile-orders__col.profile-orders__col_id.hidden-xs.hidden-xxs")

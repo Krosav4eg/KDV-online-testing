@@ -31,6 +31,7 @@ public class SQLConnect  extends Constants{
 	 * @param passwordName set password to DB
 	 * @return Connection parameter
 	 */
+	@Deprecated
 	public  Connection connectPostgreaDB(String serverName, String userName, String passwordName) throws Exception {
 		Class.forName("org.postgresql.Driver");
 		return DriverManager.getConnection(serverName, userName, passwordName);
@@ -42,6 +43,7 @@ public class SQLConnect  extends Constants{
 	 * @param passwordName set password to DB
 	 * @return Connection parameter
 	 */
+	@Deprecated
 	public  Connection connectMySQLDB(String serverName, String userName, String passwordName) throws Exception {
 		Class.forName("org.mysql.Driver");
 		return DriverManager.getConnection(serverName, userName, passwordName);

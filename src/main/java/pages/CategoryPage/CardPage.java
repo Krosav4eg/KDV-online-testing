@@ -1,5 +1,6 @@
 package pages.CategoryPage;
 
+import Core.apiMethods.GlobalAPI;
 import Core.basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -71,6 +72,8 @@ public class CardPage extends BasePage {
 
     @FindBy(css = ".benefit_payment")
     private WebElement benefitPayment;
+
+
 
     public void searchAndSelect() {
         driver.navigate().refresh();

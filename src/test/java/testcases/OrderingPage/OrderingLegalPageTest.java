@@ -8,6 +8,7 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static Core.basePage.BasePage.sleepWait;
 import static utils.Constants.*;
 
 
@@ -51,6 +52,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
+        orderingGuestPage.waitText();
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
@@ -104,7 +106,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-
+        orderingGuestPage.waitText();
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
 
@@ -162,6 +164,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
+
 
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);

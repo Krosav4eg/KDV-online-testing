@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasketPages.BasketPage;
+import pages.PersonalAreaPage.PersonalCabinetPage;
 
 import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.*;
@@ -189,9 +190,14 @@ public class OrderingGuestPage extends BasePage {
         sleepWait();
     }
 
+    public void waitText()
+    {
+      elementIsVisible(new PersonalCabinetPage(driver).titleField,driver);
+      sleepWait();
+    }
+
     public void clickOnWebElement(WebElement element) {
         elementFluentWaitVisibility(element, driver).click();
-        sleepWait();
     }
 
     public void clickCheckBoxAndOrderButton() {
