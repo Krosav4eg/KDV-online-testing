@@ -116,7 +116,6 @@ public class CategoryPage extends BasePage {
 
     public void checkBox() {
         selectCategorySideBar();
-        //	driver.findElement(By.id("")).isDisplayed();
         elementFluentWaitVisibility(existBtn, driver).click();
         AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
