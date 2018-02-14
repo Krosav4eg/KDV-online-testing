@@ -151,8 +151,8 @@ public class BasePage {
     }
 
     protected void fillInputFieldAndPressEnterButton(WebElement element, String message) {
-        element.clear();
-        element.sendKeys(message);
+        elementFluentWaitVisibility(element, driver).clear();
+        elementFluentWaitVisibility(element, driver).sendKeys(message);
         element.sendKeys(Keys.ENTER);
     }
 

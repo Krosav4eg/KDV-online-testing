@@ -26,10 +26,11 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C39081");
         categoryPage.commodityGridList();
     }
-
+//TODO bug absence signatures "Статус" "В наличии"
     @Test
     public void verifyCheckBoxIsPresent() {
         TestReporter.testTitle("Test ID - C39083");
+
         categoryPage.checkBox();
     }
 
@@ -63,6 +64,7 @@ public class CategoryGoodsTest extends BaseTest {
         cardPage.verifyFieldsCardMainPage();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyAddProductMainPage() {
         TestReporter.testTitle("Test ID - C39141");

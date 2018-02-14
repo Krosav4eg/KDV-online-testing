@@ -91,6 +91,7 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyPhysicalAuthCredential();
     }
 
+    //TODO appear additional slash after base url
     @Test
     public void verifyPersonalCabinetLinkTest() {
         TestReporter.testTitle("Test ID = 34312");
