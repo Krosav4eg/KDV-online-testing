@@ -9,6 +9,7 @@ import utils.TestReporter;
 
 import static Core.basePage.BasePage.navigateBack;
 import static utils.Constants.*;
+import static utils.WaitingUtility.elementIsVisible;
 
 public class CabinetTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -23,7 +24,7 @@ public class CabinetTest extends BaseTest {
         data.put("email", AUTHORIZATION_EMAIL);
         data.put("password", AUTHORIZATION_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(controlPanelPage.personalDataHeader.isDisplayed());
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.personalDataHeader,driver));
         AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
                 contains("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
@@ -33,7 +34,7 @@ public class CabinetTest extends BaseTest {
         (controlPanelPage.editPersonalDataButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
         navigateBack();
-        AssertCollector.verifyCondition(controlPanelPage.addressByDefaultHeader.isDisplayed());
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.addressByDefaultHeader,driver));
         AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().
                 equals("г Кемерово, ул Варшавская, д 87, кв 12"));
@@ -51,7 +52,7 @@ public class CabinetTest extends BaseTest {
         data.put("email", PHYSICAL_PERSON_EMAIL);
         data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(controlPanelPage.controlPanelHeader.isDisplayed());
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.controlPanelHeader,driver));
         del.textPresentDelegate("Здравствуйте, Иннокентий Макаров!");
         del.textPresentDelegate("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
     }

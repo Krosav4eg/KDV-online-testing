@@ -9,6 +9,7 @@ import utils.AssertCollector;
 import static utils.Constants.ABOUT_PAGE_URL;
 import static utils.Constants.BASE_URL;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.elementIsVisible;
 
 public class CategoryPage extends BasePage {
     public CategoryPage(WebDriver driver) {
@@ -120,8 +121,8 @@ public class CategoryPage extends BasePage {
         AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("в наличии"), "text 'В наличии' is present");
-        AssertCollector.assertTrue(deletePositionBtn.isDisplayed(), "checkbox delete is present");
-        AssertCollector.assertTrue(existBtn.isDisplayed(), "checkbox is present");
+        AssertCollector.assertTrue(elementIsVisible(deletePositionBtn,driver), "checkbox delete is present");
+        AssertCollector.assertTrue(elementIsVisible(existBtn,driver), "checkbox is present");
         AssertCollector.assertTrue(getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
         elementFluentWaitVisibility(deletePositionBtn, driver).click();
         elementFluentWaitVisibility(existBtn, driver).click();

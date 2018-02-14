@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AssertCollector;
 
-import static utils.WaitingUtility.elementFluentWaitVisibility;
-import static utils.WaitingUtility.elementIsClickable;
+import static utils.WaitingUtility.*;
 
 public class ModalWindow extends BasePage {
     public ModalWindow(WebDriver driver) {
@@ -60,21 +59,21 @@ public class ModalWindow extends BasePage {
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"), "");
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"), "Text is present");
-        AssertCollector.assertTrue(addCartModalBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsVisible(addCartModalBtn,driver), "element is visible");
         elementFluentWaitVisibility(addCartModalBtn, driver).click();
         sleepWait();
-        AssertCollector.assertTrue(cartControlModalIncBtn.isDisplayed(), "element is visible");
-        AssertCollector.assertTrue(cartControlModalDecBtn.isDisplayed(), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalIncBtn,driver), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalDecBtn,driver), "element is visible");
         clickElementByJS(driver, cartControlModalIncBtn);
         sleepWait();
         clickElementByJS(driver, cartControlModalDecBtn);
         elementIsClickable(closeBtn, driver).click();
-        AssertCollector.assertFalse(modalContainerWindow.isDisplayed());
+        AssertCollector.assertFalse(elementIsVisible(modalContainerWindow,driver));
         moveMouseTo(driver, categoryContainer);
         clickElementByJS(driver, openModalBtn);
         sleepWait();
         clickElementByJS(driver, logoBtn);
-        AssertCollector.assertFalse(modalContainerWindow.isDisplayed());
+        AssertCollector.assertFalse(elementIsVisible( modalContainerWindow,driver));
     }
 
     public void addProductNotValidModalWindow() {

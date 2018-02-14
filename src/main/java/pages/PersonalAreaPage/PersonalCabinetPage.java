@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import utils.AssertCollector;
 
 import static utils.Constants.*;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.*;
+import static utils.WaitingUtility.elementIsVisible;
 import static utils.WaitingUtility.textIsPresent;
 
 public class PersonalCabinetPage extends BasePage {
@@ -146,21 +147,21 @@ public class PersonalCabinetPage extends BasePage {
 
     public void verifyFieldsData() {
         getUrl(BASE_URL + "/customer/account/edit/");
-        AssertCollector.verifyCondition(firstNameInEditPage.isDisplayed());
-        AssertCollector.verifyCondition(lastNameInEditPage.isDisplayed());
-        AssertCollector.verifyCondition(emailField.isDisplayed());
-        AssertCollector.verifyCondition(passwordInEditPage.isDisplayed());
-        AssertCollector.verifyCondition(phoneInEditPage.isDisplayed());
+        AssertCollector.verifyCondition(elementIsVisible(firstNameInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(lastNameInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(emailField,driver));
+        AssertCollector.verifyCondition(elementIsVisible(passwordInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(phoneInEditPage,driver));
         if (!isSubscribedBtn.isSelected()) {
             clickElementByJS(driver, isSubscribedBtn);
         }
         if (!changerPassBtn.isSelected()) {
             clickElementByJS(driver, changerPassBtn);
         }
-        AssertCollector.verifyCondition(isSubscribedBtn.isSelected());
-        AssertCollector.verifyCondition(changerPassBtn.isSelected());
-        AssertCollector.verifyCondition(newConfirmationField.isDisplayed());
-        AssertCollector.assertTrue(newPasswordField.isDisplayed());
+        AssertCollector.verifyCondition(elementIsSelected(isSubscribedBtn,driver));
+        AssertCollector.verifyCondition(elementIsSelected(changerPassBtn,driver));
+        AssertCollector.verifyCondition(elementIsVisible(newConfirmationField,driver));
+        AssertCollector.assertTrue(elementIsVisible(newPasswordField,driver));
     }
 
     public JSONObject dataPersonal() {

@@ -4,6 +4,7 @@ import Core.driverFactory.BrowserFactory;
 import logger.LevelCustom;
 import logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.util.Files;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -27,10 +28,13 @@ import utils.TestReporter;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.driverFactory.BrowserFactory.testName;
+import java.nio.file.*;
 import static utils.Constants.*;
 /**
  * @author Sergey Potapov

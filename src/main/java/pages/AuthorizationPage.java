@@ -10,6 +10,7 @@ import utils.AssertCollector;
 
 import static utils.Constants.*;
 import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static utils.WaitingUtility.elementIsVisible;
 
 /**
  * @author Sergey Potapov
@@ -93,8 +94,8 @@ public class AuthorizationPage extends BasePage {
         elementFluentWaitVisibility(authorizationButton, driver).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("http://kemerovo.demo.dev.magonline.ru/customer/account/"));
         elementFluentWaitVisibility(exitButton, driver).click();
-        AssertCollector.assertTrue(registBtn.isDisplayed(), "Registration button is appear");
-        AssertCollector.assertTrue(loginButton.isDisplayed(), "Login button is appear");
+        AssertCollector.assertTrue(elementIsVisible(registBtn,driver), "Registration button is appear");
+        AssertCollector.assertTrue(elementIsVisible(loginButton,driver), "Login button is appear");
     }
 
     public void typeIncorrectPasswordInAuth() {
@@ -291,7 +292,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyOfTextInRegistrationTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(registrationButton.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(registrationButton,driver));
         textPresent("Регистрация");
         textPresent("Регистрация позволит вам экономить время при оформлении заказов, даст возможность" +
                 " отслеживать их состояние и повторять заказы из архива.");
@@ -299,14 +300,14 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyOfTextInContinueAsGuestTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(continueAsGuestButton.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(continueAsGuestButton,driver));
         textPresent("Продолжить как гость");
         textPresent("В нашем интернет-магазине вы можете выбрать товары и оформить заказ без регистрации.");
     }
 
     public void verifyTextInForOrganizationsTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(buttonForOrganizations.isDisplayed());
+        AssertCollector.assertTrue(elementIsVisible(buttonForOrganizations,driver));
         textPresent("Для организаций");
         String actColor = "#ff1b41";
         String expColor = getElementColor(forOrganizationsTitle, "color");
