@@ -40,7 +40,7 @@ public class PersonalCabinetPage extends BasePage {
     private WebElement newPasswordField;
 
     @FindBy(css = "h1.title")
-    private WebElement titleField;
+    public WebElement titleField;
 
     @FindBy(id = "confirmation")
     private WebElement newConfirmationField;

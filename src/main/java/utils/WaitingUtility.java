@@ -32,13 +32,45 @@ public class WaitingUtility {
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
+    static class StopWatch {
 
+        private long startTime = 0;
+        private long stopTime = 0;
+        private boolean running = false;
+
+        void start() {
+            this.startTime = System.currentTimeMillis();
+            this.running = true;
+        }
+
+        void stop() {
+            this.stopTime = System.currentTimeMillis();
+            this.running = false;
+        }
+
+        /**
+         * Get time between start way of method to end of method
+         *
+         * @return long
+         */
+        long getElapsedTime() {
+            long elapsed;
+            if (running) {
+                elapsed = (System.currentTimeMillis() - startTime);
+            } else {
+                elapsed = (stopTime - startTime);
+            }
+            return elapsed;
+        }
+    }
     /**
      * Method for waiting for Javascript and jQuery to finish loading.
      * Execute Javascript to check if jQuery.active is 0
      * and document.readyState is complete, which means the JS and jQuery load is complete.
      */
     public static boolean waitForJSandJQueryToLoad(WebDriver driver) {
+        StopWatch watch = new StopWatch();
+        watch.start();
         WebDriverWait wait = new WebDriverWait(driver, 60);
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = drivers -> {
@@ -46,6 +78,8 @@ public class WaitingUtility {
                 return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
                 // no jQuery present
+                watch.stop();
+                LOGGER.log(Level.INFO,"Wait Until Page Load " + String.valueOf(watch.getElapsedTime()) + "ms.");
                 LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
                 TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
                 return true;
@@ -54,6 +88,8 @@ public class WaitingUtility {
         // wait for Javascript to load
         ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
                 .toString().equals("complete");
+        LOGGER.log(Level.INFO,"");
+
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
