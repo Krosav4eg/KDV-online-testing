@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import static Core.driverFactory.DriverCapabilities.chromeCapabilities;
 import static Core.driverFactory.DriverCapabilities.firefoxCapabilities;
-import static com.sun.deploy.config.OSType.isUnix;
 import static utils.Constants.*;
 
 
@@ -52,7 +51,10 @@ public class BrowserFactory implements DriverCapabilities {
      * There is setting driver by name
      */
     public synchronized WebDriver setDriver() {
-
+        String osName = System.getProperty("os.name").toLowerCase();
+        String swtFileName =
+        osName.contains("win") ? "win" : osName.contains("mac") ? "macosx" :
+        osName.contains("linux") || osName.contains("nix") ? "linux_gtk" :null;
         String driverName = BASE_DRIVER;
         WebDriver driver = null;
         if (driverName != null) {
@@ -66,11 +68,11 @@ public class BrowserFactory implements DriverCapabilities {
                 }
                 case CHROME: {
                     //LOGGER.log(Level.INFO, "set browser CHROME");
-                    if (isUnix()) {
+                    if (swtFileName.contains("win")) {
+                        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
+                    } else {
                         System.out.println("This is Unix or Linux OS");
                         System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH_UNIX);
-                    } else {
-                        System.setProperty(DRIVER_NAME_CHROME, CHROME_DRIVER_PATH);
                     }
                     driverThread.set(new ChromeDriver(chromeCapabilities()));
                     driver = driverThread.get();
