@@ -83,7 +83,7 @@ public class AuthorizationPage extends BasePage {
         elementFluentWaitVisibility(passwordField, driver).clear();
         elementFluentWaitVisibility(passwordField, driver).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authorizationButton, driver).click();
-        AssertCollector.assertEqualsJ(getCurrentUrl(),ACCOUNT_PAGE_URL,"Verify current url");
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_PAGE_URL, "Verify current url");
     }
 
     public void authAsPhysicalPerson() {
