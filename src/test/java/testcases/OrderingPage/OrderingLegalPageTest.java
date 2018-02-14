@@ -165,7 +165,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
 
-
+        orderingGuestPage.waitText();
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
 

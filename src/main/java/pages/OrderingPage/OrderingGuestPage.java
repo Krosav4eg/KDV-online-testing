@@ -198,6 +198,7 @@ public class OrderingGuestPage extends BasePage {
 
     public void clickOnWebElement(WebElement element) {
         elementFluentWaitVisibility(element, driver).click();
+        sleepWait();
     }
 
     public void clickCheckBoxAndOrderButton() {
