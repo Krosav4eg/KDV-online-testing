@@ -303,8 +303,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
     private WebElement mailToLink;
 
-    @FindBy(xpath = ".//*[@href='tel:8 800 250 5555']")
-    private WebElement telLink;
+    @FindBy(xpath = "(.//*[@href='tel:8 800 250 5555'])[2]")
+    public WebElement telLink;
+
+    @FindBy(xpath = "(.//*[@href=\"tel:+7 913 817-38-90\"])[2]")
+    public WebElement additionalTelLink;
 
     @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
     private WebElement confidentialPoliticLink;
