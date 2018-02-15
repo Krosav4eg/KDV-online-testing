@@ -4,6 +4,7 @@ import Core.basePage.BasePage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import testcases.base.BaseTest;
+import utils.AssertCollector;
 import utils.TestReporter;
 
 import java.lang.reflect.Method;
@@ -12,6 +13,9 @@ import java.lang.reflect.Method;
  * @author Sergey Potapov
  */
 public class FooterTest extends BaseTest {
+
+    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
 
     @BeforeMethod
     public void beforeGeneralTests(Method method) {
@@ -55,5 +59,21 @@ public class FooterTest extends BaseTest {
         mainPage.openingInstaInFooter();
         mainPage.openingGooglePlayInFooter();
         mainPage.clickingUpButtonInFooter();
+    }
+
+    //TODO write id for test
+    @Test
+    public void verifyAdditionalPhoneLinkTest() {
+        TestReporter.testTitle("Test ID - ");
+        del.textPresentDelegate("8 800 250 5555");
+        del.textPresentDelegate("Служба поддержки");
+        orderingGuestPage.clickOnWebElement(mainPage.telLink);
+        AssertCollector.assertEqualsJ(mainPage.telLink.getAttribute("href"), "tel:8 800 250 5555",
+                "references are equals");
+        del.textPresentDelegate("+7 913 817-38-90");
+        del.textPresentDelegate("Служба доставки в городе Томск:");
+        orderingGuestPage.clickOnWebElement(mainPage.additionalTelLink);
+        AssertCollector.assertEqualsJ(mainPage.additionalTelLink.getAttribute("href"), "tel:+7 913 817-38-90",
+                "references are equals");
     }
 }

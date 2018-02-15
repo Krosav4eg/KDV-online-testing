@@ -96,6 +96,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div/p[1]")
     private WebElement resultsProductSearch;
 
+    @FindBy(xpath = "(//a[@class=\"event-menu__phone\"])[1]")
+    public WebElement firstPhoneLink;
+
+    @FindBy(xpath = "(//a[@class=\"event-menu__phone\"])[2]")
+    public WebElement secondPhoneLink;
+
     //========================
     @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
     private WebElement myCart;
@@ -297,8 +303,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
     private WebElement mailToLink;
 
-    @FindBy(xpath = ".//*[@href='tel:8 800 250 5555']")
-    private WebElement telLink;
+    @FindBy(xpath = "(.//*[@href='tel:8 800 250 5555'])[2]")
+    public WebElement telLink;
+
+    @FindBy(xpath = "(.//*[@href=\"tel:+7 913 817-38-90\"])[2]")
+    public WebElement additionalTelLink;
 
     @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
     private WebElement confidentialPoliticLink;

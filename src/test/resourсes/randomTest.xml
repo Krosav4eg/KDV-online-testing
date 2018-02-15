@@ -7,11 +7,11 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="C40269">
+    <test name="1">
         <classes>
-            <class name="testcases.mainPage.categorySection.CategoryGoodsTest">
+            <class name="testcases.footer.FooterTest">
                 <methods>
-                    <include name="verifyProductCardNotValid"/>
+                    <include name="verifyAdditionalPhoneLinkTest"/>
                 </methods>
             </class>
         </classes>
