@@ -96,6 +96,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div/p[1]")
     private WebElement resultsProductSearch;
 
+    @FindBy(xpath = "(//a[@class=\"event-menu__phone\"])[1]")
+    public WebElement firstPhoneLink;
+
+    @FindBy(xpath = "(//a[@class=\"event-menu__phone\"])[2]")
+    public WebElement secondPhoneLink;
+
     //========================
     @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
     private WebElement myCart;
