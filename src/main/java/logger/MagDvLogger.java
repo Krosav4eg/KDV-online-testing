@@ -82,7 +82,7 @@ public class MagDvLogger extends Handler {
         File folder = new File(LOGGING_FOLDER +
                 File.separator + "test-output");
         if (!folder.exists()) {
-            folder.mkdir();
+            folder.mkdirs();
         }
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         Formatter formatterHTML = new HtmlLoggerFormatter();
