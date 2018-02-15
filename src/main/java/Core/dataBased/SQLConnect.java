@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+@Deprecated
 public class SQLConnect  extends Constants{
 
 	@GET

@@ -22,7 +22,7 @@ import static utils.Constants.*;
  */
 public class BrowserFactory implements DriverCapabilities {
     private static volatile BrowserFactory instance;
-
+    public static WebDriver driver;
     public static BrowserFactory getInstance() {
         BrowserFactory localInstance = instance;
         if (localInstance == null) {

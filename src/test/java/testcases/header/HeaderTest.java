@@ -107,8 +107,8 @@ public class HeaderTest extends BaseTest {
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/customer/account",
                 "Urls are equals");
         orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn, driver), "Registration button is appear");
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton, driver), "Login button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn), "Registration button is appear");
+        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton), "Login button is appear");
     }
 
     @Test

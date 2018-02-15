@@ -105,40 +105,40 @@ public class AccountDataPage extends BasePage {
 
     public String verifyEditAccountFields(JSONObject data) {
         getUrl(ACCOUNT_INFORMATION_URL);
-        elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(lastNameInEditPage, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(emailInEditPage, driver).clear();
-        elementFluentWaitVisibility(emailInEditPage, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(phoneInEditPage, driver).clear();
-        elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
-        elementFluentWaitVisibility(passwordInEditPage, driver).clear();
-        elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
+        elementFluentWaitVisibility(firstNameInEditPage).clear();
+        elementFluentWaitVisibility(firstNameInEditPage).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameInEditPage).clear();
+        elementFluentWaitVisibility(lastNameInEditPage).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(emailInEditPage).clear();
+        elementFluentWaitVisibility(emailInEditPage).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(phoneInEditPage).clear();
+        elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(passwordInEditPage).clear();
+        elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
         AssertCollector.assertEqualsJ(getCurrentUrl(),ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
 
     public String verifyAddingNewAccountFields(JSONObject data) {
         getUrl(BASE_URL + "/customer/address/new/");
-        elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(lastNameInEditPage, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(newPhoneField, driver).clear();
-        elementFluentWaitVisibility(newPhoneField, driver).sendKeys(data.getString("phone"));
-        elementFluentWaitVisibility(newAddressField, driver).clear();
-        elementFluentWaitVisibility(newAddressField, driver).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(firstNameInEditPage).clear();
+        elementFluentWaitVisibility(firstNameInEditPage).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameInEditPage).clear();
+        elementFluentWaitVisibility(lastNameInEditPage).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(newPhoneField).clear();
+        elementFluentWaitVisibility(newPhoneField).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(newAddressField).clear();
+        elementFluentWaitVisibility(newAddressField).sendKeys(data.getString("address"));
         del.scrollByCoordinate();
-        elementFluentWaitVisibility(newFloorField, driver).clear();
-        elementFluentWaitVisibility(newFloorField, driver).sendKeys(data.getString("floor"));
-        elementFluentWaitVisibility(newPorchField, driver).clear();
-        elementFluentWaitVisibility(newPorchField, driver).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(newFloorField).clear();
+        elementFluentWaitVisibility(newFloorField).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(newPorchField).clear();
+        elementFluentWaitVisibility(newPorchField).sendKeys(data.getString("porch"));
         return getText(informationAccountEdit);
     }
 
     public void verifyAddressDropDownAddress() {
-        elementFluentWaitVisibility(newAddressField, driver).clear();
+        elementFluentWaitVisibility(newAddressField).clear();
         fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
     }
 }

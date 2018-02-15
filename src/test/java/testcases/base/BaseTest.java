@@ -1,13 +1,12 @@
 package testcases.base;
 
 import Core.driverFactory.BrowserFactory;
+import listener.ListenerTest;
 import logger.LevelCustom;
 import logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
-import org.assertj.core.util.Files;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -28,13 +27,10 @@ import utils.TestReporter;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static Core.driverFactory.BrowserFactory.testName;
-import java.nio.file.*;
+import static Core.driverFactory.BrowserFactory.*;
 import static utils.Constants.*;
 /**
  * @author Sergey Potapov
@@ -61,7 +57,6 @@ public class BaseTest {
     protected OrderingLegalPage orderingLegalPage;
 
     private BrowserFactory singleton = BrowserFactory.getInstance();
-    public WebDriver driver;
 
 
     /**
@@ -117,16 +112,23 @@ public class BaseTest {
             mainPage.openMainPage();
             screen();
         }
+        driver.manage().deleteAllCookies();
+        mainPage.openMainPage();
     }
 
     @AfterMethod
     public void clearCookies(ITestResult result) {
+        if(result.getStatus()==ITestResult.SUCCESS) {
+            new ListenerTest().onTestSuccess(result);
+        }
+        if(result.getStatus()==ITestResult.FAILURE) {
+            new ListenerTest().onTestFailure(result);
+        }
         long millis=result.getEndMillis()-result.getStartMillis();
         long tim=((millis % 60000)/1000)*1000;
         long timeS=millis -tim;
         String date = String.format("TEST TIME: %d:%d:%d", millis / 60000, (millis % 60000) / 1000,timeS);
-        driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
+
         logStatus(result,date);
     }
 
@@ -145,8 +147,8 @@ public class BaseTest {
     @AfterClass
     public void closeAfterClass()
     {
-    	driver.quit();
-    	driver=null;
+        driver.quit();
+        driver=null;
     }
 
     /**

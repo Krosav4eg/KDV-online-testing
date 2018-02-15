@@ -9,6 +9,7 @@ import testcases.base.BaseTest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.testng.ITestResult.SUCCESS;
 import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
@@ -21,13 +22,15 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        LOGGER.log(Level.INFO, iTestResult.getName() + "This test is success");
-        BaseTest.capture(iTestResult.getName(), SUCCESS_SCREENSHOT_FOLDER);
+        if(iTestResult.getStatus()==ITestResult.SUCCESS)
+        {
+            LOGGER.log(Level.INFO, iTestResult.getName() + "This test is success");
+            BaseTest.capture(iTestResult.getName(), SUCCESS_SCREENSHOT_FOLDER);
+        }
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.println(" TEST: " + iTestResult);
         LOGGER.log(Level.WARNING, ">>>>>> This test is failed:<<<<<< " + iTestResult.getName());
         LOGGER.log(Level.WARNING, ">>>>>> This test is failed after:<<<<<< " + ((iTestResult.getEndMillis()
                 - iTestResult.getStartMillis()) / 1000) + "Seconds");
@@ -40,5 +43,6 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
                     + messageErr.replace("Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator", ""));
         }
         BaseTest.capture(iTestResult.getName(), ERROR_SCREENSHOT_FOLDER);
+
     }
 }

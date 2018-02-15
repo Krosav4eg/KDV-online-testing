@@ -124,8 +124,8 @@ public class OrganizationInfoTest extends BaseTest {
         data.put("address", RandomStringUtils.randomAlphanumeric(256));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.address.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+        AssertCollector.assertTrue(registrationPage.address.getAttribute("value").length()
+                ==RandomStringUtils.randomAlphabetic(255).length());
         data = registrationPage.mainInfoRegistration();
         data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).

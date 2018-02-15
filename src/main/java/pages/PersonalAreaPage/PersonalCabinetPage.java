@@ -82,16 +82,16 @@ public class PersonalCabinetPage extends BasePage {
 
     public void verifyEditAccountFields(JSONObject data) {
         getUrl(ACCOUNT_INFORMATION_URL);
-        elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(lastNameInEditPage, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(emailInEditPage, driver).clear();
-        elementFluentWaitVisibility(emailInEditPage, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(phoneInEditPage, driver).clear();
-        elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
-        elementFluentWaitVisibility(passwordInEditPage, driver).clear();
-        elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPassword"));
+        elementFluentWaitVisibility(firstNameInEditPage).clear();
+        elementFluentWaitVisibility(firstNameInEditPage).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameInEditPage).clear();
+        elementFluentWaitVisibility(lastNameInEditPage).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(emailInEditPage).clear();
+        elementFluentWaitVisibility(emailInEditPage).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(phoneInEditPage).clear();
+        elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(passwordInEditPage).clear();
+        elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
         AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
     }
 
@@ -105,21 +105,21 @@ public class PersonalCabinetPage extends BasePage {
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71113959049"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("Томск, Комсомольский проспект, 57"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71111111111"));
-        elementFluentWaitVisibility(editBtn, driver).click();
+        elementFluentWaitVisibility(editBtn).click();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/edit/"));
         backPage();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/"));
     }
 
     public void verifyFieldsAuthorization() {
-        textIsPresent(titleField, driver, "Панель управления");
+        textIsPresent(titleField, "Панель управления");
         AssertCollector.verifyCondition(getText(profileContainer).contains("Здравствуйте, Геннадий Фадеев!"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("test_g.fadeev@magdv.com"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71119348926"));
         moveToElementJS(driver, linkTxt);
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71111111111"));
         moveToElementJS(driver, linkElement);
-        elementFluentWaitVisibility(editBtn, driver).click();
+        elementFluentWaitVisibility(editBtn).click();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/edit/"));
         backPage();
         AssertCollector.verifyCondition(getCurrentUrl().contains("/customer/account/"));
@@ -147,21 +147,21 @@ public class PersonalCabinetPage extends BasePage {
 
     public void verifyFieldsData() {
         getUrl(BASE_URL + "/customer/account/edit/");
-        AssertCollector.verifyCondition(elementIsVisible(firstNameInEditPage,driver));
-        AssertCollector.verifyCondition(elementIsVisible(lastNameInEditPage,driver));
-        AssertCollector.verifyCondition(elementIsVisible(emailField,driver));
-        AssertCollector.verifyCondition(elementIsVisible(passwordInEditPage,driver));
-        AssertCollector.verifyCondition(elementIsVisible(phoneInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(firstNameInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(lastNameInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(emailField));
+        AssertCollector.verifyCondition(elementIsVisible(passwordInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(phoneInEditPage));
         if (!isSubscribedBtn.isSelected()) {
             clickElementByJS(driver, isSubscribedBtn);
         }
         if (!changerPassBtn.isSelected()) {
             clickElementByJS(driver, changerPassBtn);
         }
-        AssertCollector.verifyCondition(elementIsSelected(isSubscribedBtn,driver));
-        AssertCollector.verifyCondition(elementIsSelected(changerPassBtn,driver));
-        AssertCollector.verifyCondition(elementIsVisible(newConfirmationField,driver));
-        AssertCollector.assertTrue(elementIsVisible(newPasswordField,driver));
+        AssertCollector.verifyCondition(elementIsSelected(isSubscribedBtn));
+        AssertCollector.verifyCondition(elementIsSelected(changerPassBtn));
+        AssertCollector.verifyCondition(elementIsVisible(newConfirmationField));
+        AssertCollector.assertTrue(elementIsVisible(newPasswordField));
     }
 
     public JSONObject dataPersonal() {
@@ -179,26 +179,26 @@ public class PersonalCabinetPage extends BasePage {
     public String fillFields(JSONObject data, boolean select) {
 
         getUrl(BASE_URL + "/customer/account/edit/");
-        elementFluentWaitVisibility(firstNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(lastNameInEditPage, driver).clear();
-        elementFluentWaitVisibility(emailField, driver).clear();
-        elementFluentWaitVisibility(passwordInEditPage, driver).clear();
-        elementFluentWaitVisibility(phoneInEditPage, driver).clear();
-        elementFluentWaitVisibility(firstNameInEditPage, driver).sendKeys(data.getString("first"));
-        elementFluentWaitVisibility(lastNameInEditPage, driver).sendKeys(data.getString("last"));
-        elementFluentWaitVisibility(emailField, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(passwordInEditPage, driver).sendKeys(data.getString("currentPass"));
-        elementFluentWaitVisibility(phoneInEditPage, driver).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(firstNameInEditPage).clear();
+        elementFluentWaitVisibility(lastNameInEditPage).clear();
+        elementFluentWaitVisibility(emailField).clear();
+        elementFluentWaitVisibility(passwordInEditPage).clear();
+        elementFluentWaitVisibility(phoneInEditPage).clear();
+        elementFluentWaitVisibility(firstNameInEditPage).sendKeys(data.getString("first"));
+        elementFluentWaitVisibility(lastNameInEditPage).sendKeys(data.getString("last"));
+        elementFluentWaitVisibility(emailField).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPass"));
+        elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
         if (select) {
             if (!changerPassBtn.isSelected()) {
                 clickElementByJS(driver, changerPassBtn);
             }
 
-            elementFluentWaitVisibility(newPasswordField, driver).sendKeys(data.getString("newPass"));
-            elementFluentWaitVisibility(newConfirmationField, driver).sendKeys(data.getString("confirmPass"));
+            elementFluentWaitVisibility(newPasswordField).sendKeys(data.getString("newPass"));
+            elementFluentWaitVisibility(newConfirmationField).sendKeys(data.getString("confirmPass"));
         }
         moveToElementJS(driver, saveButtonInEditPage);
-        elementFluentWaitVisibility(saveButtonInEditPage, driver).click();
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
         return getText(profileContainer);
     }
 }

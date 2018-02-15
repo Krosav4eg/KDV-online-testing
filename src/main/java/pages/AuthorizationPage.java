@@ -79,37 +79,37 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyAuthFields(JSONObject data) {
         getUrl(AUTORIZATION_PAGE_URL);
-        elementFluentWaitVisibility(emailInputField, driver).clear();
-        elementFluentWaitVisibility(emailInputField, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(passwordField, driver).clear();
-        elementFluentWaitVisibility(passwordField, driver).sendKeys(data.getString("password"));
-        elementFluentWaitVisibility(authorizationButton, driver).click();
+        elementFluentWaitVisibility(emailInputField).clear();
+        elementFluentWaitVisibility(emailInputField).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordField).clear();
+        elementFluentWaitVisibility(passwordField).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(authorizationButton).click();
         AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_PAGE_URL, "Verify current url");
     }
 
     public void authAsPhysicalPerson() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
-        fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
-        elementFluentWaitVisibility(authorizationButton, driver).click();
+        fillInputField(emailInputField, PHYSICAL_PERSON_EMAIL);
+        fillInputField(passwordField, PHYSICAL_PERSON_PASSWORD);
+        elementFluentWaitVisibility(authorizationButton).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("http://kemerovo.demo.dev.magonline.ru/customer/account/"));
-        elementFluentWaitVisibility(exitButton, driver).click();
-        AssertCollector.assertTrue(elementIsVisible(registBtn,driver), "Registration button is appear");
-        AssertCollector.assertTrue(elementIsVisible(loginButton,driver), "Login button is appear");
+        elementFluentWaitVisibility(exitButton).click();
+        AssertCollector.assertTrue(elementIsVisible(registBtn), "Registration button is appear");
+        AssertCollector.assertTrue(elementIsVisible(loginButton), "Login button is appear");
     }
 
     public void typeIncorrectPasswordInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, INCORRECT_EMAIL);
-        fillInputField(passwordField, driver, PHYSICAL_PERSON_PASSWORD);
-        elementFluentWaitVisibility(authorizationButton, driver).click();
+        fillInputField(emailInputField, INCORRECT_EMAIL);
+        fillInputField(passwordField, PHYSICAL_PERSON_PASSWORD);
+        elementFluentWaitVisibility(authorizationButton).click();
         getValueOfInputField(passwordField, "value");
         textPresent("Неверный адрес электронной почты (email) или пароль");
     }
 
     public void typeCorrectLoginIncorrectPasswordInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
+        fillInputField(emailInputField, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         getValueOfInputField(passwordField, "value");
         textPresent("Неверный адрес электронной почты (email) или пароль");
@@ -117,7 +117,7 @@ public class AuthorizationPage extends BasePage {
 
     public void typeEmptyDataInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, EMPTY_DATA);
+        fillInputField(emailInputField, EMPTY_DATA);
         fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
         textPresent("Это поле обязательно для заполнения.");
     }
@@ -131,14 +131,14 @@ public class AuthorizationPage extends BasePage {
 
     public void typePasswordWithoutLoginInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, EMPTY_DATA);
+        fillInputField(emailInputField, EMPTY_DATA);
         fillInputFieldAndPressEnterButton(passwordField, PHYSICAL_PERSON_PASSWORD);
         textPresent("Это поле обязательно для заполнения.");
     }
 
     public void verifyEmailFieldWithoutAt() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a.shauloandersenlab.com");
+        fillInputField(emailInputField, "a.shauloandersenlab.com");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
@@ -146,7 +146,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailFieldWithoutDomainName() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a.shaulo@andersenlabcom");
+        fillInputField(emailInputField, "a.shaulo@andersenlabcom");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
@@ -154,7 +154,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailFieldWithMoreThanOneDot() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a..shaulo@andersenlab.com");
+        fillInputField(emailInputField, "a..shaulo@andersenlab.com");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
@@ -162,7 +162,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailFieldWithNumbersAndSymbols() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, RandomStringUtils.randomAlphanumeric(6) +
+        fillInputField(emailInputField, RandomStringUtils.randomAlphanumeric(6) +
                 PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Неверный адрес электронной почты (email) или пароль.");
@@ -171,28 +171,28 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailWithSpaces() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, EMPTY_DATA + PHYSICAL_PERSON_EMAIL);
+        fillInputField(emailInputField, EMPTY_DATA + PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email)");
     }
 
     public void verifyTypingPasswordLessSixSymbols() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, PHYSICAL_PERSON_EMAIL);
+        fillInputField(emailInputField, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, RandomStringUtils.randomAlphanumeric(5));
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
     public void verifyPasswordContainsOnlySpaces() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a.shaulo@andersenlab.com");
+        fillInputField(emailInputField, "a.shaulo@andersenlab.com");
         fillInputFieldAndPressEnterButton(passwordField, EMPTY_DATA);
         textPresent("Это поле обязательно для заполнения.");
     }
 
     public void verifyPasswordContainsSpacesAtStartAndEnd() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "a.shaulo@andersenlab.com");
+        fillInputField(emailInputField, "a.shaulo@andersenlab.com");
         fillInputFieldAndPressEnterButton(passwordField, " As06051993 ");
         textPresent("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
@@ -200,7 +200,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyForgotPassword() {
         getUrl(AUTORIZATION_PAGE_URL);
         String linkTextAttribute = getValueOfAttributeByName(forgotPassword, "href");
-        elementFluentWaitVisibility(forgotPassword, driver).click();
+        elementFluentWaitVisibility(forgotPassword).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url forgot password ",
                 linkTextAttribute);
@@ -209,7 +209,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyReturnToAuthorizationForm() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
         String linkTextAttribute = getValueOfAttributeByName(authForm, "href");
-        elementFluentWaitVisibility(authForm, driver).click();
+        elementFluentWaitVisibility(authForm).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to url of authorization form ",
                 linkTextAttribute);
@@ -217,16 +217,16 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailFieldWithoutDomainNameInForgotPasswordField() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
-        fillInputField(emailInputAtForgotPassword, driver, "a.shaulo@andersenlab");
-        elementFluentWaitVisibility(sendEmailForVerification, driver).click();
+        fillInputField(emailInputAtForgotPassword, "a.shaulo@andersenlab");
+        elementFluentWaitVisibility(sendEmailForVerification).click();
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
     }
 
     public void verifyValidEmailInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
-        fillInputField(emailInputAtForgotPassword, driver, "a.shaulo@andersenlab.com");
-        elementFluentWaitVisibility(sendEmailForVerification, driver).click();
+        fillInputField(emailInputAtForgotPassword, "a.shaulo@andersenlab.com");
+        elementFluentWaitVisibility(sendEmailForVerification).click();
         String expLink = BASE_URL + "/customer/account/login/";
         String actLink = getCurrentUrl();
         AssertCollector.assertEquals(actLink, " Current link is equal to ", expLink);
@@ -236,15 +236,15 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyEmailWithoutAtInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
-        fillInputField(emailInputAtForgotPassword, driver, "a.shauloandersenlab.com");
-        elementFluentWaitVisibility(sendEmailForVerification, driver).click();
+        fillInputField(emailInputAtForgotPassword, "a.shauloandersenlab.com");
+        elementFluentWaitVisibility(sendEmailForVerification).click();
         textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, " +
                 "ivanivanov@domain.com.");
     }
 
     public void verifyEnterWithUnconfirmedEmail() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, "anastasiya.shaulo@gmail.com");
+        fillInputField(emailInputField, "anastasiya.shaulo@gmail.com");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         textPresent("Неверный адрес электронной почты (email) или пароль.");
     }
@@ -252,7 +252,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyOpeningMainPage() {
         getUrl(AUTORIZATION_PAGE_URL);
         String link = getValueOfAttributeByName(mainPageLogo, "href");
-        elementFluentWaitVisibility(mainPageLogo, driver).click();
+        elementFluentWaitVisibility(mainPageLogo).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page ",
                 link);
@@ -261,7 +261,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyOpeningRegistrationLink() {
         getUrl(AUTORIZATION_PAGE_URL);
         String linkTextAttribute = getValueOfAttributeByName(registrationButton, "href");
-        elementFluentWaitVisibility(registrationButton, driver).click();
+        elementFluentWaitVisibility(registrationButton).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link of registration ",
                 linkTextAttribute);
@@ -270,7 +270,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyOpeningContinueAsGuestLink() {
         getUrl(AUTORIZATION_PAGE_URL);
         String linkTextAttribute = getValueOfAttributeByName(continueAsGuestButton, "href");
-        elementFluentWaitVisibility(continueAsGuestButton, driver).click();
+        elementFluentWaitVisibility(continueAsGuestButton).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to Singleton page link ",
                 linkTextAttribute);
@@ -279,7 +279,7 @@ public class AuthorizationPage extends BasePage {
     public void verifyOpeningForOrganizationsLink() {
         getUrl(AUTORIZATION_PAGE_URL);
         String linkTextAttribute = getValueOfAttributeByName(buttonForOrganizations, "href");
-        elementFluentWaitVisibility(buttonForOrganizations, driver).click();
+        elementFluentWaitVisibility(buttonForOrganizations).click();
         getCurrentUrl();
         AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal to link for organizations ",
                 linkTextAttribute);
@@ -292,7 +292,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyOfTextInRegistrationTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(elementIsVisible(registrationButton,driver));
+        AssertCollector.assertTrue(elementIsVisible(registrationButton));
         textPresent("Регистрация");
         textPresent("Регистрация позволит вам экономить время при оформлении заказов, даст возможность" +
                 " отслеживать их состояние и повторять заказы из архива.");
@@ -300,14 +300,14 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyOfTextInContinueAsGuestTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(elementIsVisible(continueAsGuestButton,driver));
+        AssertCollector.assertTrue(elementIsVisible(continueAsGuestButton));
         textPresent("Продолжить как гость");
         textPresent("В нашем интернет-магазине вы можете выбрать товары и оформить заказ без регистрации.");
     }
 
     public void verifyTextInForOrganizationsTab() {
         getUrl(AUTORIZATION_PAGE_URL);
-        AssertCollector.assertTrue(elementIsVisible(buttonForOrganizations,driver));
+        AssertCollector.assertTrue(elementIsVisible(buttonForOrganizations));
         textPresent("Для организаций");
         String actColor = "#ff1b41";
         String expColor = getElementColor(forOrganizationsTitle, "color");
@@ -326,7 +326,7 @@ public class AuthorizationPage extends BasePage {
 
     public String authForm(JSONObject data) {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, data.getString("email"));
+        fillInputField(emailInputField, data.getString("email"));
         fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
         return getText(loginContainer);
     }

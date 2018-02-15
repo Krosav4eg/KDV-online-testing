@@ -60,11 +60,11 @@ public class OrderingLegalPage extends BasePage {
     }
 
     public void deliveryAddressBlock(JSONObject data) {
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt, driver).clear();
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt, driver).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).lastNameTxt, driver).clear();
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).lastNameTxt, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt, driver).clear();
-        elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt, driver).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt).clear();
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).lastNameTxt).clear();
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).lastNameTxt).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt).clear();
+        elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt).sendKeys(data.getString("phone"));
     }
 }

@@ -105,7 +105,7 @@ public class DeliveryAddressPage extends BasePage {
         Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
         Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
         Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
-        elementFluentWaitClick(editAddressLink, driver).click();
+        elementFluentWaitClick(editAddressLink).click();
         Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
@@ -120,7 +120,7 @@ public class DeliveryAddressPage extends BasePage {
         Verify.verify(getText(deliveryAddressContainer).contains("+71111111111"));
         Verify.verify(getText(deliveryAddressContainer).contains("По умолчанию"));
         Verify.verify(getText(deliveryAddressContainer).contains("Не подтвержден"));
-        elementFluentWaitClick(editAddressLink, driver).click();
+        elementFluentWaitClick(editAddressLink).click();
         Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
@@ -129,17 +129,17 @@ public class DeliveryAddressPage extends BasePage {
 
     public void addAddresses() {
         getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
-        elementFluentWaitClick(addBtn, driver).click();
+        elementFluentWaitClick(addBtn).click();
         Verify.verify(getCurrentUrl().contains("/customer/address/new/"));
         Verify.verify(getValueOfAttributeByName(firstNameInEditDeliveryPage, "value").contains("Геннадий"));
         Verify.verify(getValueOfAttributeByName(lastNameInEditDeliveryPage, "value").contains("Фадеев"));
         Verify.verify(getValueOfAttributeByName(phoneInEditDeliveryPage, "value").contains("71119348926"));
-        elementFluentWaitClick(company, driver).sendKeys("ТЕСТОВАЯ");
-        elementFluentWaitClick(addressInEditDeliveryPage, driver).sendKeys("ул.Тестеров Тест 1");
+        elementFluentWaitClick(company).sendKeys("ТЕСТОВАЯ");
+        elementFluentWaitClick(addressInEditDeliveryPage).sendKeys("ул.Тестеров Тест 1");
         moveMouseTo(driver, getAboutLink);
-        elementFluentWaitClick(addressInEditDeliveryPage, driver).click();
+        elementFluentWaitClick(addressInEditDeliveryPage).click();
         Verify.verify(getText(addressesContainerDropDown).contains("Выберите адрес"));
-        elementFluentWaitClick(getSaveDeliveryAddressBtn, driver).submit();
+        elementFluentWaitClick(getSaveDeliveryAddressBtn).submit();
         Verify.verify(getText(messageSuccesTxt).contains("Адрес сохранён."));
     }
 }

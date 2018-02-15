@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import static Core.driverFactory.BrowserFactory.getDriver;
 import static Core.readDocs.ReadXMLFile.readXML;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static Core.driverFactory.BrowserFactory.*;
 
 /**
  * @author Sergey Potapov
@@ -68,19 +69,16 @@ public class WaitingUtility {
      * Execute Javascript to check if jQuery.active is 0
      * and document.readyState is complete, which means the JS and jQuery load is complete.
      */
-    public static boolean waitForJSandJQueryToLoad(WebDriver driver) {
+    public static boolean waitForJSandJQueryToLoad() {
         StopWatch watch = new StopWatch();
         watch.start();
-        WebDriverWait wait = new WebDriverWait(driver, 60);
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         // wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = drivers -> {
             try {
                 return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
-                // no jQuery present
-                watch.stop();
-                LOGGER.log(Level.INFO,"Wait Until Page Load " + String.valueOf(watch.getElapsedTime()) + "ms.");
-                LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
+                  LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
                 TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
                 return true;
             }
@@ -88,8 +86,8 @@ public class WaitingUtility {
         // wait for Javascript to load
         ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
                 .toString().equals("complete");
-        LOGGER.log(Level.INFO,"");
-
+        watch.stop();
+        LOGGER.log(Level.INFO,"Wait Until Page Load " + String.valueOf(watch.getElapsedTime()) + "ms.");
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
@@ -98,7 +96,7 @@ public class WaitingUtility {
      *
      * @param element used to find the element
      */
-    public static WebElement elementIsClickable(WebElement element, WebDriver driver) {
+    public static WebElement elementIsClickable(WebElement element) {
         Wait<WebDriver> newWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.MILLISECONDS)
@@ -109,41 +107,40 @@ public class WaitingUtility {
     /**
      * Method was created for helps to search for elements with certain intervals within a given period of time.
      * Web element searching every 50 MILLISECONDS for 30 seconds.
-     *
      * @param element - used to find the element
      */
-    public static WebElement elementFluentWaitVisibility(WebElement element, WebDriver driver) {
+    public static WebElement elementFluentWaitVisibility(WebElement element) {
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(10, TimeUnit.SECONDS)
+                .withTimeout(WAITING_TIMEOUT, TimeUnit.SECONDS)
                 .pollingEvery(50, TimeUnit.MILLISECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(visibilityOf(element));
     }
 
-    public static WebElement elementFluentWaitClick(WebElement element, WebDriver driver) {
+    public static WebElement elementFluentWaitClick(WebElement element) {
         Wait<WebDriver> newWait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
+                .withTimeout(WAITING_TIMEOUT, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
         return newWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static void waitInvisibilityOfElement(WebElement element, WebDriver driver) {
+    public static void waitInvisibilityOfElement(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(visibilityOf(element));
     }
 
-    public static void textIsPresent(WebElement element, WebDriver driver, String text) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+    public static void textIsPresent(WebElement element, String text) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         wait.until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public static boolean elementIsDisplayed(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+    public static boolean elementIsDisplayed(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
-    public static boolean elementIsPresent(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+    public static boolean elementIsPresent(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT/10);
         try {
              return  wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
         }
@@ -152,8 +149,8 @@ public class WaitingUtility {
             return false;
         }
     }
-    public static boolean elementIsVisible(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+    public static boolean elementIsVisible(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         try {
             return  wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
         }
@@ -163,8 +160,8 @@ public class WaitingUtility {
         }
 
     }
-    public static boolean elementIsSelected(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+    public static boolean elementIsSelected(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         try {
             return  wait.until(ExpectedConditions.visibilityOf(element)).isSelected();
         }

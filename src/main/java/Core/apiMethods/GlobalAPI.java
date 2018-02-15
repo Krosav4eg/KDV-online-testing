@@ -13,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 
+@Deprecated
 public class   GlobalAPI {
 
 	/**
@@ -20,7 +21,6 @@ public class   GlobalAPI {
 	 * @param setData- api data it must be in JSON format
 	 * @return ClientResponse from api request
 	 */
-	@Deprecated
 	public ClientResponse apiPost(JSONObject apiParameterData, JSONObject setData) {
 		Client client = Client.create();
 		System.out.println(/**************apiPost**************/);
@@ -50,7 +50,6 @@ public class   GlobalAPI {
 	 * @param apiParameterData - api parameter it must be in JSON format ("url,refresh,access tokens")
 	 * @return ClientResponse from api request
 	 */
-	@Deprecated
 	public ClientResponse apiGet(JSONObject apiParameterData) {
 		Client client = Client.create();
 		System.out.println(/**************apiPost**************/);
@@ -81,7 +80,6 @@ public class   GlobalAPI {
 	 * @param patchData- data for patch request
 	 * @return ClientResponse from api request
 	 */
-	@Deprecated
 	protected CloseableHttpResponse apiPatch(JSONObject apiParameterData, JSONObject patchData) throws Exception {
 		String postData = patchData.toString();
 		System.out.println(/**************apiPatch**************/);

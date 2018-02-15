@@ -113,14 +113,14 @@ public class OrderingPhysicalPage extends BasePage {
      */
     private void selectProduct() {
         getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, driver, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
+        fillInputField(emailInputField, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
         fillInputFieldAndPressEnterButton(passwordField,PONOMAREVA_PASSWORD); //"ztq0d9e6");
         if (!getText(basketSummaryTxt).contains("тов.")) {
             new OrderingGuestPage(driver).addProductToBasket();
         } else {
-            elementFluentWaitVisibility(selectMiniCart, driver).click();
-            elementFluentWaitVisibility(selectBasket, driver).click();
-            elementFluentWaitVisibility(orderBtn, driver).click();
+            elementFluentWaitVisibility(selectMiniCart).click();
+            elementFluentWaitVisibility(selectBasket).click();
+            elementFluentWaitVisibility(orderBtn).click();
         }
     }
 
@@ -128,16 +128,16 @@ public class OrderingPhysicalPage extends BasePage {
      * Validate Data after ordering
      */
     private void validateMainData() {
-        textIsPresent(orderContainer, driver, "Ваш заказ принят");
+        textIsPresent(orderContainer, "Ваш заказ принят");
         String order = getText(orderTxt);
         AssertCollector.verifyCondition(getText(orderContainer).contains("Ваш заказ принят"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Спасибо за покупку!"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Номер вашего заказа"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Вы получите письмо на ваш адрес электронной почты"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Продолжить покупать"));
-        elementFluentWaitVisibility(byeBtn, driver).click();
+        elementFluentWaitVisibility(byeBtn).click();
         AssertCollector.verifyCondition(getText(headerTxt).contains("Пономарёва Маргарита"));
-        elementFluentWaitVisibility(accountLink, driver).click();
+        elementFluentWaitVisibility(accountLink).click();
         Assert.assertTrue(getText(orderConteiner).contains(order));
     }
 
@@ -167,52 +167,52 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         dateDay(getValueOfAttributeByName(dateTxt, "value"));
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
     }
 
     public void orderingNewAddress() {
         selectProduct();
         verifyOrderingBeforeSend();
-        elementFluentWaitVisibility(checkboxLabelBtn, driver).click();
+        elementFluentWaitVisibility(checkboxLabelBtn).click();
         sleepWait();
-        elementFluentWaitVisibility(addressesField, driver).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
+        elementFluentWaitVisibility(addressesField).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
+        elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
-        elementFluentWaitVisibility(addressesLink, driver).click();
+        elementFluentWaitVisibility(addressesLink).click();
         AssertCollector.assertTrue(getText(addressesContaineer).contains("Адрес доставки Томск, пр. Мира 20, оф.4"));
     }
 
     public void orderingChangedAddress() {
         selectProduct();
         verifyOrderingBeforeSend();
-        elementFluentWaitVisibility(dropListAddresses, driver).click();
+        elementFluentWaitVisibility(dropListAddresses).click();
         Select dropdown = new Select(addressesList);
         dropdown.selectByIndex(4);
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
     }
 
     public void orderingChangedStoreAddress() {
         selectProduct();
         verifyOrderingBeforeSend();
-        elementFluentWaitVisibility(dropListAddresses, driver).click();
+        elementFluentWaitVisibility(dropListAddresses).click();
         Select dropdown = new Select(addressesList);
         dropdown.selectByIndex(1);
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
-        textIsPresent(modelWindows, driver, "Выбранный вами адрес обслуживается другим");
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        textIsPresent(modelWindows, "Выбранный вами адрес обслуживается другим");
         AssertCollector.verifyCondition(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
                 "Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
-        elementFluentWaitVisibility(cancelBtn, driver).click();
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
-        elementFluentWaitVisibility(closedBtn, driver).click();
-        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
-        textIsPresent(confirmBtn, driver, "Да");
-        elementFluentWaitVisibility(confirmBtn, driver).click();
+        elementFluentWaitVisibility(cancelBtn).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        elementFluentWaitVisibility(closedBtn).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        textIsPresent(confirmBtn, "Да");
+        elementFluentWaitVisibility(confirmBtn).click();
 //        //TODO
-//        elementFluentWaitClick(dropListAddresses, driver).click();
+//        elementFluentWaitClick(dropListAddresses).click();
 //        dropdown.selectByIndex(1);
-//        elementFluentWaitVisibility(guest.createOrderButton, driver).click();
+//        elementFluentWaitVisibility(guest.createOrderButton).click();
 //        validateMainData();
     }
 }

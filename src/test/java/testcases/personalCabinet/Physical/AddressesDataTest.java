@@ -26,7 +26,7 @@ public class AddressesDataTest extends BaseTest {
 		authorizationPage.verifyAuthFields(data);
 		del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
-		AssertCollector.assertTrue(elementIsVisible( deliveryAddressPage.deliveryAddressHeader,driver),
+		AssertCollector.assertTrue(elementIsVisible( deliveryAddressPage.deliveryAddressHeader),
 				"Required header is displayed");
 	}
 
@@ -57,7 +57,7 @@ public class AddressesDataTest extends BaseTest {
 				"Addresses are equals");
 		AssertCollector.assertEqualsJ(deliveryAddressPage.phoneDeliveryByDefault.getText(), "+71111111111",
 				"Phone numbers are equals");
-			AssertCollector.assertTrue(elementIsVisible(deliveryAddressPage.byDefaultMark,driver));
+			AssertCollector.assertTrue(elementIsVisible(deliveryAddressPage.byDefaultMark));
 		orderingGuestPage.clickOnWebElement(deliveryAddressPage.addressActionLink);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL + "edit/id/4236/",
 				"Urls are equals");

@@ -164,15 +164,15 @@ public class OrderingGuestPage extends BasePage {
         getUrl(BASE_URL);
         new BasketPage(driver).selectOneProduct();
         new BasketPage(driver).increaseProductCount();
-        elementFluentWaitVisibility(orderBtn, driver).click();
+        elementFluentWaitVisibility(orderBtn).click();
         try {
-            elementIsPresent(messageOrderError,driver);
-            if (elementIsDisplayed(messageOrderError,driver)) {
-                elementFluentWaitVisibility(selectMiniCart, driver).click();
-                elementFluentWaitVisibility(selectBasket, driver).click();
+            elementIsPresent(messageOrderError);
+            if (elementIsDisplayed(messageOrderError)) {
+                elementFluentWaitVisibility(selectMiniCart).click();
+                elementFluentWaitVisibility(selectBasket).click();
             }
         new BasketPage(driver).increaseLegalPersonProductCount();
-        elementFluentWaitVisibility(orderBtn, driver).click();
+        elementFluentWaitVisibility(orderBtn).click();
         }
         catch (Exception e) {
             e.getMessage();
@@ -185,37 +185,37 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void clickOrderButton() {
-        elementFluentWaitVisibility(createOrderButton, driver).click();
+        elementFluentWaitVisibility(createOrderButton).click();
         sleepWait();
     }
 
     public void waitText()
     {
-      elementIsVisible(new PersonalCabinetPage(driver).titleField,driver);
+      elementIsVisible(new PersonalCabinetPage(driver).titleField);
       sleepWait();
     }
 
     public void clickOnWebElement(WebElement element) {
-        elementFluentWaitVisibility(element, driver).click();
+        elementFluentWaitVisibility(element).click();
         sleepWait();
     }
 
     public void clickCheckBoxAndOrderButton() {
         sleepWait();
-        elementFluentWaitVisibility(agreementCheckBoxAdvice, driver).click();
-        elementFluentWaitVisibility(createOrderButton, driver).click();
+        elementFluentWaitVisibility(agreementCheckBoxAdvice).click();
+        elementFluentWaitVisibility(createOrderButton).click();
         sleepWait();
     }
 
     public String identificationBlock(JSONObject data) {
-        elementFluentWaitVisibility(firstNameTxt, driver).clear();
-        elementFluentWaitVisibility(firstNameTxt, driver).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastNameTxt, driver).clear();
-        elementFluentWaitVisibility(lastNameTxt, driver).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(emailTxt, driver).clear();
-        elementFluentWaitVisibility(emailTxt, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(phoneTxt, driver).clear();
-        elementFluentWaitVisibility(phoneTxt, driver).sendKeys(data.getString("phone"));
+        elementFluentWaitVisibility(firstNameTxt).clear();
+        elementFluentWaitVisibility(firstNameTxt).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameTxt).clear();
+        elementFluentWaitVisibility(lastNameTxt).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(emailTxt).clear();
+        elementFluentWaitVisibility(emailTxt).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(phoneTxt).clear();
+        elementFluentWaitVisibility(phoneTxt).sendKeys(data.getString("phone"));
         return getText(identificationInfo);
     }
 
@@ -227,11 +227,11 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void authorizationBlockModalWindow(JSONObject data) {
-        elementFluentWaitVisibility(emailAuth, driver).clear();
-        elementFluentWaitVisibility(emailAuth, driver).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(passwordAuth, driver).clear();
-        elementFluentWaitVisibility(passwordAuth, driver).sendKeys(data.getString("password"));
-        elementFluentWaitVisibility(authEnterButton, driver).click();
+        elementFluentWaitVisibility(emailAuth).clear();
+        elementFluentWaitVisibility(emailAuth).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(passwordAuth).clear();
+        elementFluentWaitVisibility(passwordAuth).sendKeys(data.getString("password"));
+        elementFluentWaitVisibility(authEnterButton).click();
         sleepWait();
     }
 
@@ -245,14 +245,14 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void deliveryFormInfo(JSONObject data) {
-        elementFluentWaitVisibility(deliveryAddressField, driver).clear();
-        elementFluentWaitVisibility(deliveryAddressField, driver).sendKeys(data.getString("address"));
-        elementFluentWaitVisibility(deliveryFloorField, driver).clear();
-        elementFluentWaitVisibility(deliveryFloorField, driver).sendKeys(data.getString("floor"));
-        elementFluentWaitVisibility(deliveryPorchField, driver).clear();
-        elementFluentWaitVisibility(deliveryPorchField, driver).sendKeys(data.getString("porch"));
-        elementFluentWaitVisibility(deliveryCommentField, driver).clear();
-        elementFluentWaitVisibility(deliveryCommentField, driver).sendKeys(data.getString("comment"));
+        elementFluentWaitVisibility(deliveryAddressField).clear();
+        elementFluentWaitVisibility(deliveryAddressField).sendKeys(data.getString("address"));
+        elementFluentWaitVisibility(deliveryFloorField).clear();
+        elementFluentWaitVisibility(deliveryFloorField).sendKeys(data.getString("floor"));
+        elementFluentWaitVisibility(deliveryPorchField).clear();
+        elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(deliveryCommentField).clear();
+        elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
         sleepWait();
     }
 }
