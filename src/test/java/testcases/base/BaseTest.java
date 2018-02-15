@@ -118,9 +118,10 @@ public class BaseTest {
 
     @AfterMethod
     public void clearCookies(ITestResult result) {
-        if(result.getStatus()==ITestResult.SUCCESS) {
-            new ListenerTest().onTestSuccess(result);
-        }
+//        if(result.getStatus()==ITestResult.SUCCESS) {
+//            new ListenerTest().onTestSuccess(result);
+//        }
+//        System.out.println(result.getStatus());
         if(result.getStatus()==ITestResult.FAILURE) {
             new ListenerTest().onTestFailure(result);
         }

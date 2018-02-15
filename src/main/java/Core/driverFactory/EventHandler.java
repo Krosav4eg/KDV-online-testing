@@ -137,21 +137,6 @@ public abstract class EventHandler implements WebDriverEventListener {
 //        }
 //        capture(testName, ERROR_SCREENSHOT_FOLDER);
     }
-    /***
-     * Need to implement it refactoring
-     */
-    static void capture(String screenShotName, String folder) {
-        System.out.println(folder);
-        TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
-        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        String dest = folder + screenShotName + ".png";
-        File destination = new File(dest);
-        try {
-            FileUtils.copyFile(source, destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-            //LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
-        }
-    }
+
 
 }
