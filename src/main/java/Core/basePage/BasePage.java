@@ -327,7 +327,7 @@ public class BasePage {
         }
     }
 
-    protected static void sleepWait() {
+    public static void sleepWait() {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
