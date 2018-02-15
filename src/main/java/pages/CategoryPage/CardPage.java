@@ -1,6 +1,5 @@
 package pages.CategoryPage;
 
-import Core.apiMethods.GlobalAPI;
 import Core.basePage.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,9 +23,6 @@ public class CardPage extends BasePage {
 
     @FindBy(css = ".product")
     private WebElement productContainer;
-//
-//    @FindBy(css = "[title='Поиск']")
-//    private WebElement searchBtn;
 
     @FindBy(css = ".search-button__label")
     private WebElement searchBtn;
@@ -81,8 +77,8 @@ public class CardPage extends BasePage {
     public void searchAndSelect() {
         driver.navigate().refresh();
         driver.navigate().to(BASE_URL + "/konfety.html");
-        elementFluentWaitVisibility(selectCategorySearchBtn, driver).click();
-        CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()", driver);
+        elementFluentWaitVisibility(selectCategorySearchBtn).click();
+        CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()");
         fillInputFieldAndPressEnterButton(searchField, "Томские классические");
         moveMouseTo(driver, aboutLink);
     }
@@ -92,7 +88,7 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(categoryContainer).contains("Конфеты «Томские классические», 300 г"));
         AssertCollector.assertTrue(getText(categoryContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(categoryContainer).contains("\u20BD"));
-        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn, driver), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn), "element is visible");
     }
 
     //TODO bug with increment button
@@ -101,15 +97,15 @@ public class CardPage extends BasePage {
         clickElementByJS(driver, categoryAddBtn);
         driver.navigate().refresh();
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"));
-        elementFluentWaitVisibility(categoryDecBtn, driver).click();
+        elementFluentWaitVisibility(categoryDecBtn).click();
         driver.navigate().refresh();
-//        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn, driver));
+//        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn));
     }
 
     public void addProductNotValidFromCardMainPage() {
         searchAndSelect();
         moveMouseTo(driver, aboutLink);
-        elementFluentWaitVisibility(categoryAddBtn, driver).click();
+        elementFluentWaitVisibility(categoryAddBtn).click();
         sleepWait();
         driver.navigate().refresh();
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"));
@@ -119,7 +115,7 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
         addTxtToInput("@!$^*&$#@*()");
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
-        elementFluentWaitVisibility(categoryInputTxt, driver).clear();
+        elementFluentWaitVisibility(categoryInputTxt).clear();
     }
 
     private void addTxtToInput(String txt) {
@@ -129,8 +125,8 @@ public class CardPage extends BasePage {
         } catch (Exception ex) {
             System.out.println("Add button not available");
         }
-        elementFluentWaitVisibility(categoryInputTxt, driver).click();
-        elementFluentWaitVisibility(categoryInputTxt, driver).sendKeys(txt);
+        elementFluentWaitVisibility(categoryInputTxt).click();
+        elementFluentWaitVisibility(categoryInputTxt).sendKeys(txt);
         moveMouseToAndClick(driver, mainTxt, 0, 0);
         sleepWait();
         driver.navigate().refresh();
@@ -138,24 +134,24 @@ public class CardPage extends BasePage {
 
     public void validCardProductVerify() {
         searchAndSelect();
-        elementFluentWaitVisibility(productCardContainer, driver).click();
+        elementFluentWaitVisibility(productCardContainer).click();
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические», 300 г"));
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"));
-        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn, driver), "element is visible");
-        elementFluentWaitVisibility(categoryAddBtn, driver).click();
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn), "element is visible");
+        elementFluentWaitVisibility(categoryAddBtn).click();
         sleepWait();
-        AssertCollector.assertTrue(elementIsDisplayed(cartControlIncBtn, driver), "element is visible");
-        AssertCollector.assertTrue(elementIsDisplayed(cartControlDecBtn, driver), "element is visible");
-        elementFluentWaitVisibility(cartControlDecBtn, driver).click();
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlIncBtn), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlDecBtn), "element is visible");
+        elementFluentWaitVisibility(cartControlDecBtn).click();
         sleepWait();
-        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn, driver), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn), "element is visible");
     }
 
     public void validCardProductVerifyDescription() {
         searchAndSelect();
-        elementFluentWaitVisibility(productCardContainer, driver).click();
+        elementFluentWaitVisibility(productCardContainer).click();
         moveMouseTo(driver, productCardDescriptionContainer);
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Описание"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Страна производства:"));
@@ -170,7 +166,7 @@ public class CardPage extends BasePage {
 
     public void validCardProductVerifyComposition() {
         searchAndSelect();
-        elementFluentWaitVisibility(productCardContainer, driver).click();
+        elementFluentWaitVisibility(productCardContainer).click();
         moveMouseTo(driver, productCardDescriptionContainer);
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Состав продукта:"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Белки"));
@@ -181,13 +177,13 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("22 г"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("59 г"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("495 ккал"));
-        AssertCollector.assertTrue(elementIsDisplayed(showAll, driver), "element is present");
-        elementFluentWaitVisibility(showAll, driver).click();
+        AssertCollector.assertTrue(elementIsDisplayed(showAll), "element is present");
+        elementFluentWaitVisibility(showAll).click();
     }
 
     public void verifyNotValidProductCard() {
         searchAndSelect();
-        elementFluentWaitVisibility(productCardContainer, driver).click();
+        elementFluentWaitVisibility(productCardContainer).click();
         addTxtToInput("-5");
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"),
                 "text not present");
@@ -199,17 +195,17 @@ public class CardPage extends BasePage {
 
     public void validCardProductVerifyAdvantagesShop() {
         searchAndSelect();
-        elementFluentWaitVisibility(productCardContainer, driver).click();
+        elementFluentWaitVisibility(productCardContainer).click();
         AssertCollector.assertTrue(getText(benefitDelivery).contains("Ваши покупки из интернет-магазина KDV мы доставим бесплатно. Доставка в день заказа, в удобное для вас время, до двери квартиры/офиса."));
-        elementFluentWaitVisibility(benefitDelivery, driver).click();
+        elementFluentWaitVisibility(benefitDelivery).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("delivery"));
         driver.navigate().back();
         AssertCollector.assertTrue(getText(benefitPayment).contains("Интернет-магазин KDV работает без предоплаты. Оплата производится курьеру наличным и безналичным способом по факту доставки Вашего заказа."));
-        elementFluentWaitVisibility(benefitPayment, driver).click();
+        elementFluentWaitVisibility(benefitPayment).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("payment-orders"));
         driver.navigate().back();
         AssertCollector.assertTrue(getText(benefitPrice).contains("KDV - мощное производство, распределительные центры и автопарк, что позволяет KDV держать демократичные цены на продукцию. В интернет-магазине KDV – еще дешевле."));
-        elementFluentWaitVisibility(benefitPrice, driver).click();
+        elementFluentWaitVisibility(benefitPrice).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("about"));
         driver.navigate().back();
     }

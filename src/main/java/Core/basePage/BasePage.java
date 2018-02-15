@@ -84,11 +84,11 @@ public class BasePage {
             System.setProperty("close.current.window.handle", parentHandle);
         }
 
-        public void fillInputField(WebElement element, WebDriver driver, String message) {
+        public void fillInputField(WebElement element, String message) {
             LOGGER.log(Level.INFO, "Feel input field ");
             TestReporter.step("Feel input field ");
-            elementFluentWaitVisibility(element, driver).clear();
-            elementFluentWaitVisibility(element, driver).sendKeys(message);
+            elementFluentWaitVisibility(element).clear();
+            elementFluentWaitVisibility(element).sendKeys(message);
         }
 
         public void backPage() {
@@ -143,16 +143,16 @@ public class BasePage {
         driver.navigate().back();
     }
 
-    protected void fillInputField(WebElement element, WebDriver driver, String message) {
+    protected void fillInputField(WebElement element, String message) {
         LOGGER.log(Level.INFO, "Feel input field ");
         TestReporter.step("Feel input field ");
-        elementFluentWaitVisibility(element, driver).clear();
-        elementFluentWaitVisibility(element, driver).sendKeys(message);
+        elementFluentWaitVisibility(element).clear();
+        elementFluentWaitVisibility(element).sendKeys(message);
     }
 
     protected void fillInputFieldAndPressEnterButton(WebElement element, String message) {
-        elementFluentWaitVisibility(element, driver).clear();
-        elementFluentWaitVisibility(element, driver).sendKeys(message);
+        elementFluentWaitVisibility(element).clear();
+        elementFluentWaitVisibility(element).sendKeys(message);
         element.sendKeys(Keys.ENTER);
     }
 
@@ -206,7 +206,7 @@ public class BasePage {
      *
      * @param script example jQery("div:contains('test')").click()
      */
-    protected static void CallJS(String script, WebDriver driver) {
+    protected static void CallJS(String script) {
         ((JavascriptExecutor) driver).executeScript(script);
     }
 

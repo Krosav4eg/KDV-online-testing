@@ -89,14 +89,14 @@ public class CategoryPage extends BasePage {
     //TODO find the solution of this problem - it must be fixed
     public void selectFromCategoryDropDown() {
         driver.navigate().refresh();
-        elementFluentWaitVisibility(selectCategorySearchBtn, driver).click();
-        CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()", driver);
+        elementFluentWaitVisibility(selectCategorySearchBtn).click();
+        CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()");
         //clickElementByJS(driver,selectCategoryInSearchLink);
-        elementFluentWaitVisibility(searchBtn, driver).click();
+        elementFluentWaitVisibility(searchBtn).click();
         AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"), "required header  is present");
         driver.navigate().to(ABOUT_PAGE_URL);
-        elementFluentWaitVisibility(catalogMainList, driver).click();
-        elementFluentWaitVisibility(candyCategoryMainLink, driver).click();
+        elementFluentWaitVisibility(catalogMainList).click();
+        elementFluentWaitVisibility(candyCategoryMainLink).click();
         AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"), "required header  is present");
     }
 
@@ -107,36 +107,36 @@ public class CategoryPage extends BasePage {
 
     public void commodityGridList() {
         selectCategorySideBar();
-        elementFluentWaitVisibility(listBtn, driver).click();
+        elementFluentWaitVisibility(listBtn).click();
         AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"), "required list  is active");
-        elementFluentWaitVisibility(gridBtn, driver).click();
+        elementFluentWaitVisibility(gridBtn).click();
         AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"), "required grid  is active");
 
     }
 
     public void checkBox() {
         selectCategorySideBar();
-        elementFluentWaitVisibility(existBtn, driver).click();
+        elementFluentWaitVisibility(existBtn).click();
         AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("в наличии"), "text 'В наличии' is present");
-        AssertCollector.assertTrue(elementIsVisible(deletePositionBtn,driver), "checkbox delete is present");
-        AssertCollector.assertTrue(elementIsVisible(existBtn,driver), "checkbox is present");
+        AssertCollector.assertTrue(elementIsVisible(deletePositionBtn), "checkbox delete is present");
+        AssertCollector.assertTrue(elementIsVisible(existBtn), "checkbox is present");
         AssertCollector.assertTrue(getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
-        elementFluentWaitVisibility(deletePositionBtn, driver).click();
-        elementFluentWaitVisibility(existBtn, driver).click();
-        elementFluentWaitVisibility(deletePositionLink, driver).click();
+        elementFluentWaitVisibility(deletePositionBtn).click();
+        elementFluentWaitVisibility(existBtn).click();
+        elementFluentWaitVisibility(deletePositionLink).click();
         AssertCollector.assertTrue(!getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
     }
 
     public void sortFilterDefault() {
         selectCategorySideBar();
         moveMouseTo(driver, dropDownMenu);
-        elementFluentWaitVisibility(sortDeafultLink, driver).click();
+        elementFluentWaitVisibility(sortDeafultLink).click();
         moveMouseTo(driver, dropDownMenu);
-        elementFluentWaitVisibility(sortDeafultLink, driver).click();
+        elementFluentWaitVisibility(sortDeafultLink).click();
         String firstElement = getText(categoryElementTxt);
-        elementFluentWaitVisibility(sortBtn, driver).click();
+        elementFluentWaitVisibility(sortBtn).click();
         AssertCollector.assertTrue(!firstElement.contains(getText(categoryElementTxt)), "price filter is active");
     }
 
@@ -144,13 +144,13 @@ public class CategoryPage extends BasePage {
         selectCategorySideBar();
         moveMouseTo(driver, dropDownMenu);
         Double firstValue = Double.valueOf(getText(priceTxt).replaceAll("[^0-9]", ""));
-        elementFluentWaitVisibility(sortPriceLink, driver).click();
-        elementFluentWaitVisibility(sortBtn, driver).click();
+        elementFluentWaitVisibility(sortPriceLink).click();
+        elementFluentWaitVisibility(sortBtn).click();
         Double lastValue = Double.valueOf(getText(priceTxt).replaceAll("[^0-9]", ""));
         AssertCollector.assertTrue(lastValue > firstValue, "Asc filter is active");
         firstValue = Double.valueOf(getText(priceTxt).replaceAll("[^0-9]", ""));
         moveMouseTo(driver, dropDownMenu);
-        elementFluentWaitVisibility(sortPriceLink, driver).click();
+        elementFluentWaitVisibility(sortPriceLink).click();
         lastValue = Double.valueOf(getText(priceTxt).replaceAll("[^0-9]", ""));
         AssertCollector.assertTrue(lastValue < firstValue, "Asc filter is active");
     }

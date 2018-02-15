@@ -59,21 +59,21 @@ public class ModalWindow extends BasePage {
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"), "");
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"), "Text is present");
-        AssertCollector.assertTrue(elementIsVisible(addCartModalBtn,driver), "element is visible");
-        elementFluentWaitVisibility(addCartModalBtn, driver).click();
+        AssertCollector.assertTrue(elementIsVisible(addCartModalBtn), "element is visible");
+        elementFluentWaitVisibility(addCartModalBtn).click();
         sleepWait();
-        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalIncBtn,driver), "element is visible");
-        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalDecBtn,driver), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalIncBtn), "element is visible");
+        AssertCollector.assertTrue(elementIsDisplayed(cartControlModalDecBtn), "element is visible");
         clickElementByJS(driver, cartControlModalIncBtn);
         sleepWait();
         clickElementByJS(driver, cartControlModalDecBtn);
-        elementIsClickable(closeBtn, driver).click();
-        AssertCollector.assertFalse(elementIsVisible(modalContainerWindow,driver));
+        elementIsClickable(closeBtn).click();
+        AssertCollector.assertFalse(elementIsVisible(modalContainerWindow));
         moveMouseTo(driver, categoryContainer);
         clickElementByJS(driver, openModalBtn);
         sleepWait();
         clickElementByJS(driver, logoBtn);
-        AssertCollector.assertFalse(elementIsVisible( modalContainerWindow,driver));
+        AssertCollector.assertFalse(elementIsVisible( modalContainerWindow));
     }
 
     public void addProductNotValidModalWindow() {
@@ -82,7 +82,7 @@ public class ModalWindow extends BasePage {
         AssertCollector.assertEquals(addText("asdasdasd"), "", "15");
         AssertCollector.assertEquals(addText("@!$^*&$#@*()"), "", "15");
         AssertCollector.assertEquals(addText("123123"), "", "9999");
-        elementFluentWaitVisibility(categoryInputTxt, driver).clear();
+        elementFluentWaitVisibility(categoryInputTxt).clear();
     }
 
     private String addText(String text) {
@@ -93,7 +93,7 @@ public class ModalWindow extends BasePage {
             System.out.println("Element Card not valid");
         }
         clickElementByJS(driver, categoryInputTxt);
-        elementFluentWaitVisibility(categoryInputTxt, driver).sendKeys(text);
+        elementFluentWaitVisibility(categoryInputTxt).sendKeys(text);
         sleepWait();
         return getValueOfAttributeByName(categoryInputTxt, "value");
     }

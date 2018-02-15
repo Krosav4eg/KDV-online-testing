@@ -50,7 +50,7 @@ public abstract class EventHandler implements WebDriverEventListener {
 
     @Override
     public void beforeClickOn(WebElement arg0, WebDriver arg1) {
-        waitForJSandJQueryToLoad(arg1);
+        waitForJSandJQueryToLoad();
         //threadSleep();
         //waitForPageLoad(arg1);
         //moveToElementJS(arg1,arg0);
@@ -62,7 +62,7 @@ public abstract class EventHandler implements WebDriverEventListener {
     public void afterClickOn(WebElement arg0, WebDriver arg1) {
         TestReporter.step("Click on - \t" + arg0);
         LOGGER.log(Level.INFO, "Click on - \t" + arg0);
-        waitForJSandJQueryToLoad(arg1);
+        waitForJSandJQueryToLoad();
         //waitForPageLoad(arg1);
         //System.out.println("afterClickOn "+arg0+" WebDriver "+arg1);
     }
@@ -131,31 +131,12 @@ public abstract class EventHandler implements WebDriverEventListener {
 
     @Override
     public void onException(Throwable arg0, WebDriver arg1) {
-        arg0.printStackTrace();
-        if (arg0.getLocalizedMessage().contains("no such window")) {
-            return;
-        }
-        capture(testName, ERROR_SCREENSHOT_FOLDER);
-
+//        arg0.printStackTrace();
+//        if (arg0.getLocalizedMessage().contains("no such window")) {
+//            return;
+//        }
+//        capture(testName, ERROR_SCREENSHOT_FOLDER);
     }
 
-
-    //TODO not completed
-
-    /***
-     * Need to implement it refactoring
-     */
-    static void capture(String screenShotName, String folder) {
-        TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());
-        File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        String dest = folder + screenShotName + ".png";
-        File destination = new File(dest);
-        try {
-            FileUtils.copyFile(source, destination);
-        } catch (IOException e) {
-            e.printStackTrace();
-            //LOGGER.log(Level.WARNING, "Error during screenshot taking: " + e.getMessage());
-        }
-    }
 
 }

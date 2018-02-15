@@ -24,9 +24,9 @@ public class AccountDataTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(ACCOUNT_INFORMATION_URL);
-        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataHeaderInEditPage,driver));
-        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataInEditPage,driver));
-        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.sharingInEditPage,driver));
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataHeaderInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.personalDataInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(accountDataPage.sharingInEditPage));
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(45));
         accountDataPage.verifyEditAccountFields(data);
@@ -114,11 +114,11 @@ public class AccountDataTest extends BaseTest {
         accountDataPage.saveButtonInEditPage.click();
         del.textPresentDelegate("Это поле обязательно для заполнения");
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
-        AssertCollector.assertTrue(elementIsVisible(accountDataPage.changePasswordHeader,driver),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.changePasswordHeader),
                 "Required header is displayed");
-        AssertCollector.assertTrue(elementIsVisible(accountDataPage.newPasswordField,driver),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.newPasswordField),
                 "Required field is displayed");
-        AssertCollector.assertTrue(elementIsVisible(accountDataPage.confirmPasswordField,driver),
+        AssertCollector.assertTrue(elementIsVisible(accountDataPage.confirmPasswordField),
                 "Required field is displayed");
     }
 }

@@ -109,26 +109,26 @@ public class BasketPage extends BasePage {
 
     private void searchElement() {
         moveToElementJS(driver, productContainer);
-        elementFluentWaitVisibility(searchField, driver).sendKeys("Кальмар подкопчённый");
+        elementFluentWaitVisibility(searchField).sendKeys("Кальмар подкопчённый");
         moveToElementJS(driver, searchBtn);
-        elementFluentWaitVisibility(searchBtn, driver).click();
+        elementFluentWaitVisibility(searchBtn).click();
     }
 
     public void selectOneProduct() {
         searchElement();
         moveToElementJS(driver, productAddBtn);
         scrollDown();
-        textIsPresent(searchHeaderTxt, driver, "Результаты поиска для «Кальмар подкопчённый»");
+        textIsPresent(searchHeaderTxt, "Результаты поиска для «Кальмар подкопчённый»");
         moveToElementJS(driver, tittleProductTxt);
         try {
-            if (elementIsVisible(productAddBtn,driver)) {
-                elementFluentWaitVisibility(productAddBtn, driver).click();
-                textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, driver, "тов.");
-                elementFluentWaitVisibility(selectMiniCart, driver).click();
-                elementFluentWaitVisibility(selectBasket, driver).click();
-            } else if (elementIsVisible(productPlusBtn,driver)) {
-                elementFluentWaitVisibility(selectMiniCart, driver).click();
-                elementFluentWaitVisibility(selectBasket, driver).click();
+            if (elementIsVisible(productAddBtn)) {
+                elementFluentWaitVisibility(productAddBtn).click();
+                textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, "тов.");
+                elementFluentWaitVisibility(selectMiniCart).click();
+                elementFluentWaitVisibility(selectBasket).click();
+            } else if (elementIsVisible(productPlusBtn)) {
+                elementFluentWaitVisibility(selectMiniCart).click();
+                elementFluentWaitVisibility(selectBasket).click();
             }
         } catch (NoSuchElementException ex) {
             ex.getMessage();
@@ -147,8 +147,8 @@ public class BasketPage extends BasePage {
         AssertCollector.assertTrue(getText(cardContainer).contains("Итого к оплате:"));
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Итого к оплате:"));
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Минимальная сумма заказа 300,00"));
-        AssertCollector.assertTrue(elementIsDisplayed(imageCard,driver));
-        elementFluentWaitVisibility(imageCard, driver).click();
+        AssertCollector.assertTrue(elementIsDisplayed(imageCard));
+        elementFluentWaitVisibility(imageCard).click();
         driver.navigate().back();
     }
 
@@ -157,9 +157,9 @@ public class BasketPage extends BasePage {
         clickElementByJS(driver, firstProductBtn);
         clickElementByJS(driver, secondProductBtn);
         moveToElementJS(driver, selectMiniCart);
-        elementIsClickable(selectMiniCart, driver).click();
+        elementIsClickable(selectMiniCart).click();
         moveToElementJS(driver, selectBasket);
-        elementIsClickable(selectBasket, driver).click();
+        elementIsClickable(selectBasket).click();
     }
 
     public void verifyAddProductToBasket() {
@@ -169,7 +169,7 @@ public class BasketPage extends BasePage {
         AssertCollector.assertTrue(getPrice(summTxt) == summ);
         increaseProductCount();
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Ну вот, уже лучше! Можно и заказ оформить."));
-        elementFluentWaitVisibility(completeOrder, driver).click();
+        elementFluentWaitVisibility(completeOrder).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("onestepcheckout/"));
     }
 
@@ -180,7 +180,7 @@ public class BasketPage extends BasePage {
     public void increaseProductCount() {
         while (getPrice(summTxt) < 300) {
             sleepWait();
-            elementFluentWaitVisibility(incBtn, driver).click();
+            elementFluentWaitVisibility(incBtn).click();
         }
     }
 
@@ -188,7 +188,7 @@ public class BasketPage extends BasePage {
         try {
             while (getPrice(summTxt) < 2000) {
                 sleepWait();
-                elementFluentWaitVisibility(incBtn, driver).click();
+                elementFluentWaitVisibility(incBtn).click();
             }
         } catch (NoSuchElementException ex) {
             ex.getMessage();
@@ -197,31 +197,31 @@ public class BasketPage extends BasePage {
 
     public void verifyDeleteProduct() {
         selectTwoProducts();
-        elementFluentWaitVisibility(removePositionBtn, driver).click();
+        elementFluentWaitVisibility(removePositionBtn).click();
         AssertCollector.assertTrue(getText(removeContainer).contains("Вы уверены, что хотите удалить товар из корзины?"));
         AssertCollector.assertTrue(getText(removeContainer).contains("Отмена"));
-        elementFluentWaitVisibility(canceledBtn, driver).click();
-        elementFluentWaitVisibility(removePositionBtn, driver).click();
-        elementFluentWaitVisibility(closeBtn, driver).click();
-        elementFluentWaitVisibility(removePositionBtn, driver).click();
-        elementFluentWaitVisibility(confirmBtn, driver).click();
-        elementFluentWaitVisibility(removePositionBtn, driver).click();
-        elementFluentWaitVisibility(confirmBtn, driver).click();
+        elementFluentWaitVisibility(canceledBtn).click();
+        elementFluentWaitVisibility(removePositionBtn).click();
+        elementFluentWaitVisibility(closeBtn).click();
+        elementFluentWaitVisibility(removePositionBtn).click();
+        elementFluentWaitVisibility(confirmBtn).click();
+        elementFluentWaitVisibility(removePositionBtn).click();
+        elementFluentWaitVisibility(confirmBtn).click();
         AssertCollector.assertTrue(getText(basketContainer).contains("Ваша корзина пуста, вы можете перейти"));
-        elementFluentWaitVisibility(mainPageLink, driver).click();
+        elementFluentWaitVisibility(mainPageLink).click();
         AssertCollector.assertTrue(getCurrentUrl().contains(BASE_URL));
     }
 
     public void verifyDeleteAllProduct() {
         selectTwoProducts();
-        elementFluentWaitVisibility(removeAll, driver).click();
-        elementFluentWaitVisibility(canceledBtn, driver).click();
-        elementFluentWaitVisibility(removeAll, driver).click();
-        elementFluentWaitVisibility(closeAllBtn, driver).click();
-        elementFluentWaitVisibility(removeAll, driver).click();
-        elementFluentWaitVisibility(confirmBtn, driver).click();
+        elementFluentWaitVisibility(removeAll).click();
+        elementFluentWaitVisibility(canceledBtn).click();
+        elementFluentWaitVisibility(removeAll).click();
+        elementFluentWaitVisibility(closeAllBtn).click();
+        elementFluentWaitVisibility(removeAll).click();
+        elementFluentWaitVisibility(confirmBtn).click();
         AssertCollector.assertTrue(getText(basketContainer).contains("Ваша корзина пуста, вы можете перейти"));
-        elementFluentWaitVisibility(mainPageLink, driver).click();
+        elementFluentWaitVisibility(mainPageLink).click();
         AssertCollector.assertTrue(getCurrentUrl().contains(BASE_URL));
     }
 
@@ -229,8 +229,8 @@ public class BasketPage extends BasePage {
         selectOneProduct();
         AssertCollector.assertTrue(getText(cardContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(cardContainer).contains("Конфеты «Томские классические», 300 г"));
-        elementFluentWaitVisibility(selectCityLink, driver).click();
-        elementFluentWaitVisibility(selectCityTylaLink, driver).click();
+        elementFluentWaitVisibility(selectCityLink).click();
+        elementFluentWaitVisibility(selectCityTylaLink).click();
         AssertCollector.assertTrue(getText(cardContainer).contains("Нет в наличии"));
         AssertCollector.assertTrue(getPrice(summTxt) == 0);
     }

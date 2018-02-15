@@ -24,7 +24,7 @@ public class CabinetTest extends BaseTest {
         data.put("email", AUTHORIZATION_EMAIL);
         data.put("password", AUTHORIZATION_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.personalDataHeader,driver));
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.personalDataHeader));
         AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
                 contains("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
@@ -34,7 +34,7 @@ public class CabinetTest extends BaseTest {
         (controlPanelPage.editPersonalDataButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
         navigateBack();
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.addressByDefaultHeader,driver));
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.addressByDefaultHeader));
         AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().
                 equals("г Кемерово, ул Варшавская, д 87, кв 12"));
@@ -52,7 +52,7 @@ public class CabinetTest extends BaseTest {
         data.put("email", PHYSICAL_PERSON_EMAIL);
         data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.controlPanelHeader,driver));
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.controlPanelHeader));
         del.textPresentDelegate("Здравствуйте, Иннокентий Макаров!");
         del.textPresentDelegate("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
     }

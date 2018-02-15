@@ -4,6 +4,7 @@ import java.sql.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+@Deprecated
 public class SQLMethods extends SQLConnect{
 
 	/**
