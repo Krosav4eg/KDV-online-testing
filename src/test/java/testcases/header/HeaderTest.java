@@ -153,5 +153,20 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37067");
         mainPage.verifySearchQueryWithInputTextWithCategory();
     }
+
+    @Test
+    public void verifyAdditionalPhoneNumbersTest() {
+        TestReporter.testTitle("Test ID = 43017");
+        del.textPresentDelegate("8 800 250 5555");
+        del.textPresentDelegate("Служба поддержки");
+        orderingGuestPage.clickOnWebElement(mainPage.firstPhoneLink);
+        AssertCollector.assertEqualsJ(mainPage.firstPhoneLink.getAttribute("href"), "tel:8 800 250 5555",
+                "references are equals");
+        del.textPresentDelegate("+7 913 817-38-90");
+        del.textPresentDelegate("По вопросам заказа в городе Томск");
+        orderingGuestPage.clickOnWebElement(mainPage.firstPhoneLink);
+        AssertCollector.assertEqualsJ(mainPage.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
+                "references are equals");
+    }
 }
 
