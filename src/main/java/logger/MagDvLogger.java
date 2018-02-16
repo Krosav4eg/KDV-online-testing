@@ -17,7 +17,7 @@ public class MagDvLogger extends Handler {
     private OutputStream output;
     private boolean doneHeader;
     private volatile Writer writer;
-    public static boolean doneFooter=true;
+    public static boolean doneFooter = true;
 
     private MagDvLogger() {
         setup();
@@ -42,7 +42,7 @@ public class MagDvLogger extends Handler {
                 writer.write(getFormatter().getHead(this));
                 doneHeader = true;
             }
-            if(!doneFooter) {
+            if (!doneFooter) {
                 writer.write("TEST");
             }
             writer.write(msg);

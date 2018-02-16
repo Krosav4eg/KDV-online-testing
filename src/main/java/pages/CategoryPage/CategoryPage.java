@@ -114,6 +114,7 @@ public class CategoryPage extends BasePage {
 
     }
 
+    //TODO bug absence signatures "Статус" "В наличии"
     public void checkBox() {
         selectCategorySideBar();
         elementFluentWaitVisibility(existBtn).click();

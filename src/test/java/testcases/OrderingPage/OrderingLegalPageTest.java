@@ -8,9 +8,7 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
-import static Core.basePage.BasePage.sleepWait;
 import static utils.Constants.*;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
 
 
 public class OrderingLegalPageTest extends BaseTest {
@@ -68,7 +66,7 @@ public class OrderingLegalPageTest extends BaseTest {
     }
 
     @Test
-    public void verifyCreateOrderWithChangingAddressTest() {
+    public void verifyCreateOrderWithChangingAddressTest() throws InterruptedException {
         TestReporter.testTitle("Test ID = 41801");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", FADEEV_EMAIL);
@@ -84,21 +82,16 @@ public class OrderingLegalPageTest extends BaseTest {
         AssertCollector.assertTrue(orderingLegalPage.addressDropDownArea.isDisplayed(),
                 "Address dropdown list is appear");
         orderingGuestPage.clickOnWebElement(orderingLegalPage.secondAddressDropDownList);
-
         String currentName = del.getValueOfAttributeByName(orderingGuestPage.firstNameTxt, "value");
         AssertCollector.assertEqualsJ(currentName, "Софья",
                 "First name is correct");
-
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.lastNameTxt, "value"),
                 "Стрелкова", "Last name is correct");
-
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.phoneTxt, "value"),
                 "+72222222222", "Phones correct");
-
         AssertCollector.assertTrue(orderingLegalPage.transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
-
         del.textPresentDelegate("Обработка, пожалуйста, подождите. Не нажимайте на обновление или кнопку" +
                 " назад иначе этот заказ не будет оформлен.");
         del.textPresentDelegate("Ваш заказ принят.");
@@ -110,16 +103,12 @@ public class OrderingLegalPageTest extends BaseTest {
         orderingGuestPage.waitText();
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
-
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
                 BASE_URL + "/", "Urls are equals");
-
         orderingGuestPage.clickOnWebElement(customerAccountPage.myAccountLink);
-
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
                 BASE_URL + "/customer/account", "Urls are equals");
         del.getUrlDelegate(BASE_URL + "/sales/order/history/");
-
         AssertCollector.assertEqualsJ(orderNumberActual, orderingLegalPage.
                         getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");

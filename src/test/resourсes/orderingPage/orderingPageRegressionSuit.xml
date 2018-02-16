@@ -7,19 +7,19 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="OrderingPageTest">
+    <test name="OrderingGuestPageTest">
         <classes>
             <class name="testcases.OrderingPage.OrderingGuestPageTest"/>
         </classes>
     </test>
 
-    <test name="OrderingPageTest">
+    <test name="OrderingLegalPageTest">
         <classes>
             <class name="testcases.OrderingPage.OrderingLegalPageTest"/>
         </classes>
     </test>
 
-    <test name="OrderingPageTest">
+    <test name="OrderingPhysicalPageTest">
         <classes>
             <class name="testcases.OrderingPage.OrderingPhysicalPageTest"/>
         </classes>
