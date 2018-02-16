@@ -112,16 +112,10 @@ public class BaseTest {
             mainPage.openMainPage();
             screen();
         }
-        driver.manage().deleteAllCookies();
-        mainPage.openMainPage();
     }
 
     @AfterMethod
     public void clearCookies(ITestResult result) {
-//        if(result.getStatus()==ITestResult.SUCCESS) {
-//            new ListenerTest().onTestSuccess(result);
-//        }
-//        System.out.println(result.getStatus());
         if(result.getStatus()==ITestResult.FAILURE) {
             new ListenerTest().onTestFailure(result);
         }
@@ -129,8 +123,9 @@ public class BaseTest {
         long tim=((millis % 60000)/1000)*1000;
         long timeS=millis -tim;
         String date = String.format("TEST TIME: %d:%d:%d", millis / 60000, (millis % 60000) / 1000,timeS);
-
         logStatus(result,date);
+        driver.quit();
+        driver=null;
     }
 
     /**
@@ -143,13 +138,6 @@ public class BaseTest {
             driver.quit();
         }
         TestReporter.removeNumberStep();
-    }
-
-    @AfterClass
-    public void closeAfterClass()
-    {
-        driver.quit();
-        driver=null;
     }
 
     /**

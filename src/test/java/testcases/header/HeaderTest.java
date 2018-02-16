@@ -7,6 +7,7 @@ import testcases.base.BaseTest;
 import utils.AssertCollector;
 import utils.TestReporter;
 
+import static Core.driverFactory.BrowserFactory.driver;
 import static utils.Constants.BASE_URL;
 import static utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static utils.Constants.PHYSICAL_PERSON_PASSWORD;
@@ -25,12 +26,12 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34282");
         mainPage.checkCompanyLogo();
     }
-
-    @Test
-    public void verifyClosingModalWindowTest() {
-        TestReporter.testTitle("Test ID - C34287");
-        mainPage.closingModalWindow();
-    }
+//
+//    @Test
+//    public void verifyClosingModalWindowTest() {
+//        TestReporter.testTitle("Test ID - C34287");
+//        mainPage.closingModalWindow();
+//    }
 
     //TODO fix it too long
     // @Test(timeOut = 60000)
@@ -167,6 +168,7 @@ public class HeaderTest extends BaseTest {
         orderingGuestPage.clickOnWebElement(mainPage.firstPhoneLink);
         AssertCollector.assertEqualsJ(mainPage.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
                 "references are equals");
+
     }
 }
 
