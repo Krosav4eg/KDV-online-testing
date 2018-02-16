@@ -303,7 +303,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
     private WebElement mailToLink;
 
-    @FindBy(xpath = "(.//*[@href='tel:8 800 250 5555'])[2]")
+    @FindBy(xpath = "//div[@class=\"event-menu\"]//*[@href='tel:8 800 250 5555']")
     public WebElement telLink;
 
     @FindBy(xpath = "(.//*[@href=\"tel:+7 913 817-38-90\"])[2]")
@@ -855,6 +855,7 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingAnswerYourQuestionsTelNumber() {
+        getUrl(BASE_URL);
         textPresent("Ответим на ваши вопросы");
         String expTelLink = "tel:8 800 250 5555";
         String actTelLink = getValueOfAttributeByName(telLink, "href");

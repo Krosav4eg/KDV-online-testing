@@ -30,7 +30,6 @@ public class CategoryGoodsTest extends BaseTest {
     @Test
     public void verifyCheckBoxIsPresent() {
         TestReporter.testTitle("Test ID - C39083");
-
         categoryPage.checkBox();
     }
 

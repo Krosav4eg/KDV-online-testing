@@ -67,12 +67,10 @@ public class FooterTest extends BaseTest {
         TestReporter.testTitle("Test ID - ");
         del.textPresentDelegate("8 800 250 5555");
         del.textPresentDelegate("Служба поддержки");
-        orderingGuestPage.clickOnWebElement(mainPage.telLink);
         AssertCollector.assertEqualsJ(mainPage.telLink.getAttribute("href"), "tel:8 800 250 5555",
                 "references are equals");
         del.textPresentDelegate("+7 913 817-38-90");
         del.textPresentDelegate("Служба доставки в городе Томск:");
-        orderingGuestPage.clickOnWebElement(mainPage.additionalTelLink);
         AssertCollector.assertEqualsJ(mainPage.additionalTelLink.getAttribute("href"), "tel:+7 913 817-38-90",
                 "references are equals");
     }

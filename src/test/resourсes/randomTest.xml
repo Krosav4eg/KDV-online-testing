@@ -9,9 +9,9 @@
 
     <test name="1">
         <classes>
-            <class name="testcases.footer.FooterTest">
+            <class name="testcases.OrderingPage.OrderingLegalPageTest">
                 <methods>
-                    <include name="verifyAdditionalPhoneLinkTest"/>
+                    <include name="verifyCreateOrderWithChangingAddressTest"/>
                 </methods>
             </class>
         </classes>
