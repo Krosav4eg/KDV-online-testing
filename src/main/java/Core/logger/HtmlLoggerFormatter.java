@@ -88,10 +88,6 @@ public class HtmlLoggerFormatter extends Formatter {
                 + "</tr>\n";
     }
 
-    public static String getFooter() {
-        return CLOSE_TABLE_CELL_TAG;
-    }
-
     /**
      * This method is called just after the handler using this formatter is closed
      *

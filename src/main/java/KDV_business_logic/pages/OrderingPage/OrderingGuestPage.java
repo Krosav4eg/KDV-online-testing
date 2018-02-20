@@ -171,10 +171,9 @@ public class OrderingGuestPage extends BasePage {
                 elementFluentWaitVisibility(selectMiniCart).click();
                 elementFluentWaitVisibility(selectBasket).click();
             }
-        new BasketPage(driver).increaseLegalPersonProductCount();
-        elementFluentWaitVisibility(orderBtn).click();
-        }
-        catch (Exception e) {
+            new BasketPage(driver).increaseLegalPersonProductCount();
+            elementFluentWaitVisibility(orderBtn).click();
+        } catch (Exception e) {
             e.getMessage();
         }
     }
@@ -189,10 +188,9 @@ public class OrderingGuestPage extends BasePage {
         sleepWait();
     }
 
-    public void waitText()
-    {
-      elementIsVisible(new PersonalCabinetPage(driver).titleField);
-      sleepWait();
+    public void waitText() {
+        elementIsVisible(new PersonalCabinetPage(driver).titleField);
+        sleepWait();
     }
 
     public void clickOnWebElement(WebElement element) {

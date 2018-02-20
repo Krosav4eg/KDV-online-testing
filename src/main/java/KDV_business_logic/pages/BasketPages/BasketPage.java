@@ -63,7 +63,7 @@ public class BasketPage extends BasePage {
     private WebElement firstPriceTxt;
 
     @FindBy(css = "#cart-form>div.cart-list__total> div > span.j_cart_total_cost > span")
-    private WebElement summTxt;
+    private WebElement sumTxt;
 
     @FindBy(css = "div.cart-list__items>div:nth-child(1)>div.cart-item__col_cart  div.cart-control__active>div.j_cart_control_inc")
     private WebElement incBtn;
@@ -163,10 +163,9 @@ public class BasketPage extends BasePage {
     }
 
     public void verifyAddProductToBasket() {
-
         selectTwoProducts();
-        Double summ = getPrice(firstPriceTxt) + getPrice(secondPriceTxt);
-        AssertCollector.assertTrue(getPrice(summTxt) == summ);
+        Double sum = getPrice(firstPriceTxt) + getPrice(secondPriceTxt);
+        AssertCollector.assertTrue(getPrice(sumTxt) == sum);
         increaseProductCount();
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Ну вот, уже лучше! Можно и заказ оформить."));
         elementFluentWaitVisibility(completeOrder).click();
@@ -178,7 +177,7 @@ public class BasketPage extends BasePage {
     }
 
     public void increaseProductCount() {
-        while (getPrice(summTxt) < 300) {
+        while (getPrice(sumTxt) < 300) {
             sleepWait();
             elementFluentWaitVisibility(incBtn).click();
         }
@@ -186,7 +185,7 @@ public class BasketPage extends BasePage {
 
     public void increaseLegalPersonProductCount() {
         try {
-            while (getPrice(summTxt) < 2000) {
+            while (getPrice(sumTxt) < 2000) {
                 sleepWait();
                 elementFluentWaitVisibility(incBtn).click();
             }
@@ -232,6 +231,6 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(selectCityLink).click();
         elementFluentWaitVisibility(selectCityTylaLink).click();
         AssertCollector.assertTrue(getText(cardContainer).contains("Нет в наличии"));
-        AssertCollector.assertTrue(getPrice(summTxt) == 0);
+        AssertCollector.assertTrue(getPrice(sumTxt) == 0);
     }
 }

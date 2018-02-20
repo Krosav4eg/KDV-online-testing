@@ -167,7 +167,6 @@ public class HeaderTest extends BaseTest {
         orderingGuestPage.clickOnWebElement(mainPage.firstPhoneLink);
         AssertCollector.assertEqualsJ(mainPage.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
                 "references are equals");
-
     }
 }
 

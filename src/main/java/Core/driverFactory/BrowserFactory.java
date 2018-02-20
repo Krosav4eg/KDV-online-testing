@@ -42,7 +42,6 @@ public class BrowserFactory implements DriverCapabilities {
     private static final String GRID = "GRID";
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-
     /**
      * There is pre-initialization of the driver and his way that is it prior to calling object
      */

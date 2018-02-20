@@ -36,7 +36,6 @@ public class CustomerAccountPage extends BasePage {
     @FindBy(css = ".top-link-myaccount")
     public WebElement myAccountLink;
 
-
     public void verifyToolTypeTextInPhysicalPersonAccount() {
         moveMouseTo(driver, baseCityLink);
         String baseCityLinkValue = getValueOfAttributeByName(baseCityLink, "title");

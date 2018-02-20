@@ -21,7 +21,7 @@ import static Core.driverFactory.BrowserFactory.*;
  * @author Sergey Potapov
  */
 public class WaitingUtility {
-    private static final int WAITING_TIMEOUT = Integer.parseInt(readXML("section","waitTime"));
+    private static final int WAITING_TIMEOUT = Integer.parseInt(readXML("section", "waitTime"));
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     private WaitingUtility() {
@@ -33,6 +33,7 @@ public class WaitingUtility {
         wait.until((ExpectedCondition<Boolean>) driver1 -> ((JavascriptExecutor) Objects.requireNonNull(driver1)).executeScript(
                 "return document.readyState").equals("complete"));
     }
+
     static class StopWatch {
 
         private long startTime = 0;
@@ -64,6 +65,7 @@ public class WaitingUtility {
             return elapsed;
         }
     }
+
     /**
      * Method for waiting for Javascript and jQuery to finish loading.
      * Execute Javascript to check if jQuery.active is 0
@@ -78,7 +80,7 @@ public class WaitingUtility {
             try {
                 return ((Long) ((JavascriptExecutor) getDriver()).executeScript("return jQuery.active") == 0);
             } catch (Exception e) {
-                  LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
+                LOGGER.log(Level.WARNING, "Exception, see message for details: %s " + e.getMessage());
                 TestReporter.fail("Exception, see message for details: %s " + e.getMessage());
                 return true;
             }
@@ -87,7 +89,7 @@ public class WaitingUtility {
         ExpectedCondition<Boolean> jsLoad = drivers -> ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
                 .toString().equals("complete");
         watch.stop();
-        LOGGER.log(Level.INFO,"Wait Until Page Load " + String.valueOf(watch.getElapsedTime()) + "ms.");
+        LOGGER.log(Level.INFO, "Wait Until Page Load " + String.valueOf(watch.getElapsedTime()) + "ms.");
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
@@ -107,6 +109,7 @@ public class WaitingUtility {
     /**
      * Method was created for helps to search for elements with certain intervals within a given period of time.
      * Web element searching every 50 MILLISECONDS for 30 seconds.
+     *
      * @param element - used to find the element
      */
     public static WebElement elementFluentWaitVisibility(WebElement element) {
@@ -139,14 +142,16 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
+
     public static boolean elementIsPresent(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT/10);
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT / 10);
         try {
             return wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
         } catch (Exception ex) {
             return false;
         }
     }
+
     public static boolean elementIsVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         try {
@@ -154,8 +159,8 @@ public class WaitingUtility {
         } catch (Exception ex) {
             return false;
         }
-
     }
+
     public static boolean elementIsSelected(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         try {
@@ -163,6 +168,5 @@ public class WaitingUtility {
         } catch (Exception ex) {
             return false;
         }
-
     }
 }

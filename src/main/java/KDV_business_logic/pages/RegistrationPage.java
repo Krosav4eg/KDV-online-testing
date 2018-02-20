@@ -38,7 +38,6 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "lastname")
     public WebElement lastName;
 
-
     @FindBy(css = "#create-user-form > div.registration-layout__content.row > div:nth-child(3)")
     private WebElement contactData;
 
@@ -435,7 +434,6 @@ public class RegistrationPage extends BasePage {
         return organizationInformation + addressDelivery + contactData + authorizationInformation;
     }
 
-
     public String selectExistEmail() {
         elementFluentWaitVisibility(forgotPasswordLink).click();
         return getCurrentUrl();
@@ -760,7 +758,6 @@ public class RegistrationPage extends BasePage {
         fillInputField(taxpayerId, "%*&^@12121");
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton).click();
-
     }
 
     public void verifyInputLessThenTenDigitsInTaxpayerIdField() {

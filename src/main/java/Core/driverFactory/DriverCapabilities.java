@@ -14,7 +14,6 @@ import java.util.Arrays;
 
  public interface DriverCapabilities {
 
-
 	 /**
 	  * PROXY you can use only if you need to connect to some proxy server
 	  */

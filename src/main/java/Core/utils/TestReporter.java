@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.lang.String.format;
 
-
 /**
  * @author Sergey Potapov
  */
@@ -53,8 +52,6 @@ public class TestReporter {
     public static void step(String step) {
         Reporter.log(format(P_TAG, getTimeStamp() + format(STEP_TAG, numberStep.get().getAndIncrement() + ":") + format(STEP_MESSAGE_TAG, step)), false);
     }
-
-
 
     /**
      * This method mark your message as a part of step log,

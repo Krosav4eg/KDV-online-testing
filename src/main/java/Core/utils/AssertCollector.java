@@ -16,7 +16,7 @@ public class AssertCollector {
 
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-    public static void assertEquals(Object actual, String message, Object expected)  {
+    public static void assertEquals(Object actual, String message, Object expected) {
         try {
             Assert.assertEquals(actual, expected);
             LOGGER.log(Level.INFO, expected.toString() + message + actual.toString());

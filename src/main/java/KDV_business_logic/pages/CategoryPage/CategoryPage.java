@@ -111,7 +111,6 @@ public class CategoryPage extends BasePage {
         AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"), "required list  is active");
         elementFluentWaitVisibility(gridBtn).click();
         AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"), "required grid  is active");
-
     }
 
     //TODO bug absence signatures "Статус" "В наличии"
