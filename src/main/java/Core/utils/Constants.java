@@ -7,6 +7,9 @@ import static Core.readDocs.ReadXMLFile.readXML;
  */
 public class Constants {
 
+
+    public static String EMAIL_SENDER="";
+    public static String PASS_EMAIL="";
     //========================Data Based==================================
     /**
      * DB for connection to TestBD
