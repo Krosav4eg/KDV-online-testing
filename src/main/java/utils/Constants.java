@@ -7,7 +7,6 @@ import static Core.readDocs.ReadXMLFile.readXML;
  */
 public class Constants {
 
-
     //========================Data Based==================================
     /**
      * DB for connection to TestBD
