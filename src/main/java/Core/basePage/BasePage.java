@@ -4,8 +4,8 @@ import Core.logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import utils.AssertCollector;
-import utils.TestReporter;
+import Core.utils.AssertCollector;
+import Core.utils.TestReporter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.fail;
-import static utils.Constants.COMMA_REGEX;
-import static utils.Constants.RGBA_TO_RGB_REGEX;
-import static utils.WaitingUtility.elementFluentWaitVisibility;
+import static Core.utils.Constants.COMMA_REGEX;
+import static Core.utils.Constants.RGBA_TO_RGB_REGEX;
+import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 
 
 /**

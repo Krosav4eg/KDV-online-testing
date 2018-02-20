@@ -4,13 +4,13 @@ import Core.logger.MagDvLogger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-import testcases.base.BaseTest;
+import KDV_testcases.base.BaseTest;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
+import static Core.utils.Constants.ERROR_SCREENSHOT_FOLDER;
+import static Core.utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
 /**
  * @author Sergey Potapov

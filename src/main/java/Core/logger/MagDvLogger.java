@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.logging.*;
 
-import static utils.Constants.*;
+import static Core.utils.Constants.*;
 
 /**
  * @author Sergey Potapov

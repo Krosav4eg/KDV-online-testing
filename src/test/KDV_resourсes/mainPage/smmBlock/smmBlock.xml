@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Smm Block Regression Tests">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="BlockSmmTest">
+        <classes>
+            <class name="KDV_testcases.mainPage.blockSmm.BlockSmmTest"/>
+        </classes>
+    </test>
+</suite>

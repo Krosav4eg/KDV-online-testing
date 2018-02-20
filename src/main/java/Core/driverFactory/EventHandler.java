@@ -3,13 +3,13 @@ package Core.driverFactory;
 import Core.logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
-import utils.TestReporter;
+import Core.utils.TestReporter;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static utils.WaitingUtility.waitForJSandJQueryToLoad;
-import static utils.WaitingUtility.waitForPageLoad;
+import static Core.utils.WaitingUtility.waitForJSandJQueryToLoad;
+import static Core.utils.WaitingUtility.waitForPageLoad;
 
 public abstract class EventHandler implements WebDriverEventListener {
 
