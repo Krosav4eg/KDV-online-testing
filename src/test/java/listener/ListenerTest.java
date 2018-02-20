@@ -1,17 +1,16 @@
 package listener;
 
-import logger.MagDvLogger;
+import Core.logger.MagDvLogger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-import testcases.base.BaseTest;
+import KDV_testcases.base.BaseTest;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.testng.ITestResult.SUCCESS;
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
-import static utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
+import static Core.utils.Constants.ERROR_SCREENSHOT_FOLDER;
+import static Core.utils.Constants.SUCCESS_SCREENSHOT_FOLDER;
 
 /**
  * @author Sergey Potapov
@@ -22,8 +21,7 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        if(iTestResult.getStatus()==ITestResult.SUCCESS)
-        {
+        if (iTestResult.getStatus() == ITestResult.SUCCESS) {
             LOGGER.log(Level.INFO, iTestResult.getName() + "This test is success");
             BaseTest.capture(iTestResult.getName(), SUCCESS_SCREENSHOT_FOLDER);
         }
@@ -42,8 +40,8 @@ public class ListenerTest extends TestListenerAdapter implements ITestListener {
             LOGGER.log(Level.WARNING, ">>>>>>> Reason: Unable to locate current element by using selector:<<<<<< "
                     + messageErr.replace("Expected condition failed: waiting for visibility of Proxy element for: DefaultElementLocator", ""));
         }
-	    BaseTest.capture(iTestResult.getName(), ERROR_SCREENSHOT_FOLDER);
-	    LOGGER.log(Level.WARNING, "<a href="+ERROR_SCREENSHOT_FOLDER+iTestResult.getName()+".png> Error Screen:"+iTestResult.getName() +"</a>");
+        BaseTest.capture(iTestResult.getName(), ERROR_SCREENSHOT_FOLDER);
+        LOGGER.log(Level.WARNING, "<a href=" + ERROR_SCREENSHOT_FOLDER + iTestResult.getName() + ".png> Error Screen:" + iTestResult.getName() + "</a>");
     }
 }
 

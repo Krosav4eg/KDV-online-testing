@@ -4,7 +4,7 @@ Project contains autotests for verifying base application functional.
 
 
 ### Framework contain:
-============================short description===================================
+============================**short description**===================================
 
 Selenium WebDriver version 3.0.1 - http://www.seleniumhq.org/download/
 TestNG version 6.8 - http://testng.org/doc/download.html
@@ -39,4 +39,39 @@ In case simple test running chose any needed test case in resource folder  > sel
 
 ### Report running:
 After running tests we can launch reports from directory `./test-output/html/index.html`
-Just click on `index.html` file right button and option Run
+Just click on `index.html` file right button and option Run.
+
+### Logger running:
+After running tests we can launch logger from directory `./test-output/Logging.html`
+Just click on `Logging.html` file right button and option Run.
+
+============================**framework structure**===================================
+
+### package main.java.Core
+This package contain base framework logic as: 
+basePage(include custom commons methods)
+driverFactory(helps select needed browser and provide driver capabilities)
+logger(logging mechanism and html structure)
+readDocs(contain xml parser for test data)
+utils(contain assert collector, constants, test reporter steps and waiting methods)
+
+### package main.java.KDV_business_logic.
+The package contain main application pages and realizes page object pattern.
+
+### package main.java.resources.
+The package contain browser drivers and log4j properties
+
+### package main.test.KDV_testcases.
+The package contain test cases for KDV project
+
+### package main.test.KDV_resources.
+For running KDV xml tests 
+
+### All tests data
+The file constantsData.xml contain all test data
+
+
+
+
+
+
