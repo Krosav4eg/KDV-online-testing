@@ -1,4 +1,4 @@
-package logger;
+package Core.logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+
 import static Core.driverFactory.BrowserFactory.testName;
 
 /**
@@ -16,22 +17,22 @@ public class HtmlLoggerFormatter extends Formatter {
     private static String OPEN_TABLE_TAG = "\t<td>";
     private static final String CLOSE_TABLE_ROW = "</tr>\n";
 
-
     /**
      * This method is called for every log record
      *
      * @param rec - logger record instance
      * @return formatted log message string
      */
+
     @Override
     public String format(LogRecord rec) {
         StringBuilder buf = new StringBuilder(1000);
         buf.append(CLOSE_TABLE_ROW);
         if (rec.getLevel().intValue() >= Level.WARNING.intValue()) {
-            OPEN_TABLE_TAG="\t<td style=\"color:red\">";
+            OPEN_TABLE_TAG = "\t<td style=\"color:red\">";
         }
-        if(rec.getLevel().intValue() == Level.FINE.intValue()) {
-            OPEN_TABLE_TAG="\t<td style=\"color:green\">";
+        if (rec.getLevel().intValue() == Level.FINE.intValue()) {
+            OPEN_TABLE_TAG = "\t<td style=\"color:green\">";
         }
         buf.append(OPEN_TABLE_TAG);
         buf.append(rec.getLevel());
@@ -45,9 +46,10 @@ public class HtmlLoggerFormatter extends Formatter {
         buf.append(OPEN_TABLE_TAG);
         buf.append(formatMessage(rec));
         buf.append(CLOSE_TABLE_CELL_TAG);
-        OPEN_TABLE_TAG="\t<td>";
+        OPEN_TABLE_TAG = "\t<td>";
         return buf.toString();
     }
+
     /**
      * Calculate date-time of logging
      *
@@ -59,6 +61,7 @@ public class HtmlLoggerFormatter extends Formatter {
         Date resultDate = new Date(milliseconds);
         return dateFormat.format(resultDate);
     }
+
     /**
      * This method is called just after the handler using this formatter is created
      *
@@ -89,17 +92,14 @@ public class HtmlLoggerFormatter extends Formatter {
         return CLOSE_TABLE_CELL_TAG;
     }
 
-
-
-   /**
-    * This method is called just after the handler using this formatter is closed
-    *
-    * @param h - handler
-    * @return - html table
-    */
+    /**
+     * This method is called just after the handler using this formatter is closed
+     *
+     * @param h - handler
+     * @return - html table
+     */
     @Override
     public String getTail(Handler h) {
         return "</table>\n</body>\n</html>";
     }
-
 }

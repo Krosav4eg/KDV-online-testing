@@ -1,7 +1,7 @@
 package pages;
 
 import Core.basePage.BasePage;
-import logger.MagDvLogger;
+import Core.logger.MagDvLogger;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

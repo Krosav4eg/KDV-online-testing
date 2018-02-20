@@ -1,18 +1,13 @@
 package Core.driverFactory;
 
-import logger.MagDvLogger;
-import org.apache.commons.io.FileUtils;
+import Core.logger.MagDvLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import utils.TestReporter;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static Core.driverFactory.BrowserFactory.testName;
-import static utils.Constants.ERROR_SCREENSHOT_FOLDER;
 import static utils.WaitingUtility.waitForJSandJQueryToLoad;
 import static utils.WaitingUtility.waitForPageLoad;
 

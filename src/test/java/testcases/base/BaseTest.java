@@ -2,8 +2,8 @@ package testcases.base;
 
 import Core.driverFactory.BrowserFactory;
 import listener.ListenerTest;
-import logger.LevelCustom;
-import logger.MagDvLogger;
+import Core.logger.LevelCustom;
+import Core.logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

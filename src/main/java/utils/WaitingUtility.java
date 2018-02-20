@@ -1,6 +1,6 @@
 package utils;
 
-import logger.MagDvLogger;
+import Core.logger.MagDvLogger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

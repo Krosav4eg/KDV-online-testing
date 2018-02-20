@@ -1,13 +1,9 @@
 package utils;
 
-import com.mysql.cj.core.exceptions.AssertionFailedException;
-import logger.MagDvLogger;
+import Core.logger.MagDvLogger;
 import org.testng.Assert;
-import org.testng.TestException;
 import org.testng.asserts.SoftAssert;
 
-import javax.security.auth.login.FailedLoginException;
-import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
