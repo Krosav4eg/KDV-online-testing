@@ -4,7 +4,7 @@ Project contains autotests for verifying base application functional.
 
 
 ### Framework contain:
-============================short description===================================
+============================**short description**===================================
 
 Selenium WebDriver version 3.0.1 - http://www.seleniumhq.org/download/
 TestNG version 6.8 - http://testng.org/doc/download.html
@@ -45,7 +45,7 @@ Just click on `index.html` file right button and option Run.
 After running tests we can launch logger from directory `./test-output/Logging.html`
 Just click on `Logging.html` file right button and option Run.
 
-============================framework structure===================================
+============================**framework structure**===================================
 
 ### package main.java.Core
 This package contain base framework logic as: 
