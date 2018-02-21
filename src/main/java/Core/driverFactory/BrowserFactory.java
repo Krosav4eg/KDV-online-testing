@@ -1,6 +1,6 @@
 package Core.driverFactory;
 
-import logger.MagDvLogger;
+import Core.logger.MagDvLogger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 import static Core.driverFactory.DriverCapabilities.chromeCapabilities;
 import static Core.driverFactory.DriverCapabilities.firefoxCapabilities;
-import static utils.Constants.*;
+import static Core.utils.Constants.*;
 
 
 /**
@@ -23,6 +23,7 @@ import static utils.Constants.*;
 public class BrowserFactory implements DriverCapabilities {
     private static volatile BrowserFactory instance;
     public static WebDriver driver;
+
     public static BrowserFactory getInstance() {
         BrowserFactory localInstance = instance;
         if (localInstance == null) {
@@ -41,7 +42,6 @@ public class BrowserFactory implements DriverCapabilities {
     private static final String GRID = "GRID";
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-
     /**
      * There is pre-initialization of the driver and his way that is it prior to calling object
      */
@@ -53,8 +53,8 @@ public class BrowserFactory implements DriverCapabilities {
     public synchronized WebDriver setDriver() {
         String osName = System.getProperty("os.name").toLowerCase();
         String swtFileName =
-        osName.contains("win") ? "win" : osName.contains("mac") ? "macosx" :
-        osName.contains("linux") || osName.contains("nix") ? "linux_gtk" :null;
+                osName.contains("win") ? "win" : osName.contains("mac") ? "macosx" :
+                        osName.contains("linux") || osName.contains("nix") ? "linux_gtk" : null;
         String driverName = BASE_DRIVER;
         WebDriver driver = null;
         if (driverName != null) {

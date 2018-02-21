@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Ordering Page regression tests">
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+        <listener class-name="listener.ListenerTest"/>
+    </listeners>
+
+    <test name="OrderingGuestPageTest">
+        <classes>
+            <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>
+        </classes>
+    </test>
+
+    <test name="OrderingLegalPageTest">
+        <classes>
+            <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
+        </classes>
+    </test>
+
+    <test name="OrderingPhysicalPageTest">
+        <classes>
+            <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>
+        </classes>
+    </test>
+</suite>
