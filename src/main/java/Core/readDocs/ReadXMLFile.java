@@ -14,7 +14,7 @@ public class ReadXMLFile {
 
     public static String readXML(String section, String tagName) {
         try {
-            File fXmlFile = new File(System.getProperty("user.dir") + "/constantsData.xml");
+            File fXmlFile = new File(System.getProperty("user.dir") + "/src/main/resources/constantsData.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
