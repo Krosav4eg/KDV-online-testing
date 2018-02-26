@@ -57,7 +57,8 @@ public class ContactDataTest extends BaseTest {
                 contains("Значение \"Имя\" не должно превышать 45 символов."));
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+        String text=registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(text.
                 contains("Значение \"Имя\" не должно превышать 45 символов."));
         AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
