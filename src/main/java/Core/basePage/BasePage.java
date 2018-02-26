@@ -116,9 +116,17 @@ public class BasePage {
     //========================CUSTOM METHODS=============================================
 
     protected static String getText(WebElement element) {
-        LOGGER.log(Level.INFO, " Get text of element ");
-        TestReporter.step(" Get text of element ");
-        return element.getText();
+        String test="";
+        try {
+
+            LOGGER.log(Level.INFO, " Get text of element ");
+            TestReporter.step(" Get text of element ");
+            test=element.getText();
+        }catch (Exception ex)
+        {
+
+        }
+        return test;
     }
 
     protected Double parseStringToDouble(String text) {

@@ -20,11 +20,14 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(css = ".top-link-myaccount")
-    public WebElement myAccountLink;
+    @FindBy(css = ".registration-layout__content")
+    public WebElement allContainerText;
 
     @FindBy(xpath = "//a[@rel='general']")
     private WebElement individualButton;
+
+    @FindBy(id = "customer_type_legal")
+    private WebElement legalBtn;
 
     @FindBy(xpath = "//a[@rel='legal']")
     private WebElement organizationButton;
@@ -421,17 +424,19 @@ public class RegistrationPage extends BasePage {
     public String verifyAuthorizationFields(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformation(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
+       verifyAuthorizationInformation(data);
+        organizationInformation(data);
+         addressDelivery(data);
+        contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         elementIsClickable(agreeLegal).click();
         AssertCollector.assertTrue(agreeLegal.isEnabled());
         elementIsClickable(sendButton).click();
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
+        sleepWait();
+        System.out.println(getText(layout));
+        return getText(layout);
     }
 
     public String selectExistEmail() {
@@ -443,13 +448,13 @@ public class RegistrationPage extends BasePage {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
         elementFluentWaitVisibility(getIndividualButton).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformationIndividual(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
+        verifyAuthorizationInformation(data);
+         organizationInformationIndividual(data);
+       addressDelivery(data);
+        contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(sendButton).click();
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
+        return  getText(layout);
     }
 
     public String verifyAuthorizationFieldsIndividual(JSONObject data) {
@@ -466,7 +471,8 @@ public class RegistrationPage extends BasePage {
         elementIsClickable(agreeLegal).click();
         AssertCollector.assertTrue(agreeLegal.isEnabled());
         elementIsClickable(sendButton).click();
-        return organizationInformation + addressDelivery + contactData + authorizationInformation;
+        System.out.println(getText(layout));
+        return  getText(layout);
     }
 
     //registration
@@ -710,7 +716,8 @@ public class RegistrationPage extends BasePage {
     public void verifyLegalEntitySelected() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton).click();
-        AssertCollector.assertTrue(organizationButton.isSelected());
+        System.out.println(legalBtn.isSelected());
+        AssertCollector.assertTrue(legalBtn.isSelected());
     }
 
     public void verifyOrganizationFullNameFieldPresence() {

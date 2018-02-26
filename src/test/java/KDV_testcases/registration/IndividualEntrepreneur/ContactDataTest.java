@@ -54,13 +54,11 @@ public class ContactDataTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+                contains("Значение \"Имя\" не должно превышать 45 символов."));
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+                contains("Значение \"Имя\" не должно превышать 45 символов."));
         AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
         data = registrationPage.mainInfoRegistration();
@@ -82,9 +80,9 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40068");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", RandomStringUtils.randomAlphanumeric(10));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения"));
-        AssertCollector.assertEquals(phoneInEditPage.getAttribute("value"),
-                " Value of email field is equal ", phoneInEditPage.getAttribute("value"));
+        String text=registrationPage.verifyAuthorizationFields(data);
+        System.out.println(text);
+        AssertCollector.assertTrue(text.
+                contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }
 }
