@@ -26,7 +26,8 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C39081");
         categoryPage.commodityGridList();
     }
-//TODO bug absence signatures "Статус" "В наличии"
+
+    //TODO bug absence signatures "Статус" "В наличии"
     @Test
     public void verifyCheckBoxIsPresent() {
         TestReporter.testTitle("Test ID - C39083");
@@ -106,7 +107,6 @@ public class CategoryGoodsTest extends BaseTest {
         cardPage.validCardProductVerifyComposition();
     }
 
-    //BUGS
     @Test
     public void verifyProductCardNotValid() {
         TestReporter.testTitle("Test ID - C40269");
