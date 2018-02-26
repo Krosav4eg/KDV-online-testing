@@ -9,10 +9,10 @@
 
     <test name="1">
         <classes>
-            <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest">
-                <methods>
-                    <include name="verifyCreateOrderWithChangingAddressTest"/>
-                </methods>
+            <class name="KDV_testcases.header.HeaderTest">
+                <!--<methods>-->
+                    <!--<include name="verifyAdditionalPhoneNumbersTest"/>-->
+                <!--</methods>-->
             </class>
         </classes>
     </test>
