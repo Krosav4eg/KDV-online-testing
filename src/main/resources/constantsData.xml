@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <constant>
     <notification id="0">
-        <emailSend>cashuptestmail@gmail.com</emailSend>
-        <emailPassword>testpass</emailPassword>
+        <emailSend>magdevkdv@gmail.com</emailSend>
+        <emailPassword>passwordTest</emailPassword>
         <emailList>russheyko@gmail.com</emailList>
     </notification>
     <section id="1">
