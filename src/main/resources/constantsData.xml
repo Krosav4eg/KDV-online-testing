@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <constant>
+    <notification id="0">
+        <emailSend>cashuptestmail@gmail.com</emailSend>
+        <emailPassword>testpass</emailPassword>
+        <emailList>russheyko@gmail.com</emailList>
+    </notification>
     <section id="1">
         <unixPath></unixPath>
         <driver>Chrome</driver>

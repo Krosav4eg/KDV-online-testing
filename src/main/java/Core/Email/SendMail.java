@@ -16,7 +16,6 @@ public class SendMail {
 
 
     public void sendMail(String Body) {
-        String baseEmail =readXML("baseData","mailSend");
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -24,17 +23,18 @@ public class SendMail {
                 "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
+        System.out.println(EMAIL_SENDER+"  "+PASS_EMAIL);
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(EMAIL_SENDER, PASS_EMAIL);
+                        return new PasswordAuthentication("TestWebDriver74@gmail.com", "TestSelenium2016");
                     }
                 });
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(baseEmail));
+            message.setFrom(new InternetAddress(EMAIL_SENDER));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(readXML("baseData","mailList")));
+                    InternetAddress.parse(readXML("notification","emailList")));
             message.setSubject("TEST RESULT ");
             message.setText(Body,"UTF-8","html");
             SimpleDateFormat format = new SimpleDateFormat("HH");
