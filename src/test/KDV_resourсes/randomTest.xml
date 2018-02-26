@@ -9,11 +9,11 @@
 
     <test name="1">
         <classes>
-            <class name="KDV_testcases.header.HeaderTest">
-                <!--<methods>-->
-                    <!--<include name="verifyAdditionalPhoneNumbersTest"/>-->
-                <!--</methods>-->
+            <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest">
+                <methods>
+                    <include name="verifyCourierDeliveryTest"/>
+                </methods>
             </class>
         </classes>
     </test>
-</suite>
+   </suite>
