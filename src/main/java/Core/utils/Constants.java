@@ -8,15 +8,12 @@ import static Core.readDocs.ReadXMLFile.readXML;
 public class Constants {
 
 
-    public static String EMAIL_SENDER="";
-    public static String PASS_EMAIL="";
+    public static String EMAIL_SENDER=readXML("notification","emailSend");
+    public static String PASS_EMAIL=readXML("notification","emailPassword");
     //========================Data Based==================================
     /**
      * DB for connection to TestBD
      */
-    protected final String serverName = "";//"jdbc:postgresql://localhost:5432/TestLog";
-    protected final String userName = "";//"postgres";
-    protected final String passwordName = "";//"admin";
     //========================BASE URL==================================
     public static String BASE_DRIVER = readXML("section", "driver");
     //========================BASE URL==================================
