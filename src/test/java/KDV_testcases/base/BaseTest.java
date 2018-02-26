@@ -29,17 +29,11 @@ import Core.utils.TestReporter;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Core.driverFactory.BrowserFactory.*;
 import static Core.logger.NotificationLogger.TestStatus;
-import static Core.logger.NotificationLogger.mailBody;
 import static Core.utils.Constants.*;
 /**
  * @author Sergey Potapov
@@ -125,7 +119,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void clearCookies(ITestResult result) {
+    public void stopTest(ITestResult result) {
         if(result.getStatus()==ITestResult.FAILURE) {
 	        new ListenerTest().onTestFailure(result);
         }

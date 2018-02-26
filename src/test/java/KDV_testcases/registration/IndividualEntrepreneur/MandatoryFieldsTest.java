@@ -132,7 +132,7 @@ public class MandatoryFieldsTest extends BaseTest {
 		JSONObject verifyData=registrationPage.mainInfoRegistration();
 		verifyData.put("taxId","1234567891");
 		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-				contains("Это поле обязательно для заполнения."));
+				contains("Значение \"ИНН\" должно содержать 12 символов."));
 	}
 
 	@Test
