@@ -9,6 +9,8 @@
     <test name="AuthorizationTest">
         <classes >
             <class name="KDV_testcases.authorization.AuthorizationTest"/>
+            <class name="KDV_testcases.authorization.PasswordRecoveryTest"/>
+            <class name="KDV_testcases.authorization.SiteLoginTest"/>
         </classes>
     </test>
     <test name="HeaderTest">

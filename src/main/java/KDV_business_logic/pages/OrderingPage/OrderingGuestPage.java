@@ -190,7 +190,7 @@ public class OrderingGuestPage extends BasePage {
 
     public void waitText() {
         elementIsVisible(new PersonalCabinetPage(driver).titleField);
-        sleepWait();
+        sleepWait();     sleepWait();     sleepWait();
     }
 
     public void clickOnWebElement(WebElement element) {

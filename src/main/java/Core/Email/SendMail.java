@@ -27,7 +27,7 @@ public class SendMail {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("TestWebDriver74@gmail.com", "TestSelenium2016");
+                        return new PasswordAuthentication(EMAIL_SENDER, PASS_EMAIL);
                     }
                 });
         try {

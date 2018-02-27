@@ -102,31 +102,18 @@ public class OrderingGuestPageTest extends BaseTest {
         del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
     }
 
-    //maximum length 256 symbols validation problem in delivery comment field
-    @Test
-    public void verifySelfDeliveryTest() {
-        TestReporter.testTitle("Test ID - C41070");
-        JSONObject data = orderingGuestPage.data();
-        orderingGuestPage.createOrder(data);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.selfDeliveryRadioButton);
-        AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
-        AssertCollector.verifyCondition(orderingGuestPage.deliveryHeader.getText().contains("Доставка"));
-        del.scrollByCoordinate();
-        AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getText().
-                contains("г Томск, ул Сибирская, д 10"));
-    }
-
+    //validation fail. address input value has more than 255 symbols
     @Test
     public void verifyCourierDeliveryTest() {
         TestReporter.testTitle("Test ID - C41072,41070");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         AssertCollector.verifyCondition(orderingGuestPage.courierDeliveryRadioButton.isEnabled());
-        AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getAttribute("value").
-                contains("г Томск, ул Сибирская, д 10"));
+        AssertCollector.assertTrue(orderingGuestPage.deliveryAddressField.getAttribute("placeholder").
+                contains("Томск, пр. Мира 20, оф.4"));
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "Томск, пр. Мира 20, оф.4");
-        data.put("comment", RandomStringUtils.randomAlphabetic(255));
+        data.put("comment", RandomStringUtils.randomAlphabetic(256));
         orderingGuestPage.deliveryFormInfo(data);
         AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
@@ -164,8 +151,8 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41074,4075");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
-        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("firstName", RandomStringUtils.randomAlphabetic(46));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(46));
         orderingGuestPage.clickOnWebElement(orderingGuestPage.payBankCardRadioButton);
         AssertCollector.verifyCondition(orderingGuestPage.payBankCardRadioButton.isEnabled());
         del.scrollByCoordinate();

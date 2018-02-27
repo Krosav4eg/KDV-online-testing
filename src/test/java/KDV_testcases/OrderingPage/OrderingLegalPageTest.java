@@ -1,6 +1,7 @@
 package KDV_testcases.OrderingPage;
 
 import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -100,7 +101,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-        orderingGuestPage.waitText();
+        WaitingUtility.elementFluentWaitVisibility(orderingLegalPage.orderLink);
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),

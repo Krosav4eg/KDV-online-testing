@@ -73,7 +73,6 @@ public class CardPage extends BasePage {
     private WebElement benefitPayment;
 
 
-
     public void searchAndSelect() {
         driver.navigate().refresh();
         driver.navigate().to(BASE_URL + "/konfety.html");
@@ -98,8 +97,7 @@ public class CardPage extends BasePage {
         driver.navigate().refresh();
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"));
         elementFluentWaitVisibility(categoryDecBtn).click();
-        driver.navigate().refresh();
-//        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn));
+        AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn));
     }
 
     public void addProductNotValidFromCardMainPage() {
@@ -107,15 +105,14 @@ public class CardPage extends BasePage {
         moveMouseTo(driver, aboutLink);
         elementFluentWaitVisibility(categoryAddBtn).click();
         sleepWait();
-        driver.navigate().refresh();
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("1"));
         addTxtToInput("-5");
+        sleepWait();
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("51"));
         addTxtToInput("99999");
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
         addTxtToInput("@!$^*&$#@*()");
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
-        elementFluentWaitVisibility(categoryInputTxt).clear();
     }
 
     private void addTxtToInput(String txt) {
@@ -129,7 +126,6 @@ public class CardPage extends BasePage {
         elementFluentWaitVisibility(categoryInputTxt).sendKeys(txt);
         moveMouseToAndClick(driver, mainTxt, 0, 0);
         sleepWait();
-        driver.navigate().refresh();
     }
 
     public void validCardProductVerify() {
@@ -198,6 +194,7 @@ public class CardPage extends BasePage {
         elementFluentWaitVisibility(productCardContainer).click();
         AssertCollector.assertTrue(getText(benefitDelivery).contains("Ваши покупки из интернет-магазина KDV мы доставим" +
                 " бесплатно. Доставка в день заказа, в удобное для вас время, до двери квартиры/офиса."));
+
         elementFluentWaitVisibility(benefitDelivery).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("delivery"));
         driver.navigate().back();
