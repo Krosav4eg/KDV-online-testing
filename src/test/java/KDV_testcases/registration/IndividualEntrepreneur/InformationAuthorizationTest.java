@@ -27,7 +27,7 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+                contains("Учётная запись с таким адресом электронной почты уже существует"));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData.put("confirmPassword", "test234   ");
         verifyData.put("pass", "testsea");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Это поле обязательно для заполнения."));
+                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
     }
 
     @Test
@@ -108,20 +108,16 @@ public class InformationAuthorizationTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+                contains("Учётная запись с таким адресом электронной почты уже существует."));
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
-        data.put("password", RandomStringUtils.randomAlphanumeric(7));
+        data.put("password","");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.password.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
-        data = registrationPage.mainInfoRegistration();
-        data.put("confirmPassword", RandomStringUtils.randomAlphanumeric(7));
+          data = registrationPage.mainInfoRegistration();
+        data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.confirmPassword.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
-    }
+          }
 }

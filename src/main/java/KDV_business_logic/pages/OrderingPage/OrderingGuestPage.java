@@ -167,7 +167,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(orderBtn).click();
         try {
             elementIsPresent(messageOrderError);
-            if (elementIsDisplayed(messageOrderError)) {
+            if (elementIsDisplayedTime(messageOrderError)) {
                 elementFluentWaitVisibility(selectMiniCart).click();
                 elementFluentWaitVisibility(selectBasket).click();
             }

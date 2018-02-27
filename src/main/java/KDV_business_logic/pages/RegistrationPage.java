@@ -471,7 +471,6 @@ public class RegistrationPage extends BasePage {
         elementIsClickable(agreeLegal).click();
         AssertCollector.assertTrue(agreeLegal.isEnabled());
         elementIsClickable(sendButton).click();
-        System.out.println(getText(layout));
         return  getText(layout);
     }
 
