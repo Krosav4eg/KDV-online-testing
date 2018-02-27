@@ -94,7 +94,6 @@ public class ModalWindow extends BasePage {
         }
         clickElementByJS(driver, categoryInputTxt);
         elementFluentWaitVisibility(categoryInputTxt).sendKeys(text);
-        sleepWait();
         return getValueOfAttributeByName(categoryInputTxt, "value");
     }
 }
