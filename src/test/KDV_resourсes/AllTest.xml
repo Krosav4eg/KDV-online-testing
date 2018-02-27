@@ -7,7 +7,7 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
     <test name="AuthorizationTest">
-        <classes >
+        <classes>
             <class name="KDV_testcases.authorization.AuthorizationTest"/>
             <class name="KDV_testcases.authorization.PasswordRecoveryTest"/>
             <class name="KDV_testcases.authorization.SiteLoginTest"/>
@@ -101,15 +101,7 @@
     <test name="Ordering OrderingPageTest OrderingLegalPageTest">
         <classes>
             <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
-        </classes>
-    </test>
-    <test name="Ordering OrderingPageTest OrderingGuestPageTest">
-        <classes>
             <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>
-        </classes>
-    </test>
-    <test name="Ordering OrderingPageTest OrderingPhysicalPageTest">
-        <classes>
             <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>
         </classes>
     </test>
@@ -117,11 +109,8 @@
     <test name="IndividualEntrepreneur ">
         <classes>
             <class name="KDV_testcases.registration.IndividualEntrepreneur.ContactDataTest"/>
-
             <class name="KDV_testcases.registration.IndividualEntrepreneur.InformationAuthorizationTest"/>
-
             <class name="KDV_testcases.registration.IndividualEntrepreneur.MandatoryFieldsTest"/>
-
             <class name="KDV_testcases.registration.IndividualEntrepreneur.OrganizationInfoTest"/>
         </classes>
     </test>
@@ -129,11 +118,8 @@
     <test name="LegalPerson OrganizationInfoTest">
         <classes>
             <class name="KDV_testcases.registration.LegalPerson.OrganizationInfoTest"/>
-
             <class name="KDV_testcases.registration.LegalPerson.ContactDataTest"/>
-
             <class name="KDV_testcases.registration.LegalPerson.DeliveryAddressTest"/>
-
             <class name="KDV_testcases.registration.LegalPerson.RegistrationTest"/>
         </classes>
     </test>
