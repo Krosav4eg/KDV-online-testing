@@ -94,7 +94,7 @@ public class AccountDataTest extends BaseTest {
         del.scrollToNecessaryElementDelegate(accountDataPage.saveButtonInEditPage);
         accountDataPage.saveButtonInEditPage.click();
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_PAGE_URL, "Urls are equals");
-        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
+        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains("+77711111111"));
     }
 
     @Test
