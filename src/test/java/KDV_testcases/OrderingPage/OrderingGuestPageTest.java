@@ -183,8 +183,8 @@ public class OrderingGuestPageTest extends BaseTest {
     public void verifyEmptyEmailFieldTest() {
         TestReporter.testTitle("Test ID - C41080");
         JSONObject data = orderingGuestPage.data();
-        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
-        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("firstName", RandomStringUtils.randomAlphabetic(46));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(46));
         data.put("email", "");
         orderingGuestPage.createOrder(data);
         del.scrollByCoordinate();
@@ -234,8 +234,8 @@ public class OrderingGuestPageTest extends BaseTest {
     public void verifyEmptyPhoneAndAddressFieldsTest() {
         TestReporter.testTitle("Test ID - C41081-41082");
         JSONObject data = orderingGuestPage.data();
-        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
-        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("firstName", RandomStringUtils.randomAlphabetic(46));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(46));
         data.put("email", "test@test.ru");
         data.put("phone", "");
         orderingGuestPage.createOrder(data);
