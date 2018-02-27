@@ -107,7 +107,7 @@ public class AuthorizationInfoTest extends BaseTest {
         data.put("password", "test");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Пожалуйста, введите не менее 6 символов без"));
         data.put("password", " test ");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Пожалуйста, введите не менее 6 символов без"));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class AuthorizationInfoTest extends BaseTest {
         data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
         data.put("confirmPassword", "test");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
 
     }
 
@@ -176,7 +176,8 @@ public class AuthorizationInfoTest extends BaseTest {
         AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Учётная запись с таким адресом электронной почты уже существует. "));
         data = registrationPage.mainInfoRegistration();
         data.put("taxId", "1234567891");
-        AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Значение \"ИНН\" уже используется другим пользователем. "));
+        System.out.println(del2.getTextDelegate(registrationPage.getAlertTet));
+        AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).contains("Учётная запись с таким адресом электронной почты уже существует."));
     }
 
     @Test
@@ -193,7 +194,8 @@ public class AuthorizationInfoTest extends BaseTest {
     public void verifyFields() {
         TestReporter.testTitle("Test ID = 37542");
         JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertTrue(!registrationPage.verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+        registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(del2.getCurrentUrlDelegate().contains("login/"));
     }
 
     @Test
