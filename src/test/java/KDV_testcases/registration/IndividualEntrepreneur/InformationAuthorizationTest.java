@@ -24,10 +24,6 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData.put("email", "a..shaulo@andersenlab.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-        verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("email", "ulo@andersenlab.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
     }
 
     @Test
@@ -84,6 +80,7 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("pass", "131");
+        System.out.println(registrationPage.verifyAuthorizationFieldsIndividual(verifyData));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
         verifyData = registrationPage.mainInfoRegistration();
@@ -98,6 +95,7 @@ public class InformationAuthorizationTest extends BaseTest {
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("confirmPassword", "test234   ");
         verifyData.put("pass", "testsea");
+        System.out.println(registrationPage.verifyAuthorizationFieldsIndividual(verifyData));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Это поле обязательно для заполнения."));
     }
@@ -107,6 +105,7 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
+        System.out.println(registrationPage.verifyAuthorizationFields(data));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
