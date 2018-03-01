@@ -24,6 +24,10 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData.put("email", "a..shaulo@andersenlab.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+        verifyData = registrationPage.mainInfoRegistration();
+        verifyData.put("email", "ulo@andersenlab.com");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+                contains("Учётная запись с таким адресом электронной почты уже существует"));
     }
 
     @Test
@@ -80,7 +84,6 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("pass", "131");
-        System.out.println(registrationPage.verifyAuthorizationFieldsIndividual(verifyData));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
         verifyData = registrationPage.mainInfoRegistration();
@@ -95,9 +98,8 @@ public class InformationAuthorizationTest extends BaseTest {
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("confirmPassword", "test234   ");
         verifyData.put("pass", "testsea");
-        System.out.println(registrationPage.verifyAuthorizationFieldsIndividual(verifyData));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Это поле обязательно для заполнения."));
+                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
     }
 
     @Test
@@ -105,22 +107,17 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
-        System.out.println(registrationPage.verifyAuthorizationFields(data));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+                contains("Учётная запись с таким адресом электронной почты уже существует."));
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
-        data.put("password", RandomStringUtils.randomAlphanumeric(7));
+        data.put("password","");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.password.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
-        data = registrationPage.mainInfoRegistration();
-        data.put("confirmPassword", RandomStringUtils.randomAlphanumeric(7));
+          data = registrationPage.mainInfoRegistration();
+        data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-        AssertCollector.assertEquals(registrationPage.confirmPassword.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(7).length());
-    }
+          }
 }

@@ -83,9 +83,6 @@ public class OrderingLegalPageTest extends BaseTest {
         AssertCollector.assertTrue(orderingLegalPage.addressDropDownArea.isDisplayed(),
                 "Address dropdown list is appear");
         orderingGuestPage.clickOnWebElement(orderingLegalPage.secondAddressDropDownList);
-        String currentName = del.getValueOfAttributeByName(orderingGuestPage.firstNameTxt, "value");
-        AssertCollector.assertEqualsJ(currentName, "Софья",
-                "First name is correct");
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.lastNameTxt, "value"),
                 "Стрелкова", "Last name is correct");
         AssertCollector.assertEqualsJ(del.getValueOfAttributeByName(orderingGuestPage.phoneTxt, "value"),

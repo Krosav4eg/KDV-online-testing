@@ -121,7 +121,7 @@ public class BasketPage extends BasePage {
         textIsPresent(searchHeaderTxt, "Результаты поиска для «Кальмар подкопчённый»");
         moveToElementJS(driver, tittleProductTxt);
         try {
-            if (elementIsVisible(productAddBtn)) {
+            if (elementIsVisibleTime(productAddBtn)) {
                 elementFluentWaitVisibility(productAddBtn).click();
                 textIsPresent(new OrderingPhysicalPage(driver).basketSummaryTxt, "тов.");
                 elementFluentWaitVisibility(selectMiniCart).click();
