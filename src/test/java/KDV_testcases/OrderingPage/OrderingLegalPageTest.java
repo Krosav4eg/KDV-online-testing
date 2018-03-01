@@ -52,7 +52,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-        orderingGuestPage.waitText();
+        WaitingUtility.elementFluentWaitVisibility(orderingLegalPage.orderLink);
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
@@ -155,8 +155,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-
-        orderingGuestPage.waitText();
+        WaitingUtility.elementFluentWaitVisibility(orderingLegalPage.orderLink);
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
 
@@ -200,6 +199,7 @@ public class OrderingLegalPageTest extends BaseTest {
         data2.put("phone", "7111111");
         orderingLegalPage.deliveryAddressBlock(data2);
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
+        WaitingUtility.elementFluentWaitVisibility(orderingGuestPage.phoneNotice);
         AssertCollector.assertTrue(orderingGuestPage.phoneNotice.isDisplayed(),
                 "Error Message is displayed");
     }
