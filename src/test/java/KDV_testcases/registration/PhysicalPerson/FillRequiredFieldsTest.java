@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
 import Core.utils.TestReporter;
 
-public class FillRequiredFieldsTest extends BaseTest{
+public class FillRequiredFieldsTest extends BaseTest {
 
     @Test
     public void verifyPressSendButtonWithoutFillingFieldsTest() {
