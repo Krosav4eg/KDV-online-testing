@@ -112,12 +112,12 @@ public class InformationAuthorizationTest extends BaseTest {
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
-        data.put("password","");
+        data.put("password", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-          data = registrationPage.mainInfoRegistration();
+        data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-          }
+    }
 }
