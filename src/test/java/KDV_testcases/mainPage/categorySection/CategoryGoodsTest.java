@@ -114,7 +114,7 @@ public class CategoryGoodsTest extends BaseTest {
     }
 
     @Test
-    public void verifyProductCardAdvanceShop() {
+    public void verifyProductCardAdvanceShop()  {
         TestReporter.testTitle("Test ID - C40271");
         cardPage.validCardProductVerifyAdvantagesShop();
     }

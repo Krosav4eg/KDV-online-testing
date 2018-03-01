@@ -189,22 +189,24 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getValueOfAttributeByName(categoryInputTxt, "value").contains("9999"));
     }
 
+    //was changed description text
     public void validCardProductVerifyAdvantagesShop() {
         searchAndSelect();
         elementFluentWaitVisibility(productCardContainer).click();
-        AssertCollector.assertTrue(getText(benefitDelivery).contains("Ваши покупки из интернет-магазина KDV мы доставим" +
-                " бесплатно. Доставка в день заказа, в удобное для вас время, до двери квартиры/офиса."));
-
+        AssertCollector.assertTrue(getText(benefitDelivery).contains("Ваши покупки из интернет-магазина" +
+                " KDV по г. Томску мы доставим бесплатно. Доставка в день заказа, в удобное для вас время, " +
+                "до двери квартиры/офиса."));
         elementFluentWaitVisibility(benefitDelivery).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("delivery"));
         driver.navigate().back();
-        AssertCollector.assertTrue(getText(benefitPayment).contains("Интернет-магазин KDV работает без предоплаты." +
-                " Оплата производится курьеру наличным и безналичным способом по факту доставки Вашего заказа."));
+        AssertCollector.assertTrue(getText(benefitPayment).contains("Интернет-магазин KDV работает без предоплаты. " +
+                "Оплата производится курьеру наличным и безналичным способом по факту доставки Вашего заказа."));
         elementFluentWaitVisibility(benefitPayment).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("payment-orders"));
         driver.navigate().back();
-        AssertCollector.assertTrue(getText(benefitPrice).contains("KDV - мощное производство, распределительные центры " +
-                "и автопарк, что позволяет KDV держать демократичные цены на продукцию. В интернет-магазине KDV – еще дешевле."));
+        AssertCollector.assertTrue(getText(benefitPrice).contains("KDV - мощное производство, распределительные центры" +
+                " и автопарк, что позволяет KDV держать демократичные цены на продукцию. " +
+                "В интернет-магазине KDV – еще дешевле."));
         elementFluentWaitVisibility(benefitPrice).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("about"));
         driver.navigate().back();

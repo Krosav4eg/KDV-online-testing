@@ -2,6 +2,7 @@ package KDV_testcases.OrderingPage;
 
 
 import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -255,6 +256,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("address", "Томск, пр. Мира 20, оф.4");
         orderingGuestPage.deliveryFormInfo(data);
         orderingGuestPage.clickCheckBoxAndOrderButton();
+        WaitingUtility.elementFluentWaitVisibility(orderingGuestPage.phoneNotice);
         AssertCollector.assertEqualsJ(orderingGuestPage.phoneNotice.getText(),
                 "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
                 "Error messages are equals");
