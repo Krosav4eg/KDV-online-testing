@@ -89,13 +89,13 @@ public class InformationAuthorizationTest extends BaseTest {
     @Test
     public void verifyMandatoryWrongPassTest() {
         TestReporter.testTitle("Test ID = 37523");
-        JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("pass", "131");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("password", "11");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
-        verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("pass", "131 123");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+        data = registrationPage.mainInfoRegistration();
+        data.put("password", " 3132 ");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
     }
 
@@ -103,8 +103,8 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyMandatoryEmptyConfirmPasswordTest() {
         TestReporter.testTitle("Test ID = C40075");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("pass", "testsea");
-        verifyData.put("confirmPassword", "test234   ");
+        verifyData.put("pass", "teea");
+        verifyData.put("confirmPassword", "tes7676t234   ");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
