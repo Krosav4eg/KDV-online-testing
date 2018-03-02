@@ -29,5 +29,4 @@ public class OrderingPhysicalPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41313");
         orderingPhysicalPage.orderingChangedStoreAddress();
     }
-
 }
