@@ -15,7 +15,7 @@ public class InformationAuthorizationTest extends BaseTest {
 
     //изменилась логика работы приложения. после ввода "email", "ulo@andersenlab.com".
     // выполняется переход на другую страницу и появляется текст:
-   // "Требуется подтверждение учётной записи.
+    // "Требуется подтверждение учётной записи.
     // Ссылка ддя подтверждения была выслана на указанный адрес электронной почты. Чтобы выслатиь ссылку повторно нажмите"
     @Test
     public void verifyCorrectMailTest() {
@@ -109,13 +109,22 @@ public class InformationAuthorizationTest extends BaseTest {
                 contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
     }
 
+    //изменилась логика работы приложения. после ввода "email", "test@test.com".
+    // теперь появляется текст:
+    // "Учётная запись с таким адресом электронной почты уже существует." +
+    //                " Если вы уверены, что это ваш адрес, то нажмите нажмите сюда для получения пароля на email. " +
+    //                "С ним вы сможете получить доступ к вашей учётной записи.");
     @Test
     public void verifyEmailFieldValidationTest() {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Учётная запись с таким адресом электронной почты уже существует."));
+//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+//                contains("Учётная запись с таким адресом электронной почты уже существует."));
+        registrationPage.verifyAuthorizationFieldsIndividual(data);
+        del.textPresentDelegate("Учётная запись с таким адресом электронной почты уже существует." +
+                " Если вы уверены, что это ваш адрес, то нажмите нажмите сюда для получения пароля на email. " +
+                "С ним вы сможете получить доступ к вашей учётной записи.");
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
