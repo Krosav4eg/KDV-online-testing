@@ -106,16 +106,16 @@ public class MainPage extends BasePage {
     @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
     private WebElement myCart;
 
-    @FindBy(xpath = "//*[@title='Конфеты «Томские классические», 300 г']")
+    @FindBy(xpath = "(.//*[@class='product-item__title-link'])[1]")
     private WebElement productTitleToBasket;
 
-    @FindBy(xpath = ".//*[@id='product-price-2465']/span[1]")
+    @FindBy(xpath = "(.//*[@class='product-total-price'])[1]")
     private WebElement productPriceToBasket;
 
-    @FindBy(css = ".mini-cart-product__name.mini-cart-product__name_link")
+    @FindBy(xpath = ".//*[@class='mini-cart-product__name mini-cart-product__name_link']")
     private WebElement productTitleInBasket;
 
-    @FindBy(css = ".mini-cart-product__price")
+    @FindBy(xpath = ".//*[@class='mini-cart-product__price']")
     private WebElement productPriceInBasket;
 
     @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
@@ -133,7 +133,7 @@ public class MainPage extends BasePage {
     @FindBy(css = ".mini-cart-product__remove")
     private WebElement removeProductsFromBasket;
 
-    @FindBy(css = ".mini-cart-dropdown__link.btn.btn-primary")
+    @FindBy(xpath = "(.//*[@class='mini-cart-dropdown__link btn btn-primary'])[1]")
     private WebElement submitAddingToBasket;
 
     @FindBy(css = ".mini-cart-dropdown__link.mini-cart-dropdown__link_right.btn.btn-primary")
@@ -874,7 +874,7 @@ public class MainPage extends BasePage {
     public void verifyMyBasketWithProduct() {
         getUrl(BASE_URL);
         String actTitle = getValueOfAttributeByName(productTitleToBasket, "title");
-        String actPrice = getValueOfAttributeByName(productPriceToBasket, "title");
+        String actPrice = getText(productPriceToBasket);
         moveToElementJS(driver, socialContainer);
         clickOnIndexFromElementList(hitSalesBasketButtons, 0);
         elementIsClickable(productAddedButton);
@@ -890,7 +890,7 @@ public class MainPage extends BasePage {
         elementFluentWaitVisibility(upButton).click();
         hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
         String expTitle = getValueOfAttributeByName(productTitleInBasket, "title");
-        String expPrice = getValueOfAttributeByName(productPriceInBasket, "title");
+        String expPrice = getText(productPriceInBasket);
         AssertCollector.assertEquals(actTitle, " Title in Singleton page equals title in" +
                 " basket page ", expTitle);
         AssertCollector.assertEquals(actPrice, " Price in Singleton page equals price in" +
