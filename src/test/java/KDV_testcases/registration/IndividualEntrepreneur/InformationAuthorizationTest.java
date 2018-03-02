@@ -13,6 +13,10 @@ public class InformationAuthorizationTest extends BaseTest {
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
+    //изменилась логика работы приложения. после ввода "email", "ulo@andersenlab.com".
+    // выполняется переход на другую страницу и появляется текст:
+   // "Требуется подтверждение учётной записи.
+    // Ссылка ддя подтверждения была выслана на указанный адрес электронной почты. Чтобы выслатиь ссылку повторно нажмите"
     @Test
     public void verifyCorrectMailTest() {
         TestReporter.testTitle("Test ID = 37516");
@@ -26,8 +30,11 @@ public class InformationAuthorizationTest extends BaseTest {
                 contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Учётная запись с таким адресом электронной почты уже существует"));
+        registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
+        del.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка ддя подтверждения " +
+                "была выслана на указанный адрес электронной почты. Чтобы выслатиь ссылку повторно нажмите");
+//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+//                contains("Учётная запись с таким адресом электронной почты уже существует"));
     }
 
     @Test
