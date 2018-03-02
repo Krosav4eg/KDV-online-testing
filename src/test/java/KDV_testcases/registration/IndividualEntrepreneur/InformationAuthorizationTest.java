@@ -100,12 +100,12 @@ public class InformationAuthorizationTest extends BaseTest {
     }
 
     @Test
-    public void verifyMandatoryEmptyConfirmPasswordTest() throws InterruptedException {
+    public void verifyMandatoryEmptyConfirmPasswordTest() {
         TestReporter.testTitle("Test ID = C40075");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("confirmPassword", "test234   ");
         verifyData.put("pass", "testsea");
-        Thread.sleep(4000);
+        verifyData.put("confirmPassword", "test234   ");
+        registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
     }
