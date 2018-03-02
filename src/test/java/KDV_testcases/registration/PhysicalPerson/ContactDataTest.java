@@ -20,7 +20,7 @@ public class ContactDataTest extends BaseTest {
     }
 
     @Test
-    
+
     public void verifyMaximumInputInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37103");
         registrationPage.verifyMaximumInputInFirstNameField();
@@ -36,7 +36,6 @@ public class ContactDataTest extends BaseTest {
 
     //BUG ON SITE
     @Test
-    
     public void verifyInputForbiddenSymbolsInFirstNameFieldTest() {
         TestReporter.testTitle("Test ID = 37105");
         registrationPage.verifyInputForbiddenSymbolsInFirstNameField();
@@ -62,7 +61,7 @@ public class ContactDataTest extends BaseTest {
 
     //test not pass(validation problems)
     @Test
-    
+
     public void verifyMaximumInputInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37115");
         registrationPage.verifyMaximumInputInLastNameField();
@@ -70,7 +69,7 @@ public class ContactDataTest extends BaseTest {
 
     //test not pass(validation problems)
     @Test
-    
+
     public void verifyInputNumbersInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37117");
         registrationPage.verifyInputNumbersInLastNameField();
@@ -78,7 +77,7 @@ public class ContactDataTest extends BaseTest {
 
     //test not pass(validation problems)
     @Test
-    
+
     public void verifyInputForbiddenSymbolsInLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 37118");
         registrationPage.verifyInputForbiddenSymbolsInLastNameField();

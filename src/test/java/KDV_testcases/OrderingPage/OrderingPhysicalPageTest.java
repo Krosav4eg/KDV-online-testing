@@ -6,7 +6,7 @@ import Core.utils.TestReporter;
 
 public class OrderingPhysicalPageTest extends BaseTest {
 
-     @Test
+    @Test
     public void orderingDefaultAddress() {
         TestReporter.testTitle("Test ID - C41300");
         orderingPhysicalPage.orderingDefaultAddress();
@@ -18,7 +18,7 @@ public class OrderingPhysicalPageTest extends BaseTest {
         orderingPhysicalPage.orderingNewAddress();
     }
 
-    @Test//(invocationCount = 3)
+    @Test
     public void orderingChangeAddress() {
         TestReporter.testTitle("Test ID - C41454");
         orderingPhysicalPage.orderingChangedAddress();
