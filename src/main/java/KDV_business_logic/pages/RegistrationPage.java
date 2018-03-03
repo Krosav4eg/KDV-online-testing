@@ -424,9 +424,9 @@ public class RegistrationPage extends BasePage {
     public String verifyAuthorizationFields(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
-       verifyAuthorizationInformation(data);
+        verifyAuthorizationInformation(data);
         organizationInformation(data);
-         addressDelivery(data);
+        addressDelivery(data);
         contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(subscription).click();
@@ -449,29 +449,29 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(organizationCheckBox).click();
         elementFluentWaitVisibility(getIndividualButton).click();
         verifyAuthorizationInformation(data);
-         organizationInformationIndividual(data);
-       addressDelivery(data);
+        organizationInformationIndividual(data);
+        addressDelivery(data);
         contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(sendButton).click();
-        return  getText(layout);
+        return getText(layout);
     }
 
     public String verifyAuthorizationFieldsIndividual(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
         elementFluentWaitVisibility(getIndividualButton).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformationIndividual(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
+        verifyAuthorizationInformation(data);
+        organizationInformationIndividual(data);
+        addressDelivery(data);
+        contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         elementIsClickable(agreeLegal).click();
         AssertCollector.assertTrue(agreeLegal.isEnabled());
         elementIsClickable(sendButton).click();
-        return  getText(layout);
+        return getText(layout);
     }
 
     //registration
@@ -511,19 +511,14 @@ public class RegistrationPage extends BasePage {
     }
 
     String addressDelivery(JSONObject data) {
-        elementFluentWaitVisibility(company).click();
         elementFluentWaitVisibility(company).sendKeys(data.getString("company"));
-        elementFluentWaitVisibility(address).click();
         elementFluentWaitVisibility(address).sendKeys(data.getString("address"));
-        elementFluentWaitVisibility(comments).click();
         elementFluentWaitVisibility(comments).sendKeys(data.getString("comments"));
         return getText(addressDelivery);
     }
 
     public String contactData(JSONObject data) {
-        elementFluentWaitVisibility(firstName).click();
         elementFluentWaitVisibility(firstName).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastName).click();
         elementFluentWaitVisibility(lastName).sendKeys(data.getString("lastName"));
         elementFluentWaitVisibility(PersonalCabinetPage.phoneInEditPage).click();
         elementFluentWaitVisibility(PersonalCabinetPage.phoneInEditPage).sendKeys(data.getString("phone"));

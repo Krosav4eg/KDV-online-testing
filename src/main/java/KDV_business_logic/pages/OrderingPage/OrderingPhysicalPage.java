@@ -9,6 +9,7 @@ import org.testng.Assert;
 import Core.utils.AssertCollector;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static Core.utils.Constants.*;
 import static Core.utils.WaitingUtility.*;
@@ -105,8 +106,11 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = "#loc-changed .modal__close")
     private WebElement closedBtn;
 
+    @FindBy(css = "#billing-address-select>option")///checkout-delivery-time
+    private List<WebElement> addressesList;
+
     @FindBy(id = "billing-address-select")///checkout-delivery-time
-    private WebElement addressesList;
+    private WebElement addressList;
 
     /**
      * Authorization and select product
@@ -114,7 +118,7 @@ public class OrderingPhysicalPage extends BasePage {
     private void selectProduct() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
-        fillInputFieldAndPressEnterButton(passwordField,PONOMAREVA_PASSWORD); //"ztq0d9e6");
+        fillInputFieldAndPressEnterButton(passwordField, PONOMAREVA_PASSWORD); //"ztq0d9e6");
         if (!getText(basketSummaryTxt).contains("тов.")) {
             new OrderingGuestPage(driver).addProductToBasket();
         } else {
@@ -187,8 +191,7 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-        Select dropdown = new Select(addressesList);
-        dropdown.selectByIndex(4);
+        clickOnIndexFromElementList(addressesList, 4);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
     }
@@ -197,7 +200,9 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-        Select dropdown = new Select(addressesList);
+//        Select dropdown = new Select(addressList);
+//        addressList.dropdown.selectByIndex(4);
+        Select dropdown = new Select(addressList);
         dropdown.selectByIndex(1);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         textIsPresent(modelWindows, "Выбранный вами адрес обслуживается другим");

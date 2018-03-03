@@ -6,34 +6,34 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
-    <test name="AuthorizationTest">
-        <classes>
-            <class name="KDV_testcases.authorization.AuthorizationTest"/>
-            <class name="KDV_testcases.authorization.PasswordRecoveryTest"/>
-            <class name="KDV_testcases.authorization.SiteLoginTest"/>
-        </classes>
-    </test>
-    <test name="FooterTest">
-        <classes>
-            <class name="KDV_testcases.footer.FooterTest"/>
-        </classes>
-    </test>
-    <test name="HeaderTest">
-        <classes>
-            <class name="KDV_testcases.header.HeaderTest"/>
-        </classes>
-    </test>
+    <!--<test name="AuthorizationTest">-->
+        <!--<classes>-->
+            <!--<class name="KDV_testcases.authorization.AuthorizationTest"/>-->
+            <!--<class name="KDV_testcases.authorization.PasswordRecoveryTest"/>-->
+            <!--<class name="KDV_testcases.authorization.SiteLoginTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="FooterTest">-->
+        <!--<classes>-->
+            <!--<class name="KDV_testcases.footer.FooterTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="HeaderTest">-->
+        <!--<classes>-->
+            <!--<class name="KDV_testcases.header.HeaderTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
-        <test name="Main Page">
-            <classes>
-                <class name="KDV_testcases.mainPage.banner.BannerTest"/>
-                <class name="KDV_testcases.mainPage.basket.BasketTests"/>
-                <class name="KDV_testcases.mainPage.blockSmm.BlockSmmTest"/>
-                <class name="KDV_testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>
-                <class name="KDV_testcases.mainPage.categorySection.CategoryGoodsTest"/>
-                <class name="KDV_testcases.mainPage.hitOfSales.HitOfSalesTest"/>
-            </classes>
-        </test>
+        <!--<test name="Main Page">-->
+            <!--<classes>-->
+                <!--<class name="KDV_testcases.mainPage.banner.BannerTest"/>-->
+                <!--<class name="KDV_testcases.mainPage.basket.BasketTests"/>-->
+                <!--<class name="KDV_testcases.mainPage.blockSmm.BlockSmmTest"/>-->
+                <!--<class name="KDV_testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>-->
+                <!--<class name="KDV_testcases.mainPage.categorySection.CategoryGoodsTest"/>-->
+                <!--<class name="KDV_testcases.mainPage.hitOfSales.HitOfSalesTest"/>-->
+            <!--</classes>-->
+        <!--</test>-->
         <test name="OrderingPage">
             <classes>
                 <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
