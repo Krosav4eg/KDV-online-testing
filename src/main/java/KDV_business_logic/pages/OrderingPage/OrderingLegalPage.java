@@ -31,9 +31,6 @@ public class OrderingLegalPage extends BasePage {
     @FindBy(xpath = "//span[@class=\"text\"]")
     public WebElement transportDescription;
 
-    @FindBy(css = ".load-wait.text")
-    public WebElement orderLoadingMessage;
-
     @FindBy(css = ".button.button_mobile-wide.j_button_metrics_goals")
     public WebElement continueShoppingButton;
 

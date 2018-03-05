@@ -1,11 +1,10 @@
 package KDV_testcases.registration.PhysicalPerson;
 
-
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
 import Core.utils.TestReporter;
 
-public class FillRequiredFieldsTest extends BaseTest{
+public class FillRequiredFieldsTest extends BaseTest {
 
     @Test
     public void verifyPressSendButtonWithoutFillingFieldsTest() {
@@ -68,7 +67,7 @@ public class FillRequiredFieldsTest extends BaseTest{
     }
 
     @Test
-    public void verifySuccessfulRegistrationTest() {
+    public void verifySuccessfulRegistrationTest() throws InterruptedException {
         TestReporter.testTitle("Test ID = 37366");
         registrationPage.verifySuccessfulRegistration();
     }

@@ -13,6 +13,7 @@ public class OrderingDataTest extends BaseTest {
 
 	BasePage.MyDelegate del = new BasePage.MyDelegate() {
 	};
+
 	@Test
 	public void verifyOpeningMyBookingItemPersonalTest() {
 		TestReporter.testTitle("Test ID = 40112");

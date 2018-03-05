@@ -16,7 +16,6 @@ public class CabinetTest extends BaseTest {
     };
 
     // TODO: 12.01.2018 C38045 take id from DB
-
     @Test
     public void verifyAccountAndAddressByDefaultTest() {
         TestReporter.testTitle("Test ID = 38062-38066,38196-38200");

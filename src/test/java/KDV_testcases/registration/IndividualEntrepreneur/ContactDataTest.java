@@ -22,14 +22,18 @@ public class ContactDataTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomNumeric(45));
         data.put("lastName", RandomStringUtils.randomNumeric(45));
         registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф.");
-        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.");
+        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф.");
+        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф.");
         data = registrationPage.mainInfoRegistration();
         data.put("firstName", " !@#$%^&*()+_/|{}[]?><.,");
         data.put("lastName", " !@#$%^&*()+_/|{}[]?><.,");
         registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф.");
-        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.");
+        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф.");
+        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф.");
     }
 
     @Test
@@ -39,8 +43,7 @@ public class ContactDataTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
         registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
-
+        del.textPresentDelegate("Это поле обязательно для заполнения");
         data = registrationPage.mainInfoRegistration();
         data.put("phone", RandomStringUtils.randomNumeric(9));
         registrationPage.verifyAuthorizationFields(data);
@@ -57,9 +60,9 @@ public class ContactDataTest extends BaseTest {
                 contains("Значение \"Имя\" не должно превышать 45 символов."));
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
-        String text=registrationPage.verifyAuthorizationFields(data);
+        String text = registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(text.
-                contains("Значение \"Имя\" не должно превышать 45 символов."));
+                contains("Значение \"Фамилия\" не должно превышать 45 символов."));
         AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
         data = registrationPage.mainInfoRegistration();
@@ -81,7 +84,7 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40068");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", RandomStringUtils.randomAlphanumeric(10));
-        String text=registrationPage.verifyAuthorizationFields(data);
+        String text = registrationPage.verifyAuthorizationFields(data);
         System.out.println(text);
         AssertCollector.assertTrue(text.
                 contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));

@@ -11,7 +11,6 @@ public class LegalDataTest extends BaseTest {
 
     @Test
     public void verifyFieldsNotApprovedUser() {
-
         TestReporter.testTitle("Test ID = 41510");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_a.grigoriev@magdv.com");

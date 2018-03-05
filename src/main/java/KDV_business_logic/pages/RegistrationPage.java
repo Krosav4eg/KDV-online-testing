@@ -4,10 +4,12 @@ import Core.basePage.BasePage;
 import KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
+import org.omg.PortableServer.THREAD_POLICY_ID;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import Core.utils.AssertCollector;
+import org.testng.Assert;
 
 import static Core.utils.Constants.EMPTY_DATA;
 import static Core.utils.Constants.REGISTRATION_PAGE_URL;
@@ -20,9 +22,6 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(css = ".registration-layout__content")
-    public WebElement allContainerText;
-
     @FindBy(xpath = "//a[@rel='general']")
     private WebElement individualButton;
 
@@ -31,6 +30,9 @@ public class RegistrationPage extends BasePage {
 
     @FindBy(xpath = "//a[@rel='legal']")
     private WebElement organizationButton;
+
+    @FindBy(xpath = "//li[@class=\"notice-msg\"]")
+    private WebElement noticeMessage;
 
     @FindBy(xpath = "//a[contains(text(),'Индивидуальный предприниматель')]")
     private WebElement individualEntrepreneurButton;
@@ -71,6 +73,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(xpath = "//label[@data-show='general']")
     private WebElement checkboxConfirm;
 
+    @FindBy(id = "form-validate")
+    private WebElement formValidate;
+
     @FindBy(xpath = "//label[@data-show='legal']")
     private WebElement checkboxConfirmLegal;
 
@@ -101,7 +106,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "adv_full_name")
     public WebElement organizationFullName;
 
-    @FindBy(id = "adv_inn")
+    @FindBy(xpath = "//input[@name=\"adv_inn\"]")
     public WebElement taxpayerId;
 
     @FindBy(id = "adv_kpp")
@@ -134,6 +139,9 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
     public WebElement getAlertTet;
 
+    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
+
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
         AssertCollector.assertTrue(individualButton.isEnabled());
@@ -151,10 +159,7 @@ public class RegistrationPage extends BasePage {
     public void verifyForOrganizationsTextPresence() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton).click();
-        textPresent("Внимание! Все заявки на регистрацию контрагентов - индивидуальных предпринимателей и " +
-                "юридических лиц рассматриваются специалистами отдела продаж. Это может занять некоторое время. " +
-                "До тех пор, пока контрагент не зарегистрирован, оформление заказов невозможно. Как правило, " +
-                "рассмотрение заявки занимает не более одного рабочего дня.");
+        Assert.assertTrue(noticeMessage.getText().contains("Внимание! Все заявки на регистрацию контрагентов"));
     }
 
     public void verifyFieldFirstNamePresence() {
@@ -175,7 +180,8 @@ public class RegistrationPage extends BasePage {
     public void verifyMaximumInputInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, RandomStringUtils.randomAlphabetic(46));
-        AssertCollector.assertEquals(firstName.getAttribute("value").length(), " Number of symbols is equal ",
+        AssertCollector.assertEquals(firstName.getAttribute("value").length(),
+                " Number of symbols is equal ",
                 RandomStringUtils.randomAlphabetic(45).length());
     }
 
@@ -254,32 +260,37 @@ public class RegistrationPage extends BasePage {
     public void verifyMaskInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(PersonalCabinetPage.phoneInEditPage).click();
-        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(), "phone mask is correct");
+        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(),
+                "phone mask is correct");
     }
 
     public void verifyMaximumInputInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(PersonalCabinetPage.phoneInEditPage, RandomStringUtils.randomNumeric(15));
-        AssertCollector.assertEquals(PersonalCabinetPage.phoneInEditPage.getAttribute("value").length(), " The length of phone number equals ",
+        AssertCollector.assertEquals(PersonalCabinetPage.phoneInEditPage.getAttribute("value").length(),
+                " The length of phone number equals ",
                 RandomStringUtils.randomNumeric(12).length());
     }
 
     public void verifyInputForbiddenSymbolsInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(PersonalCabinetPage.phoneInEditPage, "!@#$%^&*()+_/|{}[]?><.,");
-        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
+        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(),
+                "Phone field is displayed");
     }
 
     public void verifyInputLettersInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(PersonalCabinetPage.phoneInEditPage, RandomStringUtils.randomAlphabetic(10));
-        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
+        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(),
+                "Phone field is displayed");
     }
 
     public void verifyInputSpacesInPhoneField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(PersonalCabinetPage.phoneInEditPage, EMPTY_DATA);
-        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(), "Phone field is displayed");
+        AssertCollector.assertTrue(PersonalCabinetPage.phoneInEditPage.getAttribute("value").isEmpty(),
+                "Phone field is displayed");
     }
 
     public void verifyInputLessThenTenNumbersInPhoneField() {
@@ -301,6 +312,7 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(elementIsDisplayed(email), "Email field is displayed");
     }
 
+    //Пропало сообщение "Часть адреса после символа \"@\" не должна содержать символ \" \"." на
     public void verifyEmailWithoutAtSymbol() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(email, "a.shauloandersenlab.com");
@@ -315,7 +327,8 @@ public class RegistrationPage extends BasePage {
         fillInputField(email, "a.shaulo@andersenlabcom");
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton).click();
-        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). " +
+                "Например, ivanivanov@domain.com.");
     }
 
     public void verifyEmailWithMoreThanOneDot() {
@@ -323,9 +336,11 @@ public class RegistrationPage extends BasePage {
         fillInputField(email, "a..shaulo@andersenlab.com");
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(sendButton).click();
-        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.");
+        textPresent("Пожалуйста, введите правильный адрес электронной почты (email). " +
+                "Например, ivanivanov@domain.com.");
     }
 
+    //Пропало сообщение "Часть адреса после символа \"@\" не должна содержать символ \" \"." на
     public void verifyEmailWithSpacesBeforeAtSymbol() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(email, "a.s ha ulo@andersenlab.com");
@@ -334,6 +349,7 @@ public class RegistrationPage extends BasePage {
         textPresent("Часть адреса до символа \"@\" не должна содержать символ \" \".");
     }
 
+    //Пропало сообщение "Часть адреса после символа \"@\" не должна содержать символ \" \"." на
     public void verifyEmailWithSpacesAfterAtSymbol() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(email, "a.shaulo@anders enlab.com");
@@ -421,14 +437,15 @@ public class RegistrationPage extends BasePage {
         return getText(loginInformation);
     }
 
+    //метод scrollToNecessaryElement(footer) не срабатывал. Заменил на del.scrollByCoordinate();
     public String verifyAuthorizationFields(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
-       verifyAuthorizationInformation(data);
+        verifyAuthorizationInformation(data);
         organizationInformation(data);
-         addressDelivery(data);
+        addressDelivery(data);
         contactData(data);
-        scrollToNecessaryElement(footer);
+        del.scrollByCoordinate();
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         elementIsClickable(agreeLegal).click();
@@ -449,39 +466,39 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(organizationCheckBox).click();
         elementFluentWaitVisibility(getIndividualButton).click();
         verifyAuthorizationInformation(data);
-         organizationInformationIndividual(data);
-       addressDelivery(data);
+        organizationInformationIndividual(data);
+        addressDelivery(data);
         contactData(data);
         scrollToNecessaryElement(footer);
         elementIsClickable(sendButton).click();
-        return  getText(layout);
+        return getText(layout);
     }
 
     public String verifyAuthorizationFieldsIndividual(JSONObject data) {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationCheckBox).click();
         elementFluentWaitVisibility(getIndividualButton).click();
-        String authorizationInformation = verifyAuthorizationInformation(data);
-        String organizationInformation = organizationInformationIndividual(data);
-        String addressDelivery = addressDelivery(data);
-        String contactData = contactData(data);
         scrollToNecessaryElement(footer);
+        elementIsClickable(sendButton).click();
+        elementIsClickable(agreeLegal).click();
+        scrollToNecessaryElement(getHeaderTxt);
+        verifyAuthorizationInformation(data);
+        organizationInformationIndividual(data);
+        addressDelivery(data);
+        contactData(data);
+        del.scrollByCoordinate();
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
-        elementIsClickable(agreeLegal).click();
         AssertCollector.assertTrue(agreeLegal.isEnabled());
         elementIsClickable(sendButton).click();
-        return  getText(layout);
+        return getText(layout);
     }
 
     //registration
     private String verifyAuthorizationInformation(JSONObject data) {
         moveToElementJS(driver, PersonalCabinetPage.phoneInEditPage);
-        elementFluentWaitVisibility(email).click();
         elementFluentWaitVisibility(email).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(password).click();
         elementFluentWaitVisibility(password).sendKeys(data.getString("password"));
-        elementFluentWaitVisibility(confirmPassword).click();
         elementFluentWaitVisibility(confirmPassword).sendKeys(data.getString("confirmPassword"));
         return getText(loginInformation);
     }
@@ -675,9 +692,7 @@ public class RegistrationPage extends BasePage {
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(checkboxConfirm).click();
         elementFluentWaitVisibility(sendButton).click();
-        textPresent("Учётная запись с таким адресом электронной почты уже существует. Если вы уверены, " +
-                "что это ваш адрес, то нажмите сюда для получения пароля на email. С ним вы сможете получить доступ " +
-                "к вашей учётной записи.");
+        textPresent("Учётная запись с таким адресом электронной почты уже существует.");
     }
 
     public void verifyForgotPasswordButton() {
@@ -702,14 +717,13 @@ public class RegistrationPage extends BasePage {
         fillInputField(firstName, RandomStringUtils.randomAlphabetic(12));
         fillInputField(lastName, RandomStringUtils.randomAlphabetic(12));
         fillInputField(PersonalCabinetPage.phoneInEditPage, RandomStringUtils.randomNumeric(12));
-        fillInputField(email, "testuser@test.com");
+        fillInputField(email, RandomStringUtils.randomAlphabetic(7) + "@test.com");
         fillInputField(password, "123456789");
         fillInputField(confirmPassword, "123456789");
         scrollToNecessaryElement(sendButton);
         elementFluentWaitVisibility(checkboxConfirm).click();
         elementFluentWaitVisibility(sendButton).click();
-        textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на " +
-                "указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
+        Assert.assertTrue(formValidate.getText().contains("Требуется подтверждение учётной записи."));
     }
 
     public void verifyLegalEntitySelected() {

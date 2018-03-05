@@ -51,7 +51,7 @@ public class DeliveryAddressPage extends BasePage {
     @FindBy(id = "telephone")
     public WebElement phoneInEditDeliveryPage;
 
-    @FindBy(id = "street_1")
+    @FindBy(css = ".field-address.j_field_address.required-entry.suggestions-input")
     public WebElement addressInEditDeliveryPage;
 
     @FindBy(id = "floor")
@@ -59,15 +59,6 @@ public class DeliveryAddressPage extends BasePage {
 
     @FindBy(id = "porch")
     public WebElement porchInEditDeliveryPage;
-
-    @FindBy(css = ".checkbox__label")
-    public WebElement checkBoxDelivery;
-
-    @FindBy(css = ".button.button_mobile-wide")
-    public WebElement saveDeliveryAddressButton;
-
-    @FindBy(xpath = "(//div[@class='profile__addresses']/div[@class='address'])[1]")
-    public WebElement deliveryAddressList;
 
     @FindBy(css = ".profile__addresses")
     public WebElement deliveryAddressContainer;
@@ -94,9 +85,7 @@ public class DeliveryAddressPage extends BasePage {
     @FindBy(css = "[href='/about']")
     public WebElement getAboutLink;
 
-    @FindBy(css = ".header-top")
-    public WebElement headerDelivery;
-
+    //в адрес доставки "Томск, Нечевский переулок, 34" был добавлен пробел
     public void verifyCardNotApprovedAddress() {
         getUrl(ACCOUNT_DELIVERY_ADDRESS_URL);
         Verify.verify(getText(deliveryAddressContainer).contains("Илья Панфилов"));
@@ -109,7 +98,9 @@ public class DeliveryAddressPage extends BasePage {
         Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
-        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").contains("Томск, Нечевский переулок, 34"));
+        scrollDown();
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").
+                contains("Томск, Нечевский переулок, 34"));
     }
 
     public void verifyCardApprovedAddress() {
@@ -124,7 +115,8 @@ public class DeliveryAddressPage extends BasePage {
         Verify.verify(getValueOfAttributeByName(company, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "readonly").contains("true"));
         Verify.verify(getValueOfAttributeByName(company, "value").contains("Герцог мини-маркет"));
-        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").contains("Томск, Нечевский переулок, 34"));
+        Verify.verify(getValueOfAttributeByName(addressInEditDeliveryPage, "value").
+                contains("Томск, Нечевский переулок, 34"));
     }
 
     public void addAddresses() {

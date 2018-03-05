@@ -16,7 +16,7 @@ public class OrderDataTest extends BaseTest{
 		data.put("password", FADEEV_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
 	}
-//TODO not finished
+
 	@Test
 	public void verifyMyOrderEmptyKist() {
 		TestReporter.testTitle("Test ID = 41936");

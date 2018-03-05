@@ -25,7 +25,8 @@ public class AddressesDataTest extends BaseTest {
 		data.put("password", PONOMAREVA_PASSWORD);//"ztq0d9e6"
 		authorizationPage.verifyAuthFields(data);
 		del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
-		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
+		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL,
+				"Urls are equals");
 		AssertCollector.assertTrue(elementIsVisible( deliveryAddressPage.deliveryAddressHeader),
 				"Required header is displayed");
 	}
@@ -85,5 +86,4 @@ public class AddressesDataTest extends BaseTest {
 		orderingGuestPage.clickOnWebElement(deliveryAddressPage.editDeliveryLink);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_INFORMATION_URL, "Urls are equals");
 	}
-
 }

@@ -116,14 +116,13 @@ public class BasePage {
     //========================CUSTOM METHODS=============================================
 
     protected static String getText(WebElement element) {
-        String test="";
+        String test = "";
         try {
 
             LOGGER.log(Level.INFO, " Get text of element ");
             TestReporter.step(" Get text of element ");
-            test=element.getText();
-        }catch (Exception ex)
-        {
+            test = element.getText();
+        } catch (Exception ex) {
 
         }
         return test;
@@ -330,8 +329,9 @@ public class BasePage {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
         } else {
-            LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
-            TestReporter.step(expectedText + " - Required text is present ");
+            LOGGER.log(Level.INFO, expectedText + " - Required text isn't present ");
+            TestReporter.step(expectedText + " - Required text isn't present ");
+            fail();
         }
     }
 

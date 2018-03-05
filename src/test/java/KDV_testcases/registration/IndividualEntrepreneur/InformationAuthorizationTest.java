@@ -13,6 +13,9 @@ public class InformationAuthorizationTest extends BaseTest {
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
+    //Изменился текст! Вместо "Учётная запись с таким адресом электронной почты уже существует" появилось
+    // "Требуется подтверждение учётной записи."
+
     @Test
     public void verifyCorrectMailTest() {
         TestReporter.testTitle("Test ID = 37516");
@@ -27,7 +30,7 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Учётная запись с таким адресом электронной почты уже существует"));
+                contains("Учётная запись с таким адресом электронной почты уже существует" ));
     }
 
     @Test
@@ -83,11 +86,11 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyMandatoryWrongPassTest() {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("pass", "131");
+        verifyData.put("password", "131");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
         verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("pass", "131 123");
+        verifyData.put("password", " 131123 ");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
     }
@@ -112,12 +115,12 @@ public class InformationAuthorizationTest extends BaseTest {
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
-        data.put("password","");
+        data.put("password", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-          data = registrationPage.mainInfoRegistration();
+        data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
-          }
+    }
 }

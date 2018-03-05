@@ -90,20 +90,11 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = ".//a[contains(text(),'Договора купли-продажи.')]")
     public WebElement salesPurchaseAgreementLink;
 
-    @FindBy(xpath = "//input[@id='billing:is_agree']/following-sibling::span")
-    public WebElement agreeCheckBox;
-
-    @FindBy(css = ".title.checkout-form__title.offset-b-4.offset-t-4")
-    public WebElement deliveryHeader;
-
     @FindBy(xpath = "//span[contains(text(),'Самовывоз')]")
     public WebElement selfDeliveryRadioButton;
 
     @FindBy(id = "billing:street_new")
     public WebElement deliveryAddressField;
-
-    @FindBy(css = "div[data-index='1']")
-    public WebElement addressSuggestionList;
 
     @FindBy(id = "id_comments")
     public WebElement deliveryCommentField;
@@ -138,9 +129,6 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(id = "billing:porch")
     public WebElement deliveryPorchField;
 
-    @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
-    public WebElement addressErrorField;
-
     @FindBy(css = ".message__item")
     public WebElement messageOrderError;
 
@@ -149,7 +137,6 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(css = "[title='Просмотр корзины ']")
     private WebElement selectBasket;
-
 
     public JSONObject data() {
         JSONObject data = new JSONObject();
