@@ -38,27 +38,27 @@
             <!--</classes>-->
         <!--</test>-->
 
-        <test name="OrderingPage">
-            <classes>
-                <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
-                <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>
-                <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>
-            </classes>
-        </test>
+        <!--<test name="OrderingPage">-->
+            <!--<classes>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>-->
+            <!--</classes>-->
+        <!--</test>-->
 
-        <test name="PersonalCabinet">
-            <classes>
-                <class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.CabinetTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.AccountDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.AddressesDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.OrderDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.LegalDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.AddressesDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.CabinetLegalTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.PersonalDataTest"/>
-            </classes>
-        </test>
+        <!--<test name="PersonalCabinet">-->
+            <!--<classes>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.CabinetTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.AccountDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.AddressesDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.OrderDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.LegalDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.AddressesDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.CabinetLegalTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.PersonalDataTest"/>-->
+            <!--</classes>-->
+        <!--</test>-->
 
         <test name="Registration ">
             <classes>

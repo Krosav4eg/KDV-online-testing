@@ -1,6 +1,7 @@
 package KDV_business_logic.pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
+import Core.utils.AssertCollector;
 import com.google.common.base.Verify;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -129,8 +130,6 @@ public class DeliveryAddressPage extends BasePage {
         elementFluentWaitClick(company).sendKeys("ТЕСТОВАЯ");
         elementFluentWaitClick(addressInEditDeliveryPage).sendKeys("ул.Тестеров Тест 1");
         moveMouseTo(driver, getAboutLink);
-        elementFluentWaitClick(addressInEditDeliveryPage).click();
-        Verify.verify(getText(addressesContainerDropDown).contains("Выберите адрес"));
         elementFluentWaitClick(getSaveDeliveryAddressBtn).submit();
         Verify.verify(getText(messageSuccesTxt).contains("Адрес сохранён."));
     }
