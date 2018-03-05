@@ -1,6 +1,7 @@
-package KDV_business_logic.pages.OrderingPage;
+package KDV_business_logic.pages.OrderingPage.OrderGuest;
 
 import Core.basePage.BasePage;
+import Core.utils.AssertCollector;
 import KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
@@ -90,20 +91,14 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = ".//a[contains(text(),'Договора купли-продажи.')]")
     public WebElement salesPurchaseAgreementLink;
 
-    @FindBy(xpath = "//input[@id='billing:is_agree']/following-sibling::span")
-    public WebElement agreeCheckBox;
-
-    @FindBy(css = ".title.checkout-form__title.offset-b-4.offset-t-4")
-    public WebElement deliveryHeader;
-
-    @FindBy(xpath = "//span[contains(text(),'Самовывоз')]")
+    @FindBy(css = "label[for='s_method_pickup_delivery_pickup_delivery']")
     public WebElement selfDeliveryRadioButton;
+
+    @FindBy(css = ".offset-t-4")
+    public WebElement deliveryTxt;
 
     @FindBy(id = "billing:street_new")
     public WebElement deliveryAddressField;
-
-    @FindBy(css = "div[data-index='1']")
-    public WebElement addressSuggestionList;
 
     @FindBy(id = "id_comments")
     public WebElement deliveryCommentField;
@@ -129,7 +124,7 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = ".//*[@id='checkout-review-table']/tbody/tr/td[4]/span")
     public WebElement totalPriceCompositionOrder;
 
-    @FindBy(css = "label[for=\"p_method_beznal\"] span")
+    @FindBy (css = "label[for='p_method_beznal'] span")
     public WebElement payBankCardRadioButton;
 
     @FindBy(id = "billing:floor")
@@ -137,9 +132,6 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(id = "billing:porch")
     public WebElement deliveryPorchField;
-
-    @FindBy(xpath = "//div[@class=\"suggestions-wrapper\"]/following-sibling::p")
-    public WebElement addressErrorField;
 
     @FindBy(css = ".message__item")
     public WebElement messageOrderError;
@@ -149,6 +141,9 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(css = "[title='Просмотр корзины ']")
     private WebElement selectBasket;
+
+    @FindBy(css = ".checkout-layout__inner h1")
+    private WebElement headerTxt;
 
 
     public JSONObject data() {
@@ -185,13 +180,21 @@ public class OrderingGuestPage extends BasePage {
 
     public void clickOrderButton() {
         elementFluentWaitVisibility(createOrderButton).click();
-        sleepWait();
     }
 
-    public void waitText() {
-        elementIsVisible(new PersonalCabinetPage(driver).titleField);
-        sleepWait();     sleepWait();     sleepWait();
+    public void orderingSelfGet(JSONObject data)
+    {
+
+        moveToElementJS(driver,headerTxt);
+        elementIsClickable(payBankCardRadioButton).click();
+        AssertCollector.verifyCondition(payBankCardRadioButton.isEnabled());
+        data = deliveryFormData();
+        deliveryFormInfo(data);
+        moveToElementJS(driver,deliveryTxt);
+        elementIsClickable(selfDeliveryRadioButton).click();
+        elementIsClickable(createOrderButton).click();
     }
+
 
     public void clickOnWebElement(WebElement element) {
         elementFluentWaitVisibility(element).click();

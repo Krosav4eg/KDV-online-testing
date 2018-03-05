@@ -100,13 +100,7 @@ public class HeaderTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(BASE_URL);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/", "Urls are equals");
-        AssertCollector.assertEqualsJ(mainPage.myAccountLink.getText(),
-                "ООО Аванс", "Organization name is correct");
-        orderingGuestPage.clickOnWebElement(mainPage.myAccountLink);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/customer/account",
-                "Urls are equals");
-        orderingGuestPage.clickOnWebElement(authorizationPage.exitButton);
+        mainPage.cabinetLink();
         AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn), "Registration button is appear");
         AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton), "Login button is appear");
     }
@@ -159,7 +153,6 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 43017");
         del.textPresentDelegate("8 800 250 5555");
         del.textPresentDelegate("Служба поддержки");
-        orderingGuestPage.clickOnWebElement(mainPage.firstPhoneLink);
         AssertCollector.assertEqualsJ(mainPage.firstPhoneLink.getAttribute("href"), "tel:8 800 250 5555",
                 "references are equals");
         del.textPresentDelegate("+7 913 817-38-90");
