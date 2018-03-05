@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import KDV_business_logic.pages.BasketPages.BasketPage;
+import org.testng.Assert;
 
 import static Core.utils.Constants.BASE_URL;
 import static Core.utils.WaitingUtility.*;
@@ -21,6 +22,9 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
     private WebElement orderBtn;
+
+    @FindBy(css = "h1")
+    public WebElement headerOrderTxt;
 
     @FindBy(css = "[id='billing:firstname']")
     public WebElement firstNameTxt;
@@ -78,6 +82,7 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(id = "review-btn")
     public WebElement createOrderButton;
+
 
     @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
     private WebElement identificationInfo;
@@ -144,6 +149,12 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(css = ".checkout-layout__inner h1")
     private WebElement headerTxt;
+
+
+
+    @FindBy(css = ".page__inner")
+    private WebElement pageSuccseedContaier;
+
 
 
     public JSONObject data() {
@@ -256,4 +267,14 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
         sleepWait();
     }
+
+    public void clickCreateOrderBtn()
+    {
+        moveToElementJS(driver,compositionOrderHeader );
+        elementIsClickable(createOrderButton).click();
+        textIsPresent(headerOrderTxt,"Ваш заказ принят.");
+        Assert.assertTrue(getText(headerOrderTxt).contains("Ваш заказ принят."));
+    }
+
+    public void
 }
