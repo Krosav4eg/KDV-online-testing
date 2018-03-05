@@ -32,9 +32,6 @@ public class CategoryPage extends BasePage {
     @FindBy(css = "[title='Сетка']")
     private WebElement gridBtn;
 
-    @FindBy(css = "div.columns-layout__aside > div > div:nth-child(1)")
-    private WebElement statusTxt;
-
     @FindBy(css = "div.columns-layout__aside > div > div:nth-child(1) a")
     private WebElement existBtn;
 
@@ -57,7 +54,7 @@ public class CategoryPage extends BasePage {
     private WebElement sortPriceLink;
 
     @FindBy(css = ".toolbar-select__list a:nth-child(2)")
-    private WebElement sortDeafultLink;
+    private WebElement sortDefaultLink;
 
     @FindBy(css = "div.yt-products-container.clearfix > div > div:nth-child(1)")
     private WebElement categoryElementTxt;
@@ -86,12 +83,10 @@ public class CategoryPage extends BasePage {
         clickElementByJS(driver, candyLink);
     }
 
-    //TODO find the solution of this problem - it must be fixed
     public void selectFromCategoryDropDown() {
         driver.navigate().refresh();
         elementFluentWaitVisibility(selectCategorySearchBtn).click();
         CallJS("jQuery(\"#inputs-search-table div.search-category-dropdown__list div:contains('Конфеты')\").click()");
-        //clickElementByJS(driver,selectCategoryInSearchLink);
         elementFluentWaitVisibility(searchBtn).click();
         AssertCollector.assertTrue(headerTxt.getText().contains("Конфеты"), "required header  is present");
         driver.navigate().to(ABOUT_PAGE_URL);
@@ -132,9 +127,9 @@ public class CategoryPage extends BasePage {
     public void sortFilterDefault() {
         selectCategorySideBar();
         moveMouseTo(driver, dropDownMenu);
-        elementFluentWaitVisibility(sortDeafultLink).click();
+        elementFluentWaitVisibility(sortDefaultLink).click();
         moveMouseTo(driver, dropDownMenu);
-        elementFluentWaitVisibility(sortDeafultLink).click();
+        elementFluentWaitVisibility(sortDefaultLink).click();
         String firstElement = getText(categoryElementTxt);
         elementFluentWaitVisibility(sortBtn).click();
         AssertCollector.assertTrue(!firstElement.contains(getText(categoryElementTxt)), "price filter is active");

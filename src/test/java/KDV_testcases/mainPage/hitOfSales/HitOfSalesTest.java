@@ -4,8 +4,6 @@ import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
 import Core.utils.TestReporter;
 
-
-
 /**
  * @author Sergey Potapov
  */

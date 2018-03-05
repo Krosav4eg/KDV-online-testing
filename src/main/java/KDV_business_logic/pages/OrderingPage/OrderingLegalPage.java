@@ -2,6 +2,8 @@ package KDV_business_logic.pages.OrderingPage;
 
 
 import Core.basePage.BasePage;
+import KDV_business_logic.pages.BasketPages.BasketPage;
+import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,7 @@ public class OrderingLegalPage extends BasePage {
     public OrderingLegalPage(WebDriver driver) {
         super(driver);
     }
+    BasketPage basketPage= new BasketPage(driver);
 
     @FindBy(css = ".select2-selection__rendered#select2-billing-address-select-container")
     public WebElement deliveryAddress;
@@ -44,7 +47,7 @@ public class OrderingLegalPage extends BasePage {
     public List<WebElement> orderNumberInList;
 
     public void createOrderForLegalPerson() {
-        new OrderingGuestPage(driver).addProductToBasket();
+        basketPage.addProductToBasket();
     }
 
     public String getElementTextFromList(List<WebElement> element, int elementIndex) {
