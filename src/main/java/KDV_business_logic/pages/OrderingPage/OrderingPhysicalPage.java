@@ -1,6 +1,8 @@
 package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
+import KDV_business_logic.pages.BasketPages.BasketPage;
+import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +23,7 @@ public class OrderingPhysicalPage extends BasePage {
     }
 
     OrderingGuestPage guest = new OrderingGuestPage(driver);
+    BasketPage basketPage = new BasketPage(driver);
     @FindBy(id = "email")
     private WebElement emailInputField;
 
@@ -120,7 +123,7 @@ public class OrderingPhysicalPage extends BasePage {
         fillInputField(emailInputField, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
         fillInputFieldAndPressEnterButton(passwordField, PONOMAREVA_PASSWORD); //"ztq0d9e6");
         if (!getText(basketSummaryTxt).contains("тов.")) {
-            new OrderingGuestPage(driver).addProductToBasket();
+            basketPage.addProductToBasket();
         } else {
             elementFluentWaitVisibility(selectMiniCart).click();
             elementFluentWaitVisibility(selectBasket).click();

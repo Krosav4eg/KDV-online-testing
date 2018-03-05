@@ -16,6 +16,15 @@ public class BasketPage extends BasePage {
         super(driver);
     }
 
+
+    @FindBy(css = ".message__item")
+    public WebElement messageOrderError;
+
+
+    @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
+    private WebElement orderBtn;
+
+
     @FindBy(css = ".j_cart_control_add")
     private WebElement productAddBtn;
 
@@ -113,6 +122,25 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(searchBtn).click();
     }
 
+
+    public void addProductToBasket() {
+        getUrl(BASE_URL);
+        new BasketPage(driver).selectOneProduct();
+        new BasketPage(driver).increaseProductCount();
+        elementFluentWaitVisibility(orderBtn).click();
+        try {
+            elementIsPresent(messageOrderError);
+            if (elementIsDisplayedTime(messageOrderError)) {
+                elementFluentWaitVisibility(selectMiniCart).click();
+                elementFluentWaitVisibility(selectBasket).click();
+            }
+            new BasketPage(driver).increaseLegalPersonProductCount();
+            elementFluentWaitVisibility(orderBtn).click();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
     public void selectOneProduct() {
         searchElement();
         moveToElementJS(driver, productAddBtn);
@@ -128,6 +156,27 @@ public class BasketPage extends BasePage {
             } else if (elementIsVisible(productPlusBtn)) {
                 elementFluentWaitVisibility(selectMiniCart).click();
                 elementFluentWaitVisibility(selectBasket).click();
+            }
+        } catch (NoSuchElementException ex) {
+            ex.getMessage();
+        }
+    }
+    private double getPrice(WebElement element) {
+        return parseStringToDouble(getText(element));
+    }
+
+    public void increaseProductCount() {
+        while (getPrice(sumTxt) < 300) {
+            sleepWait();
+            elementFluentWaitVisibility(incBtn).click();
+        }
+    }
+
+    public void increaseLegalPersonProductCount() {
+        try {
+            while (getPrice(sumTxt) < 2000) {
+                sleepWait();
+                elementFluentWaitVisibility(incBtn).click();
             }
         } catch (NoSuchElementException ex) {
             ex.getMessage();
@@ -170,27 +219,7 @@ public class BasketPage extends BasePage {
         AssertCollector.assertTrue(getCurrentUrl().contains("onestepcheckout/"));
     }
 
-    private double getPrice(WebElement element) {
-        return parseStringToDouble(getText(element));
-    }
 
-    public void increaseProductCount() {
-        while (getPrice(sumTxt) < 300) {
-            sleepWait();
-            elementFluentWaitVisibility(incBtn).click();
-        }
-    }
-
-    public void increaseLegalPersonProductCount() {
-        try {
-            while (getPrice(sumTxt) < 2000) {
-                sleepWait();
-                elementFluentWaitVisibility(incBtn).click();
-            }
-        } catch (NoSuchElementException ex) {
-            ex.getMessage();
-        }
-    }
 
     public void verifyDeleteProduct() {
         selectTwoProducts();

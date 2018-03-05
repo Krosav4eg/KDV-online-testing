@@ -36,6 +36,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Регистрация']")
     private WebElement registrationButton;
 
+    @FindBy(xpath = "//a[@title=\"Выйти\"]")
+    public WebElement exitButton;
+
     @FindBy(css = ".geo.j_geo")
     private WebElement selectCityModalWindow;
 
@@ -68,6 +71,9 @@ public class MainPage extends BasePage {
 
     @FindBy(className = "quicklink__item_geo")
     public WebElement cityLink;
+
+    @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
+    private List<WebElement> otherCityLink;
 
     @FindBy(xpath = "(//*[@class='modal__box']//div[@data-location])[1]")
     private WebElement firstCityLink;
@@ -1024,5 +1030,17 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(title.contains("суфле"));
         AssertCollector.assertEquals(actResult, " Names of categories are equal ", expResult);
     }
+
+
+    public  void cabinetLink()
+    {
+        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/", "Urls are equals");
+        AssertCollector.assertEqualsJ(myAccountLink.getText(),
+                "ООО Аванс", "Organization name is correct");
+        elementIsClickable(myAccountLink).click();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/customer/account","Is Clicable");
+        elementIsClickable(exitButton);
+    }
+
 }
 

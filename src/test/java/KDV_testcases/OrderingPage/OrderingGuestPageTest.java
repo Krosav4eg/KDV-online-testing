@@ -39,7 +39,7 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41076");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        orderingGuestPage.modalAuthLink.click();
+        orderingGuestPage.clickOnWebElement(orderingGuestPage.modalAuthLink);
         orderingGuestPage.clickOnWebElement(orderingGuestPage.authEnterButton);
         AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         JSONObject data2 = orderingGuestPage.authModalFormData();
@@ -146,10 +146,20 @@ public class OrderingGuestPageTest extends BaseTest {
         AssertCollector.assertEqualsJ(actualPrice, expectedPrice, "Price from row and total price are equals");
     }
 
+
+    @Test
+    public void verifyCreationOrderTest() {
+        TestReporter.testTitle("Test ID - C41074");
+        JSONObject data = orderingGuestPage.data();
+        orderingGuestPage.createOrder(data);
+        orderingGuestPage.orderingSelfGet(data);
+        AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
+    }
+
     //maximum length 46 symbols validation problem in delivery comment field
     @Test
     public void verifyCreationOrderAsGuestTest() {
-        TestReporter.testTitle("Test ID - C41074,4075");
+        TestReporter.testTitle("Test ID - C4075");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         data.put("firstName", RandomStringUtils.randomAlphabetic(46));
