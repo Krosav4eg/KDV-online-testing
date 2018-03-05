@@ -331,7 +331,6 @@ public class BasePage {
         } else {
             LOGGER.log(Level.INFO, expectedText + " - Required text isn't present ");
             TestReporter.step(expectedText + " - Required text isn't present ");
-            fail();
         }
     }
 
