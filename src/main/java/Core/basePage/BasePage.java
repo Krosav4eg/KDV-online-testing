@@ -326,7 +326,11 @@ public class BasePage {
      *
      * @param expectedText- text which must be present on the page
      */
-    protected static void textPresent(String expectedText) {
+    protected static void
+
+
+
+    textPresent(String expectedText) {
         if (driver.getPageSource().contains(expectedText)) {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");

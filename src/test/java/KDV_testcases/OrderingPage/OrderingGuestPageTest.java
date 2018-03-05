@@ -39,15 +39,13 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41076");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.modalAuthLink);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.authEnterButton);
+        orderingGuestPage.selectAuthorizationLink();
         AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         JSONObject data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.closeModalButton);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.modalAuthLink);
+        orderingGuestPage.closeAuthorizationLink();
         AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "test_s.zuevmagdv.com");
@@ -83,24 +81,7 @@ public class OrderingGuestPageTest extends BaseTest {
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         del.scrollByCoordinate();
-        orderingGuestPage.regulationsWebsiteLink.click();
-        del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
-        del.verifyTabsCountAsExpected(TWO_TABS_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/regulations"));
-        del.closeDriverToAnyTabOfBrowser(1);
-        del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
-        orderingGuestPage.consentPersonalDataProcessingLink.click();
-        del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL +
-                "/media/rules/Consent_to_personal_data_processing.pdf"));
-        del.closeDriverToAnyTabOfBrowser(1);
-        del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
-        orderingGuestPage.salesPurchaseAgreementLink.click();
-        del.switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL +
-                "/media/rules/Sales_and_Purchase_Agreement.pdf"));
-        del.closeDriverToAnyTabOfBrowser(1);
-        del.switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
+        orderingGuestPage.checkReglament();
     }
 
     //validation fail. address input value has more than 255 symbols
@@ -183,7 +164,6 @@ public class OrderingGuestPageTest extends BaseTest {
         del.scrollByCoordinate();
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
-        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.firstNameFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.verifyCondition(orderingGuestPage.lastNameFieldAdvice.getText().
@@ -201,41 +181,35 @@ public class OrderingGuestPageTest extends BaseTest {
         del.scrollByCoordinate();
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
-        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.emailFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         data = orderingGuestPage.data();
         data.put("email", "a.shauloandersenlab.com");
-        orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.clickOrderButton();
+        orderingGuestPage.identificationBlockWrong(data);
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@andersenlabcom");
-        orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.clickOrderButton();
+        orderingGuestPage.identificationBlockWrong(data);
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a..shaulo@andersenlab.com");
-        orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.clickOrderButton();
+        orderingGuestPage.identificationBlockWrong(data);
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.s ha ulo@andersenlab.com");
-        orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.clickOrderButton();
+        orderingGuestPage.identificationBlockWrong(data);
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@anders enlab.com");
-        orderingGuestPage.identificationBlock(data);
-        orderingGuestPage.clickOrderButton();
+        orderingGuestPage.identificationBlockWrong(data);
         AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
                 "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
                 "Error messages are equals");
@@ -254,7 +228,6 @@ public class OrderingGuestPageTest extends BaseTest {
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "");
         orderingGuestPage.deliveryFormInfo(data);
-        orderingGuestPage.clickOrderButton();
         AssertCollector.verifyCondition(orderingGuestPage.phoneFieldAdvice.getText().
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.verifyCondition(orderingGuestPage.addressFieldAdvice.getText().

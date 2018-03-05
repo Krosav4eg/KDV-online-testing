@@ -9,8 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import KDV_business_logic.pages.BasketPages.BasketPage;
+import org.testng.Assert;
 
-import static Core.utils.Constants.BASE_URL;
+import static Core.utils.Constants.*;
+import static Core.utils.Constants.FIRST_TAB_BROWSER;
 import static Core.utils.WaitingUtility.*;
 
 public class OrderingGuestPage extends BasePage {
@@ -21,6 +23,9 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
     private WebElement orderBtn;
+
+    @FindBy(css = "h1")
+    public WebElement headerOrderTxt;
 
     @FindBy(css = "[id='billing:firstname']")
     public WebElement firstNameTxt;
@@ -78,6 +83,7 @@ public class OrderingGuestPage extends BasePage {
 
     @FindBy(id = "review-btn")
     public WebElement createOrderButton;
+
 
     @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
     private WebElement identificationInfo;
@@ -146,6 +152,12 @@ public class OrderingGuestPage extends BasePage {
     private WebElement headerTxt;
 
 
+
+    @FindBy(css = ".page__inner")
+    private WebElement pageSuccseedContaier;
+
+
+
     public JSONObject data() {
         JSONObject data = new JSONObject();
         data.put("firstName", "ТЕСТ");
@@ -178,9 +190,6 @@ public class OrderingGuestPage extends BasePage {
         identificationBlock(data);
     }
 
-    public void clickOrderButton() {
-        elementFluentWaitVisibility(createOrderButton).click();
-    }
 
     public void orderingSelfGet(JSONObject data)
     {
@@ -195,6 +204,29 @@ public class OrderingGuestPage extends BasePage {
         elementIsClickable(createOrderButton).click();
     }
 
+    public void checkReglament()
+    {
+        moveToElementJS(driver,emailTxt);
+        (regulationsWebsiteLink).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        verifyTabsCountAsExpected(TWO_TABS_BROWSER);
+        AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL + "/regulations"));
+        switchDriverToAnyTabOfBrowser(1);
+        switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
+        elementIsClickable(consentPersonalDataProcessingLink).click();
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL +
+                "/media/rules/Consent_to_personal_data_processing.pdf"));
+        switchDriverToAnyTabOfBrowser(1);
+        switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
+        salesPurchaseAgreementLink.click();
+       switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL +
+                "/media/rules/Sales_and_Purchase_Agreement.pdf"));
+        switchDriverToAnyTabOfBrowser(1);
+        switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
+
+    }
 
     public void clickOnWebElement(WebElement element) {
         elementFluentWaitVisibility(element).click();
@@ -217,6 +249,20 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(emailTxt).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(phoneTxt).clear();
         elementFluentWaitVisibility(phoneTxt).sendKeys(data.getString("phone"));
+        return getText(identificationInfo);
+    }
+
+    public String identificationBlockWrong(JSONObject data) {
+        elementFluentWaitVisibility(firstNameTxt).clear();
+        elementFluentWaitVisibility(firstNameTxt).sendKeys(data.getString("firstName"));
+        elementFluentWaitVisibility(lastNameTxt).clear();
+        elementFluentWaitVisibility(lastNameTxt).sendKeys(data.getString("lastName"));
+        elementFluentWaitVisibility(emailTxt).clear();
+        elementFluentWaitVisibility(emailTxt).sendKeys(data.getString("email"));
+        elementFluentWaitVisibility(phoneTxt).clear();
+        elementFluentWaitVisibility(phoneTxt).sendKeys(data.getString("phone"));
+        moveToElementJS(driver,deliveryCommentField);
+        elementFluentWaitVisibility(createOrderButton).click();
         return getText(identificationInfo);
     }
 
@@ -255,5 +301,28 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryCommentField).clear();
         elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
         sleepWait();
+        moveToElementJS(driver,deliveryCommentField);
+        elementFluentWaitVisibility(createOrderButton).click();
+    }
+
+    public void clickCreateOrderBtn()
+    {
+        moveToElementJS(driver,compositionOrderHeader );
+        elementIsClickable(createOrderButton).click();
+        textIsPresent(headerOrderTxt,"Ваш заказ принят.");
+        Assert.assertTrue(getText(headerOrderTxt).contains("Ваш заказ принят."));
+    }
+
+    public void selectAuthorizationLink()
+    {
+        moveToElementJS(driver,headerTxt);
+        elementIsClickable(modalAuthLink).click();
+        elementIsClickable(authEnterButton).click();
+    }
+    public void closeAuthorizationLink()
+    {
+        elementIsClickable(closeModalButton).click();
+        moveToElementJS(driver,headerTxt);
+        elementIsClickable(modalAuthLink).click();
     }
 }
