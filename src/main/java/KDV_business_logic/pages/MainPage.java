@@ -36,9 +36,6 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@title='Регистрация']")
     private WebElement registrationButton;
 
-    @FindBy(id = "geo_modal")
-    private WebElement modelWindow;
-
     @FindBy(css = ".geo.j_geo")
     private WebElement selectCityModalWindow;
 
@@ -57,9 +54,6 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//button[text()='Да']")
     private WebElement acceptGeoConfirm;
 
-    @FindBy(css = ".j_geo_confirm_confirm")
-    private WebElement acceptBtn;
-
     @FindBy(xpath = "//*[@id='geo_modal']//div[@class='modal__close']")
     private WebElement closePopupButton;
 
@@ -75,9 +69,6 @@ public class MainPage extends BasePage {
     @FindBy(className = "quicklink__item_geo")
     public WebElement cityLink;
 
-    @FindBy(xpath = "//*[@class='modal__box']//div[@data-location]")
-    private List<WebElement> otherCityLink;
-
     @FindBy(xpath = "(//*[@class='modal__box']//div[@data-location])[1]")
     private WebElement firstCityLink;
 
@@ -89,9 +80,6 @@ public class MainPage extends BasePage {
 
     @FindBy(css = ".top-link-myaccount")
     public WebElement myAccountLink;
-
-    @FindBy(xpath = "//div[2]//h1")
-    private WebElement resultsProductSearchTitle;
 
     @FindBy(xpath = "//div/p[1]")
     private WebElement resultsProductSearch;
@@ -135,9 +123,6 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "(.//*[@class='mini-cart-dropdown__link btn btn-primary'])[1]")
     private WebElement submitAddingToBasket;
-
-    @FindBy(css = ".mini-cart-dropdown__link.mini-cart-dropdown__link_right.btn.btn-primary")
-    private WebElement createOrderInBasket;
 
     //========================The unit with the advantages of the store==============
     @FindBy(xpath = "//*[@class='benefit benefit_price j_benefit']")
@@ -198,23 +183,11 @@ public class MainPage extends BasePage {
     private WebElement slideSecondPoint;
 
     //========================CATEGORIES LIST SECTION=========================================
-    @FindBy(css = ".menu-categories__title")
-    private List<WebElement> categoryGoodsList;
-
-    @FindBy(css = ".filter__group")
-    private WebElement filter;
-
     @FindBy(css = ".filter__value")
     private WebElement filterValue;
 
-    @FindBy(css = ".menu-categories__link")
-    private WebElement categoryLink;
-
     @FindBy(css = ".menu-categories__item")
     private WebElement parentItemOfProducts;
-
-    @FindBy(xpath = "(//a[@href='http://tomsk.demo.dev.magonline.ru/new-year-gifts.html'])[2]")
-    private WebElement firstGoodInLinkList;
 
     //========================
     @FindBy(xpath = "(.//span[@class='btn-catalog__label with-closed-expander'])[1]")
@@ -355,9 +328,6 @@ public class MainPage extends BasePage {
     @FindBy(css = ".search-button__btn")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//span[@class='search-button__label']/span")
-    private WebElement searchButtonLabel;
-
     @FindBy(css = ".mini-cart__dropdown.j_mini-cart__dropdown")
     private WebElement fullBasketDropdown;
 
@@ -379,14 +349,6 @@ public class MainPage extends BasePage {
         elementIsClickable(companyLogo).click();
         String urlExpected = driver.getCurrentUrl();
         AssertCollector.assertEquals(urlActual, " URL IS EQUAL ", urlExpected);
-    }
-
-    public void closingModalWindow() {
-        elementFluentWaitVisibility(baseCityLink).click();
-        elementFluentWaitVisibility(closePopupButton).click();
-        elementFluentWaitVisibility(baseCityLink).click();
-        moveMouseToAndClick(driver, companyLogo, 1, 1);
-        AssertCollector.assertFalse(elementIsVisible(modalContentWindow));
     }
 
     public void changeCity() {
@@ -623,7 +585,6 @@ public class MainPage extends BasePage {
     }
 
     public void openingInstagramLink() {
-
         String originalHandle = driver.getWindowHandle();
         String expUrl = "https://www.instagram.com/kdvonline/";
         elementFluentWaitVisibility(instaLink).click();
@@ -661,7 +622,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(customerPickupLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of pick up ",
                 linkTextAttribute);
     }
 
@@ -670,7 +631,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(freeDeliveryLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of free delivery ",
                 linkTextAttribute);
     }
 
@@ -679,7 +640,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(paymentLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of payment ",
                 linkTextAttribute);
     }
 
@@ -688,7 +649,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(howToBuyLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of how to buy page ",
                 linkTextAttribute);
     }
 
@@ -697,7 +658,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(exchangeAndReturnLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of exchange ",
                 linkTextAttribute);
     }
 
@@ -706,7 +667,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(infoLegalPersonLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of info page ",
                 linkTextAttribute);
     }
 
@@ -780,7 +741,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(regulationsLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of regulations page ",
                 linkTextAttribute);
     }
 
@@ -789,7 +750,7 @@ public class MainPage extends BasePage {
         moveToElementJS(driver, footerMenu);
         elementFluentWaitVisibility(contactsLink).click();
         getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of product ",
+        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of contacts ",
                 linkTextAttribute);
     }
 
@@ -807,7 +768,6 @@ public class MainPage extends BasePage {
     }
 
     public void openingInstaInFooter() {
-
         String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
         elementFluentWaitVisibility(footerInstaLink).click();

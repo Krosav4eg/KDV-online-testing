@@ -25,12 +25,6 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID - C34282");
         mainPage.checkCompanyLogo();
     }
-//
-//    @Test
-//    public void verifyClosingModalWindowTest() {
-//        TestReporter.testTitle("Test ID - C34287");
-//        mainPage.closingModalWindow();
-//    }
 
     //TODO fix it too long
     // @Test(timeOut = 60000)

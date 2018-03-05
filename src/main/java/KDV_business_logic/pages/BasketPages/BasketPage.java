@@ -11,7 +11,6 @@ import Core.utils.AssertCollector;
 import static Core.utils.Constants.BASE_URL;
 import static Core.utils.WaitingUtility.*;
 
-
 public class BasketPage extends BasePage {
     public BasketPage(WebDriver driver) {
         super(driver);
@@ -146,7 +145,6 @@ public class BasketPage extends BasePage {
         AssertCollector.assertTrue(getText(cardContainer).contains("Сумма"));
         AssertCollector.assertTrue(getText(cardContainer).contains("Итого к оплате:"));
         AssertCollector.assertTrue(getText(cardPayContainer).contains("Итого к оплате:"));
-        //   AssertCollector.assertTrue(getText(cardPayContainer).contains("Минимальная сумма заказа 300,00"));
         AssertCollector.assertTrue(elementIsDisplayed(imageCard));
         elementFluentWaitVisibility(imageCard).click();
         driver.navigate().back();
