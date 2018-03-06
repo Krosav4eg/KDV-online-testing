@@ -1,12 +1,12 @@
 package KDV_business_logic.pages;
 
 import Core.basePage.BasePage;
+import Core.utils.AssertCollector;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import Core.utils.AssertCollector;
 
 import static Core.utils.Constants.*;
 import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
@@ -93,7 +93,7 @@ public class AuthorizationPage extends BasePage {
         fillInputField(passwordField, PHYSICAL_PERSON_PASSWORD);
         elementFluentWaitVisibility(authorizationButton).click();
         getValueOfInputField(passwordField, "value");
-        textPresent("Неверный адрес электронной почты (email) или пароль");
+        textPresent("Неверный логин или пароль.");
     }
 
     public void typeCorrectLoginIncorrectPasswordInAuth() {
@@ -101,7 +101,7 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
         getValueOfInputField(passwordField, "value");
-        textPresent("Неверный адрес электронной почты (email) или пароль");
+        textPresent("Неверный логин или пароль.");
     }
 
     public void typeEmptyDataInAuth() {
@@ -154,7 +154,7 @@ public class AuthorizationPage extends BasePage {
         fillInputField(emailInputField, RandomStringUtils.randomAlphanumeric(6) +
                 PHYSICAL_PERSON_EMAIL);
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
-        textPresent("Неверный адрес электронной почты (email) или пароль.");
+        textPresent("Неверный логин или пароль.");
         getValueOfInputField(passwordField, "value");
     }
 
@@ -236,7 +236,7 @@ public class AuthorizationPage extends BasePage {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, "anastasiya.shaulo@gmail.com");
         fillInputFieldAndPressEnterButton(passwordField, INCORRECT_PASSWORD);
-        textPresent("Неверный адрес электронной почты (email) или пароль.");
+        textPresent("Неверный логин или пароль.");
     }
 
     public void verifyOpeningMainPage() {
@@ -277,7 +277,7 @@ public class AuthorizationPage extends BasePage {
 
     public void verifyCopyWrite() {
         getUrl(AUTORIZATION_PAGE_URL);
-        textPresent("© 2017 ООО «КДВ Групп»");
+        textPresent("2018 ООО \"КДВ Групп\"");
     }
 
     public void verifyOfTextInRegistrationTab() {

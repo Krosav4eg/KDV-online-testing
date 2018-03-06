@@ -117,14 +117,13 @@ public class BasePage {
     //========================CUSTOM METHODS=============================================
 
     protected static String getText(WebElement element) {
-        String test="";
+        String test = "";
         try {
 
             LOGGER.log(Level.INFO, " Get text of element ");
             TestReporter.step(" Get text of element ");
-            test=element.getText();
-        }catch (Exception ex)
-        {
+            test = element.getText();
+        } catch (Exception ex) {
 
         }
         return test;
@@ -327,7 +326,6 @@ public class BasePage {
      * @param expectedText- text which must be present on the page
      */
     protected static void
-
 
 
     textPresent(String expectedText) {
