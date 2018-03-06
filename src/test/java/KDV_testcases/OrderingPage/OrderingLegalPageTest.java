@@ -52,7 +52,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-        orderingGuestPage.waitText();
+        WaitingUtility.elementFluentWaitVisibility(orderingLegalPage.orderLink);
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),
@@ -65,7 +65,7 @@ public class OrderingLegalPageTest extends BaseTest {
                         getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");
     }
-
+//TODO Добавить задержку тест не успевает отрабатывать
     @Test
     public void verifyCreateOrderWithChangingAddressTest() {
         TestReporter.testTitle("Test ID = 41801");
@@ -76,7 +76,6 @@ public class OrderingLegalPageTest extends BaseTest {
         orderingLegalPage.createOrderForLegalPerson();
         AssertCollector.assertEqualsJ(customerAccountPage.myAccountLink.getText(), "ООО Юрмет",
                 "Company name is correct");
-        del.textPresentDelegate("Адреса доставки (Торговые точки)");
         AssertCollector.assertTrue(orderingLegalPage.deliveryAddress.getText().contains("Томск, Иркутский тракт 114/1"),
                 "Address is correct");
         orderingGuestPage.clickOnWebElement(orderingLegalPage.deliveryAddress);
@@ -147,7 +146,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 "информацией о заказе и ссылкой на страницу, на которой можно проверить текущий статус заказа.\n" +
                 "\n" +
                 "Будем благодарны, если при оплате наличными Вы подготовите сумму без сдачи.");
-        orderingGuestPage.waitText();
+        WaitingUtility.elementFluentWaitVisibility(orderingLegalPage.orderLink);
         String orderNumberActual = orderingLegalPage.orderLink.getText();
         orderingGuestPage.clickOnWebElement(orderingLegalPage.continueShoppingButton);
         AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(),

@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
+import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

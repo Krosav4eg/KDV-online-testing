@@ -1,19 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Site Tests" parallel="tests">
+<suite name="Site Tests">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
-
-    <test name="Ordering OrderingPageTest OrderingLegalPageTest">
+    <test name="AuthorizationTest">
         <classes>
-            <class name="KDV_testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifySearchQueryWithInputTextWithoutCategoryTest"/>
-                </methods>
-            </class>
+            <class name="KDV_testcases.authorization.AuthorizationTest"/>
+            <class name="KDV_testcases.authorization.SiteLoginTest"/>
         </classes>
     </test>
 </suite>

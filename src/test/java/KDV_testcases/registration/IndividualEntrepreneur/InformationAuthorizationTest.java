@@ -13,9 +13,10 @@ public class InformationAuthorizationTest extends BaseTest {
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
-    //Изменился текст! Вместо "Учётная запись с таким адресом электронной почты уже существует" появилось
-    // "Требуется подтверждение учётной записи."
-
+    //изменилась логика работы приложения. после ввода "email", "ulo@andersenlab.com".
+    // выполняется переход на другую страницу и появляется текст:
+    // "Требуется подтверждение учётной записи.
+    // Ссылка ддя подтверждения была выслана на указанный адрес электронной почты. Чтобы выслатиь ссылку повторно нажмите"
     @Test
     public void verifyCorrectMailTest() {
         TestReporter.testTitle("Test ID = 37516");
@@ -85,13 +86,13 @@ public class InformationAuthorizationTest extends BaseTest {
     @Test
     public void verifyMandatoryWrongPassTest() {
         TestReporter.testTitle("Test ID = 37523");
-        JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("password", "131");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+        JSONObject data = registrationPage.mainInfoRegistration();
+        data.put("password", "11");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
-        verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("password", " 131123 ");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+        data = registrationPage.mainInfoRegistration();
+        data.put("password", " 3132 ");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
                 contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
     }
 
@@ -99,12 +100,18 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyMandatoryEmptyConfirmPasswordTest() {
         TestReporter.testTitle("Test ID = C40075");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("confirmPassword", "test234   ");
-        verifyData.put("pass", "testsea");
+        verifyData.put("pass", "teea");
+        verifyData.put("confirmPassword", "tes7676t234   ");
+        registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
     }
 
+    //изменилась логика работы приложения. после ввода "email", "test@test.com".
+    // теперь появляется текст:
+    // "Учётная запись с таким адресом электронной почты уже существует." +
+    //                " Если вы уверены, что это ваш адрес, то нажмите нажмите сюда для получения пароля на email. " +
+    //                "С ним вы сможете получить доступ к вашей учётной записи.");
     @Test
     public void verifyEmailFieldValidationTest() {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");

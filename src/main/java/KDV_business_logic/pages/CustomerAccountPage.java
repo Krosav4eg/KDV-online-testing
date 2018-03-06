@@ -18,9 +18,6 @@ public class CustomerAccountPage extends BasePage {
     protected MainPage mainPage;
 
     //========================Customer Account Page=============================================
-    @FindBy(css = ".//a[@title='Выйти']")
-    private WebElement exitFromAccountButton;
-
     @FindBy(xpath = "(//a[@title='КДВ'])[1]")
     private WebElement companyLogo;
 

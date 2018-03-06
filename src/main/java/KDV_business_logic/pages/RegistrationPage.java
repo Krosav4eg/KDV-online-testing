@@ -22,6 +22,9 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
+    @FindBy(css = ".registration-layout__content")
+    public WebElement allContainerText;
+
     @FindBy(xpath = "//a[@rel='general']")
     private WebElement individualButton;
 
@@ -106,7 +109,7 @@ public class RegistrationPage extends BasePage {
     @FindBy(id = "adv_full_name")
     public WebElement organizationFullName;
 
-    @FindBy(xpath = "//input[@name=\"adv_inn\"]")
+    @FindBy(id = "adv_inn")
     public WebElement taxpayerId;
 
     @FindBy(id = "adv_kpp")
@@ -528,19 +531,14 @@ public class RegistrationPage extends BasePage {
     }
 
     String addressDelivery(JSONObject data) {
-        elementFluentWaitVisibility(company).click();
         elementFluentWaitVisibility(company).sendKeys(data.getString("company"));
-        elementFluentWaitVisibility(address).click();
         elementFluentWaitVisibility(address).sendKeys(data.getString("address"));
-        elementFluentWaitVisibility(comments).click();
         elementFluentWaitVisibility(comments).sendKeys(data.getString("comments"));
         return getText(addressDelivery);
     }
 
     public String contactData(JSONObject data) {
-        elementFluentWaitVisibility(firstName).click();
         elementFluentWaitVisibility(firstName).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastName).click();
         elementFluentWaitVisibility(lastName).sendKeys(data.getString("lastName"));
         elementFluentWaitVisibility(PersonalCabinetPage.phoneInEditPage).click();
         elementFluentWaitVisibility(PersonalCabinetPage.phoneInEditPage).sendKeys(data.getString("phone"));

@@ -56,7 +56,6 @@ public class SiteLoginTest extends BaseTest {
         authorizationPage.verifyEmailFieldWithMoreThanOneDot();
     }
 
-    //FAILED
     @Test
     public void verifyNotValidEmail() {
         TestReporter.testTitle("Test ID = 34487,34488,34489");
@@ -68,7 +67,7 @@ public class SiteLoginTest extends BaseTest {
         data.put("email", "a..shaulo@andersenlab.com");
         AssertCollector.verifyCondition(authorizationPage.authForm(data).contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
         data.put("email", "anastasiya.shaulo@gmail.com");
-        AssertCollector.assertTrue(authorizationPage.authForm(data).contains("Эта учётная запись не подтверждена"));
+        AssertCollector.assertTrue(authorizationPage.authForm(data).contains("Неверный логин или пароль."));
     }
 
     @Test

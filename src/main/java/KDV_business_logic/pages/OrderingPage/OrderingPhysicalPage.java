@@ -1,6 +1,8 @@
 package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
+import KDV_business_logic.pages.BasketPages.BasketPage;
+import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +23,7 @@ public class OrderingPhysicalPage extends BasePage {
     }
 
     OrderingGuestPage guest = new OrderingGuestPage(driver);
+    BasketPage basketPage = new BasketPage(driver);
     @FindBy(id = "email")
     private WebElement emailInputField;
 
@@ -96,8 +99,11 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = "#loc-changed .modal__close")
     private WebElement closedBtn;
 
+    @FindBy(css = "#billing-address-select>option")///checkout-delivery-time
+    private List<WebElement> addressesList;
+
     @FindBy(id = "billing-address-select")///checkout-delivery-time
-    private WebElement addressesList;
+    private WebElement addressList;
 
     /**
      * Authorization and select product
@@ -105,24 +111,14 @@ public class OrderingPhysicalPage extends BasePage {
     private void selectProduct() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, PONOMAREVA_EMAIL);//"test_m.ponomareva@magdv.com");
-
         fillInputFieldAndPressEnterButton(passwordField, PONOMAREVA_PASSWORD); //"ztq0d9e6");
-        if (!
-
-                getText(basketSummaryTxt).
-
-                        contains("тов."))
-
-        {
-            new OrderingGuestPage(driver).addProductToBasket();
-        } else
-
-        {
+        if (!getText(basketSummaryTxt).contains("тов.")) {
+            basketPage.addProductToBasket();
+        } else {
             elementFluentWaitVisibility(selectMiniCart).click();
             elementFluentWaitVisibility(selectBasket).click();
             elementFluentWaitVisibility(orderBtn).click();
         }
-
     }
 
     /**
@@ -202,13 +198,14 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-        Select dropdown = new Select(addressesList);
+//        Select dropdown = new Select(addressList);
+//        addressList.dropdown.selectByIndex(4);
+        Select dropdown = new Select(addressList);
         dropdown.selectByIndex(1);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         textIsPresent(modelWindows, "Выбранный вами адрес обслуживается другим");
-        AssertCollector.verifyCondition(getText(modelWindows).
-                contains("Выбранный вами адрес обслуживается другим складом. " +
-                        "Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
+        AssertCollector.verifyCondition(getText(modelWindows).contains("Выбранный вами адрес обслуживается другим складом. " +
+                "Цены и наличие товаров в заказе могут измениться. Переходим на другой склад?"));
         elementFluentWaitVisibility(cancelBtn).click();
         elementFluentWaitVisibility(guest.createOrderButton).click();
         elementFluentWaitVisibility(closedBtn).click();

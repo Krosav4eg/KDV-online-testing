@@ -1,13 +1,11 @@
 package KDV_testcases.base;
 
-import Core.Email.SendMail;
 import Core.driverFactory.BrowserFactory;
 import KDV_business_logic.pages.PersonalAreaPage.*;
 import listener.ListenerTest;
 import Core.logger.LevelCustom;
 import Core.logger.MagDvLogger;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.PageFactory;
@@ -20,7 +18,7 @@ import KDV_business_logic.pages.CategoryPage.CategoryPage;
 import KDV_business_logic.pages.CategoryPage.ModalWindow;
 import KDV_business_logic.pages.CustomerAccountPage;
 import KDV_business_logic.pages.MainPage;
-import KDV_business_logic.pages.OrderingPage.OrderingGuestPage;
+import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import KDV_business_logic.pages.OrderingPage.OrderingLegalPage;
 import KDV_business_logic.pages.OrderingPage.OrderingPhysicalPage;
 import KDV_business_logic.pages.RegistrationPage;
@@ -35,13 +33,11 @@ import java.util.logging.Logger;
 import static Core.driverFactory.BrowserFactory.*;
 import static Core.logger.NotificationLogger.TestStatus;
 import static Core.utils.Constants.*;
+
 /**
  * @author Sergey Potapov
  */
 public class BaseTest {
-
-
-
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
     //=======DECLARATION OF PAGE CLASSES=========
     protected MainPage mainPage;
@@ -63,32 +59,29 @@ public class BaseTest {
 
     private BrowserFactory singleton = BrowserFactory.getInstance();
 
-    /**
-     * Clean directory with error and success screenshots before starting auto tests
-     * and set browser before starting auto tests
-     */
-    private void logStatus(ITestResult result,String date)
-    {
-        switch (result.getStatus())
-        {
-            case ITestResult.FAILURE:
-            {
-                LOGGER.log(Level.WARNING, "TEST STATUS: FAILURE\t"+date);
+
+    private void logStatus(ITestResult result, String date) {
+        switch (result.getStatus()) {
+            case ITestResult.FAILURE: {
+                LOGGER.log(Level.WARNING, "TEST STATUS: FAILURE\t" + date);
                 break;
             }
-            case ITestResult.SKIP:
-            {
-                LOGGER.log(LevelCustom.SKIP, "TEST STATUS: SKIP\t"+date);
+            case ITestResult.SKIP: {
+                LOGGER.log(LevelCustom.SKIP, "TEST STATUS: SKIP\t" + date);
                 break;
             }
-            case ITestResult.SUCCESS:
-            {
-                LOGGER.log(Level.FINE, "TEST STATUS: PASSED\t"+date);
+            case ITestResult.SUCCESS: {
+                LOGGER.log(Level.FINE, "TEST STATUS: PASSED\t" + date);
                 break;
             }
         }
     }
 
+
+    /**
+     * Clean directory with error and success screenshots before starting auto tests
+     * and set browser before starting auto tests
+     */
     private void screen() {
         if (new File(ERROR_SCREENSHOT_FOLDER).exists())
             try {
@@ -107,9 +100,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void verifyBrowser(Method method) {
-        testName=method.getName();
-        if (driver==null)
-        {
+        testName = method.getName();
+        if (driver == null) {
             driver = singleton.setDriver();
             initPageElements();
             TestReporter.step("Open Main page");
@@ -120,17 +112,17 @@ public class BaseTest {
 
     @AfterMethod
     public void stopTest(ITestResult result) {
-        if(result.getStatus()==ITestResult.FAILURE) {
-	        new ListenerTest().onTestFailure(result);
+        if (result.getStatus() == ITestResult.FAILURE) {
+            new ListenerTest().onTestFailure(result);
         }
-	    long millis=result.getEndMillis()-result.getStartMillis();
-	    long tim=((millis % 60000)/1000)*1000;
-	    long timeS=millis -tim;
-	    String date = String.format("TEST TIME: %d:%d:%d", millis / 60000, (millis % 60000) / 1000,timeS);
-	    TestStatus(result);
-	    logStatus(result,date);
+        long millis = result.getEndMillis() - result.getStartMillis();
+        long tim = ((millis % 60000) / 1000) * 1000;
+        long timeS = millis - tim;
+        String date = String.format("TEST TIME: %d:%d:%d", millis / 60000, (millis % 60000) / 1000, timeS);
+        TestStatus(result);
+        logStatus(result, date);
         driver.quit();
-        driver=null;
+        driver = null;
     }
 
     /**
@@ -138,8 +130,7 @@ public class BaseTest {
      */
     @AfterTest()
     public void closeBrowser() {
-        if(driver!=null)
-        {
+        if (driver != null) {
             driver.quit();
         }
         TestReporter.removeNumberStep();
@@ -155,8 +146,8 @@ public class BaseTest {
      * Method for screenshot creation
      *
      * @param screenShotName -name of screenshot
-     * @param folder -folder       which contain screenshots
-     //* @return dest - destination where to be situated screenshots
+     * @param folder         -folder       which contain screenshots
+     *                       //* @return dest - destination where to be situated screenshots
      */
     public static void capture(String screenShotName, String folder) {
         TakesScreenshot takesScreenshot = ((TakesScreenshot) BrowserFactory.getDriver());

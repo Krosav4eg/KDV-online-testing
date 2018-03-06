@@ -86,17 +86,6 @@ public class AuthorizationPage extends BasePage {
         AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_PAGE_URL, "Verify current url");
     }
 
-    public void authAsPhysicalPerson() {
-        getUrl(AUTORIZATION_PAGE_URL);
-        fillInputField(emailInputField, PHYSICAL_PERSON_EMAIL);
-        fillInputField(passwordField, PHYSICAL_PERSON_PASSWORD);
-        elementFluentWaitVisibility(authorizationButton).click();
-        AssertCollector.assertTrue(getCurrentUrl().contains("http://kemerovo.demo.dev.magonline.ru/customer/account/"));
-        elementFluentWaitVisibility(exitButton).click();
-        AssertCollector.assertTrue(elementIsVisible(registBtn), "Registration button is appear");
-        AssertCollector.assertTrue(elementIsVisible(loginButton), "Login button is appear");
-    }
-
     public void typeIncorrectPasswordInAuth() {
         getUrl(AUTORIZATION_PAGE_URL);
         fillInputField(emailInputField, INCORRECT_EMAIL);
@@ -222,6 +211,7 @@ public class AuthorizationPage extends BasePage {
                 "ivanivanov@domain.com.");
     }
 
+    //если запускать много раз этот тест, то необходимо менять email. иначе будет превышено число доступных запросов
     public void verifyValidEmailInForgotPassword() {
         getUrl(BASE_URL + "/customer/account/forgotpassword/");
         fillInputField(emailInputAtForgotPassword, "a.shaulo@andersenlab.com");

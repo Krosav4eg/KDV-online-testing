@@ -6,7 +6,7 @@ import Core.utils.TestReporter;
 
 public class OrderingPhysicalPageTest extends BaseTest {
 
-     @Test
+    @Test
     public void orderingDefaultAddress() {
         TestReporter.testTitle("Test ID - C41300");
         orderingPhysicalPage.orderingDefaultAddress();

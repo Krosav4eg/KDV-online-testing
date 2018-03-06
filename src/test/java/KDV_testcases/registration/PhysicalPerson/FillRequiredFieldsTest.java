@@ -55,7 +55,7 @@ public class FillRequiredFieldsTest extends BaseTest {
     }
 
     @Test
-    public void verifyDuplicateEmailTest() {
+        public void verifyDuplicateEmailTest() {
         TestReporter.testTitle("Test ID = 37360");
         registrationPage.verifyDuplicateEmail();
     }

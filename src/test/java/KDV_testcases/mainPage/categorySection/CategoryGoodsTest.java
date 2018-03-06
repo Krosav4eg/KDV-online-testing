@@ -45,12 +45,6 @@ public class CategoryGoodsTest extends BaseTest {
         TestReporter.testTitle("Test ID - C40223");
         categoryPage.sortFilterPrice();
     }
-    //TODO test data is miss no functional
-//    @Test
-//    public void verifySelectingCategoryTest() {
-//        TestReporter.testTitle("Test ID - C34335");
-//        mainPage.selectingCategory();
-//    }
 
     @Test
     public void verifyMoveToCategoryTest() {
@@ -58,6 +52,7 @@ public class CategoryGoodsTest extends BaseTest {
         mainPage.moveToCategory();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyCategoryFieldsMainPage() {
         TestReporter.testTitle("Test ID - C39091");
@@ -71,24 +66,28 @@ public class CategoryGoodsTest extends BaseTest {
         cardPage.addProductFromCardMainPage();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyAddProductNotValidMainPage() {
         TestReporter.testTitle("Test ID - C40246");
         cardPage.addProductNotValidFromCardMainPage();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyModalWindow() {
         TestReporter.testTitle("Test ID - C39126");
         modalWindow.checkModalWindow();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyAddProductNotValidModalWindow() {
         TestReporter.testTitle("Test ID - C40268");
         modalWindow.addProductNotValidModalWindow();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyProductCard() {
         TestReporter.testTitle("Test ID - C39286");
@@ -107,6 +106,7 @@ public class CategoryGoodsTest extends BaseTest {
         cardPage.validCardProductVerifyComposition();
     }
 
+    //TODO BUG with goods increment button
     @Test
     public void verifyProductCardNotValid() {
         TestReporter.testTitle("Test ID - C40269");
