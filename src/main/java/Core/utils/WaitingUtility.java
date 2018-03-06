@@ -142,10 +142,12 @@ public class WaitingUtility {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
+
     public static boolean elementIsDisplayedTime(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT/20);
+        WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT / 20);
         return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
     }
+
     public static boolean elementIsPresent(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT / 30);
         try {
@@ -163,6 +165,7 @@ public class WaitingUtility {
             return false;
         }
     }
+
     public static boolean elementIsVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, WAITING_TIMEOUT);
         try {

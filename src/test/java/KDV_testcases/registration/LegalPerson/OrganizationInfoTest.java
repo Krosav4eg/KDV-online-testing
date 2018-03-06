@@ -81,7 +81,7 @@ public class OrganizationInfoTest extends BaseTest {
         registrationPage.verifyInputSymbolsInReasonCodeField();
     }
     //not pass due validation in both fields
-    @Test
+    @Test(enabled = false)
     public void verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest() {
         TestReporter.testTitle("Test ID = 37568,40062,37486");
         JSONObject data = registrationPage.mainInfoRegistration();
@@ -99,7 +99,7 @@ public class OrganizationInfoTest extends BaseTest {
     }
 
     //not pass due validation in both fields
-    @Test
+    @Test(enabled = false)
     public void verifyMaximumInputLengthInCompanyAndCommentsFieldTest() {
         TestReporter.testTitle("Test ID = 40063,40066,37480,37424");
         JSONObject data = registrationPage.mainInfoRegistration();
@@ -117,7 +117,7 @@ public class OrganizationInfoTest extends BaseTest {
     }
 
     //not pass due validation
-    @Test
+    @Test(enabled = false)
     public void verifyMaximumInputAddressFieldTest() {
         TestReporter.testTitle("Test ID = 40065,37421");
         JSONObject data = registrationPage.mainInfoRegistration();

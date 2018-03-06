@@ -1,5 +1,8 @@
 package KDV_testcases.personalCabinet.Legal;
 
+import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
+import KDV_business_logic.pages.PersonalAreaPage.MyBookingPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -9,14 +12,19 @@ import Core.utils.TestReporter;
 
 public class PersonalDataTest extends BaseTest {
 
+    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
+
     @Test
     public void verifyFieldsIsPresent() {
-
         TestReporter.testTitle("Test ID = 41552");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
+        orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
+        del.textPresentDelegate("Мои заказы");
+        del.textPresentDelegate("У вас пока нет оформленных заказов.");
         personalCabinetPage.verifyFieldsData();
     }
 
@@ -108,9 +116,10 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("first", "!@#$%^&*()+_/|{}[]?>");
         dataCab.put("last", "!@#$%^&*()+_/|{}[]?>");
         String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф."));
-        AssertCollector.verifyCondition(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф."));
-
+        AssertCollector.verifyCondition(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать " +
+                "только буквы, тире и апостроф."));
+        AssertCollector.verifyCondition(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать " +
+                "только буквы, тире и апостроф."));
     }
 
     @Test
@@ -125,23 +134,26 @@ public class PersonalDataTest extends BaseTest {
         String email = "a.shauloandersenlab.com";
         dataCab.put("email", email);
         String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
+                "(email)."));
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a.shaulo@andersenlabcom";
         dataCab.put("email", email);
         allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
+                "(email)."));
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a..shaulo@andersenlab.com";
         dataCab.put("email", email);
         allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
+                "(email)."));
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a.shaulo@anders enlab.com";
         dataCab.put("email", email);
         allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты (email)."));
-
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
+                "(email)."));
     }
 
     @Test
@@ -160,7 +172,6 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("phone", phone);
         allResult = personalCabinetPage.fillFields(dataCab, false);
         AssertCollector.verifyCondition(allResult.contains("Данные учётной записи сохранены."));
-
     }
 
     @Test

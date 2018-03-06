@@ -66,40 +66,22 @@ public class PersonalCabinetPage extends BasePage {
     @FindBy(css = "[name='is_subscribed']")
     private WebElement isSubscribedBtn;
 
-    @FindBy(id = "email")
-    private WebElement emailInEditPage;
-
-
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");
         data.put("email", "test_a.evdokimov@magdv.com");
-        data.put("phone", "+71111111111");
+        data.put("phone", "+71111111111 ");
         data.put("currentPassword", AUTHORIZATION_PASSWORD);
         return data;
-    }
-
-    public void verifyEditAccountFields(JSONObject data) {
-        getUrl(ACCOUNT_INFORMATION_URL);
-        elementFluentWaitVisibility(firstNameInEditPage).clear();
-        elementFluentWaitVisibility(firstNameInEditPage).sendKeys(data.getString("firstName"));
-        elementFluentWaitVisibility(lastNameInEditPage).clear();
-        elementFluentWaitVisibility(lastNameInEditPage).sendKeys(data.getString("lastName"));
-        elementFluentWaitVisibility(emailInEditPage).clear();
-        elementFluentWaitVisibility(emailInEditPage).sendKeys(data.getString("email"));
-        elementFluentWaitVisibility(phoneInEditPage).clear();
-        elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
-        elementFluentWaitVisibility(passwordInEditPage).clear();
-        elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
-        AssertCollector.assertTrue(getCurrentUrl().contains(ACCOUNT_PAGE_URL), "Verify current url");
     }
 
     /*******Legal Room********/
 
     public void verifyFieldsNotAuthorization() {
-        AssertCollector.verifyCondition(getText(allertTxt).contains("Обратите внимание, что юридические лица и организации могут " +
-                "оформлять заказы в интернет-магазине KDV только после рассмотрения заявки менеджером. "));
+        AssertCollector.verifyCondition(getText(allertTxt).
+                contains("Обратите внимание, что юридические лица и организации могут " +
+                        "оформлять заказы в интернет-магазине KDV только после рассмотрения заявки менеджером. "));
         AssertCollector.verifyCondition(getText(profileContainer).contains("Здравствуйте, Александр Григорьев!"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("test_a.grigoriev@magdv.com"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("+71113959049"));
@@ -127,12 +109,14 @@ public class PersonalCabinetPage extends BasePage {
 
     public void verifyFieldsNotAuthorizationInfo() {
         getUrl(BASE_URL + "/advancedcustomer/legalinformation/");
-        AssertCollector.verifyCondition(getText(allertTxt).contains("Обратите внимание, что юридические лица и организации могут " +
-                "оформлять заказы в интернет-магазине KDV только после рассмотрения заявки менеджером. "));
+        AssertCollector.verifyCondition(getText(allertTxt).
+                contains("Обратите внимание, что юридические лица и организации могут " +
+                        "оформлять заказы в интернет-магазине KDV только после рассмотрения заявки менеджером. "));
         AssertCollector.verifyCondition(getText(profileContainer).contains("ООО Арман"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("ИНН: 7017138320"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("КПП: 701701001"));
-        AssertCollector.verifyCondition(getText(profileContainer).contains("Юридический адрес: 634062, Томская обл, Томск г, Иркутский тракт, 102, кв. 2"));
+        AssertCollector.verifyCondition(getText(profileContainer).
+                contains("Юридический адрес: 634062, Томская обл, Томск г, Иркутский тракт, 102, кв. 2"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("Способ оплаты: -"));
     }
 
@@ -141,7 +125,8 @@ public class PersonalCabinetPage extends BasePage {
         AssertCollector.verifyCondition(getText(profileContainer).contains("ООО Юрмет"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("ИНН: 7002000827"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("КПП: 701701001"));
-        AssertCollector.verifyCondition(getText(profileContainer).contains("Юридический адрес: 636820, Томская обл, Асиновский р-н, Батурино с, Промышленная ул, дом № 11"));
+        AssertCollector.verifyCondition(getText(profileContainer).
+                contains("Юридический адрес: 636820, Томская обл, Асиновский р-н, Батурино с, Промышленная ул, дом № 11"));
         AssertCollector.verifyCondition(getText(profileContainer).contains("Способ оплаты: НаличныеОтсрочка"));
     }
 
@@ -193,7 +178,6 @@ public class PersonalCabinetPage extends BasePage {
             if (!changerPassBtn.isSelected()) {
                 clickElementByJS(driver, changerPassBtn);
             }
-
             elementFluentWaitVisibility(newPasswordField).sendKeys(data.getString("newPass"));
             elementFluentWaitVisibility(newConfirmationField).sendKeys(data.getString("confirmPass"));
         }
