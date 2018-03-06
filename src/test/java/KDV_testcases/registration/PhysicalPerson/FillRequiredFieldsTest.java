@@ -55,7 +55,7 @@ public class FillRequiredFieldsTest extends BaseTest {
     }
 
     @Test
-        public void verifyDuplicateEmailTest() {
+    public void verifyDuplicateEmailTest() {
         TestReporter.testTitle("Test ID = 37360");
         registrationPage.verifyDuplicateEmail();
     }
@@ -67,7 +67,7 @@ public class FillRequiredFieldsTest extends BaseTest {
     }
 
     @Test
-    public void verifySuccessfulRegistrationTest() throws InterruptedException {
+    public void verifySuccessfulRegistrationTest() {
         TestReporter.testTitle("Test ID = 37366");
         registrationPage.verifySuccessfulRegistration();
     }
