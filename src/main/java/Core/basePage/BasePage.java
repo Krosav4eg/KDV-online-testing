@@ -276,6 +276,20 @@ public class BasePage {
         sleepWait();
     }
 
+    protected void scrollUp() {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "AWT Exception occurs, see message for details: %s", e.getMessage());
+        }
+        sleepWait();
+        robot.keyPress(KeyEvent.VK_PAGE_UP);
+        robot.keyRelease(KeyEvent.VK_PAGE_UP);
+        sleepWait();
+    }
+
     public static void scrollToNecessaryElement(WebElement element) {
         LOGGER.log(Level.INFO, "Scroll to necessary element on page");
         TestReporter.step("Scroll to necessary element on page");
