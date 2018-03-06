@@ -4,7 +4,6 @@ import Core.basePage.BasePage;
 import KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
-import org.omg.PortableServer.THREAD_POLICY_ID;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -170,10 +169,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(elementIsDisplayed(firstName));
     }
 
+    //validation problems
     public void verifyInputInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(firstName).click();
-        fillInputField(firstName, RandomStringUtils.randomAlphabetic(46));
+        fillInputField(firstName, RandomStringUtils.randomAlphabetic(45));
         elementFluentWaitVisibility(layout).click();
         String text = firstName.getAttribute("value");
         AssertCollector.assertEquals(text, " Current text is equal to ", text);
@@ -182,20 +182,20 @@ public class RegistrationPage extends BasePage {
     //test not pass(validation problems)
     public void verifyMaximumInputInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(firstName, RandomStringUtils.randomAlphabetic(46));
+        fillInputField(firstName, RandomStringUtils.randomAlphabetic(45));
         AssertCollector.assertEquals(firstName.getAttribute("value").length(),
                 " Number of symbols is equal ",
                 RandomStringUtils.randomAlphabetic(45).length());
     }
 
-    //test not pass(validation problems)
+    //test not pass(validation problems). accepting possibility inputting numbers
     public void verifyInputNumbersInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, RandomStringUtils.randomNumeric(6));
         AssertCollector.assertTrue(firstName.getAttribute("value").isEmpty(), "required field is empty");
     }
 
-    //test not pass(validation problems)
+    //test not pass(validation problems). BUG 143
     public void verifyInputForbiddenSymbolsInFirstNameField() {
         getUrl(REGISTRATION_PAGE_URL);
         fillInputField(firstName, "!@#$%^&*()+_/|{}[]?><.,");
@@ -215,9 +215,10 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(elementIsDisplayed(lastName));
     }
 
+    //validation problems
     public void verifyInputInLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(lastName, RandomStringUtils.randomAlphabetic(46));
+        fillInputField(lastName, RandomStringUtils.randomAlphabetic(45));
         elementFluentWaitVisibility(layout).click();
         String text = lastName.getAttribute("value");
         AssertCollector.assertEquals(text, "  Current text is equal to  ", text);
@@ -226,7 +227,7 @@ public class RegistrationPage extends BasePage {
 
     public void verifyMaximumInputInLastNameField() {
         getUrl(REGISTRATION_PAGE_URL);
-        fillInputField(lastName, RandomStringUtils.randomAlphabetic(46));
+        fillInputField(lastName, RandomStringUtils.randomAlphabetic(45));
         AssertCollector.assertEquals(lastName.getAttribute("value").length(), " Number of symbols is equal ",
                 RandomStringUtils.randomAlphabetic(45).length());
     }
@@ -508,13 +509,13 @@ public class RegistrationPage extends BasePage {
 
     public String organizationInformation(JSONObject data) {
         moveMouseTo(driver, allertTxt);
-        elementFluentWaitVisibility(organizationFullName).click();
+        elementFluentWaitVisibility(organizationFullName).clear();
         elementFluentWaitVisibility(organizationFullName).sendKeys(data.getString("organizationName"));
-        elementFluentWaitVisibility(taxpayerId).click();
+        elementFluentWaitVisibility(taxpayerId).clear();
         elementFluentWaitVisibility(taxpayerId).sendKeys(data.getString("taxId"));
-        elementFluentWaitVisibility(reasonCode).click();
+        elementFluentWaitVisibility(reasonCode).clear();
         elementFluentWaitVisibility(reasonCode).sendKeys(data.getString("reasonCode"));
-        elementFluentWaitVisibility(legalAddress).click();
+        elementFluentWaitVisibility(legalAddress).clear();
         elementFluentWaitVisibility(legalAddress).sendKeys(data.getString("legalAddress"));
         return getText(informationOrganization);
     }

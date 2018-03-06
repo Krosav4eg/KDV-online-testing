@@ -12,7 +12,6 @@ public class CabinetLegalTest extends BaseTest {
 
     @Test
     public void verifyFieldsNotApprovedUser() {
-
         TestReporter.testTitle("TestID = 41510");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_a.grigoriev@magdv.com");

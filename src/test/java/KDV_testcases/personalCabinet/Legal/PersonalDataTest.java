@@ -1,5 +1,8 @@
 package KDV_testcases.personalCabinet.Legal;
 
+import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
+import KDV_business_logic.pages.PersonalAreaPage.MyBookingPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -9,6 +12,9 @@ import Core.utils.TestReporter;
 
 public class PersonalDataTest extends BaseTest {
 
+    BasePage.MyDelegate del = new BasePage.MyDelegate() {
+    };
+
     @Test
     public void verifyFieldsIsPresent() {
         TestReporter.testTitle("Test ID = 41552");
@@ -16,6 +22,9 @@ public class PersonalDataTest extends BaseTest {
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
+        orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
+        del.textPresentDelegate("Мои заказы");
+        del.textPresentDelegate("У вас пока нет оформленных заказов.");
         personalCabinetPage.verifyFieldsData();
     }
 

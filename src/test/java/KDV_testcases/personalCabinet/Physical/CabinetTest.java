@@ -1,6 +1,7 @@
 package KDV_testcases.personalCabinet.Physical;
 
 import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
@@ -10,6 +11,7 @@ import Core.utils.TestReporter;
 import static Core.basePage.BasePage.navigateBack;
 import static Core.utils.Constants.*;
 import static Core.utils.WaitingUtility.elementIsVisible;
+import static Core.utils.WaitingUtility.waitForJSandJQueryToLoad;
 
 public class CabinetTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -28,7 +30,6 @@ public class CabinetTest extends BaseTest {
                 contains("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
         AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+77111111111"));
-
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
         (controlPanelPage.editPersonalDataButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
@@ -40,7 +41,7 @@ public class CabinetTest extends BaseTest {
         AssertCollector.verifyCondition(controlPanelPage.phoneInAddressByDefault.getText().equals("+71111111111"));
         del.scrollToNecessaryElementDelegate(controlPanelPage.editAddressButton);
         String expLink1 = del.getValueOfAttributeByName(controlPanelPage.editAddressButton, "href");
-        (controlPanelPage.editAddressButton).click();
+        WaitingUtility.elementIsClickable(controlPanelPage.editAddressButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink1));
     }
 

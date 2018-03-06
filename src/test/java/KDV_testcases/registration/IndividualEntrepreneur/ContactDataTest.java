@@ -45,36 +45,26 @@ public class ContactDataTest extends BaseTest {
         registrationPage.verifyAuthorizationFields(data);
         del.textPresentDelegate("Это поле обязательно для заполнения");
         data = registrationPage.mainInfoRegistration();
-        data.put("phone", RandomStringUtils.randomNumeric(9));
+        data.put("phone", "8997");
         registrationPage.verifyAuthorizationFields(data);
         del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
     }
 
-    //not pass due validation in all fields
+    //была убрана проверка длинны ввода строк, т.к. у нас появилось валидационное сообщение по превышению ввода символов
+    //BUG 143 при воде в поля имя/фамилия значениия Анна-Мар'я появляетя сообщение что поле не может быть пустым
     @Test
     public void verifyMaximumInputLengthFirstAndLastNameFieldTest() {
         TestReporter.testTitle("Test ID = 40067");
         JSONObject data = registrationPage.mainInfoRegistration();
-        data.put("firstName", RandomStringUtils.randomAlphanumeric(46));
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Значение \"Имя\" не должно превышать 45 символов."));
-        data = registrationPage.mainInfoRegistration();
-        data.put("lastName", RandomStringUtils.randomAlphanumeric(46));
-        String text = registrationPage.verifyAuthorizationFields(data);
-        AssertCollector.assertTrue(text.
-                contains("Значение \"Фамилия\" не должно превышать 45 символов."));
-        AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-        data = registrationPage.mainInfoRegistration();
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+                contains("Значение \"Имя\" не должно превышать 45 символов."));
         AssertCollector.assertEquals(registrationPage.firstName.getAttribute("value"),
                 " Value of last name is equal ", registrationPage.firstName.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphanumeric(36));
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+                contains("Значение \"Фамилия\" не должно превышать 45 символов."));
         AssertCollector.assertEquals(registrationPage.lastName.getAttribute("value"),
                 " Value of last name is equal ", registrationPage.lastName.getAttribute("value"));
     }
@@ -83,9 +73,8 @@ public class ContactDataTest extends BaseTest {
     public void verifyPhoneFieldValidationTest() {
         TestReporter.testTitle("Test ID = 40068");
         JSONObject data = registrationPage.mainInfoRegistration();
-        data.put("phone", RandomStringUtils.randomAlphanumeric(10));
+        data.put("phone", "2121");
         String text = registrationPage.verifyAuthorizationFields(data);
-        System.out.println(text);
         AssertCollector.assertTrue(text.
                 contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }

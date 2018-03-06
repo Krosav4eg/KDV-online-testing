@@ -1,6 +1,8 @@
 package KDV_business_logic.pages;
 
 import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
+import KDV_business_logic.pages.PersonalAreaPage.MyBookingPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -69,7 +71,7 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = ".link")
     private WebElement authForm;
 
-    public JSONObject mainAuthorizationInfo() {
+      public JSONObject mainAuthorizationInfo() {
         JSONObject data = new JSONObject();
         data.put("email", AUTHORIZATION_EMAIL);
         data.put("password", AUTHORIZATION_PASSWORD);
