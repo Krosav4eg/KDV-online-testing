@@ -1,6 +1,7 @@
 package KDV_testcases.personalCabinet.Physical;
 
 import Core.basePage.BasePage;
+import Core.utils.WaitingUtility;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
@@ -8,8 +9,6 @@ import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.*;
-import static Core.utils.Constants.ACCOUNT_INFORMATION_URL;
-import static Core.utils.Constants.ZUEV_PASSWORD;
 import static Core.utils.WaitingUtility.elementIsVisible;
 
 public class AddressesDataTest extends BaseTest {
@@ -25,7 +24,8 @@ public class AddressesDataTest extends BaseTest {
 		data.put("password", PONOMAREVA_PASSWORD);//"ztq0d9e6"
 		authorizationPage.verifyAuthFields(data);
 		del.getUrlDelegate(ACCOUNT_DELIVERY_ADDRESS_URL);
-		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
+		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL,
+				"Urls are equals");
 		AssertCollector.assertTrue(elementIsVisible( deliveryAddressPage.deliveryAddressHeader),
 				"Required header is displayed");
 	}
@@ -37,7 +37,7 @@ public class AddressesDataTest extends BaseTest {
 		data.put("email", MAKAROVA_EMAIL);
 		data.put("password", MAKAROVA_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
-		orderingGuestPage.clickOnWebElement(deliveryAddressPage.deliveryAddressItemButton);
+		WaitingUtility.elementIsClickable(deliveryAddressPage.deliveryAddressItemButton).click();
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_DELIVERY_ADDRESS_URL +
 				"new/", "Urls are equals");
 	}
@@ -49,7 +49,7 @@ public class AddressesDataTest extends BaseTest {
 		data.put("email",BOLSHAKOV_EMAIL);
 		data.put("password", BOLSHAKOV_PASSWORD);
 		authorizationPage.verifyAuthFields(data);
-		orderingGuestPage.clickOnWebElement(deliveryAddressPage.deliveryAddressItemButton);
+		WaitingUtility.elementIsClickable(deliveryAddressPage.deliveryAddressItemButton).click();
 		AssertCollector.assertEqualsJ(deliveryAddressPage.nameDeliveryByDefault.getText(), "Тимофей Большаков",
 				"First name and last name are equals");
 		AssertCollector.assertEqualsJ(deliveryAddressPage.deliveryAddressByDefault.getText(),
@@ -85,5 +85,4 @@ public class AddressesDataTest extends BaseTest {
 		orderingGuestPage.clickOnWebElement(deliveryAddressPage.editDeliveryLink);
 		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), ACCOUNT_INFORMATION_URL, "Urls are equals");
 	}
-
 }

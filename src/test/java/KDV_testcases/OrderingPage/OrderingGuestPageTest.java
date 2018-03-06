@@ -12,6 +12,7 @@ import Core.utils.TestReporter;
 
 import static Core.utils.Constants.*;
 import static Core.utils.Constants.BASE_URL;
+import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 
 public class OrderingGuestPageTest extends BaseTest {
 
@@ -95,7 +96,7 @@ public class OrderingGuestPageTest extends BaseTest {
                 contains("Томск, пр. Мира 20, оф.4"));
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "Томск, пр. Мира 20, оф.4");
-        data.put("comment", RandomStringUtils.randomAlphabetic(256));
+        del.fillInputField(orderingGuestPage.deliveryCommentField, RandomStringUtils.randomAlphabetic(255));
         orderingGuestPage.deliveryFormInfo(data);
         AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
@@ -215,7 +216,7 @@ public class OrderingGuestPageTest extends BaseTest {
                 "Error messages are equals");
     }
 
-    @Test
+    @Test(enabled = false)
     public void verifyEmptyPhoneAndAddressFieldsTest() {
         TestReporter.testTitle("Test ID - C41081-41082");
         JSONObject data = orderingGuestPage.data();

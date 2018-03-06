@@ -115,7 +115,7 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage).clear();
         elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
-        AssertCollector.assertEqualsJ(getCurrentUrl(),ACCOUNT_INFORMATION_URL, "Verify current url");
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
 

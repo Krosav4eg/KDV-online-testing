@@ -81,9 +81,8 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = ".modal-auth__errors.j_modal_auth_errors.text")
     public WebElement errorText;
 
-    @FindBy(id = "review-btn")
+    @FindBy(css = ".button.button_mobile-wide.j_button_make_order")
     public WebElement createOrderButton;
-
 
     @FindBy(css = ".checkout-form__section.checkout-form__buyer.j_buyer_info")
     private WebElement identificationInfo;
@@ -130,7 +129,7 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(xpath = ".//*[@id='checkout-review-table']/tbody/tr/td[4]/span")
     public WebElement totalPriceCompositionOrder;
 
-    @FindBy (css = "label[for='p_method_beznal'] span")
+    @FindBy(css = "label[for='p_method_beznal'] span")
     public WebElement payBankCardRadioButton;
 
     @FindBy(id = "billing:floor")
@@ -151,11 +150,8 @@ public class OrderingGuestPage extends BasePage {
     @FindBy(css = ".checkout-layout__inner h1")
     private WebElement headerTxt;
 
-
-
     @FindBy(css = ".page__inner")
     private WebElement pageSuccseedContaier;
-
 
 
     public JSONObject data() {
@@ -191,22 +187,18 @@ public class OrderingGuestPage extends BasePage {
     }
 
 
-    public void orderingSelfGet(JSONObject data)
-    {
-
-        moveToElementJS(driver,headerTxt);
+    public void orderingSelfGet(JSONObject data) {
+        moveToElementJS(driver, headerTxt);
         elementIsClickable(payBankCardRadioButton).click();
         AssertCollector.verifyCondition(payBankCardRadioButton.isEnabled());
         data = deliveryFormData();
         deliveryFormInfo(data);
-        moveToElementJS(driver,deliveryTxt);
         elementIsClickable(selfDeliveryRadioButton).click();
         elementIsClickable(createOrderButton).click();
     }
 
-    public void checkReglament()
-    {
-        moveToElementJS(driver,emailTxt);
+    public void checkReglament() {
+        moveToElementJS(driver, emailTxt);
         (regulationsWebsiteLink).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         verifyTabsCountAsExpected(TWO_TABS_BROWSER);
@@ -220,7 +212,7 @@ public class OrderingGuestPage extends BasePage {
         switchDriverToAnyTabOfBrowser(1);
         switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
         salesPurchaseAgreementLink.click();
-       switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
+        switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
         AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL +
                 "/media/rules/Sales_and_Purchase_Agreement.pdf"));
         switchDriverToAnyTabOfBrowser(1);
@@ -261,7 +253,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(emailTxt).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(phoneTxt).clear();
         elementFluentWaitVisibility(phoneTxt).sendKeys(data.getString("phone"));
-        moveToElementJS(driver,deliveryCommentField);
+//        moveToElementJS(driver, deliveryCommentField);
         elementFluentWaitVisibility(createOrderButton).click();
         return getText(identificationInfo);
     }
@@ -298,31 +290,26 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(deliveryPorchField).clear();
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
-        elementFluentWaitVisibility(deliveryCommentField).clear();
-        elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
-        sleepWait();
-        moveToElementJS(driver,deliveryCommentField);
-        elementFluentWaitVisibility(createOrderButton).click();
+        scrollUp();
+        elementIsClickable(createOrderButton).click();
     }
 
-    public void clickCreateOrderBtn()
-    {
-        moveToElementJS(driver,compositionOrderHeader );
+    public void clickCreateOrderBtn() {
+        moveToElementJS(driver, compositionOrderHeader);
         elementIsClickable(createOrderButton).click();
-        textIsPresent(headerOrderTxt,"Ваш заказ принят.");
+        textIsPresent(headerOrderTxt, "Ваш заказ принят.");
         Assert.assertTrue(getText(headerOrderTxt).contains("Ваш заказ принят."));
     }
 
-    public void selectAuthorizationLink()
-    {
-        moveToElementJS(driver,headerTxt);
+    public void selectAuthorizationLink() {
+        moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
         elementIsClickable(authEnterButton).click();
     }
-    public void closeAuthorizationLink()
-    {
+
+    public void closeAuthorizationLink() {
         elementIsClickable(closeModalButton).click();
-        moveToElementJS(driver,headerTxt);
+        moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
     }
 }

@@ -9,10 +9,7 @@
 
     <test name="Ordering OrderingPageTest OrderingLegalPageTest">
         <classes>
-            <class name="KDV_testcases.header.HeaderTest">
-                <methods>
-                    <include name="verifySearchQueryWithInputTextWithoutCategoryTest"/>
-                </methods>
+            <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest">
             </class>
         </classes>
     </test>

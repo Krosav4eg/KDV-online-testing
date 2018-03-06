@@ -30,11 +30,8 @@ public class InformationAuthorizationTest extends BaseTest {
                 contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
-        registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        del.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка ддя подтверждения " +
-                "была выслана на указанный адрес электронной почты. Чтобы выслатиь ссылку повторно нажмите");
-//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-//                contains("Учётная запись с таким адресом электронной почты уже существует"));
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+                contains("Учётная запись с таким адресом электронной почты уже существует" ));
     }
 
     @Test
@@ -120,12 +117,8 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test.com");
-//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-//                contains("Учётная запись с таким адресом электронной почты уже существует."));
-        registrationPage.verifyAuthorizationFieldsIndividual(data);
-        del.textPresentDelegate("Учётная запись с таким адресом электронной почты уже существует." +
-                " Если вы уверены, что это ваш адрес, то нажмите нажмите сюда для получения пароля на email. " +
-                "С ним вы сможете получить доступ к вашей учётной записи.");
+        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
+                contains("Учётная запись с таким адресом электронной почты уже существует."));
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
                 " Value of email field is equal ", registrationPage.email.getAttribute("value"));
         data = registrationPage.mainInfoRegistration();

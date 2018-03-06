@@ -70,13 +70,4 @@ public class ControlPanelPage extends BasePage {
 
     @FindBy(xpath = "//h2//a[@class='address__action link offset-l-1']")
     public WebElement editAddressButton;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_id hidden-xs hidden-xxs']")
-    public WebElement orderId;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_date hidden-xs hidden-xxs']")
-    public WebElement orderDate;
-
-    @FindBy(xpath = ".//*[@class='profile-orders__col profile-orders__col_status hidden-xs hidden-xxs']")
-    public WebElement orderStatus;
 }
