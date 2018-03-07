@@ -2,7 +2,6 @@ package KDV_business_logic.pages.OrderingPage.OrderGuest;
 
 import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
-import KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
