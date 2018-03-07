@@ -9,6 +9,7 @@ import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.AUTORIZATION_PAGE_URL;
+import static Core.utils.Constants.KALASHNIKOVA_EMAIL;
 
 public class MandatoryFieldsTest extends BaseTest {
 
@@ -122,7 +123,7 @@ public class MandatoryFieldsTest extends BaseTest {
 	public void verifyMandatoryExistEmailTest() {
 		TestReporter.testTitle("Test ID = C37679");
 		JSONObject verifyData=registrationPage.mainInfoRegistration();
-		verifyData.put("email","a.shaulo@andersenlab.com");
+		verifyData.put("email",KALASHNIKOVA_EMAIL);
 		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
 				contains("Учётная запись с таким адресом электронной почты уже существует."));
 	}
