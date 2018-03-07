@@ -301,7 +301,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryCommentField).clear();
         elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
         sleepWait();
-        moveToElementJS(driver,deliveryCommentField);
+        moveToElementJS(driver,deliveryAddressField);
         elementFluentWaitVisibility(createOrderButton).click();
     }
 

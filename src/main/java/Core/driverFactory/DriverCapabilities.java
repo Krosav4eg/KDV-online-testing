@@ -22,7 +22,7 @@ import java.util.Arrays;
 		 //proxy.setHttpProxy("178.62.38.197:8118");
 		 ChromeOptions options = new ChromeOptions();
 		 options.addArguments("start-maximized");
-		 options.addArguments("--headless");
+		 //options.addArguments("--headless");
 		 DesiredCapabilities capability = DesiredCapabilities.chrome();
 		 capability.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
 		 capability.setCapability("chrome.switches", Arrays.asList("--incognito"));

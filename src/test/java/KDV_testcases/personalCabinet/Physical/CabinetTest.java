@@ -29,7 +29,6 @@ public class CabinetTest extends BaseTest {
                 contains("Аркадий Евдокимов"));
         AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
         AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+77111111111"));
-
         String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
         (controlPanelPage.editPersonalDataButton).click();
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));

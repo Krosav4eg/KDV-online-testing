@@ -1,6 +1,7 @@
 package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
+import Core.utils.Constants;
 import KDV_business_logic.pages.BasketPages.BasketPage;
 import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.openqa.selenium.WebDriver;
@@ -84,8 +85,8 @@ public class OrderingPhysicalPage extends BasePage {
 
     @FindBy(id = "billing:porch")
     private WebElement porchField;
-
-    @FindBy(css = "[href='http://tomsk.kdv.demo.dev.magonline.ru/customer/address/']")
+    //
+    @FindBy(css = "div.profile-nav__content > a:nth-child(3)")
     private WebElement addressesLink;
 
     @FindBy(css = ".profile__addresses")
@@ -184,6 +185,7 @@ public class OrderingPhysicalPage extends BasePage {
         elementFluentWaitVisibility(checkboxLabelBtn).click();
         sleepWait();
         elementFluentWaitVisibility(addressesField).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
+        moveToElementJS(driver,addressesField);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
         elementFluentWaitVisibility(addressesLink).click();
