@@ -89,7 +89,7 @@ public class PersonalDataTest extends BaseTest {
 
     @Test
     public void verifyRewritePassword() {
-        TestReporter.testTitle("Test ID = C41588");
+        TestReporter.testTitle("Test ID = C41591");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");

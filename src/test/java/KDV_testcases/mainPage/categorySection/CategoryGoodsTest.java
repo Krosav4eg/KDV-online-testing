@@ -109,7 +109,7 @@ public class CategoryGoodsTest extends BaseTest {
     //TODO BUG with goods increment button
     @Test
     public void verifyProductCardNotValid() {
-        TestReporter.testTitle("Test ID - C40269");
+        TestReporter.testTitle("Test ID - C40269,40916");
         cardPage.verifyNotValidProductCard();
     }
 
