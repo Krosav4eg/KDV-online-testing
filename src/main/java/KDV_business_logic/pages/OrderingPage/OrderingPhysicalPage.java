@@ -99,7 +99,7 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "checkout-delivery-date")
     private WebElement dateTxt;
 
-    @FindBy(css = "[href='http://tomsk.kdv.demo.dev.magonline.ru/customer/address/']")
+    @FindBy(css = "div.profile-nav__content > a:nth-child(3)")
     private WebElement addressesLink;
 
     @FindBy(css = ".profile__addresses")

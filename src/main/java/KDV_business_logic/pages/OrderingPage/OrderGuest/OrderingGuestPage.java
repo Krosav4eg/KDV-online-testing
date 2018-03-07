@@ -289,6 +289,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(deliveryPorchField).clear();
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
+        moveToElementJS(driver,payBankCardRadioButton);
         scrollUp();
         elementIsClickable(createOrderButton).click();
     }

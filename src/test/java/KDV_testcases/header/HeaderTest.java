@@ -10,6 +10,7 @@ import Core.utils.TestReporter;
 import static Core.utils.Constants.BASE_URL;
 import static Core.utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static Core.utils.Constants.PHYSICAL_PERSON_PASSWORD;
+import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 import static Core.utils.WaitingUtility.elementIsVisible;
 
 /**
@@ -58,17 +59,6 @@ public class HeaderTest extends BaseTest {
         mainPage.verifyMyBasketWithProduct();
     }
 
-    @Test()
-    public void verifyProductsInBasketTest() {
-        TestReporter.testTitle("Test ID = 34299");
-        mainPage.checkingProductsInBasket();
-//TODO not fix in progress
-//    @Test//(timeOut = 30000)
-//    public void verifyOpeningBasketPageFromHeaderTest() {
-        TestReporter.testTitle("Test ID = 34296");
-        mainPage.openingBasketPageFromHeader();
-    }
-
     @Test
     public void verifyOpeningCatalogAfterLeftMainPageTest() {
         TestReporter.testTitle("Test ID = 34308");
@@ -95,8 +85,6 @@ public class HeaderTest extends BaseTest {
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(BASE_URL);
         mainPage.cabinetLink();
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.registBtn), "Registration button is appear");
-        AssertCollector.assertTrue(elementIsVisible(authorizationPage.loginButton), "Login button is appear");
     }
 
     @Test

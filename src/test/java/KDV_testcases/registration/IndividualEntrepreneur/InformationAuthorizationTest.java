@@ -8,6 +8,8 @@ import KDV_testcases.base.BaseTest;
 import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
+import static Core.utils.Constants.KALASHNIKOVA_EMAIL;
+
 public class InformationAuthorizationTest extends BaseTest {
 
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
@@ -21,10 +23,10 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyCorrectMailTest() {
         TestReporter.testTitle("Test ID = 37516");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-        verifyData.put("email", "a.shaulo@andersenlabcom");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-        verifyData = registrationPage.mainInfoRegistration();
+//        verifyData.put("email", "a.shauloandersenlab.com");
+//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
+//                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+//        verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a..shaulo@andersenlab.com");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
@@ -116,7 +118,7 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyEmailFieldValidationTest() {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
-        data.put("email", "test@test.com");
+        data.put("email",KALASHNIKOVA_EMAIL);
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Учётная запись с таким адресом электронной почты уже существует."));
         AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
