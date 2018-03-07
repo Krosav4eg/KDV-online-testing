@@ -21,9 +21,10 @@ public class OrderingPhysicalPageTest extends BaseTest {
         orderingPhysicalPage.orderingDefaultAddress();
     }
 
+    //объеденены кейсы C41314,41996
     @Test
     public void orderingNewAddress() {
-        TestReporter.testTitle("Test ID - C41314");
+        TestReporter.testTitle("Test ID - C41314,41996");
         orderingPhysicalPage.orderingNewAddress();
     }
 
@@ -64,5 +65,18 @@ public class OrderingPhysicalPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         orderingPhysicalPage.orderingWithSamePhone();
         del.textPresentDelegate("Номер телефона уже используется.");
+    }
+
+    @Test
+    public void verifyPhoneFieldValidationTest() {
+        TestReporter.testTitle("Test ID = C41997");
+        JSONObject data = orderingGuestPage.data();
+        data.put("firstName", RandomStringUtils.randomAlphabetic(45));
+        data.put("lastName", RandomStringUtils.randomAlphabetic(45));
+        data.put("email", RandomStringUtils.randomAlphabetic(5) + "@test.ru");
+        data.put("phone", " ");
+        orderingGuestPage.createOrder(data);
+        orderingPhysicalPage.orderingWithSamePhone();
+        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX.");
     }
 }
