@@ -742,7 +742,7 @@ public class RegistrationPage extends BasePage {
     public void verifyMaximumInputInFullName() {
         getUrl(REGISTRATION_PAGE_URL);
         elementFluentWaitVisibility(organizationButton).click();
-        fillInputField(organizationFullName, RandomStringUtils.randomAlphabetic(256));
+        fillInputField(organizationFullName, RandomStringUtils.randomAlphabetic(255));
         AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(), " Number of symbols is equal ",
                 RandomStringUtils.randomAlphabetic(255).length());
     }
