@@ -19,6 +19,9 @@ public class AccountDataPage extends BasePage {
         super(driver);
     }
 
+    @FindBy(xpath = "//li[@class=\"success-msg\"]")
+    public WebElement sucsessMessage;
+
     @FindBy(xpath = "//h1[contains(text(), \"Учётная запись\")]")
     public WebElement personalDataHeaderInEditPage;
 
@@ -89,6 +92,8 @@ public class AccountDataPage extends BasePage {
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
         data.put("currentPassword", AUTHORIZATION_PASSWORD);
+        data.put("newPassword", "");
+        data.put("confirmPassword", "");
         return data;
     }
 
@@ -115,6 +120,10 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage).clear();
         elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
+        elementFluentWaitVisibility(newPasswordField).clear();
+        elementFluentWaitVisibility(newPasswordField).sendKeys(data.getString("newPassword"));
+        elementFluentWaitVisibility(confirmPasswordField).clear();
+        elementFluentWaitVisibility(confirmPasswordField).sendKeys(data.getString("confirmPassword"));
         AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
@@ -140,5 +149,14 @@ public class AccountDataPage extends BasePage {
     public void verifyAddressDropDownAddress() {
         elementFluentWaitVisibility(newAddressField).clear();
         fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
+    }
+
+    public void changingPassword(String currentPass, String newPass) {
+        getUrl(BASE_URL + "/customer/account/edit/");
+        fillInputField(passwordInEditPage, currentPass);
+        elementFluentWaitVisibility(changePasswordCheckbox).click();
+        fillInputField(newPasswordField, newPass);
+        fillInputField(confirmPasswordField, newPass);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
     }
 }

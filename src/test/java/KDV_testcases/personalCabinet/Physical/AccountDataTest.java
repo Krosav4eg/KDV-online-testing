@@ -9,6 +9,7 @@ import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.*;
+import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 import static Core.utils.WaitingUtility.elementIsVisible;
 
 public class AccountDataTest extends BaseTest {
@@ -64,7 +65,7 @@ public class AccountDataTest extends BaseTest {
 
     @Test
     public void verifyConfirmPasswordFieldValidationTest() {
-        TestReporter.testTitle("Test ID = 40094,40098");
+        TestReporter.testTitle("Test ID = 38298,40094,40098");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         data = accountDataPage.mainAccountInfo();
@@ -119,5 +120,16 @@ public class AccountDataTest extends BaseTest {
                 "Required field is displayed");
         AssertCollector.assertTrue(elementIsVisible(accountDataPage.confirmPasswordField),
                 "Required field is displayed");
+    }
+
+    @Test
+    public void verifyCorrectChangingPasswordTest() {
+        TestReporter.testTitle("Test ID = 38451");
+        JSONObject data = authorizationPage.mainAuthorizationInfo();
+        data.put("email", ZUEV_EMAIL);
+        data.put("password", ZUEV_PASSWORD);
+        authorizationPage.verifyAuthFields(data);
+        accountDataPage.changingPassword(ZUEV_PASSWORD,ZUEV_PASSWORD);
+        AssertCollector.assertTrue(accountDataPage.sucsessMessage.getText().contains("Данные учётной записи сохранены."));
     }
 }
