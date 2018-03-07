@@ -12,6 +12,7 @@ import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -99,6 +100,12 @@ public class MainPage extends BasePage {
     //========================
     @FindBy(css = ".mini-cart-summary__qty.mini-cart-summary__qty_empty")
     private WebElement myCart;
+
+    @FindBy(css = ".mini-cart-summary__qty")
+    private WebElement smallCart;
+
+    @FindBy(css = ".mini-cart-summary.j_mini_cart_summary")
+    private WebElement cartWithProduct;
 
     @FindBy(xpath = "(.//*[@class='product-item__title-link'])[1]")
     private WebElement productTitleToBasket;
@@ -208,6 +215,9 @@ public class MainPage extends BasePage {
     @FindBy(css = ".product-item__summary-cart")
     private List<WebElement> hitSalesBasketButtons;
 
+    @FindBy(xpath = "(.//*[@class='cart-control__btn cart-control__btn_inc j_cart_control_inc'])[1]")
+    private WebElement incrementButton;
+
     @FindBy(className = "social")
     private WebElement socialContainer;
 
@@ -311,6 +321,9 @@ public class MainPage extends BasePage {
 
     @FindBy(id = "footer")
     public WebElement footer;
+
+    @FindBy(xpath = ".//*[@class='footer__copyright']")
+    private WebElement copywrite;
 
     //========================
     @FindBy(css = ".header-bottom-left__logo_small.text-left")
@@ -727,7 +740,6 @@ public class MainPage extends BasePage {
 
     public void openingContactDataLink() {
         textPresent("Свяжитесь с нами");
-        textPresent("Звонок по России бесплатный");
         String expMailLink = getValueOfAttributeByName(mailToLink, "href");
         String actMailLink = "mailto:info@kdvonline.ru";
         String expTelLink = getValueOfAttributeByName(telLink, "href");
@@ -739,7 +751,7 @@ public class MainPage extends BasePage {
     }
 
     public void verifyingCopyWriting() {
-        textPresent("© 2017 ООО «КДВ Групп»");
+        AssertCollector.assertTrue(Objects.equals(copywrite.getText(), "© 2018 ООО «КДВ Групп»"));
     }
 
     public void openingRegulationsLink() {
@@ -822,7 +834,7 @@ public class MainPage extends BasePage {
 
     public void verifyingAnswerYourQuestionsTelNumber() {
         getUrl(BASE_URL);
-        textPresent("Ответим на ваши вопросы");
+        textPresent("Служба поддержки");
         String expTelLink = "tel:8 800 250 5555";
         String actTelLink = getValueOfAttributeByName(telLink, "href");
         AssertCollector.assertEquals(actTelLink, " Current telephone is equal to ",
@@ -834,7 +846,7 @@ public class MainPage extends BasePage {
         TestReporter.step("Verifying clicking my basket");
         elementIsClickable(myCart).click();
         AssertCollector.assertTrue(elementIsVisible(myCart));
-        textPresent("Корзина пока пуста");
+        AssertCollector.assertTrue(myCart.getText().equals("Корзина пока пуста"));
     }
 
     public void verifyMyBasketWithProduct() {
@@ -863,41 +875,6 @@ public class MainPage extends BasePage {
                 " basket page ", expPrice);
     }
 
-    public void checkingProductsInBasket() throws NoSuchElementException {
-        if (elementIsVisible(basketIsEmpty)) {
-            scrollToNecessaryElement(socialContainer);
-            moveToCategory();
-            clickOnIndexFromElementList(hitSalesBasketButtons, 0);
-            if (elementIsVisible(productAddedButton)) {
-                AssertCollector.assertTrue(elementIsVisible(productAddedButton));
-                LOGGER.log(Level.INFO, "Button hitSalesBasketButtons is displayed");
-                TestReporter.step("Button hitSalesBasketButtons is displayed");
-            } else {
-                LOGGER.log(Level.WARNING, "Button hitSalesBasketButtons isn't displayed");
-                TestReporter.step("Button hitSalesBasketButtons isn't displayed");
-                fail();
-            }
-            elementFluentWaitVisibility(upButton).click();
-            hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
-            textPresent("2 тов.");
-            TestReporter.step("2 products are in the basket");
-        } else {
-            while (!basketIsEmpty.isDisplayed()) {
-                hoverAndClick(driver, mainBasketToExpandButton, subBasketToExpandButton);
-                elementFluentWaitVisibility(removeProductsFromBasket).click();
-            }
-        }
-    }
-
-    public void openingBasketPageFromHeader() {
-        verifyMyBasketWithProduct();
-        String linkTextAttribute = getValueOfAttributeByName(submitAddingToBasket, "href");
-        elementFluentWaitVisibility(submitAddingToBasket).click();
-        getCurrentUrl();
-        AssertCollector.assertEquals(getCurrentUrl(), " Current url is equal link of adding to basket ",
-                linkTextAttribute);
-    }
-
     public void openingCatalogAfterLeftMainPage() {
         elementFluentWaitVisibility(registrationButton).click();
         elementFluentWaitVisibility(catalogExpand).click();
@@ -910,7 +887,7 @@ public class MainPage extends BasePage {
         AssertCollector.assertTrue(elementIsVisible(searchProductField));
         AssertCollector.assertTrue(elementIsVisible(categoryDropdown));
         AssertCollector.assertTrue(elementIsVisible(searchButton));
-        textPresent("Корзина пока пуста");
+        AssertCollector.assertTrue(myCart.getText().equals("Корзина пока пуста"));
         clickOnIndexFromElementList(hitSalesBasketButtons, 14);
         elementIsClickable(quantityOfProductsInBasket).click();
         AssertCollector.assertTrue(elementIsVisible(fullBasketDropdown));
@@ -972,7 +949,7 @@ public class MainPage extends BasePage {
 
     public void verifyLatinTextInProductInputField() {
         fillInputFieldAndPressEnterButton(searchProductField, "biscuit");
-        textPresent("По вашему запросу ничего не найдено.");
+        textPresent("По вашему запросу «biscuit» ничего не найдено.");
         verifySpecialSymbolsInProductInputField();
         verifyNumbersInProductInputField();
         verifyLongStringsWithNumbersInProductInputField();
@@ -1031,14 +1008,12 @@ public class MainPage extends BasePage {
         AssertCollector.assertEquals(actResult, " Names of categories are equal ", expResult);
     }
 
-
-    public  void cabinetLink()
-    {
+    public void cabinetLink() {
         AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/", "Urls are equals");
         AssertCollector.assertEqualsJ(myAccountLink.getText(),
                 "ООО Аванс", "Organization name is correct");
         elementIsClickable(myAccountLink).click();
-        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/customer/account","Is Clicable");
+        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/customer/account", "Is Clicable");
         elementIsClickable(exitButton);
     }
 

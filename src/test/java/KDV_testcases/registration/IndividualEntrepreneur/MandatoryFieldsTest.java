@@ -21,6 +21,7 @@ public class MandatoryFieldsTest extends BaseTest {
 		AssertCollector.assertTrue(registrationPage.verifyMandatory().
 				contains("Это поле обязательно для заполнения."));
 	}
+
 	@Test
 	public void verifyMandatoryTaxIdTest() {
 		TestReporter.testTitle("Test ID = 37677");
@@ -166,8 +167,7 @@ public class MandatoryFieldsTest extends BaseTest {
 		JSONObject data = registrationPage.mainInfoRegistration();
 		AssertCollector.verifyCondition(registrationPage.verifyAuthorizationFields(data).
 				contains("Это поле обязательно для заполнения"));
-		del.textPresentDelegate("Требуется подтверждение учётной записи. Ссылка для подтверждения была" +
-				" выслана на указанный адрес электронной почты. Чтобы выслать ссылку повторно нажмите сюда.");
-		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls Not equals");
+		del.textPresentDelegate("Требуется подтверждение учётной записи.");
+		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls equals");
 	}
 }

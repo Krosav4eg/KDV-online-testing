@@ -16,8 +16,6 @@ public class AccountDataTest extends BaseTest {
     BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
-    //test 40087 not pass due validation
-    //TODO we have same assertion for "firstName", "Анна-Мар'я"
     @Test
     public void verifyOpeningPersonalDataItemTest() {
         TestReporter.testTitle("Test ID = 38264,40087,38364,40095");
@@ -35,7 +33,8 @@ public class AccountDataTest extends BaseTest {
         data = accountDataPage.mainAccountInfo();
         data.put("lastName", RandomStringUtils.randomAlphanumeric(45));
         accountDataPage.verifyEditAccountFields(data);
-        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value").length() == RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(45).length());
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");

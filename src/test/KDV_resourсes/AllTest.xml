@@ -6,6 +6,7 @@
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
         <listener class-name="listener.ListenerTest"/>
     </listeners>
+
     <test name="AuthorizationTest">
         <classes>
             <class name="KDV_testcases.authorization.AuthorizationTest"/>
@@ -13,11 +14,13 @@
             <class name="KDV_testcases.authorization.SiteLoginTest"/>
         </classes>
     </test>
+
     <test name="FooterTest">
         <classes>
             <class name="KDV_testcases.footer.FooterTest"/>
         </classes>
     </test>
+
     <test name="HeaderTest">
         <classes>
             <class name="KDV_testcases.header.HeaderTest"/>
@@ -34,6 +37,7 @@
                 <class name="KDV_testcases.mainPage.hitOfSales.HitOfSalesTest"/>
             </classes>
         </test>
+
         <test name="OrderingPage">
             <classes>
                 <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
@@ -41,6 +45,7 @@
                 <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>
             </classes>
         </test>
+
         <test name="PersonalCabinet">
             <classes>
                 <class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>

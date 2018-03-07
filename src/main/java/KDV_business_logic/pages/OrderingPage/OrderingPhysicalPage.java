@@ -1,7 +1,6 @@
 package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
-import Core.utils.Constants;
 import KDV_business_logic.pages.BasketPages.BasketPage;
 import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.openqa.selenium.WebDriver;
@@ -31,9 +30,6 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "pass")
     private WebElement passwordField;
 
-    @FindBy(css = ".j_mini_cart_summary .price")
-    private WebElement basketTxt;
-
     @FindBy(css = ".header-top")
     private WebElement headerTxt;
 
@@ -43,17 +39,14 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = ".mini-cart-summary")
     public WebElement basketSummaryTxt;
 
-
     @FindBy(css = "div.j_mini_cart_summary")
     private WebElement selectMiniCart;
 
     @FindBy(css = "[title='Просмотр корзины ']")
     private WebElement selectBasket;
 
-
     @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
     private WebElement orderBtn;
-
 
     @FindBy(id = "onepage-billing")
     private WebElement orderBillingTxt;
@@ -70,7 +63,6 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = "[title='Продолжить покупать']")
     private WebElement byeBtn;
 
-
     @FindBy(css = ".checkbox__label")
     public WebElement checkboxLabelBtn;
 
@@ -83,9 +75,6 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "checkout-delivery-date")
     private WebElement dateTxt;
 
-    @FindBy(id = "billing:porch")
-    private WebElement porchField;
-    //
     @FindBy(css = "div.profile-nav__content > a:nth-child(3)")
     private WebElement addressesLink;
 
@@ -95,8 +84,8 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = ".select2-container")
     public WebElement dropListAddresses;
 
-    @FindBy(css = "div.checkout-layout__inner h1")
-    public WebElement headerOrderTxt;
+    @FindBy(xpath = "//select[@id=\"billing-address-select\"]/option")
+    public List<WebElement> addressChangeList;
 
     @FindBy(id = "loc-changed")
     public WebElement modelWindows;
@@ -141,7 +130,8 @@ public class OrderingPhysicalPage extends BasePage {
         AssertCollector.verifyCondition(getText(orderContainer).contains("Ваш заказ принят"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Спасибо за покупку!"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Номер вашего заказа"));
-        AssertCollector.verifyCondition(getText(orderContainer).contains("Вы получите письмо на ваш адрес электронной почты"));
+        AssertCollector.verifyCondition(getText(orderContainer).
+                contains("Вы получите письмо на ваш адрес электронной почты"));
         AssertCollector.verifyCondition(getText(orderContainer).contains("Продолжить покупать"));
         elementFluentWaitVisibility(byeBtn).click();
         AssertCollector.verifyCondition(getText(headerTxt).contains("Пономарёва Маргарита"));
@@ -151,9 +141,12 @@ public class OrderingPhysicalPage extends BasePage {
 
     private void verifyOrderingBeforeSend() {
         AssertCollector.verifyCondition(getText(orderBillingTxt).contains("г Томск, ул Нахимова, д 34, кв 53"));
-        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.firstNameTxt, "value").contains("Маргарита"));
-        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.lastNameTxt, "value").contains("Пономарёва"));
-        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.phoneTxt, "value").contains("71111111111"));
+        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.firstNameTxt, "value").
+                contains("Маргарита"));
+        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.lastNameTxt, "value").
+                contains("Пономарёва"));
+        AssertCollector.verifyCondition(getValueOfAttributeByName(guest.phoneTxt, "value").
+                contains("71111111111"));
     }
 
     private static boolean dateDay(String time) {
@@ -185,18 +178,18 @@ public class OrderingPhysicalPage extends BasePage {
         elementFluentWaitVisibility(checkboxLabelBtn).click();
         sleepWait();
         elementFluentWaitVisibility(addressesField).sendKeys("Адрес доставки Томск, пр. Мира 20, оф.4");
-        moveToElementJS(driver,addressesField);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
         elementFluentWaitVisibility(addressesLink).click();
         AssertCollector.assertTrue(getText(addressesContaineer).contains("Адрес доставки Томск, пр. Мира 20, оф.4"));
     }
 
+    //не срабатывает метод selectByIndex().Пришлось заменить на кастомный метод clickOnIndexFromElementList()
     public void orderingChangedAddress() {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-        clickOnIndexFromElementList(addressesList, 4);
+        clickOnIndexFromElementList(addressChangeList,3);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
     }

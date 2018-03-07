@@ -1,6 +1,5 @@
 package KDV_testcases.registration.PhysicalPerson;
 
-
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
 import Core.utils.TestReporter;
@@ -56,7 +55,7 @@ public class FillRequiredFieldsTest extends BaseTest {
     }
 
     @Test
-        public void verifyDuplicateEmailTest() {
+    public void verifyDuplicateEmailTest() {
         TestReporter.testTitle("Test ID = 37360");
         registrationPage.verifyDuplicateEmail();
     }
