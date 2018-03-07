@@ -344,7 +344,7 @@ public class BasePage {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
         } else {
-            LOGGER.log(Level.INFO, expectedText + " - Required text isn't present ");
+            LOGGER.log(Level.WARNING, expectedText + " - Required text isn't present ");
             TestReporter.step(expectedText + " - Required text isn't present ");
         }
     }
