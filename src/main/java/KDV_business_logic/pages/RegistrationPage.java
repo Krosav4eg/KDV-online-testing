@@ -494,8 +494,10 @@ public class RegistrationPage extends BasePage {
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         AssertCollector.assertTrue(agreeLegal.isEnabled());
+        moveToElementJS(driver,subscription);
         elementIsClickable(sendButton).click();
         return getText(layout);
+
     }
 
     //registration

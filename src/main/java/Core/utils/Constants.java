@@ -17,7 +17,7 @@ public class Constants {
     //========================BASE URL==================================
     public static String BASE_DRIVER = readXML("section", "driver");
     //========================BASE URL==================================
-    public static String BASE_URL = readXML("section", "mainUrl");
+    public  static  String  BASE_URL = readXML("section", "mainUrl");
     //========================BROWSER DRIVER NAMES======================
     public static final String DRIVER_NAME_FIREFOX = "webdriver.gecko.driver";
     public static final String DRIVER_NAME_CHROME = "webdriver.chrome.driver";
