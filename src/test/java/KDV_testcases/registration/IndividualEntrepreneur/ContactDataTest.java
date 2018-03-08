@@ -11,8 +11,6 @@ import Core.utils.TestReporter;
 import static KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage.phoneInEditPage;
 
 public class ContactDataTest extends BaseTest {
-    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     @Test
     public void verifyIncorrectFirstAndLastValuesTest() {
@@ -21,19 +19,19 @@ public class ContactDataTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", RandomStringUtils.randomNumeric(45));
         data.put("lastName", RandomStringUtils.randomNumeric(45));
-        registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
-                "тире и апостроф.");
-        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
-                "тире и апостроф.");
+        String registration= registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(registration.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
+        AssertCollector.assertTrue(registration.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
         data = registrationPage.mainInfoRegistration();
         data.put("firstName", " !@#$%^&*()+_/|{}[]?><.,");
         data.put("lastName", " !@#$%^&*()+_/|{}[]?><.,");
-        registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
-                "тире и апостроф.");
-        del.textPresentDelegate("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
-                "тире и апостроф.");
+        registration= registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(registration.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
+        AssertCollector.assertTrue(registration.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
     }
 
     @Test
@@ -42,12 +40,12 @@ public class ContactDataTest extends BaseTest {
         registrationPage.verifyIndividualEntrepreneurRadioButton();
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
-        registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Это поле обязательно для заполнения");
+        String registration=registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(registration.contains("Это поле обязательно для заполнения"));
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "8997");
-        registrationPage.verifyAuthorizationFields(data);
-        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+        registration=registrationPage.verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(registration.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }
 
     //была убрана проверка длинны ввода строк, т.к. у нас появилось валидационное сообщение по превышению ввода символов
