@@ -141,7 +141,7 @@ public class OrderingGuestPageTest extends BaseTest {
     //maximum length 46 symbols validation problem in delivery comment field
     @Test
     public void verifyCreationOrderAsGuestTest() {
-        TestReporter.testTitle("Test ID - C4075");
+        TestReporter.testTitle("Test ID - C41077");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         data.put("firstName", RandomStringUtils.randomAlphabetic(46));

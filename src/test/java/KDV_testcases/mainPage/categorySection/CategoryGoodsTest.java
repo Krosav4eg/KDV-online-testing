@@ -103,7 +103,7 @@ public class CategoryGoodsTest extends BaseTest {
 
     @Test
     public void verifyProductCardNotValid() {
-        TestReporter.testTitle("Test ID - C40269");
+        TestReporter.testTitle("Test ID - C40269,40916");
         cardPage.verifyNotValidProductCard();
     }
 

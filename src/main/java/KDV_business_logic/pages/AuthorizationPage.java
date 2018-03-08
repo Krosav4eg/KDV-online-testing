@@ -69,7 +69,7 @@ public class AuthorizationPage extends BasePage {
     @FindBy(css = ".link")
     private WebElement authForm;
 
-      public JSONObject mainAuthorizationInfo() {
+    public JSONObject mainAuthorizationInfo() {
         JSONObject data = new JSONObject();
         data.put("email", AUTHORIZATION_EMAIL);
         data.put("password", AUTHORIZATION_PASSWORD);
@@ -319,4 +319,4 @@ public class AuthorizationPage extends BasePage {
         fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
         return getText(loginContainer);
     }
-}
+ }
