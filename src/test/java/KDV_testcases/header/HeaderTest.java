@@ -10,8 +10,6 @@ import Core.utils.TestReporter;
 import static Core.utils.Constants.BASE_URL;
 import static Core.utils.Constants.PHYSICAL_PERSON_EMAIL;
 import static Core.utils.Constants.PHYSICAL_PERSON_PASSWORD;
-import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
-import static Core.utils.WaitingUtility.elementIsVisible;
 
 /**
  * @author Sergey Potapov
@@ -24,45 +22,45 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifyLogoTest() {
         TestReporter.testTitle("Test ID - C34282");
-        mainPage.checkCompanyLogo();
+        mainPageSelector.checkCompanyLogo();
     }
 
     //TODO fix it too long
     // @Test(timeOut = 60000)
     public void verifyChangingCityTest() {
         TestReporter.testTitle("Test ID - C34287");//C34287 - в этом кейсе объеденены C34283, C34285, C34316
-        mainPage.changeCity();
-        mainPage.changeCityToOther();
-        mainPage.changeCityToCurrent();
+        mainPageSelector.changeCity();
+        mainPageSelector.changeCityToOther();
+        mainPageSelector.changeCityToCurrent();
     }
 
     @Test
     public void verifyOpeningRegistrationTest() {//C34288 - в этом кейсе объеденены C34289, C34290
         TestReporter.testTitle("Test ID - C34288");
-        mainPage.openingRegistrationLink();
+        mainPageSelector.openingRegistrationLink();
         TestReporter.testTitle("Test ID - C34289");
-        mainPage.openingEnterLink();
+        mainPageSelector.openingEnterLink();
         TestReporter.testTitle("Test ID - C34290");
-        mainPage.verifyingAnswerYourQuestionsTelNumber();
+        mainPageSelector.verifyingAnswerYourQuestionsTelNumber();
     }
 
     @Test
     public void verifyMyCardIsEmptyTest() {
         TestReporter.testTitle("Test ID - C34292");
-        mainPage.verifyMyCardIsEmpty();
+        mainPageSelector.verifyMyCardIsEmpty();
     }
 
     //TODO it`s failed can`t  find other element , some element isn`t visible
     @Test
     public void verifyMyBasketWithProductTest() {
         TestReporter.testTitle("Test ID - C34292");//C34292 - в этом кейсе объеденены C34293, C34299, C34296, C34297
-        mainPage.verifyMyBasketWithProduct();
+        mainPageSelector.verifyMyBasketWithProduct();
     }
 
     @Test
     public void verifyOpeningCatalogAfterLeftMainPageTest() {
         TestReporter.testTitle("Test ID = 34308");
-        mainPage.openingCatalogAfterLeftMainPage();
+        mainPageSelector.openingCatalogAfterLeftMainPage();
     }
 
     @Test
@@ -72,7 +70,7 @@ public class HeaderTest extends BaseTest {
         data.put("email", PHYSICAL_PERSON_EMAIL);
         data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        mainPage.verifyPhysicalAuthCredential();
+        mainPageSelector.verifyPhysicalAuthCredential();
     }
 
     //TODO appear additional slash after base url
@@ -84,19 +82,19 @@ public class HeaderTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         del.getUrlDelegate(BASE_URL);
-        mainPage.cabinetLink();
+        mainPageSelector.cabinetLink();
     }
 
     @Test
     public void verifyStickingHeaderDuringScrollingTest() {
         TestReporter.testTitle("Test ID = 34317");
-        mainPage.verifyStickingHeaderDuringScrolling();
+        mainPageSelector.verifyStickingHeaderDuringScrolling();
     }
 
     @Test
     public void verifyToolTypeTextTest() {
         TestReporter.testTitle("Test ID = 34346");
-        mainPage.verifyToolTypeText();
+        mainPageSelector.verifyToolTypeText();
     }
 
     @Test
@@ -112,22 +110,22 @@ public class HeaderTest extends BaseTest {
     @Test
     public void verifySearchButtonTest() {
         TestReporter.testTitle("Test ID = 34374-34376");
-        mainPage.verifySearchButton();
-        mainPage.placeholderCheckingInSearchField();
-        mainPage.verificationOfCategoriesDropdownInSearchField();
+        mainPageSelector.verifySearchButton();
+        mainPageSelector.placeholderCheckingInSearchField();
+        mainPageSelector.verificationOfCategoriesDropdownInSearchField();
     }
 
     @Test
     public void verifyLatinTextInProductInputFieldTest() {
         TestReporter.testTitle("Test ID = 34377,34382-34384");
-        mainPage.verifyLatinTextInProductInputField();
+        mainPageSelector.verifyLatinTextInProductInputField();
     }
 
     @Test
     public void verifySearchQueryWithInputTextWithoutCategoryTest() {
         TestReporter.testTitle("Test ID = 37066");
         TestReporter.testTitle("Test ID = 37067");
-        mainPage.verifySearchQueryWithInputTextWithCategory();
+        mainPageSelector.verifySearchQueryWithInputTextWithCategory();
     }
 
     @Test
@@ -135,11 +133,11 @@ public class HeaderTest extends BaseTest {
         TestReporter.testTitle("Test ID = 43017");
         del.textPresentDelegate("8 800 250 5555");
         del.textPresentDelegate("Служба поддержки");
-        AssertCollector.assertEqualsJ(mainPage.firstPhoneLink.getAttribute("href"), "tel:8 800 250 5555",
+        AssertCollector.assertEqualsJ(mainPageSelector.firstPhoneLink.getAttribute("href"), "tel:8 800 250 5555",
                 "references are equals");
         del.textPresentDelegate("+7 913 817-38-90");
         del.textPresentDelegate("По вопросам заказа в городе Томск");
-        AssertCollector.assertEqualsJ(mainPage.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
+        AssertCollector.assertEqualsJ(mainPageSelector.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
                 "references are equals");
     }
 }

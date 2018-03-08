@@ -1,6 +1,7 @@
 package KDV_business_logic.pages;
 
 import Core.basePage.BasePage;
+import KDV_business_logic.pages.MainPage.MainPageSelector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +16,7 @@ public class CustomerAccountPage extends BasePage {
         super(driver);
     }
 
-    protected MainPage mainPage;
+    protected MainPageSelector mainPageSelector;
 
     //========================Customer Account Page=============================================
     @FindBy(xpath = "(//a[@title='КДВ'])[1]")

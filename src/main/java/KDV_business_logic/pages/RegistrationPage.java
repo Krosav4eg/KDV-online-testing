@@ -841,4 +841,10 @@ public class RegistrationPage extends BasePage {
         elementFluentWaitVisibility(individualEntrepreneurButton).click();
         AssertCollector.assertTrue(organizationButton.isEnabled(), "Required radio button is selected");
     }
+
+    public void verifySuccessRegistration()
+    {
+        textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на указанный адрес электронной почты.");
+        AssertCollector.assertTrue(getCurrentUrl().contains("customer/account/login/"));
+    }
 }

@@ -11,8 +11,8 @@ public class BannerTest extends BaseTest {
     @Test
     public void switchSlideForwardTest() {
         TestReporter.testTitle("Test ID - C34331");
-        mainPage.switchSlideForward();
-        mainPage.switchSlidePreviously();
-        mainPage.switchBetweenSlides();
+        mainPageSelector.switchSlideForward();
+        mainPageSelector.switchSlidePreviously();
+        mainPageSelector.switchBetweenSlides();
     }
 }

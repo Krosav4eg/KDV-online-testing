@@ -12,9 +12,6 @@ import static KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage.phon
 
 public class ContactDataTest extends BaseTest {
 
-    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
-
     @Test
     public void verifyMandatoryEmptyFirstNameTest() {
         TestReporter.testTitle("Test ID = C37688,40272,40275");
@@ -67,7 +64,7 @@ public class ContactDataTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomAlphabetic(20));
         data.put("lastName", RandomStringUtils.randomAlphabetic(20));
         data.put("phone", RandomStringUtils.randomNumeric(9));
-        registrationPage.verifyAuthorizationFieldsIndividual(data);
-        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
+        String registr= registrationPage.verifyAuthorizationFieldsIndividual(data);
+        AssertCollector.assertTrue(registr.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }
 }

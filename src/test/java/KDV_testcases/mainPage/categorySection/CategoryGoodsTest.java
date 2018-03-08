@@ -49,7 +49,7 @@ public class CategoryGoodsTest extends BaseTest {
     @Test
     public void verifyMoveToCategoryTest() {
         TestReporter.testTitle("Test ID - C34336");
-        mainPage.moveToCategory();
+        mainPageSelector.moveToCategory();
     }
 
     @Test

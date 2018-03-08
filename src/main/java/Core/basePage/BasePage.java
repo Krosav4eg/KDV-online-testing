@@ -1,11 +1,13 @@
 package Core.basePage;
 
 import Core.logger.MagDvLogger;
+import Core.utils.WaitingUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.awt.*;
@@ -24,7 +26,7 @@ import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 /**
  * @author Sergey_Potapov
  */
-public class BasePage {
+public class BasePage extends WaitingUtility {
 
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
@@ -107,10 +109,16 @@ public class BasePage {
         driver.navigate().back();
     }
 
+    public static void selectOptionList(WebElement element,int index)
+    {
+        Select drpCountry = new Select(element);
+        drpCountry.selectByIndex(index);
+    }
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
+        super();
         BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
