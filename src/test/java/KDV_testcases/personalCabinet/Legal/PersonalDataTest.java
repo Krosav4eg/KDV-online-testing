@@ -12,8 +12,6 @@ import Core.utils.TestReporter;
 
 public class PersonalDataTest extends BaseTest {
 
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     @Test
     public void verifyFieldsIsPresent() {
@@ -23,8 +21,6 @@ public class PersonalDataTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
-        del.textPresentDelegate("Мои заказы");
-        del.textPresentDelegate("У вас пока нет оформленных заказов.");
         personalCabinetPage.verifyFieldsData();
     }
 

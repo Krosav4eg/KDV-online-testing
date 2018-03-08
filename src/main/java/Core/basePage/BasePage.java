@@ -51,12 +51,6 @@ public class BasePage extends WaitingUtility {
         }
 
         //TODO more flexible method
-        public void scrollByCoordinate() {
-            LOGGER.log(Level.INFO, "Scroll to necessary element ");
-            TestReporter.step("Scroll to necessary element ");
-            JavascriptExecutor jse = (JavascriptExecutor) driver;
-            jse.executeScript("window.scrollBy(0,500)", "");
-        }
 
         public void switchDriverToAnyTabOfBrowser(int tabIndex) {
             LOGGER.log(Level.INFO, "Navigate to needed tab " + tabIndex);
@@ -104,6 +98,15 @@ public class BasePage extends WaitingUtility {
             return element.getAttribute(attribute);
         }
     }
+
+
+    public void scrollByCoordinate() {
+        LOGGER.log(Level.INFO, "Scroll to necessary element ");
+        TestReporter.step("Scroll to necessary element ");
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,500)", "");
+    }
+
 
     public static void navigateBack() {
         driver.navigate().back();
@@ -342,15 +345,16 @@ public class BasePage extends WaitingUtility {
         AssertCollector.assertEqualsJ(actualCount, expectedCount, "Verifying browser tabs count");
     }
 
+    public static String getPageText()
+    {
+        return driver.getPageSource();
+    }
     /**
      * Method for verifying required text on page.
      *
      * @param expectedText- text which must be present on the page
      */
-    protected static void
-
-
-    textPresent(String expectedText) {
+    protected static void textPresent(String expectedText) {
         if (driver.getPageSource().contains(expectedText)) {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");

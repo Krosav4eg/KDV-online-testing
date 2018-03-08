@@ -57,9 +57,9 @@ public class FooterTest extends BaseTest {
         footerPage.clickingUpButtonInFooter();
     }
 
-    //TODO write id for test
     @Test
     public void verifyAdditionalPhoneLinkTest() {
+        TestReporter.testTitle("Test ID - 43017");
         footerPage.verifyAdditionalPhoneLink();
     }
 }

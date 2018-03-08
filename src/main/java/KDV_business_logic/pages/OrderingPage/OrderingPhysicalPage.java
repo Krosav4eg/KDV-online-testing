@@ -248,7 +248,7 @@ public class OrderingPhysicalPage extends BasePage {
         elementFluentWaitVisibility(physicalRadioButton).click();
         String getEmailValue = billingEmail.getAttribute("value");
         fillInputFieldAndPressEnterButton(addressesField, "Адрес доставки Томск, пр. Мира 20, оф.4");
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         fillInputField(customerPassword, "test12");
         fillInputField(confirmPasswordField, "test12");
         elementFluentWaitVisibility(guest.createOrderButton).click();
@@ -269,7 +269,7 @@ public class OrderingPhysicalPage extends BasePage {
     public void orderingWithSamePhone() {
         elementFluentWaitVisibility(physicalRadioButton).click();
         fillInputFieldAndPressEnterButton(addressesField, "Адрес доставки Томск, пр. Мира 20, оф.4");
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         fillInputField(customerPassword, "test12");
         fillInputField(confirmPasswordField, "test12");
         elementFluentWaitVisibility(guest.createOrderButton).click();
