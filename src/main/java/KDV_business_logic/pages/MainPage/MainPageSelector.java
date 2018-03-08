@@ -758,6 +758,7 @@ public class MainPageSelector extends BasePage {
     }
 
     public void cabinetLink() {
+        getUrl(BASE_URL);
         AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/", "Urls are equals");
         AssertCollector.assertEqualsJ(myAccountLink.getText(),
                 "ООО Аванс", "Organization name is correct");

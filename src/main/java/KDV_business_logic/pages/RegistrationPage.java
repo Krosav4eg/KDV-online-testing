@@ -141,8 +141,6 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = "div.layout.container-static-top div > div > div > ul > li > ul > li > span")
     public WebElement getAlertTet;
 
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     public void verifyLegalFormByDefault() {
         getUrl(REGISTRATION_PAGE_URL);
@@ -449,7 +447,7 @@ public class RegistrationPage extends BasePage {
         organizationInformation(data);
         addressDelivery(data);
         contactData(data);
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         elementIsClickable(agreeLegal).click();
@@ -490,7 +488,7 @@ public class RegistrationPage extends BasePage {
         organizationInformationIndividual(data);
         addressDelivery(data);
         contactData(data);
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         AssertCollector.assertTrue(agreeLegal.isEnabled());

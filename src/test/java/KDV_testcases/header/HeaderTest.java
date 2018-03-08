@@ -16,9 +16,6 @@ import static Core.utils.Constants.PHYSICAL_PERSON_PASSWORD;
  */
 public class HeaderTest extends BaseTest {
 
-    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
-
     @Test
     public void verifyLogoTest() {
         TestReporter.testTitle("Test ID - C34282");
@@ -81,7 +78,7 @@ public class HeaderTest extends BaseTest {
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
-        del.getUrlDelegate(BASE_URL);
+
         mainPageSelector.cabinetLink();
     }
 
@@ -128,17 +125,5 @@ public class HeaderTest extends BaseTest {
         mainPageSelector.verifySearchQueryWithInputTextWithCategory();
     }
 
-    @Test
-    public void verifyAdditionalPhoneNumbersTest() {
-        TestReporter.testTitle("Test ID = 43017");
-        del.textPresentDelegate("8 800 250 5555");
-        del.textPresentDelegate("Служба поддержки");
-        AssertCollector.assertEqualsJ(mainPageSelector.firstPhoneLink.getAttribute("href"), "tel:8 800 250 5555",
-                "references are equals");
-        del.textPresentDelegate("+7 913 817-38-90");
-        del.textPresentDelegate("По вопросам заказа в городе Томск");
-        AssertCollector.assertEqualsJ(mainPageSelector.secondPhoneLink.getAttribute("href"), "tel:+7 913 817-38-90",
-                "references are equals");
-    }
 }
 

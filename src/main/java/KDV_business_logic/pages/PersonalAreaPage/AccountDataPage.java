@@ -82,9 +82,6 @@ public class AccountDataPage extends BasePage {
     @FindBy(xpath = "//span[text()='Адрес удалён.']")
     public WebElement deletionAddress;
 
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
-
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
         data.put("firstName", "Аркадий");
@@ -138,7 +135,7 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(newPhoneField).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(newAddressField).clear();
         elementFluentWaitVisibility(newAddressField).sendKeys(data.getString("address"));
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         elementFluentWaitVisibility(newFloorField).clear();
         elementFluentWaitVisibility(newFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(newPorchField).clear();
@@ -146,9 +143,10 @@ public class AccountDataPage extends BasePage {
         return getText(informationAccountEdit);
     }
 
-    public void verifyAddressDropDownAddress() {
+    public String verifyAddressDropDownAddress() {
         elementFluentWaitVisibility(newAddressField).clear();
         fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
+        return getPageText();
     }
 
     public void changingPassword(String currentPass, String newPass) {
@@ -158,5 +156,16 @@ public class AccountDataPage extends BasePage {
         fillInputField(newPasswordField, newPass);
         fillInputField(confirmPasswordField, newPass);
         elementFluentWaitVisibility(saveButtonInEditPage).click();
+    }
+
+    public void verifyFirstAndLastNameValues()
+    {
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        textPresent("Адрес сохранён.");
+        textPresent("Анна-Мар'я");
+        textPresent("Томск, пр. Мира 20, оф.1");
+        scrollByCoordinate();
+        elementFluentWaitVisibility(deleteNewAddress).click();
+        AssertCollector.verifyCondition(deletionAddress.isDisplayed());
     }
 }

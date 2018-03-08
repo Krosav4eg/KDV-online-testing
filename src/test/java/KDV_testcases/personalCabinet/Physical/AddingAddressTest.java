@@ -34,18 +34,12 @@ public class AddingAddressTest extends BaseTest {
         data = accountDataPage.addingNewAddressInfo();
         data.put("firstName", "Анна-Мар'я");
         data.put("lastName", "Анна-Мар'я");
-        accountDataPage.verifyAddingNewAccountFields(data);
+         accountDataPage.verifyAddingNewAccountFields(data);
         AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value") ==
                 "Анна-Мар'я");
         AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value") ==
                 "Анна-Мар'я");
-        orderingGuestPage.clickOnWebElement(accountDataPage.saveButtonInEditPage);
-        del.textPresentDelegate("Адрес сохранён.");
-        del.textPresentDelegate("Анна-Мар'я");
-        del.textPresentDelegate("Томск, пр. Мира 20, оф.1");
-        del.scrollByCoordinate();
-        orderingGuestPage.clickOnWebElement(accountDataPage.deleteNewAddress);
-        AssertCollector.verifyCondition(accountDataPage.deletionAddress.isDisplayed());
+        accountDataPage.verifyFirstAndLastNameValues();
     }
 
     @Test
@@ -74,8 +68,8 @@ public class AddingAddressTest extends BaseTest {
         accountDataPage.verifyAddingNewAccountFields(data);
         AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length() ==
                 RandomStringUtils.randomAlphabetic(255).length());
-        accountDataPage.verifyAddressDropDownAddress();
-        del.textPresentDelegate("Это поле обязательно для заполнения.");
+        String myData=accountDataPage.verifyAddressDropDownAddress();
+        AssertCollector.assertTrue(myData.contains("Это поле обязательно для заполнения."));
     }
 
     @Test
