@@ -24,7 +24,7 @@ public class WaitingUtility {
     private static final int WAITING_TIMEOUT = Integer.parseInt(readXML("section", "waitTime"));
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
-    private WaitingUtility() {
+    protected WaitingUtility() {
     }
 
     public static void waitForPageLoad(WebDriver driver) {

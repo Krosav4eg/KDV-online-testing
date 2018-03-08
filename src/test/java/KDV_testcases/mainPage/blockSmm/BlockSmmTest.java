@@ -14,14 +14,14 @@ public class BlockSmmTest extends BaseTest {
 
     @BeforeMethod
     public void beforeGeneralTests(Method method) {
-        mainPage.scrollToNecessaryElement(mainPage.socialLinkSection);
+        mainPageSelector.scrollToNecessaryElement(mainPageSelector.socialLinkSection);
     }
 
     @Test
     public void verifyOpeningVkLinkTest() {//C37058 - объеденен с C37062 и C37063
         TestReporter.testTitle("Test ID - C37058");
-        mainPage.openingVkLink();
-        mainPage.openingInstagramLink();
-        mainPage.openingGooglePlayLink();
+        mainPageSelector.openingVkLink();
+        mainPageSelector.openingInstagramLink();
+        mainPageSelector.openingGooglePlayLink();
     }
 }
