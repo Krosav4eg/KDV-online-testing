@@ -131,6 +131,8 @@ public class PersonalCabinetPage extends BasePage {
     }
 
     public void verifyFieldsData() {
+        textPresent("Мои заказы");
+        textPresent("У вас пока нет оформленных заказов.");
         getUrl(BASE_URL + "/customer/account/edit/");
         AssertCollector.verifyCondition(elementIsVisible(firstNameInEditPage));
         AssertCollector.verifyCondition(elementIsVisible(lastNameInEditPage));

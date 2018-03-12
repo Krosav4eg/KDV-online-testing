@@ -1,6 +1,7 @@
 package KDV_testcases.base;
 
 import Core.driverFactory.BrowserFactory;
+import KDV_business_logic.pages.MainPage.FooterPage;
 import KDV_business_logic.pages.PersonalAreaPage.*;
 import listener.ListenerTest;
 import Core.logger.LevelCustom;
@@ -17,7 +18,7 @@ import KDV_business_logic.pages.CategoryPage.CardPage;
 import KDV_business_logic.pages.CategoryPage.CategoryPage;
 import KDV_business_logic.pages.CategoryPage.ModalWindow;
 import KDV_business_logic.pages.CustomerAccountPage;
-import KDV_business_logic.pages.MainPage;
+import KDV_business_logic.pages.MainPage.MainPageSelector;
 import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import KDV_business_logic.pages.OrderingPage.OrderingLegalPage;
 import KDV_business_logic.pages.OrderingPage.OrderingPhysicalPage;
@@ -40,7 +41,8 @@ import static Core.utils.Constants.*;
 public class BaseTest {
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
     //=======DECLARATION OF PAGE CLASSES=========
-    protected MainPage mainPage;
+    protected FooterPage footerPage;
+    protected MainPageSelector mainPageSelector;
     protected AuthorizationPage authorizationPage;
     protected CustomerAccountPage customerAccountPage;
     protected RegistrationPage registrationPage;
@@ -105,7 +107,7 @@ public class BaseTest {
             driver = singleton.setDriver();
             initPageElements();
             TestReporter.step("Open Main page");
-            mainPage.openMainPage();
+            mainPageSelector.openMainPage();
             screen();
         }
     }
@@ -135,12 +137,6 @@ public class BaseTest {
         }
         TestReporter.removeNumberStep();
     }
-//    @AfterSuite
-//    public void afterSuite()
-//    {
-//        new SendMail().sendMail(mailBody);
-//    }
-
 
     /**
      * Method for screenshot creation
@@ -162,7 +158,7 @@ public class BaseTest {
     }
 
     private void initPageElements() {
-        mainPage = PageFactory.initElements(driver, MainPage.class);
+        mainPageSelector = PageFactory.initElements(driver, MainPageSelector.class);
         authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
@@ -172,6 +168,7 @@ public class BaseTest {
         basketPage = PageFactory.initElements(driver, BasketPage.class);
         accountDataPage = PageFactory.initElements(driver, AccountDataPage.class);
         controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
+        footerPage = PageFactory.initElements(driver, FooterPage.class);
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);

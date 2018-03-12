@@ -1,7 +1,6 @@
 package KDV_testcases.OrderingPage;
 
 
-import Core.basePage.BasePage;
 import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
@@ -10,30 +9,17 @@ import KDV_testcases.base.BaseTest;
 import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
-import static Core.utils.Constants.*;
-import static Core.utils.Constants.BASE_URL;
-import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
-
 public class OrderingGuestPageTest extends BaseTest {
 
-    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
+
 
     @Test
     public void verifyAuthorizationLInkTest() {
         TestReporter.testTitle("Test ID - C41075");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        orderingGuestPage.modalAuthLink.click();
-        AssertCollector.assertTrue(orderingGuestPage.modalAuthForm.isDisplayed(),
-                "Modal authorization form is appear");
-        orderingGuestPage.closeModalButton.click();
-        orderingGuestPage.modalAuthLink.click();
-        JSONObject data1 = orderingGuestPage.authModalFormData();
-        orderingGuestPage.authorizationBlockModalWindow(data1);
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/onestepcheckout/"));
-        AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
-      }
+        orderingGuestPage.verifyAuthorizationLInk();
+    }
 
     @Test
     public void verifyAuthModalWindowTest() {
@@ -81,7 +67,7 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41069");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        del.scrollByCoordinate();
+
         orderingGuestPage.checkReglament();
     }
 
@@ -96,7 +82,7 @@ public class OrderingGuestPageTest extends BaseTest {
                 contains("Томск, пр. Мира 20, оф.4"));
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "Томск, пр. Мира 20, оф.4");
-        del.fillInputField(orderingGuestPage.deliveryCommentField, RandomStringUtils.randomAlphabetic(255));
+        data.put("comment", RandomStringUtils.randomAlphabetic(255));
         orderingGuestPage.deliveryFormInfo(data);
         AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
@@ -107,25 +93,7 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41073");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-        AssertCollector.assertTrue(orderingGuestPage.compositionOrderHeader.isDisplayed());
-        AssertCollector.assertTrue(orderingGuestPage.editCompositionOrderHeader.isDisplayed());
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.editCompositionOrderHeader);
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/checkout/cart/",
-                "Urls are equals");
-        del.backPage();
-        AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), BASE_URL + "/onestepcheckout/",
-                "Urls are equals");
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.reviewOrder);
-        AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Название товара"));
-        AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Цена"));
-        AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Кол-во"));
-        AssertCollector.verifyCondition(orderingGuestPage.reviewOrder.getText().contains("Итого"));
-        AssertCollector.verifyCondition(orderingGuestPage.totalShipping.getText().contains("Доставка и обработка"));
-        AssertCollector.verifyCondition(orderingGuestPage.totalShipping.getText().contains("0,00"));
-        AssertCollector.verifyCondition(orderingGuestPage.compositionOrderLastRow.getText().contains("Итого к оплате"));
-        String actualPrice = (orderingGuestPage.compositionOrderLastRow.getText().substring(15, 23));
-        String expectedPrice = orderingGuestPage.totalPriceCompositionOrder.getText();
-        AssertCollector.assertEqualsJ(actualPrice, expectedPrice, "Price from row and total price are equals");
+        orderingGuestPage.verifyCompositionOrder();
     }
 
 
@@ -148,7 +116,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("lastName", RandomStringUtils.randomAlphabetic(46));
         orderingGuestPage.clickOnWebElement(orderingGuestPage.payBankCardRadioButton);
         AssertCollector.verifyCondition(orderingGuestPage.payBankCardRadioButton.isEnabled());
-        del.scrollByCoordinate();
+
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
         orderingGuestPage.clickOnWebElement(orderingGuestPage.selfDeliveryRadioButton);
@@ -162,7 +130,6 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("firstName", "");
         data.put("lastName", "");
         orderingGuestPage.createOrder(data);
-        del.scrollByCoordinate();
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
         AssertCollector.verifyCondition(orderingGuestPage.firstNameFieldAdvice.getText().
@@ -179,7 +146,6 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("lastName", RandomStringUtils.randomAlphabetic(46));
         data.put("email", "");
         orderingGuestPage.createOrder(data);
-        del.scrollByCoordinate();
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
         AssertCollector.verifyCondition(orderingGuestPage.emailFieldAdvice.getText().
@@ -225,7 +191,6 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("email", "test@test.ru");
         data.put("phone", "");
         orderingGuestPage.createOrder(data);
-        del.scrollByCoordinate();
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "");
         orderingGuestPage.deliveryFormInfo(data);
