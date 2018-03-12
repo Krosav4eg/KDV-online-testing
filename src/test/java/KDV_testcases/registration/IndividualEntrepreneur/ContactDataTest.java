@@ -19,7 +19,7 @@ public class ContactDataTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", RandomStringUtils.randomNumeric(45));
         data.put("lastName", RandomStringUtils.randomNumeric(45));
-        String registration= registrationPage.verifyAuthorizationFields(data);
+        String registration = registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(registration.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
                 "тире и апостроф."));
         AssertCollector.assertTrue(registration.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
@@ -27,7 +27,7 @@ public class ContactDataTest extends BaseTest {
         data = registrationPage.mainInfoRegistration();
         data.put("firstName", " !@#$%^&*()+_/|{}[]?><.,");
         data.put("lastName", " !@#$%^&*()+_/|{}[]?><.,");
-        registration= registrationPage.verifyAuthorizationFields(data);
+        registration = registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(registration.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
                 "тире и апостроф."));
         AssertCollector.assertTrue(registration.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
@@ -40,11 +40,11 @@ public class ContactDataTest extends BaseTest {
         registrationPage.verifyIndividualEntrepreneurRadioButton();
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
-        String registration=registrationPage.verifyAuthorizationFields(data);
+        String registration = registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(registration.contains("Это поле обязательно для заполнения"));
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "8997");
-        registration=registrationPage.verifyAuthorizationFields(data);
+        registration = registrationPage.verifyAuthorizationFields(data);
         AssertCollector.assertTrue(registration.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }
 
