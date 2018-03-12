@@ -19,6 +19,9 @@ public class AccountDataPage extends BasePage {
         super(driver);
     }
 
+    @FindBy(xpath = "//li[@class=\"success-msg\"]")
+    public WebElement sucsessMessage;
+
     @FindBy(xpath = "//h1[contains(text(), \"Учётная запись\")]")
     public WebElement personalDataHeaderInEditPage;
 
@@ -79,9 +82,6 @@ public class AccountDataPage extends BasePage {
     @FindBy(xpath = "//span[text()='Адрес удалён.']")
     public WebElement deletionAddress;
 
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
-
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
         data.put("firstName", "Аркадий");
@@ -89,6 +89,8 @@ public class AccountDataPage extends BasePage {
         data.put("email", "test_a.evdokimov@magdv.com");
         data.put("phone", "+71111111111");
         data.put("currentPassword", AUTHORIZATION_PASSWORD);
+        data.put("newPassword", "");
+        data.put("confirmPassword", "");
         return data;
     }
 
@@ -115,6 +117,10 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage).clear();
         elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
+        elementFluentWaitVisibility(newPasswordField).clear();
+        elementFluentWaitVisibility(newPasswordField).sendKeys(data.getString("newPassword"));
+        elementFluentWaitVisibility(confirmPasswordField).clear();
+        elementFluentWaitVisibility(confirmPasswordField).sendKeys(data.getString("confirmPassword"));
         AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
@@ -129,7 +135,7 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(newPhoneField).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(newAddressField).clear();
         elementFluentWaitVisibility(newAddressField).sendKeys(data.getString("address"));
-        del.scrollByCoordinate();
+        scrollByCoordinate();
         elementFluentWaitVisibility(newFloorField).clear();
         elementFluentWaitVisibility(newFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(newPorchField).clear();
@@ -137,8 +143,29 @@ public class AccountDataPage extends BasePage {
         return getText(informationAccountEdit);
     }
 
-    public void verifyAddressDropDownAddress() {
+    public String verifyAddressDropDownAddress() {
         elementFluentWaitVisibility(newAddressField).clear();
         fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
+        return getPageText();
+    }
+
+    public void changingPassword(String currentPass, String newPass) {
+        getUrl(BASE_URL + "/customer/account/edit/");
+        fillInputField(passwordInEditPage, currentPass);
+        elementFluentWaitVisibility(changePasswordCheckbox).click();
+        fillInputField(newPasswordField, newPass);
+        fillInputField(confirmPasswordField, newPass);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+    }
+
+    public void verifyFirstAndLastNameValues()
+    {
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        textPresent("Адрес сохранён.");
+        textPresent("Анна-Мар'я");
+        textPresent("Томск, пр. Мира 20, оф.1");
+        scrollByCoordinate();
+        elementFluentWaitVisibility(deleteNewAddress).click();
+        AssertCollector.verifyCondition(deletionAddress.isDisplayed());
     }
 }

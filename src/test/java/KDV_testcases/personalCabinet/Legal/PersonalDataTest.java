@@ -12,8 +12,6 @@ import Core.utils.TestReporter;
 
 public class PersonalDataTest extends BaseTest {
 
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     @Test
     public void verifyFieldsIsPresent() {
@@ -23,8 +21,6 @@ public class PersonalDataTest extends BaseTest {
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
         orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
-        del.textPresentDelegate("Мои заказы");
-        del.textPresentDelegate("У вас пока нет оформленных заказов.");
         personalCabinetPage.verifyFieldsData();
     }
 
@@ -89,7 +85,7 @@ public class PersonalDataTest extends BaseTest {
 
     @Test
     public void verifyRewritePassword() {
-        TestReporter.testTitle("Test ID = C41588");
+        TestReporter.testTitle("Test ID = C41591");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");

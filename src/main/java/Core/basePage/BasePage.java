@@ -1,11 +1,13 @@
 package Core.basePage;
 
 import Core.logger.MagDvLogger;
+import Core.utils.WaitingUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.awt.*;
@@ -24,7 +26,7 @@ import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 /**
  * @author Sergey_Potapov
  */
-public class BasePage {
+public class BasePage extends WaitingUtility {
 
     public abstract static class MyDelegate {
         public String getTextDelegate(WebElement element) {
@@ -49,12 +51,6 @@ public class BasePage {
         }
 
         //TODO more flexible method
-        public void scrollByCoordinate() {
-            LOGGER.log(Level.INFO, "Scroll to necessary element ");
-            TestReporter.step("Scroll to necessary element ");
-            JavascriptExecutor jse = (JavascriptExecutor) driver;
-            jse.executeScript("window.scrollBy(0,500)", "");
-        }
 
         public void switchDriverToAnyTabOfBrowser(int tabIndex) {
             LOGGER.log(Level.INFO, "Navigate to needed tab " + tabIndex);
@@ -103,14 +99,29 @@ public class BasePage {
         }
     }
 
+
+    public void scrollByCoordinate() {
+        LOGGER.log(Level.INFO, "Scroll to necessary element ");
+        TestReporter.step("Scroll to necessary element ");
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,500)", "");
+    }
+
+
     public static void navigateBack() {
         driver.navigate().back();
     }
 
+    public static void selectOptionList(WebElement element,int index)
+    {
+        Select drpCountry = new Select(element);
+        drpCountry.selectByIndex(index);
+    }
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
     public BasePage(WebDriver driver) {
+        super();
         BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -334,20 +345,21 @@ public class BasePage {
         AssertCollector.assertEqualsJ(actualCount, expectedCount, "Verifying browser tabs count");
     }
 
+    public static String getPageText()
+    {
+        return driver.getPageSource();
+    }
     /**
      * Method for verifying required text on page.
      *
      * @param expectedText- text which must be present on the page
      */
-    protected static void
-
-
-    textPresent(String expectedText) {
+    protected static void textPresent(String expectedText) {
         if (driver.getPageSource().contains(expectedText)) {
             LOGGER.log(Level.INFO, expectedText + " - Required text is present ");
             TestReporter.step(expectedText + " - Required text is present ");
         } else {
-            LOGGER.log(Level.INFO, expectedText + " - Required text isn't present ");
+            LOGGER.log(Level.WARNING, expectedText + " - Required text isn't present ");
             TestReporter.step(expectedText + " - Required text isn't present ");
         }
     }

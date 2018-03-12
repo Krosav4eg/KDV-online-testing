@@ -24,11 +24,29 @@ public class OrderingPhysicalPage extends BasePage {
 
     OrderingGuestPage guest = new OrderingGuestPage(driver);
     BasketPage basketPage = new BasketPage(driver);
+    MyDelegate del = new MyDelegate() {
+    };
+
+    @FindBy(id = "form-validate")
+    public WebElement validateForm;
+
+    @FindBy(css = "#send2")
+    private WebElement authButton;
+
     @FindBy(id = "email")
     private WebElement emailInputField;
 
+    @FindBy(id = "billing:email")
+    private WebElement billingEmail;
+
     @FindBy(id = "pass")
     private WebElement passwordField;
+
+    @FindBy(id = "billing:confirm_password")
+    private WebElement confirmPasswordField;
+
+    @FindBy(id = "billing:customer_password")
+    private WebElement customerPassword;
 
     @FindBy(css = ".header-top")
     private WebElement headerTxt;
@@ -48,11 +66,17 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
     private WebElement orderBtn;
 
+    @FindBy(xpath = "//span[text()='Физическое лицо']")
+    private WebElement physicalRadioButton;
+
     @FindBy(id = "onepage-billing")
     private WebElement orderBillingTxt;
 
     @FindBy(css = ".page__inner")
-    private WebElement orderContainer;
+    public WebElement orderContainer;
+
+    @FindBy(css = ".checkout-form__review")
+    public WebElement checkoutForm;
 
     @FindBy(css = ".text a")
     private WebElement orderTxt;
@@ -67,7 +91,7 @@ public class OrderingPhysicalPage extends BasePage {
     public WebElement checkboxLabelBtn;
 
     @FindBy(id = "billing:street_new")
-    private WebElement addressesField;
+    public WebElement addressesField;
 
     @FindBy(id = "billing:floor")
     private WebElement floorField;
@@ -75,7 +99,7 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "checkout-delivery-date")
     private WebElement dateTxt;
 
-    @FindBy(css = "[href='http://tomsk.kdv.demo.dev.magonline.ru/customer/address/']")
+    @FindBy(css = "div.profile-nav__content > a:nth-child(3)")
     private WebElement addressesLink;
 
     @FindBy(css = ".profile__addresses")
@@ -105,6 +129,9 @@ public class OrderingPhysicalPage extends BasePage {
     @FindBy(id = "billing-address-select")///checkout-delivery-time
     private WebElement addressList;
 
+    @FindBy(xpath = "//span[@class='checkbox__label']//following-sibling::div")
+    public WebElement checkBoxAdvice;
+
     /**
      * Authorization and select product
      */
@@ -124,7 +151,7 @@ public class OrderingPhysicalPage extends BasePage {
     /**
      * Validate Data after ordering
      */
-    private void validateMainData() {
+    public void validateMainData() {
         textIsPresent(orderContainer, "Ваш заказ принят");
         String order = getText(orderTxt);
         AssertCollector.verifyCondition(getText(orderContainer).contains("Ваш заказ принят"));
@@ -189,7 +216,7 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-        clickOnIndexFromElementList(addressChangeList,3);
+        clickOnIndexFromElementList(addressChangeList, 3);
         elementFluentWaitVisibility(guest.createOrderButton).click();
         validateMainData();
     }
@@ -198,8 +225,6 @@ public class OrderingPhysicalPage extends BasePage {
         selectProduct();
         verifyOrderingBeforeSend();
         elementFluentWaitVisibility(dropListAddresses).click();
-//        Select dropdown = new Select(addressList);
-//        addressList.dropdown.selectByIndex(4);
         Select dropdown = new Select(addressList);
         dropdown.selectByIndex(1);
         elementFluentWaitVisibility(guest.createOrderButton).click();
@@ -217,5 +242,39 @@ public class OrderingPhysicalPage extends BasePage {
 //        dropdown.selectByIndex(1);
 //        elementFluentWaitVisibility(guest.createOrderButton).click();
 //        validateMainData();
+    }
+
+    public void checkPhysicalPersonRadioButton() {
+        elementFluentWaitVisibility(physicalRadioButton).click();
+        String getEmailValue = billingEmail.getAttribute("value");
+        fillInputFieldAndPressEnterButton(addressesField, "Адрес доставки Томск, пр. Мира 20, оф.4");
+        scrollByCoordinate();
+        fillInputField(customerPassword, "test12");
+        fillInputField(confirmPasswordField, "test12");
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        elementFluentWaitVisibility(checkBoxAdvice).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        textIsPresent(orderContainer, "Ваш заказ принят");
+        AssertCollector.verifyCondition(getText(orderContainer).contains("Ваш заказ принят"));
+        AssertCollector.verifyCondition(getText(orderContainer).contains("Спасибо за покупку!"));
+        AssertCollector.verifyCondition(getText(orderContainer).contains("Номер вашего заказа"));
+        AssertCollector.verifyCondition(getText(orderContainer).
+                contains("Вы получите письмо на ваш адрес электронной почты"));
+        getUrl(BASE_URL + "/customer/account/login/");
+        fillInputField(emailInputField, getEmailValue);
+        fillInputField(passwordField, "test12");
+        elementFluentWaitVisibility(authButton).click();
+    }
+
+    public void orderingWithSamePhone() {
+        elementFluentWaitVisibility(physicalRadioButton).click();
+        fillInputFieldAndPressEnterButton(addressesField, "Адрес доставки Томск, пр. Мира 20, оф.4");
+        scrollByCoordinate();
+        fillInputField(customerPassword, "test12");
+        fillInputField(confirmPasswordField, "test12");
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        elementFluentWaitVisibility(checkBoxAdvice).click();
+        elementFluentWaitVisibility(guest.createOrderButton).click();
+        elementFluentWaitVisibility(physicalRadioButton);
     }
 }

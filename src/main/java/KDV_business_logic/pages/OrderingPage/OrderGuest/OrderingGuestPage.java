@@ -2,7 +2,6 @@ package KDV_business_logic.pages.OrderingPage.OrderGuest;
 
 import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
-import KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -198,6 +197,7 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void checkReglament() {
+        scrollByCoordinate();
         moveToElementJS(driver, emailTxt);
         (regulationsWebsiteLink).click();
         switchDriverToAnyTabOfBrowser(SECOND_TAB_BROWSER);
@@ -284,12 +284,16 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void deliveryFormInfo(JSONObject data) {
+         scrollByCoordinate();
         elementFluentWaitVisibility(deliveryAddressField).clear();
         elementFluentWaitVisibility(deliveryAddressField).sendKeys(data.getString("address"));
         elementFluentWaitVisibility(deliveryFloorField).clear();
         elementFluentWaitVisibility(deliveryFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(deliveryPorchField).clear();
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
+        elementFluentWaitVisibility(deliveryCommentField).clear();
+        elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
+        moveToElementJS(driver,payBankCardRadioButton);
         scrollUp();
         elementIsClickable(createOrderButton).click();
     }
@@ -311,5 +315,40 @@ public class OrderingGuestPage extends BasePage {
         elementIsClickable(closeModalButton).click();
         moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
+    }
+    public void verifyAuthorizationLInk()
+    {
+        moveToElementJS(driver,modalAuthLink);
+        elementIsClickable(modalAuthLink).click();
+        AssertCollector.assertTrue(modalAuthForm.isDisplayed(),
+                "Modal authorization form is appear");
+        elementIsClickable(closeModalButton).click();
+        modalAuthLink.click();
+        JSONObject data1 = authModalFormData();
+        authorizationBlockModalWindow(data1);
+        AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
+    }
+
+    public void verifyCompositionOrder()
+    {
+        AssertCollector.assertTrue(compositionOrderHeader.isDisplayed());
+        AssertCollector.assertTrue(editCompositionOrderHeader.isDisplayed());
+        clickOnWebElement(editCompositionOrderHeader);
+        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/checkout/cart/",
+                "Urls are equals");
+        backPage();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), BASE_URL + "/onestepcheckout/",
+                "Urls are equals");
+        clickOnWebElement(reviewOrder);
+        AssertCollector.verifyCondition(reviewOrder.getText().contains("Название товара"));
+        AssertCollector.verifyCondition(reviewOrder.getText().contains("Цена"));
+        AssertCollector.verifyCondition(reviewOrder.getText().contains("Кол-во"));
+        AssertCollector.verifyCondition(reviewOrder.getText().contains("Итого"));
+        AssertCollector.verifyCondition(totalShipping.getText().contains("Доставка и обработка"));
+        AssertCollector.verifyCondition(totalShipping.getText().contains("0,00"));
+        AssertCollector.verifyCondition(compositionOrderLastRow.getText().contains("Итого к оплате"));
+        String actualPrice = (compositionOrderLastRow.getText().substring(15, 23));
+        String expectedPrice = totalPriceCompositionOrder.getText();
+        AssertCollector.assertEqualsJ(actualPrice, expectedPrice, "Price from row and total price are equals");
     }
 }

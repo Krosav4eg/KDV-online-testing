@@ -9,6 +9,7 @@ import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.AUTORIZATION_PAGE_URL;
+import static Core.utils.Constants.KALASHNIKOVA_EMAIL;
 
 public class MandatoryFieldsTest extends BaseTest {
 
@@ -122,7 +123,7 @@ public class MandatoryFieldsTest extends BaseTest {
 	public void verifyMandatoryExistEmailTest() {
 		TestReporter.testTitle("Test ID = C37679");
 		JSONObject verifyData=registrationPage.mainInfoRegistration();
-		verifyData.put("email","a.shaulo@andersenlab.com");
+		verifyData.put("email",KALASHNIKOVA_EMAIL);
 		AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
 				contains("Учётная запись с таким адресом электронной почты уже существует."));
 	}
@@ -141,7 +142,7 @@ public class MandatoryFieldsTest extends BaseTest {
 		TestReporter.testTitle("Test ID = C37681");
 		JSONObject verifyData=registrationPage.mainInfoRegistration();
 		registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-		AssertCollector.assertTrue(del.getTextDelegate(authorizationPage.loginContainer).contains("Требуется подтверждение учётной записи"));
+		registrationPage.verifySuccessRegistration();
 	}
 
 	@Test
@@ -165,9 +166,9 @@ public class MandatoryFieldsTest extends BaseTest {
 	public void verifySuccessRegistrationTest() {
 		TestReporter.testTitle("Test ID = 37564,37565,37485,37397,37681,37571,37572,37416,37479,37423,37567");
 		JSONObject data = registrationPage.mainInfoRegistration();
-		AssertCollector.verifyCondition(registrationPage.verifyAuthorizationFields(data).
+		String registr=registrationPage.verifyAuthorizationFields(data);
+		AssertCollector.verifyCondition(registr.
 				contains("Это поле обязательно для заполнения"));
-		del.textPresentDelegate("Требуется подтверждение учётной записи.");
-		AssertCollector.assertEqualsJ(del.getCurrentUrlDelegate(), AUTORIZATION_PAGE_URL, "Urls equals");
+		registrationPage.verifySuccessRegistration();
 	}
 }

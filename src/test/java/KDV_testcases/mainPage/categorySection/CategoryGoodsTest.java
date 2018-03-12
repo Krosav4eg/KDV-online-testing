@@ -49,7 +49,7 @@ public class CategoryGoodsTest extends BaseTest {
     @Test
     public void verifyMoveToCategoryTest() {
         TestReporter.testTitle("Test ID - C34336");
-        mainPage.moveToCategory();
+        mainPageSelector.moveToCategory();
     }
 
     @Test
@@ -103,7 +103,7 @@ public class CategoryGoodsTest extends BaseTest {
 
     @Test
     public void verifyProductCardNotValid() {
-        TestReporter.testTitle("Test ID - C40269");
+        TestReporter.testTitle("Test ID - C40269,40916");
         cardPage.verifyNotValidProductCard();
     }
 
