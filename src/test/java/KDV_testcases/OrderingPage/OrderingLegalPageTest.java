@@ -16,6 +16,7 @@ public class OrderingLegalPageTest extends BaseTest {
     private BasePage.MyDelegate del = new BasePage.MyDelegate() {
     };
 
+    //Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
     @Test
     public void verifyCreateOrderWithDefaultAddressTest() {
         TestReporter.testTitle("Test ID = 41799");
@@ -65,7 +66,8 @@ public class OrderingLegalPageTest extends BaseTest {
                         getElementTextFromList(orderingLegalPage.orderNumberInList, 0).substring(2, 12)
                 , "Number orders are equals");
     }
-//TODO Добавить задержку тест не успевает отрабатывать
+
+    //TODO Добавить задержку тест не успевает отрабатывать
     @Test
     public void verifyCreateOrderWithChangingAddressTest() {
         TestReporter.testTitle("Test ID = 41801");
@@ -160,6 +162,7 @@ public class OrderingLegalPageTest extends BaseTest {
                 , "Number orders are equals");
     }
 
+    //Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
     @Test
     public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");

@@ -185,7 +185,6 @@ public class OrderingGuestPage extends BasePage {
         identificationBlock(data);
     }
 
-
     public void orderingSelfGet(JSONObject data) {
         moveToElementJS(driver, headerTxt);
         elementIsClickable(payBankCardRadioButton).click();
@@ -289,7 +288,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryFloorField).sendKeys(data.getString("floor"));
         elementFluentWaitVisibility(deliveryPorchField).clear();
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
-        moveToElementJS(driver,payBankCardRadioButton);
+        moveToElementJS(driver, payBankCardRadioButton);
         scrollUp();
         elementIsClickable(createOrderButton).click();
     }

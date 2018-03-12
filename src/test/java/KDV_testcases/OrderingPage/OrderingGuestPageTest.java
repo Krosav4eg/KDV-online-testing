@@ -33,7 +33,7 @@ public class OrderingGuestPageTest extends BaseTest {
         orderingGuestPage.authorizationBlockModalWindow(data1);
         AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(BASE_URL + "/onestepcheckout/"));
         AssertCollector.verifyCondition(customerAccountPage.myAccountLink.getText().contains("Зуев Степан"));
-    }
+      }
 
     @Test
     public void verifyAuthModalWindowTest() {

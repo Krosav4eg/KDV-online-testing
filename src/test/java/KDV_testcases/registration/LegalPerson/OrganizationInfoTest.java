@@ -80,6 +80,7 @@ public class OrganizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37396");
         registrationPage.verifyInputSymbolsInReasonCodeField();
     }
+
     //not pass due validation in both fields
     @Test(enabled = false)
     public void verifyMaximumInputLengthInOrganizationFullNameLegalAddressFieldTest() {
@@ -125,7 +126,7 @@ public class OrganizationInfoTest extends BaseTest {
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
                 contains("Это поле обязательно для заполнения."));
         AssertCollector.assertTrue(registrationPage.address.getAttribute("value").length()
-                ==RandomStringUtils.randomAlphabetic(255).length());
+                == RandomStringUtils.randomAlphabetic(255).length());
         data = registrationPage.mainInfoRegistration();
         data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5");
         AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
