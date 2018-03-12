@@ -244,6 +244,19 @@ public class OrderingGuestPage extends BasePage {
         return getText(identificationInfo);
     }
 
+    public void verifyCheckAndInputValue(JSONObject data){
+        AssertCollector.assertEquals(firstNameTxt.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.assertEquals(lastNameTxt.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+        elementFluentWaitVisibility(createOrderButton).click();
+        AssertCollector.assertTrue(!identificationBlock(data).
+                contains("Пожалуйста, введите правильный адрес электронной почты (email). " +
+                        "Например, ivanivanov@domain.com."));
+        AssertCollector.assertEquals(phoneTxt.getAttribute("value").length(),
+                " Number of phone symbols is equal ", RandomStringUtils.randomAlphabetic(12).length());
+    }
+
     public String identificationBlockWrong(JSONObject data) {
         elementFluentWaitVisibility(firstNameTxt).clear();
         elementFluentWaitVisibility(firstNameTxt).sendKeys(data.getString("firstName"));
@@ -272,6 +285,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(passwordAuth).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authEnterButton).click();
         sleepWait();
+        AssertCollector.assertTrue(errorText.isDisplayed(), "Required text is present");
     }
 
     public JSONObject deliveryFormData() {
@@ -284,7 +298,7 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void deliveryFormInfo(JSONObject data) {
-         scrollByCoordinate();
+        scrollByCoordinate();
         elementFluentWaitVisibility(deliveryAddressField).clear();
         elementFluentWaitVisibility(deliveryAddressField).sendKeys(data.getString("address"));
         elementFluentWaitVisibility(deliveryFloorField).clear();
@@ -293,7 +307,7 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
         elementFluentWaitVisibility(deliveryCommentField).clear();
         elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
-        moveToElementJS(driver,payBankCardRadioButton);
+        moveToElementJS(driver, payBankCardRadioButton);
         scrollUp();
         elementIsClickable(createOrderButton).click();
     }
@@ -309,16 +323,19 @@ public class OrderingGuestPage extends BasePage {
         moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
         elementIsClickable(authEnterButton).click();
+        AssertCollector.assertTrue(errorText.isDisplayed(), "Required text is present");
     }
 
     public void closeAuthorizationLink() {
         elementIsClickable(closeModalButton).click();
         moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
+        AssertCollector.assertTrue(errorText.isDisplayed(), "Required text is present");
+
     }
-    public void verifyAuthorizationLInk()
-    {
-        moveToElementJS(driver,modalAuthLink);
+
+    public void verifyAuthorizationLInk() {
+        moveToElementJS(driver, modalAuthLink);
         elementIsClickable(modalAuthLink).click();
         AssertCollector.assertTrue(modalAuthForm.isDisplayed(),
                 "Modal authorization form is appear");
@@ -329,8 +346,7 @@ public class OrderingGuestPage extends BasePage {
         AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
     }
 
-    public void verifyCompositionOrder()
-    {
+    public void verifyCompositionOrder() {
         AssertCollector.assertTrue(compositionOrderHeader.isDisplayed());
         AssertCollector.assertTrue(editCompositionOrderHeader.isDisplayed());
         clickOnWebElement(editCompositionOrderHeader);

@@ -27,18 +27,16 @@ public class OrderingGuestPageTest extends BaseTest {
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         orderingGuestPage.selectAuthorizationLink();
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         JSONObject data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
         orderingGuestPage.closeAuthorizationLink();
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "test_s.zuevmagdv.com");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
+
     }
 
     //problem with validation length and validation message in first name and last name fields
@@ -50,16 +48,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(35));
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(35));
         orderingGuestPage.identificationBlock(data);
-        AssertCollector.assertEquals(orderingGuestPage.firstNameTxt.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-        AssertCollector.assertEquals(orderingGuestPage.lastNameTxt.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-        orderingGuestPage.createOrderButton.click();
-        AssertCollector.assertTrue(!orderingGuestPage.identificationBlock(data).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email). " +
-                        "Например, ivanivanov@domain.com."));
-        AssertCollector.assertEquals(orderingGuestPage.phoneTxt.getAttribute("value").length(),
-                " Number of phone symbols is equal ", RandomStringUtils.randomAlphabetic(12).length());
+        orderingGuestPage.verifyCheckAndInputValue(data);
     }
 
     @Test
@@ -67,7 +56,6 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41069");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-
         orderingGuestPage.checkReglament();
     }
 
