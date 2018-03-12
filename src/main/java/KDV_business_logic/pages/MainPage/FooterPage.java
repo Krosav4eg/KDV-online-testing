@@ -51,11 +51,8 @@ public class FooterPage  extends BasePage{
     @FindBy(xpath = ".//*[@href='mailto:info@kdvonline.ru']")
     private WebElement mailToLink;
 
-
-
     @FindBy(xpath = ".//*[@class='footer__copyright']")
     private WebElement copywrite;
-
 
     @FindBy(xpath = "(.//*[@href=\"tel:+7 913 817-38-90\"])[2]")
     public WebElement additionalTelLink;
@@ -91,7 +88,7 @@ public class FooterPage  extends BasePage{
 
     public void verifyAdditionalPhoneLink()
     {
-        TestReporter.testTitle("Test ID - ");
+
         textPresent("8 800 250 5555");
         textPresent("Служба поддержки");
         AssertCollector.assertEqualsJ(telLink.getAttribute("href"), "tel:8 800 250 5555",

@@ -168,6 +168,7 @@ public class BaseTest {
         basketPage = PageFactory.initElements(driver, BasketPage.class);
         accountDataPage = PageFactory.initElements(driver, AccountDataPage.class);
         controlPanelPage = PageFactory.initElements(driver, ControlPanelPage.class);
+        footerPage = PageFactory.initElements(driver, FooterPage.class);
         deliveryAddressPage = PageFactory.initElements(driver, DeliveryAddressPage.class);
         myBookingPage = PageFactory.initElements(driver, MyBookingPage.class);
         orderingGuestPage = PageFactory.initElements(driver, OrderingGuestPage.class);
