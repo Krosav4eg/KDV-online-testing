@@ -17,7 +17,7 @@ public class OrderingLegalPageTest extends BaseTest {
     };
 
     //Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
-    @Test
+    @Test(enabled = false)
     public void verifyCreateOrderWithDefaultAddressTest() {
         TestReporter.testTitle("Test ID = 41799");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
@@ -162,8 +162,8 @@ public class OrderingLegalPageTest extends BaseTest {
                 , "Number orders are equals");
     }
 
-    //Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
-    @Test
+    //BUG 143 Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
+    @Test(enabled = false)
     public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
