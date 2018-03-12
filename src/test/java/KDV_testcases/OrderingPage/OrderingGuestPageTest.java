@@ -36,7 +36,6 @@ public class OrderingGuestPageTest extends BaseTest {
         data2.put("email", "test_s.zuevmagdv.com");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
-
     }
 
     //problem with validation length and validation message in first name and last name fields
