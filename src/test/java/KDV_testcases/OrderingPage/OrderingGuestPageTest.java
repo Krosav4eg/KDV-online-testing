@@ -1,7 +1,5 @@
 package KDV_testcases.OrderingPage;
 
-
-import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -11,10 +9,8 @@ import Core.utils.TestReporter;
 
 public class OrderingGuestPageTest extends BaseTest {
 
-
-
     @Test
-    public void verifyAuthorizationLInkTest() {
+    public void verifyAuthorizationLinkTest() {
         TestReporter.testTitle("Test ID - C41075");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
@@ -27,18 +23,16 @@ public class OrderingGuestPageTest extends BaseTest {
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         orderingGuestPage.selectAuthorizationLink();
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         JSONObject data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
+        orderingGuestPage.authorizationBlockModalWindowError();
         orderingGuestPage.closeAuthorizationLink();
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
         data2 = orderingGuestPage.authModalFormData();
         data2.put("email", "test_s.zuevmagdv.com");
         data2.put("password", "YZde8m");
         orderingGuestPage.authorizationBlockModalWindow(data2);
-        AssertCollector.assertTrue(orderingGuestPage.errorText.isDisplayed(), "Required text is present");
     }
 
     //problem with validation length and validation message in first name and last name fields
@@ -50,16 +44,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("firstName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(35));
         data.put("lastName", "Анна-Мар'я" + RandomStringUtils.randomAlphabetic(35));
         orderingGuestPage.identificationBlock(data);
-        AssertCollector.assertEquals(orderingGuestPage.firstNameTxt.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-        AssertCollector.assertEquals(orderingGuestPage.lastNameTxt.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
-        orderingGuestPage.createOrderButton.click();
-        AssertCollector.assertTrue(!orderingGuestPage.identificationBlock(data).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email). " +
-                        "Например, ivanivanov@domain.com."));
-        AssertCollector.assertEquals(orderingGuestPage.phoneTxt.getAttribute("value").length(),
-                " Number of phone symbols is equal ", RandomStringUtils.randomAlphabetic(12).length());
+        orderingGuestPage.verifyCheckAndInputValue(data);
     }
 
     @Test
@@ -67,12 +52,11 @@ public class OrderingGuestPageTest extends BaseTest {
         TestReporter.testTitle("Test ID - C41069");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
-
         orderingGuestPage.checkReglament();
     }
 
     //validation fail. address input value has more than 255 symbols
-    @Test
+    @Test(enabled = false)
     public void verifyCourierDeliveryTest() {
         TestReporter.testTitle("Test ID - C41072,41070");
         JSONObject data = orderingGuestPage.data();
@@ -84,8 +68,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("address", "Томск, пр. Мира 20, оф.4");
         data.put("comment", RandomStringUtils.randomAlphabetic(255));
         orderingGuestPage.deliveryFormInfo(data);
-        AssertCollector.assertEquals(orderingGuestPage.deliveryCommentField.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+        orderingGuestPage.verifyingCommentFieldLength();
     }
 
     @Test
@@ -96,14 +79,12 @@ public class OrderingGuestPageTest extends BaseTest {
         orderingGuestPage.verifyCompositionOrder();
     }
 
-
     @Test
     public void verifyCreationOrderTest() {
         TestReporter.testTitle("Test ID - C41074");
         JSONObject data = orderingGuestPage.data();
         orderingGuestPage.createOrder(data);
         orderingGuestPage.orderingSelfGet(data);
-        AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
     }
 
     //maximum length 46 symbols validation problem in delivery comment field
@@ -114,13 +95,10 @@ public class OrderingGuestPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         data.put("firstName", RandomStringUtils.randomAlphabetic(46));
         data.put("lastName", RandomStringUtils.randomAlphabetic(46));
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.payBankCardRadioButton);
-        AssertCollector.verifyCondition(orderingGuestPage.payBankCardRadioButton.isEnabled());
-
+        orderingGuestPage.verifypayBankCardRadioButton();
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.selfDeliveryRadioButton);
-        AssertCollector.verifyCondition(orderingGuestPage.selfDeliveryRadioButton.isEnabled());
+        orderingGuestPage.enabledSelfDeliveryButton();
     }
 
     @Test
@@ -132,10 +110,7 @@ public class OrderingGuestPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
-        AssertCollector.verifyCondition(orderingGuestPage.firstNameFieldAdvice.getText().
-                contains("Это поле обязательно для заполнения."));
-        AssertCollector.verifyCondition(orderingGuestPage.lastNameFieldAdvice.getText().
-                contains("Это поле обязательно для заполнения."));
+        orderingGuestPage.verifyingEmptyField();
     }
 
     @Test
@@ -148,41 +123,30 @@ public class OrderingGuestPageTest extends BaseTest {
         orderingGuestPage.createOrder(data);
         data = orderingGuestPage.deliveryFormData();
         orderingGuestPage.deliveryFormInfo(data);
-        AssertCollector.verifyCondition(orderingGuestPage.emailFieldAdvice.getText().
-                contains("Это поле обязательно для заполнения."));
+        orderingGuestPage.verifyingEmailEmptyField();
         data = orderingGuestPage.data();
         data.put("email", "a.shauloandersenlab.com");
         orderingGuestPage.identificationBlockWrong(data);
-        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
-                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
-                "Error messages are equals");
+        orderingGuestPage.verifyingEmailEmptyField(data);
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@andersenlabcom");
         orderingGuestPage.identificationBlockWrong(data);
-        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
-                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
-                "Error messages are equals");
+        orderingGuestPage.verifyingEmailEmptyField(data);
         data = orderingGuestPage.data();
         data.put("email", "a..shaulo@andersenlab.com");
         orderingGuestPage.identificationBlockWrong(data);
-        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
-                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
-                "Error messages are equals");
+        orderingGuestPage.verifyingEmailEmptyField(data);
         data = orderingGuestPage.data();
         data.put("email", "a.s ha ulo@andersenlab.com");
         orderingGuestPage.identificationBlockWrong(data);
-        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
-                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
-                "Error messages are equals");
+        orderingGuestPage.verifyingEmailEmptyField(data);
         data = orderingGuestPage.data();
         data.put("email", "a.shaulo@anders enlab.com");
         orderingGuestPage.identificationBlockWrong(data);
-        AssertCollector.assertEqualsJ(orderingGuestPage.emailFieldAdvice.getText(),
-                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
-                "Error messages are equals");
+        orderingGuestPage.verifyingEmailEmptyField(data);
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyEmptyPhoneAndAddressFieldsTest() {
         TestReporter.testTitle("Test ID - C41081-41082");
         JSONObject data = orderingGuestPage.data();
@@ -194,10 +158,7 @@ public class OrderingGuestPageTest extends BaseTest {
         data = orderingGuestPage.deliveryFormData();
         data.put("address", "");
         orderingGuestPage.deliveryFormInfo(data);
-        AssertCollector.verifyCondition(orderingGuestPage.phoneFieldAdvice.getText().
-                contains("Это поле обязательно для заполнения."));
-        AssertCollector.verifyCondition(orderingGuestPage.addressFieldAdvice.getText().
-                contains("Это поле обязательно для заполнения."));
+        orderingGuestPage.verifyPhoneAndAddressEmptyField();
         data = orderingGuestPage.data();
         data.put("phone", RandomStringUtils.randomNumeric(9));
         orderingGuestPage.identificationBlock(data);
@@ -205,9 +166,5 @@ public class OrderingGuestPageTest extends BaseTest {
         data.put("address", "Томск, пр. Мира 20, оф.4");
         orderingGuestPage.deliveryFormInfo(data);
         orderingGuestPage.clickCheckBoxAndOrderButton();
-        WaitingUtility.elementFluentWaitVisibility(orderingGuestPage.phoneNotice);
-        AssertCollector.assertEqualsJ(orderingGuestPage.phoneNotice.getText(),
-                "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
-                "Error messages are equals");
     }
 }

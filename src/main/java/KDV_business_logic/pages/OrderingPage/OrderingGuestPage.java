@@ -1,4 +1,4 @@
-package KDV_business_logic.pages.OrderingPage.OrderGuest;
+package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
@@ -12,7 +12,6 @@ import org.testng.Assert;
 
 import static Core.utils.Constants.*;
 import static Core.utils.Constants.FIRST_TAB_BROWSER;
-import static Core.utils.WaitingUtility.*;
 
 public class OrderingGuestPage extends BasePage {
 
@@ -175,14 +174,19 @@ public class OrderingGuestPage extends BasePage {
             }
             new BasketPage(driver).increaseLegalPersonProductCount();
             elementFluentWaitVisibility(orderBtn).click();
-        } catch (Exception e) {
-            e.getMessage();
+        } catch (Exception ex) {
+            ex.getMessage();
         }
     }
 
     public void createOrder(JSONObject data) {
         addProductToBasket();
         identificationBlock(data);
+    }
+
+    public void verifypayBankCardRadioButton() {
+        elementFluentWaitVisibility(payBankCardRadioButton).click();
+        AssertCollector.verifyCondition(payBankCardRadioButton.isEnabled());
     }
 
 
@@ -194,6 +198,7 @@ public class OrderingGuestPage extends BasePage {
         deliveryFormInfo(data);
         elementIsClickable(selfDeliveryRadioButton).click();
         elementIsClickable(createOrderButton).click();
+        AssertCollector.verifyCondition(selfDeliveryRadioButton.isEnabled());
     }
 
     public void checkReglament() {
@@ -217,7 +222,6 @@ public class OrderingGuestPage extends BasePage {
                 "/media/rules/Sales_and_Purchase_Agreement.pdf"));
         switchDriverToAnyTabOfBrowser(1);
         switchDriverToAnyTabOfBrowser(FIRST_TAB_BROWSER);
-
     }
 
     public void clickOnWebElement(WebElement element) {
@@ -230,6 +234,10 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(agreementCheckBoxAdvice).click();
         elementFluentWaitVisibility(createOrderButton).click();
         sleepWait();
+        elementFluentWaitVisibility(phoneNotice);
+        AssertCollector.assertEqualsJ(phoneNotice.getText(),
+                "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX",
+                "Error messages are equals");
     }
 
     public String identificationBlock(JSONObject data) {
@@ -244,6 +252,19 @@ public class OrderingGuestPage extends BasePage {
         return getText(identificationInfo);
     }
 
+    public void verifyCheckAndInputValue(JSONObject data) {
+        AssertCollector.assertEquals(firstNameTxt.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.assertEquals(lastNameTxt.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(45).length());
+        elementFluentWaitVisibility(createOrderButton).click();
+        AssertCollector.assertTrue(!identificationBlock(data).
+                contains("Пожалуйста, введите правильный адрес электронной почты (email). " +
+                        "Например, ivanivanov@domain.com."));
+        AssertCollector.assertEquals(phoneTxt.getAttribute("value").length(),
+                " Number of phone symbols is equal ", RandomStringUtils.randomAlphabetic(12).length());
+    }
+
     public String identificationBlockWrong(JSONObject data) {
         elementFluentWaitVisibility(firstNameTxt).clear();
         elementFluentWaitVisibility(firstNameTxt).sendKeys(data.getString("firstName"));
@@ -253,7 +274,6 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(emailTxt).sendKeys(data.getString("email"));
         elementFluentWaitVisibility(phoneTxt).clear();
         elementFluentWaitVisibility(phoneTxt).sendKeys(data.getString("phone"));
-//        moveToElementJS(driver, deliveryCommentField);
         elementFluentWaitVisibility(createOrderButton).click();
         return getText(identificationInfo);
     }
@@ -271,7 +291,11 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(passwordAuth).clear();
         elementFluentWaitVisibility(passwordAuth).sendKeys(data.getString("password"));
         elementFluentWaitVisibility(authEnterButton).click();
+    }
+
+    public void authorizationBlockModalWindowError() {
         sleepWait();
+        AssertCollector.assertTrue(errorText.isDisplayed());
     }
 
     public JSONObject deliveryFormData() {
@@ -284,7 +308,6 @@ public class OrderingGuestPage extends BasePage {
     }
 
     public void deliveryFormInfo(JSONObject data) {
-         scrollByCoordinate();
         elementFluentWaitVisibility(deliveryAddressField).clear();
         elementFluentWaitVisibility(deliveryAddressField).sendKeys(data.getString("address"));
         elementFluentWaitVisibility(deliveryFloorField).clear();
@@ -293,9 +316,43 @@ public class OrderingGuestPage extends BasePage {
         elementFluentWaitVisibility(deliveryPorchField).sendKeys(data.getString("porch"));
         elementFluentWaitVisibility(deliveryCommentField).clear();
         elementFluentWaitVisibility(deliveryCommentField).sendKeys(data.getString("comment"));
-        moveToElementJS(driver,payBankCardRadioButton);
         scrollUp();
-        elementIsClickable(createOrderButton).click();
+        elementFluentWaitClick(createOrderButton).click();
+    }
+
+    public void verifyPhoneAndAddressEmptyField() {
+        AssertCollector.verifyCondition(phoneFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.verifyCondition(addressFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+    }
+
+    public void verifyingEmptyField() {
+        AssertCollector.verifyCondition(firstNameFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+        AssertCollector.verifyCondition(lastNameFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+    }
+
+    public void verifyingEmailEmptyField() {
+        AssertCollector.verifyCondition(emailFieldAdvice.getText().
+                contains("Это поле обязательно для заполнения."));
+    }
+
+    public void verifyingEmailEmptyField(JSONObject data) {
+        AssertCollector.assertEqualsJ(emailFieldAdvice.getText(),
+                "Пожалуйста, введите правильный адрес электронной почты (email). Например, ivanivanov@domain.com.",
+                "Error messages are equals");
+    }
+
+    public void enabledSelfDeliveryButton() {
+        elementFluentWaitClick(selfDeliveryRadioButton).click();
+        AssertCollector.verifyCondition(selfDeliveryRadioButton.isEnabled());
+    }
+
+    public void verifyingCommentFieldLength() {
+        AssertCollector.assertEquals(deliveryCommentField.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
     }
 
     public void clickCreateOrderBtn() {
@@ -309,28 +366,29 @@ public class OrderingGuestPage extends BasePage {
         moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
         elementIsClickable(authEnterButton).click();
+        AssertCollector.assertTrue(errorText.isDisplayed(), "Required text is present");
     }
 
     public void closeAuthorizationLink() {
         elementIsClickable(closeModalButton).click();
         moveToElementJS(driver, headerTxt);
         elementIsClickable(modalAuthLink).click();
+        AssertCollector.assertTrue(errorText.isDisplayed(), "Required text is present");
     }
-    public void verifyAuthorizationLInk()
-    {
-        moveToElementJS(driver,modalAuthLink);
+
+    public void verifyAuthorizationLInk() {
+        scrollUp();
         elementIsClickable(modalAuthLink).click();
         AssertCollector.assertTrue(modalAuthForm.isDisplayed(),
                 "Modal authorization form is appear");
         elementIsClickable(closeModalButton).click();
-        modalAuthLink.click();
+        elementIsClickable(modalAuthLink).click();
         JSONObject data1 = authModalFormData();
         authorizationBlockModalWindow(data1);
         AssertCollector.verifyCondition(getCurrentUrl().equals(BASE_URL + "/onestepcheckout/"));
     }
 
-    public void verifyCompositionOrder()
-    {
+    public void verifyCompositionOrder() {
         AssertCollector.assertTrue(compositionOrderHeader.isDisplayed());
         AssertCollector.assertTrue(editCompositionOrderHeader.isDisplayed());
         clickOnWebElement(editCompositionOrderHeader);

@@ -112,11 +112,11 @@ public class BasePage extends WaitingUtility {
         driver.navigate().back();
     }
 
-    public static void selectOptionList(WebElement element,int index)
-    {
+    public static void selectOptionList(WebElement element, int index) {
         Select drpCountry = new Select(element);
         drpCountry.selectByIndex(index);
     }
+
     protected static WebDriver driver;
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
 
@@ -125,12 +125,12 @@ public class BasePage extends WaitingUtility {
         BasePage.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     //========================CUSTOM METHODS=============================================
 
     protected static String getText(WebElement element) {
         String test = "";
         try {
-
             LOGGER.log(Level.INFO, " Get text of element ");
             TestReporter.step(" Get text of element ");
             test = element.getText();
@@ -298,6 +298,8 @@ public class BasePage extends WaitingUtility {
         sleepWait();
         robot.keyPress(KeyEvent.VK_PAGE_UP);
         robot.keyRelease(KeyEvent.VK_PAGE_UP);
+        robot.keyPress(KeyEvent.VK_PAGE_UP);
+        robot.keyRelease(KeyEvent.VK_PAGE_UP);
         sleepWait();
     }
 
@@ -345,10 +347,10 @@ public class BasePage extends WaitingUtility {
         AssertCollector.assertEqualsJ(actualCount, expectedCount, "Verifying browser tabs count");
     }
 
-    public static String getPageText()
-    {
+    public static String getPageText() {
         return driver.getPageSource();
     }
+
     /**
      * Method for verifying required text on page.
      *

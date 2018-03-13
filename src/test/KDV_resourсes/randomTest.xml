@@ -7,13 +7,9 @@
         <listener class-name="listener.ListenerTest"/>
     </listeners>
 
-    <test name="Ordering OrderingPageTest OrderingLegalPageTest">
+    <test name="Ordering OrderingPageTest OrderingGuestPageTest">
         <classes>
-            <class name="KDV_testcases.personalCabinet.Physical.AccountDataTest">
-                <!--<methods>-->
-                    <!--<include name="verifyCreateOrderWithDefaultAddressTest"/>-->
-                    <!--<include name="verifyCreateOrderWithoutLAstNadFirstNameFields"/>-->
-                <!--</methods>-->
+            <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest">
             </class>
         </classes>
     </test>
