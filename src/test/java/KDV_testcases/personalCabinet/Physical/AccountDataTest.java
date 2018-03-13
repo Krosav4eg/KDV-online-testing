@@ -129,7 +129,7 @@ public class AccountDataTest extends BaseTest {
         data.put("email", ZUEV_EMAIL);
         data.put("password", ZUEV_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        accountDataPage.changingPassword(ZUEV_PASSWORD,ZUEV_PASSWORD);
+        accountDataPage.changingPassword(ZUEV_PASSWORD, ZUEV_PASSWORD);
         AssertCollector.assertTrue(accountDataPage.sucsessMessage.getText().contains("Данные учётной записи сохранены."));
     }
 }

@@ -1,6 +1,7 @@
 package KDV_business_logic.pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -117,10 +118,6 @@ public class AccountDataPage extends BasePage {
         elementFluentWaitVisibility(phoneInEditPage).sendKeys(data.getString("phone"));
         elementFluentWaitVisibility(passwordInEditPage).clear();
         elementFluentWaitVisibility(passwordInEditPage).sendKeys(data.getString("currentPassword"));
-        elementFluentWaitVisibility(newPasswordField).clear();
-        elementFluentWaitVisibility(newPasswordField).sendKeys(data.getString("newPassword"));
-        elementFluentWaitVisibility(confirmPasswordField).clear();
-        elementFluentWaitVisibility(confirmPasswordField).sendKeys(data.getString("confirmPassword"));
         AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_INFORMATION_URL, "Verify current url");
         return getText(informationAccountEdit);
     }
@@ -151,6 +148,8 @@ public class AccountDataPage extends BasePage {
 
     public void changingPassword(String currentPass, String newPass) {
         getUrl(BASE_URL + "/customer/account/edit/");
+        elementFluentWaitVisibility(phoneInEditPage).clear();
+        elementFluentWaitVisibility(phoneInEditPage).sendKeys(RandomStringUtils.randomNumeric(10));
         fillInputField(passwordInEditPage, currentPass);
         elementFluentWaitVisibility(changePasswordCheckbox).click();
         fillInputField(newPasswordField, newPass);

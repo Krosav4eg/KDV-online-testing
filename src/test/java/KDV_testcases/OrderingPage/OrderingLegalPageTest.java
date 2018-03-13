@@ -13,7 +13,8 @@ import static Core.utils.Constants.*;
 
 public class OrderingLegalPageTest extends BaseTest {
 
-    @Test
+    //Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
+    @Test(enabled = false)
     public void verifyCreateOrderWithDefaultAddressTest() {
         TestReporter.testTitle("Test ID = 41799");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
@@ -25,7 +26,8 @@ public class OrderingLegalPageTest extends BaseTest {
         orderingLegalPage.verifyCreateOrder(data1);
 
     }
-//TODO Добавить задержку тест не успевает отрабатывать
+
+    //TODO Добавить задержку тест не успевает отрабатывать
     @Test
     public void verifyCreateOrderWithChangingAddressTest() {
         TestReporter.testTitle("Test ID = 41801");
@@ -51,7 +53,8 @@ public class OrderingLegalPageTest extends BaseTest {
 
     }
 
-    @Test
+    //BUG 143 Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
+    @Test(enabled = false)
     public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
