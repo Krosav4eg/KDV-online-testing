@@ -1,17 +1,15 @@
 package KDV_business_logic.pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
+import Core.utils.AssertCollector;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import Core.utils.AssertCollector;
 
-import static Core.utils.Constants.*;
-import static Core.utils.WaitingUtility.*;
-import static Core.utils.WaitingUtility.elementIsVisible;
-import static Core.utils.WaitingUtility.textIsPresent;
+import static Core.utils.Constants.AUTHORIZATION_PASSWORD;
+import static Core.utils.Constants.BASE_URL;
 
 public class PersonalCabinetPage extends BasePage {
     public PersonalCabinetPage(WebDriver driver) {
@@ -186,5 +184,59 @@ public class PersonalCabinetPage extends BasePage {
         moveToElementJS(driver, saveButtonInEditPage);
         elementFluentWaitVisibility(saveButtonInEditPage).click();
         return getText(profileContainer);
+    }
+
+    public void fieldIsNecessaryToInputFalse(JSONObject data) {
+        AssertCollector.assertTrue(fillFields(data, false).contains("Это поле обязательно для заполнения."));
+    }
+
+    public void fieldIsNecessaryToInputTrue(JSONObject data) {
+        AssertCollector.assertTrue(fillFields(data, true).contains("Это поле обязательно для заполнения."));
+    }
+
+    public void verifyRewritingFields(JSONObject data) {
+        String first = RandomStringUtils.randomAlphabetic(5);
+        String last = RandomStringUtils.randomAlphabetic(5);
+        String email = "test_n.moiseeva@magdv.com";
+        String phone = RandomStringUtils.randomNumeric(10);
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains(first));
+        AssertCollector.verifyCondition(allResult.contains(last));
+        AssertCollector.verifyCondition(allResult.contains(email));
+        AssertCollector.verifyCondition(allResult.contains(phone));
+    }
+
+    public void verifyInputWrongNameAndSurname(JSONObject data) {
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать " +
+                "только буквы, тире и апостроф."));
+        AssertCollector.verifyCondition(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать " +
+                "только буквы, тире и апостроф."));
+    }
+
+    public void obligatorilyFillTheField(JSONObject data) {
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains("Это поле обязательно для заполнения."));
+    }
+
+    public void personDataSaved(JSONObject data) {
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains("Данные учётной записи сохранены."));
+    }
+
+    public void isPasswordWrong(JSONObject data) {
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains("Неправильный текущий пароль"));
+    }
+
+    public void arePasswordsTheSame(JSONObject data) {
+        String allResult = fillFields(data, true);
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+    }
+
+    public void checkTheAddressIsCorrect(JSONObject data) {
+        String allResult = fillFields(data, false);
+        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
+                "(email)."));
     }
 }
