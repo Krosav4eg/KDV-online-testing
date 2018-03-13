@@ -19,7 +19,7 @@ import KDV_business_logic.pages.CategoryPage.CategoryPage;
 import KDV_business_logic.pages.CategoryPage.ModalWindow;
 import KDV_business_logic.pages.CustomerAccountPage;
 import KDV_business_logic.pages.MainPage.MainPageSelector;
-import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
+import KDV_business_logic.pages.OrderingPage.OrderingGuestPage;
 import KDV_business_logic.pages.OrderingPage.OrderingLegalPage;
 import KDV_business_logic.pages.OrderingPage.OrderingPhysicalPage;
 import KDV_business_logic.pages.RegistrationPage;

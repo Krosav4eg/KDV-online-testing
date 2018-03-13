@@ -1,7 +1,5 @@
 package KDV_testcases.OrderingPage;
 
-import Core.basePage.BasePage;
-import Core.utils.AssertCollector;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -10,10 +8,6 @@ import Core.utils.TestReporter;
 
 
 public class OrderingPhysicalPageTest extends BaseTest {
-
-    private BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
-
 
     @Test
     public void orderingDefaultAddress() {
@@ -50,8 +44,6 @@ public class OrderingPhysicalPageTest extends BaseTest {
         data.put("phone", RandomStringUtils.randomNumeric(11));
         orderingGuestPage.createOrder(data);
         orderingPhysicalPage.checkPhysicalPersonRadioButton();
-        AssertCollector.assertTrue(orderingPhysicalPage.validateForm.getText().contains("Эта учётная запись не " +
-                "подтверждена. Нажмите сюда для повторной отсылки письма с кодом подтверждения."));
     }
 
     @Test
@@ -64,7 +56,6 @@ public class OrderingPhysicalPageTest extends BaseTest {
         data.put("phone", "1111111111");
         orderingGuestPage.createOrder(data);
         orderingPhysicalPage.orderingWithSamePhone();
-        del.textPresentDelegate("Номер телефона уже используется.");
     }
 
     @Test
@@ -76,7 +67,6 @@ public class OrderingPhysicalPageTest extends BaseTest {
         data.put("email", RandomStringUtils.randomAlphabetic(5) + "@test.ru");
         data.put("phone", " ");
         orderingGuestPage.createOrder(data);
-        orderingPhysicalPage.orderingWithSamePhone();
-        del.textPresentDelegate("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX.");
+        orderingPhysicalPage.orderingWithIncorrectPhone();
     }
 }

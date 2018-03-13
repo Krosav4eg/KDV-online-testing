@@ -2,7 +2,6 @@ package KDV_business_logic.pages.OrderingPage;
 
 import Core.basePage.BasePage;
 import KDV_business_logic.pages.BasketPages.BasketPage;
-import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +13,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import static Core.utils.Constants.*;
-import static Core.utils.WaitingUtility.*;
 
 public class OrderingPhysicalPage extends BasePage {
 
@@ -264,6 +262,8 @@ public class OrderingPhysicalPage extends BasePage {
         fillInputField(emailInputField, getEmailValue);
         fillInputField(passwordField, "test12");
         elementFluentWaitVisibility(authButton).click();
+        AssertCollector.assertTrue(validateForm.getText().contains("Эта учётная запись не " +
+                "подтверждена. Нажмите сюда для повторной отсылки письма с кодом подтверждения."));
     }
 
     public void orderingWithSamePhone() {
@@ -276,5 +276,10 @@ public class OrderingPhysicalPage extends BasePage {
         elementFluentWaitVisibility(checkBoxAdvice).click();
         elementFluentWaitVisibility(guest.createOrderButton).click();
         elementFluentWaitVisibility(physicalRadioButton);
+        textPresent("Номер телефона уже используется.");
+    }
+
+    public void orderingWithIncorrectPhone() {
+        textPresent("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX.");
     }
 }

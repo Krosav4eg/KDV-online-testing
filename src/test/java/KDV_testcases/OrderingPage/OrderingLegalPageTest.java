@@ -1,11 +1,9 @@
 package KDV_testcases.OrderingPage;
 
-import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.*;
@@ -39,8 +37,8 @@ public class OrderingLegalPageTest extends BaseTest {
         JSONObject data1 = orderingLegalPage.dataFirst();
         orderingLegalPage.verifyCreateOrder(data1);
     }
-
-    @Test
+    //BUG 143 Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
+    @Test(enabled = false)
     public void verifyCreateOrderWithThirdAddressTest() {
         TestReporter.testTitle("Test ID = 41826");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
@@ -50,12 +48,11 @@ public class OrderingLegalPageTest extends BaseTest {
         orderingLegalPage.createOrderForLegalPerson();
         JSONObject data1 = orderingLegalPage.data();
         orderingLegalPage.verifyCreateOrder(data1);
-
     }
 
     //BUG 143 Периодически возникает баг с кнопкой "Оформить заказ" на странице "Оформление заказа". Выдаёт 404 ошибку
-    @Test(enabled = false)
-    public void verifyCreateOrderWithoutLAstNadFirstNameFields() {
+    @Test
+    public void verifyCreateOrderWithoutLastNadFirstNameFields() {
         TestReporter.testTitle("Test ID = 42013");
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         data.put("email", FADEEV_EMAIL);
@@ -67,21 +64,15 @@ public class OrderingLegalPageTest extends BaseTest {
         data1.put("lastName", "");
         data1.put("phone", "");
         orderingLegalPage.deliveryAddressBlock(data1);
+        orderingLegalPage.verifyPhoneFieldAdvice();
         orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
-        AssertCollector.assertTrue(orderingGuestPage.firstNameFieldAdvice.isDisplayed(),
-                "Error Message is displayed");
-        AssertCollector.assertTrue(orderingGuestPage.lastNameFieldAdvice.isDisplayed(),
-                "Error Message is displayed");
-        AssertCollector.assertTrue(orderingGuestPage.phoneFieldAdvice.isDisplayed(),
-                "Error Message is displayed");
+        orderingGuestPage.verifyingEmptyField();
+
         JSONObject data2 = orderingLegalPage.data();
         data2.put("firstName", RandomStringUtils.randomAlphabetic(45));
         data2.put("lastName", RandomStringUtils.randomAlphabetic(45));
         data2.put("phone", "7111111");
         orderingLegalPage.deliveryAddressBlock(data2);
-        WaitingUtility.elementFluentWaitVisibility(orderingGuestPage.createOrderButton);
-        orderingGuestPage.clickOnWebElement(orderingGuestPage.createOrderButton);
-        AssertCollector.assertTrue(orderingGuestPage.phoneNotice.isDisplayed(),
-                "Error Message is displayed");
+        orderingLegalPage.verifyPhoneFieldAdvice();
     }
 }

@@ -6,12 +6,10 @@ import Core.utils.AssertCollector;
 import Core.utils.WaitingUtility;
 import KDV_business_logic.pages.BasketPages.BasketPage;
 import KDV_business_logic.pages.MainPage.MainPageSelector;
-import KDV_business_logic.pages.OrderingPage.OrderGuest.OrderingGuestPage;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -21,13 +19,16 @@ public class OrderingLegalPage extends BasePage {
     public OrderingLegalPage(WebDriver driver) {
         super(driver);
     }
-    BasketPage basketPage= new BasketPage(driver);
-    MainPageSelector mainPageSelector= new MainPageSelector(driver);
+
+    BasketPage basketPage = new BasketPage(driver);
+    MainPageSelector mainPageSelector = new MainPageSelector(driver);
+    OrderingGuestPage orderingGuestPage = new OrderingGuestPage(driver);
+
     @FindBy(css = "[id='billing:firstname']")
     public WebElement firstNameTxt;
 
 
-    @FindBy (id = "billing-address-select")
+    @FindBy(id = "billing-address-select")
     public WebElement addresList;
 
     @FindBy(css = ".button.button_mobile-wide.j_button_make_order")
@@ -97,6 +98,7 @@ public class OrderingLegalPage extends BasePage {
         data.put("phone", "+72222222222");
         return data;
     }
+
     public void deliveryAddressBlock(JSONObject data) {
         elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt).clear();
         elementFluentWaitVisibility(new OrderingGuestPage(driver).firstNameTxt).sendKeys(data.getString("firstName"));
@@ -104,9 +106,15 @@ public class OrderingLegalPage extends BasePage {
         elementFluentWaitVisibility(new OrderingGuestPage(driver).lastNameTxt).sendKeys(data.getString("lastName"));
         elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt).clear();
         elementFluentWaitVisibility(new OrderingGuestPage(driver).phoneTxt).sendKeys(data.getString("phone"));
+        elementIsClickable(createOrderButton).click();
     }
-    public void verifyCreateOrder(JSONObject data)
-    {
+
+    public void verifyPhoneFieldAdvice() {
+        AssertCollector.assertTrue(orderingGuestPage.phoneFieldAdvice.isDisplayed(),
+                "Error Message is displayed");
+    }
+
+    public void verifyCreateOrder(JSONObject data) {
         AssertCollector.assertEqualsJ(mainPageSelector.myAccountLink.getText(), "ООО Юрмет",
                 "Company name is correct");
         textPresent("Адреса доставки (Торговые точки)");
@@ -116,16 +124,13 @@ public class OrderingLegalPage extends BasePage {
         AssertCollector.assertTrue(addressDropDownArea.isDisplayed(),
                 "Address dropdown list is appear");
 
-        if(data.getString("firstName").equals("Софья")){
-            selectOptionList(addresList,1);
-           // elementIsClickable(secondAddressDropDownList).click();
+        if (data.getString("firstName").equals("Софья")) {
+            selectOptionList(addresList, 1);
         }
-        if (data.getString("firstName").equals("Геннадий"))
-        {
-            selectOptionList(addresList,0);
-            //elementIsClickable(thirdAddressDropDownList).click();
+        if (data.getString("firstName").equals("Геннадий")) {
+            selectOptionList(addresList, 0);
         }
-        moveMouseToAndClick(driver,orderContainer,0,0);
+        moveMouseToAndClick(driver, orderContainer, 0, 0);
         sleepWait();
         String currentName = getValueOfAttributeByName(firstNameTxt, "value");
         AssertCollector.assertEqualsJ(currentName, data.getString("firstName"),
@@ -136,7 +141,7 @@ public class OrderingLegalPage extends BasePage {
                 data.getString("phone"), "Phones correct");
         AssertCollector.assertTrue(transportDescription.getText().
                 contains("Доставка грузовым транспортом: 0,00"), "Correct value");
-        moveToElementJS(driver,orderContainer);
+        scrollUp();
         elementIsClickable(createOrderButton).click();
         textPresent("Обработка, пожалуйста, подождите. Не нажимайте на обновление или кнопку" +
                 " назад иначе этот заказ не будет оформлен.");
