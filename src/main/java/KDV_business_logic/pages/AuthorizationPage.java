@@ -319,4 +319,8 @@ public class AuthorizationPage extends BasePage {
         fillInputFieldAndPressEnterButton(passwordField, data.getString("pass"));
         return getText(loginContainer);
     }
- }
+
+    public void navigateToUrl(String Url) {
+        getUrl(Url);
+    }
+}
