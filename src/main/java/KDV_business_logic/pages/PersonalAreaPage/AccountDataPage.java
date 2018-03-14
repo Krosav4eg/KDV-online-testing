@@ -155,6 +155,7 @@ public class AccountDataPage extends BasePage {
         fillInputField(newPasswordField, newPass);
         fillInputField(confirmPasswordField, newPass);
         elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.assertTrue(sucsessMessage.getText().contains("Данные учётной записи сохранены."));
     }
 
     public void verifyFirstAndLastNameValues()
