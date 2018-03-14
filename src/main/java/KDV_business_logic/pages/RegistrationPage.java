@@ -853,11 +853,6 @@ public class RegistrationPage extends BasePage {
                 "тире и апостроф."));
     }
 
-    public void phoneValueMustMatchFormat(JSONObject data) {
-        String registration = verifyAuthorizationFields(data);
-        AssertCollector.assertTrue(registration.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
-    }
-
     public void checkFirstNameLessThan45Symbols(JSONObject data) {
         AssertCollector.assertTrue(verifyAuthorizationFields(data).
                 contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.\n"));
@@ -872,12 +867,12 @@ public class RegistrationPage extends BasePage {
                 " Value of last name is equal ", lastName.getAttribute("value"));
     }
 
-    public void fieldNecessaryToFillInWithData(JSONObject data) {
-        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения"));
+    public void fieldNecessaryToFillInWithData(JSONObject data, String text) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains(text));
     }
 
-    public void mandatoryFieldForIndividualFillIn(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).contains("Это поле обязательно для заполнения."));
+    public void mandatoryFieldForIndividualFillIn(JSONObject verifyData, String text) {
+        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).contains(text));
     }
 
     public void checkNotSelectedCheckbox(JSONObject verifyData) {
@@ -891,21 +886,6 @@ public class RegistrationPage extends BasePage {
 
     public void fieldNecessaryToFillInWithoutData() {
         AssertCollector.assertTrue(verifyMandatory().contains("Это поле обязательно для заполнения."));
-    }
-
-    public void taxpayerIdMustContain12Symbols(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Значение \"ИНН\" должно содержать 12 символов."));
-    }
-
-    public void taxpayerIdMustContain10Symbols(JSONObject data) {
-        AssertCollector.assertTrue(verifyAuthorizationFields(data).
-                contains("Значение \"ИНН\" должно содержать 10 символов."));
-    }
-
-    public void accountWithSuchEmailAlreadyExists(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Учётная запись с таким адресом электронной почты уже существует."));
     }
 
     public void accountWithSuchEmailAlreadyExistsWithEqualityCheck(JSONObject verifyData) {
@@ -928,18 +908,4 @@ public class RegistrationPage extends BasePage {
 
     }
 
-    public void inputCorrectEmail(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-    }
-
-    public void passwordMustContainMoreSymbols(JSONObject data) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(data).
-                contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
-    }
-
-    public void verifyPasswordsAreEqual(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
-    }
 }
