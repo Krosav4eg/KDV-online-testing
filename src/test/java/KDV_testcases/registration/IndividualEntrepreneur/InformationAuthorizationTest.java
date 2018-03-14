@@ -22,10 +22,12 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37516");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a..shaulo@andersenlab.com");
-        registrationPage.inputCorrectEmail(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData,
+                "Пожалуйста, введите правильный адрес электронной почты (email)");
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
-        registrationPage.accountWithSuchEmailAlreadyExists(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData,
+                "Учётная запись с таким адресом электронной почты уже существует.");
     }
 
     @Test
@@ -82,10 +84,12 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("password", "11");
-        registrationPage.passwordMustContainMoreSymbols(data);
+        registrationPage.mandatoryFieldForIndividualFillIn(data,
+                "Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
         data = registrationPage.mainInfoRegistration();
         data.put("password", " 3132 ");
-        registrationPage.passwordMustContainMoreSymbols(data);
+        registrationPage.mandatoryFieldForIndividualFillIn(data,
+                "Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале.");
     }
 
     @Test
@@ -95,7 +99,7 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData.put("pass", "teea");
         verifyData.put("confirmPassword", "tes7676t234   ");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        registrationPage.verifyPasswordsAreEqual(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Пожалуйста, убедитесь, что ваши пароли совпадают.");
     }
 
     //изменилась логика работы приложения. после ввода "email", "test@test.com".
@@ -111,9 +115,9 @@ public class InformationAuthorizationTest extends BaseTest {
         registrationPage.accountWithSuchEmailAlreadyExistsWithEqualityCheck(data);
         data = registrationPage.mainInfoRegistration();
         data.put("password", "");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения");
         data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения");
     }
 }

@@ -15,6 +15,6 @@ public class OrganizationInfoTest extends BaseTest {
         registrationPage.verifyIndividualEntrepreneurRadioButton();
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("taxId", RandomStringUtils.randomNumeric(9));
-        registrationPage.taxpayerIdMustContain10Symbols(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Значение \"ИНН\" должно содержать 10 символов.");
     }
 }

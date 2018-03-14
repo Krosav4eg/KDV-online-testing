@@ -21,10 +21,10 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37677");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("taxId", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("taxId", RandomStringUtils.randomNumeric(10));
-        registrationPage.taxpayerIdMustContain12Symbols(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Значение \"ИНН\" должно содержать 12 символов.");
     }
 
     @Test
@@ -32,7 +32,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37678");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("company", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
 
@@ -41,7 +41,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37686");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("organizationName", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37685");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("legalAddress", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
 
@@ -58,7 +58,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37687");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("address", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37689");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("lastName", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -74,7 +74,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37690");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("phone", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -82,7 +82,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37691,40069");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -90,7 +90,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37692,40072,40073");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("password", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -98,7 +98,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37693,40074");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("confirmPassword", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -106,7 +106,8 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37679");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", KALASHNIKOVA_EMAIL);
-        registrationPage.accountWithSuchEmailAlreadyExists(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData,
+                "Учётная запись с таким адресом электронной почты уже существует.");
     }
 
     @Test
@@ -114,7 +115,7 @@ public class MandatoryFieldsTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37695");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("taxId", "1234567891");
-        registrationPage.taxpayerIdMustContain12Symbols(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Значение \"ИНН\" должно содержать 12 символов.");
     }
 
     @Test

@@ -28,10 +28,10 @@ public class ContactDataTest extends BaseTest {
         registrationPage.verifyIndividualEntrepreneurRadioButton();
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения");
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "8997");
-        registrationPage.phoneValueMustMatchFormat(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
     }
 
     //была убрана проверка длинны ввода строк, т.к. у нас появилось валидационное сообщение по превышению ввода символов
@@ -52,6 +52,6 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40068");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("phone", "2121");
-        registrationPage.phoneValueMustMatchFormat(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
     }
 }
