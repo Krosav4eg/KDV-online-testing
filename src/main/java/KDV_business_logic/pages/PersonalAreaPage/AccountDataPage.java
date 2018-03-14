@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import Core.utils.AssertCollector;
 
 import static Core.utils.Constants.*;
-import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 
 /**
  * @author Sergey Potapov
@@ -151,6 +150,12 @@ public class AccountDataPage extends BasePage {
         AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains("+77711111111"));
     }
 
+    public void verifyPhoneFieldLengthValidation() {
+        scrollUp();
+        AssertCollector.verifyCondition(newPhoneField.getAttribute("value").length() ==
+                RandomStringUtils.randomNumeric(11).length());
+    }
+
     public void verifyPasswordFieldValidation() {
         AssertCollector.assertEquals(passwordInEditPage.getAttribute("value"),
                 " Value of current password field is equal ", passwordInEditPage.
@@ -165,6 +170,13 @@ public class AccountDataPage extends BasePage {
                 RandomStringUtils.randomAlphabetic(45).length());
         AssertCollector.verifyCondition(lastNameInEditPage.getAttribute("value").length() ==
                 RandomStringUtils.randomAlphabetic(45).length());
+    }
+
+    public void verifyFirstAndLastNameSpecialSymbols() {
+        AssertCollector.verifyCondition(firstNameInEditPage.getAttribute("value") ==
+                "Анна-Мар'я");
+        AssertCollector.verifyCondition(lastNameInEditPage.getAttribute("value") ==
+                "Анна-Мар'я");
     }
 
     public String verifyAddingNewAccountFields(JSONObject data) {
@@ -185,10 +197,12 @@ public class AccountDataPage extends BasePage {
         return getText(informationAccountEdit);
     }
 
-    public String verifyAddressDropDownAddress() {
+    public void verifyAddressMaximumLength() {
+        AssertCollector.verifyCondition(firstNameInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(255).length());
         elementFluentWaitVisibility(newAddressField).clear();
-        fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
-        return getPageText();
+        fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября");
+        textPresent("Внимание! Вы не указали номер квартиры, офиса.");
     }
 
     public void changingPassword(String currentPass, String newPass) {
@@ -232,5 +246,10 @@ public class AccountDataPage extends BasePage {
                 "Required field is displayed");
         AssertCollector.assertTrue(elementIsVisible(confirmPasswordField),
                 "Required field is displayed");
+    }
+
+    public void checkRequiredFieldsMessage() {
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        textPresent("Это поле обязательно для заполнения.");
     }
 }

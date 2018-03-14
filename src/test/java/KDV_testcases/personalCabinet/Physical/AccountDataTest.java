@@ -16,13 +16,11 @@ public class AccountDataTest extends BaseTest {
         JSONObject data = authorizationPage.mainAuthorizationInfo();
         authorizationPage.verifyAuthFields(data);
         accountDataPage.verifyAccountInfoVisibility();
-
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", RandomStringUtils.randomAlphanumeric(45));
         data.put("lastName", RandomStringUtils.randomAlphanumeric(45));
         accountDataPage.verifyEditAccountFields(data);
         accountDataPage.verifyLengthFirstAndLastName();
-
         data = accountDataPage.mainAccountInfo();
         data.put("firstName", "Аркадий");
         data.put("lastName", "Евдокимов");

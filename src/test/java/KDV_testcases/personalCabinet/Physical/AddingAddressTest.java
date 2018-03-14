@@ -1,20 +1,15 @@
 package KDV_testcases.personalCabinet.Physical;
 
-import Core.basePage.BasePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
 import static Core.utils.Constants.KALASHNIKOVA_EMAIL;
 import static Core.utils.Constants.KALASHNIKOVA_PASSWORD;
 
 public class AddingAddressTest extends BaseTest {
-
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     @Test
     public void verifyFirstAndLastNameValuesTest() {
@@ -27,18 +22,12 @@ public class AddingAddressTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomAlphabetic(45));
         data.put("lastName", RandomStringUtils.randomAlphabetic(45));
         accountDataPage.verifyAddingNewAccountFields(data);
-        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length() ==
-                RandomStringUtils.randomAlphabetic(45).length());
-        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value").length() ==
-                RandomStringUtils.randomAlphabetic(45).length());
+        accountDataPage.verifyLengthFirstAndLastName();
         data = accountDataPage.addingNewAddressInfo();
         data.put("firstName", "Анна-Мар'я");
         data.put("lastName", "Анна-Мар'я");
-         accountDataPage.verifyAddingNewAccountFields(data);
-        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value") ==
-                "Анна-Мар'я");
-        AssertCollector.verifyCondition(accountDataPage.lastNameInEditPage.getAttribute("value") ==
-                "Анна-Мар'я");
+        accountDataPage.verifyAddingNewAccountFields(data);
+        accountDataPage.verifyFirstAndLastNameSpecialSymbols();
         accountDataPage.verifyFirstAndLastNameValues();
     }
 
@@ -52,8 +41,7 @@ public class AddingAddressTest extends BaseTest {
         data = accountDataPage.addingNewAddressInfo();
         data.put("phone", RandomStringUtils.randomNumeric(11));
         accountDataPage.verifyAddingNewAccountFields(data);
-        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length() ==
-                RandomStringUtils.randomAlphabetic(11).length());
+        accountDataPage.verifyPhoneFieldLengthValidation();
     }
 
     @Test
@@ -66,10 +54,7 @@ public class AddingAddressTest extends BaseTest {
         data = accountDataPage.addingNewAddressInfo();
         data.put("address", RandomStringUtils.randomAlphabetic(255));
         accountDataPage.verifyAddingNewAccountFields(data);
-        AssertCollector.verifyCondition(accountDataPage.firstNameInEditPage.getAttribute("value").length() ==
-                RandomStringUtils.randomAlphabetic(255).length());
-        String myData=accountDataPage.verifyAddressDropDownAddress();
-        AssertCollector.assertTrue(myData.contains("Это поле обязательно для заполнения."));
+        accountDataPage.verifyAddressMaximumLength();
     }
 
     @Test
@@ -87,7 +72,6 @@ public class AddingAddressTest extends BaseTest {
         data.put("floor", "");
         data.put("porch", "");
         accountDataPage.verifyAddingNewAccountFields(data);
-        orderingGuestPage.clickOnWebElement(accountDataPage.saveButtonInEditPage);
-        del.textPresentDelegate("Это поле обязательно для заполнения.");
+        accountDataPage.checkRequiredFieldsMessage();
     }
 }
