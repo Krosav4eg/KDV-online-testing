@@ -908,21 +908,6 @@ public class RegistrationPage extends BasePage {
 
     }
 
-    public void inputCorrectEmail(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-    }
-
-    public void passwordMustContainMoreSymbols(JSONObject data) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(data).
-                contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
-    }
-
-    public void verifyPasswordsAreEqual(JSONObject verifyData) {
-        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
-    }
-
     public void checkOrganizationFullName() {
         AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(),
                 " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());

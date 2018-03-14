@@ -86,11 +86,11 @@ public class OrganizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37568,40062,37486");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("organizationName", RandomStringUtils.randomAlphanumeric(256));
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         registrationPage.checkOrganizationFullName();
         data = registrationPage.mainInfoRegistration();
         data.put("legalAddress", RandomStringUtils.randomAlphanumeric(256));
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         registrationPage.checkLegalAddress();
     }
 
@@ -100,11 +100,11 @@ public class OrganizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40063,40066,37480,37424");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("company", RandomStringUtils.randomAlphanumeric(256));
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         registrationPage.checkCompany();
         data = registrationPage.mainInfoRegistration();
         data.put("comments", RandomStringUtils.randomAlphanumeric(1001));
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         registrationPage.checkComments();
     }
 
@@ -114,7 +114,7 @@ public class OrganizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 40065,37421");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("address", RandomStringUtils.randomAlphanumeric(256));
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         registrationPage.checkAddress();
         data = registrationPage.mainInfoRegistration();
         data.put("address", "Тульская обл, г Новомосковск, пр-кт Победы, д 5");

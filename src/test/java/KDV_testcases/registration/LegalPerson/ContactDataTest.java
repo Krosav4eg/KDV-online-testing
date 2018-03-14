@@ -13,7 +13,7 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37688,40272,40275");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("firstName", "");
-        registrationPage.mandatoryFieldForIndividualFillIn(verifyData);
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -58,6 +58,6 @@ public class ContactDataTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomAlphabetic(20));
         data.put("lastName", RandomStringUtils.randomAlphabetic(20));
         data.put("phone", RandomStringUtils.randomNumeric(9));
-        registrationPage.phoneValueMustMatchFormatForIndividual(data);
+        registrationPage.mandatoryFieldForIndividualFillIn(data, "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
     }
 }

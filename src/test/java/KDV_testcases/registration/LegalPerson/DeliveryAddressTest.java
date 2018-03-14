@@ -12,12 +12,12 @@ public class DeliveryAddressTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37551,37552,37553,40279,40280,40281");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("legalAddress", "");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("company", "");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("address", "");
-        registrationPage.fieldNecessaryToFillInWithData(data);
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
     }
 }
