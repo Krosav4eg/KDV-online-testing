@@ -23,17 +23,11 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyCorrectMailTest() {
         TestReporter.testTitle("Test ID = 37516");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
-//        verifyData.put("email", "a.shauloandersenlab.com");
-//        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-//                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
-//        verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a..shaulo@andersenlab.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, введите правильный адрес электронной почты (email)"));
+        registrationPage.inputCorrectEmail(verifyData);
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "ulo@andersenlab.com");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Учётная запись с таким адресом электронной почты уже существует" ));
+        registrationPage.accountWithSuchEmailAlreadyExists(verifyData);
     }
 
     @Test
@@ -42,39 +36,39 @@ public class InformationAuthorizationTest extends BaseTest {
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha#ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha$ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha%ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha^ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha&ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha*ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha()ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha_ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
         verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("email", "a.sha+ulo@andersenlab.com");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertFalse(del.getCurrentUrlDelegate().contains("account/forgotpassword/"));
+        registrationPage.falseCheckForForgotPassword();
     }
 
     @Test
@@ -82,7 +76,7 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37522");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertTrue(del.getCurrentUrlDelegate().contains("customer/account/login/"));
+        registrationPage.mandatoryCorrectPass();
     }
 
     @Test
@@ -90,12 +84,10 @@ public class InformationAuthorizationTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("password", "11");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
-                contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
+        registrationPage.passwordMustContainMoreSymbols(data);
         data = registrationPage.mainInfoRegistration();
         data.put("password", " 3132 ");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(data).
-                contains("Пожалуйста, введите не менее 6 символов без пробелов в конце и в начале."));
+        registrationPage.passwordMustContainMoreSymbols(data);
     }
 
     @Test
@@ -105,8 +97,7 @@ public class InformationAuthorizationTest extends BaseTest {
         verifyData.put("pass", "teea");
         verifyData.put("confirmPassword", "tes7676t234   ");
         registrationPage.verifyAuthorizationFieldsIndividual(verifyData);
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+        registrationPage.verifyPasswordsAreEqual(verifyData);
     }
 
     //изменилась логика работы приложения. после ввода "email", "test@test.com".
@@ -118,18 +109,13 @@ public class InformationAuthorizationTest extends BaseTest {
     public void verifyEmailFieldValidationTest() {
         TestReporter.testTitle("Test ID = 40069,40072,40074,40076,40077");
         JSONObject data = registrationPage.mainInfoRegistration();
-        data.put("email",KALASHNIKOVA_EMAIL);
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Учётная запись с таким адресом электронной почты уже существует."));
-        AssertCollector.assertEquals(registrationPage.email.getAttribute("value"),
-                " Value of email field is equal ", registrationPage.email.getAttribute("value"));
+        data.put("email", KALASHNIKOVA_EMAIL);
+        registrationPage.accountWithSuchEmailAlreadyExistsWithEqualityCheck(data);
         data = registrationPage.mainInfoRegistration();
         data.put("password", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data);
         data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data);
     }
 }
