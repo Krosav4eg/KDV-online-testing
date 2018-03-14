@@ -858,6 +858,11 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(registration.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
     }
 
+    public void phoneValueMustMatchFormatForIndividual(JSONObject data) {
+        String registration = verifyAuthorizationFieldsIndividual(data);
+        AssertCollector.assertTrue(registration.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
+    }
+
     public void checkFirstNameLessThan45Symbols(JSONObject data) {
         AssertCollector.assertTrue(verifyAuthorizationFields(data).
                 contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.\n"));
@@ -941,5 +946,34 @@ public class RegistrationPage extends BasePage {
     public void verifyPasswordsAreEqual(JSONObject verifyData) {
         AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
                 contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+    }
+
+    public void checkOrganizationFullName() {
+        AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkLegalAddress() {
+        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkCompany() {
+        AssertCollector.assertEquals(company.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkComments() {
+        AssertCollector.assertEquals(comments.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(1000).length());
+    }
+
+    public void checkAddress() {
+        AssertCollector.assertTrue(address.getAttribute("value").length()
+                == RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkCorrectAddress(JSONObject data) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains("Внимание! Вы не указали номер квартиры, офиса."));
     }
 }

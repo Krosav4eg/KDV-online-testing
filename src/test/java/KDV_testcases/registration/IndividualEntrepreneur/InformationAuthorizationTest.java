@@ -1,12 +1,10 @@
 package KDV_testcases.registration.IndividualEntrepreneur;
 
 import Core.basePage.BasePage;
-import org.apache.commons.lang.RandomStringUtils;
+import Core.utils.TestReporter;
+import KDV_testcases.base.BaseTest;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
-import Core.utils.TestReporter;
 
 import static Core.utils.Constants.KALASHNIKOVA_EMAIL;
 
