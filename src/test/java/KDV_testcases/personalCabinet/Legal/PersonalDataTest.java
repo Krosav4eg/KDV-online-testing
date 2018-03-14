@@ -1,14 +1,10 @@
 package KDV_testcases.personalCabinet.Legal;
 
-import Core.basePage.BasePage;
-import Core.utils.WaitingUtility;
-import KDV_business_logic.pages.PersonalAreaPage.MyBookingPage;
+import Core.utils.TestReporter;
+import KDV_testcases.base.BaseTest;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
-import Core.utils.TestReporter;
 
 public class PersonalDataTest extends BaseTest {
 
@@ -20,7 +16,7 @@ public class PersonalDataTest extends BaseTest {
         data.put("email", "test_n.moiseeva@magdv.com");
         data.put("password", "bu5ttq");
         authorizationPage.verifyAuthFields(data);
-        orderingGuestPage.clickOnWebElement(myBookingPage.myBookingsItemButton);
+        myBookingPage.selectItem();
         personalCabinetPage.verifyFieldsData();
     }
 
@@ -36,8 +32,7 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("last", "");
         dataCab.put("email", "");
         dataCab.put("phone", "");
-        AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab, false).contains(
-                "Это поле обязательно для заполнения."));
+        personalCabinetPage.fieldIsNecessaryToInputFalse(dataCab);
     }
 
     @Test
@@ -54,8 +49,7 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("phone", "");
         dataCab.put("newPass", "");
         dataCab.put("confirmPass", "");
-        AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab, true).contains(
-                "Это поле обязательно для заполнения."));
+        personalCabinetPage.fieldIsNecessaryToInputTrue(dataCab);
     }
 
     @Test
@@ -76,11 +70,7 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("phone", phone);
         dataCab.put("newPass", "");
         dataCab.put("confirmPass", "");
-        String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains(first));
-        AssertCollector.verifyCondition(allResult.contains(last));
-        AssertCollector.verifyCondition(allResult.contains(email));
-        AssertCollector.verifyCondition(allResult.contains(phone));
+        personalCabinetPage.verifyRewritingFields(dataCab);
     }
 
     @Test
@@ -94,8 +84,7 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         dataCab.put("newPass", "bu5ttq");
         dataCab.put("confirmPass", "bu5ttq");
-        AssertCollector.assertTrue(personalCabinetPage.fillFields(dataCab, true).
-                contains("Данные учётной записи сохранены."));
+        personalCabinetPage.personDataSaved(dataCab);
     }
 
     @Test
@@ -111,11 +100,7 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("email", email);
         dataCab.put("first", "!@#$%^&*()+_/|{}[]?>");
         dataCab.put("last", "!@#$%^&*()+_/|{}[]?>");
-        String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Значение 'Фамилия' не должно быть пустым и может содержать " +
-                "только буквы, тире и апостроф."));
-        AssertCollector.verifyCondition(allResult.contains("Значение 'Имя' не должно быть пустым и может содержать " +
-                "только буквы, тире и апостроф."));
+        personalCabinetPage.verifyInputWrongNameAndSurname(dataCab);
     }
 
     @Test
@@ -129,27 +114,19 @@ public class PersonalDataTest extends BaseTest {
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         String email = "a.shauloandersenlab.com";
         dataCab.put("email", email);
-        String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
-                "(email)."));
+        personalCabinetPage.checkTheAddressIsCorrect(dataCab);
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a.shaulo@andersenlabcom";
         dataCab.put("email", email);
-        allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
-                "(email)."));
+        personalCabinetPage.checkTheAddressIsCorrect(dataCab);
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a..shaulo@andersenlab.com";
         dataCab.put("email", email);
-        allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
-                "(email)."));
+        personalCabinetPage.checkTheAddressIsCorrect(dataCab);
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         email = "a.shaulo@anders enlab.com";
         dataCab.put("email", email);
-        allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
-                "(email)."));
+        personalCabinetPage.checkTheAddressIsCorrect(dataCab);
     }
 
     @Test
@@ -162,12 +139,10 @@ public class PersonalDataTest extends BaseTest {
         JSONObject dataCab = personalCabinetPage.dataPersonal();
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         dataCab.put("phone", "@!#$%&*()_+/*");
-        String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Это поле обязательно для заполнения."));
+        personalCabinetPage.obligatorilyFillTheField(dataCab);
         String phone = RandomStringUtils.randomNumeric(10);
         dataCab.put("phone", phone);
-        allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Данные учётной записи сохранены."));
+        personalCabinetPage.personDataSaved(dataCab);
     }
 
     @Test
@@ -181,11 +156,9 @@ public class PersonalDataTest extends BaseTest {
         String pass = RandomStringUtils.randomAlphabetic(5);
         dataCab.put("email", "test_n.moiseeva@magdv.com");
         dataCab.put("currentPass", pass);
-        String allResult = personalCabinetPage.fillFields(dataCab, false);
-        AssertCollector.verifyCondition(allResult.contains("Неправильный текущий пароль"));
+        personalCabinetPage.isPasswordWrong(dataCab);
         dataCab.put("newPass", RandomStringUtils.randomAlphabetic(6));
         dataCab.put("confirmPass", RandomStringUtils.randomAlphabetic(7));
-        allResult = personalCabinetPage.fillFields(dataCab, true);
-        AssertCollector.verifyCondition(allResult.contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+        personalCabinetPage.arePasswordsTheSame(dataCab);
     }
 }
