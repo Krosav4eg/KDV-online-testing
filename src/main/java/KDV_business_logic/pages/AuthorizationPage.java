@@ -323,4 +323,5 @@ public class AuthorizationPage extends BasePage {
     public void navigateToUrl(String Url) {
         getUrl(Url);
     }
+
 }

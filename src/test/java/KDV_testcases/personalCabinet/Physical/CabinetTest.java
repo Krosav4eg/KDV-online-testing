@@ -1,21 +1,13 @@
 package KDV_testcases.personalCabinet.Physical;
 
-import Core.basePage.BasePage;
-import Core.utils.WaitingUtility;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
 import Core.utils.TestReporter;
 
-import static Core.basePage.BasePage.navigateBack;
 import static Core.utils.Constants.*;
-import static Core.utils.WaitingUtility.elementIsVisible;
-import static Core.utils.WaitingUtility.waitForJSandJQueryToLoad;
 
 public class CabinetTest extends BaseTest {
-    BasePage.MyDelegate del = new BasePage.MyDelegate() {
-    };
 
     // TODO: 12.01.2018 C38045 take id from DB
     @Test
@@ -25,25 +17,8 @@ public class CabinetTest extends BaseTest {
         data.put("email", AUTHORIZATION_EMAIL);
         data.put("password", AUTHORIZATION_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.personalDataHeader));
-        AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().
-                contains("Аркадий Евдокимов"));
-        AssertCollector.verifyCondition(controlPanelPage.emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
-        AssertCollector.verifyCondition(controlPanelPage.phoneInPersonalData.getText().equals("+77111111111"));
-        String expLink = del.getValueOfAttributeByName(controlPanelPage.editPersonalDataButton, "href");
-        (controlPanelPage.editPersonalDataButton).click();
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink));
-        navigateBack();
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.addressByDefaultHeader));
-        AssertCollector.verifyCondition(controlPanelPage.nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
-        AssertCollector.verifyCondition(controlPanelPage.addressInAddressByDefault.getText().
-                equals("г Кемерово, ул Варшавская, д 87, кв 12"));
-        AssertCollector.verifyCondition(controlPanelPage.phoneInAddressByDefault.getText().equals("+71111111111"));
-        del.scrollToNecessaryElementDelegate(controlPanelPage.editAddressButton);
-        String expLink1 = del.getValueOfAttributeByName(controlPanelPage.editAddressButton, "href");
-        WaitingUtility.elementIsClickable(controlPanelPage.editAddressButton).click();
-        AssertCollector.verifyCondition(del.getCurrentUrlDelegate().equals(expLink1));
-    }
+        controlPanelPage.verifyAccountAndAddressByDefault();
+       }
 
     @Test
     public void verifyControlPanelTest() {
@@ -52,8 +27,6 @@ public class CabinetTest extends BaseTest {
         data.put("email", PHYSICAL_PERSON_EMAIL);
         data.put("password", PHYSICAL_PERSON_PASSWORD);
         authorizationPage.verifyAuthFields(data);
-        AssertCollector.verifyCondition(elementIsVisible(controlPanelPage.controlPanelHeader));
-        del.textPresentDelegate("Здравствуйте, Иннокентий Макаров!");
-        del.textPresentDelegate("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
+        controlPanelPage.verifyControlPanel();
     }
 }
