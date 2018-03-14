@@ -492,7 +492,7 @@ public class RegistrationPage extends BasePage {
         elementIsClickable(subscription).click();
         AssertCollector.assertTrue(subscription.isEnabled());
         AssertCollector.assertTrue(agreeLegal.isEnabled());
-        moveToElementJS(driver,subscription);
+        moveToElementJS(driver, subscription);
         elementIsClickable(sendButton).click();
         return getText(layout);
 
@@ -840,9 +840,72 @@ public class RegistrationPage extends BasePage {
         AssertCollector.assertTrue(organizationButton.isEnabled(), "Required radio button is selected");
     }
 
-    public void verifySuccessRegistration()
-    {
+    public void verifySuccessRegistration() {
         textPresent("Требуется подтверждение учётной записи. Ссылка для подтверждения была выслана на указанный адрес электронной почты.");
         AssertCollector.assertTrue(getCurrentUrl().contains("customer/account/login/"));
     }
+
+    public void valueForFirstAndLastNameMustPresent(JSONObject data) {
+        String registration = verifyAuthorizationFields(data);
+        AssertCollector.assertTrue(registration.contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
+        AssertCollector.assertTrue(registration.contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, " +
+                "тире и апостроф."));
+    }
+
+    public void checkFirstNameLessThan45Symbols(JSONObject data) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).
+                contains("Значение 'Имя' не должно быть пустым и может содержать только буквы, тире и апостроф.\n"));
+        AssertCollector.assertEquals(firstName.getAttribute("value"),
+                " Value of last name is equal ", firstName.getAttribute("value"));
+    }
+
+    public void checkLastNameLessThan45Symbols(JSONObject data) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).
+                contains("Значение 'Фамилия' не должно быть пустым и может содержать только буквы, тире и апостроф.\n"));
+        AssertCollector.assertEquals(lastName.getAttribute("value"),
+                " Value of last name is equal ", lastName.getAttribute("value"));
+    }
+
+    public void fieldNecessaryToFillInWithData(JSONObject data, String text) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains(text));
+    }
+
+    public void mandatoryFieldForIndividualFillIn(JSONObject verifyData, String text) {
+        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).contains(text));
+    }
+
+    public void checkNotSelectedCheckbox(JSONObject verifyData) {
+        AssertCollector.assertTrue(verifyUnselectCheckoBoxIndividual(verifyData).contains("Это поле обязательно для заполнения."));
+    }
+
+    public void checkRegistrationSuccessful(JSONObject data) {
+        String verifyData = verifyAuthorizationFields(data);
+        AssertCollector.verifyCondition(verifyData.contains("Это поле обязательно для заполнения"));
+    }
+
+    public void fieldNecessaryToFillInWithoutData() {
+        AssertCollector.assertTrue(verifyMandatory().contains("Это поле обязательно для заполнения."));
+    }
+
+    public void accountWithSuchEmailAlreadyExistsWithEqualityCheck(JSONObject verifyData) {
+        AssertCollector.assertTrue(verifyAuthorizationFieldsIndividual(verifyData).
+                contains("Учётная запись с таким адресом электронной почты уже существует."));
+        AssertCollector.assertEquals(email.getAttribute("value"),
+                " Value of email field is equal ", email.getAttribute("value"));
+    }
+
+    public void checkIfEmailExists() {
+        AssertCollector.assertTrue(selectExistEmail().contains("account/forgotpassword/"));
+    }
+
+    public void falseCheckForForgotPassword() {
+        AssertCollector.assertFalse(getCurrentUrl().contains("account/forgotpassword/"));
+    }
+
+    public void mandatoryCorrectPass() {
+        AssertCollector.assertTrue(getCurrentUrl().contains("customer/account/login/"));
+
+    }
+
 }
