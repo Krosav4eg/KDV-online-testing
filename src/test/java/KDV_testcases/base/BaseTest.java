@@ -1,7 +1,8 @@
 package KDV_testcases.base;
 
 import Core.driverFactory.BrowserFactory;
-import KDV_business_logic.pages.MainPage.FooterPage;
+import KDV_business_logic.pages.HeaderPage.HeaderPage;
+import KDV_business_logic.pages.MainPage.*;
 import KDV_business_logic.pages.PersonalAreaPage.*;
 import listener.ListenerTest;
 import Core.logger.LevelCustom;
@@ -18,7 +19,6 @@ import KDV_business_logic.pages.CategoryPage.CardPage;
 import KDV_business_logic.pages.CategoryPage.CategoryPage;
 import KDV_business_logic.pages.CategoryPage.ModalWindow;
 import KDV_business_logic.pages.CustomerAccountPage;
-import KDV_business_logic.pages.MainPage.MainPageSelector;
 import KDV_business_logic.pages.OrderingPage.OrderingGuestPage;
 import KDV_business_logic.pages.OrderingPage.OrderingLegalPage;
 import KDV_business_logic.pages.OrderingPage.OrderingPhysicalPage;
@@ -42,7 +42,12 @@ public class BaseTest {
     private static final Logger LOGGER = MagDvLogger.getMagDvLogger().getLogger();
     //=======DECLARATION OF PAGE CLASSES=========
     protected FooterPage footerPage;
-    protected MainPageSelector mainPageSelector;
+    protected MainPage mainPageSelector;
+    protected BannerSection bannerSection;
+    protected BlockSmm blockSmm;
+    protected BenefitsBlock benefitsBlock;
+    protected HitOfSales hitOfSales;
+    protected HeaderPage headerPage;
     protected AuthorizationPage authorizationPage;
     protected CustomerAccountPage customerAccountPage;
     protected RegistrationPage registrationPage;
@@ -158,7 +163,12 @@ public class BaseTest {
     }
 
     private void initPageElements() {
-        mainPageSelector = PageFactory.initElements(driver, MainPageSelector.class);
+        hitOfSales = PageFactory.initElements(driver, HitOfSales.class);
+        headerPage = PageFactory.initElements(driver, HeaderPage.class);
+        blockSmm = PageFactory.initElements(driver, BlockSmm.class);
+        benefitsBlock = PageFactory.initElements(driver, BenefitsBlock.class);
+        bannerSection = PageFactory.initElements(driver, BannerSection.class);
+        mainPageSelector = PageFactory.initElements(driver, MainPage.class);
         authorizationPage = PageFactory.initElements(driver, AuthorizationPage.class);
         customerAccountPage = PageFactory.initElements(driver, CustomerAccountPage.class);
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);

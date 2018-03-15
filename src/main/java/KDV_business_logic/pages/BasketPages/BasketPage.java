@@ -9,21 +9,17 @@ import org.openqa.selenium.support.FindBy;
 import Core.utils.AssertCollector;
 
 import static Core.utils.Constants.BASE_URL;
-import static Core.utils.WaitingUtility.*;
 
 public class BasketPage extends BasePage {
     public BasketPage(WebDriver driver) {
         super(driver);
     }
 
-
     @FindBy(css = ".message__item")
     public WebElement messageOrderError;
 
-
     @FindBy(css = "a.button.cart__checkout-button.j_cart_checkout")
     private WebElement orderBtn;
-
 
     @FindBy(css = ".j_cart_control_add")
     private WebElement productAddBtn;
@@ -122,7 +118,6 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(searchBtn).click();
     }
 
-
     public void addProductToBasket() {
         getUrl(BASE_URL);
         new BasketPage(driver).selectOneProduct();
@@ -161,6 +156,7 @@ public class BasketPage extends BasePage {
             ex.getMessage();
         }
     }
+
     private double getPrice(WebElement element) {
         return parseStringToDouble(getText(element));
     }
@@ -218,8 +214,6 @@ public class BasketPage extends BasePage {
         elementFluentWaitVisibility(completeOrder).click();
         AssertCollector.assertTrue(getCurrentUrl().contains("onestepcheckout/"));
     }
-
-
 
     public void verifyDeleteProduct() {
         selectTwoProducts();

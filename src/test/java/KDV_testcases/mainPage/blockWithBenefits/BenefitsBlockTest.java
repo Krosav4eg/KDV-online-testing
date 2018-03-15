@@ -8,33 +8,34 @@ import Core.utils.TestReporter;
  * @author Sergey Potapov
  */
 public class BenefitsBlockTest extends BaseTest {
+
     @Test
     public void verifyLowerPriceTest() {
         TestReporter.testTitle("Test ID - C34321");//C34321 - объеденен с C34322 и C34323
-        mainPageSelector.verifyingOpeningLowerPricesSection();
-        mainPageSelector.verifyingClosingLowerPricesSection();
-        mainPageSelector.verifyingAboutLinkLowerPriceSection();
+        benefitsBlock.verifyingOpeningLowerPricesSection();
+        benefitsBlock.verifyingClosingLowerPricesSection();
+        benefitsBlock.verifyingAboutLinkLowerPriceSection();
     }
 
     @Test
     public void verifyOpeningFreeDeliveryTest() {//C34324 - объеденен с C34325 и C34326
         TestReporter.testTitle("Test ID - C34324");
-        mainPageSelector.verifyingOpeningFreeDeliveringSection();
-        mainPageSelector.verifyingClosingFreeDeliveringSection();
-        mainPageSelector.verifyingAboutLinkFreeDeliveringSection();
+        benefitsBlock.verifyingOpeningFreeDeliveringSection();
+        benefitsBlock.verifyingClosingFreeDeliveringSection();
+        benefitsBlock.verifyingAboutLinkFreeDeliveringSection();
     }
 
     @Test
     public void verifyingOpeningPaymentUponReceivingTest() {//C34327 - объеденен с C34328 и C34329
         TestReporter.testTitle("Test ID - C34327");
-        mainPageSelector.verifyingOpeningPaymentUponReceivingSection();
-        mainPageSelector.verifyingClosingPaymentUponReceivingSection();
-        mainPageSelector.verifyingAboutLinkPaymentUponReceivingSection();
+        benefitsBlock.verifyingOpeningPaymentUponReceivingSection();
+        benefitsBlock.verifyingClosingPaymentUponReceivingSection();
+        benefitsBlock.verifyingAboutLinkPaymentUponReceivingSection();
     }
 
     @Test
     public void verifyingBorderColorTest() {
         TestReporter.testTitle("Test ID - C34330");
-        mainPageSelector.verifyBorderColor();
+        benefitsBlock.verifyBorderColor();
     }
 }

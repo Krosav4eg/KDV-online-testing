@@ -1,4 +1,4 @@
-package KDV_testcases.mainPage.categorySection;
+package KDV_testcases.categorySection;
 
 import Core.utils.TestReporter;
 import KDV_testcases.base.BaseTest;

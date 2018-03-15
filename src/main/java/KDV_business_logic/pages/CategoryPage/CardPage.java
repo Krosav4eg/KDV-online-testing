@@ -17,7 +17,6 @@ public class CardPage extends BasePage {
         super(driver);
     }
 
-    //========================CARD PAGE=============================================
     @FindBy(id = "search")
     private WebElement searchField;
 
@@ -132,7 +131,9 @@ public class CardPage extends BasePage {
         searchAndSelect();
         elementFluentWaitVisibility(productCardContainer).click();
         AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические», 300 г"));
-        AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
+        AssertCollector.assertTrue(getText(productContainer).
+                contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, " +
+                        "где история сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"));
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"));
         AssertCollector.assertTrue(elementIsDisplayed(categoryAddBtn), "element is visible");
@@ -153,7 +154,8 @@ public class CardPage extends BasePage {
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Страна производства:"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Россия"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Условия хранения:"));
-        AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Хранить при температуре (18±3) С и относительной влажности воздуха не более 75%."));
+        AssertCollector.assertTrue(getText(productCardDescriptionContainer).
+                contains("Хранить при температуре (18±3) С и относительной влажности воздуха не более 75%."));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Срок хранения:"), "");
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("СТО 73745375-001-2013"));
         AssertCollector.assertTrue(getText(productCardDescriptionContainer).contains("Артикул:"));

@@ -17,7 +17,7 @@
 
     <!--<test name="FooterTest">-->
         <!--<classes>-->
-            <!--<class name="KDV_testcases.footer.FooterTest"/>-->
+            <!--<class name="KDV_testcases.mainPage.footer.FooterTest"/>-->
         <!--</classes>-->
     <!--</test>-->
 
@@ -27,54 +27,54 @@
         <!--</classes>-->
     <!--</test>-->
 
-        <!--<test name="Main Page">-->
+        <test name="Main Page">
+            <classes>
+                <class name="KDV_testcases.mainPage.banner.BannerTest"/>
+                <class name="KDV_testcases.basket.BasketTests"/>
+                <class name="KDV_testcases.mainPage.blockSmm.BlockSmmTest"/>
+                <class name="KDV_testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>
+                <class name="KDV_testcases.categorySection.CategoryGoodsTest"/>
+                <class name="KDV_testcases.mainPage.hitOfSales.HitOfSalesTest"/>
+            </classes>
+        </test>
+
+        <!--<test name="OrderingPage">-->
             <!--<classes>-->
-                <!--<class name="KDV_testcases.mainPage.banner.BannerTest"/>-->
-                <!--<class name="KDV_testcases.mainPage.basket.BasketTests"/>-->
-                <!--<class name="KDV_testcases.mainPage.blockSmm.BlockSmmTest"/>-->
-                <!--<class name="KDV_testcases.mainPage.blockWithBenefits.BenefitsBlockTest"/>-->
-                <!--<class name="KDV_testcases.mainPage.categorySection.CategoryGoodsTest"/>-->
-                <!--<class name="KDV_testcases.mainPage.hitOfSales.HitOfSalesTest"/>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>-->
+                <!--<class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>-->
             <!--</classes>-->
         <!--</test>-->
 
-        <test name="OrderingPage">
-            <classes>
-                <class name="KDV_testcases.OrderingPage.OrderingLegalPageTest"/>
-                <class name="KDV_testcases.OrderingPage.OrderingGuestPageTest"/>
-                <class name="KDV_testcases.OrderingPage.OrderingPhysicalPageTest"/>
-            </classes>
-        </test>
+        <!--<test name="PersonalCabinet">-->
+            <!--<classes>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.CabinetTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.AccountDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Physical.AddressesDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.OrderDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.LegalDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.AddressesDataTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.CabinetLegalTest"/>-->
+                <!--<class name="KDV_testcases.personalCabinet.Legal.PersonalDataTest"/>-->
+            <!--</classes>-->
+        <!--</test>-->
 
-        <test name="PersonalCabinet">
-            <classes>
-                <class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.CabinetTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.AccountDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Physical.AddressesDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.OrderDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.LegalDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.AddressesDataTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.CabinetLegalTest"/>
-                <class name="KDV_testcases.personalCabinet.Legal.PersonalDataTest"/>
-            </classes>
-        </test>
+        <!--<test name="Registration ">-->
+            <!--<classes>-->
+                <!--<class name="KDV_testcases.registration.IndividualEntrepreneur.ContactDataTest"/>-->
+                <!--<class name="KDV_testcases.registration.IndividualEntrepreneur.InformationAuthorizationTest"/>-->
+                <!--<class name="KDV_testcases.registration.IndividualEntrepreneur.MandatoryFieldsTest"/>-->
+                <!--<class name="KDV_testcases.registration.IndividualEntrepreneur.OrganizationInfoTest"/>-->
 
-        <test name="Registration ">
-            <classes>
-                <class name="KDV_testcases.registration.IndividualEntrepreneur.ContactDataTest"/>
-                <class name="KDV_testcases.registration.IndividualEntrepreneur.InformationAuthorizationTest"/>
-                <class name="KDV_testcases.registration.IndividualEntrepreneur.MandatoryFieldsTest"/>
-                <class name="KDV_testcases.registration.IndividualEntrepreneur.OrganizationInfoTest"/>
+                <!--<class name="KDV_testcases.registration.LegalPerson.OrganizationInfoTest"/>-->
+                <!--<class name="KDV_testcases.registration.LegalPerson.ContactDataTest"/>-->
+                <!--<class name="KDV_testcases.registration.LegalPerson.DeliveryAddressTest"/>-->
+                <!--<class name="KDV_testcases.registration.LegalPerson.RegistrationTest"/>-->
 
-                <class name="KDV_testcases.registration.LegalPerson.OrganizationInfoTest"/>
-                <class name="KDV_testcases.registration.LegalPerson.ContactDataTest"/>
-                <class name="KDV_testcases.registration.LegalPerson.DeliveryAddressTest"/>
-                <class name="KDV_testcases.registration.LegalPerson.RegistrationTest"/>
-
-                <class name="KDV_testcases.registration.PhysicalPerson.AuthorizationInfoTest"/>
-                <class name="KDV_testcases.registration.PhysicalPerson.ContactDataTest"/>
-                <class name="KDV_testcases.registration.PhysicalPerson.FillRequiredFieldsTest"/>
-            </classes>
-        </test>
+                <!--<class name="KDV_testcases.registration.PhysicalPerson.AuthorizationInfoTest"/>-->
+                <!--<class name="KDV_testcases.registration.PhysicalPerson.ContactDataTest"/>-->
+                <!--<class name="KDV_testcases.registration.PhysicalPerson.FillRequiredFieldsTest"/>-->
+            <!--</classes>-->
+        <!--</test>-->
 </suite>

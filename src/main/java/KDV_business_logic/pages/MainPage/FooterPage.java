@@ -2,7 +2,6 @@ package KDV_business_logic.pages.MainPage;
 
 import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
-import Core.utils.TestReporter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,9 +11,12 @@ import java.util.Objects;
 import static Core.utils.Constants.SECOND_TAB_BROWSER;
 import static Core.utils.Constants.TWO_TABS_BROWSER;
 
-public class FooterPage  extends BasePage{
+public class FooterPage extends BasePage {
 
-    //========================FOOTER SECTION=========================================
+    public FooterPage(WebDriver driver) {
+        super(driver);
+    }
+
     @FindBy(xpath = ".//a[text()='О магазине']")
     private WebElement aboutShopLink;
 
@@ -55,7 +57,7 @@ public class FooterPage  extends BasePage{
     private WebElement copywrite;
 
     @FindBy(xpath = "(.//*[@href=\"tel:+7 913 817-38-90\"])[2]")
-    public WebElement additionalTelLink;
+    private WebElement additionalTelLink;
 
     @FindBy(xpath = ".//a[text()='Политика конфиденциальности']")
     private WebElement confidentialPoliticLink;
@@ -81,14 +83,7 @@ public class FooterPage  extends BasePage{
     @FindBy(css = ".button-scroll-top")
     private WebElement upButton;
 
-
-    public FooterPage(WebDriver driver) {
-        super(driver);
-    }
-
-    public void verifyAdditionalPhoneLink()
-    {
-
+    public void verifyAdditionalPhoneLink() {
         textPresent("8 800 250 5555");
         textPresent("Служба поддержки");
         AssertCollector.assertEqualsJ(telLink.getAttribute("href"), "tel:8 800 250 5555",
@@ -112,7 +107,6 @@ public class FooterPage  extends BasePage{
         driver.switchTo().window(originalHandle);
     }
 
-
     public void openingInstaInFooter() {
         String originalHandle = driver.getWindowHandle();
         String linkTextAttribute = getValueOfAttributeByName(footerInstaLink, "href");
@@ -125,7 +119,6 @@ public class FooterPage  extends BasePage{
         driver.close();
         driver.switchTo().window(originalHandle);
     }
-
 
     public void openingGooglePlayInFooter() {
         String originalHandle = driver.getWindowHandle();
@@ -140,13 +133,10 @@ public class FooterPage  extends BasePage{
         driver.switchTo().window(originalHandle);
     }
 
-
-
     public void clickingUpButtonInFooter() {
         elementFluentWaitVisibility(upButton).click();
         waitInvisibilityOfElement(upButton);
     }
-
 
     public void openingRegulationsLink() {
         String linkTextAttribute = getValueOfAttributeByName(regulationsLink, "href");

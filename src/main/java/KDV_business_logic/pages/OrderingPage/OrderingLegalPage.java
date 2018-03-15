@@ -5,7 +5,7 @@ import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
 import Core.utils.WaitingUtility;
 import KDV_business_logic.pages.BasketPages.BasketPage;
-import KDV_business_logic.pages.MainPage.MainPageSelector;
+import KDV_business_logic.pages.MainPage.MainPage;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ public class OrderingLegalPage extends BasePage {
     }
 
     BasketPage basketPage = new BasketPage(driver);
-    MainPageSelector mainPageSelector = new MainPageSelector(driver);
+    MainPage mainPageSelector = new MainPage(driver);
     OrderingGuestPage orderingGuestPage = new OrderingGuestPage(driver);
 
     @FindBy(css = "[id='billing:firstname']")
@@ -156,7 +156,7 @@ public class OrderingLegalPage extends BasePage {
         elementIsClickable(continueShoppingButton).click();
         AssertCollector.assertEqualsJ(getCurrentUrl(),
                 BASE_URL + "/", "Urls are equals");
-        elementIsClickable(new MainPageSelector(driver).myAccountLink).click();
+        elementIsClickable(new MainPage(driver).myAccountLink).click();
         AssertCollector.assertEqualsJ(getCurrentUrl(),
                 BASE_URL + "/customer/account", "Urls are equals");
         getUrl(BASE_URL + "/sales/order/history/");

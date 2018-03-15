@@ -1,4 +1,4 @@
-package KDV_testcases.footer;
+package KDV_testcases.mainPage.footer;
 
 import Core.basePage.BasePage;
 import org.testng.annotations.BeforeMethod;

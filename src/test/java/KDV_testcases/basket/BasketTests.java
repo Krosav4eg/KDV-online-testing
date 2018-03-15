@@ -1,4 +1,4 @@
-package KDV_testcases.mainPage.basket;
+package KDV_testcases.basket;
 
 import org.testng.annotations.Test;
 import KDV_testcases.base.BaseTest;

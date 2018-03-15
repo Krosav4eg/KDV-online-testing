@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import Core.utils.AssertCollector;
 
-import static Core.utils.WaitingUtility.*;
-
 public class ModalWindow extends BasePage {
     public ModalWindow(WebDriver driver) {
         super(driver);
@@ -55,8 +53,11 @@ public class ModalWindow extends BasePage {
 
     public void checkModalWindow() {
         openModal();
-        AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические», 300 г"), "");
-        AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история сладкого бренда началась 50 лет назад."));
+        AssertCollector.assertTrue(getText(productContainer).contains("Конфеты «Томские классические», 300 г"),
+                "");
+        AssertCollector.assertTrue(getText(productContainer).
+                contains("Конфеты «Томские классические» – суфле в шоколаде – визитная карточка Томска, где история " +
+                        "сладкого бренда началась 50 лет назад."));
         AssertCollector.assertTrue(getText(productContainer).contains("95,20"), "");
         AssertCollector.assertTrue(getText(productContainer).contains("\u20BD"), "Text is present");
         AssertCollector.assertTrue(elementIsVisible(addCartModalBtn), "element is visible");

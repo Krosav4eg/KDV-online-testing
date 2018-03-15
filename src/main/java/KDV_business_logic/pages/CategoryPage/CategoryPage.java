@@ -8,8 +8,6 @@ import Core.utils.AssertCollector;
 
 import static Core.utils.Constants.ABOUT_PAGE_URL;
 import static Core.utils.Constants.BASE_URL;
-import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
-import static Core.utils.WaitingUtility.elementIsVisible;
 
 public class CategoryPage extends BasePage {
     public CategoryPage(WebDriver driver) {
@@ -97,31 +95,37 @@ public class CategoryPage extends BasePage {
 
     public void breadCrumbs() {
         selectCategorySideBar();
-        AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"), "required bread Crumbs  is present");
+        AssertCollector.assertTrue(breadcrumbsTxt.getText().contains("Конфеты"),
+                "required bread Crumbs  is present");
     }
 
     public void commodityGridList() {
         selectCategorySideBar();
         elementFluentWaitVisibility(listBtn).click();
-        AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"), "required list  is active");
+        AssertCollector.assertTrue(listBtn.getAttribute("class").contains("list-mode__item_active"),
+                "required list  is active");
         elementFluentWaitVisibility(gridBtn).click();
-        AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"), "required grid  is active");
+        AssertCollector.assertTrue(gridBtn.getAttribute("class").contains("list-mode__item_active"),
+                "required grid  is active");
     }
 
     //TODO bug absence signatures "Статус" "В наличии"
     public void checkBox() {
         selectCategorySideBar();
         elementFluentWaitVisibility(existBtn).click();
-        AssertCollector.assertTrue(getText(activeFilter).contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
+        AssertCollector.assertTrue(getText(activeFilter).
+                contains("Выбранные параметры"), "text 'Выбранные параметры' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("Статус"), "text 'Статус' is present");
         AssertCollector.assertTrue(getText(activeFilter).contains("в наличии"), "text 'В наличии' is present");
         AssertCollector.assertTrue(elementIsVisible(deletePositionBtn), "checkbox delete is present");
         AssertCollector.assertTrue(elementIsVisible(existBtn), "checkbox is present");
-        AssertCollector.assertTrue(getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
+        AssertCollector.assertTrue(getText(leftSideNavigateTxt).
+                contains("Выбранные параметры"), "all condition deleted");
         elementFluentWaitVisibility(deletePositionBtn).click();
         elementFluentWaitVisibility(existBtn).click();
         elementFluentWaitVisibility(deletePositionLink).click();
-        AssertCollector.assertTrue(!getText(leftSideNavigateTxt).contains("Выбранные параметры"), "all condition deleted");
+        AssertCollector.assertTrue(!getText(leftSideNavigateTxt).contains("Выбранные параметры"),
+                "all condition deleted");
     }
 
     public void sortFilterDefault() {

@@ -9,11 +9,11 @@
 
     <test name="Ordering OrderingPageTest OrderingGuestPageTest">
         <classes>
-            <class name="KDV_testcases.personalCabinet.Physical.AddressesDataTest"/>
-            <class name="KDV_testcases.personalCabinet.Physical.AccountDataTest"/>
-            <class name="KDV_testcases.personalCabinet.Physical.CabinetTest"/>
-            <class name="KDV_testcases.personalCabinet.Physical.OrderingDataTest"/>
-            <class name="KDV_testcases.personalCabinet.Physical.AddingAddressTest"/>
+            <class name="KDV_testcases.header.HeaderTest">
+                <methods>
+                    <include name="verifyMyBasketWithProductTest"></include>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
