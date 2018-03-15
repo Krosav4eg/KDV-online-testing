@@ -1,14 +1,10 @@
 package KDV_testcases.registration.LegalPerson;
 
-import Core.basePage.BasePage;
+import Core.utils.TestReporter;
+import KDV_testcases.base.BaseTest;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
-import Core.utils.TestReporter;
-
-import static KDV_business_logic.pages.PersonalAreaPage.PersonalCabinetPage.phoneInEditPage;
 
 public class ContactDataTest extends BaseTest {
 
@@ -17,8 +13,7 @@ public class ContactDataTest extends BaseTest {
         TestReporter.testTitle("Test ID = C37688,40272,40275");
         JSONObject verifyData = registrationPage.mainInfoRegistration();
         verifyData.put("firstName", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFieldsIndividual(verifyData).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.mandatoryFieldForIndividualFillIn(verifyData, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -40,16 +35,15 @@ public class ContactDataTest extends BaseTest {
         data.put("lastName", RandomStringUtils.randomAlphabetic(10));
         data.put("phone", RandomStringUtils.randomNumeric(11));
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(phoneInEditPage.getAttribute("value").length() ==
-                RandomStringUtils.randomAlphabetic(11).length());
+        personalCabinetPage.verifyLengthOfPhone();
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "  ");
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
+        personalCabinetPage.verifyPhoneIsEmpty();
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "@!#$%&*()_+/*");
         registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
+        personalCabinetPage.verifyPhoneIsEmpty();
         data = new JSONObject();
         data.put("email", RandomStringUtils.randomAlphabetic(10) + "@test.com");
         data.put("password", pass);
@@ -64,7 +58,6 @@ public class ContactDataTest extends BaseTest {
         data.put("firstName", RandomStringUtils.randomAlphabetic(20));
         data.put("lastName", RandomStringUtils.randomAlphabetic(20));
         data.put("phone", RandomStringUtils.randomNumeric(9));
-        String registr= registrationPage.verifyAuthorizationFieldsIndividual(data);
-        AssertCollector.assertTrue(registr.contains("Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX"));
+        registrationPage.mandatoryFieldForIndividualFillIn(data, "Значение \"Телефон\" должно соответствовать формату: +7XXXXXXXXXX");
     }
 }

@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import Core.utils.AssertCollector;
 
 import static Core.utils.Constants.*;
-import static Core.utils.WaitingUtility.elementFluentWaitVisibility;
 
 /**
  * @author Sergey Potapov
@@ -83,6 +82,8 @@ public class AccountDataPage extends BasePage {
     @FindBy(xpath = "//span[text()='Адрес удалён.']")
     public WebElement deletionAddress;
 
+    ControlPanelPage controlPanelPage = new ControlPanelPage(driver);
+
     public JSONObject mainAccountInfo() {
         JSONObject data = new JSONObject();
         data.put("firstName", "Аркадий");
@@ -122,6 +123,62 @@ public class AccountDataPage extends BasePage {
         return getText(informationAccountEdit);
     }
 
+    public void verifyUserNameAfterChangingFirstAndLastName() {
+        scrollToNecessaryElement(saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.verifyCondition(getCurrentUrl().contains(ACCOUNT_PAGE_URL));
+        AssertCollector.verifyCondition(controlPanelPage.nameInPersonalData.getText().contains("Аркадий Евдокимов"));
+    }
+
+    public void verifyEmailFieldValidation() {
+        AssertCollector.assertEquals(emailInEditPage.getAttribute("value"),
+                " Value of current password field is equal ", emailInEditPage.
+                        getAttribute("value"));
+        scrollToNecessaryElement(saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.assertEquals(getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
+        AssertCollector.assertTrue(controlPanelPage.emailInPersonalData.getText().contains(AUTHORIZATION_EMAIL));
+    }
+
+    public void verifyPhoneFieldValidation() {
+        AssertCollector.assertEquals(phoneInEditPage.getAttribute("value"),
+                " Value of phone field is equal ", phoneInEditPage.
+                        getAttribute("value"));
+        scrollToNecessaryElement(saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_PAGE_URL, "Urls are equals");
+        AssertCollector.assertTrue(controlPanelPage.phoneInPersonalData.getText().contains("+77711111111"));
+    }
+
+    public void verifyPhoneFieldLengthValidation() {
+        scrollUp();
+        AssertCollector.verifyCondition(newPhoneField.getAttribute("value").length() ==
+                RandomStringUtils.randomNumeric(11).length());
+    }
+
+    public void verifyPasswordFieldValidation() {
+        AssertCollector.assertEquals(passwordInEditPage.getAttribute("value"),
+                " Value of current password field is equal ", passwordInEditPage.
+                        getAttribute("value"));
+        scrollToNecessaryElement(saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.assertEquals(getCurrentUrl(), "Current url is equals", ACCOUNT_PAGE_URL);
+    }
+
+    public void verifyLengthFirstAndLastName() {
+        AssertCollector.verifyCondition(firstNameInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(45).length());
+        AssertCollector.verifyCondition(lastNameInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(45).length());
+    }
+
+    public void verifyFirstAndLastNameSpecialSymbols() {
+        AssertCollector.verifyCondition(firstNameInEditPage.getAttribute("value") ==
+                "Анна-Мар'я");
+        AssertCollector.verifyCondition(lastNameInEditPage.getAttribute("value") ==
+                "Анна-Мар'я");
+    }
+
     public String verifyAddingNewAccountFields(JSONObject data) {
         getUrl(BASE_URL + "/customer/address/new/");
         elementFluentWaitVisibility(firstNameInEditPage).clear();
@@ -140,10 +197,12 @@ public class AccountDataPage extends BasePage {
         return getText(informationAccountEdit);
     }
 
-    public String verifyAddressDropDownAddress() {
+    public void verifyAddressMaximumLength() {
+        AssertCollector.verifyCondition(firstNameInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(255).length());
         elementFluentWaitVisibility(newAddressField).clear();
-        fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября, д 16 ");
-        return getPageText();
+        fillInputFieldAndPressEnterButton(newAddressField, "г Кемерово, ул 50 лет Октября");
+        textPresent("Внимание! Вы не указали номер квартиры, офиса.");
     }
 
     public void changingPassword(String currentPass, String newPass) {
@@ -155,10 +214,10 @@ public class AccountDataPage extends BasePage {
         fillInputField(newPasswordField, newPass);
         fillInputField(confirmPasswordField, newPass);
         elementFluentWaitVisibility(saveButtonInEditPage).click();
+        AssertCollector.assertTrue(sucsessMessage.getText().contains("Данные учётной записи сохранены."));
     }
 
-    public void verifyFirstAndLastNameValues()
-    {
+    public void verifyFirstAndLastNameValues() {
         elementFluentWaitVisibility(saveButtonInEditPage).click();
         textPresent("Адрес сохранён.");
         textPresent("Анна-Мар'я");
@@ -166,5 +225,31 @@ public class AccountDataPage extends BasePage {
         scrollByCoordinate();
         elementFluentWaitVisibility(deleteNewAddress).click();
         AssertCollector.verifyCondition(deletionAddress.isDisplayed());
+    }
+
+    public void verifyAccountInfoVisibility() {
+        getUrl(ACCOUNT_INFORMATION_URL);
+        AssertCollector.verifyCondition(elementIsVisible(personalDataHeaderInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(personalDataInEditPage));
+        AssertCollector.verifyCondition(elementIsVisible(sharingInEditPage));
+    }
+
+    public void verifyImportantEmptyFieldAdvices() {
+        elementFluentWaitVisibility(changePasswordCheckbox).click();
+        scrollToNecessaryElement(saveButtonInEditPage);
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        textPresent("Это поле обязательно для заполнения");
+        scrollToNecessaryElement(saveButtonInEditPage);
+        AssertCollector.assertTrue(elementIsVisible(changePasswordHeader),
+                "Required field is displayed");
+        AssertCollector.assertTrue(elementIsVisible(newPasswordField),
+                "Required field is displayed");
+        AssertCollector.assertTrue(elementIsVisible(confirmPasswordField),
+                "Required field is displayed");
+    }
+
+    public void checkRequiredFieldsMessage() {
+        elementFluentWaitVisibility(saveButtonInEditPage).click();
+        textPresent("Это поле обязательно для заполнения.");
     }
 }

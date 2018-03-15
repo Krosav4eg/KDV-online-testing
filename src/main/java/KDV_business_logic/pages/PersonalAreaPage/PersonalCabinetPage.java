@@ -2,12 +2,14 @@ package KDV_business_logic.pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
 import Core.utils.AssertCollector;
+import Core.utils.WaitingUtility;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static Core.utils.Constants.AUTHORIZATION_EMAIL;
 import static Core.utils.Constants.AUTHORIZATION_PASSWORD;
 import static Core.utils.Constants.BASE_URL;
 
@@ -238,5 +240,14 @@ public class PersonalCabinetPage extends BasePage {
         String allResult = fillFields(data, false);
         AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
                 "(email)."));
+    }
+
+    public void verifyLengthOfPhone() {
+        AssertCollector.verifyCondition(phoneInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(11).length());
+    }
+
+    public void verifyPhoneIsEmpty() {
+        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static Core.utils.Constants.ACCOUNT_DELIVERY_ADDRESS_URL;
+import static Core.utils.Constants.ACCOUNT_INFORMATION_URL;
 import static Core.utils.WaitingUtility.elementFluentWaitClick;
 
 /**
@@ -132,5 +133,46 @@ public class DeliveryAddressPage extends BasePage {
         moveMouseTo(driver, getAboutLink);
         elementFluentWaitClick(getSaveDeliveryAddressBtn).submit();
         Verify.verify(getText(messageSuccesTxt).contains("Адрес сохранён."));
+    }
+
+
+    public void verifyDeliveryAddressHeader() {
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL,
+                "Urls are equals");
+        AssertCollector.assertTrue(elementIsVisible(deliveryAddressHeader),
+                "Required header is displayed");
+    }
+
+    public void verifyChangingDeliveryAddress() {
+        elementFluentWaitClick(editDeliveryLink).click();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_INFORMATION_URL, "Urls are equals");
+    }
+
+    public void verifyAbsenceDeliveryAddress() {
+        elementIsClickable(deliveryAddressItemButton).click();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL, "Urls are equals");
+        AssertCollector.assertEqualsJ(nameDeliveryByDefault.getText(), "Тимофей Большаков",
+                "First name and last name are equals");
+        AssertCollector.assertEqualsJ(deliveryAddressByDefault.getText(),
+                "г Томск, ул Вавилова, д 13, кв 23",
+                "Addresses are equals");
+        AssertCollector.assertEqualsJ(phoneDeliveryByDefault.getText(), "+71111111111",
+                "Phone numbers are equals");
+        AssertCollector.assertTrue(elementIsVisible(byDefaultMark));
+        elementFluentWaitClick(addressActionLink).click();
+        AssertCollector.assertEqualsJ(getCurrentUrl(), ACCOUNT_DELIVERY_ADDRESS_URL + "edit/id/4236/",
+                "Urls are equals");
+        AssertCollector.assertEqualsJ(firstNameInEditDeliveryPage.getAttribute("value"),
+                "Тимофей", "First names are correct");
+        AssertCollector.assertEqualsJ(lastNameInEditDeliveryPage.getAttribute("value"),
+                "Большаков", "Last names are correct");
+        AssertCollector.assertEqualsJ(phoneInEditDeliveryPage.getAttribute("value"),
+                "+71111111111", "Phone numbers are equals");
+        AssertCollector.assertEqualsJ(addressInEditDeliveryPage.getAttribute("value"),
+                "г Томск, ул Вавилова, д 13, кв 23", "Addresses are equals");
+        AssertCollector.assertEqualsJ(florInEditDeliveryPage.getAttribute("value"),
+                "1", "Flores are equals");
+        AssertCollector.assertEqualsJ(porchInEditDeliveryPage.getAttribute("value"),
+                "2", "Porches are equals");
     }
 }
