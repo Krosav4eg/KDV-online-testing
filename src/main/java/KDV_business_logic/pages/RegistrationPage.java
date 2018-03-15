@@ -908,4 +908,32 @@ public class RegistrationPage extends BasePage {
 
     }
 
+    public void checkOrganizationFullName() {
+        AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkLegalAddress() {
+        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkCompany() {
+        AssertCollector.assertEquals(company.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkComments() {
+        AssertCollector.assertEquals(comments.getAttribute("value").length(),
+                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(1000).length());
+    }
+
+    public void checkAddress() {
+        AssertCollector.assertTrue(address.getAttribute("value").length()
+                == RandomStringUtils.randomAlphabetic(255).length());
+    }
+
+    public void checkCorrectAddress(JSONObject data) {
+        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains("Внимание! Вы не указали номер квартиры, офиса."));
+    }
 }
