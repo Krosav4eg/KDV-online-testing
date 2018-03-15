@@ -1,17 +1,12 @@
 package KDV_testcases.registration.PhysicalPerson;
 
-import Core.basePage.BasePage;
+import Core.utils.TestReporter;
+import KDV_testcases.base.BaseTest;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-import KDV_testcases.base.BaseTest;
-import Core.utils.AssertCollector;
-import Core.utils.TestReporter;
 
 
 public class AuthorizationInfoTest extends BaseTest {
-
-    private BasePage.MyDelegate del2 = new BasePage.MyDelegate() {
-    };
 
     @Test
     public void verifyFieldEmailPresenceTest() {
@@ -89,8 +84,8 @@ public class AuthorizationInfoTest extends BaseTest {
     public void verifyInputEmailTest() {
         TestReporter.testTitle("Test ID = 37522,37515,37529,37530,37542");
         JSONObject data = registrationPage.mainInfoRegistration();
-        AssertCollector.assertFalse(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.verifyInputEmail(data);
+
     }
 
     @Test
@@ -98,8 +93,8 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37516");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "test@test");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Пожалуйста, введите правильный адрес электронной почты"));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Пожалуйста, введите правильный адрес электронной почты");
+
     }
 
     @Test
@@ -107,11 +102,9 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37523");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("password", "test");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Пожалуйста, введите не менее 6 символов без"));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Пожалуйста, введите не менее 6 символов без");
         data.put("password", " test ");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Пожалуйста, введите не менее 6 символов без"));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Пожалуйста, введите не менее 6 символов без");
     }
 
     @Test
@@ -119,11 +112,10 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37526,37528");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data.put("confirmPassword", "test");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Пожалуйста, убедитесь, что ваши пароли совпадают."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Пожалуйста, убедитесь, что ваши пароли совпадают.");
+
 
     }
 
@@ -132,16 +124,13 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37533,37534,37550");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("company", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("taxId", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("reasonCode", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -149,16 +138,13 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37554,37556,37557");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("lastName", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("phone", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -166,16 +152,13 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37558,37559,37560");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("password", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("confirmPassword", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
         data = registrationPage.mainInfoRegistration();
         data.put("email", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
     }
 
     @Test
@@ -184,13 +167,10 @@ public class AuthorizationInfoTest extends BaseTest {
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("email", "a.shaulo@andersenlab.com");
         registrationPage.verifyAuthorizationFields(data);
-        AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).
-                contains("Учётная запись с таким адресом электронной почты уже существует. "));
+        registrationPage.checkAlertText(data);
         data = registrationPage.mainInfoRegistration();
         data.put("taxId", "1234567891");
-        System.out.println(del2.getTextDelegate(registrationPage.getAlertTet));
-        AssertCollector.assertTrue(del2.getTextDelegate(registrationPage.getAlertTet).
-                contains("Учётная запись с таким адресом электронной почты уже существует."));
+        registrationPage.checkAlertText(data);
     }
 
     @Test
@@ -207,7 +187,7 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37542");
         JSONObject data = registrationPage.mainInfoRegistration();
         registrationPage.verifyAuthorizationFields(data);
-        AssertCollector.assertTrue(del2.getCurrentUrlDelegate().contains("login/"));
+        registrationPage.verifyFieldsCorrect(data);
     }
 
     @Test
@@ -215,8 +195,7 @@ public class AuthorizationInfoTest extends BaseTest {
         TestReporter.testTitle("Test ID = 37542");
         JSONObject data = registrationPage.mainInfoRegistration();
         data.put("firstName", "");
-        AssertCollector.assertTrue(registrationPage.verifyAuthorizationFields(data).
-                contains("Это поле обязательно для заполнения."));
+        registrationPage.fieldNecessaryToFillInWithData(data, "Это поле обязательно для заполнения.");
     }
 
     @Test

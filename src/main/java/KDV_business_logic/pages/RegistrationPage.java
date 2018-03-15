@@ -908,4 +908,16 @@ public class RegistrationPage extends BasePage {
 
     }
 
+    public void checkAlertText(JSONObject data) {
+        AssertCollector.assertTrue(getText(getAlertTet).
+                contains("Учётная запись с таким адресом электронной почты уже существует. "));
+    }
+
+    public void verifyFieldsCorrect(JSONObject data) {
+        AssertCollector.assertTrue(getCurrentUrl().contains("login/"));
+    }
+
+    public void verifyInputEmail(JSONObject data) {
+        AssertCollector.assertFalse(verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
+    }
 }
