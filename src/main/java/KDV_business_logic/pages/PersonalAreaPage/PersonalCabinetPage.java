@@ -241,4 +241,13 @@ public class PersonalCabinetPage extends BasePage {
         AssertCollector.verifyCondition(allResult.contains("Пожалуйста, введите правильный адрес электронной почты " +
                 "(email)."));
     }
+
+    public void verifyLengthOfPhone() {
+        AssertCollector.verifyCondition(phoneInEditPage.getAttribute("value").length() ==
+                RandomStringUtils.randomAlphabetic(11).length());
+    }
+
+    public void verifyPhoneIsEmpty() {
+        AssertCollector.verifyCondition(phoneInEditPage.getText().isEmpty());
+    }
 }
