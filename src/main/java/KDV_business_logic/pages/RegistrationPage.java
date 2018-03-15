@@ -908,32 +908,16 @@ public class RegistrationPage extends BasePage {
 
     }
 
-    public void checkOrganizationFullName() {
-        AssertCollector.assertEquals(organizationFullName.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    public void checkAlertText(JSONObject data) {
+        AssertCollector.assertTrue(getText(getAlertTet).
+                contains("Учётная запись с таким адресом электронной почты уже существует. "));
     }
 
-    public void checkLegalAddress() {
-        AssertCollector.assertEquals(legalAddress.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
+    public void verifyFieldsCorrect(JSONObject data) {
+        AssertCollector.assertTrue(getCurrentUrl().contains("login/"));
     }
 
-    public void checkCompany() {
-        AssertCollector.assertEquals(company.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(255).length());
-    }
-
-    public void checkComments() {
-        AssertCollector.assertEquals(comments.getAttribute("value").length(),
-                " Number of symbols is equal ", RandomStringUtils.randomAlphabetic(1000).length());
-    }
-
-    public void checkAddress() {
-        AssertCollector.assertTrue(address.getAttribute("value").length()
-                == RandomStringUtils.randomAlphabetic(255).length());
-    }
-
-    public void checkCorrectAddress(JSONObject data) {
-        AssertCollector.assertTrue(verifyAuthorizationFields(data).contains("Внимание! Вы не указали номер квартиры, офиса."));
+    public void verifyInputEmail(JSONObject data) {
+        AssertCollector.assertFalse(verifyAuthorizationFields(data).contains("Это поле обязательно для заполнения."));
     }
 }
