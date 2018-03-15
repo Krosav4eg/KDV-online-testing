@@ -192,7 +192,6 @@ public class FooterPage  extends BasePage{
                 expTelLink);
     }
 
-
     public void openingShopLink() {
         String linkTextAttribute = getValueOfAttributeByName(aboutShopLink, "href");
         elementFluentWaitVisibility(aboutShopLink).click();
@@ -294,6 +293,4 @@ public class FooterPage  extends BasePage{
         driver.close();
         driver.switchTo().window(originalHandle);
     }
-
-
 }
