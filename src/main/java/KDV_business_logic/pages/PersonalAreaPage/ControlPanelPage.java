@@ -1,9 +1,13 @@
 package KDV_business_logic.pages.PersonalAreaPage;
 
 import Core.basePage.BasePage;
+import Core.utils.AssertCollector;
+import Core.utils.WaitingUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static Core.utils.Constants.AUTHORIZATION_EMAIL;
 
 /**
  * @author Sergey Potapov
@@ -70,4 +74,32 @@ public class ControlPanelPage extends BasePage {
 
     @FindBy(xpath = "//h2//a[@class='address__action link offset-l-1']")
     public WebElement editAddressButton;
+
+
+    public void verifyAccountAndAddressByDefault() {
+        AssertCollector.verifyCondition(elementIsVisible(personalDataHeader));
+        AssertCollector.verifyCondition(nameInPersonalData.getText().
+                contains("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(emailInPersonalData.getText().equals(AUTHORIZATION_EMAIL));
+        AssertCollector.verifyCondition(phoneInPersonalData.getText().equals("+77111111111"));
+        String expLink = getValueOfAttributeByName(editPersonalDataButton, "href");
+        elementFluentWaitVisibility(editPersonalDataButton).click();
+        AssertCollector.verifyCondition(getCurrentUrl().equals(expLink));
+        navigateBack();
+        AssertCollector.verifyCondition(elementIsVisible(addressByDefaultHeader));
+        AssertCollector.verifyCondition(nameInAddressByDefault.getText().equals("Аркадий Евдокимов"));
+        AssertCollector.verifyCondition(addressInAddressByDefault.getText().
+                equals("г Кемерово, ул Варшавская, д 87, кв 12"));
+        AssertCollector.verifyCondition(phoneInAddressByDefault.getText().equals("+71111111111"));
+        scrollToNecessaryElement(editAddressButton);
+        String expLink1 = getValueOfAttributeByName(editAddressButton, "href");
+        elementIsClickable(editAddressButton).click();
+        AssertCollector.verifyCondition(getCurrentUrl().equals(expLink1));
+    }
+
+    public void verifyControlPanel() {
+        AssertCollector.verifyCondition(elementIsVisible(controlPanelHeader));
+        textPresent("Здравствуйте, Иннокентий Макаров!");
+        textPresent("Здесь вы можете просмотреть краткий обзор активности вашей учётной записи.");
+    }
 }

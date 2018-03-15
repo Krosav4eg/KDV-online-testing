@@ -41,7 +41,6 @@ public class BasePage extends WaitingUtility {
             return getCurrentUrl();
         }
 
-
         public void getUrlDelegate(String url) {
             getUrl(url);
         }
