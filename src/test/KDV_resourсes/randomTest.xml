@@ -9,9 +9,9 @@
 
     <test name="Ordering OrderingPageTest OrderingGuestPageTest">
         <classes>
-            <class name="KDV_testcases.header.HeaderTest">
+            <class name="KDV_testcases.basket.BasketTests">
                 <methods>
-                    <include name="verifyMyBasketWithProductTest"></include>
+                    <include name="verifyAddProductToBasket"></include>
                 </methods>
             </class>
         </classes>
